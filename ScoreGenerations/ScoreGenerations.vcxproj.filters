@@ -17,7 +17,6 @@
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="StateHooks.h" />
     <ClInclude Include="Mod.h" />
-    <ClInclude Include="Patches.h" />
     <ClInclude Include="MemoryHelper.h" />
     <ClInclude Include="dependencies\inipp.h">
       <Filter>Dependencies</Filter>
@@ -32,7 +31,6 @@
     <ClCompile Include="ObjectHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="Pch.cpp" />
-    <ClCompile Include="Patches.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

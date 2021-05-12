@@ -5,43 +5,9 @@
         "DisplayName": "Appearance",
         "Elements": [
           {
-            "Name": "scoreDisplay",
-            "Description": [
-                "Enable this to display a score counter on the HUD.\n",
-				"This will track score in the same way Sonic Forces does."
-            ],
-            "DisplayName": "Forces Score System",
-            "Type": "bool",
-            "MinValue": null,
-            "MaxValue": null,
-            "DefaultValue": "true"
-          },
-          {
-            "Name": "ringFormatter",
-            "Description": [
-                "Enable this to reduce the number of zeroes for the ring counter."
-            ],
-            "DisplayName": "Forces Ring Formatting",
-            "Type": "bool",
-            "MinValue": null,
-            "MaxValue": null,
-            "DefaultValue": "true"
-          },
-          {
-            "Name": "homingReticle",
-            "Description": [
-                "Enable this to display the homing reticle from Sonic Forces."
-            ],
-            "DisplayName": "Forces Homing Reticle",
-            "Type": "bool",
-            "MinValue": null,
-            "MaxValue": null,
-            "DefaultValue": "true"
-          },
-          {
             "Name": "scoreFormat",
             "Description": [
-                "String format used to display the score on the HUD.\n",
+                "The string format used to display the score on the HUD.\n",
 				"Examples:",
 				"%d - write the raw value.",
 				"%06d - write the value with six digit padding."
@@ -50,10 +16,10 @@
             "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": "%d"
+            "DefaultValue": "%06d"
           }
         ]
       }
     ],
-    "IniFile": "ForcesHUD.ini"
+    "IniFile": "ScoreGenerations.ini"
   }

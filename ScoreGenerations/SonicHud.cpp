@@ -11,54 +11,31 @@ unsigned int SonicHud::elapsedTime = 0;
 /// <summary>
 /// Replaces leading nulls from the string printer with dashes which are invisible in the textures.
 /// </summary>
-/// <param name="buffer">Character buffer from EDX.</param>
-/// <param name="rings">Ring count from ESI.</param>
-char* __fastcall HideZeroesInRingDisplay(char* buffer, unsigned int rings)
+/// <param name="rings">Ring count from input register.</param>
+void __fastcall UpdateRingCount(unsigned int rings)
 {
-	if (Mod::scoreDisplay)
+	// Update current ring count.
+	SonicHud::ringCount = rings;
+
+	// Update total ring count.
+	if (rings > SonicHud::totalRingCount)
 	{
-		// Update current ring count.
-		SonicHud::ringCount = rings;
-
-		// Update total ring count.
-		if (rings > SonicHud::totalRingCount)
-		{
-			SonicHud::totalRingCount = rings;
-		}
+		SonicHud::totalRingCount = rings;
 	}
-
-	// Change string format justification.
-	sprintf(buffer, Mod::ringFormatter ? "%3d" : "%03d", rings);
-
-	if (Mod::ringFormatter)
-	{
-		char hidden = '-';
-
-		if (rings < 10)
-		{
-			// The first two leading nulls will be replaced.
-			buffer[0] = hidden;
-			buffer[1] = hidden;
-		}
-		else if (rings < 100)
-		{
-			// The first single null will be replaced.
-			buffer[0] = hidden;
-		}
-	}
-
-	return buffer;
 }
 
 __declspec(naked) void DefaultRingFormatterMidAsmHook()
 {
-	static void* returnAddress = (void*)0x1098E76;
+	static void* returnAddress = (void*)0x1098E59;
 
 	__asm
 	{
-		mov ecx, edx
-		mov edx, esi
-		call HideZeroesInRingDisplay
+		// Get ring count from registers.
+		mov ecx, [esp + 100h + 0xFFFFFF30]
+		mov esi, [ecx + 10h]
+
+		mov ecx, esi
+		call UpdateRingCount
 		mov edx, eax
 
 		jmp [returnAddress]
@@ -67,15 +44,19 @@ __declspec(naked) void DefaultRingFormatterMidAsmHook()
 
 __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 {
-	static void* returnAddress = (void*)0x122824A;
+	static void* interruptAddress = (void*)0x41CAA0;
+	static void* returnAddress = (void*)0x12281C5;
 
 	__asm
 	{
-		mov ebx, ecx
-		mov ecx, edx
-		push ebx
-		pop edx
-		call HideZeroesInRingDisplay
+		call [interruptAddress]
+
+		// Get ring count from registers.
+		mov eax, [esp + 50h + 0xFFFFFFD8]
+		mov [esp + 50h + 0xFFFFFFC0], eax
+
+		mov ecx, eax
+		call UpdateRingCount
 		mov edx, eax
 
 		jmp [returnAddress]
@@ -87,7 +68,7 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 /// </summary>
 /// <param name="minutes">Minutes from EDI.</param>
 /// <param name="seconds">Seconds from EAX.</param>
-void __fastcall GetElapsedTime(unsigned int minutes, unsigned int seconds)
+void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
 {
 	// Update real-time elapsed time.
 	SonicHud::elapsedTime = (minutes * 60) + seconds;
@@ -104,7 +85,7 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 
 		mov ecx, eax
 		mov edx, edi
-		call GetElapsedTime
+		call UpdateElapsedTime
 		mov edx, eax
 
 		jmp [returnAddress]
@@ -131,28 +112,19 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* This, void* Edx, v
 /// </summary>
 void SonicHud::Install()
 {
-	// Jump to ring formatters to fix leading zeroes.
-	WRITE_JUMP(0x1098E71, &DefaultRingFormatterMidAsmHook);
-	WRITE_JUMP(0x1228245, &FinalBossRingFormatterMidAsmHook);
+	// Display the Casino Night score.
+	WRITE_NOP(0x109C1DA, 2);
 
-	if (Mod::scoreDisplay)
-	{
-		// Display the Casino Night score.
-		WRITE_NOP(0x109C1DA, 2);
+	// Set score string format.
+	WRITE_MEMORY(0x1095D7D, char*, Mod::scoreFormat.c_str());
 
-		// Set score string format.
-		WRITE_MEMORY(0x1095D7D, char*, Mod::scoreFormat.c_str());
+	// Install hook to update the score counter.
+	INSTALL_HOOK(CHudSonicStageUpdate);
 
-		// Install hook to update the score counter.
-		INSTALL_HOOK(CHudSonicStageUpdate);
+	// Jump to store elapsed time locally for time bonus.
+	WRITE_JUMP(0x1098D4D, &TimeFormatterMidAsmHook);
 
-		// Jump to store elapsed time locally for time bonus.
-		WRITE_JUMP(0x1098D4D, &TimeFormatterMidAsmHook);
-	}
-	else
-	{
-#if _DEBUG
-		printf("[Forces HUD] Score display is disabled!\n");
-#endif
-	}
+	// Jump to ring formatters to update the ring count.
+	WRITE_JUMP(0x1098E4C, &DefaultRingFormatterMidAsmHook);
+	WRITE_JUMP(0x12281B8, &FinalBossRingFormatterMidAsmHook);
 }

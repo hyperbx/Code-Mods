@@ -186,7 +186,6 @@ copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirecto
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Mod.h" />
     <ClInclude Include="ObjectHooks.h" />
-    <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="SonicHud.h" />
@@ -202,7 +201,6 @@ copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirecto
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ScoreListener.cpp" />
-    <ClCompile Include="Patches.cpp" />
     <ClCompile Include="SonicHud.cpp" />
     <ClCompile Include="StateHooks.cpp" />
   </ItemGroup>
