@@ -13,3 +13,13 @@ string StringHelper::Unquote(string str)
 
 	return str;
 }
+
+bool StringHelper::Compare(const char* charPtr1, const char* charPtr2)
+{
+	return strcmp(charPtr1, charPtr2) == 0 ? true : false;
+}
+
+bool StringHelper::Compare(string str1, string str2)
+{
+	return strcmp(str1.c_str(), str2.c_str()) == 0 ? true : false;
+}

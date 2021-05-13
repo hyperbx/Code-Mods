@@ -37,7 +37,7 @@ string Loader::GetModsDatabase()
 	}
 
 	// Early builds of Hedge Mod Manager use relative paths.
-	if (!strcmp(StringHelper::ToLower(modsDatabase).c_str(), StringHelper::ToLower(MODS_DEFAULT).c_str()))
+	if (StringHelper::Compare(StringHelper::ToLower(modsDatabase), StringHelper::ToLower(MODS_DEFAULT)))
 		return Loader::GetWorkingDirectory() + "\\" + MODS_DEFAULT;
 
 	return modsDatabase;

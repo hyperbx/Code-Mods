@@ -87,34 +87,13 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 	}
 }
 
-FUNCTION_PTR(void, __thiscall, ProcessMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const StatisticsListener::MsgSetPinballHud& msgSetPinballHud);
-
-HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, void* pUpdateInfo)
-{
-	StatisticsListener::MsgSetPinballHud msgSetPinballHud {};
-	msgSetPinballHud.flags = 1;
-	msgSetPinballHud.score = ScoreListener::score;
-
-	// Checks if the current stage is Casino Night before updating the score.
-	if (strcmp(StateHooks::stageID, "cnz100"))
-		ProcessMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
-
-	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
-}
-
 /// <summary>
 /// Installs the mid-ASM hooks.
 /// </summary>
 void StatisticsListener::Install()
 {
-	// Display the Casino Night score.
-	WRITE_NOP(0x109C1DA, 2);
-
 	// Set score string format.
 	WRITE_MEMORY(0x1095D7D, char*, Mod::scoreFormat.c_str());
-
-	// Install hook to update the score counter.
-	INSTALL_HOOK(CHudSonicStageUpdate);
 
 	// Jump to store elapsed time locally for time bonus.
 	WRITE_JUMP(0x1098D4D, &TimeFormatterMidAsmHook);
