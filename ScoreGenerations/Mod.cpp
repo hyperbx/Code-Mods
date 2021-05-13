@@ -7,7 +7,7 @@ bool Mod::customHUD = false;
 /// <summary>
 /// Reads the mod configuration file.
 /// </summary>
-void Mod::ReadModINI(string path = "")
+void Mod::ReadConfig(string path = "")
 {
 	inipp::Ini<char> ini;
 	std::ifstream file(path.empty() ? INI_FILE : path);

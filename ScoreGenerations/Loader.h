@@ -26,7 +26,9 @@ public:
 		string code;
 		string schema;
 
-		static ModInformation ReadModINI(string path)
+		string config;
+
+		static ModInformation ReadConfig(string path)
 		{
 			ModInformation modInfo;
 
@@ -46,6 +48,8 @@ public:
 				inipp::extract(ini.sections["Main"]["DLLFile"], modInfo.dll);
 				inipp::extract(ini.sections["Main"]["CodeFile"], modInfo.code);
 				inipp::extract(ini.sections["Main"]["ConfigSchemaFile"], modInfo.schema);
+
+				modInfo.config = path;
 
 				file.close();
 			}

@@ -10,7 +10,7 @@ public:
 	/// <summary>
 	/// Reads the INI configuration file for the mod.
 	/// </summary>
-	static void ReadModINI(string path);
+	static void ReadConfig(string path);
 
 	/// <summary>
 	/// Formatting used for the string printer for score.

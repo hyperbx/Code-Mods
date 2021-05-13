@@ -63,7 +63,7 @@ void Loader::ConfigureScoreGenerations()
 			// Used to flip the for loop direction.
 			inipp::extract(ini.sections["Main"]["ReverseLoadOrder"], loadOrder);
 
-			reverseLoadOrder = loadOrder == 0 ? true : false;
+			reverseLoadOrder = loadOrder == 1 ? true : false;
 		}
 
 		int count;
@@ -89,7 +89,7 @@ void Loader::ConfigureScoreGenerations()
 
 #if _DEBUG
 				// Get mod information so we can put the mod name into the console.
-				modInfo = Loader::ModInformation::ReadModINI(config);
+				modInfo = Loader::ModInformation::ReadConfig(config);
 #endif
 			}
 
@@ -97,7 +97,7 @@ void Loader::ConfigureScoreGenerations()
 
 			if (IOHelper::FileExists(scoreGenerationsConfig))
 			{
-				Mod::ReadModINI(scoreGenerationsConfig);
+				Mod::ReadConfig(scoreGenerationsConfig);
 
 #if _DEBUG
 				printf("[Score Generations] Configuration overridden by %s\n", modInfo.title.c_str());
