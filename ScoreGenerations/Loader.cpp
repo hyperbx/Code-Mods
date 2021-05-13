@@ -1,5 +1,3 @@
-#include "StringHelper.h"
-
 string Loader::GetExecutablePath()
 {
 	char buffer[MAX_PATH];
