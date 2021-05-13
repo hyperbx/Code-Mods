@@ -1,6 +1,6 @@
 #pragma once
 
-class SonicHud
+class StatisticsListener
 {
 public:
     static void Install();
@@ -21,13 +21,13 @@ public:
     static unsigned int elapsedTime;
 
     /// <summary>
-    /// Reverse-engineered struct for MsgSetPinballHud (thanks Skyth)!
+    /// Reverse-engineered struct for MsgSetPinballHud - thanks Skyth!
     /// </summary>
     struct MsgSetPinballHud
     {
-        uint8_t padding1[0x10];
+        uint8_t padding_1[0x10];
         uint32_t flags;
         uint32_t score;
-        uint8_t padding2[0x8];
+        uint8_t padding_2[0x8];
     };
 };

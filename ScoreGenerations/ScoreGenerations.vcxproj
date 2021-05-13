@@ -178,30 +178,33 @@ copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirecto
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="dependencies\inipp.h" />
-    <ClInclude Include="MemoryHelper.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h" />
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
     <ClInclude Include="Dependencies\Detours\include\syelog.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="Mod.h" />
     <ClInclude Include="ObjectHooks.h" />
+    <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="ScoreListener.h" />
-    <ClInclude Include="SonicHud.h" />
+    <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="StateHooks.h" />
     <ClInclude Include="StringHelper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="ObjectHooks.cpp" />
+    <ClCompile Include="Patches.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ScoreListener.cpp" />
-    <ClCompile Include="SonicHud.cpp" />
+    <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="StateHooks.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -1,12 +1,7 @@
-#include "SonicHud.h"
-#include "ScoreListener.h"
-#include "Mod.h"
-#include "StateHooks.h"
-
 // Declare class variables.
-unsigned int SonicHud::totalRingCount = 0;
-unsigned int SonicHud::ringCount = 0;
-unsigned int SonicHud::elapsedTime = 0;
+unsigned int StatisticsListener::totalRingCount = 0;
+unsigned int StatisticsListener::ringCount = 0;
+unsigned int StatisticsListener::elapsedTime = 0;
 
 /// <summary>
 /// Replaces leading nulls from the string printer with dashes which are invisible in the textures.
@@ -15,12 +10,12 @@ unsigned int SonicHud::elapsedTime = 0;
 void __fastcall UpdateRingCount(unsigned int rings)
 {
 	// Update current ring count.
-	SonicHud::ringCount = rings;
+	StatisticsListener::ringCount = rings;
 
 	// Update total ring count.
-	if (rings > SonicHud::totalRingCount)
+	if (rings > StatisticsListener::totalRingCount)
 	{
-		SonicHud::totalRingCount = rings;
+		StatisticsListener::totalRingCount = rings;
 	}
 }
 
@@ -71,7 +66,7 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
 {
 	// Update real-time elapsed time.
-	SonicHud::elapsedTime = (minutes * 60) + seconds;
+	StatisticsListener::elapsedTime = (minutes * 60) + seconds;
 }
 
 __declspec(naked) void TimeFormatterMidAsmHook()
@@ -92,25 +87,25 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 	}
 }
 
-FUNCTION_PTR(void, __thiscall, ProcMsgSetPinballHud, 0x1095D40, void* This, const SonicHud::MsgSetPinballHud& msgSetPinballHud);
+FUNCTION_PTR(void, __thiscall, ProcessMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const StatisticsListener::MsgSetPinballHud& msgSetPinballHud);
 
-HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* This, void* Edx, void* pUpdateInfo)
+HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, void* pUpdateInfo)
 {
-	SonicHud::MsgSetPinballHud msgSetPinballHud { };
+	StatisticsListener::MsgSetPinballHud msgSetPinballHud {};
 	msgSetPinballHud.flags = 1;
 	msgSetPinballHud.score = ScoreListener::score;
 
-	// Checks if the current stage is Casino Night before assigning the local score.
-	if (strcmp(StateHooks::stageID, "cnz100") != 0)
-		ProcMsgSetPinballHud(This, msgSetPinballHud);
+	// Checks if the current stage is Casino Night before updating the score.
+	if (strcmp(StateHooks::stageID, "cnz100"))
+		ProcessMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
 
-	originalCHudSonicStageUpdate(This, Edx, pUpdateInfo);
+	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
 
 /// <summary>
 /// Installs the mid-ASM hooks.
 /// </summary>
-void SonicHud::Install()
+void StatisticsListener::Install()
 {
 	// Display the Casino Night score.
 	WRITE_NOP(0x109C1DA, 2);

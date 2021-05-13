@@ -1,6 +1,3 @@
-#include "ScoreListener.h"
-#include "SonicHud.h"
-
 // Declare class variables.
 unsigned int ScoreListener::score = 0;
 
@@ -9,18 +6,18 @@ unsigned int ScoreListener::score = 0;
 /// </summary>
 void ScoreListener::Reset()
 {
-	SonicHud::elapsedTime = 0;
-	SonicHud::totalRingCount = 0;
-	SonicHud::ringCount = 0;
+	StatisticsListener::elapsedTime = 0;
+	StatisticsListener::totalRingCount = 0;
+	StatisticsListener::ringCount = 0;
 
 	score = 0;
 
 #if _DEBUG
 	printf("[Score Generations] Score has been reset...\n");
-	printf("[Score Generations] elapsedTime = %d\n", SonicHud::elapsedTime);
-	printf("[Score Generations] totalRingCount = %d\n", SonicHud::totalRingCount);
-	printf("[Score Generations] ringCount = %d\n", SonicHud::ringCount);
-	printf("[Score Generations] score = %d\n", score);
+	printf("[Score Generations] StatisticsListener::elapsedTime = %d\n", StatisticsListener::elapsedTime);
+	printf("[Score Generations] StatisticsListener::totalRingCount = %d\n", StatisticsListener::totalRingCount);
+	printf("[Score Generations] StatisticsListener::ringCount = %d\n", StatisticsListener::ringCount);
+	printf("[Score Generations] ScoreListener::score = %d\n", score);
 #endif
 }
 
@@ -30,13 +27,12 @@ void ScoreListener::Reset()
 void ScoreListener::Bonus()
 {
 	// Add ring bonus (Forces).
-	ScoreListener::score += SonicHud::ringCount * 300;
+	ScoreListener::score += StatisticsListener::ringCount * 300;
 }
 
 /// <summary>
-/// Rewards the player with score based on the input register.
+/// Rewards the player with score based on the input type.
 /// </summary>
-/// <param name="id">Identifier from ECX.</param>
 void __fastcall ScoreListener::Reward(ScoreType type)
 {
 	int scoreToReward = 0;

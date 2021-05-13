@@ -1,5 +1,3 @@
-#include <string>
-
 using namespace std;
 
 #pragma once
@@ -9,6 +7,11 @@ using namespace std;
 class Mod
 {
 public:
+	/// <summary>
+	/// Reads the INI configuration file for the mod.
+	/// </summary>
+	static void ReadINI();
+
 	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>

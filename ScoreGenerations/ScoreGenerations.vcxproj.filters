@@ -12,25 +12,28 @@
     <ClInclude Include="Dependencies\Detours\include\syelog.h">
       <Filter>Dependencies\Detours\include</Filter>
     </ClInclude>
-    <ClInclude Include="SonicHud.h" />
+    <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="StateHooks.h" />
     <ClInclude Include="Mod.h" />
-    <ClInclude Include="MemoryHelper.h" />
     <ClInclude Include="dependencies\inipp.h">
       <Filter>Dependencies</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="ArchiveTreePatcher.h" />
+    <ClInclude Include="Patches.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
-    <ClCompile Include="SonicHud.cpp" />
+    <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="ObjectHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="Pch.cpp" />
+    <ClCompile Include="ArchiveTreePatcher.cpp" />
+    <ClCompile Include="Patches.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

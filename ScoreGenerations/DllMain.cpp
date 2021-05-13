@@ -1,5 +1,3 @@
-#include <Windows.h>
-
 BOOL WINAPI DllMain(_In_ HINSTANCE instance, _In_ DWORD reason, _In_ LPVOID reserved)
 {
 	switch (reason)

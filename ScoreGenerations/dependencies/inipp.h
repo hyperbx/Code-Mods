@@ -98,7 +98,8 @@ namespace inipp
 	template <typename CharT>
 	inline bool extract(const std::basic_string<CharT>& value, std::basic_string<CharT>& dst)
 	{
-		dst = value;
+		if (!value.empty())
+			dst = value;
 		return true;
 	}
 

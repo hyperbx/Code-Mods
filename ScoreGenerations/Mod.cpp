@@ -1,22 +1,14 @@
-#include <fstream>
-
-#include "Mod.h"
-#include "SonicHud.h"
-#include "ObjectHooks.h"
-#include "StateHooks.h"
 #include "StringHelper.h"
-
-#include "dependencies\inipp.h"
 
 using namespace std;
 
 // Declare class variables.
-string Mod::scoreFormat = "%d";
+string Mod::scoreFormat = "%06d";
 
 /// <summary>
 /// Reads the mod configuration file.
 /// </summary>
-void ReadINI()
+void Mod::ReadINI()
 {
 	inipp::Ini<char> ini;
 	std::ifstream file(INI_FILE);
@@ -33,9 +25,12 @@ void ReadINI()
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
-	ReadINI();
+	Mod::ReadINI();
 
-	SonicHud::Install();
+	Patches::Install();
+
+	ArchiveTreePatcher::Install();
+	StatisticsListener::Install();
 	ObjectHooks::Install();
 	StateHooks::Install();
 }

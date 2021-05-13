@@ -1,6 +1,3 @@
-#include <string>
-#include <algorithm>
-
 using namespace std;
 
 #pragma once
@@ -23,14 +20,16 @@ public:
 
 string StringHelper::ToLower(string str)
 {
-	transform(str.begin(), str.end(), str.begin(), ::tolower);
+	if (!str.empty())
+		transform(str.begin(), str.end(), str.begin(), ::tolower);
 
 	return str;
 }
 
 string StringHelper::Unquote(string str)
 {
-	str.erase(remove(str.begin(), str.end(), '\"'), str.end());
+	if (!str.empty())
+		str.erase(remove(str.begin(), str.end(), '\"'), str.end());
 
 	return str;
 }

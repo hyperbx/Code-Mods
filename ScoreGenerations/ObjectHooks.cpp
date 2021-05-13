@@ -1,6 +1,3 @@
-#include "ObjectHooks.h"
-#include "ScoreListener.h"
-
 __declspec(naked) void RingMidAsmHook()
 {
 	static void* interruptAddress = (void*)0x10534B0;

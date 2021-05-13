@@ -1,12 +1,7 @@
-#include "StateHooks.h"
-#include "ScoreListener.h"
-#include "SonicHud.h"
-#include "Mod.h"
-
 // Declare class variables.
 const char* const StateHooks::stageID = (const char*)0x1E774D4;
 
-__declspec(naked) void ClassicSonicRestartMidAsmHook()
+__declspec(naked) void ClassicSonicPrepareRestartMidAsmHook()
 {
 	static void* interruptAddress = (void*)0xDD6740;
 	static void* returnAddress = (void*)0xDEB841;
@@ -22,7 +17,7 @@ __declspec(naked) void ClassicSonicRestartMidAsmHook()
 	}
 }
 
-__declspec(naked) void ModernSonicRestartMidAsmHook()
+__declspec(naked) void ModernSonicPrepareRestartMidAsmHook()
 {
 	static void* interruptAddress = (void*)0xE14350;
 	static void* returnAddress = (void*)0xE28C7B;
@@ -95,9 +90,11 @@ __declspec(naked) void ResultsCalculateMidAsmHook()
 /// </summary>
 void StateHooks::Install()
 {
-	WRITE_JUMP(0xDEB83C, &ClassicSonicRestartMidAsmHook);
-	WRITE_JUMP(0xE28C76, &ModernSonicRestartMidAsmHook);
+	WRITE_JUMP(0xDEB83C, &ClassicSonicPrepareRestartMidAsmHook);
+	WRITE_JUMP(0xE28C76, &ModernSonicPrepareRestartMidAsmHook);
+
 	WRITE_JUMP(0x42AD71, &ExitMidAsmHook);
+
+	// WRITE_JUMP(0x10B419D, &ResultsCalculateMidAsmHook);
 	WRITE_JUMP(0xCFAEE2, &ResultsEndMidAsmHook);
-	WRITE_JUMP(0x10B419D, &ResultsCalculateMidAsmHook);
 }
