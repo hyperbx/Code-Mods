@@ -24,9 +24,12 @@
 // Internal headers
 #include "ArchiveTreePatcher.h"
 #include "Helpers.h"
+#include "IOHelper.h"
+#include "Loader.h"
 #include "Mod.h"
 #include "ObjectHooks.h"
 #include "Patches.h"
 #include "ScoreListener.h"
 #include "StatisticsListener.h"
 #include "StateHooks.h"
+#include "StringHelper.h"

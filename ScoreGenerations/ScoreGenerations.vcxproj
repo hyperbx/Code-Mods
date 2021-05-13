@@ -188,6 +188,8 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
     <ClInclude Include="Dependencies\Detours\include\syelog.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="IOHelper.h" />
+    <ClInclude Include="Loader.h" />
     <ClInclude Include="Mod.h" />
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="Patches.h" />
@@ -200,6 +202,8 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
   <ItemGroup>
     <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="IOHelper.cpp" />
+    <ClCompile Include="Loader.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="ObjectHooks.cpp" />
     <ClCompile Include="Patches.cpp" />
@@ -210,6 +214,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="StateHooks.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Detours\lib\x64\detours.lib" />

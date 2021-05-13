@@ -23,6 +23,8 @@
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Patches.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="IOHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -34,6 +36,9 @@
     <ClCompile Include="Pch.cpp" />
     <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="Patches.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="IOHelper.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

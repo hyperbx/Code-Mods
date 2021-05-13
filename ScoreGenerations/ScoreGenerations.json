@@ -19,6 +19,23 @@
             "DefaultValue": "%06d"
           }
         ]
+      },
+	  {
+	    "Name": "Developer",
+        "DisplayName": "Developer",
+        "Elements": [
+          {
+            "Name": "customHUD",
+            "Description": [
+                "Disables the Score Generations HUD in favour of using a custom layout from a mod with higher priority."
+            ],
+            "DisplayName": "Custom HUD",
+            "Type": "bool",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": false
+          }
+        ]
       }
     ],
     "IniFile": "ScoreGenerations.ini"

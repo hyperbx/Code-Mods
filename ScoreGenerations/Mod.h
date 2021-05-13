@@ -10,10 +10,15 @@ public:
 	/// <summary>
 	/// Reads the INI configuration file for the mod.
 	/// </summary>
-	static void ReadINI();
+	static void ReadModINI(string path);
 
 	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>
 	static string scoreFormat;
+
+	/// <summary>
+	/// Determines if the mod overriding the configuration uses a custom HUD.
+	/// </summary>
+	static bool customHUD;
 };
