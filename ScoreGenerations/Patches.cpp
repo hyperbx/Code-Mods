@@ -3,9 +3,9 @@
 /// </summary>
 void Patches::Install()
 {
-	if (!Mod::customHUD)
+	if (!Mod::customXNCP)
 	{
-		// Use fixed HUD with moved life counter.
+		// Use Score Generations' HUD XNCP.
 		WRITE_MEMORY(0x168E333, uint8_t, "_b\0");
 	}
 }

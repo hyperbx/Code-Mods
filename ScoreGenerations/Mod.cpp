@@ -2,7 +2,7 @@ using namespace std;
 
 // Declare class variables.
 string Mod::scoreFormat = "%06d";
-bool Mod::customHUD = false;
+bool Mod::customXNCP = false;
 
 /// <summary>
 /// Reads the mod configuration file.
@@ -17,7 +17,7 @@ void Mod::ReadConfig(string path = "")
 	inipp::extract(StringHelper::Unquote(ini.sections["Appearance"]["scoreFormat"]), Mod::scoreFormat);
 
 	// Developer
-	inipp::extract(StringHelper::Unquote(ini.sections["Developer"]["customHUD"]), Mod::customHUD);
+	inipp::extract(StringHelper::Unquote(ini.sections["Developer"]["customXNCP"]), Mod::customXNCP);
 
 	file.close();
 }
@@ -31,7 +31,10 @@ extern "C" _declspec(dllexport) void Init()
 
 	Patches::Install();
 
-	ArchiveTreePatcher::Install();
+	// Patch archive tree for Score Generations HUD.
+	if (!Mod::customXNCP)
+		ArchiveTreePatcher::Install();
+
 	StatisticsListener::Install();
 	ObjectHooks::Install();
 	StateHooks::Install();

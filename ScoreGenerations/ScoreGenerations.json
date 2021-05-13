@@ -25,11 +25,11 @@
         "DisplayName": "Developer",
         "Elements": [
           {
-            "Name": "customHUD",
+            "Name": "customXNCP",
             "Description": [
-                "Disables the Score Generations HUD in favour of using a custom layout from a mod with higher priority."
+                "Disables Score Generations' HUD in favour of using a custom layout from a mod with higher priority."
             ],
-            "DisplayName": "Custom HUD",
+            "DisplayName": "Custom HUD Layout",
             "Type": "bool",
             "MinValue": null,
             "MaxValue": null,

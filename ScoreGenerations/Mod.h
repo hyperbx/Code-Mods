@@ -18,7 +18,7 @@ public:
 	static string scoreFormat;
 
 	/// <summary>
-	/// Determines if the mod overriding the configuration uses a custom HUD.
+	/// Determines if the mod overriding the configuration uses a custom XNCP.
 	/// </summary>
-	static bool customHUD;
+	static bool customXNCP;
 };
