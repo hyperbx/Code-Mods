@@ -107,8 +107,10 @@
       <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
-copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"</Command>
+      <Command>copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
+copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
+xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\disk"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -152,8 +154,10 @@ copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirecto
       <AdditionalLibraryDirectories>$(ProjectDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
-copy "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"</Command>
+      <Command>copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
+copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
+xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\disk"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
