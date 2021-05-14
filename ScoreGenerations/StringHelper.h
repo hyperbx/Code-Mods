@@ -32,4 +32,18 @@ public:
 	/// <param name="str2">String to test.</param>
 	/// <returns>Boolean result - true if they're the same, false if not.</returns>
 	static bool Compare(string str1, string str2);
+
+	/// <summary>
+	/// Checks if the string contains numbers.
+	/// </summary>
+	/// <param name="str">String to check.</param>
+	/// <returns>Boolean result - true if it contains numbers, false if not.</returns>
+	static bool ContainsNumbers(string str);
+
+	/// <summary>
+	/// Extracts numbers from a string and converts the result to an integer.
+	/// </summary>
+	/// <param name="str">String to get numbers from.</param>
+	/// <returns>The digits from the string as an integer.</returns>
+	static int GetDigits(string str);
 };

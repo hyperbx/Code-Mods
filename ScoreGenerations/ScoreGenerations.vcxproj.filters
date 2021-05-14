@@ -16,15 +16,15 @@
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="StateHooks.h" />
-    <ClInclude Include="Mod.h" />
-    <ClInclude Include="dependencies\inipp.h">
-      <Filter>Dependencies</Filter>
-    </ClInclude>
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="IOHelper.h" />
+    <ClInclude Include="dependencies\INIReader.h">
+      <Filter>Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="Configuration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -39,6 +39,7 @@
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="Configuration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

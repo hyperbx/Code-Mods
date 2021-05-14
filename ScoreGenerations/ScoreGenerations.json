@@ -1,6 +1,133 @@
 {
     "Groups": [
-      {
+	  {
+        "Name": "Object",
+        "DisplayName": "Score",
+        "Elements": [
+          {
+            "Name": "Ring",
+            "Description": [
+                "The amount of score rewarded for collecting rings."
+            ],
+            "DisplayName": "Rings",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "Enemy",
+            "Description": [
+                "The amount of score rewarded for defeating enemies."
+            ],
+            "DisplayName": "Enemies",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 300
+          },
+		  {
+            "Name": "Physics",
+            "Description": [
+                "The amount of score rewarded for breaking physics objects."
+            ],
+            "DisplayName": "Objects",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "PointMarker",
+            "Description": [
+                "The amount of score rewarded for passing through checkpoints."
+            ],
+            "DisplayName": "Checkpoints",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "RedRing",
+            "Description": [
+                "The amount of score rewarded for collecting red rings."
+            ],
+            "DisplayName": "Red Rings",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "RainbowRing",
+            "Description": [
+                "The amount of score rewarded for passing through rainbow rings."
+            ],
+            "DisplayName": "Rainbow Rings",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 1000
+          },
+		  {
+            "Name": "ItemBox",
+            "Description": [
+                "The amount of score rewarded for breaking item boxes."
+            ],
+            "DisplayName": "Item Boxes",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "SuperRing",
+            "Description": [
+                "The amount of score rewarded for collecting super rings."
+            ],
+            "DisplayName": "Super Rings",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "TrickRamp",
+            "Description": [
+                "The amount of score rewarded for using trick ramps."
+            ],
+            "DisplayName": "Trick Ramps",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 5000
+          },
+		  {
+            "Name": "Tricks",
+            "Description": [
+                "The amount of score rewarded for performing trick combos."
+            ],
+            "DisplayName": "Trick Combos",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "Life",
+            "Description": [
+                "The amount of score rewarded for collecting lives."
+            ],
+            "DisplayName": "Lives",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+        ]
+      },
+	  {
         "Name": "Appearance",
         "DisplayName": "Appearance",
         "Elements": [

@@ -183,14 +183,14 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArchiveTreePatcher.h" />
-    <ClInclude Include="dependencies\inipp.h" />
+    <ClInclude Include="Configuration.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h" />
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
     <ClInclude Include="Dependencies\Detours\include\syelog.h" />
+    <ClInclude Include="dependencies\INIReader.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
-    <ClInclude Include="Mod.h" />
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
@@ -201,6 +201,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArchiveTreePatcher.cpp" />
+    <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="Loader.cpp" />

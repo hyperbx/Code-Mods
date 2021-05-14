@@ -27,13 +27,9 @@ string Loader::GetModsDatabase()
 
 	if (IOHelper::FileExists(cpkRedirConfig))
 	{
-		inipp::Ini<char> ini;
-		std::ifstream file(cpkRedirConfig);
-		ini.parse(file);
+		INIReader reader(cpkRedirConfig);
 
-		inipp::extract(StringHelper::Unquote(ini.sections["CPKREDIR"]["ModsDbIni"]), modsDatabase);
-
-		file.close();
+		modsDatabase = reader.Get("CPKREDIR", "ModsDbIni", MODS_DEFAULT);
 	}
 
 	// Early builds of Hedge Mod Manager use relative paths.
@@ -56,24 +52,18 @@ void Loader::ConfigureScoreGenerations()
 
 	if (IOHelper::FileExists(modsDatabase))
 	{
-		inipp::Ini<char> ini;
-		std::ifstream file(modsDatabase);
-		ini.parse(file);
+		INIReader reader(modsDatabase);
 
 		bool reverseLoadOrder;
 		{
-			int loadOrder = 0;
-
 			// Used to flip the for loop direction.
-			inipp::extract(ini.sections["Main"]["ReverseLoadOrder"], loadOrder);
-
-			reverseLoadOrder = loadOrder == 1 ? true : false;
+			reverseLoadOrder = reader.GetBoolean("Main", "ReverseLoadOrder", 0);
 		}
 
 		int count;
 		{
 			// Used for iterating the for loop.
-			inipp::extract(ini.sections["Main"]["ActiveModCount"], count);
+			count = reader.GetInteger("Main", "ActiveModCount", 0);
 		}
 
 		// (reverseLoadOrder == true)  = for (int i = 0; i < count; i++)
@@ -84,12 +74,12 @@ void Loader::ConfigureScoreGenerations()
 
 			string guid;
 			{
-				inipp::extract(StringHelper::Unquote(ini.sections["Main"]["ActiveMod" + to_string(i)]), guid);
+				guid = reader.Get("Main", "ActiveMod" + to_string(i), "");
 			}
 
 			string config;
 			{
-				inipp::extract(StringHelper::Unquote(ini.sections["Mods"][guid]), config);
+				config = reader.Get("Mods", guid, "");
 
 #if _DEBUG
 				// Get mod information so we can put the mod name into the console.
@@ -101,14 +91,12 @@ void Loader::ConfigureScoreGenerations()
 
 			if (IOHelper::FileExists(scoreGenerationsConfig))
 			{
-				Mod::ReadConfig(scoreGenerationsConfig);
+				Configuration::Read(scoreGenerationsConfig);
 
 #if _DEBUG
 				printf("[Score Generations] Configuration overridden by %s\n", modInfo.title.c_str());
 #endif
 			}
 		}
-
-		file.close();
 	}
 }

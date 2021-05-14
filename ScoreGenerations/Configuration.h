@@ -4,13 +4,18 @@ using namespace std;
 
 #define INI_FILE "ScoreGenerations.ini"
 
-class Mod
+class Configuration
 {
 public:
 	/// <summary>
+	/// The configuration being used for settings.
+	/// </summary>
+	static INIReader config;
+
+	/// <summary>
 	/// Reads the INI configuration file for the mod.
 	/// </summary>
-	static void ReadConfig(string path);
+	static void Read(string path);
 
 	/// <summary>
 	/// Formatting used for the string printer for score.

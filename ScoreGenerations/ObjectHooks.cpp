@@ -1,3 +1,5 @@
+#pragma region ----- Mid-ASM Hooks -----
+
 __declspec(naked) void RingMidAsmHook()
 {
 	static void* interruptAddress = (void*)0x10534B0;
@@ -157,11 +159,14 @@ __declspec(naked) void SuperRingMidAsmHook()
 	}
 }
 
+#pragma endregion
+
 /// <summary>
 /// Installs the mid-ASM hooks.
 /// </summary>
 void ObjectHooks::Install()
 {
+	// Hook objects to add score to the counter.
 	WRITE_JUMP(0x1054420, &RingMidAsmHook);
 	WRITE_JUMP(0xDEB11C, &ClassicSonicMidAsmHook);
 	WRITE_JUMP(0xE28556, &ModernSonicMidAsmHook);

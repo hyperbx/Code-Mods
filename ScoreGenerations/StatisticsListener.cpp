@@ -3,6 +3,8 @@ unsigned int StatisticsListener::totalRingCount = 0;
 unsigned int StatisticsListener::ringCount = 0;
 unsigned int StatisticsListener::elapsedTime = 0;
 
+#pragma region ----- Hooked Functions -----
+
 /// <summary>
 /// Replaces leading nulls from the string printer with dashes which are invisible in the textures.
 /// </summary>
@@ -19,6 +21,20 @@ void __fastcall UpdateRingCount(unsigned int rings)
 	}
 }
 
+/// <summary>
+/// Updates the elapsed time.
+/// </summary>
+/// <param name="minutes">Minutes from EDI.</param>
+/// <param name="seconds">Seconds from EAX.</param>
+void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
+{
+	// Update real-time elapsed time.
+	StatisticsListener::elapsedTime = (minutes * 60) + seconds;
+}
+
+#pragma endregion
+
+#pragma region ----- Mid-ASM Hooks -----
 __declspec(naked) void DefaultRingFormatterMidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E59;
@@ -58,17 +74,6 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 	}
 }
 
-/// <summary>
-/// Updates the elapsed time.
-/// </summary>
-/// <param name="minutes">Minutes from EDI.</param>
-/// <param name="seconds">Seconds from EAX.</param>
-void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
-{
-	// Update real-time elapsed time.
-	StatisticsListener::elapsedTime = (minutes * 60) + seconds;
-}
-
 __declspec(naked) void TimeFormatterMidAsmHook()
 {
 	static void* interruptAddress = (void*)0xA6901D;
@@ -76,16 +81,17 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 
 	__asm
 	{
-		call [interruptAddress]
+		call[interruptAddress]
 
 		mov ecx, eax
 		mov edx, edi
 		call UpdateElapsedTime
 		mov edx, eax
 
-		jmp [returnAddress]
+		jmp[returnAddress]
 	}
 }
+#pragma endregion
 
 /// <summary>
 /// Installs the mid-ASM hooks.
@@ -93,12 +99,12 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 void StatisticsListener::Install()
 {
 	// Set score string format.
-	WRITE_MEMORY(0x1095D7D, char*, Mod::scoreFormat.c_str());
+	WRITE_MEMORY(0x1095D7D, char*, Configuration::scoreFormat.c_str());
 
-	// Jump to store elapsed time locally for time bonus.
+	// Store elapsed time locally for the time bonus.
 	WRITE_JUMP(0x1098D4D, &TimeFormatterMidAsmHook);
 
-	// Jump to ring formatters to update the ring count.
+	// Update the ring count.
 	WRITE_JUMP(0x1098E4C, &DefaultRingFormatterMidAsmHook);
 	WRITE_JUMP(0x12281B8, &FinalBossRingFormatterMidAsmHook);
 }

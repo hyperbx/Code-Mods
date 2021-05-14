@@ -30,30 +30,29 @@ public:
 
 		string config;
 
+		/// <summary>
+		/// Reads the configuration for the active mod.
+		/// </summary>
 		static ModInformation ReadConfig(string path)
 		{
 			ModInformation modInfo;
 
 			if (IOHelper::FileExists(path))
 			{
-				inipp::Ini<char> ini;
-				std::ifstream file(path);
-				ini.parse(file);
+				INIReader reader(path);
 
-				inipp::extract(ini.sections["Desc"]["Title"], modInfo.title);
-				inipp::extract(ini.sections["Desc"]["Description"], modInfo.description);
-				inipp::extract(ini.sections["Desc"]["Version"], modInfo.version);
-				inipp::extract(ini.sections["Desc"]["Date"], modInfo.date);
-				inipp::extract(ini.sections["Desc"]["Author"], modInfo.author);
-				inipp::extract(ini.sections["Desc"]["AuthorURL"], modInfo.authorURL);
+				modInfo.title = reader.Get("Desc", "Title", "N/A");
+				modInfo.description = reader.Get("Desc", "Description", "N/A");
+				modInfo.version = reader.Get("Desc", "Version", "N/A");
+				modInfo.date = reader.Get("Desc", "Date", "N/A");
+				modInfo.author = reader.Get("Desc", "Author", "N/A");
+				modInfo.authorURL = reader.Get("Desc", "AuthorURL", "");
 
-				inipp::extract(ini.sections["Main"]["DLLFile"], modInfo.dll);
-				inipp::extract(ini.sections["Main"]["CodeFile"], modInfo.code);
-				inipp::extract(ini.sections["Main"]["ConfigSchemaFile"], modInfo.schema);
+				modInfo.dll = reader.Get("Main", "DLLFile", "");
+				modInfo.code = reader.Get("Main", "CodeFile", "");
+				modInfo.schema = reader.Get("Main", "ConfigSchemaFile", "");
 
 				modInfo.config = path;
-
-				file.close();
 			}
 
 			return modInfo;

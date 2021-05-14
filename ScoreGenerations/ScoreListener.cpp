@@ -1,5 +1,7 @@
 // Declare class variables.
 unsigned int ScoreListener::score = 0;
+struct ScoreListener::ScoreTable ScoreListener::scoreTable;
+struct ScoreListener::RankTable ScoreListener::rankTable;
 
 /// <summary>
 /// Resets all statistics used for score calculation.
@@ -33,36 +35,54 @@ void ScoreListener::Bonus()
 /// <summary>
 /// Rewards the player with score based on the input type.
 /// </summary>
-void __fastcall ScoreListener::Reward(ScoreType type)
+void __fastcall ScoreListener::Reward(Object type)
 {
 	int scoreToReward = 0;
 
 	switch (type)
 	{
 		case Ring:
-		case Object:
-			scoreToReward = 100;
-			break;
-
-		case SuperRing:
-			scoreToReward = 1000;
+			scoreToReward = scoreTable.Ring;
 			break;
 
 		case Enemy:
-			scoreToReward = 1500;
+			scoreToReward = scoreTable.Enemy;
+			break;
+
+		case Physics:
+			scoreToReward = scoreTable.Physics;
 			break;
 
 		case PointMarker:
-		case ItemBox:
-			scoreToReward = 5000;
-			break;
-
-		case RainbowRing:
-			scoreToReward = 10000;
+			scoreToReward = scoreTable.PointMarker;
 			break;
 
 		case RedRing:
-			scoreToReward = 30000;
+			scoreToReward = scoreTable.RedRing;
+			break;
+
+		case RainbowRing:
+			scoreToReward = scoreTable.RainbowRing;
+			break;
+
+		case ItemBox:
+			scoreToReward = scoreTable.ItemBox;
+			break;
+
+		case SuperRing:
+			scoreToReward = scoreTable.SuperRing;
+			break;
+
+		case TrickRamp:
+			scoreToReward = scoreTable.TrickRamp;
+			break;
+
+		case Tricks:
+			scoreToReward = scoreTable.TrickRamp;
+			break;
+
+		case Life:
+			scoreToReward = scoreTable.Life;
 			break;
 	}
 

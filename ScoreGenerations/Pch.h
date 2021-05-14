@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <fstream>
+#include <regex>
 #include <set>
 #include <sstream>
 #include <stdint.h>
@@ -19,14 +20,14 @@
 #include <vector>
 
 // Dependencies
-#include "dependencies\inipp.h"
+#include "dependencies\INIReader.h"
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
+#include "Configuration.h"
 #include "Helpers.h"
 #include "IOHelper.h"
 #include "Loader.h"
-#include "Mod.h"
 #include "ObjectHooks.h"
 #include "Patches.h"
 #include "ScoreListener.h"
