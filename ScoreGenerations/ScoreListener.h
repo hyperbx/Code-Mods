@@ -1,5 +1,3 @@
-#include "StateHooks.h"
-
 #pragma once
 
 class ScoreListener
@@ -81,6 +79,33 @@ public:
     };
 
     static ScoreTable scoreTable;
+
+    struct BonusTable
+    {
+        int timeBonus = 0;
+        int ringBonus = 0;
+        int speedBonus = 0;
+
+        static BonusTable GetBonuses()
+        {
+            BonusTable bonusTable;
+
+            // Use the current configuration to get the bonuses.
+            bonusTable.timeBonus  = Configuration::config.GetInteger("Bonus", "timeBonus", 0);
+            bonusTable.ringBonus  = Configuration::config.GetInteger("Bonus", "ringBonus", 0);
+            bonusTable.speedBonus = Configuration::config.GetInteger("Bonus", "speedBonus", 0);
+
+#if _DEBUG
+            printf("[Score Generations] timeBonus = %d\n", bonusTable.timeBonus);
+            printf("[Score Generations] ringBonus = %d\n", bonusTable.ringBonus);
+            printf("[Score Generations] speedBonus = %d\n", bonusTable.speedBonus);
+#endif
+
+            return bonusTable;
+        }
+    };
+
+    static BonusTable bonusTable;
 
     /// <summary>
     /// Table of ranks defined in the mod configuration.

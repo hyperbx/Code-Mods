@@ -25,6 +25,7 @@
       <Filter>Dependencies</Filter>
     </ClInclude>
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="PlayerListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

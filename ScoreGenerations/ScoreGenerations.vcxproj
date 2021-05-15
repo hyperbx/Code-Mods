@@ -194,6 +194,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="ObjectHooks.h" />
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="StateHooks.h" />
@@ -212,6 +213,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="StateHooks.cpp" />

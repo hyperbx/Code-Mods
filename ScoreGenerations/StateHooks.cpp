@@ -105,7 +105,7 @@ __declspec(naked) void ExitMidAsmHook()
 
 __declspec(naked) void ResultsCalculateMidAsmHook()
 {
-	static void* returnAddress = (void*)0x10B41A5;
+	static void* returnAddress = (void*)0x10B4041;
 
 	// Calculate bonuses.
 	ScoreListener::Bonus();
@@ -113,8 +113,8 @@ __declspec(naked) void ResultsCalculateMidAsmHook()
 	__asm
 	{
 		// Move locally calculated score to final results registers.
-		cvtsi2ss xmm0, ScoreListener::score
-		cvtss2sd xmm1, xmm0
+		mov eax, ScoreListener::score
+		mov [ebx], eax
 
 		jmp [returnAddress]
 	}
@@ -157,7 +157,7 @@ void StateHooks::Install()
 	WRITE_JUMP(0x42AD71, &ExitMidAsmHook);
 
 	// Calculate results screen with local score.
-	// WRITE_JUMP(0x10B419D, &ResultsCalculateMidAsmHook);
+	WRITE_JUMP(0x10B403B, &ResultsCalculateMidAsmHook);
 
 	// Reset statistics upon results finishing.
 	WRITE_JUMP(0xCFAEE2, &ResultsEndMidAsmHook);

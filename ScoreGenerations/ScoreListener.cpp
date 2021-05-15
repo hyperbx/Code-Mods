@@ -1,23 +1,24 @@
 // Declare class variables.
 unsigned int ScoreListener::score = 0;
-struct ScoreListener::ScoreTable ScoreListener::scoreTable;
-struct ScoreListener::RankTable ScoreListener::rankTable;
+ScoreListener::ScoreTable ScoreListener::scoreTable;
+ScoreListener::RankTable ScoreListener::rankTable;
+ScoreListener::BonusTable ScoreListener::bonusTable;
 
 /// <summary>
 /// Resets all statistics used for score calculation.
 /// </summary>
 void ScoreListener::Reset()
 {
-	StatisticsListener::elapsedTime = 0;
 	StatisticsListener::totalRingCount = 0;
+	StatisticsListener::totalVelocity = 0;
+	StatisticsListener::elapsedTime = 0;
 	StatisticsListener::ringCount = 0;
-
 	score = 0;
 
 #if _DEBUG
-	printf("[Score Generations] Score has been reset...\n");
-	printf("[Score Generations] StatisticsListener::elapsedTime = %d\n", StatisticsListener::elapsedTime);
 	printf("[Score Generations] StatisticsListener::totalRingCount = %d\n", StatisticsListener::totalRingCount);
+	printf("[Score Generations] StatisticsListener::totalVelocity = %d\n", StatisticsListener::totalVelocity);
+	printf("[Score Generations] StatisticsListener::elapsedTime = %d\n", StatisticsListener::elapsedTime);
 	printf("[Score Generations] StatisticsListener::ringCount = %d\n", StatisticsListener::ringCount);
 	printf("[Score Generations] ScoreListener::score = %d\n", score);
 #endif
@@ -28,8 +29,17 @@ void ScoreListener::Reset()
 /// </summary>
 void ScoreListener::Bonus()
 {
-	// Add ring bonus (Forces).
-	ScoreListener::score += StatisticsListener::ringCount * 300;
+	// Calculate ring bonus.
+	score += StatisticsListener::ringCount * bonusTable.ringBonus;
+
+	// Calculate speed bonus.
+	score += StatisticsListener::totalVelocity * bonusTable.speedBonus;
+
+#if _DEBUG
+	printf("[Score Generations] Time Bonus = %d\n", 0);
+	printf("[Score Generations] Ring Bonus = %d\n", StatisticsListener::ringCount * bonusTable.ringBonus);
+	printf("[Score Generations] Speed Bonus = %d\n", StatisticsListener::totalVelocity * bonusTable.speedBonus);
+#endif
 }
 
 /// <summary>
@@ -54,8 +64,18 @@ void __fastcall ScoreListener::Reward(Object type)
 			break;
 
 		case PointMarker:
+		{
 			scoreToReward = scoreTable.PointMarker;
+
+			// Increase total velocity for the speed bonus.
+			StatisticsListener::totalVelocity += (unsigned int)(PlayerListener::GetVelocity() * 10);
+
+#if _DEBUG
+			printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::totalVelocity);
+#endif
+
 			break;
+		}
 
 		case RedRing:
 			scoreToReward = scoreTable.RedRing;

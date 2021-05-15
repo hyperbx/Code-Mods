@@ -1,7 +1,8 @@
 // Declare class variables.
 unsigned int StatisticsListener::totalRingCount = 0;
-unsigned int StatisticsListener::ringCount = 0;
+unsigned int StatisticsListener::totalVelocity = 0;
 unsigned int StatisticsListener::elapsedTime = 0;
+unsigned int StatisticsListener::ringCount = 0;
 
 #pragma region ----- Hooked Functions -----
 

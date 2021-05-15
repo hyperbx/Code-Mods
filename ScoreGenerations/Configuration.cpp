@@ -20,4 +20,7 @@ void Configuration::Read(string path = "")
 
 	// Get the score for the objects.
 	ScoreListener::scoreTable = ScoreListener::ScoreTable::GetScore();
+
+	// Get the bonuses.
+	ScoreListener::bonusTable = ScoreListener::BonusTable::GetBonuses();
 }

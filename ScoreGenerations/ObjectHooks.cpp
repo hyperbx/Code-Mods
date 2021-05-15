@@ -18,7 +18,7 @@ __declspec(naked) void RingMidAsmHook()
 	}
 }
 
-__declspec(naked) void ClassicSonicMidAsmHook()
+__declspec(naked) void ClassicSonicDamageSuccessMidAsmHook()
 {
 	static void* interruptAddress = (void*)0xDDAE80;
 	static void* returnAddress = (void*)0xDEB121;
@@ -36,7 +36,7 @@ __declspec(naked) void ClassicSonicMidAsmHook()
 	}
 }
 
-__declspec(naked) void ModernSonicMidAsmHook()
+__declspec(naked) void ModernSonicDamageSuccessMidAsmHook()
 {
 	static void* interruptAddress = (void*)0xE18260;
 	static void* returnAddress = (void*)0xE2855B;
@@ -168,8 +168,8 @@ void ObjectHooks::Install()
 {
 	// Hook objects to add score to the counter.
 	WRITE_JUMP(0x1054420, &RingMidAsmHook);
-	WRITE_JUMP(0xDEB11C, &ClassicSonicMidAsmHook);
-	WRITE_JUMP(0xE28556, &ModernSonicMidAsmHook);
+	WRITE_JUMP(0xDEB11C, &ClassicSonicDamageSuccessMidAsmHook);
+	WRITE_JUMP(0xE28556, &ModernSonicDamageSuccessMidAsmHook);
 	WRITE_JUMP(0xEA5412, &ObjectPhysicsMidAsmHook);
 	WRITE_JUMP(0x457D49, &PointMarkerMidAsmHook);
 	WRITE_JUMP(0x11A9CC9, &RedRingMidAsmHook);
