@@ -10,6 +10,5 @@ public:
 
     static bool IsContextSafe();
     static const uint32_t GetContext();
-	static float GetVelocity();
+    static float GetVelocity();
 };
-

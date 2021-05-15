@@ -18,6 +18,9 @@ const uint32_t PlayerListener::GetContext()
 
 float PlayerListener::GetVelocity()
 {
+	if (!IsContextSafe())
+		return 0;
+
 	float* velocity = (float*)(GetContext() + 656);
 
 	return sqrtf(velocity[0] * velocity[0] + velocity[1] * velocity[1] + velocity[2] * velocity[2]);
