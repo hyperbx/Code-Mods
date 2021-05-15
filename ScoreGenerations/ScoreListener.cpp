@@ -29,11 +29,17 @@ void ScoreListener::Reset()
 /// </summary>
 void ScoreListener::Bonus()
 {
-	// Calculate ring bonus.
-	score += StatisticsListener::ringCount * bonusTable.ringBonus;
+	if (bonusTable.ringBonus != -1)
+	{
+		// Calculate ring bonus.
+		score += StatisticsListener::ringCount * bonusTable.ringBonus;
+	}
 
-	// Calculate speed bonus.
-	score += StatisticsListener::totalVelocity * bonusTable.speedBonus;
+	if (bonusTable.speedBonus != -1)
+	{
+		// Calculate speed bonus.
+		score += StatisticsListener::totalVelocity * bonusTable.speedBonus;
+	}
 
 #if _DEBUG
 	printf("[Score Generations] Time Bonus = %d\n", 0);

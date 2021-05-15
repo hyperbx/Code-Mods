@@ -82,6 +82,7 @@ public:
 
     struct BonusTable
     {
+        // Multipliers for bonus algorithms.
         int timeBonus = 0;
         int ringBonus = 0;
         int speedBonus = 0;
@@ -91,9 +92,9 @@ public:
             BonusTable bonusTable;
 
             // Use the current configuration to get the bonuses.
-            bonusTable.timeBonus  = Configuration::config.GetInteger("Bonus", "timeBonus", 0);
-            bonusTable.ringBonus  = Configuration::config.GetInteger("Bonus", "ringBonus", 0);
-            bonusTable.speedBonus = Configuration::config.GetInteger("Bonus", "speedBonus", 0);
+            bonusTable.timeBonus  = Configuration::config.GetInteger("Bonus", "timeBonus", -1);
+            bonusTable.ringBonus  = Configuration::config.GetInteger("Bonus", "ringBonus", -1);
+            bonusTable.speedBonus = Configuration::config.GetInteger("Bonus", "speedBonus", -1);
 
 #if _DEBUG
             printf("[Score Generations] timeBonus = %d\n", bonusTable.timeBonus);

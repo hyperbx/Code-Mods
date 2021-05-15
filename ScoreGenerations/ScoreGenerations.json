@@ -134,9 +134,10 @@
           {
             "Name": "timeBonus",
             "Description": [
-                "The number the elapsed time will be multiplied by to get the time bonus."
+                "The number the elapsed time will be multiplied by to get the time bonus.\n",
+				"Set this to -1 to disable it."
             ],
-            "DisplayName": "Time Bonus",
+            "DisplayName": "Time Bonus Multiplier",
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
@@ -145,9 +146,10 @@
 		  {
             "Name": "ringBonus",
             "Description": [
-                "The number the rings will be multiplied by to get the ring bonus."
+                "The number the rings will be multiplied by to get the ring bonus.\n",
+				"Set this to -1 to disable it."
             ],
-            "DisplayName": "Ring Bonus",
+            "DisplayName": "Ring Bonus Multiplier",
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
@@ -156,9 +158,10 @@
 		  {
             "Name": "speedBonus",
             "Description": [
-                "The number the total velocity will be multiplied by to get the speed bonus."
+                "The number the total velocity will be multiplied by to get the speed bonus.\n",
+				"Set this to -1 to disable it."
             ],
-            "DisplayName": "Speed Bonus",
+            "DisplayName": "Speed Bonus Multiplier",
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
@@ -193,7 +196,7 @@
           {
             "Name": "customXNCP",
             "Description": [
-                "Disables Score Generations' HUD in favour of using a custom layout from a mod with higher priority."
+                "Disables Score Generations' HUD in favour of using a custom layout from another mod."
             ],
             "DisplayName": "Custom HUD Layout",
             "Type": "bool",
