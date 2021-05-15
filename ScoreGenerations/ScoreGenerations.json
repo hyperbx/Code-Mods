@@ -154,7 +154,7 @@
             "DefaultValue": 100
           },
 		  {
-            "Name": "checkpointBonus",
+            "Name": "speedBonus",
             "Description": [
                 "The number the total velocity will be multiplied by to get the speed bonus."
             ],
