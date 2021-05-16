@@ -26,6 +26,22 @@
     </ClInclude>
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="LuaCallback.h" />
+    <ClInclude Include="dependencies\Lua542\include\lauxlib.h">
+      <Filter>Dependencies\Lua542\include</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\Lua542\include\lua.h">
+      <Filter>Dependencies\Lua542\include</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\Lua542\include\lua.hpp">
+      <Filter>Dependencies\Lua542\include</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\Lua542\include\luaconf.h">
+      <Filter>Dependencies\Lua542\include</Filter>
+    </ClInclude>
+    <ClInclude Include="dependencies\Lua542\include\lualib.h">
+      <Filter>Dependencies\Lua542\include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -42,6 +58,7 @@
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="PlayerListener.cpp" />
+    <ClCompile Include="LuaCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">
@@ -62,6 +79,12 @@
     <Filter Include="Dependencies\Detours\lib\x64">
       <UniqueIdentifier>{737983fc-3a8e-4a50-b3bc-7bd1e5145ad5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dependencies\Lua542">
+      <UniqueIdentifier>{2570cd49-fc56-421a-a4de-ae20ff3bf408}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dependencies\Lua542\include">
+      <UniqueIdentifier>{bda2539d-2185-4253-918d-97e85b8546ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Detours\lib\x64\detours.lib">
@@ -76,6 +99,9 @@
     <Library Include="Dependencies\Detours\lib\x86\syelog.lib">
       <Filter>Dependencies\Detours\lib\x86</Filter>
     </Library>
+    <Library Include="dependencies\Lua542\lua54.lib">
+      <Filter>Dependencies\Lua542</Filter>
+    </Library>
   </ItemGroup>
   <ItemGroup>
     <None Include="Dependencies\Detours\lib\x64\detours.pdb">
@@ -83,6 +109,9 @@
     </None>
     <None Include="Dependencies\Detours\lib\x86\detours.pdb">
       <Filter>Dependencies\Detours\lib\x86</Filter>
+    </None>
+    <None Include="dependencies\Lua542\lua54.dll">
+      <Filter>Dependencies\Lua542</Filter>
     </None>
   </ItemGroup>
 </Project>

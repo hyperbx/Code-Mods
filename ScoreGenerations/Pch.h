@@ -28,6 +28,7 @@
 #include "Helpers.h"
 #include "IOHelper.h"
 #include "Loader.h"
+#include "LuaCallback.h"
 #include "ObjectHooks.h"
 #include "Patches.h"
 #include "PlayerListener.h"

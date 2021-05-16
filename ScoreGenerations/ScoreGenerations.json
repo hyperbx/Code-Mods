@@ -132,40 +132,40 @@
         "DisplayName": "Bonuses",
         "Elements": [
           {
-            "Name": "timeBonus",
+            "Name": "timeBonusAlgorithm",
             "Description": [
-                "The number the elapsed time will be multiplied by to get the time bonus.\n",
-				"Set this to -1 to disable it."
+                "A simple Lua equation that calculates the time bonus.\n",
+				"Set this to '0' to disable it."
             ],
-            "DisplayName": "Time Bonus Multiplier",
-            "Type": "int",
+            "DisplayName": "Time Bonus Algorithm",
+            "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 100
+            "DefaultValue": "elapsedTime * 100"
           },
 		  {
-            "Name": "ringBonus",
+            "Name": "ringBonusAlgorithm",
             "Description": [
-                "The number the rings will be multiplied by to get the ring bonus.\n",
-				"Set this to -1 to disable it."
+                "A simple Lua equation that calculates the ring bonus.\n",
+				"Set this to '0' to disable it."
             ],
-            "DisplayName": "Ring Bonus Multiplier",
-            "Type": "int",
+            "DisplayName": "Ring Bonus Algorithm",
+            "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 100
+            "DefaultValue": "totalRingCount * 50"
           },
 		  {
-            "Name": "speedBonus",
+            "Name": "speedBonusAlgorithm",
             "Description": [
-                "The number the total velocity will be multiplied by to get the speed bonus.\n",
-				"Set this to -1 to disable it."
+                "A simple Lua equation that calculates the speed bonus.\n",
+				"Set this to '0' to disable it."
             ],
-            "DisplayName": "Speed Bonus Multiplier",
-            "Type": "int",
+            "DisplayName": "Speed Bonus Algorithm",
+            "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 3
+            "DefaultValue": "totalVelocity * 3"
           }
         ]
       },

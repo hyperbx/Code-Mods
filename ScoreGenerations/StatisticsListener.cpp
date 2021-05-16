@@ -1,7 +1,8 @@
 // Declare class variables.
 unsigned int StatisticsListener::totalRingCount = 0;
 unsigned int StatisticsListener::totalVelocity = 0;
-unsigned int StatisticsListener::elapsedTime = 0;
+unsigned int StatisticsListener::minutes = 0;
+unsigned int StatisticsListener::seconds = 0;
 unsigned int StatisticsListener::ringCount = 0;
 
 #pragma region ----- Hooked Functions -----
@@ -29,10 +30,10 @@ void __fastcall UpdateRingCount(unsigned int rings)
 /// <param name="seconds">Seconds from EAX.</param>
 void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
 {
-	// Update real-time elapsed time.
-	StatisticsListener::elapsedTime = (minutes * 60) + seconds;
+	// Update real-time minutes and seconds.
+	StatisticsListener::minutes = minutes;
+	StatisticsListener::seconds = seconds;
 }
-
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
@@ -75,24 +76,30 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 	}
 }
 
+
 __declspec(naked) void TimeFormatterMidAsmHook()
 {
-	static void* interruptAddress = (void*)0xA6901D;
-	static void* returnAddress = (void*)0x1098D52;
+	static void* returnAddress = (void*)0x1098D47;
 
 	__asm
 	{
-		call[interruptAddress]
-
-		mov ecx, eax
-		mov edx, edi
+		pop ecx
+		pop edx
+		push edx
+		push ecx
 		call UpdateElapsedTime
 		mov edx, eax
 
-		jmp[returnAddress]
+		lea ecx, [esp + 94h]
+		jmp [returnAddress]
 	}
 }
 #pragma endregion
+
+unsigned int StatisticsListener::GetElapsedTime()
+{
+	return (minutes * 60) + seconds;
+}
 
 /// <summary>
 /// Installs the mid-ASM hooks.
@@ -103,7 +110,7 @@ void StatisticsListener::Install()
 	WRITE_MEMORY(0x1095D7D, char*, Configuration::scoreFormat.c_str());
 
 	// Store elapsed time locally for the time bonus.
-	WRITE_JUMP(0x1098D4D, &TimeFormatterMidAsmHook);
+	WRITE_JUMP(0x1098D40, &TimeFormatterMidAsmHook);
 
 	// Update the ring count.
 	WRITE_JUMP(0x1098E4C, &DefaultRingFormatterMidAsmHook);

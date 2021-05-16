@@ -82,24 +82,24 @@ public:
 
     struct BonusTable
     {
-        // Multipliers for bonus algorithms.
-        int timeBonus = 0;
-        int ringBonus = 0;
-        int speedBonus = 0;
+        // Algorithms for calculating bonuses.
+        string timeBonusAlgorithm;
+        string ringBonusAlgorithm;
+        string speedBonusAlgorithm;
 
         static BonusTable GetBonuses()
         {
             BonusTable bonusTable;
 
             // Use the current configuration to get the bonuses.
-            bonusTable.timeBonus  = Configuration::config.GetInteger("Bonus", "timeBonus", -1);
-            bonusTable.ringBonus  = Configuration::config.GetInteger("Bonus", "ringBonus", -1);
-            bonusTable.speedBonus = Configuration::config.GetInteger("Bonus", "speedBonus", -1);
+            bonusTable.timeBonusAlgorithm  = Configuration::config.Get("Bonus", "timeBonusAlgorithm", "");
+            bonusTable.ringBonusAlgorithm  = Configuration::config.Get("Bonus", "ringBonusAlgorithm", "");
+            bonusTable.speedBonusAlgorithm = Configuration::config.Get("Bonus", "speedBonusAlgorithm", "");
 
 #if _DEBUG
-            printf("[Score Generations] timeBonus = %d\n", bonusTable.timeBonus);
-            printf("[Score Generations] ringBonus = %d\n", bonusTable.ringBonus);
-            printf("[Score Generations] speedBonus = %d\n", bonusTable.speedBonus);
+            printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
+            printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
+            printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
 #endif
 
             return bonusTable;
@@ -113,6 +113,10 @@ public:
     /// </summary>
     struct RankTable
     {
+        // Time in seconds required for ranks.
+        int secondsForA = 0;
+        int secondsForC = 0;
+
         // Score required for ranks.
         int S = 0;
         int A = 0;
@@ -127,7 +131,11 @@ public:
         {
             RankTable rankTable;
 
-            // Use the current stage ID to get the ranks as strings.
+            // Use the current stage ID to get the time requirements.
+            rankTable.secondsForA = Configuration::config.GetInteger(StateHooks::stageID, "secondsForA", 0);
+            rankTable.secondsForC = Configuration::config.GetInteger(StateHooks::stageID, "secondsForC", 0);
+
+            // Use the current stage ID to get the ranks.
             rankTable.S = Configuration::config.GetInteger(StateHooks::stageID, "S", 0);
             rankTable.A = Configuration::config.GetInteger(StateHooks::stageID, "A", 0);
             rankTable.B = Configuration::config.GetInteger(StateHooks::stageID, "B", 0);
@@ -135,6 +143,8 @@ public:
             rankTable.D = Configuration::config.GetInteger(StateHooks::stageID, "D", 0);
 
 #if _DEBUG
+            printf("[Score Generations] secondsForA = %d\n", rankTable.secondsForA);
+            printf("[Score Generations] secondsForC = %d\n", rankTable.secondsForC);
             printf("[Score Generations] S = %d\n", rankTable.S);
             printf("[Score Generations] A = %d\n", rankTable.A);
             printf("[Score Generations] B = %d\n", rankTable.B);
