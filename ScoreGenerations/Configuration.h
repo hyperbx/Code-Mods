@@ -1,5 +1,3 @@
-using namespace std;
-
 #pragma once
 
 #define INI_FILE "ScoreGenerations.ini"
@@ -11,6 +9,16 @@ public:
 	/// The configuration being used for settings.
 	/// </summary>
 	static INIReader config;
+
+	/// <summary>
+	/// The path to the configuration.
+	/// </summary>
+	static string configPath;
+
+	/// <summary>
+	/// Gets the directory containing the configuration.
+	/// </summary>
+	static string GetConfigDirectory();
 
 	/// <summary>
 	/// Reads the INI configuration file for the mod.

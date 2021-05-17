@@ -5,9 +5,9 @@ vector<ArchiveDependency> ArchiveTreePatcher::archiveDependencies =
 
 HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const size_t size, void* pDatabase)
 {
-    std::string str;
+    string str;
     {
-        std::stringstream stream;
+        stringstream stream;
 
         for (ArchiveDependency const& node : ArchiveTreePatcher::archiveDependencies)
         {
@@ -33,7 +33,7 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
     }
 
     const size_t newSize = size + str.size();
-    const std::unique_ptr<char[]> pBuffer = std::make_unique<char[]>(newSize);
+    const unique_ptr<char[]> pBuffer = std::make_unique<char[]>(newSize);
 
     memcpy(pBuffer.get(), pData, size);
 

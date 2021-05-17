@@ -1,5 +1,3 @@
-using namespace std;
-
 #pragma once
 
 struct ArchiveDependency

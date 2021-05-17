@@ -1,5 +1,3 @@
-using namespace std;
-
 #pragma once
 
 #define MODS_DEFAULT "mods\\ModsDB.ini"

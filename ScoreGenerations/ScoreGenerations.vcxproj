@@ -108,6 +108,7 @@
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
+copy /Y "$(MSBuildProjectDirectory)\Math.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\Math.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
 copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"
@@ -160,6 +161,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"
+copy /Y "$(MSBuildProjectDirectory)\Math.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\Math.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
 copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"

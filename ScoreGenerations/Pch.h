@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿using namespace std;
+
+#pragma once
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -21,6 +23,7 @@
 
 // Dependencies
 #include "dependencies\INIReader.h"
+#include "StateHooks.h"
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
@@ -32,7 +35,6 @@
 #include "ObjectHooks.h"
 #include "Patches.h"
 #include "PlayerListener.h"
-#include "StateHooks.h"
 #include "ScoreListener.h"
 #include "StatisticsListener.h"
 #include "StringHelper.h"
