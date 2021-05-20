@@ -4,8 +4,7 @@
 void Patches::Install()
 {
 	// Disable next rank dialog on results.
-	// TODO: ACTUALLY IMPLEMENT THIS INSTEAD OF LEAVING A BROKEN MEMORY WRITER THAT DOESN'T ACTUALLY WORK BEHIND FOR THE SAKE OF LEAVING A COMMENT AS A REMINDER HERE!
-	// WRITE_MEMORY(0x10B6E37, uint8_t, 0x89, 0xD0, 0x90, 0x90, 0x90);
+	// WRITE_MEMORY(0x10B6DEC, uint8_t, 0x6A, 0x01);
 
 	// Skip score cap in results.
 	WRITE_JUMP(0x10B4012, (void*)0x10B401E);

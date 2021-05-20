@@ -143,6 +143,7 @@
 				"• seconds - seconds on the timer.",
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
+				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
 				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."
@@ -165,6 +166,7 @@
 				"• seconds - seconds on the timer.",
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
+				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
 				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."
@@ -187,6 +189,7 @@
 				"• seconds - seconds on the timer.",
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
+				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
 				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."

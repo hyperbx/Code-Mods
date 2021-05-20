@@ -4,7 +4,7 @@ const char* StateHooks::stageID = (const char*)0x1E774D4;
 void OnLoad()
 {
 	// Get the ranks for the current stage.
-	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks();
+	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks(StateHooks::stageID);
 
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
@@ -28,6 +28,7 @@ __declspec(naked) void LoadingMidAsmHook()
 
 	__asm
 	{
+		// Perform actions on the loading screen.
 		call OnLoad
 
 		call[interruptAddress]

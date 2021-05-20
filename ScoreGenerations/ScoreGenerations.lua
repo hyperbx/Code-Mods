@@ -8,5 +8,5 @@ function calculateTimeBonus()
 		end
 	end
 	
-	return math.clamp(elapsedTime * 10, 0, 999999)
+	return math.clamp(elapsedTime * 10, 0, scoreLimit)
 end

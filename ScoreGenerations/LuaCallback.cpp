@@ -22,6 +22,7 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedUnsignedInteger(L, "seconds", StatisticsListener::seconds);
 	PushExposedUnsignedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
 	PushExposedUnsignedInteger(L, "score", ScoreListener::score);
+	PushExposedUnsignedInteger(L, "scoreLimit", Configuration::scoreLimit);
 	PushExposedUnsignedInteger(L, "secondsForA", ScoreListener::rankTable.secondsForA);
 	PushExposedUnsignedInteger(L, "secondsForC", ScoreListener::rankTable.secondsForC);
 }
