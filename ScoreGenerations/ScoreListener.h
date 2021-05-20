@@ -131,12 +131,10 @@ public:
         int C = 0;
         int D = 0;
 
-        bool global;
-
         static bool IsNull(RankTable rankTable)
         {
             // The INI reader returned the default value.
-            if ((rankTable.secondsForA / rankTable.secondsForC / rankTable.S / rankTable.A / rankTable.B / rankTable.C / rankTable.D) == -1)
+            if ((rankTable.secondsForA - rankTable.secondsForC - rankTable.S - rankTable.A - rankTable.B - rankTable.C - rankTable.D) == -7)
                 return true;
 
             return false;
@@ -145,20 +143,20 @@ public:
         /// <summary>
         /// Gets the ranks from the current configuration.
         /// </summary>
-        static RankTable GetRanks(const char* stageID)
+        static RankTable GetRanks(const char* stageID, int defaultValue)
         {
             RankTable rankTable;
 
             // Use the current stage ID to get the time requirements.
-            rankTable.secondsForA = Configuration::config.GetInteger(stageID, "secondsForA", -1);
-            rankTable.secondsForC = Configuration::config.GetInteger(stageID, "secondsForC", -1);
+            rankTable.secondsForA = Configuration::config.GetInteger(stageID, "secondsForA", defaultValue);
+            rankTable.secondsForC = Configuration::config.GetInteger(stageID, "secondsForC", defaultValue);
 
             // Use the current stage ID to get the ranks.
-            rankTable.S = Configuration::config.GetInteger(stageID, "S", -1);
-            rankTable.A = Configuration::config.GetInteger(stageID, "A", -1);
-            rankTable.B = Configuration::config.GetInteger(stageID, "B", -1);
-            rankTable.C = Configuration::config.GetInteger(stageID, "C", -1);
-            rankTable.D = Configuration::config.GetInteger(stageID, "D", -1);
+            rankTable.S = Configuration::config.GetInteger(stageID, "S", defaultValue);
+            rankTable.A = Configuration::config.GetInteger(stageID, "A", defaultValue);
+            rankTable.B = Configuration::config.GetInteger(stageID, "B", defaultValue);
+            rankTable.C = Configuration::config.GetInteger(stageID, "C", defaultValue);
+            rankTable.D = Configuration::config.GetInteger(stageID, "D", defaultValue);
 
 #if _DEBUG
             printf("[Score Generations] secondsForA = %d\n", rankTable.secondsForA);
@@ -177,7 +175,7 @@ public:
 #endif
 
                 // Read from the global rank table.
-                rankTable = GetRanks("Global");
+                rankTable = GetRanks("Global", 0);
             }
 
             return rankTable;
