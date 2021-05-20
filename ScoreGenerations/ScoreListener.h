@@ -16,12 +16,14 @@ public:
         RainbowRing,
         ItemBox,
         SuperRing,
-        TrickRamp, // TODO: implement.
-        Tricks,    // TODO: implement.
-        Life       // TODO: implement.
+        TrickFinish,
+        Trick,
+        Life, // TODO: implement.
+        DashRing
     };
 
     static void Reset();
+    static void Clamp(unsigned int scoreToReward);
     static void Bonus();
     static void __fastcall Reward(Object type);
 
@@ -41,9 +43,10 @@ public:
         int RainbowRing = 0;
         int ItemBox = 0;
         int SuperRing = 0;
-        int TrickRamp = 0;
-        int Tricks = 0;
+        int TrickFinish = 0;
+        int Trick = 0;
         int Life = 0;
+        int DashRing = 0;
 
         static ScoreTable GetScore()
         {
@@ -58,8 +61,10 @@ public:
             scoreTable.RainbowRing = Configuration::config.GetInteger("Object", "RainbowRing", 0);
             scoreTable.ItemBox     = Configuration::config.GetInteger("Object", "ItemBox", 0);
             scoreTable.SuperRing   = Configuration::config.GetInteger("Object", "SuperRing", 0);
-            scoreTable.TrickRamp   = Configuration::config.GetInteger("Object", "TrickRamp", 0);
+            scoreTable.TrickFinish = Configuration::config.GetInteger("Object", "TrickFinish", 0);
+            scoreTable.Trick       = Configuration::config.GetInteger("Object", "Trick", 0);
             scoreTable.Life        = Configuration::config.GetInteger("Object", "Life", 0);
+            scoreTable.DashRing    = Configuration::config.GetInteger("Object", "DashRing", 0);
 
 #if _DEBUG
             printf("[Score Generations] Ring = %d\n", scoreTable.Ring);
@@ -70,8 +75,10 @@ public:
             printf("[Score Generations] RainbowRing = %d\n", scoreTable.RainbowRing);
             printf("[Score Generations] ItemBox = %d\n", scoreTable.ItemBox);
             printf("[Score Generations] SuperRing = %d\n", scoreTable.SuperRing);
-            printf("[Score Generations] TrickRamp = %d\n", scoreTable.TrickRamp);
+            printf("[Score Generations] TrickFinish = %d\n", scoreTable.TrickFinish);
+            printf("[Score Generations] Trick = %d\n", scoreTable.Trick);
             printf("[Score Generations] Life = %d\n", scoreTable.Life);
+            printf("[Score Generations] DashRing = %d\n", scoreTable.DashRing);
 #endif
 
             return scoreTable;

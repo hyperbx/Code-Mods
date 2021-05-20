@@ -29,6 +29,7 @@
 #include "ArchiveTreePatcher.h"
 #include "Configuration.h"
 #include "Helpers.h"
+#include "HudSonicStage.h"
 #include "IOHelper.h"
 #include "Loader.h"
 #include "LuaCallback.h"

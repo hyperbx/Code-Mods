@@ -1,42 +1,23 @@
 // Declare class variables.
 const char* StateHooks::stageID = (const char*)0x1E774D4;
 
-#pragma region ----- Hooked Functions -----
-
 void OnLoad()
 {
 	// Get the ranks for the current stage.
 	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks();
 
-	// Disable the score counter for Shadow's boss fight.
-	if (StringHelper::Compare(StateHooks::stageID, "bsd"))
+	// Disable the score counter for special HUDs.
+	if (HudSonicStage::IsHudSpecial())
 	{
-		// Jump over Casino Night score initialiser.
+		// Skip Casino Night score instructions.
 		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
 	}
 	else
 	{
-		// Restore Casino Night score instructions.
+		// Execute Casino Night score instructions.
 		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x00);
 	}
 }
-
-FUNCTION_PTR(void, __thiscall, ProcessMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const StateHooks::MsgSetPinballHud& msgSetPinballHud);
-
-HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, void* pUpdateInfo)
-{
-	StateHooks::MsgSetPinballHud msgSetPinballHud{};
-	msgSetPinballHud.flags = 1;
-	msgSetPinballHud.score = ScoreListener::score;
-
-	// Makes sure the current stage isn't Casino Night before sending the message.
-	if (!StringHelper::Compare(StateHooks::stageID, "cnz100"))
-		ProcessMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
-
-	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
-}
-
-#pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
 
@@ -105,7 +86,7 @@ __declspec(naked) void ExitMidAsmHook()
 
 __declspec(naked) void ResultsCalculateMidAsmHook()
 {
-	static void* returnAddress = (void*)0x10B4041;
+	static void* returnAddress = (void*)0x10B4044;
 
 	// Calculate bonuses.
 	ScoreListener::Bonus();
@@ -115,6 +96,7 @@ __declspec(naked) void ResultsCalculateMidAsmHook()
 		// Move locally calculated score to final results registers.
 		mov eax, ScoreListener::score
 		mov [ebx], eax
+		movss xmm0, ScoreListener::score
 
 		jmp [returnAddress]
 	}
@@ -130,12 +112,12 @@ __declspec(naked) void ResultsEndMidAsmHook()
 
 	__asm
 	{
-		call[interruptAddress]
+		call [interruptAddress]
 
 		// Reset statistics.
 		call ScoreListener::Reset
 
-		jmp[returnAddress]
+		jmp [returnAddress]
 	}
 }
 
@@ -161,7 +143,4 @@ void StateHooks::Install()
 
 	// Reset statistics upon results finishing.
 	WRITE_JUMP(0xCFAEE2, &ResultsEndMidAsmHook);
-
-	// Install hook to update the score counter.
-	INSTALL_HOOK(CHudSonicStageUpdate);
 }

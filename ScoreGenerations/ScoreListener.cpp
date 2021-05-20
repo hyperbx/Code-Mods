@@ -17,6 +17,7 @@ void ScoreListener::Reset()
 	score = 0;
 
 #if _DEBUG
+	printf("[Score Generations] Your score has been reset...\n");
 	printf("[Score Generations] totalRingCount = %d\n", StatisticsListener::totalRingCount);
 	printf("[Score Generations] totalVelocity = %d\n", StatisticsListener::totalVelocity);
 	printf("[Score Generations] ringCount = %d\n", StatisticsListener::ringCount);
@@ -27,15 +28,24 @@ void ScoreListener::Reset()
 #endif
 }
 
+void ScoreListener::Clamp(unsigned int scoreToReward)
+{
+	// Clamp the maximum score.
+	if ((score + scoreToReward) <= Configuration::scoreLimit)
+		score += scoreToReward;
+	else
+		score = Configuration::scoreLimit;
+}
+
 /// <summary>
 /// Calculates the bonuses and adds them to the total score.
 /// </summary>
 void ScoreListener::Bonus()
 {
-	// Calculate Lua bonuses.
-	score += LuaCallback::GetBonus(bonusTable.timeBonusAlgorithm);
-	score += LuaCallback::GetBonus(bonusTable.ringBonusAlgorithm);
-	score += LuaCallback::GetBonus(bonusTable.speedBonusAlgorithm);
+	// Rewards the Lua bonuses and clamps them.
+	Clamp(LuaCallback::GetBonus(bonusTable.timeBonusAlgorithm));
+	Clamp(LuaCallback::GetBonus(bonusTable.ringBonusAlgorithm));
+	Clamp(LuaCallback::GetBonus(bonusTable.speedBonusAlgorithm));
 }
 
 /// <summary>
@@ -89,24 +99,25 @@ void __fastcall ScoreListener::Reward(Object type)
 			scoreToReward = scoreTable.SuperRing;
 			break;
 
-		case TrickRamp:
-			scoreToReward = scoreTable.TrickRamp;
+		case TrickFinish:
+			scoreToReward = scoreTable.TrickFinish;
 			break;
 
-		case Tricks:
-			scoreToReward = scoreTable.TrickRamp;
+		case Trick:
+			scoreToReward = scoreTable.Trick;
 			break;
 
 		case Life:
 			scoreToReward = scoreTable.Life;
 			break;
+
+		case DashRing:
+			scoreToReward = scoreTable.DashRing;
+			break;
 	}
 
-	// Clamp the maximum score.
-	if ((score + scoreToReward) <= 999999)
-		score += scoreToReward;
-	else
-		score = 999999;
+	// Rewards the score and clamps it.
+	Clamp(scoreToReward);
 
 #if _DEBUG
 	printf("[Score Generations] Type %d rewarded player with %d score!\n", type, scoreToReward);

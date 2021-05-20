@@ -26,6 +26,11 @@ public:
 	static void Read(string path);
 
 	/// <summary>
+	/// The maximum amount of score the player can obtain.
+	/// </summary>
+	static unsigned int scoreLimit;
+
+	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>
 	static string scoreFormat;
@@ -34,4 +39,9 @@ public:
 	/// Determines if the mod overriding the configuration uses a custom XNCP.
 	/// </summary>
 	static bool customXNCP;
+
+	/// <summary>
+	/// List of forbidden stages that should not display the score counter.
+	/// </summary>
+	static vector<string> forbiddenStages;
 };

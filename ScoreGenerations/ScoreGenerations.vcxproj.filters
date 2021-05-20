@@ -42,6 +42,7 @@
     <ClInclude Include="dependencies\Lua542\include\lualib.h">
       <Filter>Dependencies\Lua542\include</Filter>
     </ClInclude>
+    <ClInclude Include="HudSonicStage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -59,6 +60,7 @@
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

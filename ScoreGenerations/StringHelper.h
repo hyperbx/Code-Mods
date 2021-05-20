@@ -44,4 +44,18 @@ public:
 	/// <param name="str">String to get numbers from.</param>
 	/// <returns>The digits from the string as an integer.</returns>
 	static int GetDigits(string str);
+
+	/// <summary>
+	/// Removes all spaces from a string.
+	/// </summary>
+	/// <param name="str">String to remove spaces from.</param>
+	/// <returns>String without spaces.</returns>
+	static string RemoveSpaces(string str);
+
+	/// <summary>
+	/// Extracts comma separated strings.
+	/// </summary>
+	/// <param name="str">String to extract from.</param>
+	/// <returns>Vector of the strings.</returns>
+	static vector<string> GetCommaSeparatedStrings(string str);
 };

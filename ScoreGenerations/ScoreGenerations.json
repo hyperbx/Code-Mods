@@ -129,12 +129,22 @@
       },
 	  {
         "Name": "Bonus",
-        "DisplayName": "Bonuses",
+        "DisplayName": "Bonus",
         "Elements": [
           {
             "Name": "timeBonusAlgorithm",
             "Description": [
-                "A simple Lua equation that calculates the time bonus.\n",
+                "The Lua equation that calculates the time bonus.\n",
+				"Exposed variables:",
+				"• totalRingCount - total number of rings obtained throughout the stage.",
+				"• totalVelocity - total velocity built up throughout the stage when passing checkpoints.",
+				"• ringCount - number of rings the player finished with.",
+				"• minutes - minutes on the timer.",
+				"• seconds - seconds on the timer.",
+				"• elapsedTime - total amount of time passed in seconds.",
+				"• score - total score the player finished with.",
+				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
+				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Time Bonus Algorithm",
@@ -146,7 +156,17 @@
 		  {
             "Name": "ringBonusAlgorithm",
             "Description": [
-                "A simple Lua equation that calculates the ring bonus.\n",
+                "The Lua equation that calculates the ring bonus.\n",
+				"Exposed variables:",
+				"• totalRingCount - total number of rings obtained throughout the stage.",
+				"• totalVelocity - total velocity built up throughout the stage when passing checkpoints.",
+				"• ringCount - number of rings the player finished with.",
+				"• minutes - minutes on the timer.",
+				"• seconds - seconds on the timer.",
+				"• elapsedTime - total amount of time passed in seconds.",
+				"• score - total score the player finished with.",
+				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
+				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Ring Bonus Algorithm",
@@ -158,7 +178,17 @@
 		  {
             "Name": "speedBonusAlgorithm",
             "Description": [
-                "A simple Lua equation that calculates the speed bonus.\n",
+                "The Lua equation that calculates the speed bonus.\n",
+				"Exposed variables:",
+				"• totalRingCount - total number of rings obtained throughout the stage.",
+				"• totalVelocity - total velocity built up throughout the stage when passing checkpoints.",
+				"• ringCount - number of rings the player finished with.",
+				"• minutes - minutes on the timer.",
+				"• seconds - seconds on the timer.",
+				"• elapsedTime - total amount of time passed in seconds.",
+				"• score - total score the player finished with.",
+				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
+				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Speed Bonus Algorithm",
@@ -166,6 +196,23 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": "totalVelocity * 3"
+          }
+        ]
+      },
+	  {
+        "Name": "Behaviour",
+        "DisplayName": "Behaviour",
+        "Elements": [
+          {
+            "Name": "scoreLimit",
+            "Description": [
+                "The maximum amount of score the player can obtain."
+            ],
+            "DisplayName": "Score Limit",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 999999
           }
         ]
       },
@@ -203,6 +250,17 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": false
+          },
+		  {
+            "Name": "forbiddenStages",
+            "Description": [
+                "The list of stages that don't display or count your score."
+            ],
+            "DisplayName": "Forbidden Stages",
+            "Type": "string",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": "bsd, sph101"
           }
         ]
       }

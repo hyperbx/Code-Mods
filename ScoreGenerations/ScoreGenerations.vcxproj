@@ -206,6 +206,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="dependencies\Lua542\include\luaconf.h" />
     <ClInclude Include="dependencies\Lua542\include\lualib.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="HudSonicStage.h" />
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
@@ -222,6 +223,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="LuaCallback.cpp" />

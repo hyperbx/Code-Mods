@@ -1,4 +1,4 @@
-function calculateGenerationsTimeBonus()
+function calculateTimeBonus()
 
 	-- Penalty for D rank.
 	if (elapsedTime > secondsForC) then

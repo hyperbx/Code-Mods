@@ -33,3 +33,22 @@ int StringHelper::GetDigits(string str)
 {
 	return stoi(StringHelper::ContainsNumbers(str) ? regex_replace(str, regex("[^0-9]*([0-9]+).*"), string("$1")) : "0");
 }
+
+string StringHelper::RemoveSpaces(string str)
+{
+	str.erase(remove_if(str.begin(), str.end(), ::isspace), str.end());
+
+	return str;
+}
+
+vector<string> StringHelper::GetCommaSeparatedStrings(string str)
+{
+	vector<string> strings;
+	istringstream stream(str);
+	string token;
+
+	while (getline(stream, token, ','))
+		strings.push_back(token);
+
+	return strings;
+}
