@@ -6,7 +6,7 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 	msgSetPinballHud.flags = 1;
 	msgSetPinballHud.score = ScoreListener::score;
 
-	// Makes sure the current stage isn't forbidden before initialising the score.
+	// Makes sure the current stage isn't forbidden before sending the message.
 	if (!HudSonicStage::IsStageForbidden())
 		ProcessMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
 
