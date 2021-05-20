@@ -6,10 +6,9 @@ public:
     static void Install();
 
     /// <summary>
-    /// Determines if the current stage ID uses a special HUD.
+    /// Determines if the current stage ID is forbidden.
     /// </summary>
-    /// <returns></returns>
-    static bool IsHudSpecial();
+    static bool IsStageForbidden();
 
     /// <summary>
     /// Reverse-engineered struct for MsgSetPinballHud - thanks Skyth!

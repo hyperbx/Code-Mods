@@ -260,7 +260,7 @@
             "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": "bsd, sph101"
+            "DefaultValue": "bsd, cnz100, sph101"
           }
         ]
       }

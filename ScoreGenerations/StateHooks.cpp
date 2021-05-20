@@ -6,8 +6,8 @@ void OnLoad()
 	// Get the ranks for the current stage.
 	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks();
 
-	// Disable the score counter for special HUDs.
-	if (HudSonicStage::IsHudSpecial())
+	// Disable the score counter for forbidden stages.
+	if (HudSonicStage::IsStageForbidden())
 	{
 		// Skip Casino Night score instructions.
 		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
