@@ -144,8 +144,8 @@
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
-				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
-				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
+				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Time Bonus Algorithm",
@@ -167,8 +167,8 @@
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
-				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
-				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
+				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Ring Bonus Algorithm",
@@ -190,8 +190,8 @@
 				"• elapsedTime - total amount of time passed in seconds.",
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
-				"• secondsForA - elapsed time in seconds the player must finish with for rank A.",
-				"• secondsForC - elapsed time in seconds the player must finish with for rank C.\n",
+				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Speed Bonus Algorithm",

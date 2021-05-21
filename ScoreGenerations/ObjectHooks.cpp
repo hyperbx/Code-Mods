@@ -197,22 +197,18 @@ __declspec(naked) void TrickMidAsmHook()
 
 __declspec(naked) void LifeMidAsmHook()
 {
-	static void* interruptAddress = (void*)0x6621A0;
-	static void* returnAddress = (void*)0xFFFA7E;
+	static void* interruptAddress = (void*)0xE75520;
+	static void* returnAddress = (void*)0xE6D870;
 
 	__asm
 	{
 		call [interruptAddress]
-
-		cmp edx, 0
-		jnz Return
 
 		// Reward player with Life score.
 		mov ecx, 10
 		call ScoreListener::Reward
 		mov edx, eax
 
-	Return:
 		jmp [returnAddress]
 	}
 }
@@ -254,6 +250,6 @@ void ObjectHooks::Install()
 	WRITE_JUMP(0x11F36AC, &SuperRingMidAsmHook);
 	WRITE_JUMP(0xE4BC3D, &TrickFinishMidAsmHook);
 	WRITE_JUMP(0xE4B6E7, &TrickMidAsmHook);
-	WRITE_JUMP(0xFFFA79, &LifeMidAsmHook);
+	WRITE_JUMP(0xE6D86B, &LifeMidAsmHook);
 	WRITE_JUMP(0x115A9AD, &DashRingMidAsmHook);
 }

@@ -18,7 +18,7 @@ public:
         SuperRing,
         TrickFinish,
         Trick,
-        Life, // TODO: implement.
+        Life,
         DashRing
     };
 
@@ -120,9 +120,9 @@ public:
     /// </summary>
     struct RankTable
     {
-        // Time in seconds required for ranks.
-        int secondsForA = 0;
-        int secondsForC = 0;
+        // Time in seconds required for bonuses.
+        int minSeconds = 0;
+        int maxSeconds = 0;
 
         // Score required for ranks.
         int S = 0;
@@ -131,52 +131,50 @@ public:
         int C = 0;
         int D = 0;
 
-        static bool IsNull(RankTable rankTable)
-        {
-            // The INI reader returned the default value.
-            if ((rankTable.secondsForA - rankTable.secondsForC - rankTable.S - rankTable.A - rankTable.B - rankTable.C - rankTable.D) == -7)
-                return true;
-
-            return false;
-        }
-
         /// <summary>
         /// Gets the ranks from the current configuration.
         /// </summary>
-        static RankTable GetRanks(const char* stageID, int defaultValue)
+        static RankTable GetRanks()
         {
             RankTable rankTable;
+            string id;
+
+            // Check if the current stage ID exists in the configuration.
+            if (Configuration::config.Sections().find(StateHooks::stageID) != Configuration::config.Sections().end())
+            {
+                // Use the rank table for the loaded stage.
+                id = StateHooks::stageID;
+            }
+            else
+            {
+#if _DEBUG
+                printf("[Score Generations] The current stage ID doesn't have a rank table - reverting to global rank table...\n");
+#endif
+
+                // Use the global rank table.
+                id = "Global";
+            }
 
             // Use the current stage ID to get the time requirements.
-            rankTable.secondsForA = Configuration::config.GetInteger(stageID, "secondsForA", defaultValue);
-            rankTable.secondsForC = Configuration::config.GetInteger(stageID, "secondsForC", defaultValue);
+            rankTable.minSeconds = Configuration::config.GetInteger(id, "minSeconds", 0);
+            rankTable.maxSeconds = Configuration::config.GetInteger(id, "maxSeconds", 0);
 
             // Use the current stage ID to get the ranks.
-            rankTable.S = Configuration::config.GetInteger(stageID, "S", defaultValue);
-            rankTable.A = Configuration::config.GetInteger(stageID, "A", defaultValue);
-            rankTable.B = Configuration::config.GetInteger(stageID, "B", defaultValue);
-            rankTable.C = Configuration::config.GetInteger(stageID, "C", defaultValue);
-            rankTable.D = Configuration::config.GetInteger(stageID, "D", defaultValue);
+            rankTable.S = Configuration::config.GetInteger(id, "S", 0);
+            rankTable.A = Configuration::config.GetInteger(id, "A", 0);
+            rankTable.B = Configuration::config.GetInteger(id, "B", 0);
+            rankTable.C = Configuration::config.GetInteger(id, "C", 0);
+            rankTable.D = Configuration::config.GetInteger(id, "D", 0);
 
 #if _DEBUG
-            printf("[Score Generations] secondsForA = %d\n", rankTable.secondsForA);
-            printf("[Score Generations] secondsForC = %d\n", rankTable.secondsForC);
+            printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
+            printf("[Score Generations] maxSeconds = %d\n", rankTable.maxSeconds);
             printf("[Score Generations] S = %d\n", rankTable.S);
             printf("[Score Generations] A = %d\n", rankTable.A);
             printf("[Score Generations] B = %d\n", rankTable.B);
             printf("[Score Generations] C = %d\n", rankTable.C);
             printf("[Score Generations] D = %d\n", rankTable.D);
 #endif
-
-            if (IsNull(rankTable))
-            {
-#if _DEBUG
-                printf("[Score Generations] The current stage ID doesn't have a rank table - reverting to global rank table...\n");
-#endif
-
-                // Read from the global rank table.
-                rankTable = GetRanks("Global", 0);
-            }
 
             return rankTable;
         }

@@ -4,7 +4,7 @@ const char* StateHooks::stageID = (const char*)0x1E774D4;
 void OnLoad()
 {
 	// Get the ranks for the current stage.
-	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks(StateHooks::stageID, -1);
+	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks();
 
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
