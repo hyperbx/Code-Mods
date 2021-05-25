@@ -51,7 +51,7 @@ void ScoreListener::Bonus()
 /// <summary>
 /// Rewards the player with score based on the input type.
 /// </summary>
-void __fastcall ScoreListener::Reward(Object type)
+void __fastcall ScoreListener::Reward(ScoreType type)
 {
 	int scoreToReward = 0;
 
@@ -113,6 +113,18 @@ void __fastcall ScoreListener::Reward(Object type)
 
 		case DashRing:
 			scoreToReward = scoreTable.DashRing;
+			break;
+
+		case QuickStep:
+			scoreToReward = scoreTable.QuickStep;
+			break;
+
+		case Drift:
+			scoreToReward = scoreTable.Drift;
+			break;
+
+		case Balloon:
+			scoreToReward = scoreTable.Balloon;
 			break;
 	}
 

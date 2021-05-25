@@ -14,7 +14,7 @@
     </ClInclude>
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="ScoreListener.h" />
-    <ClInclude Include="ObjectHooks.h" />
+    <ClInclude Include="ScoreHooks.h" />
     <ClInclude Include="StateHooks.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="ArchiveTreePatcher.h" />
@@ -49,7 +49,7 @@
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="ScoreListener.cpp" />
-    <ClCompile Include="ObjectHooks.cpp" />
+    <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="Pch.cpp" />
     <ClCompile Include="ArchiveTreePatcher.cpp" />

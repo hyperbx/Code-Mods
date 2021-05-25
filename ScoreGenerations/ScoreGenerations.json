@@ -13,7 +13,7 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 10
           },
 		  {
             "Name": "Enemy",
@@ -35,7 +35,7 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 150
           },
 		  {
             "Name": "PointMarker",
@@ -57,7 +57,7 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 2000
           },
 		  {
             "Name": "RainbowRing",
@@ -90,14 +90,14 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 100
           },
 		  {
-            "Name": "TrickRamp",
+            "Name": "TrickFinish",
             "Description": [
-                "The amount of score rewarded for using trick ramps."
+                "The amount of score rewarded for finishing trick combos."
             ],
-            "DisplayName": "Trick Ramps",
+            "DisplayName": "Trick Finish",
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
@@ -112,7 +112,7 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 100
           },
 		  {
             "Name": "Life",
@@ -120,6 +120,50 @@
                 "The amount of score rewarded for collecting lives."
             ],
             "DisplayName": "Lives",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 1000
+          },
+		  {
+            "Name": "DashRing",
+            "Description": [
+                "The amount of score rewarded for passing through dash rings."
+            ],
+            "DisplayName": "Dash Rings",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "QuickStep",
+            "Description": [
+                "The amount of score rewarded for quick stepping whilst running."
+            ],
+            "DisplayName": "Quick Stepping",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "Drift",
+            "Description": [
+                "The amount of score rewarded for drifting."
+            ],
+            "DisplayName": "Drifting",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 0
+          },
+		  {
+            "Name": "Balloon",
+            "Description": [
+                "The amount of score rewarded for popping balloons."
+            ],
+            "DisplayName": "Balloons",
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,

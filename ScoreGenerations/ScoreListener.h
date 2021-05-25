@@ -6,7 +6,7 @@ public:
     /// <summary>
     /// Index-based score type - makes things easier when rewarding score in other classes.
     /// </summary>
-    enum Object
+    enum ScoreType
     {
         Ring,
         Enemy,
@@ -19,13 +19,16 @@ public:
         TrickFinish,
         Trick,
         Life,
-        DashRing
+        DashRing,
+        QuickStep,
+        Drift,
+        Balloon // TODO: implement.
     };
 
     static void Reset();
     static void Clamp(unsigned int scoreToReward);
     static void Bonus();
-    static void __fastcall Reward(Object type);
+    static void __fastcall Reward(ScoreType type);
 
     /// <summary>
     /// Score calculated locally.
@@ -47,24 +50,29 @@ public:
         int Trick = 0;
         int Life = 0;
         int DashRing = 0;
+        int QuickStep = 0;
+        int Drift = 0;
+        int Balloon = 0;
 
         static ScoreTable GetScore()
         {
             ScoreTable scoreTable;
 
             // Use the current configuration to get the score for objects.
-            scoreTable.Ring        = Configuration::config.GetInteger("Object", "Ring", 0);
-            scoreTable.Enemy       = Configuration::config.GetInteger("Object", "Enemy", 0);
-            scoreTable.Physics     = Configuration::config.GetInteger("Object", "Physics", 0);
-            scoreTable.PointMarker = Configuration::config.GetInteger("Object", "PointMarker", 0);
-            scoreTable.RedRing     = Configuration::config.GetInteger("Object", "RedRing", 0);
-            scoreTable.RainbowRing = Configuration::config.GetInteger("Object", "RainbowRing", 0);
-            scoreTable.ItemBox     = Configuration::config.GetInteger("Object", "ItemBox", 0);
-            scoreTable.SuperRing   = Configuration::config.GetInteger("Object", "SuperRing", 0);
-            scoreTable.TrickFinish = Configuration::config.GetInteger("Object", "TrickFinish", 0);
-            scoreTable.Trick       = Configuration::config.GetInteger("Object", "Trick", 0);
-            scoreTable.Life        = Configuration::config.GetInteger("Object", "Life", 0);
-            scoreTable.DashRing    = Configuration::config.GetInteger("Object", "DashRing", 0);
+            scoreTable.Ring        = Configuration::config.GetInteger("Score", "Ring", 0);
+            scoreTable.Enemy       = Configuration::config.GetInteger("Score", "Enemy", 0);
+            scoreTable.Physics     = Configuration::config.GetInteger("Score", "Physics", 0);
+            scoreTable.PointMarker = Configuration::config.GetInteger("Score", "PointMarker", 0);
+            scoreTable.RedRing     = Configuration::config.GetInteger("Score", "RedRing", 0);
+            scoreTable.RainbowRing = Configuration::config.GetInteger("Score", "RainbowRing", 0);
+            scoreTable.ItemBox     = Configuration::config.GetInteger("Score", "ItemBox", 0);
+            scoreTable.SuperRing   = Configuration::config.GetInteger("Score", "SuperRing", 0);
+            scoreTable.TrickFinish = Configuration::config.GetInteger("Score", "TrickFinish", 0);
+            scoreTable.Trick       = Configuration::config.GetInteger("Score", "Trick", 0);
+            scoreTable.Life        = Configuration::config.GetInteger("Score", "Life", 0);
+            scoreTable.DashRing    = Configuration::config.GetInteger("Score", "DashRing", 0);
+            scoreTable.Drift       = Configuration::config.GetInteger("Score", "Drift", 0);
+            scoreTable.Balloon     = Configuration::config.GetInteger("Score", "Balloon", 0);
 
 #if _DEBUG
             printf("[Score Generations] Ring = %d\n", scoreTable.Ring);
@@ -79,6 +87,8 @@ public:
             printf("[Score Generations] Trick = %d\n", scoreTable.Trick);
             printf("[Score Generations] Life = %d\n", scoreTable.Life);
             printf("[Score Generations] DashRing = %d\n", scoreTable.DashRing);
+            printf("[Score Generations] Drift = %d\n", scoreTable.Drift);
+            printf("[Score Generations] Balloon = %d\n", scoreTable.Balloon);
 #endif
 
             return scoreTable;

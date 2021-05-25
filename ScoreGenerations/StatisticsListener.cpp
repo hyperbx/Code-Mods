@@ -34,9 +34,11 @@ void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
 	StatisticsListener::minutes = minutes;
 	StatisticsListener::seconds = seconds;
 }
+
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
+
 __declspec(naked) void DefaultRingFormatterMidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E59;
@@ -94,6 +96,7 @@ __declspec(naked) void TimeFormatterMidAsmHook()
 		jmp [returnAddress]
 	}
 }
+
 #pragma endregion
 
 unsigned int StatisticsListener::GetElapsedTime()

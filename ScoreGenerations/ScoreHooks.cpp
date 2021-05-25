@@ -161,7 +161,6 @@ __declspec(naked) void SuperRingMidAsmHook()
 
 __declspec(naked) void TrickFinishMidAsmHook()
 {
-	static void* interruptAddress = (void*)0x661550;
 	static void* returnAddress = (void*)0xE4BC44;
 
 	__asm
@@ -231,14 +230,73 @@ __declspec(naked) void DashRingMidAsmHook()
 	}
 }
 
+__declspec(naked) void QuickStepMidAsmHook()
+{
+	static void* interruptAddress = (void*)0x6621A0;
+	static void* returnAddress = (void*)0xDFE305;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// Skip reward if the player isn't running.
+		comisd xmm0, xmm1
+		jnbe Return
+
+		// Reward player with Quick Step score.
+		mov ecx, 12
+		call ScoreListener::Reward
+		mov edx, eax
+
+	Return:
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void DriftMidAsmHook()
+{
+	static void* interruptAddress = (void*)0x6621A0;
+	static void* returnAddress = (void*)0xDF2F1C;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// Reward player with Drift score.
+		mov ecx, 13
+		call ScoreListener::Reward
+		mov edx, eax
+
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void BalloonMidAsmHook()
+{
+	static void* interruptAddress = (void*)0x65FBE0;
+	static void* returnAddress = (void*)0x1017E5E;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// Reward player with Balloon score.
+		mov ecx, 14
+		call ScoreListener::Reward
+		mov edx, eax
+
+		jmp [returnAddress]
+	}
+}
+
 #pragma endregion
 
 /// <summary>
 /// Installs the mid-ASM hooks.
 /// </summary>
-void ObjectHooks::Install()
+void ScoreHooks::Install()
 {
-	// Hook objects to add score to the counter.
+	// Hook objects and states to add score to the counter.
 	WRITE_JUMP(0x1054420, &RingMidAsmHook);
 	WRITE_JUMP(0xDEB11C, &ClassicSonicDamageSuccessMidAsmHook);
 	WRITE_JUMP(0xE28556, &ModernSonicDamageSuccessMidAsmHook);
@@ -252,4 +310,7 @@ void ObjectHooks::Install()
 	WRITE_JUMP(0xE4B6E7, &TrickMidAsmHook);
 	WRITE_JUMP(0xE6D86B, &LifeMidAsmHook);
 	WRITE_JUMP(0x115A9AD, &DashRingMidAsmHook);
+	WRITE_JUMP(0xDFE300, &QuickStepMidAsmHook);
+	WRITE_JUMP(0xDF2F17, &DriftMidAsmHook);
+	WRITE_JUMP(0x1017E59, &BalloonMidAsmHook);
 }

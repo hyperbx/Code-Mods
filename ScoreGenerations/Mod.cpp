@@ -11,7 +11,7 @@ extern "C" _declspec(dllexport) void Init()
 
 	StatisticsListener::Install();
 	HudSonicStage::Install();
-	ObjectHooks::Install();
+	ScoreHooks::Install();
 	StateHooks::Install();
 	Patches::Install();
 }

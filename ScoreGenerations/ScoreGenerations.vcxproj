@@ -210,7 +210,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
-    <ClInclude Include="ObjectHooks.h" />
+    <ClInclude Include="ScoreHooks.h" />
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="PlayerListener.h" />
@@ -228,7 +228,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
     <ClCompile Include="Mod.cpp" />
-    <ClCompile Include="ObjectHooks.cpp" />
+    <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="Patches.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

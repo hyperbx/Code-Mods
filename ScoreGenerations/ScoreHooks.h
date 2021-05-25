@@ -1,6 +1,6 @@
 #pragma once
 
-class ObjectHooks
+class ScoreHooks
 {
 public:
     static void Install();
