@@ -167,7 +167,7 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 0
+            "DefaultValue": 75
           },
         ]
       },
