@@ -126,6 +126,10 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		case Balloon:
 			scoreToReward = scoreTable.Balloon;
 			break;
+
+		case Super:
+			scoreToReward = scoreTable.Super;
+			break;
 	}
 
 	// Rewards the score and clamps it.

@@ -1,16 +1,45 @@
-FUNCTION_PTR(void, __thiscall, ProcessMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
+// Declare class variables.
+float HudSonicStage::superSonicTimer = 0;
 
-HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, void* pUpdateInfo)
+FUNCTION_PTR(void, __thiscall, SendMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
+
+HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
+	// Update the Super Sonic timer and reward score after two seconds.
+	HudSonicStage::UpdateSuperSonicTimer(pUpdateInfo);
+
+	// Process the Casino Night score message.
+	HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
+
+	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
+}
+
+void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)
+{
+	// Update the timer using delta time.
+	HudSonicStage::superSonicTimer += *pUpdateInfo;
+
+	if (HudSonicStage::superSonicTimer > 2)
+	{
+		// Reset the timer.
+		HudSonicStage::superSonicTimer = 0;
+
+		// Reward score every two seconds if the player is Super Sonic.
+		if (PlayerListener::IsSuper())
+			ScoreListener::Reward(ScoreListener::ScoreType::Super);
+	}
+}
+
+void HudSonicStage::ProcessMsgSetPinballHud(void* thisDeclaration)
+{
+	// Set up message for Casino Night score.
 	HudSonicStage::MsgSetPinballHud msgSetPinballHud;
 	msgSetPinballHud.flags = 1;
 	msgSetPinballHud.score = ScoreListener::score;
 
 	// Makes sure the current stage isn't forbidden before sending the message.
 	if (!HudSonicStage::IsStageForbidden())
-		ProcessMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
-
-	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
+		SendMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
 }
 
 bool HudSonicStage::IsStageForbidden()

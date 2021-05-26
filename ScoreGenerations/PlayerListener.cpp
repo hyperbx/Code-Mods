@@ -1,7 +1,7 @@
-/* This class is based off code from Skyth's Parameter Editor mod.
-   https://github.com/blueskythlikesclouds/DllMods/blob/master/Source/GenerationsParameterEditor/PlayerInfo.cpp */
-
+// Declare class variables.
 void** const PlayerListener::CSonicContext = (void**)0x1E5E2F0;
+void** const PlayerListener::CSonicClassicContext = (void**)0x1E5E304;
+void** const PlayerListener::CSonicSpContext = (void**)0x1E5E310;
 
 bool PlayerListener::IsContextSafe()
 {
@@ -18,10 +18,21 @@ const uint32_t PlayerListener::GetContext()
 
 float PlayerListener::GetVelocity()
 {
+	/* This is based off code from Skyth's Parameter Editor mod.
+       https://github.com/blueskythlikesclouds/DllMods/blob/master/Source/GenerationsParameterEditor/PlayerInfo.cpp */
+
 	if (!IsContextSafe())
 		return 0;
 
 	float* velocity = (float*)(GetContext() + 656);
 
 	return sqrtf(velocity[0] * velocity[0] + velocity[1] * velocity[1] + velocity[2] * velocity[2]);
+}
+
+bool PlayerListener::IsSuper()
+{
+	if (!IsContextSafe())
+		return false;
+
+	return *(int*)(GetContext() + 0x1A0);
 }

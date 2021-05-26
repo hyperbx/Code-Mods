@@ -169,6 +169,17 @@
             "MaxValue": null,
             "DefaultValue": 75
           },
+		  {
+            "Name": "Super",
+            "Description": [
+                "The amount of score rewarded for being Super Sonic (rewarded every two seconds)."
+            ],
+            "DisplayName": "Super Sonic",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2000
+          },
         ]
       },
 	  {

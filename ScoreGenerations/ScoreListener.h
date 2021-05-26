@@ -22,7 +22,8 @@ public:
         DashRing,
         QuickStep,
         Drift,
-        Balloon // TODO: implement.
+        Balloon,
+        Super
     };
 
     static void Reset();
@@ -53,6 +54,7 @@ public:
         int QuickStep = 0;
         int Drift = 0;
         int Balloon = 0;
+        int Super = 0;
 
         static ScoreTable GetScore()
         {
@@ -73,6 +75,7 @@ public:
             scoreTable.DashRing    = Configuration::config.GetInteger("Score", "DashRing", 0);
             scoreTable.Drift       = Configuration::config.GetInteger("Score", "Drift", 0);
             scoreTable.Balloon     = Configuration::config.GetInteger("Score", "Balloon", 0);
+            scoreTable.Super       = Configuration::config.GetInteger("Score", "Super", 0);
 
 #if _DEBUG
             printf("[Score Generations] Ring = %d\n", scoreTable.Ring);
@@ -89,6 +92,7 @@ public:
             printf("[Score Generations] DashRing = %d\n", scoreTable.DashRing);
             printf("[Score Generations] Drift = %d\n", scoreTable.Drift);
             printf("[Score Generations] Balloon = %d\n", scoreTable.Balloon);
+            printf("[Score Generations] Super = %d\n", scoreTable.Balloon);
 #endif
 
             return scoreTable;
