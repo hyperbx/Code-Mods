@@ -1,7 +1,5 @@
 // Declare class variables.
 void** const PlayerListener::CSonicContext = (void**)0x1E5E2F0;
-void** const PlayerListener::CSonicClassicContext = (void**)0x1E5E304;
-void** const PlayerListener::CSonicSpContext = (void**)0x1E5E310;
 
 bool PlayerListener::IsContextSafe()
 {
