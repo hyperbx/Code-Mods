@@ -6,5 +6,6 @@ A mod for Sonic Generations that restores a real-time scoring system.
 - [PTKickass](https://github.com/PTKickass) - XNCP editing
 - [Skyth](https://github.com/blueskythlikesclouds) - reverse-engineering, [Archive Tree Patcher](https://github.com/HyperBE32/ScoreGenerations/blob/main/ScoreGenerations/ArchiveTreePatcher.cpp) and x86 assembly assistance
 - [Sajid](https://github.com/Sajidur78) - reverse-engineering, [Lost Code Loader](https://github.com/Sajidur78/LostCodeLoader) and x86 assembly assistance
+- [Syko](https://twitter.com/sykosean) - Beta testing and quality assurance
 - [benhoyt](https://github.com/benhoyt) - [inih](https://github.com/benhoyt/inih)
 - [PUC-Rio](https://www.puc-rio.br) - [Lua](http://www.lua.org)
