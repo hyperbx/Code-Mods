@@ -1,4 +1,3 @@
-// Declare class variables.
 void** const PlayerListener::CSonicContext = (void**)0x1E5E2F0;
 
 bool PlayerListener::IsContextSafe()

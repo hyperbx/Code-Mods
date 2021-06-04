@@ -3,12 +3,10 @@
 class HudSonicStage
 {
 public:
-    static void Install();
-
     /// <summary>
-    /// Timer calculated in delta time for rewarding score to Super Sonic.
+    /// Installs the mid-ASM hooks.
     /// </summary>
-    static float superSonicTimer;
+    static void Install();
 
     /// <summary>
     /// Sends MsgSetPinballHud to the message receiver.
@@ -26,7 +24,7 @@ public:
     static bool IsStageForbidden();
 
     /// <summary>
-    /// Reverse-engineered struct for MsgSetPinballHud - thanks Skyth!
+    /// Reverse-engineered struct for MsgSetPinballHud - by Skyth.
     /// </summary>
     struct MsgSetPinballHud
     {

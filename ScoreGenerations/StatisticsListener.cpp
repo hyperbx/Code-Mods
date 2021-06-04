@@ -1,4 +1,3 @@
-// Declare class variables.
 unsigned int StatisticsListener::totalRingCount = 0;
 unsigned int StatisticsListener::totalVelocity = 0;
 unsigned int StatisticsListener::minutes = 0;
@@ -104,9 +103,6 @@ unsigned int StatisticsListener::GetElapsedTime()
 	return (minutes * 60) + seconds;
 }
 
-/// <summary>
-/// Installs the mid-ASM hooks.
-/// </summary>
 void StatisticsListener::Install()
 {
 	// Set score string format.

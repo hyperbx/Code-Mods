@@ -1,5 +1,4 @@
-// Declare class variables.
-float HudSonicStage::superSonicTimer = 0;
+float superSonicDeltaTimer = 0;
 
 FUNCTION_PTR(void, __thiscall, SendMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
 
@@ -17,12 +16,12 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)
 {
 	// Update the timer using delta time.
-	HudSonicStage::superSonicTimer += *pUpdateInfo;
+	superSonicDeltaTimer += *pUpdateInfo;
 
-	if (HudSonicStage::superSonicTimer > 2)
+	if (superSonicDeltaTimer > Configuration::superSonicTimer)
 	{
 		// Reset the timer.
-		HudSonicStage::superSonicTimer = 0;
+		superSonicDeltaTimer = 0;
 
 		// Reward score every two seconds if the player is Super Sonic.
 		if (PlayerListener::IsSuper())
@@ -55,9 +54,6 @@ bool HudSonicStage::IsStageForbidden()
 	return false;
 }
 
-/// <summary>
-/// Installs the mid-ASM hooks.
-/// </summary>
 void HudSonicStage::Install()
 {
 	// Install hook to update the score counter.

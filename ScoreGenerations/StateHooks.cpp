@@ -1,4 +1,3 @@
-// Declare class variables.
 const char* StateHooks::stageID = (const char*)0x1E774D4;
 
 #pragma region ----- Hooked Functions -----
@@ -6,7 +5,7 @@ const char* StateHooks::stageID = (const char*)0x1E774D4;
 void OnLoad()
 {
 	// Get the ranks for the current stage.
-	ScoreListener::rankTable = ScoreListener::RankTable::GetRanks();
+	ResultListener::rankTable = ResultListener::RankTable::GetRanks();
 
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
@@ -24,32 +23,6 @@ void OnLoad()
 
 		// Hook to results for local score.
 		StateHooks::HookResults(true);
-	}
-}
-
-int CalculateRank()
-{
-	if (ScoreListener::score < ScoreListener::rankTable.S)
-	{
-		if (ScoreListener::score < ScoreListener::rankTable.A)
-		{
-			if (ScoreListener::score < ScoreListener::rankTable.D)
-			{
-				return 0; // D rank
-			}
-			else
-			{
-				return 1; // C rank
-			}
-		}
-		else
-		{
-			return 2; // B rank
-		}
-	}
-	else
-	{
-		return 3; // A rank
 	}
 }
 
@@ -121,31 +94,16 @@ __declspec(naked) void ExitMidAsmHook()
 	}
 }
 
-__declspec(naked) void ResultsScoreCalculateMidAsmHook()
+__declspec(naked) void ResultsCalculateMidAsmHook()
 {
-	static void* returnAddress = (void*)0x10B4044;
+	static void* returnAddress = (void*)0xD5A191;
 
-	// Calculate bonuses.
-	ScoreListener::Bonus();
+	// Gather the results.
+	ResultListener::Result();
 
 	__asm
 	{
-		// Move locally calculated score to final results registers.
-		mov eax, ScoreListener::score
-		mov [ebx], eax
-		movss xmm0, ScoreListener::score
-
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void ResultsRankCalculateMidAsmHook()
-{
-	static void* returnAddress = (void*)0x10B410A;
-
-	__asm
-	{
-		//mov [ebx + 4], CalculateRank
+		lea eax, ResultListener::resultDescription
 
 		jmp [returnAddress]
 	}
@@ -169,17 +127,12 @@ __declspec(naked) void ResultsEndMidAsmHook()
 
 #pragma endregion
 
-/// <summary>
-/// Hooks to the results screen for calculating the local score.
-/// </summary>
-/// <param name="enabled">Enables/disables the hooks.</param>
 void StateHooks::HookResults(bool enabled)
 {
 	if (enabled)
 	{
 		// Calculate results with local statistics.
-		WRITE_JUMP(0x10B403B, &ResultsScoreCalculateMidAsmHook);
-		WRITE_JUMP(0x10B40B1, &ResultsRankCalculateMidAsmHook);
+		WRITE_JUMP(0xD5A18C, &ResultsCalculateMidAsmHook);
 	}
 	else
 	{
@@ -189,9 +142,6 @@ void StateHooks::HookResults(bool enabled)
 	}
 }
 
-/// <summary>
-/// Installs the mid-ASM hooks.
-/// </summary>
 void StateHooks::Install()
 {
 	// Update local loading function.

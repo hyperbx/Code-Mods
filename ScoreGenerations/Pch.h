@@ -23,11 +23,11 @@
 
 // Dependencies
 #include "dependencies\INIReader.h"
+#include "Configuration.h"
 #include "StateHooks.h"
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
-#include "Configuration.h"
 #include "Helpers.h"
 #include "HudSonicStage.h"
 #include "IOHelper.h"
@@ -35,6 +35,7 @@
 #include "LuaCallback.h"
 #include "Patches.h"
 #include "PlayerListener.h"
+#include "ResultListener.h"
 #include "ScoreHooks.h"
 #include "ScoreListener.h"
 #include "StatisticsListener.h"

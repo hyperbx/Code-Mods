@@ -172,7 +172,7 @@
 		  {
             "Name": "Super",
             "Description": [
-                "The amount of score rewarded for being Super Sonic (rewarded every two seconds)."
+                "The amount of score rewarded for being Super Sonic at the frequency specified in the behaviour section."
             ],
             "DisplayName": "Super Sonic",
             "Type": "int",
@@ -271,6 +271,17 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": 999999
+          },
+          {
+            "Name": "superSonicTimer",
+            "Description": [
+                "The amount of time in seconds the player is rewarded for being Super Sonic."
+            ],
+            "DisplayName": "Super Sonic Timer",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
           }
         ]
       },

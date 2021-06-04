@@ -1,10 +1,8 @@
-/// <summary>
-/// Installs the patches.
-/// </summary>
 void Patches::Install()
 {
-	// Disable next rank dialog on results.
-	// WRITE_MEMORY(0x10B6DEC, uint8_t, 0x6A, 0x01);
+	// Remove next rank dialog in results.
+	WRITE_JUMP(0x10B66F0, (void*)0x10B6700);
+	WRITE_JUMP(0x10B7DAE, (void*)0x10B7DB7);
 
 	// Skip score cap in results.
 	WRITE_JUMP(0x10B4012, (void*)0x10B401E);

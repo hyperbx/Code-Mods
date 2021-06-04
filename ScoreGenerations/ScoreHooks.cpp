@@ -291,9 +291,6 @@ __declspec(naked) void BalloonMidAsmHook()
 
 #pragma endregion
 
-/// <summary>
-/// Installs the mid-ASM hooks.
-/// </summary>
 void ScoreHooks::Install()
 {
 	// Hook objects and states to add score to the counter.

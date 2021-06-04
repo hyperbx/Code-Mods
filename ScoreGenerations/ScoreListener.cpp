@@ -1,14 +1,12 @@
-// Declare class variables.
-unsigned int ScoreListener::score = 0;
+int ScoreListener::score = 0;
 ScoreListener::ScoreTable ScoreListener::scoreTable;
-ScoreListener::RankTable ScoreListener::rankTable;
-ScoreListener::BonusTable ScoreListener::bonusTable;
 
-/// <summary>
-/// Resets all statistics used for score calculation.
-/// </summary>
 void ScoreListener::Reset()
 {
+#if _DEBUG
+	printf("[Score Generations] [pre-reset] score = %d\n", score);
+#endif
+
 	StatisticsListener::totalRingCount = 0;
 	StatisticsListener::totalVelocity = 0;
 	StatisticsListener::ringCount = 0;
@@ -17,18 +15,18 @@ void ScoreListener::Reset()
 	score = 0;
 
 #if _DEBUG
-	printf("[Score Generations] Your score has been reset...\n");
-	printf("[Score Generations] totalRingCount = %d\n", StatisticsListener::totalRingCount);
-	printf("[Score Generations] totalVelocity = %d\n", StatisticsListener::totalVelocity);
-	printf("[Score Generations] ringCount = %d\n", StatisticsListener::ringCount);
-	printf("[Score Generations] minutes = %d\n", StatisticsListener::minutes);
-	printf("[Score Generations] seconds = %d\n", StatisticsListener::seconds);
-	printf("[Score Generations] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
-	printf("[Score Generations] score = %d\n", score);
+	printf("[Score Generations] [post-reset] Your score has been reset...\n");
+	printf("[Score Generations] [post-reset] totalRingCount = %d\n", StatisticsListener::totalRingCount);
+	printf("[Score Generations] [post-reset] totalVelocity = %d\n", StatisticsListener::totalVelocity);
+	printf("[Score Generations] [post-reset] ringCount = %d\n", StatisticsListener::ringCount);
+	printf("[Score Generations] [post-reset] minutes = %d\n", StatisticsListener::minutes);
+	printf("[Score Generations] [post-reset] seconds = %d\n", StatisticsListener::seconds);
+	printf("[Score Generations] [post-reset] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
+	printf("[Score Generations] [post-reset] score = %d\n", score);
 #endif
 }
 
-void ScoreListener::Clamp(unsigned int scoreToReward)
+void ScoreListener::AddClamp(unsigned int scoreToReward)
 {
 	// Clamp the maximum score.
 	if ((score + scoreToReward) <= Configuration::scoreLimit)
@@ -37,20 +35,6 @@ void ScoreListener::Clamp(unsigned int scoreToReward)
 		score = Configuration::scoreLimit;
 }
 
-/// <summary>
-/// Calculates the bonuses and adds them to the total score.
-/// </summary>
-void ScoreListener::Bonus()
-{
-	// Rewards the Lua bonuses and clamps them.
-	Clamp(LuaCallback::GetBonus(bonusTable.timeBonusAlgorithm));
-	Clamp(LuaCallback::GetBonus(bonusTable.ringBonusAlgorithm));
-	Clamp(LuaCallback::GetBonus(bonusTable.speedBonusAlgorithm));
-}
-
-/// <summary>
-/// Rewards the player with score based on the input type.
-/// </summary>
 void __fastcall ScoreListener::Reward(ScoreType type)
 {
 	int scoreToReward = 0;
@@ -133,7 +117,7 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 	}
 
 	// Rewards the score and clamps it.
-	Clamp(scoreToReward);
+	AddClamp(scoreToReward);
 
 #if _DEBUG
 	printf("[Score Generations] Type %d rewarded player with %d score!\n", type, scoreToReward);

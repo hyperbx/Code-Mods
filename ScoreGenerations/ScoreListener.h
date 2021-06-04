@@ -26,15 +26,25 @@ public:
         Super
     };
 
+    /// <summary>
+    /// Resets all statistics used for score calculation.
+    /// </summary>
     static void Reset();
-    static void Clamp(unsigned int scoreToReward);
-    static void Bonus();
+
+    /// <summary>
+    /// Adds the input score to reward and clamps it to the maximum allowed.
+    /// </summary>
+    static void AddClamp(unsigned int scoreToReward);
+
+    /// <summary>
+    /// Rewards the player with score based on the input type.
+    /// </summary>
     static void __fastcall Reward(ScoreType type);
 
     /// <summary>
     /// Score calculated locally.
     /// </summary>
-    static unsigned int score;
+    static int score;
 
     struct ScoreTable
     {
@@ -100,99 +110,4 @@ public:
     };
 
     static ScoreTable scoreTable;
-
-    struct BonusTable
-    {
-        // Algorithms for calculating bonuses.
-        string timeBonusAlgorithm;
-        string ringBonusAlgorithm;
-        string speedBonusAlgorithm;
-
-        static BonusTable GetBonuses()
-        {
-            BonusTable bonusTable;
-
-            // Use the current configuration to get the bonuses.
-            bonusTable.timeBonusAlgorithm  = Configuration::config.Get("Bonus", "timeBonusAlgorithm", "");
-            bonusTable.ringBonusAlgorithm  = Configuration::config.Get("Bonus", "ringBonusAlgorithm", "");
-            bonusTable.speedBonusAlgorithm = Configuration::config.Get("Bonus", "speedBonusAlgorithm", "");
-
-#if _DEBUG
-            printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
-            printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
-            printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
-#endif
-
-            return bonusTable;
-        }
-    };
-
-    static BonusTable bonusTable;
-
-    /// <summary>
-    /// Table of ranks defined in the mod configuration.
-    /// </summary>
-    struct RankTable
-    {
-        // Time in seconds required for bonuses.
-        int minSeconds = 0;
-        int maxSeconds = 0;
-
-        // Score required for ranks.
-        int S = 0;
-        int A = 0;
-        int B = 0;
-        int C = 0;
-        int D = 0;
-
-        /// <summary>
-        /// Gets the ranks from the current configuration.
-        /// </summary>
-        static RankTable GetRanks()
-        {
-            RankTable rankTable;
-            string id;
-
-            // Check if the current stage ID exists in the configuration.
-            if (Configuration::config.Sections().find(StateHooks::stageID) != Configuration::config.Sections().end())
-            {
-                // Use the rank table for the loaded stage.
-                id = StateHooks::stageID;
-            }
-            else
-            {
-#if _DEBUG
-                printf("[Score Generations] The current stage ID doesn't have a rank table - reverting to global rank table...\n");
-#endif
-
-                // Use the global rank table.
-                id = "Global";
-            }
-
-            // Use the current stage ID to get the time requirements.
-            rankTable.minSeconds = Configuration::config.GetInteger(id, "minSeconds", 0);
-            rankTable.maxSeconds = Configuration::config.GetInteger(id, "maxSeconds", 0);
-
-            // Use the current stage ID to get the ranks.
-            rankTable.S = Configuration::config.GetInteger(id, "S", 0);
-            rankTable.A = Configuration::config.GetInteger(id, "A", 0);
-            rankTable.B = Configuration::config.GetInteger(id, "B", 0);
-            rankTable.C = Configuration::config.GetInteger(id, "C", 0);
-            rankTable.D = Configuration::config.GetInteger(id, "D", 0);
-
-#if _DEBUG
-            printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
-            printf("[Score Generations] maxSeconds = %d\n", rankTable.maxSeconds);
-            printf("[Score Generations] S = %d\n", rankTable.S);
-            printf("[Score Generations] A = %d\n", rankTable.A);
-            printf("[Score Generations] B = %d\n", rankTable.B);
-            printf("[Score Generations] C = %d\n", rankTable.C);
-            printf("[Score Generations] D = %d\n", rankTable.D);
-#endif
-
-            return rankTable;
-        }
-    };
-
-    static RankTable rankTable;
 };

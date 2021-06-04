@@ -45,9 +45,6 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
     return originalParseArchiveTree(a1, pBuffer.get(), newSize, pDatabase);
 }
 
-/// <summary>
-/// Installs the mid-ASM hooks.
-/// </summary>
 void ArchiveTreePatcher::Install()
 {
     INSTALL_HOOK(ParseArchiveTree);

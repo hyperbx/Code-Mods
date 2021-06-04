@@ -15,5 +15,8 @@ class ArchiveTreePatcher
 public:
     static vector<ArchiveDependency> archiveDependencies;
 
+    /// <summary>
+    /// Installs the mid-ASM hooks.
+    /// </summary>
     static void Install();
 };

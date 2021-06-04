@@ -31,6 +31,11 @@ public:
 	static unsigned int scoreLimit;
 
 	/// <summary>
+	/// The amount of time in seconds the player is rewarded for being Super Sonic.
+	/// </summary>
+	static unsigned int superSonicTimer;
+
+	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>
 	static string scoreFormat;
