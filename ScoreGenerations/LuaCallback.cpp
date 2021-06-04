@@ -23,8 +23,8 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedUnsignedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
 	PushExposedUnsignedInteger(L, "score", ScoreListener::score);
 	PushExposedUnsignedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedUnsignedInteger(L, "minSeconds", ResultListener::rankTable.minSeconds);
-	PushExposedUnsignedInteger(L, "maxSeconds", ResultListener::rankTable.maxSeconds);
+	PushExposedUnsignedInteger(L, "minSeconds", ResultListener::rankTables[StateHooks::stageID].minSeconds);
+	PushExposedUnsignedInteger(L, "maxSeconds", ResultListener::rankTables[StateHooks::stageID].maxSeconds);
 }
 
 void LuaCallback::PushExposedUnsignedInteger(lua_State* L, string name, unsigned int pushToStack)
@@ -78,7 +78,7 @@ bool LuaCallback::LoadExternalLibrary(lua_State* L)
 	return false;
 }
 
-unsigned int LuaCallback::GetBonus(string algorithm)
+int LuaCallback::GetBonus(string algorithm)
 {
 	// Create Lua virtual machine.
 	lua_State* L = luaL_newstate();
@@ -97,7 +97,7 @@ unsigned int LuaCallback::GetBonus(string algorithm)
 	if (IsLuaSafe(L, luaL_dostring(L, string("return " + algorithm).c_str())))
 	{
 		// Return and store the Lua result.
-		unsigned int result = (unsigned int)lua_tonumber(L, -1);
+		int result = (unsigned int)lua_tonumber(L, -1);
 
 #if _DEBUG
 		printf("[Score Generations] %s = %d\n", algorithm.c_str(), result);

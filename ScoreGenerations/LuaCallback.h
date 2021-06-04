@@ -11,5 +11,5 @@ public:
 	static void PushExposedUnsignedInteger(lua_State* L, string name, unsigned int pushToStack);
 	static bool LoadMathLibrary(lua_State* L);
 	static bool LoadExternalLibrary(lua_State* L);
-	static unsigned int GetBonus(string algorithm);
+	static int GetBonus(string algorithm);
 };

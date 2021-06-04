@@ -4,12 +4,15 @@ const char* StateHooks::stageID = (const char*)0x1E774D4;
 
 void OnLoad()
 {
-	// Get the ranks for the current stage.
-	ResultListener::rankTable = ResultListener::RankTable::GetRanks();
-
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
 	{
+		if (!Configuration::customXNCP)
+		{
+			// Use Sonic Generations' HUD XNCP.
+			WRITE_MEMORY(0x168E333, uint8_t, "_default\0");
+		}
+
 		// Skip Casino Night score instructions.
 		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
 
@@ -18,6 +21,20 @@ void OnLoad()
 	}
 	else
 	{
+		if (!Configuration::customXNCP)
+		{
+			if (StringHelper::GetDigits(Configuration::scoreFormat) <= 6 || StringHelper::Compare(Configuration::scoreFormat, "%d"))
+			{
+				// Use Score Generations' HUD XNCP for six digit padding (or below).
+				WRITE_MEMORY(0x168E333, uint8_t, "_low_padding\0");
+			}
+			else
+			{
+				// Use Score Generations' HUD XNCP for high amounts of padding.
+				WRITE_MEMORY(0x168E333, uint8_t, "_high_padding\0");
+			}
+		}
+
 		// Execute Casino Night score instructions.
 		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x00);
 
@@ -137,8 +154,7 @@ void StateHooks::HookResults(bool enabled)
 	else
 	{
 		// Restore default results calculation.
-		WRITE_MEMORY(0x10B403B, uint8_t, 0xF3, 0x0F, 0x2C, 0xC0, 0x89);
-		WRITE_MEMORY(0x10B40B1, uint8_t, 0x7C, 0x11, 0xF3, 0x0F, 0x10);
+		WRITE_MEMORY(0xD5A18C, uint8_t, 0xE8, 0x1F, 0x9C, 0x35, 0x00);
 	}
 }
 

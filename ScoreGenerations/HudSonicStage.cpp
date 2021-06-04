@@ -1,3 +1,4 @@
+bool HudSonicStage::isMission = false;
 float superSonicDeltaTimer = 0;
 
 FUNCTION_PTR(void, __thiscall, SendMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
@@ -11,6 +12,11 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 	HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
 
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
+}
+
+HOOK(bool, __fastcall, ScriptImplInitialise, 0x1105120, int thisDeclaration)
+{
+	return HudSonicStage::isMission = originalScriptImplInitialise(thisDeclaration);
 }
 
 void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)
@@ -43,6 +49,10 @@ void HudSonicStage::ProcessMsgSetPinballHud(void* thisDeclaration)
 
 bool HudSonicStage::IsStageForbidden()
 {
+	// Forbid missions from using the score counter.
+	if (isMission)
+		return true;
+
 	// Check if the current stage ID matches any in the list.
 	for (vector<string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
 	{
@@ -58,4 +68,7 @@ void HudSonicStage::Install()
 {
 	// Install hook to update the score counter.
 	INSTALL_HOOK(CHudSonicStageUpdate);
+
+	// Install hook to check for missions.
+	INSTALL_HOOK(ScriptImplInitialise);
 }

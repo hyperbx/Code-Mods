@@ -32,4 +32,7 @@ void Configuration::Read(string path = "")
 	// Developer
 	Configuration::customXNCP      = config.GetBoolean("Developer", "customXNCP", false);
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
+
+	// Ranks
+	ResultListener::RankTable::GetRanks();
 }

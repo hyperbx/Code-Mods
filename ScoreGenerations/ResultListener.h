@@ -90,51 +90,47 @@ public:
         int C = 0;
 
         /// <summary>
-        /// Gets the ranks from the current configuration.
+        /// Gets the ranks from the current configurations.
         /// </summary>
-        static RankTable GetRanks()
+        static void GetRanks()
         {
-            RankTable rankTable;
-            string id;
-
-            // Check if the current stage ID exists in the configuration.
-            if (Configuration::config.Sections().find(StateHooks::stageID) != Configuration::config.Sections().end())
+            for (auto& section : Configuration::config.Sections())
             {
-                // Use the rank table for the loaded stage.
-                id = StateHooks::stageID;
-            }
-            else
-            {
-#if _DEBUG
-                printf("[Score Generations] The current stage ID doesn't have a rank table - reverting to global rank table...\n");
-#endif
+                RankTable rankTable;
 
-                // Use the global rank table.
-                id = "Global";
-            }
+                if (section[0] == '#')
+                {
+                    // Use the current stage ID to get the time requirements.
+                    rankTable.minSeconds = Configuration::config.GetInteger(section, "minSeconds", 0);
+                    rankTable.maxSeconds = Configuration::config.GetInteger(section, "maxSeconds", 0);
 
-            // Use the current stage ID to get the time requirements.
-            rankTable.minSeconds = Configuration::config.GetInteger(id, "minSeconds", 0);
-            rankTable.maxSeconds = Configuration::config.GetInteger(id, "maxSeconds", 0);
-
-            // Use the current stage ID to get the ranks.
-            rankTable.A = Configuration::config.GetInteger(id, "A", 0);
-            rankTable.B = Configuration::config.GetInteger(id, "B", 0);
-            rankTable.C = Configuration::config.GetInteger(id, "C", 0);
+                    // Use the current stage ID to get the ranks.
+                    rankTable.A = Configuration::config.GetInteger(section, "A", 50000);
+                    rankTable.B = Configuration::config.GetInteger(section, "B", 25000);
+                    rankTable.C = Configuration::config.GetInteger(section, "C", 7500);
 
 #if _DEBUG
-            printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
-            printf("[Score Generations] maxSeconds = %d\n", rankTable.maxSeconds);
-            printf("[Score Generations] A = %d\n", rankTable.A);
-            printf("[Score Generations] B = %d\n", rankTable.B);
-            printf("[Score Generations] C = %d\n", rankTable.C);
+                    printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
+                    printf("[Score Generations] maxSeconds = %d\n", rankTable.maxSeconds);
+                    printf("[Score Generations] A = %d\n", rankTable.A);
+                    printf("[Score Generations] B = %d\n", rankTable.B);
+                    printf("[Score Generations] C = %d\n", rankTable.C);
 #endif
 
-            return rankTable;
+                    // Section without the hash is the stage ID.
+                    string sectionStageID = section.substr(1);
+
+                    // Remove the current stage ID if it already exists in the rank database.
+                    if (rankTables.find(sectionStageID) != rankTables.end())
+                        rankTables.erase(sectionStageID);
+
+                    rankTables.emplace(sectionStageID, rankTable);
+                }
+            }
         }
     };
 
-    static RankTable rankTable;
+    static unordered_map<string, RankTable> rankTables;
 
     struct BonusTable
     {

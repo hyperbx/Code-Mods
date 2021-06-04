@@ -24,6 +24,11 @@ public:
     static bool IsStageForbidden();
 
     /// <summary>
+    /// Determines if the current stage is a mission.
+    /// </summary>
+    static bool isMission;
+
+    /// <summary>
     /// Reverse-engineered struct for MsgSetPinballHud - by Skyth.
     /// </summary>
     struct MsgSetPinballHud

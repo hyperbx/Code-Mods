@@ -1,4 +1,4 @@
-ResultListener::RankTable ResultListener::rankTable;
+unordered_map<string, ResultListener::RankTable> ResultListener::rankTables;
 ResultListener::BonusTable ResultListener::bonusTable;
 ResultListener::ResultDescription ResultListener::resultDescription;
 
@@ -12,11 +12,11 @@ void ResultListener::Bonus()
 
 ResultListener::RankType ResultListener::Rank()
 {
-	if (ScoreListener::score < rankTable.A)
+	if (ScoreListener::score < rankTables[StateHooks::stageID].A)
 	{
-		if (ScoreListener::score < rankTable.B)
+		if (ScoreListener::score < rankTables[StateHooks::stageID].B)
 		{
-			if (ScoreListener::score < rankTable.C)
+			if (ScoreListener::score < rankTables[StateHooks::stageID].C)
 			{
 				return RankType::D; // D rank
 			}
@@ -49,6 +49,6 @@ void ResultListener::Result()
 	resultDescription.perfectRank = Rank() + 1;
 
 	// Set up progress bars.
-	resultDescription.scoreProgress = min((float)ScoreListener::score / (float)rankTable.A, 1);
+	resultDescription.scoreProgress = min((float)ScoreListener::score / (float)rankTables[StateHooks::stageID].A, 1);
 	resultDescription.ringProgress = resultDescription.scoreProgress + min((float)StatisticsListener::ringCount / 999, 1);
 }
