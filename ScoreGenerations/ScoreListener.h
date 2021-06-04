@@ -23,7 +23,8 @@ public:
         QuickStep,
         Drift,
         Balloon,
-        Super
+        Super,
+        BoardTrick
     };
 
     /// <summary>
@@ -65,6 +66,7 @@ public:
         int Drift = 0;
         int Balloon = 0;
         int Super = 0;
+        int BoardTrick = 0;
 
         static ScoreTable GetScore()
         {
@@ -86,6 +88,7 @@ public:
             scoreTable.Drift       = Configuration::config.GetInteger("Score", "Drift", 0);
             scoreTable.Balloon     = Configuration::config.GetInteger("Score", "Balloon", 0);
             scoreTable.Super       = Configuration::config.GetInteger("Score", "Super", 0);
+            scoreTable.BoardTrick  = Configuration::config.GetInteger("Score", "BoardTrick", 0);
 
 #if _DEBUG
             printf("[Score Generations] Ring = %d\n", scoreTable.Ring);
@@ -103,6 +106,7 @@ public:
             printf("[Score Generations] Drift = %d\n", scoreTable.Drift);
             printf("[Score Generations] Balloon = %d\n", scoreTable.Balloon);
             printf("[Score Generations] Super = %d\n", scoreTable.Balloon);
+            printf("[Score Generations] BoardTrick = %d\n", scoreTable.BoardTrick);
 #endif
 
             return scoreTable;

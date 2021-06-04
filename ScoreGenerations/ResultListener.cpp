@@ -48,7 +48,7 @@ void ResultListener::Result()
 	resultDescription.rank = Rank();
 	resultDescription.perfectRank = Rank() + 1;
 
-	// Set up progress bars.
+	// Set up progress bar.
 	resultDescription.scoreProgress = min((float)ScoreListener::score / (float)rankTables[StateHooks::stageID].A, 1);
-	resultDescription.ringProgress = resultDescription.scoreProgress + min((float)StatisticsListener::ringCount / 999, 1);
+	resultDescription.ringProgress = resultDescription.scoreProgress + 0.0001; // Increment the tiniest amount so the ring count appears.
 }

@@ -114,6 +114,10 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		case Super:
 			scoreToReward = scoreTable.Super;
 			break;
+
+		case BoardTrick:
+			scoreToReward = scoreTable.BoardTrick;
+			break;
 	}
 
 	// Rewards the score and clamps it.

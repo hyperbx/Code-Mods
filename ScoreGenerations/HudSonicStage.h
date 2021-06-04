@@ -24,6 +24,12 @@ public:
     static bool IsStageForbidden();
 
     /// <summary>
+    /// Determines if the current stage ID is Casino Night Zone.
+    /// </summary>
+    /// <returns></returns>
+    static bool IsCasino();
+
+    /// <summary>
     /// Determines if the current stage is a mission.
     /// </summary>
     static bool isMission;

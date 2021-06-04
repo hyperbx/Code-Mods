@@ -14,7 +14,8 @@ void OnLoad()
 		}
 
 		// Skip Casino Night score instructions.
-		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
+		if (!HudSonicStage::IsCasino())
+			WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
 
 		// Disable results hooks.
 		StateHooks::HookResults(false);
@@ -52,14 +53,17 @@ __declspec(naked) void LoadingMidAsmHook()
 	static void* interruptAddress = (void*)0x65FCC0;
 	static void* returnAddress = (void*)0x448E98;
 
+	// Reset statistics.
+	ScoreListener::Reset();
+
 	__asm
 	{
 		// Perform actions on the loading screen.
 		call OnLoad
 
-		call[interruptAddress]
+		call [interruptAddress]
 
-		jmp[returnAddress]
+		jmp [returnAddress]
 	}
 }
 
@@ -118,25 +122,12 @@ __declspec(naked) void ResultsCalculateMidAsmHook()
 	// Gather the results.
 	ResultListener::Result();
 
+	// Reset statistics.
+	ScoreListener::Reset();
+
 	__asm
 	{
 		lea eax, ResultListener::resultDescription
-
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void ResultsEndMidAsmHook()
-{
-	static void* interruptAddress = (void*)0x773250;
-	static void* returnAddress = (void*)0xCFAEE7;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		// Reset statistics.
-		call ScoreListener::Reset
 
 		jmp [returnAddress]
 	}
@@ -169,7 +160,4 @@ void StateHooks::Install()
 
 	// Reset statistics upon exiting.
 	WRITE_JUMP(0x42AD71, &ExitMidAsmHook);
-
-	// Reset statistics upon results finishing.
-	WRITE_JUMP(0xCFAEE2, &ResultsEndMidAsmHook);
 }

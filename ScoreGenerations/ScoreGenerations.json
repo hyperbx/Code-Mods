@@ -180,6 +180,17 @@
             "MaxValue": null,
             "DefaultValue": 2000
           },
+		  {
+            "Name": "BoardTrick",
+            "Description": [
+                "The amount of score rewarded for jumping off trick ramps using the board."
+            ],
+            "DisplayName": "Board Tricks",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2500
+          },
         ]
       },
 	  {
@@ -329,7 +340,7 @@
             "Type": "string",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": "bsd, cnz100, sph101"
+            "DefaultValue": "bde, bde001, blb, blb001, bms, bms001, bne, bne001, bpc, bpc001, bsd, bsd001, bsl, bsl001"
           }
         ]
       }

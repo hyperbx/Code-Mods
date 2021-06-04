@@ -9,7 +9,8 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 	HudSonicStage::UpdateSuperSonicTimer(pUpdateInfo);
 
 	// Process the Casino Night score message.
-	HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
+	if (!HudSonicStage::IsCasino() && !HudSonicStage::IsStageForbidden())
+		HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
 
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
@@ -42,9 +43,7 @@ void HudSonicStage::ProcessMsgSetPinballHud(void* thisDeclaration)
 	msgSetPinballHud.flags = 1;
 	msgSetPinballHud.score = ScoreListener::score;
 
-	// Makes sure the current stage isn't forbidden before sending the message.
-	if (!HudSonicStage::IsStageForbidden())
-		SendMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
+	SendMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
 }
 
 bool HudSonicStage::IsStageForbidden()
@@ -60,6 +59,17 @@ bool HudSonicStage::IsStageForbidden()
 		if (StringHelper::Compare(StateHooks::stageID, i->c_str()))
 			return true;
 	}
+
+	return false;
+}
+
+bool HudSonicStage::IsCasino()
+{
+	if (Configuration::overrideForbiddenCasino)
+		return false;
+
+	if (StringHelper::Compare(StateHooks::stageID, "cnz100"))
+		return true;
 
 	return false;
 }

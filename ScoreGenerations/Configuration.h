@@ -46,6 +46,11 @@ public:
 	static bool customXNCP;
 
 	/// <summary>
+	/// Not as intimidating as it sounds - just tells Score Generations that you're never in Casino Night Zone regardless.
+	/// </summary>
+	static bool overrideForbiddenCasino;
+
+	/// <summary>
 	/// List of forbidden stages that should not display the score counter.
 	/// </summary>
 	static vector<string> forbiddenStages;

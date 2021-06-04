@@ -270,6 +270,24 @@ __declspec(naked) void BalloonMidAsmHook()
 	}
 }
 
+__declspec(naked) void BoardTrickMidAsmHook()
+{
+	static void* interruptAddress = (void*)0xE5D990;
+	static void* returnAddress = (void*)0x11A1294;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// Reward player with Board Trick score.
+		mov ecx, 16
+		call ScoreListener::Reward
+		mov edx, eax
+
+		jmp [returnAddress]
+	}
+}
+
 #pragma endregion
 
 void ScoreHooks::Install()
@@ -290,4 +308,5 @@ void ScoreHooks::Install()
 	WRITE_JUMP(0xDFE300, &QuickStepMidAsmHook);
 	WRITE_JUMP(0xDF2F17, &DriftMidAsmHook);
 	WRITE_JUMP(0x1017E59, &BalloonMidAsmHook);
+	WRITE_JUMP(0x11A128F, &BoardTrickMidAsmHook);
 }
