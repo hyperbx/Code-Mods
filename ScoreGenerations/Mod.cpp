@@ -3,12 +3,28 @@
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
-#if !_DEBUG
-	// Redirect console output for release.
-	freopen("CONOUT$", "w", stdout);
-#endif
-
 	Loader::ConfigureScoreGenerations();
+
+#if !_DEBUG
+	if (Configuration::debugLua)
+	{
+		if (IOHelper::FileExists("CONOUT$"))
+		{
+			// Redirect console output for release.
+			freopen("CONOUT$", "w", stdout);
+		}
+		else
+		{
+			MessageBox
+			(
+				nullptr,
+				TEXT("Please enable the debug console via Hedge Mod Manager to use the Lua debugger!"),
+				TEXT("Score Generations"),
+				MB_ICONERROR
+			);
+		}
+	}
+#endif
 
 	// Patch archive tree for Score Generations HUD.
 	if (!Configuration::customXNCP)
