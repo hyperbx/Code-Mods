@@ -4,9 +4,8 @@ bool IsLuaSafe(lua_State* L, int result)
 	   we use that to check if the current state is safe. */
 	if (result != LUA_OK)
 	{
-#if _DEBUG
-		printf("[Score Generations] [Lua Debug] Lua error: %s\n", lua_tostring(L, -1));
-#endif
+		if (Configuration::debugLua)
+			printf("[Score Generations] [Lua Debug] Lua error: %s\n", lua_tostring(L, -1));
 
 		return false;
 	}
@@ -47,9 +46,8 @@ bool LuaCallback::LoadMathLibrary(lua_State* L)
 	if (IsLuaSafe(L, luaL_dofile(L, "Math.lua")))
 		return true;
 
-#if _DEBUG
-	printf("[Score Generations] [Lua Debug] Failed to load the math library!\n");
-#endif
+	if (Configuration::debugLua)
+		printf("[Score Generations] [Lua Debug] Failed to load the math library!\n");
 
 	return false;
 }
@@ -64,36 +62,35 @@ bool LuaCallback::LoadExternalLibrary(lua_State* L)
 	{
 		lib = LUA_FILE;
 
-#if _DEBUG
-		printf("[Score Generations] [Lua Debug] The overridden mod doesn't have a Lua script - reverting to default script...\n");
-#endif
+		if (Configuration::debugLua)
+			printf("[Score Generations] [Lua Debug] The overridden mod doesn't have a Lua script - reverting to default script...\n");
 	}
 
 	// Try loading the external library.
 	if (IsLuaSafe(L, luaL_dofile(L, lib.c_str())))
 		return true;
 
-#if _DEBUG
-	printf("[Score Generations] [Lua Debug] Failed to load the external library!\n");
-#endif
+	if (Configuration::debugLua)
+		printf("[Score Generations] [Lua Debug] Failed to load the external library!\n");
 
 	return false;
 }
 
 void LuaCallback::PrintExposedData()
 {
-#if _DEBUG
-	printf("[Score Generations] [Lua Debug] totalRingCount = %d\n", StatisticsListener::totalRingCount);
-	printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::totalVelocity);
-	printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::ringCount);
-	printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::minutes);
-	printf("[Score Generations] [Lua Debug] seconds = %d\n", StatisticsListener::seconds);
-	printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
-	printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
-	printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
-	printf("[Score Generations] [Lua Debug] minSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].minSeconds);
-	printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].maxSeconds);
-#endif
+	if (Configuration::debugLua)
+	{
+		printf("[Score Generations] [Lua Debug] totalRingCount = %d\n", StatisticsListener::totalRingCount);
+		printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::totalVelocity);
+		printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::ringCount);
+		printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::minutes);
+		printf("[Score Generations] [Lua Debug] seconds = %d\n", StatisticsListener::seconds);
+		printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
+		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
+		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
+		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].minSeconds);
+		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].maxSeconds);
+	}
 }
 
 int LuaCallback::GetBonus(string algorithm)
@@ -117,9 +114,8 @@ int LuaCallback::GetBonus(string algorithm)
 		// Return and store the Lua result.
 		int result = (unsigned int)lua_tonumber(L, -1);
 
-#if _DEBUG
-		printf("[Score Generations] [Lua Debug] %s = %d\n", algorithm.c_str(), result);
-#endif
+		if (Configuration::debugLua)
+			printf("[Score Generations] [Lua Debug] %s = %d\n", algorithm.c_str(), result);
 
 		// Clean up the Lua virtual machine.
 		lua_close(L);

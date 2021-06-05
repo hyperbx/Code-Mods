@@ -3,6 +3,11 @@
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
+#if !_DEBUG
+	// Redirect console output for release.
+	freopen("CONOUT$", "w", stdout);
+#endif
+
 	Loader::ConfigureScoreGenerations();
 
 	// Patch archive tree for Score Generations HUD.

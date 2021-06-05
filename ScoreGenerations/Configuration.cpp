@@ -6,6 +6,7 @@ unsigned int Configuration::scoreLimit = 999999;
 string Configuration::scoreFormat = "%06d";
 unsigned int Configuration::superSonicTimer = 2;
 bool Configuration::customXNCP = false;
+bool Configuration::debugLua = false;
 bool Configuration::overrideForbiddenCasino = false;
 vector<string> Configuration::forbiddenStages;
 
@@ -54,6 +55,7 @@ void Configuration::Read(string path = "")
 
 	// Developer
 	Configuration::customXNCP = config.GetBoolean("Developer", "customXNCP", false);
+	Configuration::debugLua = config.GetBoolean("Developer", "debugLua", false);
 	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", false);
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
 
@@ -62,4 +64,16 @@ void Configuration::Read(string path = "")
 
 	// Set the override flag now that we have read a config.
 	overrideFlag = true;
+
+#if _DEBUG
+	// Force enable non-default debugging features.
+	Configuration::Debug();
+#endif
+}
+
+void Configuration::Debug()
+{
+	printf("[Score Generations] Debug build detected! Overriding non-default debugging features...\n");
+
+	Configuration::debugLua = true;
 }

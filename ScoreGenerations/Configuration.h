@@ -31,6 +31,11 @@ public:
 	static void Read(string path);
 
 	/// <summary>
+	/// Force enables non-default debugging features.
+	/// </summary>
+	static void Debug();
+
+	/// <summary>
 	/// The maximum amount of score the player can obtain.
 	/// </summary>
 	static unsigned int scoreLimit;
@@ -49,6 +54,11 @@ public:
 	/// Determines if the mod overriding the configuration uses a custom XNCP.
 	/// </summary>
 	static bool customXNCP;
+
+	/// <summary>
+	/// Determines if Lua debug comments should be shown.
+	/// </summary>
+	static bool debugLua;
 
 	/// <summary>
 	/// Not as intimidating as it sounds - just tells Score Generations that you're never in Casino Night Zone regardless.

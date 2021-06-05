@@ -331,6 +331,17 @@
             "MaxValue": null,
             "DefaultValue": false
           },
+          {
+            "Name": "debugLua",
+            "Description": [
+                "Prints Lua debug information to the console window."
+            ],
+            "DisplayName": "Lua Debugger",
+            "Type": "bool",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": false
+          },
 		  {
             "Name": "forbiddenStages",
             "Description": [
