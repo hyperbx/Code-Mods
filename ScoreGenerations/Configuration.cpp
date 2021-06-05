@@ -1,3 +1,5 @@
+bool Configuration::overrideFlag = false;
+
 INIReader Configuration::config;
 string Configuration::configPath = INI_FILE;
 unsigned int Configuration::scoreLimit = 999999;
@@ -30,6 +32,26 @@ void Configuration::Read(string path = "")
 	// Appearance
 	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", "%06d");
 
+	// Override checks for Developer
+	{
+		if (overrideFlag)
+		{
+			bool overrideCustomXNCP = config.GetBoolean("Developer", "customXNCP", false);
+
+			// Compare current flag with updated INI flag - if they mismatch, then give the warning.
+			if (Configuration::customXNCP && !overrideCustomXNCP)
+			{
+				MessageBox
+				(
+					nullptr,
+					TEXT("Score Generations has detected a HUD mod loaded with incorrect priority - please make it higher priority!"),
+					TEXT("Score Generations"),
+					MB_ICONWARNING
+				);
+			}
+		}
+	}
+
 	// Developer
 	Configuration::customXNCP = config.GetBoolean("Developer", "customXNCP", false);
 	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", false);
@@ -37,4 +59,7 @@ void Configuration::Read(string path = "")
 
 	// Get the ranks.
 	ResultListener::RankTable::GetRanks();
+
+	// Set the override flag now that we have read a config.
+	overrideFlag = true;
 }

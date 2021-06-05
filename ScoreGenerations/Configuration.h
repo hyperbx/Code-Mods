@@ -4,6 +4,11 @@
 
 class Configuration
 {
+	/// <summary>
+	/// Determines if the configuration was overridden.
+	/// </summary>
+	static bool overrideFlag;
+
 public:
 	/// <summary>
 	/// The configuration being used for settings.
