@@ -39,11 +39,11 @@ public:
 			{
 				INIReader reader(path);
 
-				modInfo.title = reader.Get("Desc", "Title", "N/A");
-				modInfo.description = reader.Get("Desc", "Description", "N/A");
-				modInfo.version = reader.Get("Desc", "Version", "N/A");
-				modInfo.date = reader.Get("Desc", "Date", "N/A");
-				modInfo.author = reader.Get("Desc", "Author", "N/A");
+				modInfo.title = reader.Get("Desc", "Title", "");
+				modInfo.description = reader.Get("Desc", "Description", "");
+				modInfo.version = reader.Get("Desc", "Version", "");
+				modInfo.date = reader.Get("Desc", "Date", "");
+				modInfo.author = reader.Get("Desc", "Author", "");
 				modInfo.authorURL = reader.Get("Desc", "AuthorURL", "");
 
 				modInfo.dll = reader.Get("Main", "DLLFile", "");

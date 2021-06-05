@@ -35,6 +35,6 @@ void Configuration::Read(string path = "")
 	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", false);
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
 
-	// Ranks
+	// Get the ranks.
 	ResultListener::RankTable::GetRanks();
 }

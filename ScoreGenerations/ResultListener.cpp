@@ -38,6 +38,9 @@ ResultListener::RankType ResultListener::Rank()
 
 void ResultListener::Result()
 {
+	// Print exposed Lua data before results manipulation.
+	LuaCallback::PrintExposedData();
+
 	// Calculate the bonuses.
 	ResultListener::Bonus();
 

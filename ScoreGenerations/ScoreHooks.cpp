@@ -7,14 +7,14 @@ __declspec(naked) void RingMidAsmHook()
 
 	__asm
 	{
-		call[interruptAddress]
+		call [interruptAddress]
 
 		// Reward player with Ring score.
 		mov ecx, 0
 		call ScoreListener::Reward
 		mov edx, eax
 
-		jmp[returnAddress]
+		jmp [returnAddress]
 	}
 }
 

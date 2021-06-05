@@ -3,27 +3,12 @@ ScoreListener::ScoreTable ScoreListener::scoreTable;
 
 void ScoreListener::Reset()
 {
-#if _DEBUG
-	printf("[Score Generations] [pre-reset] score = %d\n", score);
-#endif
-
 	StatisticsListener::totalRingCount = 0;
 	StatisticsListener::totalVelocity = 0;
 	StatisticsListener::ringCount = 0;
 	StatisticsListener::minutes = 0;
 	StatisticsListener::seconds = 0;
 	score = 0;
-
-#if _DEBUG
-	printf("[Score Generations] [post-reset] Your score has been reset...\n");
-	printf("[Score Generations] [post-reset] totalRingCount = %d\n", StatisticsListener::totalRingCount);
-	printf("[Score Generations] [post-reset] totalVelocity = %d\n", StatisticsListener::totalVelocity);
-	printf("[Score Generations] [post-reset] ringCount = %d\n", StatisticsListener::ringCount);
-	printf("[Score Generations] [post-reset] minutes = %d\n", StatisticsListener::minutes);
-	printf("[Score Generations] [post-reset] seconds = %d\n", StatisticsListener::seconds);
-	printf("[Score Generations] [post-reset] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
-	printf("[Score Generations] [post-reset] score = %d\n", score);
-#endif
 }
 
 void ScoreListener::AddClamp(unsigned int scoreToReward)
