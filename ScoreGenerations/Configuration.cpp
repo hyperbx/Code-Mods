@@ -27,17 +27,17 @@ void Configuration::Read(string path = "")
 	ResultListener::bonusTable = ResultListener::BonusTable::GetBonuses();
 
 	// Behaviour
-	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", 999999);
-	Configuration::superSonicTimer = config.GetInteger("Behaviour", "superSonicTimer", 2);
+	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
+	Configuration::superSonicTimer = config.GetInteger("Behaviour", "superSonicTimer", superSonicTimer);
 
 	// Appearance
-	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", "%06d");
+	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", scoreFormat);
 
 	// Override checks for Developer
 	{
 		if (overrideFlag)
 		{
-			bool overrideCustomXNCP = config.GetBoolean("Developer", "customXNCP", false);
+			bool overrideCustomXNCP = config.GetBoolean("Developer", "customXNCP", customXNCP);
 
 			// Compare current flag with updated INI flag - if they mismatch, then give the warning.
 			if (Configuration::customXNCP && !overrideCustomXNCP)
@@ -54,9 +54,9 @@ void Configuration::Read(string path = "")
 	}
 
 	// Developer
-	Configuration::customXNCP = config.GetBoolean("Developer", "customXNCP", false);
-	Configuration::debugLua = config.GetBoolean("Developer", "debugLua", false);
-	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", false);
+	Configuration::customXNCP = config.GetBoolean("Developer", "customXNCP", customXNCP);
+	Configuration::debugLua = config.GetBoolean("Developer", "debugLua", debugLua);
+	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", overrideForbiddenCasino);
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
 
 	// Get the ranks.

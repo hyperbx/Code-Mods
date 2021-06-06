@@ -144,9 +144,9 @@ public:
             BonusTable bonusTable;
 
             // Use the current configuration to get the bonuses.
-            bonusTable.timeBonusAlgorithm = Configuration::config.Get("Bonus", "timeBonusAlgorithm", "");
-            bonusTable.ringBonusAlgorithm = Configuration::config.Get("Bonus", "ringBonusAlgorithm", "");
-            bonusTable.speedBonusAlgorithm = Configuration::config.Get("Bonus", "speedBonusAlgorithm", "");
+            bonusTable.timeBonusAlgorithm = Configuration::config.Get("Bonus", "timeBonusAlgorithm", ResultListener::bonusTable.timeBonusAlgorithm);
+            bonusTable.ringBonusAlgorithm = Configuration::config.Get("Bonus", "ringBonusAlgorithm", ResultListener::bonusTable.ringBonusAlgorithm);
+            bonusTable.speedBonusAlgorithm = Configuration::config.Get("Bonus", "speedBonusAlgorithm", ResultListener::bonusTable.speedBonusAlgorithm);
 
 #if _DEBUG
             printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
