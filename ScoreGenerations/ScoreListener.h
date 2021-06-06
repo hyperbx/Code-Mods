@@ -85,6 +85,7 @@ public:
             scoreTable.Trick       = Configuration::config.GetInteger("Score", "Trick", ScoreListener::scoreTable.Trick);
             scoreTable.Life        = Configuration::config.GetInteger("Score", "Life", ScoreListener::scoreTable.Life);
             scoreTable.DashRing    = Configuration::config.GetInteger("Score", "DashRing", ScoreListener::scoreTable.DashRing);
+            scoreTable.QuickStep   = Configuration::config.GetInteger("Score", "QuickStep", ScoreListener::scoreTable.QuickStep);
             scoreTable.Drift       = Configuration::config.GetInteger("Score", "Drift", ScoreListener::scoreTable.Drift);
             scoreTable.Balloon     = Configuration::config.GetInteger("Score", "Balloon", ScoreListener::scoreTable.Balloon);
             scoreTable.Super       = Configuration::config.GetInteger("Score", "Super", ScoreListener::scoreTable.Super);
@@ -103,6 +104,7 @@ public:
             printf("[Score Generations] Trick = %d\n", scoreTable.Trick);
             printf("[Score Generations] Life = %d\n", scoreTable.Life);
             printf("[Score Generations] DashRing = %d\n", scoreTable.DashRing);
+            printf("[Score Generations] QuickStep = %d\n", scoreTable.QuickStep);
             printf("[Score Generations] Drift = %d\n", scoreTable.Drift);
             printf("[Score Generations] Balloon = %d\n", scoreTable.Balloon);
             printf("[Score Generations] Super = %d\n", scoreTable.Balloon);
