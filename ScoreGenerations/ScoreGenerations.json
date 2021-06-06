@@ -1,7 +1,7 @@
 {
     "Groups": [
 	  {
-        "Name": "Object",
+        "Name": "Score",
         "DisplayName": "Score",
         "Elements": [
           {
