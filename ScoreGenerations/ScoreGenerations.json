@@ -104,7 +104,7 @@
             "DefaultValue": 5000
           },
 		  {
-            "Name": "Tricks",
+            "Name": "Trick",
             "Description": [
                 "The amount of score rewarded for performing trick combos."
             ],
