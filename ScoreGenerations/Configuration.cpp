@@ -2,9 +2,10 @@ bool Configuration::overrideFlag = false;
 
 INIReader Configuration::config;
 string Configuration::configPath = INI_FILE;
-unsigned int Configuration::scoreLimit = 999999;
+int Configuration::scoreLimit = 999999;
 string Configuration::scoreFormat = "%06d";
-unsigned int Configuration::superSonicTimer = 2;
+int Configuration::superSonicTimer = 2;
+int Configuration::slamTimer = 2;
 bool Configuration::customXNCP = false;
 bool Configuration::debugLua = false;
 bool Configuration::overrideForbiddenCasino = false;
@@ -29,9 +30,12 @@ void Configuration::Read(string path = "")
 	// Get the multipliers.
 	Tables::multiplierTable = Tables::MultiplierTable::GetMultipliers();
 
+	// Timer
+	Configuration::superSonicTimer = config.GetInteger("Timer", "superSonicTimer", superSonicTimer);
+	Configuration::slamTimer = config.GetInteger("Timer", "slamTimer", slamTimer);
+
 	// Behaviour
 	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
-	Configuration::superSonicTimer = config.GetInteger("Behaviour", "superSonicTimer", superSonicTimer);
 
 	// Appearance
 	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", scoreFormat);

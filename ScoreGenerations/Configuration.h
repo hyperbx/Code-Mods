@@ -38,12 +38,17 @@ public:
 	/// <summary>
 	/// The maximum amount of score the player can obtain.
 	/// </summary>
-	static unsigned int scoreLimit;
+	static int scoreLimit;
 
 	/// <summary>
 	/// The amount of time in seconds the player is rewarded for being Super Sonic.
 	/// </summary>
-	static unsigned int superSonicTimer;
+	static int superSonicTimer;
+
+	/// <summary>
+	/// The amount of time in seconds the slam bonus times out after when the player is grounded.
+	/// </summary>
+	static int slamTimer;
 
 	/// <summary>
 	/// Formatting used for the string printer for score.

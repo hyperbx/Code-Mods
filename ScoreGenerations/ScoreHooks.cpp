@@ -291,7 +291,7 @@ __declspec(naked) void DashRing_MidAsmHook()
 		je RewardRainbowRingScore
 		jmp RewardDashRingScore
 
-		NoTrickRainbowRings:
+	NoTrickRainbowRings:
 		// If the model index is 1, reward Dash Ring score - otherwise, reward Rainbow Ring score.
 		cmp dword ptr [esi + 114h], 1
 		je RewardDashRingScore

@@ -134,6 +134,7 @@ public:
     {
         // Algorithms for calculating bonuses.
         int homingChainBonus;
+        int slamBonus;
         string timeBonusAlgorithm;
         string ringBonusAlgorithm;
         string speedBonusAlgorithm;
@@ -143,13 +144,15 @@ public:
             BonusTable bonusTable;
 
             // Use the current configuration to get the bonuses.
-            bonusTable.homingChainBonus = Configuration::config.GetInteger("Bonus", "homingChainBonus", Tables::bonusTable.homingChainBonus);
-            bonusTable.timeBonusAlgorithm = Configuration::config.Get("Bonus", "timeBonusAlgorithm", Tables::bonusTable.timeBonusAlgorithm);
-            bonusTable.ringBonusAlgorithm = Configuration::config.Get("Bonus", "ringBonusAlgorithm", Tables::bonusTable.ringBonusAlgorithm);
-            bonusTable.speedBonusAlgorithm = Configuration::config.Get("Bonus", "speedBonusAlgorithm", Tables::bonusTable.speedBonusAlgorithm);
+            bonusTable.homingChainBonus = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", Tables::bonusTable.homingChainBonus);
+            bonusTable.slamBonus = Configuration::config.GetInteger("GameplayBonus", "slamBonus", Tables::bonusTable.slamBonus);
+            bonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", Tables::bonusTable.timeBonusAlgorithm);
+            bonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", Tables::bonusTable.ringBonusAlgorithm);
+            bonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", Tables::bonusTable.speedBonusAlgorithm);
 
 #if _DEBUG
             printf("[Score Generations] homingChainBonus = %d\n", bonusTable.homingChainBonus);
+            printf("[Score Generations] homingChainBonus = %d\n", bonusTable.slamBonus);
             printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
             printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
             printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
@@ -165,15 +168,19 @@ public:
     {
         // Multipliers for certain conditions.
         int homingChainMultiplier = 0;
+        int slamMultiplier = 0;
 
         static MultiplierTable GetMultipliers()
         {
             MultiplierTable multiplierTable;
 
+            // Use the current configuration to get the multipliers.
             multiplierTable.homingChainMultiplier = Configuration::config.GetInteger("Multiplier", "homingChainMultiplier", Tables::multiplierTable.homingChainMultiplier);
+            multiplierTable.slamMultiplier = Configuration::config.GetInteger("Multiplier", "slamMultiplier", Tables::multiplierTable.slamMultiplier);
 
 #if _DEBUG
             printf("[Score Generations] homingChainMultiplier = %d\n", multiplierTable.homingChainMultiplier);
+            printf("[Score Generations] slamMultiplier = %d\n", multiplierTable.slamMultiplier);
 #endif
 
             return multiplierTable;

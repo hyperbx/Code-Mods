@@ -14,6 +14,11 @@ public:
     static void ProcessMsgSetPinballHud(void* thisDeclaration);
 
     /// <summary>
+    /// Updates the multipliers.
+    /// </summary>
+    static void UpdateMultipliers(float* pUpdateInfo);
+
+    /// <summary>
     /// Updates the Super Sonic timer and rewards score.
     /// </summary>
     static void UpdateSuperSonicTimer(float* pUpdateInfo);

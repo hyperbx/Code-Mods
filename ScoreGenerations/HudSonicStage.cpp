@@ -1,20 +1,20 @@
 bool HudSonicStage::isMission = false;
 float superSonicDeltaTimer = 0;
+float slamBonusDeltaTimer = 0;
 
 FUNCTION_PTR(void, __thiscall, SendMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
 
 HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
-	// Update the Super Sonic timer and reward score after two seconds.
+	// Update the Super Sonic timer and reward score.
 	HudSonicStage::UpdateSuperSonicTimer(pUpdateInfo);
 
 	// Process the Casino Night score message.
 	if (!HudSonicStage::IsCasino() && !HudSonicStage::IsStageForbidden())
 		HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
 
-	// Reset the homing chain bonus if the player is grounded.
-	if (PlayerListener::isGrounded)
-		MultiplierListener::ResetHomingChainBonus();
+	// Update the multipliers.
+	HudSonicStage::UpdateMultipliers(pUpdateInfo);
 
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
@@ -22,6 +22,31 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 HOOK(bool, __fastcall, ScriptImplInitialise, 0x1105120, int thisDeclaration)
 {
 	return HudSonicStage::isMission = originalScriptImplInitialise(thisDeclaration);
+}
+
+void HudSonicStage::UpdateMultipliers(float* pUpdateInfo)
+{
+	// Update the timer using delta time.
+	slamBonusDeltaTimer += *pUpdateInfo;
+
+	if (PlayerListener::isGrounded)
+	{
+		// Reset the homing chain bonus if the player is grounded.
+		MultiplierListener::ResetHomingChainBonus();
+
+		if (slamBonusDeltaTimer > Configuration::slamTimer)
+		{
+			// Reset the timer.
+			slamBonusDeltaTimer = 0;
+
+			// Reset the slam bonus if the timer runs out.
+			MultiplierListener::ResetSlamBonus();
+		}
+	}
+
+	// Reset the slam bonus if the player isn't grounded.
+	else
+		MultiplierListener::ResetSlamBonus();
 }
 
 void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)

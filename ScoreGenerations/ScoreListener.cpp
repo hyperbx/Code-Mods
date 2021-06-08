@@ -30,8 +30,17 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			break;
 
 		case Enemy:
-			scoreToReward = MultiplierListener::AddHomingChainBonus(Tables::scoreTable.Enemy);
+		{
+			scoreToReward = Tables::scoreTable.Enemy;
+
+			// Calculate homing chain bonus.
+			scoreToReward += MultiplierListener::AddHomingChainBonus();
+
+			// Calculate slam bonus.
+			scoreToReward += MultiplierListener::AddSlamBonus();
+
 			break;
+		}
 
 		case Physics:
 			scoreToReward = Tables::scoreTable.Physics;

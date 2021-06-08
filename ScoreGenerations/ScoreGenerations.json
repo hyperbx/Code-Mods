@@ -194,8 +194,8 @@
         ]
       },
 	  {
-        "Name": "Bonus",
-        "DisplayName": "Bonus",
+        "Name": "GameplayBonus",
+        "DisplayName": "Gameplay Bonuses",
         "Elements": [
           {
             "Name": "homingChainBonus",
@@ -206,8 +206,26 @@
             "Type": "int",
             "MinValue": null,
             "MaxValue": null,
-            "DefaultValue": 2
+            "DefaultValue": 100
           },
+          {
+            "Name": "slamBonus",
+            "Description": [
+                "The bonus rewarded for crashing through enemies rapidly."
+            ],
+            "DisplayName": "Slam Bonus",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 100
+          }
+        ]
+      },
+	  {
+        "Name": "ResultBonus",
+        "DisplayName": "Results Bonuses",
+        "Elements": [
+
           {
             "Name": "timeBonusAlgorithm",
             "Description": [
@@ -293,6 +311,45 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": 2
+          },
+          {
+            "Name": "slamMultiplier",
+            "Description": [
+                "The multiplier used to increase the slam bonus."
+            ],
+            "DisplayName": "Slam Multiplier",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
+          }
+        ]
+      },
+	  {
+        "Name": "Timer",
+        "DisplayName": "Timers",
+        "Elements": [
+          {
+            "Name": "superSonicTimer",
+            "Description": [
+                "The amount of time in seconds the player is rewarded for being Super Sonic."
+            ],
+            "DisplayName": "Super Sonic Timer",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
+          },
+          {
+            "Name": "slamTimer",
+            "Description": [
+                "The amount of time in seconds the slam bonus times out after when the player is grounded."
+            ],
+            "DisplayName": "Slam Timer",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
           }
         ]
       },
@@ -310,17 +367,6 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": 999999
-          },
-          {
-            "Name": "superSonicTimer",
-            "Description": [
-                "The amount of time in seconds the player is rewarded for being Super Sonic."
-            ],
-            "DisplayName": "Super Sonic Timer",
-            "Type": "int",
-            "MinValue": null,
-            "MaxValue": null,
-            "DefaultValue": 2
           }
         ]
       },
