@@ -152,7 +152,7 @@ public:
 
 #if _DEBUG
             printf("[Score Generations] homingChainBonus = %d\n", bonusTable.homingChainBonus);
-            printf("[Score Generations] homingChainBonus = %d\n", bonusTable.slamBonus);
+            printf("[Score Generations] slamBonus = %d\n", bonusTable.slamBonus);
             printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
             printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
             printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
