@@ -13,7 +13,7 @@ public:
 	static void PrintExposedData();
 	static int GetBonus(string algorithm);
 
-	static int LuaPrint(lua_State* L)
+	static int print(lua_State* L)
 	{
 		int nargs = lua_gettop(L);
 

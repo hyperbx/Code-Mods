@@ -1,6 +1,6 @@
 const struct luaL_Reg LuaCallback::Functions[] =
 {
-	{ "print", LuaCallback::LuaPrint },
+	{ "print", LuaCallback::print },
 	{ NULL, NULL }
 };
 
