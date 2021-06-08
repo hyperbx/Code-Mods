@@ -38,7 +38,7 @@ void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
 
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void DefaultRingFormatterMidAsmHook()
+__declspec(naked) void DefaultRingFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E59;
 
@@ -56,7 +56,7 @@ __declspec(naked) void DefaultRingFormatterMidAsmHook()
 	}
 }
 
-__declspec(naked) void FinalBossRingFormatterMidAsmHook()
+__declspec(naked) void FinalBossRingFormatter_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x41CAA0;
 	static void* returnAddress = (void*)0x12281C5;
@@ -78,7 +78,7 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 }
 
 
-__declspec(naked) void TimeFormatterMidAsmHook()
+__declspec(naked) void TimeFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098D47;
 
@@ -109,9 +109,9 @@ void StatisticsListener::Install()
 	WRITE_MEMORY(0x1095D7D, char*, Configuration::scoreFormat.c_str());
 
 	// Store elapsed time locally for the time bonus.
-	WRITE_JUMP(0x1098D40, &TimeFormatterMidAsmHook);
+	WRITE_JUMP(0x1098D40, &TimeFormatter_MidAsmHook);
 
 	// Update the ring count.
-	WRITE_JUMP(0x1098E4C, &DefaultRingFormatterMidAsmHook);
-	WRITE_JUMP(0x12281B8, &FinalBossRingFormatterMidAsmHook);
+	WRITE_JUMP(0x1098E4C, &DefaultRingFormatter_MidAsmHook);
+	WRITE_JUMP(0x12281B8, &FinalBossRingFormatter_MidAsmHook);
 }

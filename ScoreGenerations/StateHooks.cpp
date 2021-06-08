@@ -46,7 +46,7 @@ void OnLoad()
 
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void LoadingMidAsmHook()
+__declspec(naked) void Loading_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x65FCC0;
 	static void* returnAddress = (void*)0x448E98;
@@ -65,7 +65,7 @@ __declspec(naked) void LoadingMidAsmHook()
 	}
 }
 
-__declspec(naked) void ClassicSonicPrepareRestartMidAsmHook()
+__declspec(naked) void ClassicSonicPrepareRestart_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0xDD6740;
 	static void* returnAddress = (void*)0xDEB841;
@@ -81,7 +81,7 @@ __declspec(naked) void ClassicSonicPrepareRestartMidAsmHook()
 	}
 }
 
-__declspec(naked) void ModernSonicPrepareRestartMidAsmHook()
+__declspec(naked) void ModernSonicPrepareRestart_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0xE14350;
 	static void* returnAddress = (void*)0xE28C7B;
@@ -97,7 +97,7 @@ __declspec(naked) void ModernSonicPrepareRestartMidAsmHook()
 	}
 }
 
-__declspec(naked) void ExitMidAsmHook()
+__declspec(naked) void Exit_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x6AE910;
 	static void* returnAddress = (void*)0x42AD76;
@@ -113,7 +113,7 @@ __declspec(naked) void ExitMidAsmHook()
 	}
 }
 
-__declspec(naked) void ResultsCalculateMidAsmHook()
+__declspec(naked) void ResultsCalculate_MidAsmHook()
 {
 	static void* returnAddress = (void*)0xD5A191;
 
@@ -138,7 +138,7 @@ void StateHooks::HookResults(bool enabled)
 	if (enabled)
 	{
 		// Calculate results with local statistics.
-		WRITE_JUMP(0xD5A18C, &ResultsCalculateMidAsmHook);
+		WRITE_JUMP(0xD5A18C, &ResultsCalculate_MidAsmHook);
 	}
 	else
 	{
@@ -150,12 +150,12 @@ void StateHooks::HookResults(bool enabled)
 void StateHooks::Install()
 {
 	// Update local loading function.
-	WRITE_JUMP(0x448E93, &LoadingMidAsmHook)
+	WRITE_JUMP(0x448E93, &Loading_MidAsmHook)
 
 	// Reset statistics upon restarting.
-	WRITE_JUMP(0xDEB83C, &ClassicSonicPrepareRestartMidAsmHook);
-	WRITE_JUMP(0xE28C76, &ModernSonicPrepareRestartMidAsmHook);
+	WRITE_JUMP(0xDEB83C, &ClassicSonicPrepareRestart_MidAsmHook);
+	WRITE_JUMP(0xE28C76, &ModernSonicPrepareRestart_MidAsmHook);
 
 	// Reset statistics upon exiting.
-	WRITE_JUMP(0x42AD71, &ExitMidAsmHook);
+	WRITE_JUMP(0x42AD71, &Exit_MidAsmHook);
 }
