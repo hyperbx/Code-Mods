@@ -1,4 +1,12 @@
 void** const PlayerListener::CSonicContext = (void**)0x1E5E2F0;
+bool PlayerListener::isGrounded = false;
+
+HOOK(void, __stdcall, SonicMovementContext, 0xE32180, int a1, __m128* a2)
+{
+	originalSonicMovementContext(a1, a2);
+
+	PlayerListener::isGrounded = *(bool*)(*(DWORD*)((int)a1 + 8) + 0x360);
+}
 
 bool PlayerListener::IsContextSafe()
 {
@@ -32,4 +40,10 @@ bool PlayerListener::IsSuper()
 		return false;
 
 	return *(int*)(GetContext() + 0x1A0);
+}
+
+void PlayerListener::Install()
+{
+	// Install hook to check grounded state.
+	INSTALL_HOOK(SonicMovementContext);
 }

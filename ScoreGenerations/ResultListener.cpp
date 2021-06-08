@@ -1,22 +1,20 @@
-unordered_map<string, ResultListener::RankTable> ResultListener::rankTables;
-ResultListener::BonusTable ResultListener::bonusTable;
 ResultListener::ResultDescription ResultListener::resultDescription;
 
 void ResultListener::Bonus()
 {
 	// Rewards the Lua bonuses and clamps them.
-	ScoreListener::AddClamp(LuaCallback::GetBonus(bonusTable.timeBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::GetBonus(bonusTable.ringBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::GetBonus(bonusTable.speedBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.timeBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.ringBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.speedBonusAlgorithm));
 }
 
 ResultListener::RankType ResultListener::Rank()
 {
-	if (ScoreListener::score < rankTables[StateHooks::stageID].A)
+	if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].A)
 	{
-		if (ScoreListener::score < rankTables[StateHooks::stageID].B)
+		if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].B)
 		{
-			if (ScoreListener::score < rankTables[StateHooks::stageID].C)
+			if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].C)
 			{
 				return RankType::D; // D rank
 			}
@@ -52,6 +50,6 @@ void ResultListener::Result()
 	resultDescription.perfectRank = Rank() + 1;
 
 	// Set up progress bar.
-	resultDescription.scoreProgress = min((float)ScoreListener::score / (float)rankTables[StateHooks::stageID].A, 1);
+	resultDescription.scoreProgress = min((float)ScoreListener::score / (float)Tables::rankTables[StateHooks::stageID].A, 1);
 	resultDescription.ringProgress = resultDescription.scoreProgress + 0.0001; // Increment the tiniest amount so the ring count appears.
 }

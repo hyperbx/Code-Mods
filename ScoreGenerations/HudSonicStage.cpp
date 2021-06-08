@@ -12,6 +12,10 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 	if (!HudSonicStage::IsCasino() && !HudSonicStage::IsStageForbidden())
 		HudSonicStage::ProcessMsgSetPinballHud(thisDeclaration);
 
+	// Reset the homing chain bonus if the player is grounded.
+	if (PlayerListener::isGrounded)
+		MultiplierListener::ResetHomingChainBonus();
+
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
 

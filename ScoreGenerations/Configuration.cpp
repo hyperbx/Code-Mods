@@ -21,10 +21,13 @@ void Configuration::Read(string path = "")
 	Configuration::config = configPath = path.empty() ? INI_FILE : path;
 
 	// Get the score for the objects.
-	ScoreListener::scoreTable = ScoreListener::ScoreTable::GetScore();
+	Tables::scoreTable = Tables::ScoreTable::GetScore();
 
 	// Get the bonuses.
-	ResultListener::bonusTable = ResultListener::BonusTable::GetBonuses();
+	Tables::bonusTable = Tables::BonusTable::GetBonuses();
+
+	// Get the multipliers.
+	Tables::multiplierTable = Tables::MultiplierTable::GetMultipliers();
 
 	// Behaviour
 	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
@@ -34,22 +37,20 @@ void Configuration::Read(string path = "")
 	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", scoreFormat);
 
 	// Override checks for Developer
+	if (overrideFlag)
 	{
-		if (overrideFlag)
-		{
-			bool overrideCustomXNCP = config.GetBoolean("Developer", "customXNCP", customXNCP);
+		bool overrideCustomXNCP = config.GetBoolean("Developer", "customXNCP", customXNCP);
 
-			// Compare current flag with updated INI flag - if they mismatch, then give the warning.
-			if (Configuration::customXNCP && !overrideCustomXNCP)
-			{
-				MessageBox
-				(
-					nullptr,
-					TEXT("Score Generations has detected a HUD mod loaded with incorrect priority - please make it higher priority!"),
-					TEXT("Score Generations"),
-					MB_ICONWARNING
-				);
-			}
+		// Compare current flag with updated INI flag - if they mismatch, then give the warning.
+		if (Configuration::customXNCP && !overrideCustomXNCP)
+		{
+			MessageBox
+			(
+				nullptr,
+				TEXT("Score Generations has detected a HUD mod loaded with incorrect priority - please make it higher priority!"),
+				TEXT("Score Generations"),
+				MB_ICONWARNING
+			);
 		}
 	}
 
@@ -60,7 +61,7 @@ void Configuration::Read(string path = "")
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
 
 	// Get the ranks.
-	ResultListener::RankTable::GetRanks();
+	Tables::RankTable::GetRanks();
 
 	// Set the override flag now that we have read a config.
 	overrideFlag = true;

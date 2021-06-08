@@ -210,6 +210,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
+    <ClInclude Include="MultiplierListener.h" />
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="ScoreHooks.h" />
     <ClInclude Include="Patches.h" />
@@ -219,6 +220,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="StateHooks.h" />
     <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="Tables.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArchiveTreePatcher.cpp" />
@@ -229,6 +231,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
     <ClCompile Include="Mod.cpp" />
+    <ClCompile Include="MultiplierListener.cpp" />
     <ClCompile Include="ResultListener.cpp" />
     <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="Patches.cpp" />
@@ -241,6 +244,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="Tables.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\Detours\lib\x64\detours.lib" />

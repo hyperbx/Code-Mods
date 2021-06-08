@@ -198,6 +198,17 @@
         "DisplayName": "Bonus",
         "Elements": [
           {
+            "Name": "homingChainBonus",
+            "Description": [
+                "The bonus rewarded for perfoming a homing chain."
+            ],
+            "DisplayName": "Homing Chain Bonus",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
+          },
+          {
             "Name": "timeBonusAlgorithm",
             "Description": [
                 "The Lua equation that calculates the time bonus.\n",
@@ -265,6 +276,23 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": "totalVelocity * 3"
+          }
+        ]
+      },
+	  {
+        "Name": "Multiplier",
+        "DisplayName": "Multipliers",
+        "Elements": [
+          {
+            "Name": "homingChainMultiplier",
+            "Description": [
+                "The multiplier used to increase the homing chain bonus."
+            ],
+            "DisplayName": "Homing Chain Multiplier",
+            "Type": "int",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": 2
           }
         ]
       },

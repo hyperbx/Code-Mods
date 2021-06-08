@@ -21,6 +21,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <xmmintrin.h>
 
 // Dependencies
 #include "dependencies\INIReader.h"
@@ -34,6 +35,7 @@
 #include "IOHelper.h"
 #include "Loader.h"
 #include "LuaCallback.h"
+#include "MultiplierListener.h"
 #include "Patches.h"
 #include "PlayerListener.h"
 #include "ResultListener.h"
@@ -41,3 +43,4 @@
 #include "ScoreListener.h"
 #include "StatisticsListener.h"
 #include "StringHelper.h"
+#include "Tables.h"

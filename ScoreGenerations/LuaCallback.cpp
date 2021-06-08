@@ -24,8 +24,8 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedUnsignedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
 	PushExposedUnsignedInteger(L, "score", ScoreListener::score);
 	PushExposedUnsignedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedUnsignedInteger(L, "minSeconds", ResultListener::rankTables[StateHooks::stageID].minSeconds);
-	PushExposedUnsignedInteger(L, "maxSeconds", ResultListener::rankTables[StateHooks::stageID].maxSeconds);
+	PushExposedUnsignedInteger(L, "minSeconds", Tables::rankTables[StateHooks::stageID].minSeconds);
+	PushExposedUnsignedInteger(L, "maxSeconds", Tables::rankTables[StateHooks::stageID].maxSeconds);
 }
 
 void LuaCallback::PushExposedUnsignedInteger(lua_State* L, string name, unsigned int pushToStack)
@@ -88,8 +88,8 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
 		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
-		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].minSeconds);
-		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", ResultListener::rankTables[StateHooks::stageID].maxSeconds);
+		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", Tables::rankTables[StateHooks::stageID].minSeconds);
+		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", Tables::rankTables[StateHooks::stageID].maxSeconds);
 	}
 }
 

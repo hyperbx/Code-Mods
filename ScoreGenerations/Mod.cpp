@@ -31,6 +31,7 @@ extern "C" _declspec(dllexport) void Init()
 		ArchiveTreePatcher::Install();
 
 	StatisticsListener::Install();
+	PlayerListener::Install();
 	HudSonicStage::Install();
 	ScoreHooks::Install();
 	StateHooks::Install();

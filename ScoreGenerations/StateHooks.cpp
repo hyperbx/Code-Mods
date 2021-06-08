@@ -7,11 +7,9 @@ void OnLoad()
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
 	{
+		// Use Sonic Generations' HUD XNCP.
 		if (!Configuration::customXNCP)
-		{
-			// Use Sonic Generations' HUD XNCP.
 			WRITE_MEMORY(0x168E333, uint8_t, "_default\0");
-		}
 
 		// Skip Casino Night score instructions.
 		if (!HudSonicStage::IsCasino())
@@ -24,9 +22,9 @@ void OnLoad()
 	{
 		if (!Configuration::customXNCP)
 		{
-			if (StringHelper::GetDigits(Configuration::scoreFormat) <= 6 || StringHelper::Compare(Configuration::scoreFormat, "%d"))
+			if (StringHelper::GetDigits(Configuration::scoreFormat) == 6)
 			{
-				// Use Score Generations' HUD XNCP for six digit padding (or below).
+				// Use Score Generations' HUD XNCP for six digit padding.
 				WRITE_MEMORY(0x168E333, uint8_t, "_low_padding\0");
 			}
 			else

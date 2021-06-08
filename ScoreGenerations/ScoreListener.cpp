@@ -1,5 +1,4 @@
 int ScoreListener::score = 0;
-ScoreListener::ScoreTable ScoreListener::scoreTable;
 
 void ScoreListener::Reset()
 {
@@ -27,20 +26,20 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 	switch (type)
 	{
 		case Ring:
-			scoreToReward = scoreTable.Ring;
+			scoreToReward = Tables::scoreTable.Ring;
 			break;
 
 		case Enemy:
-			scoreToReward = scoreTable.Enemy;
+			scoreToReward = MultiplierListener::AddHomingChainBonus(Tables::scoreTable.Enemy);
 			break;
 
 		case Physics:
-			scoreToReward = scoreTable.Physics;
+			scoreToReward = Tables::scoreTable.Physics;
 			break;
 
 		case PointMarker:
 		{
-			scoreToReward = scoreTable.PointMarker;
+			scoreToReward = Tables::scoreTable.PointMarker;
 
 			// Increase total velocity for the speed bonus.
 			StatisticsListener::totalVelocity += (unsigned int)(PlayerListener::GetVelocity() * 10);
@@ -53,55 +52,55 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		}
 
 		case RedRing:
-			scoreToReward = scoreTable.RedRing;
+			scoreToReward = Tables::scoreTable.RedRing;
 			break;
 
 		case RainbowRing:
-			scoreToReward = scoreTable.RainbowRing;
+			scoreToReward = Tables::scoreTable.RainbowRing;
 			break;
 
 		case ItemBox:
-			scoreToReward = scoreTable.ItemBox;
+			scoreToReward = Tables::scoreTable.ItemBox;
 			break;
 
 		case SuperRing:
-			scoreToReward = scoreTable.SuperRing;
+			scoreToReward = Tables::scoreTable.SuperRing;
 			break;
 
 		case TrickFinish:
-			scoreToReward = scoreTable.TrickFinish;
+			scoreToReward = Tables::scoreTable.TrickFinish;
 			break;
 
 		case Trick:
-			scoreToReward = scoreTable.Trick;
+			scoreToReward = Tables::scoreTable.Trick;
 			break;
 
 		case Life:
-			scoreToReward = scoreTable.Life;
+			scoreToReward = Tables::scoreTable.Life;
 			break;
 
 		case DashRing:
-			scoreToReward = scoreTable.DashRing;
+			scoreToReward = Tables::scoreTable.DashRing;
 			break;
 
 		case QuickStep:
-			scoreToReward = scoreTable.QuickStep;
+			scoreToReward = Tables::scoreTable.QuickStep;
 			break;
 
 		case Drift:
-			scoreToReward = scoreTable.Drift;
+			scoreToReward = Tables::scoreTable.Drift;
 			break;
 
 		case Balloon:
-			scoreToReward = scoreTable.Balloon;
+			scoreToReward = Tables::scoreTable.Balloon;
 			break;
 
 		case Super:
-			scoreToReward = scoreTable.Super;
+			scoreToReward = Tables::scoreTable.Super;
 			break;
 
 		case BoardTrick:
-			scoreToReward = scoreTable.BoardTrick;
+			scoreToReward = Tables::scoreTable.BoardTrick;
 			break;
 	}
 
