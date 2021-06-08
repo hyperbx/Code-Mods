@@ -190,7 +190,7 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": 2500
-          },
+          }
         ]
       },
 	  {
@@ -225,7 +225,6 @@
         "Name": "ResultBonus",
         "DisplayName": "Results Bonuses",
         "Elements": [
-
           {
             "Name": "timeBonusAlgorithm",
             "Description": [
@@ -241,7 +240,7 @@
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
 				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
-				"• stageID - the current stage ID.\n"
+				"• stageID - the current stage ID.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Time Bonus Algorithm",
@@ -265,7 +264,7 @@
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
 				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
-				"• stageID - the current stage ID.\n"
+				"• stageID - the current stage ID.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Ring Bonus Algorithm",
@@ -289,7 +288,7 @@
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
 				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
-				"• stageID - the current stage ID.\n"
+				"• stageID - the current stage ID.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Speed Bonus Algorithm",
@@ -312,7 +311,8 @@
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
-				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+				"• stageID - the current stage ID.\n",
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "User Algorithm",
