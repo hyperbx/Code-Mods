@@ -30,6 +30,7 @@
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
+#include "CodeInterceptor.h"
 #include "Helpers.h"
 #include "HudSonicStage.h"
 #include "IOHelper.h"

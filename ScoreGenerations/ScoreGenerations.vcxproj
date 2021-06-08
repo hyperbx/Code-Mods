@@ -195,6 +195,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArchiveTreePatcher.h" />
+    <ClInclude Include="CodeInterceptor.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h" />
     <ClInclude Include="Dependencies\Detours\include\detver.h" />
@@ -224,6 +225,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArchiveTreePatcher.cpp" />
+    <ClCompile Include="CodeInterceptor.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />

@@ -46,6 +46,7 @@
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="Tables.h" />
     <ClInclude Include="MultiplierListener.h" />
+    <ClInclude Include="CodeInterceptor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -67,6 +68,7 @@
     <ClCompile Include="ResultListener.cpp" />
     <ClCompile Include="Tables.cpp" />
     <ClCompile Include="MultiplierListener.cpp" />
+    <ClCompile Include="CodeInterceptor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

@@ -18,7 +18,7 @@ __declspec(naked) void Ring_MidAsmHook()
 	}
 }
 
-__declspec(naked) void EnemyIncrement_MidAsmHook()
+__declspec(naked) void Enemy_MidAsmHook()
 {
 	static void* returnAddress = (void*)0xBDDDA1;
 
@@ -35,7 +35,7 @@ __declspec(naked) void EnemyIncrement_MidAsmHook()
 	}
 }
 
-__declspec(naked) void ObjectPhysics_MidAsmHook()
+__declspec(naked) void Physics_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0xEA50B0;
 	static void* returnAddress = (void*)0xEA5417;
@@ -282,9 +282,21 @@ __declspec(naked) void DashRing_MidAsmHook()
 	{
 		call [interruptAddress]
 
+		// Jump to NoTrickRainbowRings label if that code is enabled.
+		cmp CodeInterceptor::IsNoTrickRainbowRings, 0
+		jnz NoTrickRainbowRings
+
+		// If the model index is zero, reward Rainbow Ring score - otherwise, reward Dash Ring score.
+		cmp dword ptr [esi + 114h], 0
+		je RewardRainbowRingScore
+		jmp RewardDashRingScore
+
+		NoTrickRainbowRings:
+		// If the model index is 1, reward Dash Ring score - otherwise, reward Rainbow Ring score.
 		cmp dword ptr [esi + 114h], 1
 		je RewardDashRingScore
 
+	RewardRainbowRingScore:
 		// Reward player with Rainbow Ring score.
 		mov ecx, 5
 		call ScoreListener::Reward
@@ -308,8 +320,8 @@ void ScoreHooks::Install()
 {
 	// Hook objects and states to add score to the counter.
 	WRITE_JUMP(0x1054420, &Ring_MidAsmHook);
-	WRITE_JUMP(0xBDDD9A, &EnemyIncrement_MidAsmHook);
-	WRITE_JUMP(0xEA5412, &ObjectPhysics_MidAsmHook);
+	WRITE_JUMP(0xBDDD9A, &Enemy_MidAsmHook);
+	WRITE_JUMP(0xEA5412, &Physics_MidAsmHook);
 	WRITE_JUMP(0x457D49, &PointMarker_MidAsmHook);
 	WRITE_JUMP(0x11A9CC9, &RedRing_MidAsmHook);
 	WRITE_JUMP(0x105586F, &ItemBox_MidAsmHook);
