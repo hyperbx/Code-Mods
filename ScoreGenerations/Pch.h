@@ -14,6 +14,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <fstream>
+#include <iostream>
 #include <regex>
 #include <set>
 #include <sstream>
@@ -24,6 +25,7 @@
 #include <xmmintrin.h>
 
 // Dependencies
+#include "dependencies\Lua542\include\lua.hpp"
 #include "dependencies\INIReader.h"
 #include "Configuration.h"
 #include "StateHooks.h"

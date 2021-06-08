@@ -36,19 +36,14 @@ public:
 	static void Debug();
 
 	/// <summary>
+	/// Determines if the score should stop counting up after you surpass the maximum amount of time for a time bonus.
+	/// </summary>
+	static bool scoreTimeout;
+
+	/// <summary>
 	/// The maximum amount of score the player can obtain.
 	/// </summary>
 	static int scoreLimit;
-
-	/// <summary>
-	/// The amount of time in seconds the player is rewarded for being Super Sonic.
-	/// </summary>
-	static int superSonicTimer;
-
-	/// <summary>
-	/// The amount of time in seconds the slam bonus times out after when the player is grounded.
-	/// </summary>
-	static int slamTimer;
 
 	/// <summary>
 	/// Formatting used for the string printer for score.

@@ -6,6 +6,7 @@ void ResultListener::Bonus()
 	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.timeBonusAlgorithm));
 	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.ringBonusAlgorithm));
 	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.speedBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.userAlgorithm));
 }
 
 ResultListener::RankType ResultListener::Rank()

@@ -34,7 +34,7 @@ void HudSonicStage::UpdateMultipliers(float* pUpdateInfo)
 		// Reset the homing chain bonus if the player is grounded.
 		MultiplierListener::ResetHomingChainBonus();
 
-		if (slamBonusDeltaTimer > Configuration::slamTimer)
+		if (slamBonusDeltaTimer > Tables::timerTable.slamTimer)
 		{
 			// Reset the timer.
 			slamBonusDeltaTimer = 0;
@@ -54,7 +54,7 @@ void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)
 	// Update the timer using delta time.
 	superSonicDeltaTimer += *pUpdateInfo;
 
-	if (superSonicDeltaTimer > Configuration::superSonicTimer)
+	if (superSonicDeltaTimer > Tables::timerTable.superSonicTimer)
 	{
 		// Reset the timer.
 		superSonicDeltaTimer = 0;

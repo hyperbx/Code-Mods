@@ -3,7 +3,7 @@ function calculateTimeBonus()
 		for i = minSeconds - elapsedTime, 0, -1
 		do
 			-- For every second above the minimum required bonus time, add 10 points.
-			elapsedTime = elapsedTime + 10
+			elapsedTime = (minSeconds - elapsedTime) + 10
 		end
 		
 		-- Multiply bonus by 10.
@@ -12,10 +12,10 @@ function calculateTimeBonus()
 		for i = (maxSeconds - elapsedTime) / 10, 0, -1
 		do
 			-- For every 10 seconds above the maximum allowed bonus time, add 10 points.
-			elapsedTime = elapsedTime + 10
+			elapsedTime = (maxSeconds - elapsedTime) + 10
 		end
 	else
-		-- Fuck you.
+		-- Don't reward the player with a bonus.
 		elapsedTime = 0
 	end
 	

@@ -12,6 +12,16 @@ void ScoreListener::Reset()
 
 void ScoreListener::AddClamp(unsigned int scoreToReward)
 {
+	// Stop rewarding score if the player is over the maximum time.
+	if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > Tables::rankTables[StateHooks::stageID].maxSeconds)
+	{
+#if _DEBUG
+		printf("[Score Generations] Time bonus expired! No longer rewarding score...\n");
+#endif
+
+		return;
+	}
+
 	// Clamp the maximum score.
 	if ((score + scoreToReward) <= Configuration::scoreLimit)
 		score += scoreToReward;

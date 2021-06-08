@@ -138,6 +138,7 @@ public:
         string timeBonusAlgorithm;
         string ringBonusAlgorithm;
         string speedBonusAlgorithm;
+        string userAlgorithm;
 
         static BonusTable GetBonuses()
         {
@@ -149,6 +150,7 @@ public:
             bonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", Tables::bonusTable.timeBonusAlgorithm);
             bonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", Tables::bonusTable.ringBonusAlgorithm);
             bonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", Tables::bonusTable.speedBonusAlgorithm);
+            bonusTable.userAlgorithm = Configuration::config.Get("ResultBonus", "userAlgorithm", Tables::bonusTable.userAlgorithm);
 
 #if _DEBUG
             printf("[Score Generations] homingChainBonus = %d\n", bonusTable.homingChainBonus);
@@ -156,6 +158,7 @@ public:
             printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
             printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
             printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
+            printf("[Score Generations] userAlgorithm = %s\n", bonusTable.userAlgorithm.c_str());
 #endif
 
             return bonusTable;
@@ -188,4 +191,29 @@ public:
     };
 
     static MultiplierTable multiplierTable;
+
+    struct TimerTable
+    {
+        // Timers for certain conditions.
+        int superSonicTimer = 0;
+        int slamTimer = 0;
+
+        static TimerTable GetTimers()
+        {
+            TimerTable timerTable;
+
+            // Use the current configuration to get the timers.
+            timerTable.superSonicTimer = Configuration::config.GetInteger("Timer", "superSonicTimer", timerTable.superSonicTimer);
+            timerTable.slamTimer = Configuration::config.GetInteger("Timer", "slamTimer", timerTable.slamTimer);
+
+#if _DEBUG
+            printf("[Score Generations] superSonicTimer = %d\n", timerTable.superSonicTimer);
+            printf("[Score Generations] slamTimer = %d\n", timerTable.slamTimer);
+#endif
+
+            return timerTable;
+        }
+    };
+
+    static TimerTable timerTable;
 };

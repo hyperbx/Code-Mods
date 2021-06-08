@@ -1,3 +1,9 @@
+const struct luaL_Reg LuaCallback::Functions[] =
+{
+	{ "print", LuaCallback::LuaPrint },
+	{ NULL, NULL }
+};
+
 bool IsLuaSafe(lua_State* L, int result)
 {
 	/* LUA_OK implies everything was successful,
@@ -15,23 +21,35 @@ bool IsLuaSafe(lua_State* L, int result)
 
 void LuaCallback::PushExposedData(lua_State* L)
 {
-	// Push needed exposed variables to the stack.
-	PushExposedUnsignedInteger(L, "totalRingCount", StatisticsListener::totalRingCount);
-	PushExposedUnsignedInteger(L, "totalVelocity", StatisticsListener::totalVelocity);
-	PushExposedUnsignedInteger(L, "ringCount", StatisticsListener::ringCount);
-	PushExposedUnsignedInteger(L, "minutes", StatisticsListener::minutes);
-	PushExposedUnsignedInteger(L, "seconds", StatisticsListener::seconds);
-	PushExposedUnsignedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
-	PushExposedUnsignedInteger(L, "score", ScoreListener::score);
-	PushExposedUnsignedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedUnsignedInteger(L, "minSeconds", Tables::rankTables[StateHooks::stageID].minSeconds);
-	PushExposedUnsignedInteger(L, "maxSeconds", Tables::rankTables[StateHooks::stageID].maxSeconds);
+	// Push needed exposed integers to the stack.
+	PushExposedInteger(L, "totalRingCount", StatisticsListener::totalRingCount);
+	PushExposedInteger(L, "totalVelocity", StatisticsListener::totalVelocity);
+	PushExposedInteger(L, "ringCount", StatisticsListener::ringCount);
+	PushExposedInteger(L, "minutes", StatisticsListener::minutes);
+	PushExposedInteger(L, "seconds", StatisticsListener::seconds);
+	PushExposedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
+	PushExposedInteger(L, "score", ScoreListener::score);
+	PushExposedInteger(L, "scoreLimit", Configuration::scoreLimit);
+	PushExposedInteger(L, "minSeconds", Tables::rankTables[StateHooks::stageID].minSeconds);
+	PushExposedInteger(L, "maxSeconds", Tables::rankTables[StateHooks::stageID].maxSeconds);
+
+	// Push needed exposed strings to the stack.
+	PushExposedString(L, "stageID", StateHooks::stageID);
 }
 
-void LuaCallback::PushExposedUnsignedInteger(lua_State* L, string name, unsigned int pushToStack)
+void LuaCallback::PushExposedInteger(lua_State* L, string name, unsigned int pushToStack)
 {
 	// Push the input value to the stack.
 	lua_pushnumber(L, pushToStack);
+
+	// Set the current stack value to the name of the variable.
+	lua_setglobal(L, name.c_str());
+}
+
+void LuaCallback::PushExposedString(lua_State* L, string name, string value)
+{
+	// Push the input value to the stack.
+	lua_pushstring(L, value.c_str());
 
 	// Set the current stack value to the name of the variable.
 	lua_setglobal(L, name.c_str());
@@ -54,6 +72,12 @@ bool LuaCallback::LoadMathLibrary(lua_State* L)
 
 bool LuaCallback::LoadExternalLibrary(lua_State* L)
 {
+	// Get global variable.
+	lua_getglobal(L, "_G");
+
+	// Load C++ callback functions.
+	luaL_setfuncs(L, Functions, 0);
+
 	string lib = Configuration::GetConfigDirectory() + "\\" + LUA_FILE;
 
 	/* If the mod overriding the configuration doesn't have a Lua script,
@@ -90,6 +114,7 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
 		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", Tables::rankTables[StateHooks::stageID].minSeconds);
 		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", Tables::rankTables[StateHooks::stageID].maxSeconds);
+		printf("[Score Generations] [Lua Debug] stageID = %s\n", StateHooks::stageID);
 	}
 }
 
@@ -112,7 +137,7 @@ int LuaCallback::GetBonus(string algorithm)
 	if (IsLuaSafe(L, luaL_dostring(L, string("return " + algorithm).c_str())))
 	{
 		// Return and store the Lua result.
-		int result = (unsigned int)lua_tonumber(L, -1);
+		int result = lua_tonumber(L, -1);
 
 		if (Configuration::debugLua)
 			printf("[Score Generations] [Lua Debug] %s = %d\n", algorithm.c_str(), result);

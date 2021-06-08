@@ -240,7 +240,8 @@
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
-				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+				"• stageID - the current stage ID.\n"
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Time Bonus Algorithm",
@@ -263,7 +264,8 @@
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
-				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+				"• stageID - the current stage ID.\n"
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Ring Bonus Algorithm",
@@ -286,7 +288,8 @@
 				"• score - total score the player finished with.",
 				"• scoreLimit - the maximum amount of score the player can obtain.",
 				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
-				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+				"• stageID - the current stage ID.\n"
 				"Set this to '0' to disable it."
             ],
             "DisplayName": "Speed Bonus Algorithm",
@@ -294,6 +297,29 @@
             "MinValue": null,
             "MaxValue": null,
             "DefaultValue": "totalVelocity * 3"
+          },
+		  {
+            "Name": "userAlgorithm",
+            "Description": [
+                "A custom Lua equation for mod developers to use.\n",
+				"Exposed variables:",
+				"• totalRingCount - total number of rings obtained throughout the stage.",
+				"• totalVelocity - total velocity built up throughout the stage when passing checkpoints.",
+				"• ringCount - number of rings the player finished with.",
+				"• minutes - minutes on the timer.",
+				"• seconds - seconds on the timer.",
+				"• elapsedTime - total amount of time passed in seconds.",
+				"• score - total score the player finished with.",
+				"• scoreLimit - the maximum amount of score the player can obtain.",
+				"• minSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+				"• maxSeconds - elapsed time in seconds the player must finish below for a time bonus.\n",
+				"Set this to '0' to disable it."
+            ],
+            "DisplayName": "User Algorithm",
+            "Type": "string",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": "0"
           }
         ]
       },
@@ -329,6 +355,17 @@
         "Name": "Timer",
         "DisplayName": "Timers",
         "Elements": [
+          {
+            "Name": "scoreTimeout",
+            "Description": [
+                "Determines if the score should stop counting up after you surpass the maximum amount of time for a time bonus."
+            ],
+            "DisplayName": "Score Time Over",
+            "Type": "bool",
+            "MinValue": null,
+            "MaxValue": null,
+            "DefaultValue": false
+          },
           {
             "Name": "superSonicTimer",
             "Description": [
