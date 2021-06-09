@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Helpers.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="Dependencies\Detours\include\detours.h">
       <Filter>Dependencies\Detours\include</Filter>
@@ -12,20 +11,11 @@
     <ClInclude Include="Dependencies\Detours\include\syelog.h">
       <Filter>Dependencies\Detours\include</Filter>
     </ClInclude>
-    <ClInclude Include="StatisticsListener.h" />
-    <ClInclude Include="ScoreListener.h" />
-    <ClInclude Include="ScoreHooks.h" />
-    <ClInclude Include="StateHooks.h" />
-    <ClInclude Include="StringHelper.h" />
-    <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Patches.h" />
-    <ClInclude Include="Loader.h" />
-    <ClInclude Include="IOHelper.h" />
     <ClInclude Include="dependencies\INIReader.h">
       <Filter>Dependencies</Filter>
     </ClInclude>
     <ClInclude Include="Configuration.h" />
-    <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="LuaCallback.h" />
     <ClInclude Include="dependencies\Lua542\include\lauxlib.h">
       <Filter>Dependencies\Lua542\include</Filter>
@@ -42,33 +32,43 @@
     <ClInclude Include="dependencies\Lua542\include\lualib.h">
       <Filter>Dependencies\Lua542\include</Filter>
     </ClInclude>
-    <ClInclude Include="HudSonicStage.h" />
-    <ClInclude Include="ResultListener.h" />
     <ClInclude Include="Tables.h" />
+    <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="MultiplierListener.h" />
+    <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="ResultListener.h" />
+    <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="CodeInterceptor.h" />
+    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="IOHelper.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="ArchiveTreePatcher.h" />
+    <ClInclude Include="HudSonicStage.h" />
+    <ClInclude Include="ScoreHooks.h" />
+    <ClInclude Include="StateHooks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
-    <ClCompile Include="StatisticsListener.cpp" />
-    <ClCompile Include="ScoreListener.cpp" />
-    <ClCompile Include="ScoreHooks.cpp" />
-    <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="Pch.cpp" />
-    <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="Patches.cpp" />
-    <ClCompile Include="Loader.cpp" />
-    <ClCompile Include="IOHelper.cpp" />
-    <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="Configuration.cpp" />
-    <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
-    <ClCompile Include="HudSonicStage.cpp" />
-    <ClCompile Include="ResultListener.cpp" />
     <ClCompile Include="Tables.cpp" />
     <ClCompile Include="MultiplierListener.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
+    <ClCompile Include="ResultListener.cpp" />
+    <ClCompile Include="ScoreListener.cpp" />
+    <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="CodeInterceptor.cpp" />
+    <ClCompile Include="IOHelper.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="ArchiveTreePatcher.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
+    <ClCompile Include="ScoreHooks.cpp" />
+    <ClCompile Include="StateHooks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Dependencies">

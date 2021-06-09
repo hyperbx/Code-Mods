@@ -18,4 +18,9 @@ public:
     /// The currently loaded stage ID.
     /// </summary>
     static const char* stageID;
+
+    /// <summary>
+    /// Determines whether or not the results are hooked.
+    /// </summary>
+    static bool isResultsHooked;
 };

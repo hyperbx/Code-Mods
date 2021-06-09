@@ -46,6 +46,11 @@ public:
 	static int scoreLimit;
 
 	/// <summary>
+	/// The state that determines how the perfect bonus will behave.
+	/// </summary>
+	static int perfectBonus;
+
+	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>
 	static string scoreFormat;

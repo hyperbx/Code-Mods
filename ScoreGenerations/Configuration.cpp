@@ -4,6 +4,7 @@ INIReader Configuration::config;
 string Configuration::configPath = INI_FILE;
 bool Configuration::scoreTimeout = false;
 int Configuration::scoreLimit = 999999;
+int Configuration::perfectBonus = 1;
 string Configuration::scoreFormat = "%06d";
 bool Configuration::customXNCP = false;
 bool Configuration::debugLua = false;
@@ -37,6 +38,7 @@ void Configuration::Read(string path = "")
 
 	// Behaviour
 	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
+	Configuration::perfectBonus = config.GetInteger("Behaviour", "perfectBonus", perfectBonus);
 
 	// Appearance
 	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", scoreFormat);

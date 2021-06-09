@@ -23,7 +23,12 @@ public:
     /// <summary>
     /// Calculates the rank using the total score.
     /// </summary>
-    static ResultListener::RankType Rank();
+    static RankType Rank();
+
+    /// <summary>
+    /// Calculates the progress the bar should land on.
+    /// </summary>
+    static float Progress(RankType rank);
 
     /// <summary>
     /// Gathers the final results.
@@ -66,6 +71,10 @@ public:
 
         /// <summary>
         /// The amount of progress related to score in the progress bar between 0.0 - 1.0.
+        /// 
+        /// C = 0.335
+        /// B = 0.67
+        /// A = 1.005
         /// </summary>
         float scoreProgress;
     };

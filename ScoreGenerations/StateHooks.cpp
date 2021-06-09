@@ -1,4 +1,5 @@
 const char* StateHooks::stageID = (const char*)0x1E774D4;
+bool StateHooks::isResultsHooked = false;
 
 #pragma region ----- Hooked Functions -----
 
@@ -131,6 +132,29 @@ __declspec(naked) void ResultsCalculate_MidAsmHook()
 	}
 }
 
+HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
+{
+	if (!StateHooks::isResultsHooked)
+		return originalIsPerfectBonus();
+
+	switch (Configuration::perfectBonus)
+	{
+		case 0:
+			return false;
+
+		case 1:
+		{
+			if (ResultListener::resultDescription.rank == 3)
+				return originalIsPerfectBonus() ? true : false;
+
+			return false;
+		}
+
+		case 2:
+			return originalIsPerfectBonus();
+	}
+}
+
 #pragma endregion
 
 void StateHooks::HookResults(bool enabled)
@@ -139,11 +163,15 @@ void StateHooks::HookResults(bool enabled)
 	{
 		// Calculate results with local statistics.
 		WRITE_JUMP(0xD5A18C, &ResultsCalculate_MidAsmHook);
+
+		isResultsHooked = true;
 	}
 	else
 	{
 		// Restore default results calculation.
 		WRITE_MEMORY(0xD5A18C, uint8_t, 0xE8, 0x1F, 0x9C, 0x35, 0x00);
+
+		isResultsHooked = false;
 	}
 }
 
@@ -158,4 +186,7 @@ void StateHooks::Install()
 
 	// Reset statistics upon exiting.
 	WRITE_JUMP(0x42AD71, &Exit_MidAsmHook);
+
+	// Install hook to set perfect bonus.
+	INSTALL_HOOK(IsPerfectBonus);
 }

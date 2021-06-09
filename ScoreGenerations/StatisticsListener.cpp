@@ -1,8 +1,4 @@
-unsigned int StatisticsListener::totalRingCount = 0;
-unsigned int StatisticsListener::totalVelocity = 0;
-unsigned int StatisticsListener::minutes = 0;
-unsigned int StatisticsListener::seconds = 0;
-unsigned int StatisticsListener::ringCount = 0;
+StatisticsListener::Statistics StatisticsListener::stats;
 
 #pragma region ----- Hooked Functions -----
 
@@ -10,15 +6,15 @@ unsigned int StatisticsListener::ringCount = 0;
 /// Replaces leading nulls from the string printer with dashes which are invisible in the textures.
 /// </summary>
 /// <param name="rings">Ring count from input register.</param>
-void __fastcall UpdateRingCount(unsigned int rings)
+void __fastcall UpdateRingCount(int rings)
 {
 	// Update current ring count.
-	StatisticsListener::ringCount = rings;
+	StatisticsListener::stats.ringCount = rings;
 
 	// Update total ring count.
-	if (rings > StatisticsListener::totalRingCount)
+	if (rings > StatisticsListener::stats.totalRingCount)
 	{
-		StatisticsListener::totalRingCount = rings;
+		StatisticsListener::stats.totalRingCount = rings;
 	}
 }
 
@@ -27,11 +23,11 @@ void __fastcall UpdateRingCount(unsigned int rings)
 /// </summary>
 /// <param name="minutes">Minutes from EDI.</param>
 /// <param name="seconds">Seconds from EAX.</param>
-void __fastcall UpdateElapsedTime(unsigned int minutes, unsigned int seconds)
+void __fastcall UpdateElapsedTime(int minutes, int seconds)
 {
 	// Update real-time minutes and seconds.
-	StatisticsListener::minutes = minutes;
-	StatisticsListener::seconds = seconds;
+	StatisticsListener::stats.minutes = minutes;
+	StatisticsListener::stats.seconds = seconds;
 }
 
 #pragma endregion
@@ -98,9 +94,9 @@ __declspec(naked) void TimeFormatter_MidAsmHook()
 
 #pragma endregion
 
-unsigned int StatisticsListener::GetElapsedTime()
+int StatisticsListener::GetElapsedTime()
 {
-	return (minutes * 60) + seconds;
+	return (StatisticsListener::stats.minutes * 60) + StatisticsListener::stats.seconds;
 }
 
 void StatisticsListener::Install()
