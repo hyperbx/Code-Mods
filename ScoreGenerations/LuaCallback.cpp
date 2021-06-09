@@ -37,7 +37,6 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedInteger(L, "totalBalloons", StatisticsListener::stats.totalBalloons);
 	PushExposedInteger(L, "totalVelocity", StatisticsListener::stats.totalVelocity);
 	PushExposedInteger(L, "ringCount", StatisticsListener::stats.ringCount);
-	PushExposedInteger(L, "ringCount", StatisticsListener::stats.ringCount);
 	PushExposedInteger(L, "minutes", StatisticsListener::stats.minutes);
 	PushExposedInteger(L, "seconds", StatisticsListener::stats.seconds);
 	PushExposedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
