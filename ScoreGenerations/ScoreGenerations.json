@@ -254,7 +254,7 @@
 					[
 						"The Lua equation that calculates the time bonus.\n",
 						"Exposed variables:",
-						"• totalRingCount - total number of rings obtained throughout the stage.",
+						"• totalRingCount - total number of rings obtained by the player.",
 						"• totalEnemies - total number of enemies destroyed by the player.",
 						"• totalPhysics - total number of physics objects destroyed by the player.",
 						"• totalPointMarkers - total number of checkpoints passed by the player.",
@@ -291,7 +291,7 @@
 					[
 						"The Lua equation that calculates the ring bonus.\n",
 						"Exposed variables:",
-						"• totalRingCount - total number of rings obtained throughout the stage.",
+						"• totalRingCount - total number of rings obtained by the player.",
 						"• totalEnemies - total number of enemies destroyed by the player.",
 						"• totalPhysics - total number of physics objects destroyed by the player.",
 						"• totalPointMarkers - total number of checkpoints passed by the player.",
@@ -328,7 +328,7 @@
 					[
 						"The Lua equation that calculates the speed bonus.\n",
 						"Exposed variables:",
-						"• totalRingCount - total number of rings obtained throughout the stage.",
+						"• totalRingCount - total number of rings obtained by the player.",
 						"• totalEnemies - total number of enemies destroyed by the player.",
 						"• totalPhysics - total number of physics objects destroyed by the player.",
 						"• totalPointMarkers - total number of checkpoints passed by the player.",
@@ -365,7 +365,7 @@
 					[
 						"A custom Lua equation for mod developers to use.\n",
 						"Exposed variables:",
-						"• totalRingCount - total number of rings obtained throughout the stage.",
+						"• totalRingCount - total number of rings obtained by the player.",
 						"• totalEnemies - total number of enemies destroyed by the player.",
 						"• totalPhysics - total number of physics objects destroyed by the player.",
 						"• totalPointMarkers - total number of checkpoints passed by the player.",
