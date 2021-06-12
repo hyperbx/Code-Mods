@@ -38,7 +38,6 @@
     <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="ScoreListener.h" />
-    <ClInclude Include="CodeInterceptor.h" />
     <ClInclude Include="Helpers.h" />
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
@@ -61,7 +60,6 @@
     <ClCompile Include="ResultListener.cpp" />
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
-    <ClCompile Include="CodeInterceptor.cpp" />
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="StringHelper.cpp" />

@@ -282,21 +282,10 @@ __declspec(naked) void DashRing_MidAsmHook()
 	{
 		call [interruptAddress]
 
-		// Jump to NoTrickRainbowRings label if that code is enabled.
-		cmp CodeInterceptor::IsNoTrickRainbowRings, 0
-		jnz NoTrickRainbowRings
-
-		// If the model index is zero, reward Rainbow Ring score - otherwise, reward Dash Ring score.
+		// If the model index is not zero, reward Dash Ring score.
 		cmp dword ptr [esi + 114h], 0
-		je RewardRainbowRingScore
-		jmp RewardDashRingScore
+		jnz RewardDashRingScore
 
-	NoTrickRainbowRings:
-		// If the model index is 1, reward Dash Ring score - otherwise, reward Rainbow Ring score.
-		cmp dword ptr [esi + 114h], 1
-		je RewardDashRingScore
-
-	RewardRainbowRingScore:
 		// Reward player with Rainbow Ring score.
 		mov ecx, 5
 		call ScoreListener::Reward
