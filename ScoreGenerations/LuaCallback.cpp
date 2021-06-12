@@ -67,12 +67,25 @@ void LuaCallback::PushExposedString(lua_State* L, string name, string value)
 	lua_setglobal(L, name.c_str());
 }
 
-bool LuaCallback::LoadMathLibrary(lua_State* L)
+void LuaCallback::PushLuaLibrary(lua_State* L, const char* name, lua_CFunction function)
+{
+	// Load Lua function to require.
+	luaL_requiref(L, name, function, 1);
+
+	// Pop function from stack.
+	lua_pop(L, 1);
+}
+
+bool LuaCallback::LoadInternalLibrary(lua_State* L)
 {
 	// Load Lua libraries.
-	luaL_openlibs(L);
+	PushLuaLibrary(L, "", luaopen_base);
+	PushLuaLibrary(L, LUA_LOADLIBNAME, luaopen_package);
+	PushLuaLibrary(L, LUA_TABLIBNAME, luaopen_table);
+	PushLuaLibrary(L, LUA_STRLIBNAME, luaopen_string);
+	PushLuaLibrary(L, LUA_MATHLIBNAME, luaopen_math);
 
-	// Try loading the external library.
+	// Try loading the internal math library.
 	if (IsLuaSafe(L, luaL_dofile(L, "Math.lua")))
 		return true;
 
@@ -85,7 +98,7 @@ bool LuaCallback::LoadMathLibrary(lua_State* L)
 bool LuaCallback::LoadExternalLibrary(lua_State* L)
 {
 	// Get global variable.
-	lua_getglobal(L, "_G");
+	lua_getglobal(L, LUA_GNAME);
 
 	// Load C++ callback functions.
 	luaL_setfuncs(L, Functions, 0);
@@ -142,13 +155,13 @@ void LuaCallback::PrintExposedData()
 	}
 }
 
-int LuaCallback::GetBonus(string algorithm)
+int LuaCallback::RunAlgorithm(string algorithm)
 {
 	// Create Lua virtual machine.
 	lua_State* L = luaL_newstate();
 
-	// Try loading the math library.
-	if (!LoadMathLibrary(L))
+	// Try loading the internal libraries.
+	if (!LoadInternalLibrary(L))
 		return 0;
 
 	// Try loading the external library.

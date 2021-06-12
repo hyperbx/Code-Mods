@@ -8,10 +8,11 @@ public:
 	static void PushExposedData(lua_State* L);
 	static void PushExposedInteger(lua_State* L, string name, unsigned int pushToStack);
 	static void PushExposedString(lua_State* L, string name, string value);
-	static bool LoadMathLibrary(lua_State* L);
+	static void PushLuaLibrary(lua_State* L, const char* name, lua_CFunction function);
+	static bool LoadInternalLibrary(lua_State* L);
 	static bool LoadExternalLibrary(lua_State* L);
 	static void PrintExposedData();
-	static int GetBonus(string algorithm);
+	static int RunAlgorithm(string algorithm);
 
 	static int print(lua_State* L)
 	{

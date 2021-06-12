@@ -3,10 +3,10 @@ ResultListener::ResultDescription ResultListener::resultDescription;
 void ResultListener::Bonus()
 {
 	// Rewards the Lua bonuses and clamps them.
-	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.timeBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.ringBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.speedBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::GetBonus(Tables::bonusTable.userAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.timeBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.ringBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.speedBonusAlgorithm));
+	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.userAlgorithm));
 }
 
 ResultListener::RankType ResultListener::Rank()
