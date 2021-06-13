@@ -112,7 +112,7 @@ copy /Y "$(MSBuildProjectDirectory)\Math.lua" "$(MSBuildProjectDirectory)\bin\Wi
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
 copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"
-copy /Y "$(MSBuildProjectDirectory)\dependencies\Lua542\lua54.dll" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\lua54.dll"
+copy /Y "$(SolutionDir)Dependencies\Lua542\lua54.dll" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\lua54.dll"
 xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\disk"</Command>
     </PostBuildEvent>
     <ProjectReference>
@@ -165,7 +165,7 @@ copy /Y "$(MSBuildProjectDirectory)\Math.lua" "$(MSBuildProjectDirectory)\bin\Wi
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.lua" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.lua"
 copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.json" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.json"
 copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\mod.ini"
-copy /Y "$(MSBuildProjectDirectory)\dependencies\Lua542\lua54.dll" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\lua54.dll"
+copy /Y "$(SolutionDir)Dependencies\Lua542\lua54.dll" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\lua54.dll"
 xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\disk"</Command>
     </PostBuildEvent>
     <ProjectReference>
