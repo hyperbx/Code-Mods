@@ -1,0 +1,38 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "Appearance",
+			"DisplayName": "Appearance",
+			"Elements":
+			[
+				{
+					"Name": "soundType",
+					"Description": [ "The sound that plays when interacting with the dash ring." ],
+					"DisplayName": "Sound",
+					"Type": "SoundType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				}
+			]
+        }
+    ],
+	"Enums": 
+	{
+		"SoundType": 
+		[
+			{
+				"DisplayName": "Dash Ring",
+				"Value": 0,
+				"Description": [ "Use the default dash ring sound." ],
+			},
+			{
+				"DisplayName": "Dash Panel",
+				"Value": 1,
+				"Description": [ "Use the dash panel sound." ],
+			}
+		],
+	},
+    "IniFile": "TailsDashRingsInStages.ini"
+}

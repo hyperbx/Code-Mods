@@ -25,14 +25,14 @@
 #include <xmmintrin.h>
 
 // Dependencies
-#include "dependencies\Lua542\include\lua.hpp"
-#include "dependencies\INIReader.h"
+#include <Helpers.h>
+#include <Lua542\include\lua.hpp>
+#include <INIReader.h>
 #include "Configuration.h"
 #include "StateHooks.h"
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
-#include "Helpers.h"
 #include "HudSonicStage.h"
 #include "IOHelper.h"
 #include "Loader.h"

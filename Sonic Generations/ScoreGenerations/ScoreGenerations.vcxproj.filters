@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Pch.h" />
+    <ClInclude Include="Patches.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="LuaCallback.h" />
+    <ClInclude Include="Tables.h" />
+    <ClInclude Include="StatisticsListener.h" />
+    <ClInclude Include="MultiplierListener.h" />
+    <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="ResultListener.h" />
+    <ClInclude Include="ScoreListener.h" />
+    <ClInclude Include="IOHelper.h" />
+    <ClInclude Include="Loader.h" />
+    <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="ArchiveTreePatcher.h" />
+    <ClInclude Include="HudSonicStage.h" />
+    <ClInclude Include="ScoreHooks.h" />
+    <ClInclude Include="StateHooks.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Mod.cpp" />
+    <ClCompile Include="Pch.cpp" />
+    <ClCompile Include="Patches.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="LuaCallback.cpp" />
+    <ClCompile Include="Tables.cpp" />
+    <ClCompile Include="MultiplierListener.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
+    <ClCompile Include="ResultListener.cpp" />
+    <ClCompile Include="ScoreListener.cpp" />
+    <ClCompile Include="StatisticsListener.cpp" />
+    <ClCompile Include="IOHelper.cpp" />
+    <ClCompile Include="Loader.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="ArchiveTreePatcher.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
+    <ClCompile Include="ScoreHooks.cpp" />
+    <ClCompile Include="StateHooks.cpp" />
+  </ItemGroup>
+</Project>

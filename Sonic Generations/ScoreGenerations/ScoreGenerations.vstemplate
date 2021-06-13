@@ -1,0 +1,34 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Blackjack and Hookers</Name>
+    <Description>C++ dynamic link library with Detours</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Blackjack and Hookers</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="DetoursTemplate.vcxproj" File="DetoursTemplate.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">DetoursTemplate.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="DllMain.cpp">DllMain.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Helpers.h">Helpers.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Pch.cpp">Pch.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Pch.h">Pch.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detours.h">DEPENDENCIES\DETOURS\INCLUDE\detours.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detours.lib">DEPENDENCIES\DETOURS\LIB\X64\detours.lib</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detours.lib">DEPENDENCIES\DETOURS\LIB\X86\detours.lib</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detours.pdb">DEPENDENCIES\DETOURS\LIB\X64\detours.pdb</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detours.pdb">DEPENDENCIES\DETOURS\LIB\X86\detours.pdb</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="detver.h">DEPENDENCIES\DETOURS\INCLUDE\detver.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="syelog.h">DEPENDENCIES\DETOURS\INCLUDE\syelog.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="syelog.lib">DEPENDENCIES\DETOURS\LIB\X64\syelog.lib</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="syelog.lib">DEPENDENCIES\DETOURS\LIB\X86\syelog.lib</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

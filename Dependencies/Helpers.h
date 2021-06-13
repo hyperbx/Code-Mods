@@ -53,9 +53,23 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
         VirtualProtect((void*)(location), sizeof(data), oldProtect, &oldProtect); \
     }
 
+#define WRITE_STATIC_MEMORY(location, data, size) \
+    { \
+        DWORD oldProtect; \
+        VirtualProtect((void*)(location), size, PAGE_EXECUTE_READWRITE, &oldProtect); \
+        memcpy((void*)(location), data, size); \
+        VirtualProtect((void*)(location), size, oldProtect, &oldProtect); \
+    }
+
 #define WRITE_JUMP(location, function) \
     { \
         WRITE_MEMORY(location, uint8_t, 0xE9); \
+        WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
+    }
+
+#define WRITE_CALL(location, function) \
+    { \
+        WRITE_MEMORY(location, uint8_t, 0xE8); \
         WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
     }
 
