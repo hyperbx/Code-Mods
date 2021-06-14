@@ -25,9 +25,10 @@
 #include <xmmintrin.h>
 
 // Dependencies
-#include <Helpers.h>
-#include <Lua542\include\lua.hpp>
+#include <MemoryHelper.h>
+#include <StringHelper.h>
 #include <INIReader.h>
+#include <lua.hpp>
 #include "Configuration.h"
 #include "StateHooks.h"
 
@@ -44,5 +45,4 @@
 #include "ScoreHooks.h"
 #include "ScoreListener.h"
 #include "StatisticsListener.h"
-#include "StringHelper.h"
 #include "Tables.h"

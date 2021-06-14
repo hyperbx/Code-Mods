@@ -18,7 +18,7 @@
 #include <vector>
 
 // Dependencies
-#include <Helpers.h>
+#include <MemoryHelper.h>
 #include <INIReader.h>
 #include "Resources.h"
 

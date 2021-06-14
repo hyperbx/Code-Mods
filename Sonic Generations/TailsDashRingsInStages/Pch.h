@@ -18,7 +18,7 @@
 #include <vector>
 
 // Dependencies
-#include <Helpers.h>
+#include <MemoryHelper.h>
 #include <IniReader.h>
 
 // Internal headers

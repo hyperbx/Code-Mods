@@ -4,7 +4,6 @@
     <ClInclude Include="Pch.h" />
     <ClInclude Include="SonicHud.h" />
     <ClInclude Include="Patches.h" />
-    <ClInclude Include="StringHelper.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="DllMain.h" />

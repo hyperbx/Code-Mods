@@ -13,7 +13,6 @@
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
-    <ClInclude Include="StringHelper.h" />
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="HudSonicStage.h" />
     <ClInclude Include="ScoreHooks.h" />
@@ -34,7 +33,6 @@
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="Loader.cpp" />
-    <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />
     <ClCompile Include="ScoreHooks.cpp" />
