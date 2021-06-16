@@ -5,6 +5,7 @@
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="AnimationWorker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -13,5 +14,6 @@
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="Patches.cpp" />
     <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="AnimationWorker.cpp" />
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@
 #include <xmmintrin.h>
 
 // Dependencies
-#include <MemoryHelper.h>
+#include <Helpers.h>
 #include <StringHelper.h>
 #include <INIReader.h>
 #include <lua.hpp>

@@ -10,5 +10,5 @@
 #include <cstdint>
 
 // Dependencies
-#include <MemoryHelper.h>
+#include <Helpers.h>
 #include "Resources.h"

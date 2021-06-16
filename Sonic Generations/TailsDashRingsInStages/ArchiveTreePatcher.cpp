@@ -1,7 +1,5 @@
-vector<ArchiveDependency> ArchiveTreePatcher::archiveDependencies =
-{
-    { "cmn_dashring", { "cmn100", "cmn200", "pam_cmn" }}
-};
+vector<string> commonArchives = { "cmn100", "cmn200", "pam_cmn" };
+vector<ArchiveDependency> ArchiveTreePatcher::archiveDependencies = {};
 
 HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const size_t size, void* pDatabase)
 {
@@ -47,5 +45,35 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
 
 void ArchiveTreePatcher::Install()
 {
+    switch (Configuration::colourType)
+    {
+        case Configuration::Orange:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_orange", { commonArchives }));
+            break;
+
+        case Configuration::Red:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_red", { commonArchives }));
+            break;
+
+        case Configuration::Green:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_green", { commonArchives }));
+            break;
+
+        case Configuration::GreenDiffuse:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_green_dif", { commonArchives }));
+            break;
+
+        case Configuration::Purple:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_purple", { commonArchives }));
+            break;
+
+        case Configuration::Blue:
+            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_blue", { commonArchives }));
+            break;
+    }
+
+    if (Configuration::useCustomRainbowRings)
+        ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_rainbow", { commonArchives }));
+
     INSTALL_HOOK(ParseArchiveTree);
 }

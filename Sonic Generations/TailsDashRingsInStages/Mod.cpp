@@ -11,4 +11,7 @@ extern "C" _declspec(dllexport) void Init()
 
 	// Apply simple patches.
 	Patches::Install();
+
+	// Apply new animation names.
+	AnimationWorker::Install();
 }

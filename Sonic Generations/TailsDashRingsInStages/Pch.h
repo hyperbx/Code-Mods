@@ -18,10 +18,12 @@
 #include <vector>
 
 // Dependencies
-#include <MemoryHelper.h>
+#include <Helpers.h>
 #include <IniReader.h>
 
 // Internal headers
+#include "AnimationWorker.h"
 #include "ArchiveTreePatcher.h"
 #include "Configuration.h"
 #include "Patches.h"
+#include "StringHelper.h"

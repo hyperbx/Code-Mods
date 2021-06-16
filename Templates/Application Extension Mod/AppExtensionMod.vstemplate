@@ -1,0 +1,26 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Application Extension Mod</Name>
+    <Description>C++ dynamic link library with detours.</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Untitled Mod </DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="AppExtensionMod.vcxproj" File="AppExtensionMod.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">AppExtensionMod.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="DllMain.cpp">DllMain.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Mod.cpp">Mod.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Mod.ini">Mod.ini</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Pch.cpp">Pch.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Pch.h">Pch.h</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

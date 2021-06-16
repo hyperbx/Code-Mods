@@ -14,12 +14,72 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 0
+				},
+				{
+					"Name": "colourType",
+					"Description": [ "The colour of the dash ring." ],
+					"DisplayName": "Colour",
+					"Type": "ColourType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 2
+				},
+				{
+					"Name": "overrideTailsDashRing",
+					"Description": [ "Enable this to use your sound and colour options in Tails' mission." ],
+					"DisplayName": "Override Tails' Dash Ring",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": false
+				},
+				{
+					"Name": "useCustomRainbowRings",
+					"Description": [ "Enable this to use the custom rainbow ring models, similar to Sonic Colours: Ultimate." ],
+					"DisplayName": "Use Custom Rainbow Rings",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": false
 				}
 			]
         }
     ],
 	"Enums": 
 	{
+		"ColourType": 
+		[
+			{
+				"DisplayName": "Orange",
+				"Value": 0,
+				"Description": [ "Use the normal dash ring colour." ],
+			},
+			{
+				"DisplayName": "Red",
+				"Value": 1,
+				"Description": [ "Use the red dash ring colour." ],
+			},
+			{
+				"DisplayName": "Green",
+				"Value": 2,
+				"Description": [ "Use Tails' dash ring colour with updated materials." ],
+			},
+			{
+				"DisplayName": "Green (diffuse only)",
+				"Value": 3,
+				"Description": [ "Use Tails' dash ring colour with the original materials." ],
+			},
+			{
+				"DisplayName": "Purple",
+				"Value": 4,
+				"Description": [ "Use the purple dash ring colour." ],
+			},
+			{
+				"DisplayName": "Blue",
+				"Value": 5,
+				"Description": [ "Use the blue dash ring colour." ],
+			}
+		],
 		"SoundType": 
 		[
 			{
@@ -28,11 +88,26 @@
 				"Description": [ "Use the default dash ring sound." ],
 			},
 			{
-				"DisplayName": "Dash Panel",
+				"DisplayName": "Rainbow Ring",
 				"Value": 1,
+				"Description": [ "Use the rainbow ring sound." ],
+			},
+			{
+				"DisplayName": "Dash Panel",
+				"Value": 2,
 				"Description": [ "Use the dash panel sound." ],
+			},
+			{
+				"DisplayName": "Classic Spring",
+				"Value": 3,
+				"Description": [ "Use classic Sonic's spring sound." ],
+			},
+			{
+				"DisplayName": "Modern Spring",
+				"Value": 4,
+				"Description": [ "Use modern Sonic's spring sound." ],
 			}
-		],
+		]
 	},
     "IniFile": "TailsDashRingsInStages.ini"
 }

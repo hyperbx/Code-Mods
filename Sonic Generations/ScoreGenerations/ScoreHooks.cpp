@@ -24,7 +24,7 @@ __declspec(naked) void Enemy_MidAsmHook()
 
 	__asm
 	{
-		inc word ptr[esi + 0E0h]
+		inc word ptr [esi + 0E0h]
 
 		// Reward player with Enemy score.
 		mov ecx, 1

@@ -43,6 +43,29 @@ void OnLoad()
 	}
 }
 
+HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
+{
+	if (!StateHooks::isResultsHooked)
+		return originalIsPerfectBonus();
+
+	switch (Configuration::perfectBonus)
+	{
+		case 0:
+			return false;
+
+		case 1:
+		{
+			if (ResultListener::resultDescription.rank == 3)
+				return originalIsPerfectBonus() ? true : false;
+
+			return false;
+		}
+
+		case 2:
+			return originalIsPerfectBonus();
+	}
+}
+
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
@@ -129,29 +152,6 @@ __declspec(naked) void ResultsCalculate_MidAsmHook()
 		lea eax, ResultListener::resultDescription
 
 		jmp [returnAddress]
-	}
-}
-
-HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
-{
-	if (!StateHooks::isResultsHooked)
-		return originalIsPerfectBonus();
-
-	switch (Configuration::perfectBonus)
-	{
-		case 0:
-			return false;
-
-		case 1:
-		{
-			if (ResultListener::resultDescription.rank == 3)
-				return originalIsPerfectBonus() ? true : false;
-
-			return false;
-		}
-
-		case 2:
-			return originalIsPerfectBonus();
 	}
 }
 
