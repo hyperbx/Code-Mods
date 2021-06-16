@@ -4,6 +4,10 @@ void Patches::PatchDashRingNames(const char* overrideName)
 							   Configuration::colourType == Configuration::GreenDiffuse ? "mis_obj_TailsDashring_HD" : "cmn_obj_TailsDashring_HD" :
 							   overrideName;
 
+#if _DEBUG
+	printf("[Tails' Dash Rings in Stages] Current dash ring type = %s\n", dashRingType);
+#endif
+
 	// Inject custom model name for rainbow rings.
 	if (Configuration::useCustomRainbowRings)
 		WRITE_MEMORY(0x1A47574, const char*, "rnb_obj_TailsDashring_HD");

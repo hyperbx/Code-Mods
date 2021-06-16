@@ -51,8 +51,8 @@ void __fastcall SetAnimations(int index)
 
 __declspec(naked) void DashRingInit_MidAsmHook()
 {
-	static void* interruptAddress = (void*)0x6621A0;
-	static void* returnAddress = (void*)0x115AE1E;
+	static void* interruptAddress = (void*)0x65FFF0;
+	static void* returnAddress = (void*)0x115ABC6;
 
 	// Patch new dash ring model.
 	Patches::PatchDashRingNames();
@@ -97,7 +97,7 @@ __declspec(naked) void MissionNumberDashRingInit_MidAsmHook()
 
 void AnimationWorker::Install()
 {
-	WRITE_JUMP(0x115AE19, &DashRingInit_MidAsmHook);
+	WRITE_JUMP(0x115ABC1, &DashRingInit_MidAsmHook);
 
 	WRITE_JUMP(0x115AC63, &DashRingAnimationInit_MidAsmHook);
 	WRITE_NOP(0x115AC68, 1);
