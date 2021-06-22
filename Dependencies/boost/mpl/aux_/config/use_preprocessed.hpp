@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/config/use_preprocessed.hpp,v $
-// $Date: 2004/09/02 15:40:45 $
-// $Revision: 1.7 $
+// $Id$
+// $Date$
+// $Revision$
 
 // #define BOOST_MPL_CFG_NO_PREPROCESSED_HEADERS
 

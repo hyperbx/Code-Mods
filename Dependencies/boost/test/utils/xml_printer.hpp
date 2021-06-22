@@ -1,39 +1,41 @@
-//  (C) Copyright Gennadiy Rozental 2004-2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
 //  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: xml_printer.hpp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.7 $
+//  Version     : $Revision$
 //
-//  Description : common code used by any agent serving as XML printer
+//  Description : common code used by any agent serving as OF_XML printer
 // ***************************************************************************
 
-#ifndef BOOST_TEST_XML_PRINTER_HPP_071894GER
-#define BOOST_TEST_XML_PRINTER_HPP_071894GER
+#ifndef BOOST_TEST_UTILS_XML_PRINTER_HPP
+#define BOOST_TEST_UTILS_XML_PRINTER_HPP
 
 // Boost.Test
+#include <boost/test/detail/global_typedef.hpp>
 #include <boost/test/utils/basic_cstring/basic_cstring.hpp>
-#include <boost/test/utils/fixed_mapping.hpp>
 #include <boost/test/utils/custom_manip.hpp>
 #include <boost/test/utils/foreach.hpp>
+#include <boost/test/utils/basic_cstring/io.hpp>
 
 // Boost
 #include <boost/config.hpp>
 
 // STL
 #include <iostream>
+#include <map>
 
 #include <boost/test/detail/suppress_warnings.hpp>
 
 //____________________________________________________________________________//
 
 namespace boost {
-
 namespace unit_test {
+namespace utils {
 
 // ************************************************************************** //
 // **************               xml print helpers              ************** //
@@ -42,21 +44,31 @@ namespace unit_test {
 inline void
 print_escaped( std::ostream& where_to, const_string value )
 {
-    static fixed_mapping<char,char const*> char_type(
-        '<' , "lt",
-        '>' , "gt",
-        '&' , "amp",
-        '\'', "apos" ,
-        '"' , "quot",
+#if !defined(BOOST_NO_CXX11_HDR_INITIALIZER_LIST) && !defined(BOOST_NO_CXX11_UNIFIED_INITIALIZATION_SYNTAX)
+    static std::map<char,char const*> const char_type{{
+        {'<' , "lt"},
+        {'>' , "gt"},
+        {'&' , "amp"},
+        {'\'', "apos"},
+        {'"' , "quot"}
+    }};
+#else
+    static std::map<char,char const*> char_type;
 
-        0
-    );
+    if( char_type.empty() ) {
+        char_type['<'] = "lt";
+        char_type['>'] = "gt";
+        char_type['&'] = "amp";
+        char_type['\'']= "apos";
+        char_type['"'] = "quot";
+    }
+#endif
 
     BOOST_TEST_FOREACH( char, c, value ) {
-        char const* ref = char_type[c];
+        std::map<char,char const*>::const_iterator found_ref = char_type.find( c );
 
-        if( ref )
-            where_to << '&' << ref << ';';
+        if( found_ref != char_type.end() )
+            where_to << '&' << found_ref->second << ';';
         else
             where_to << c;
     }
@@ -67,7 +79,7 @@ print_escaped( std::ostream& where_to, const_string value )
 inline void
 print_escaped( std::ostream& where_to, std::string const& value )
 {
-        print_escaped( where_to, const_string( value ) );
+    print_escaped( where_to, const_string( value ) );
 }
 
 //____________________________________________________________________________//
@@ -76,7 +88,23 @@ template<typename T>
 inline void
 print_escaped( std::ostream& where_to, T const& value )
 {
+    where_to << value;
+}
+
+//____________________________________________________________________________//
+
+inline void
+print_escaped_cdata( std::ostream& where_to, const_string value )
+{
+    static const_string cdata_end( "]]>" );
+
+    const_string::size_type pos = value.find( cdata_end );
+    if( pos == const_string::npos )
         where_to << value;
+    else {
+        where_to << value.substr( 0, pos+2 ) << cdata_end
+                 << BOOST_TEST_L( "<![CDATA[" ) << value.substr( pos+2 );
+    }
 }
 
 //____________________________________________________________________________//
@@ -87,67 +115,31 @@ template<typename T>
 inline std::ostream&
 operator<<( custom_printer<attr_value> const& p, T const& value )
 {
-        *p << "=\"";
-        print_escaped( *p, value );
-        *p << '"';
-
-        return *p;
-}
-
-//____________________________________________________________________________//
-
-typedef custom_manip<struct pcdata_t> pcdata;
-
-inline std::ostream&
-operator<<( custom_printer<pcdata> const& p, const_string value )
-{
+    *p << "=\"";
     print_escaped( *p, value );
+    *p << '"';
 
     return *p;
 }
 
 //____________________________________________________________________________//
 
-} // namespace unit_test
+typedef custom_manip<struct cdata_t> cdata;
 
-} // namespace boost
+inline std::ostream&
+operator<<( custom_printer<cdata> const& p, const_string value )
+{
+    *p << BOOST_TEST_L( "<![CDATA[" );
+    print_escaped_cdata( *p, value );
+    return  *p << BOOST_TEST_L( "]]>" );
+}
 
 //____________________________________________________________________________//
 
+} // namespace utils
+} // namespace unit_test
+} // namespace boost
+
 #include <boost/test/detail/enable_warnings.hpp>
 
-// ***************************************************************************
-//  Revision History :
-//
-//  $Log: xml_printer.hpp,v $
-//  Revision 1.7  2005/07/14 15:50:28  dgregor
-//  Untabify
-//
-//  Revision 1.6  2005/04/29 06:31:18  rogeeff
-//  bug fix for incorrect XML output
-//
-//  Revision 1.5  2005/02/20 08:27:08  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-//  Revision 1.4  2005/02/01 06:40:08  rogeeff
-//  copyright update
-//  old log entries removed
-//  minor stilistic changes
-//  depricated tools removed
-//
-//  Revision 1.3  2005/01/23 09:59:34  vawjr
-//  Changed - all the \r\r\n to \r\n in the windows flavor of the file
-//            because VC++ 8.0 complains and refuses to compile
-//
-//  Revision 1.2  2005/01/22 19:22:13  rogeeff
-//  implementation moved into headers section to eliminate dependency of included/minimal component on src directory
-//
-//  Revision 1.1  2005/01/22 18:21:40  rogeeff
-//  moved sharable staff into utils
-//
-//  Revision 1.3  2005/01/21 07:31:44  rogeeff
-//  xml helper facilities reworked to present manipulator interfaces
-//
-// ***************************************************************************
-
-#endif // BOOST_TEST_XML_PRINTER_HPP_071894GER
+#endif // BOOST_TEST_UTILS_XML_PRINTER_HPP

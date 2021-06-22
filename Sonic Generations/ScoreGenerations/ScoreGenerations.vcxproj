@@ -124,7 +124,6 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="HudSonicStage.h" />
-    <ClInclude Include="IOHelper.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
     <ClInclude Include="MultiplierListener.h" />
@@ -143,7 +142,6 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />
-    <ClCompile Include="IOHelper.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
     <ClCompile Include="Mod.cpp" />

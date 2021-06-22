@@ -1,20 +1,20 @@
-//  (C) Copyright Gennadiy Rozental 2001-2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
-//  (See accompanying file LICENSE_1_0.txt or copy at 
+//  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: class_properties.hpp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.7 $
+//  Version     : $Revision$
 //
-//  Description : simple facility that mimmic notion of read-only read-write 
+//  Description : simple facility that mimmic notion of read-only read-write
 //  properties in C++ classes. Original idea by Henrik Ravn.
 // ***************************************************************************
 
-#ifndef BOOST_TEST_CLASS_PROPERTIES_HPP_071894GER
-#define BOOST_TEST_CLASS_PROPERTIES_HPP_071894GER
+#ifndef BOOST_TEST_UTILS_CLASS_PROPERTIES_HPP
+#define BOOST_TEST_UTILS_CLASS_PROPERTIES_HPP
 
 // Boost.Test
 #include <boost/test/detail/config.hpp>
@@ -36,7 +36,6 @@
 //____________________________________________________________________________//
 
 namespace boost {
-
 namespace unit_test {
 
 // ************************************************************************** //
@@ -48,11 +47,7 @@ class class_property {
 protected:
     typedef typename call_traits<PropertyType>::const_reference     read_access_t;
     typedef typename call_traits<PropertyType>::param_type          write_param_t;
-#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x570))
-    typedef typename add_pointer<PropertyType const>::type address_res_t;
-#else
     typedef typename add_pointer<typename add_const<PropertyType>::type>::type address_res_t;
-#endif
 public:
     // Constructor
                     class_property() : value( PropertyType() ) {}
@@ -119,28 +114,6 @@ DEFINE_PROPERTY_FREE_BINARY_OPERATOR( == )
 DEFINE_PROPERTY_FREE_BINARY_OPERATOR( != )
 
 #undef DEFINE_PROPERTY_FREE_BINARY_OPERATOR
-
-#if BOOST_WORKAROUND(BOOST_MSVC, <= 1200)
-
-#define DEFINE_PROPERTY_LOGICAL_OPERATOR( op )                                  \
-template<class PropertyType>                                                    \
-inline bool                                                                     \
-operator op( bool b, class_property<PropertyType> const& p )                    \
-{                                                                               \
-    return b op p.get();                                                        \
-}                                                                               \
-template<class PropertyType>                                                    \
-inline bool                                                                     \
-operator op( class_property<PropertyType> const& p, bool b )                    \
-{                                                                               \
-    return b op p.get();                                                        \
-}                                                                               \
-/**/
-
-DEFINE_PROPERTY_LOGICAL_OPERATOR( && )
-DEFINE_PROPERTY_LOGICAL_OPERATOR( || )
-
-#endif
 
 // ************************************************************************** //
 // **************               readonly_property              ************** //
@@ -213,43 +186,10 @@ public:
 //____________________________________________________________________________//
 
 } // unit_test
-
 } // namespace boost
-
-//____________________________________________________________________________//
 
 #include <boost/test/detail/enable_warnings.hpp>
 
 #undef BOOST_TEST_NO_PROTECTED_USING
 
-// ***************************************************************************
-//  Revision History :
-//  
-//  $Log: class_properties.hpp,v $
-//  Revision 1.7  2005/05/11 05:04:58  rogeeff
-//  borland portability fix
-//
-//  Revision 1.6  2005/04/12 06:46:17  rogeeff
-//  use add_const
-//
-//  Revision 1.5  2005/02/21 10:17:27  rogeeff
-//  base reference renamed (borland bug fix)
-//
-//  Revision 1.4  2005/02/20 08:27:08  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-//  Revision 1.3  2005/02/01 06:40:07  rogeeff
-//  copyright update
-//  old log entries removed
-//  minor stilistic changes
-//  depricated tools removed
-//
-//  Revision 1.2  2005/01/22 19:22:13  rogeeff
-//  implementation moved into headers section to eliminate dependency of included/minimal component on src directory
-//
-//  Revision 1.1  2005/01/22 18:21:39  rogeeff
-//  moved sharable staff into utils
-//
-// ***************************************************************************
-
-#endif // BOOST_TEST_CLASS_PROPERTIES_HPP_071894GER
+#endif // BOOST_TEST_UTILS_CLASS_PROPERTIES_HPP

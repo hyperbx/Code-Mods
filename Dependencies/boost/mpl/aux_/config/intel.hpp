@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/config/intel.hpp,v $
-// $Date: 2004/09/02 15:40:45 $
-// $Revision: 1.1 $
+// $Id$
+// $Date$
+// $Revision$
 
 
 // BOOST_INTEL_CXX_VERSION is defined here:

@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/preprocessor/def_params_tail.hpp,v $
-// $Date: 2004/09/02 15:40:56 $
-// $Revision: 1.6 $
+// $Id$
+// $Date$
+// $Revision$
 
 #include <boost/mpl/limits/arity.hpp>
 #include <boost/mpl/aux_/config/dtp.hpp>

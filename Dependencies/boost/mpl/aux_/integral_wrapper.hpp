@@ -1,5 +1,5 @@
 
-// Copyright Aleksey Gurtovoy 2000-2004
+// Copyright Aleksey Gurtovoy 2000-2006
 //
 // Distributed under the Boost Software License, Version 1.0. 
 // (See accompanying file LICENSE_1_0.txt or copy at 
@@ -7,9 +7,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/integral_wrapper.hpp,v $
-// $Date: 2004/09/02 15:40:43 $
-// $Revision: 1.10 $
+// $Id$
+// $Date$
+// $Revision$
 
 // NO INCLUDE GUARDS, THE HEADER IS INTENDED FOR MULTIPLE INCLUSION!
 
@@ -63,9 +63,9 @@ struct AUX_WRAPPER_NAME
  public:
     typedef AUX_WRAPPER_INST(next_value) next;
     typedef AUX_WRAPPER_INST(prior_value) prior;
-#elif BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x561)) \
+#elif BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x561)) \
     || BOOST_WORKAROUND(__IBMCPP__, BOOST_TESTED_AT(502)) \
-    || BOOST_WORKAROUND(__HP_aCC, BOOST_TESTED_AT(53800))
+    || (BOOST_WORKAROUND(__HP_aCC, <= 53800) && (BOOST_WORKAROUND(__hpxstd98, != 1)))
     typedef AUX_WRAPPER_INST( BOOST_MPL_AUX_STATIC_CAST(AUX_WRAPPER_VALUE_TYPE, (N + 1)) ) next;
     typedef AUX_WRAPPER_INST( BOOST_MPL_AUX_STATIC_CAST(AUX_WRAPPER_VALUE_TYPE, (N - 1)) ) prior;
 #else
@@ -77,7 +77,7 @@ struct AUX_WRAPPER_NAME
     // functions that return objects of both arithmetic ('int', 'long',
     // 'double', etc.) and wrapped integral types (for an example, see 
     // "mpl/example/power.cpp")
-    operator AUX_WRAPPER_VALUE_TYPE() const { return static_cast<AUX_WRAPPER_VALUE_TYPE>(this->value); } 
+    BOOST_CONSTEXPR operator AUX_WRAPPER_VALUE_TYPE() const { return static_cast<AUX_WRAPPER_VALUE_TYPE>(this->value); } 
 };
 
 #if !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)

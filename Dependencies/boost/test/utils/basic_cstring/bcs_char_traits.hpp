@@ -1,19 +1,19 @@
-//  (C) Copyright Gennadiy Rozental 2004-2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
-//  (See accompanying file LICENSE_1_0.txt or copy at 
+//  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: bcs_char_traits.hpp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.3 $
+//  Version     : $Revision$
 //
 //  Description : generic char traits class; wraps std::char_traits
 // ***************************************************************************
 
-#ifndef BOOST_TEST_BCS_CHAR_TRAITS_HPP_071894GER
-#define BOOST_TEST_BCS_CHAR_TRAITS_HPP_071894GER
+#ifndef BOOST_TEST_UTILS_BCS_CHAR_TRAITS_HPP
+#define BOOST_TEST_UTILS_BCS_CHAR_TRAITS_HPP
 
 // Boost
 #include <boost/config.hpp>
@@ -39,7 +39,7 @@ template<typename CharT> struct bcs_base_char           { typedef CharT type; };
 
 template<> struct bcs_base_char<char const>             { typedef char type; };
 template<> struct bcs_base_char<unsigned char>          { typedef char type; };
-#if !BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x551))
+#if !BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x551))
 template<> struct bcs_base_char<unsigned char const>    { typedef char type; };
 #endif
 
@@ -52,7 +52,7 @@ template<> struct bcs_base_char<wchar_t const>          { typedef wchar_t type; 
 template<typename CharT>
 struct bcs_char_traits_impl
 {
-#if BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x564))
+#if BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x564))
     typedef CharT const const_char;
 #else
     typedef typename boost::add_const<CharT>::type const_char;
@@ -119,11 +119,11 @@ struct char_traits_with_find : std::string_char_traits<CharT> {
     }
 };
 
-template<> struct bcs_char_traits_impl<char> : char_traits_with_find<char> {};
-template<> struct bcs_char_traits_impl<wchar_t> : char_traits_with_find<wchar_t> {};
+template<> struct bcs_char_traits_impl<char> : public char_traits_with_find<char> {};
+template<> struct bcs_char_traits_impl<wchar_t> : public char_traits_with_find<wchar_t> {};
 #else
-template<> struct bcs_char_traits_impl<char> : std::char_traits<char> {};
-template<> struct bcs_char_traits_impl<wchar_t> : std::char_traits<wchar_t> {};
+template<> struct bcs_char_traits_impl<char> : public std::char_traits<char> {};
+template<> struct bcs_char_traits_impl<wchar_t> : public std::char_traits<wchar_t> {};
 #endif
 
 template<typename CharT>
@@ -147,22 +147,4 @@ public:
 
 #include <boost/test/detail/enable_warnings.hpp>
 
-// ***************************************************************************
-//  Revision History :
-//  
-//  $Log: bcs_char_traits.hpp,v $
-//  Revision 1.3  2005/02/20 08:27:09  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-//  Revision 1.2  2005/02/01 06:40:08  rogeeff
-//  copyright update
-//  old log entries removed
-//  minor stilistic changes
-//  depricated tools removed
-//
-//  Revision 1.1  2005/01/22 18:21:40  rogeeff
-//  moved sharable staff into utils
-//
-// ***************************************************************************
-
-#endif // BOOST_TEST_BCS_CHAR_TRAITS_HPP_071894GER
+#endif // BOOST_TEST_UTILS_BCS_CHAR_TRAITS_HPP

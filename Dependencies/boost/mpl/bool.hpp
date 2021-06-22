@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/bool.hpp,v $
-// $Date: 2004/09/26 09:54:25 $
-// $Revision: 1.6 $
+// $Id$
+// $Date$
+// $Revision$
 
 #include <boost/mpl/bool_fwd.hpp>
 #include <boost/mpl/integral_c_tag.hpp>
@@ -26,7 +26,7 @@ template< bool C_ > struct bool_
     typedef integral_c_tag tag;
     typedef bool_ type;
     typedef bool value_type;
-    operator bool() const { return this->value; }
+    BOOST_CONSTEXPR operator bool() const { return this->value; }
 };
 
 #if !defined(BOOST_NO_INCLASS_MEMBER_INITIALIZATION)

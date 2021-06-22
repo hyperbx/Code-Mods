@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/config/adl.hpp,v $
-// $Date: 2004/09/16 14:08:47 $
-// $Revision: 1.1 $
+// $Id$
+// $Date$
+// $Revision$
 
 #include <boost/mpl/aux_/config/msvc.hpp>
 #include <boost/mpl/aux_/config/intel.hpp>
@@ -27,7 +27,7 @@
 
 #if !defined(BOOST_MPL_CFG_NO_ADL_BARRIER_NAMESPACE) \
     && (   BOOST_WORKAROUND(BOOST_MSVC, BOOST_TESTED_AT(1400)) \
-        || BOOST_WORKAROUND(__BORLANDC__, < 0x600) \
+        || BOOST_WORKAROUND(BOOST_BORLANDC, BOOST_TESTED_AT(0x610)) \
         || BOOST_WORKAROUND(__DMC__, BOOST_TESTED_AT(0x840)) \
         || BOOST_WORKAROUND(__MWERKS__, BOOST_TESTED_AT(0x3202)) \
         || BOOST_WORKAROUND(BOOST_INTEL_CXX_VERSION, BOOST_TESTED_AT(810)) \

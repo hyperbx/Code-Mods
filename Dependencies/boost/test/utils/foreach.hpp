@@ -1,24 +1,24 @@
 //  (C) Copyright Eric Niebler 2004-2005
-//  (C) Copyright Gennadiy Rozental 2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
 //  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: foreach.hpp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.4 $
+//  Version     : $Revision$
 //
 //  Description : this is an abridged version of an excelent BOOST_FOREACH facility
-//  presented by Eric Niebler. I am so fond of it so I couldn't wait till it 
-//  going to be accepted into Boost. Also I need version with less number of dependencies 
-//  and more portable. This version doesn't support rvalues and will reeveluate it's 
+//  presented by Eric Niebler. I am so fond of it so I can't wait till it
+//  going to be accepted into Boost. Also I need version with less number of dependencies
+//  and more portable. This version doesn't support rvalues and will reeveluate it's
 //  parameters, but should be good enough for my purposes.
 // ***************************************************************************
 
-#ifndef BOOST_TEST_FOREACH_HPP_021005GER
-#define BOOST_TEST_FOREACH_HPP_021005GER
+#ifndef BOOST_TEST_UTILS_FOREACH_HPP
+#define BOOST_TEST_UTILS_FOREACH_HPP
 
 // Boost.Test
 #include <boost/test/detail/config.hpp>
@@ -26,20 +26,15 @@
 // Boost
 #include <boost/type.hpp>
 #include <boost/mpl/bool.hpp>
-#include <boost/test/detail/workaround.hpp>
 
-#if !BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x530) )
 #include <boost/type_traits/is_const.hpp>
-#endif
 
 #include <boost/test/detail/suppress_warnings.hpp>
 
 //____________________________________________________________________________//
 
 namespace boost {
-
 namespace unit_test {
-
 namespace for_each {
 
 // ************************************************************************** //
@@ -80,38 +75,12 @@ static_any_cast( static_any_t a, Iter* = 0 )
 // **************                   is_const                   ************** //
 // ************************************************************************** //
 
-#if BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x530) )
-
-template<typename C>
-inline mpl::false_
-is_const_coll( C& )
-{
-    return mpl::false_();
-}
-
-//____________________________________________________________________________//
-
-template<typename C>
-inline mpl::true_
-is_const_coll( C const& )
-{
-    return mpl::true_();
-}
-
-//____________________________________________________________________________//
-
-#else
-
 template<typename C>
 inline is_const<C>
 is_const_coll( C& )
 {
     return is_const<C>();
 }
-
-//____________________________________________________________________________//
-
-#endif
 
 //____________________________________________________________________________//
 
@@ -128,26 +97,12 @@ begin( C& t, mpl::false_ )
 
 //____________________________________________________________________________//
 
-#if BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x530) )
-
-template<typename C>
-inline static_any<BOOST_DEDUCED_TYPENAME C::iterator>
-begin( C const& t, mpl::true_ )
-{
-    typedef typename C::iterator it;
-    return static_any<it>( const_cast<it>( t.begin() ) );
-}
-
-#else
-
 template<typename C>
 inline static_any<BOOST_DEDUCED_TYPENAME C::const_iterator>
 begin( C const& t, mpl::true_ )
 {
     return static_any<BOOST_DEDUCED_TYPENAME C::const_iterator>( t.begin() );
 }
-
-#endif
 
 //____________________________________________________________________________//
 
@@ -164,26 +119,12 @@ end( C& t, mpl::false_ )
 
 //____________________________________________________________________________//
 
-#if BOOST_WORKAROUND(__SUNPRO_CC, BOOST_TESTED_AT(0x530) )
-
-template<typename C>
-inline static_any<BOOST_DEDUCED_TYPENAME C::iterator>
-end( C const& t, mpl::true_ )
-{
-    typedef typename C::iterator it;
-    return static_any<it>( const_cast<it>( t.end() ) );
-}
-
-#else
-
 template<typename C>
 inline static_any<BOOST_DEDUCED_TYPENAME C::const_iterator>
 end( C const& t, mpl::true_ )
 {
     return static_any<BOOST_DEDUCED_TYPENAME C::const_iterator>( t.end() );
 }
-
-#endif
 
 //____________________________________________________________________________//
 
@@ -234,6 +175,28 @@ next( static_any_t cur, C const&, mpl::true_ )
 //____________________________________________________________________________//
 
 // ************************************************************************** //
+// **************                      prev                    ************** //
+// ************************************************************************** //
+
+template<typename C>
+inline void
+prev( static_any_t cur, C&, mpl::false_ )
+{
+    --static_any_cast<BOOST_DEDUCED_TYPENAME C::iterator>( cur );
+}
+
+//____________________________________________________________________________//
+
+template<typename C>
+inline void
+prev( static_any_t cur, C const&, mpl::true_ )
+{
+    --static_any_cast<BOOST_DEDUCED_TYPENAME C::const_iterator>( cur );
+}
+
+//____________________________________________________________________________//
+
+// ************************************************************************** //
 // **************                      deref                   ************** //
 // ************************************************************************** //
 
@@ -258,10 +221,6 @@ deref( static_any_t cur, C const&, ::boost::type<RefType>, mpl::true_ )
 // ************************************************************************** //
 // **************              BOOST_TEST_FOREACH              ************** //
 // ************************************************************************** //
-
-#if BOOST_WORKAROUND(__GNUC__, < 3)
-#define BOOST_TEST_FE_MULTISTATEMENT
-#endif
 
 #define BOOST_TEST_FE_ANY                   ::boost::unit_test::for_each::static_any_t
 #define BOOST_TEST_FE_IS_CONST( COL )       ::boost::unit_test::for_each::is_const_coll( COL )
@@ -293,6 +252,13 @@ deref( static_any_t cur, C const&, ::boost::type<RefType>, mpl::true_ )
         BOOST_TEST_FE_IS_CONST( COL ) )     \
 /**/
 
+#define BOOST_TEST_FE_PREV( COL )           \
+    ::boost::unit_test::for_each::prev(     \
+        BOOST_TEST_FE_CUR_VAR,              \
+        COL,                                \
+        BOOST_TEST_FE_IS_CONST( COL ) )     \
+/**/
+
 #define BOOST_FOREACH_NOOP(COL)             \
     ((void)&(COL))
 
@@ -314,8 +280,6 @@ deref( static_any_t cur, C const&, ::boost::type<RefType>, mpl::true_ )
 #define BOOST_TEST_FE_END_VAR   BOOST_JOIN( _fe_end_, BOOST_TEST_LINE_NUM )
 #define BOOST_TEST_FE_CON_VAR   BOOST_JOIN( _fe_con_, BOOST_TEST_LINE_NUM )
 
-#ifndef BOOST_TEST_FE_MULTISTATEMENT
-
 #define BOOST_TEST_FOREACH( RefType, var, COL )                                             \
 if( BOOST_TEST_FE_ANY BOOST_TEST_FE_CUR_VAR = BOOST_TEST_FE_BEG( COL ) ) {} else            \
 if( BOOST_TEST_FE_ANY BOOST_TEST_FE_END_VAR = BOOST_TEST_FE_END( COL ) ) {} else            \
@@ -328,52 +292,24 @@ for( bool BOOST_TEST_FE_CON_VAR = true;                                         
          !BOOST_TEST_FE_CON_VAR; BOOST_TEST_FE_CON_VAR = true )                             \
 /**/
 
-#else
-
-#define BOOST_TEST_FOREACH( RefType, var, COL )                                     \
-BOOST_TEST_FE_ANY BOOST_TEST_FE_CUR_VAR = BOOST_TEST_FE_BEG( COL ),                 \
-                  BOOST_TEST_FE_END_VAR = BOOST_TEST_FE_END( COL );                 \
-                                                                                    \
-for( bool BOOST_TEST_FE_CON_VAR = true; BOOST_TEST_FE_CON_VAR; )                    \
-for( ;                                                                              \
-     BOOST_TEST_FE_CON_VAR && (BOOST_TEST_FE_CON_VAR = !BOOST_TEST_FE_DONE( COL )); \
-     BOOST_TEST_FE_CON_VAR ? BOOST_TEST_FE_NEXT( COL ) : BOOST_FOREACH_NOOP( COL )) \
-                                                                                    \
-    if( (BOOST_TEST_FE_CON_VAR = false, false) ) {} else                            \
-    for( RefType var = BOOST_TEST_FE_DEREF( COL, RefType );                         \
-         !BOOST_TEST_FE_CON_VAR; BOOST_TEST_FE_CON_VAR = true )                     \
+#define BOOST_TEST_REVERSE_FOREACH( RefType, var, COL )                                     \
+if( BOOST_TEST_FE_ANY BOOST_TEST_FE_CUR_VAR = BOOST_TEST_FE_END( COL ) ) {} else            \
+if( BOOST_TEST_FE_ANY BOOST_TEST_FE_END_VAR = BOOST_TEST_FE_BEG( COL ) ) {} else            \
+for( bool BOOST_TEST_FE_CON_VAR = true;                                                     \
+          BOOST_TEST_FE_CON_VAR && !BOOST_TEST_FE_DONE( COL ); )                            \
+                                                                                            \
+    if( (BOOST_TEST_FE_CON_VAR = false, false) ) {} else                                    \
+    if( (BOOST_TEST_FE_PREV( COL ), false) ) {} else                                        \
+    for( RefType var = BOOST_TEST_FE_DEREF( COL, RefType );                                 \
+         !BOOST_TEST_FE_CON_VAR; BOOST_TEST_FE_CON_VAR = true )                             \
 /**/
-
-#endif
 
 //____________________________________________________________________________//
 
 } // namespace for_each
-
 } // namespace unit_test
-
 } // namespace boost
-
-//____________________________________________________________________________//
 
 #include <boost/test/detail/enable_warnings.hpp>
 
-// ***************************************************************************
-//  Revision History :
-//
-//  $Log: foreach.hpp,v $
-//  Revision 1.4  2005/03/24 04:02:33  rogeeff
-//  portability fixes
-//
-//  Revision 1.3  2005/03/23 21:02:26  rogeeff
-//  Sunpro CC 5.3 fixes
-//
-//  Revision 1.2  2005/02/21 10:15:45  rogeeff
-//  vc 7.1 workaround
-//
-//  Revision 1.1  2005/02/20 08:27:08  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-// ***************************************************************************
-
-#endif // BOOST_TEST_FOREACH_HPP_021005GER
+#endif // BOOST_TEST_UTILS_FOREACH_HPP

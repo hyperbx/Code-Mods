@@ -1,15 +1,15 @@
-//  (C) Copyright Gennadiy Rozental 2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
 //  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: results_reporter.ipp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.4 $
+//  Version     : $Revision$
 //
-//  Description : result reporting facilties
+//  Description : result reporting facilities
 // ***************************************************************************
 
 #ifndef BOOST_TEST_RESULTS_REPORTER_IPP_020105GER
@@ -17,16 +17,20 @@
 
 // Boost.Test
 #include <boost/test/results_reporter.hpp>
-#include <boost/test/unit_test_suite.hpp>
 #include <boost/test/results_collector.hpp>
 #include <boost/test/framework.hpp>
+
 #include <boost/test/output/plain_report_formatter.hpp>
 #include <boost/test/output/xml_report_formatter.hpp>
 
-#include <boost/test/detail/wrap_io_saver.hpp>
+#include <boost/test/tree/visitor.hpp>
+#include <boost/test/tree/test_unit.hpp>
+#include <boost/test/tree/traverse.hpp>
 
 // Boost
 #include <boost/scoped_ptr.hpp>
+#include <boost/io/ios_state.hpp>
+typedef ::boost::io::ios_base_all_saver io_saver_type;
 
 // STL
 #include <iostream>
@@ -36,9 +40,7 @@
 //____________________________________________________________________________//
 
 namespace boost {
-
 namespace unit_test {
-
 namespace results_reporter {
 
 // ************************************************************************** //
@@ -50,37 +52,37 @@ namespace {
 struct results_reporter_impl : test_tree_visitor {
     // Constructor
     results_reporter_impl()
-    : m_output( &std::cerr )
+    : m_stream( &std::cerr )
     , m_stream_state_saver( new io_saver_type( std::cerr ) )
     , m_report_level( CONFIRMATION_REPORT )
     , m_formatter( new output::plain_report_formatter )
     {}
 
     // test tree visitor interface implementation
-    void    visit( test_case const& tc )
+    void    visit( test_case const& tc ) BOOST_OVERRIDE
     {
-        m_formatter->test_unit_report_start( tc, *m_output );
-        m_formatter->test_unit_report_finish( tc, *m_output );
+        m_formatter->test_unit_report_start( tc, *m_stream );
+        m_formatter->test_unit_report_finish( tc, *m_stream );
     }
-    bool    test_suite_start( test_suite const& ts )
+    bool    test_suite_start( test_suite const& ts ) BOOST_OVERRIDE
     {
-        m_formatter->test_unit_report_start( ts, *m_output );
+        m_formatter->test_unit_report_start( ts, *m_stream );
 
         if( m_report_level == DETAILED_REPORT && !results_collector.results( ts.p_id ).p_skipped )
             return true;
 
-        m_formatter->test_unit_report_finish( ts, *m_output );
+        m_formatter->test_unit_report_finish( ts, *m_stream );
         return false;
     }
-    void    test_suite_finish( test_suite const& ts )
+    void    test_suite_finish( test_suite const& ts ) BOOST_OVERRIDE
     {
-        m_formatter->test_unit_report_finish( ts, *m_output );
+        m_formatter->test_unit_report_finish( ts, *m_stream );
     }
 
     typedef scoped_ptr<io_saver_type> saver_ptr;
 
     // Data members
-    std::ostream*       m_output;
+    std::ostream*       m_stream;
     saver_ptr           m_stream_state_saver;
     report_level        m_report_level;
     scoped_ptr<format>  m_formatter;
@@ -106,8 +108,16 @@ set_level( report_level l )
 void
 set_stream( std::ostream& ostr )
 {
-    s_rr_impl().m_output = &ostr;
+    s_rr_impl().m_stream = &ostr;
     s_rr_impl().m_stream_state_saver.reset( new io_saver_type( ostr ) );
+}
+
+//____________________________________________________________________________//
+
+std::ostream&
+get_stream()
+{
+    return *s_rr_impl().m_stream;
 }
 
 //____________________________________________________________________________//
@@ -116,10 +126,11 @@ void
 set_format( output_format rf )
 {
     switch( rf ) {
-    case CLF:
+    default:
+    case OF_CLF:
         set_format( new output::plain_report_formatter );
         break;
-    case XML:
+    case OF_XML:
         set_format( new output::xml_report_formatter );
         break;
     }
@@ -157,11 +168,11 @@ make_report( report_level l, test_unit_id id )
     report_level bkup = s_rr_impl().m_report_level;
     s_rr_impl().m_report_level = l;
 
-    s_rr_impl().m_formatter->results_report_start( *s_rr_impl().m_output );
+    s_rr_impl().m_formatter->results_report_start( *s_rr_impl().m_stream );
 
     switch( l ) {
     case CONFIRMATION_REPORT:
-        s_rr_impl().m_formatter->do_confirmation_report( framework::get<test_unit>( id ), *s_rr_impl().m_output );
+        s_rr_impl().m_formatter->do_confirmation_report( framework::get<test_unit>( id ), *s_rr_impl().m_stream );
         break;
     case SHORT_REPORT:
     case DETAILED_REPORT:
@@ -171,40 +182,16 @@ make_report( report_level l, test_unit_id id )
         break;
     }
 
-    s_rr_impl().m_formatter->results_report_finish( *s_rr_impl().m_output );
+    s_rr_impl().m_formatter->results_report_finish( *s_rr_impl().m_stream );
     s_rr_impl().m_report_level = bkup;
 }
 
 //____________________________________________________________________________//
 
 } // namespace results_reporter
-
 } // namespace unit_test
-
 } // namespace boost
 
-//____________________________________________________________________________//
-
 #include <boost/test/detail/enable_warnings.hpp>
-
-// ***************************************************************************
-//  Revision History :
-//
-//  $Log: results_reporter.ipp,v $
-//  Revision 1.4  2005/04/30 16:48:51  rogeeff
-//  io saver warkaround for classic io is shared
-//
-//  Revision 1.3  2005/04/29 06:27:45  rogeeff
-//  bug fix for manipulator nandling
-//  bug fix for invalid output stream
-//  bug fix for set_format function implementation
-//
-//  Revision 1.2  2005/02/21 10:12:20  rogeeff
-//  Support for random order of test cases implemented
-//
-//  Revision 1.1  2005/02/20 08:27:07  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-// ***************************************************************************
 
 #endif // BOOST_TEST_RESULTS_REPORTER_IPP_020105GER

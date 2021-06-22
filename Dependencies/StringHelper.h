@@ -3,6 +3,8 @@ using namespace std;
 #pragma once
 
 #include <regex>
+#include <iostream>
+#include <iomanip>
 
 class StringHelper
 {
@@ -74,6 +76,16 @@ public:
 	/// Checks if a character array is empty.
 	/// </summary>
 	static bool IsEmpty(const char* charPtr);
+
+	/// <summary>
+	/// Converts a string containing hexadecimal data to a byte array.
+	/// </summary>
+	static uint8_t* HexStringToByteArray(const char* hex);
+
+	/// <summary>
+	/// Converts an array of bytes into a string of hexadecimal bytes.
+	/// </summary>
+	static string ByteArrayToHexString(const uint8_t* data, const size_t size);
 };
 
 inline string StringHelper::ToLower(string str)
@@ -142,4 +154,53 @@ inline bool StringHelper::IsEmpty(const char* charPtr)
 		return true;
 	
 	return false;
+}
+
+inline uint8_t* StringHelper::HexStringToByteArray(const char* hash)
+{
+	if (hash == NULL)
+		return NULL;
+
+	size_t slength = strlen(hash);
+	if ((slength % 2) != 0) // must be even
+		return NULL;
+
+	size_t dlength = slength / 2;
+
+	uint8_t* data = (uint8_t*)malloc(dlength);
+
+	memset(data, 0, dlength);
+
+	size_t index = 0;
+	while (index < slength)
+	{
+		char c = hash[index];
+		int value = 0;
+		if (c >= '0' && c <= '9')
+			value = (c - '0');
+		else if (c >= 'A' && c <= 'F')
+			value = (10 + (c - 'A'));
+		else if (c >= 'a' && c <= 'f')
+			value = (10 + (c - 'a'));
+		else
+			return NULL;
+
+		data[(index / 2)] += value << (((index + 1) % 2) * 4);
+
+		index++;
+	}
+
+	return data;
+}
+
+inline string StringHelper::ByteArrayToHexString(const uint8_t* data, const size_t size)
+{
+	stringstream ss;
+
+	ss << std::hex << std::setfill('0');
+
+	for (int i = 0; i < size; i++)
+		ss << std::hex << std::setw(2) << static_cast<int>(data[i]);
+
+	return ss.str();
 }

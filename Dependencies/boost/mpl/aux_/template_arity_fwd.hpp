@@ -10,9 +10,9 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/template_arity_fwd.hpp,v $
-// $Date: 2004/09/02 15:40:44 $
-// $Revision: 1.4 $
+// $Id$
+// $Date$
+// $Revision$
 
 namespace boost { namespace mpl { namespace aux {
 

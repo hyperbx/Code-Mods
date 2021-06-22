@@ -1,13 +1,13 @@
-//  (C) Copyright Gennadiy Rozental 2005.
+//  (C) Copyright Gennadiy Rozental 2001.
 //  Distributed under the Boost Software License, Version 1.0.
-//  (See accompanying file LICENSE_1_0.txt or copy at 
+//  (See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt)
 
 //  See http://www.boost.org/libs/test for the library home page.
 //
-//  File        : $RCSfile: compiler_log_formatter.ipp,v $
+//  File        : $RCSfile$
 //
-//  Version     : $Revision: 1.3 $
+//  Version     : $Revision$
 //
 //  Description : implements compiler like Log formatter
 // ***************************************************************************
@@ -17,9 +17,15 @@
 
 // Boost.Test
 #include <boost/test/output/compiler_log_formatter.hpp>
-#include <boost/test/unit_test_suite.hpp>
+
 #include <boost/test/framework.hpp>
+#include <boost/test/execution_monitor.hpp>
+#include <boost/test/unit_test_parameters.hpp>
+
+#include <boost/test/tree/test_unit.hpp>
+
 #include <boost/test/utils/basic_cstring/io.hpp>
+#include <boost/test/utils/lazy_ostream.hpp>
 
 // Boost
 #include <boost/version.hpp>
@@ -32,18 +38,30 @@
 //____________________________________________________________________________//
 
 namespace boost {
-
 namespace unit_test {
-
 namespace output {
 
 // ************************************************************************** //
 // **************            compiler_log_formatter            ************** //
 // ************************************************************************** //
 
+namespace {
+
+std::string
+test_phase_identifier()
+{
+    return framework::test_in_progress() ? framework::current_test_unit().full_name() : std::string( "Test setup" );
+}
+
+} // local namespace
+
+//____________________________________________________________________________//
+
 void
 compiler_log_formatter::log_start( std::ostream& output, counter_t test_cases_amount )
 {
+    m_color_output = runtime_config::get<bool>( runtime_config::btrt_color_output );
+
     if( test_cases_amount > 0 )
         output  << "Running " << test_cases_amount << " test "
                 << (test_cases_amount > 1 ? "cases" : "case") << "...\n";
@@ -52,22 +70,24 @@ compiler_log_formatter::log_start( std::ostream& output, counter_t test_cases_am
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::log_finish( std::ostream& )
+compiler_log_formatter::log_finish( std::ostream& ostr )
 {
-    // do nothing
+    ostr.flush();
 }
 
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::log_build_info( std::ostream& output )
+compiler_log_formatter::log_build_info( std::ostream& output, bool log_build_info )
 {
-    output  << "Platform: " << BOOST_PLATFORM            << '\n'
-            << "Compiler: " << BOOST_COMPILER            << '\n'
-            << "STL     : " << BOOST_STDLIB              << '\n'
-            << "Boost   : " << BOOST_VERSION/100000      << "."
-                            << BOOST_VERSION/100 % 1000  << "."
-                            << BOOST_VERSION % 100       << std::endl;
+    if(log_build_info) {
+        output  << "Platform: " << BOOST_PLATFORM            << '\n'
+                << "Compiler: " << BOOST_COMPILER            << '\n'
+                << "STL     : " << BOOST_STDLIB              << '\n'
+                << "Boost   : " << BOOST_VERSION/100000      << "."
+                                << BOOST_VERSION/100 % 1000  << "."
+                                << BOOST_VERSION % 100       << std::endl;
+    }
 }
 
 //____________________________________________________________________________//
@@ -75,6 +95,10 @@ compiler_log_formatter::log_build_info( std::ostream& output )
 void
 compiler_log_formatter::test_unit_start( std::ostream& output, test_unit const& tu )
 {
+    BOOST_TEST_SCOPE_SETCOLOR( m_color_output, output, term_attr::BRIGHT, term_color::BLUE );
+
+    print_prefix( output, tu.p_file_name, tu.p_line_num );
+
     output << "Entering test " << tu.p_type_name << " \"" << tu.p_name << "\"" << std::endl;
 }
 
@@ -83,6 +107,10 @@ compiler_log_formatter::test_unit_start( std::ostream& output, test_unit const& 
 void
 compiler_log_formatter::test_unit_finish( std::ostream& output, test_unit const& tu, unsigned long elapsed )
 {
+    BOOST_TEST_SCOPE_SETCOLOR( m_color_output, output, term_attr::BRIGHT, term_color::BLUE );
+
+    print_prefix( output, tu.p_file_name, tu.p_line_num );
+
     output << "Leaving test " << tu.p_type_name << " \"" << tu.p_name << "\"";
 
     if( elapsed > 0 ) {
@@ -90,7 +118,7 @@ compiler_log_formatter::test_unit_finish( std::ostream& output, test_unit const&
         if( elapsed % 1000 == 0 )
             output << elapsed/1000 << "ms";
         else
-            output << elapsed << "mks";
+            output << elapsed << "us";
     }
 
     output << std::endl;
@@ -99,31 +127,48 @@ compiler_log_formatter::test_unit_finish( std::ostream& output, test_unit const&
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::test_unit_skipped( std::ostream& output, test_unit const& tu )
+compiler_log_formatter::test_unit_skipped( std::ostream& output, test_unit const& tu, const_string reason )
 {
-    output  << "Test " << tu.p_type_name << " \"" << tu.p_name << "\"" << "is skipped" << std::endl;
+    BOOST_TEST_SCOPE_SETCOLOR( m_color_output, output, term_attr::BRIGHT, term_color::YELLOW );
+
+    print_prefix( output, tu.p_file_name, tu.p_line_num );
+
+    output  << "Test " << tu.p_type_name << " \"" << tu.full_name() << "\"" << " is skipped because " << reason << std::endl;
 }
-    
+
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::log_exception( std::ostream& output, log_checkpoint_data const& checkpoint_data, const_string explanation )
+compiler_log_formatter::log_exception_start( std::ostream& output, log_checkpoint_data const& checkpoint_data, execution_exception const& ex )
 {
-    print_prefix( output, BOOST_TEST_L( "unknown location" ), 0 );
-    output << "fatal error in \"" << framework::current_test_case().p_name << "\": ";
+    execution_exception::location const& loc = ex.where();
 
-    if( !explanation.is_empty() )
-        output << explanation;
-    else
-        output << "uncaught exception, system error or abort requested";
+    print_prefix( output, loc.m_file_name, loc.m_line_num );
 
+    {
+        BOOST_TEST_SCOPE_SETCOLOR( m_color_output, output, term_attr::UNDERLINE, term_color::RED );
 
-    if( !checkpoint_data.m_message.empty() ) {
-        output << '\n';
-        print_prefix( output, checkpoint_data.m_file, checkpoint_data.m_line );
-        output << "last checkpoint: " << checkpoint_data.m_message;
+        output << "fatal error: in \"" << (loc.m_function.is_empty() ? test_phase_identifier() : loc.m_function ) << "\": "
+               << ex.what();
     }
-    
+
+    if( !checkpoint_data.m_file_name.is_empty() ) {
+        output << '\n';
+        print_prefix( output, checkpoint_data.m_file_name, checkpoint_data.m_line_num );
+
+        BOOST_TEST_SCOPE_SETCOLOR( m_color_output, output, term_attr::BRIGHT, term_color::CYAN );
+
+        output << "last checkpoint";
+        if( !checkpoint_data.m_message.empty() )
+            output << ": " << checkpoint_data.m_message;
+    }
+}
+
+//____________________________________________________________________________//
+
+void
+compiler_log_formatter::log_exception_finish( std::ostream& output )
+{
     output << std::endl;
 }
 
@@ -132,24 +177,31 @@ compiler_log_formatter::log_exception( std::ostream& output, log_checkpoint_data
 void
 compiler_log_formatter::log_entry_start( std::ostream& output, log_entry_data const& entry_data, log_entry_types let )
 {
+    using namespace utils;
+
     switch( let ) {
         case BOOST_UTL_ET_INFO:
-            print_prefix( output, entry_data.m_file, entry_data.m_line );
+            print_prefix( output, entry_data.m_file_name, entry_data.m_line_num );
+            output << setcolor( m_color_output, term_attr::BRIGHT, term_color::GREEN, term_color::ORIGINAL, &m_color_state);
             output << "info: ";
             break;
         case BOOST_UTL_ET_MESSAGE:
+            output << setcolor( m_color_output, term_attr::BRIGHT, term_color::CYAN, term_color::ORIGINAL, &m_color_state);
             break;
         case BOOST_UTL_ET_WARNING:
-            print_prefix( output, entry_data.m_file, entry_data.m_line );
-            output << "warning in \"" << framework::current_test_case().p_name << "\": ";
+            print_prefix( output, entry_data.m_file_name, entry_data.m_line_num );
+            output << setcolor( m_color_output, term_attr::BRIGHT, term_color::YELLOW, term_color::ORIGINAL, &m_color_state);
+            output << "warning: in \"" << test_phase_identifier() << "\": ";
             break;
         case BOOST_UTL_ET_ERROR:
-            print_prefix( output, entry_data.m_file, entry_data.m_line );
-            output << "error in \"" << framework::current_test_case().p_name << "\": ";
+            print_prefix( output, entry_data.m_file_name, entry_data.m_line_num );
+            output << setcolor( m_color_output, term_attr::BRIGHT, term_color::RED, term_color::ORIGINAL, &m_color_state);
+            output << "error: in \"" << test_phase_identifier() << "\": ";
             break;
         case BOOST_UTL_ET_FATAL_ERROR:
-            print_prefix( output, entry_data.m_file, entry_data.m_line );
-            output << "fatal error in \"" << framework::current_test_case().p_name << "\": ";
+            print_prefix( output, entry_data.m_file_name, entry_data.m_line_num );
+            output << setcolor( m_color_output, term_attr::UNDERLINE, term_color::RED, term_color::ORIGINAL, &m_color_state);
+            output << "fatal error: in \"" << test_phase_identifier() << "\": ";
             break;
     }
 }
@@ -165,45 +217,77 @@ compiler_log_formatter::log_entry_value( std::ostream& output, const_string valu
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::log_entry_finish( std::ostream& output )
+compiler_log_formatter::log_entry_value( std::ostream& output, lazy_ostream const& value )
 {
-    output << std::endl;
+    output << value;
 }
 
 //____________________________________________________________________________//
 
 void
-compiler_log_formatter::print_prefix( std::ostream& output, const_string file, std::size_t line )
+compiler_log_formatter::log_entry_finish( std::ostream& output )
 {
-    output << file << '(' << line << "): ";
+    if( m_color_output )
+        output << utils::setcolor(m_color_output, &m_color_state);
+
+    output << std::endl;
+}
+
+
+//____________________________________________________________________________//
+
+void
+compiler_log_formatter::print_prefix( std::ostream& output, const_string file_name, std::size_t line_num )
+{
+    if( !file_name.empty() ) {
+#ifdef __APPLE_CC__
+        // Xcode-compatible logging format, idea by Richard Dingwall at
+        // <http://richarddingwall.name/2008/06/01/using-the-boost-unit-test-framework-with-xcode-3/>.
+        output << file_name << ':' << line_num << ": ";
+#else
+        output << file_name << '(' << line_num << "): ";
+#endif
+    }
 }
 
 //____________________________________________________________________________//
 
-} // namespace ouptut
-
-} // namespace unit_test
-
-} // namespace boost
+void
+compiler_log_formatter::entry_context_start( std::ostream& output, log_level l )
+{
+    if( l == log_messages ) {
+        output << "\n[context:";
+    }
+    else {
+        output << (l == log_successful_tests ? "\nAssertion" : "\nFailure" ) << " occurred in a following context:";
+    }
+}
 
 //____________________________________________________________________________//
 
-#include <boost/test/detail/enable_warnings.hpp>
+void
+compiler_log_formatter::entry_context_finish( std::ostream& output, log_level l )
+{
+    if( l == log_messages ) {
+        output << "]";
+    }
+    output.flush();
+}
 
-// ***************************************************************************
-//  Revision History :
-//
-//  $Log: compiler_log_formatter.ipp,v $
-//  Revision 1.3  2005/02/21 10:09:26  rogeeff
-//  exception logging changes so that it produce a string recognizable by compiler as an error
-//
-//  Revision 1.2  2005/02/20 08:27:06  rogeeff
-//  This a major update for Boost.Test framework. See release docs for complete list of fixes/updates
-//
-//  Revision 1.1  2005/02/01 08:59:38  rogeeff
-//  supplied_log_formatters split
-//  change formatters interface to simplify result interface
-//
-// ***************************************************************************
+//____________________________________________________________________________//
+
+void
+compiler_log_formatter::log_entry_context( std::ostream& output, log_level /*l*/, const_string context_descr )
+{
+    output << "\n    " << context_descr;
+}
+
+//____________________________________________________________________________//
+
+} // namespace output
+} // namespace unit_test
+} // namespace boost
+
+#include <boost/test/detail/enable_warnings.hpp>
 
 #endif // BOOST_TEST_COMPILER_LOG_FORMATTER_IPP_020105GER

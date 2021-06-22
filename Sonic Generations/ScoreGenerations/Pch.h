@@ -28,6 +28,7 @@
 #include <Helpers.h>
 #include <StringHelper.h>
 #include <INIReader.h>
+#include <IOHelper.h>
 #include <lua.hpp>
 #include "Configuration.h"
 #include "StateHooks.h"
@@ -35,7 +36,6 @@
 // Internal headers
 #include "ArchiveTreePatcher.h"
 #include "HudSonicStage.h"
-#include "IOHelper.h"
 #include "Loader.h"
 #include "LuaCallback.h"
 #include "MultiplierListener.h"

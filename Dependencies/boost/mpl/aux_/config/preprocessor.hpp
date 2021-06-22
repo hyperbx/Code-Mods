@@ -10,15 +10,15 @@
 //
 // See http://www.boost.org/libs/mpl for documentation.
 
-// $Source: /cvsroot/boost/boost/boost/mpl/aux_/config/preprocessor.hpp,v $
-// $Date: 2004/09/02 15:40:45 $
-// $Revision: 1.6 $
+// $Id$
+// $Date$
+// $Revision$
 
 #include <boost/mpl/aux_/config/workaround.hpp>
 
 #if !defined(BOOST_MPL_CFG_BROKEN_PP_MACRO_EXPANSION) \
     && (   BOOST_WORKAROUND(__MWERKS__, <= 0x3003) \
-        || BOOST_WORKAROUND(__BORLANDC__, BOOST_TESTED_AT(0x561)) \
+        || BOOST_WORKAROUND(BOOST_BORLANDC, < 0x582) \
         || BOOST_WORKAROUND(__IBMCPP__, BOOST_TESTED_AT(502)) \
         )
 
