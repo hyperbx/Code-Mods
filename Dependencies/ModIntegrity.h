@@ -6,6 +6,7 @@ using namespace std;
 
 #include <Crypto.h>
 #include <fstream>
+#include <IOHelper.h>
 #include <iterator>
 #include <shellapi.h>
 #include <StringHelper.h>
@@ -43,6 +44,16 @@ inline bool ModIntegrity::VerifyData(vector<Hash> hashes)
 {
 	for (Hash const& hash : hashes)
 	{
+		// Fail integrity check if the file requested doesn't exist.
+		if (!IOHelper::FileExists(hash.File))
+		{
+#if _DEBUG
+			printf("[Mod Integrity] Integrity check failed - the requested file is missing!\n");
+#endif
+
+			return false;
+		}
+
 		// Hash storage.
 		const uint8_t* expectedHash = StringHelper::HexStringToByteArray(hash.Hash);
 		uint8_t computedHash[16];
@@ -52,6 +63,7 @@ inline bool ModIntegrity::VerifyData(vector<Hash> hashes)
 		vector<char> bytes((istreambuf_iterator<char>(modData)), (istreambuf_iterator<char>()));
 
 #if _DEBUG
+		printf("[Mod Integrity] Current File = %s\n", hash.File);
 		printf("[Mod Integrity] Expected Hash = %s\n", hash.Hash);
 #endif
 
@@ -69,7 +81,7 @@ inline bool ModIntegrity::VerifyData(vector<Hash> hashes)
 		if (memcmp(expectedHash, computedHash, 16) != 0)
 		{
 #if _DEBUG
-			printf("[Mod Integrity] Integrity check failed!\n");
+			printf("[Mod Integrity] Integrity check failed - the hashes do not match!\n");
 #endif
 
 			return false;
