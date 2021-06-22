@@ -6,6 +6,7 @@ using namespace std;
 
 #include <Crypto.h>
 #include <fstream>
+#include <INIReader.h>
 #include <IOHelper.h>
 #include <iterator>
 #include <shellapi.h>
