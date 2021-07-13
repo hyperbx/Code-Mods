@@ -31,6 +31,7 @@
 #include <IOHelper.h>
 #include <lua.hpp>
 #include "Configuration.h"
+#include <ModIntegrity.h>
 #include "StateHooks.h"
 
 // Internal headers

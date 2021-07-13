@@ -1,13 +1,10 @@
 int ScoreListener::score = 0;
+int ScoreListener::lastCheckpointScore = 0;
 
 void ScoreListener::Reset()
 {
-	StatisticsListener::stats.totalRingCount = 0;
-	StatisticsListener::stats.totalVelocity = 0;
-	StatisticsListener::stats.ringCount = 0;
-	StatisticsListener::stats.minutes = 0;
-	StatisticsListener::stats.seconds = 0;
-	score = 0;
+	score = Configuration::restoreLastCheckpointScore && PlayerListener::isDead ? lastCheckpointScore : 0;
+	StatisticsListener::stats.Reset();
 }
 
 void ScoreListener::AddClamp(unsigned int scoreToReward)
@@ -56,25 +53,27 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		}
 
 		case Physics:
-		{
 			scoreToReward = Tables::scoreTable.Physics;
-
-			// Increase total physics count.
 			StatisticsListener::stats.totalPhysics++;
-
 			break;
-		}
 
 		case PointMarker:
 		{
 			scoreToReward = Tables::scoreTable.PointMarker;
 
 			// Increase total velocity for the speed bonus.
-			StatisticsListener::stats.totalVelocity += PlayerListener::GetVelocity() * 10;
+			if (Configuration::rewardVelocityBonus)
+			{
+				StatisticsListener::stats.totalVelocity += PlayerListener::GetVelocity() * Tables::multiplierTable.velocityBonusMultiplier;
 
 #if _DEBUG
-			printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::stats.totalVelocity);
+				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::stats.totalVelocity);
 #endif
+			}
+
+			// Store the current score so we can restore it later upon death if requested.
+			if (Configuration::restoreLastCheckpointScore)
+				lastCheckpointScore = score;
 
 			// Increase total checkpoint count.
 			StatisticsListener::stats.totalPointMarkers++;
@@ -83,116 +82,59 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		}
 
 		case RedRing:
-		{
 			scoreToReward = Tables::scoreTable.RedRing;
-
-			// Increase total red ring count.
 			StatisticsListener::stats.totalRedRings++;
-
 			break;
-		}
 
 		case RainbowRing:
-		{
 			scoreToReward = Tables::scoreTable.RainbowRing;
-
-			// Increase total rainbow ring count.
 			StatisticsListener::stats.totalRainbowRings++;
-
 			break;
-		}
 
 		case ItemBox:
-		{
 			scoreToReward = Tables::scoreTable.ItemBox;
-
-			// Increase total item box count.
 			StatisticsListener::stats.totalItemBoxes++;
-
 			break;
-		}
 
 		case SuperRing:
-		{
 			scoreToReward = Tables::scoreTable.SuperRing;
-
-			// Increase total super ring count.
 			StatisticsListener::stats.totalSuperRings++;
-
-			break;
-		}
-
-		case TrickFinish:
-			scoreToReward = Tables::scoreTable.TrickFinish;
 			break;
 
 		case Trick:
-		{
-			scoreToReward = Tables::scoreTable.Trick;
-
-			// Increase total trick count.
+		case TrickFinish:
+		case BoardTrick:
+			scoreToReward = type == Trick ? Tables::scoreTable.Trick : type == BoardTrick ? Tables::scoreTable.BoardTrick : Tables::scoreTable.TrickFinish;
 			StatisticsListener::stats.totalTricks++;
-
 			break;
-		}
 
 		case Life:
 			scoreToReward = Tables::scoreTable.Life;
 			break;
 
 		case DashRing:
-		{
 			scoreToReward = Tables::scoreTable.DashRing;
-
-			// Increase total dash ring count.
 			StatisticsListener::stats.totalDashRings++;
-
 			break;
-		}
 
 		case QuickStep:
-		{
 			scoreToReward = Tables::scoreTable.QuickStep;
-
-			// Increase total quick step count.
 			StatisticsListener::stats.totalQuickSteps++;
-
 			break;
-		}
 
 		case Drift:
-		{
 			scoreToReward = Tables::scoreTable.Drift;
-
-			// Increase total drift count.
 			StatisticsListener::stats.totalDrifts++;
-
 			break;
-		}
 
 		case Balloon:
-		{
 			scoreToReward = Tables::scoreTable.Balloon;
-
-			// Increase total balloon count.
 			StatisticsListener::stats.totalBalloons++;
-
 			break;
-		}
 
 		case Super:
 			scoreToReward = Tables::scoreTable.Super;
 			break;
-
-		case BoardTrick:
-		{
-			scoreToReward = Tables::scoreTable.BoardTrick;
-
-			// Increase total trick count.
-			StatisticsListener::stats.totalTricks++;
-
-			break;
-		}
 	}
 
 	// Rewards the score and clamps it.

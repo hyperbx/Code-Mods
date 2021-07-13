@@ -44,7 +44,25 @@ __declspec(naked) void Physics_MidAsmHook()
 	{
 		call [interruptAddress]
 
-		// Reward player with Object score.
+		// Reward player with Physics score.
+		mov ecx, 2
+		call ScoreListener::Reward
+		mov edx, eax
+
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void PlanetWispFallBlock_MidAsmHook()
+{
+	static void* interruptAddress = (void*)0x6621A0;
+	static void* returnAddress = (void*)0x1131D9C;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// Reward player with Physics score.
 		mov ecx, 2
 		call ScoreListener::Reward
 		mov edx, eax
@@ -178,6 +196,36 @@ __declspec(naked) void Life_MidAsmHook()
 	}
 }
 
+__declspec(naked) void DashRing_MidAsmHook()
+{
+	static void* interruptAddress = (void*)0x6644C0;
+	static void* returnAddress = (void*)0x115AAA9;
+
+	__asm
+	{
+		call [interruptAddress]
+
+		// If the model index is not zero, reward Dash Ring score.
+		cmp dword ptr [esi + 114h], 0
+		jnz RewardDashRingScore
+
+		// Reward player with Rainbow Ring score.
+		mov ecx, 5
+		call ScoreListener::Reward
+		mov edx, eax
+		jmp Return
+
+	RewardDashRingScore:
+		// Reward player with Dash Ring score.
+		mov ecx, 11
+		call ScoreListener::Reward
+		mov edx, eax
+
+	Return:
+		jmp [returnAddress]
+	}
+}
+
 __declspec(naked) void QuickStep_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x6621A0;
@@ -255,54 +303,6 @@ __declspec(naked) void BoardTrick_MidAsmHook()
 	}
 }
 
-__declspec(naked) void PlanetWispFallBlock_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x6621A0;
-	static void* returnAddress = (void*)0x1131D9C;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		// Reward player with Object score.
-		mov ecx, 2
-		call ScoreListener::Reward
-		mov edx, eax
-
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void DashRing_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x6644C0;
-	static void* returnAddress = (void*)0x115AAA9;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		// If the model index is not zero, reward Dash Ring score.
-		cmp dword ptr [esi + 114h], 0
-		jnz RewardDashRingScore
-
-		// Reward player with Rainbow Ring score.
-		mov ecx, 5
-		call ScoreListener::Reward
-		mov edx, eax
-		jmp Return
-
-	RewardDashRingScore:
-		// Reward player with Dash Ring score.
-		mov ecx, 11
-		call ScoreListener::Reward
-		mov edx, eax
-
-	Return:
-		jmp [returnAddress]
-	}
-}
-
 #pragma endregion
 
 void ScoreHooks::Install()
@@ -311,6 +311,7 @@ void ScoreHooks::Install()
 	WRITE_JUMP(0x1054420, &Ring_MidAsmHook);
 	WRITE_JUMP(0xBDDD9A, &Enemy_MidAsmHook);
 	WRITE_JUMP(0xEA5412, &Physics_MidAsmHook);
+	WRITE_JUMP(0x1131D97, &PlanetWispFallBlock_MidAsmHook);
 	WRITE_JUMP(0x457D49, &PointMarker_MidAsmHook);
 	WRITE_JUMP(0x11A9CC9, &RedRing_MidAsmHook);
 	WRITE_JUMP(0x105586F, &ItemBox_MidAsmHook);
@@ -318,10 +319,9 @@ void ScoreHooks::Install()
 	WRITE_JUMP(0xE4BC3D, &TrickFinish_MidAsmHook);
 	WRITE_JUMP(0xE4B6E7, &Trick_MidAsmHook);
 	WRITE_JUMP(0xE6D86B, &Life_MidAsmHook);
+	WRITE_JUMP(0x115AAA4, &DashRing_MidAsmHook);
 	WRITE_JUMP(0xDFE300, &QuickStep_MidAsmHook);
 	WRITE_JUMP(0xDF2F17, &Drift_MidAsmHook);
 	WRITE_JUMP(0x1017E59, &Balloon_MidAsmHook);
 	WRITE_JUMP(0x11A128F, &BoardTrick_MidAsmHook);
-	WRITE_JUMP(0x1131D97, &PlanetWispFallBlock_MidAsmHook);
-	WRITE_JUMP(0x115AAA4, &DashRing_MidAsmHook);
 }

@@ -81,6 +81,11 @@ public:
         int totalBalloons;
 
         /// <summary>
+        /// Total number of hits taken by the player.
+        /// </summary>
+        int totalDamage;
+
+        /// <summary>
         /// Total amount of speed from checkpoints.
         /// </summary>
         int totalVelocity;
@@ -99,6 +104,28 @@ public:
         /// Seconds counted by the game.
         /// </summary>
         int seconds;
+
+        void Reset()
+        {
+            totalRingCount = 0;
+            totalEnemies = 0;
+            totalPhysics = 0;
+            totalPointMarkers = 0;
+            totalRedRings = 0;
+            totalRainbowRings = 0;
+            totalItemBoxes = 0;
+            totalSuperRings = 0;
+            totalTricks = 0;
+            totalDashRings = 0;
+            totalQuickSteps = 0;
+            totalDrifts = 0;
+            totalBalloons = 0;
+            totalDamage = 0;
+            totalVelocity = 0;
+            ringCount = 0;
+            minutes = 0;
+            seconds = 0;
+        }
     };
 
     static Statistics stats;

@@ -218,6 +218,18 @@
 			"Elements":
 			[
 				{
+					"Name": "rewardVelocityBonus",
+					"Description":
+					[
+						"Determines if you should be rewarded with a bonus for your current speed passing through a checkpoint."
+					],
+					"DisplayName": "Reward Velocity Bonus",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": true
+				},
+				{
 					"Name": "homingChainBonus",
 					"Description":
 					[
@@ -426,6 +438,18 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 2
+				},
+				{
+					"Name": "velocityBonusMultiplier",
+					"Description":
+					[
+						"The multiplier used to increase the velocity bonus."
+					],
+					"DisplayName": "Velocity Bonus Multiplier",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 10
 				}
 			]
         },
@@ -477,6 +501,18 @@
 			"DisplayName": "Behaviour",
 			"Elements":
 			[
+				{
+					"Name": "restoreLastCheckpointScore",
+					"Description":
+					[
+						"Determines if the score should reset back to what you had at your last checkpoint upon dying."
+					],
+					"DisplayName": "Restore Last Checkpoint Score",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": false
+				},
 				{
 					"Name": "scoreLimit",
 					"Description":

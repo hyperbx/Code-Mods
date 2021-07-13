@@ -46,4 +46,9 @@ public:
     /// Score calculated locally.
     /// </summary>
     static int score;
+
+    /// <summary>
+    /// The last score calculated before a checkpoint was hit.
+    /// </summary>
+    static int lastCheckpointScore;
 };

@@ -2,7 +2,9 @@ bool Configuration::overrideFlag = false;
 
 INIReader Configuration::config;
 string Configuration::configPath = INI_FILE;
+bool Configuration::rewardVelocityBonus = true;
 bool Configuration::scoreTimeout = false;
+bool Configuration::restoreLastCheckpointScore = false;
 int Configuration::scoreLimit = 999999;
 int Configuration::perfectBonus = 1;
 string Configuration::scoreFormat = "%06d";
@@ -33,10 +35,14 @@ void Configuration::Read(string path = "")
 	// Get the timers.
 	Tables::timerTable = Tables::TimerTable::GetTimers();
 
+	// GameplayBonus
+	Configuration::rewardVelocityBonus = config.GetBoolean("GameplayBonus", "rewardVelocityBonus", rewardVelocityBonus);
+
 	// Timer
 	Configuration::scoreTimeout = config.GetBoolean("Timer", "scoreTimeout", scoreTimeout);
 
 	// Behaviour
+	Configuration::restoreLastCheckpointScore = config.GetBoolean("Behaviour", "restoreLastCheckpointScore", restoreLastCheckpointScore);
 	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
 	Configuration::perfectBonus = config.GetInteger("Behaviour", "perfectBonus", perfectBonus);
 

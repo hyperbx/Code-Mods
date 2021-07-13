@@ -172,6 +172,7 @@ public:
         // Multipliers for certain conditions.
         int homingChainMultiplier = 0;
         int slamMultiplier = 0;
+        int velocityBonusMultiplier = 0;
 
         static MultiplierTable GetMultipliers()
         {
@@ -180,10 +181,12 @@ public:
             // Use the current configuration to get the multipliers.
             multiplierTable.homingChainMultiplier = Configuration::config.GetInteger("Multiplier", "homingChainMultiplier", Tables::multiplierTable.homingChainMultiplier);
             multiplierTable.slamMultiplier = Configuration::config.GetInteger("Multiplier", "slamMultiplier", Tables::multiplierTable.slamMultiplier);
+            multiplierTable.velocityBonusMultiplier = Configuration::config.GetInteger("Multiplier", "velocityBonusMultiplier", Tables::multiplierTable.velocityBonusMultiplier);
 
 #if _DEBUG
             printf("[Score Generations] homingChainMultiplier = %d\n", multiplierTable.homingChainMultiplier);
             printf("[Score Generations] slamMultiplier = %d\n", multiplierTable.slamMultiplier);
+            printf("[Score Generations] velocityBonusMultiplier = %d\n", multiplierTable.velocityBonusMultiplier);
 #endif
 
             return multiplierTable;

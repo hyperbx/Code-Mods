@@ -5,6 +5,9 @@ bool StateHooks::isResultsHooked = false;
 
 void OnLoad()
 {
+	// Reset statistics.
+	ScoreListener::Reset();
+
 	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
 	{
@@ -55,6 +58,7 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 
 		case 1:
 		{
+			// Give perfect bonus only for A rank.
 			if (ResultListener::resultDescription.rank == 3)
 				return originalIsPerfectBonus() ? true : false;
 
@@ -75,9 +79,6 @@ __declspec(naked) void Loading_MidAsmHook()
 	static void* interruptAddress = (void*)0x65FCC0;
 	static void* returnAddress = (void*)0x448E98;
 
-	// Reset statistics.
-	ScoreListener::Reset();
-
 	__asm
 	{
 		// Perform actions on the loading screen.
@@ -89,35 +90,22 @@ __declspec(naked) void Loading_MidAsmHook()
 	}
 }
 
-__declspec(naked) void ClassicSonicPrepareRestart_MidAsmHook()
+__declspec(naked) void GameOver_MidAsmHook()
 {
-	static void* interruptAddress = (void*)0xDD6740;
-	static void* returnAddress = (void*)0xDEB841;
+	static void* interruptAddress = (void*)0x6621A0;
+	static void* returnAddress = (void*)0x58477C;
+
+	// Reset the last checkpoint score.
+	ScoreListener::lastCheckpointScore = 0;
 
 	__asm
 	{
-		call [interruptAddress]
+		call[interruptAddress]
 
 		// Reset statistics.
 		call ScoreListener::Reset
 
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void ModernSonicPrepareRestart_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0xE14350;
-	static void* returnAddress = (void*)0xE28C7B;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		// Reset statistics.
-		call ScoreListener::Reset
-
-		jmp [returnAddress]
+		jmp[returnAddress]
 	}
 }
 
@@ -141,14 +129,15 @@ __declspec(naked) void ResultsCalculate_MidAsmHook()
 {
 	static void* returnAddress = (void*)0xD5A191;
 
-	// Gather the results.
-	ResultListener::Result();
-
-	// Reset statistics.
-	ScoreListener::Reset();
-
 	__asm
 	{
+		// Gather the results.
+		call ResultListener::Result
+
+		// Reset statistics.
+		call ScoreListener::Reset
+
+		// Load descriptors for results.
 		lea eax, ResultListener::resultDescription
 
 		jmp [returnAddress]
@@ -178,13 +167,10 @@ void StateHooks::HookResults(bool enabled)
 void StateHooks::Install()
 {
 	// Update local loading function.
-	WRITE_JUMP(0x448E93, &Loading_MidAsmHook)
-
-	// Reset statistics upon restarting.
-	WRITE_JUMP(0xDEB83C, &ClassicSonicPrepareRestart_MidAsmHook);
-	WRITE_JUMP(0xE28C76, &ModernSonicPrepareRestart_MidAsmHook);
+	WRITE_JUMP(0x448E93, &Loading_MidAsmHook);
 
 	// Reset statistics upon exiting.
+	WRITE_JUMP(0x584777, &GameOver_MidAsmHook);
 	WRITE_JUMP(0x42AD71, &Exit_MidAsmHook);
 
 	// Install hook to set perfect bonus.

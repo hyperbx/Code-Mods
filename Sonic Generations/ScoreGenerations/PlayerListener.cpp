@@ -1,16 +1,24 @@
-void** const PlayerListener::CSonicContext = (void**)0x1E5E2F0;
+void** const PlayerListener::CSonicContextAddress = (void**)0x1E5E2F0;
 bool PlayerListener::isGrounded = false;
+bool PlayerListener::isDead = false;
 
 HOOK(void, __stdcall, SonicMovementContext, 0xE32180, int a1, __m128* a2)
 {
 	originalSonicMovementContext(a1, a2);
 
-	PlayerListener::isGrounded = *(bool*)(*(DWORD*)((int)a1 + 8) + 0x360);
+	const DWORD playerContextOffset = *(DWORD*)((int)a1 + 8);
+
+	// Get context from offset...
+	PlayerListener::CSonicContext* context = (PlayerListener::CSonicContext*)playerContextOffset;
+
+	// Get flags...
+	PlayerListener::isGrounded = *(bool*)(playerContextOffset + 0x360);
+	PlayerListener::isDead = PlayerListener::GetStateFlagsFromContext(context)->eStateFlag_Dead;
 }
 
 bool PlayerListener::IsContextSafe()
 {
-	return *CSonicContext;
+	return *CSonicContextAddress;
 }
 
 const uint32_t PlayerListener::GetContext()
@@ -18,7 +26,7 @@ const uint32_t PlayerListener::GetContext()
 	if (!IsContextSafe())
 		return -1;
 
-	return *(uint32_t*)((uint32_t) * (void**)((uint32_t)*CSonicContext + 0x110) + 172);
+	return *(uint32_t*)((uint32_t) * (void**)((uint32_t)*CSonicContextAddress + 0x110) + 172);
 }
 
 float PlayerListener::GetVelocity()
@@ -40,6 +48,13 @@ bool PlayerListener::IsSuper()
 		return false;
 
 	return *(int*)(GetContext() + 0x1A0);
+}
+
+PlayerListener::CSonicStateFlags* PlayerListener::GetStateFlagsFromContext(PlayerListener::CSonicContext* sonicContext)
+{
+	int* const context = reinterpret_cast<int*>(sonicContext);
+
+	return reinterpret_cast<CSonicStateFlags*>(*reinterpret_cast<int*>(context[0x14D] + 4));
 }
 
 void PlayerListener::Install()

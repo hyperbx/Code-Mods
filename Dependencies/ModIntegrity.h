@@ -98,7 +98,13 @@ inline bool ModIntegrity::VerifyAuthor(const char* author)
 
 	// Compare author field in the mod config with the input author.
 	if (!StringHelper::Compare(modInfo.Get("Desc", "Author", author), author))
+	{
+#if _DEBUG
+		printf("[Mod Integrity] Integrity check failed - the author does not match!\n");
+#endif
+
 		return false;
+	}
 
 	return true;
 }
