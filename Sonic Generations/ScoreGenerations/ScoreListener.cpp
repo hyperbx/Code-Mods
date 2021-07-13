@@ -62,9 +62,9 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			scoreToReward = Tables::scoreTable.PointMarker;
 
 			// Increase total velocity for the speed bonus.
-			if (Configuration::rewardVelocityBonus)
+			if (Configuration::rewardSpeedBonus)
 			{
-				StatisticsListener::stats.totalVelocity += PlayerListener::GetVelocity() * Tables::multiplierTable.velocityBonusMultiplier;
+				StatisticsListener::stats.totalVelocity += PlayerListener::GetVelocity() * Tables::multiplierTable.speedBonusMultiplier;
 
 #if _DEBUG
 				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::stats.totalVelocity);

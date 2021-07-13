@@ -38,7 +38,7 @@ public:
 	/// <summary>
 	/// Determines if you should be rewarded with a bonus for your current speed passing through a checkpoint.
 	/// </summary>
-	static bool rewardVelocityBonus;
+	static bool rewardSpeedBonus;
 
 	/// <summary>
 	/// Determines if the score should stop counting up after you surpass the maximum amount of time for a time bonus.

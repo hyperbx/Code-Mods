@@ -218,12 +218,12 @@
 			"Elements":
 			[
 				{
-					"Name": "rewardVelocityBonus",
+					"Name": "rewardSpeedBonus",
 					"Description":
 					[
 						"Determines if you should be rewarded with a bonus for your current speed passing through a checkpoint."
 					],
-					"DisplayName": "Reward Velocity Bonus",
+					"DisplayName": "Reward Speed Bonus",
 					"Type": "bool",
 					"MinValue": null,
 					"MaxValue": null,
@@ -440,12 +440,12 @@
 					"DefaultValue": 2
 				},
 				{
-					"Name": "velocityBonusMultiplier",
+					"Name": "speedBonusMultiplier",
 					"Description":
 					[
-						"The multiplier used to increase the velocity bonus."
+						"The multiplier used to increase the speed bonus."
 					],
-					"DisplayName": "Velocity Bonus Multiplier",
+					"DisplayName": "Speed Bonus Multiplier",
 					"Type": "int",
 					"MinValue": null,
 					"MaxValue": null,
