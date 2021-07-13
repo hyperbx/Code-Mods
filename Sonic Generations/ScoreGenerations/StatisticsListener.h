@@ -81,11 +81,6 @@ public:
         int totalBalloons;
 
         /// <summary>
-        /// Total number of hits taken by the player.
-        /// </summary>
-        int totalDamage;
-
-        /// <summary>
         /// Total amount of speed from checkpoints.
         /// </summary>
         int totalVelocity;
@@ -120,7 +115,6 @@ public:
             totalQuickSteps = 0;
             totalDrifts = 0;
             totalBalloons = 0;
-            totalDamage = 0;
             totalVelocity = 0;
             ringCount = 0;
             minutes = 0;

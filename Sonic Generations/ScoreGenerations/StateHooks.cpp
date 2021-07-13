@@ -100,12 +100,12 @@ __declspec(naked) void GameOver_MidAsmHook()
 
 	__asm
 	{
-		call[interruptAddress]
+		call [interruptAddress]
 
 		// Reset statistics.
 		call ScoreListener::Reset
 
-		jmp[returnAddress]
+		jmp [returnAddress]
 	}
 }
 
