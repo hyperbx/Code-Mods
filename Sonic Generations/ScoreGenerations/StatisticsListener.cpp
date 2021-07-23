@@ -34,7 +34,7 @@ void __fastcall UpdateElapsedTime(int minutes, int seconds)
 
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void DefaultRingFormatter_MidAsmHook()
+__declspec(naked) void MillisecondsFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E59;
 
@@ -108,6 +108,6 @@ void StatisticsListener::Install()
 	WRITE_JUMP(0x1098D40, &TimeFormatter_MidAsmHook);
 
 	// Update the ring count.
-	WRITE_JUMP(0x1098E4C, &DefaultRingFormatter_MidAsmHook);
+	WRITE_JUMP(0x1098E4C, &MillisecondsFormatter_MidAsmHook);
 	WRITE_JUMP(0x12281B8, &FinalBossRingFormatter_MidAsmHook);
 }

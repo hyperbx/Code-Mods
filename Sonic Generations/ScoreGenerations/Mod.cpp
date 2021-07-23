@@ -45,15 +45,15 @@ extern "C" _declspec(dllexport) void Init()
 	if (!Configuration::customXNCP)
 		ArchiveTreePatcher::Install();
 
-	// Install listeners...
+	// Install listeners.
 	StatisticsListener::Install();
 	PlayerListener::Install();
 
-	// Install hooks...
+	// Install hooks.
 	HudSonicStage::Install();
 	ScoreHooks::Install();
 	StateHooks::Install();
 
-	// Install simple patches...
+	// Apply simple patches.
 	Patches::Install();
 }

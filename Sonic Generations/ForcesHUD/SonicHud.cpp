@@ -92,7 +92,7 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void DefaultRingFormatterMidAsmHook()
+__declspec(naked) void MillisecondsFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E76;
 
@@ -107,7 +107,7 @@ __declspec(naked) void DefaultRingFormatterMidAsmHook()
 	}
 }
 
-__declspec(naked) void FinalBossRingFormatterMidAsmHook()
+__declspec(naked) void FinalBossRingFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x122824A;
 
@@ -124,7 +124,7 @@ __declspec(naked) void FinalBossRingFormatterMidAsmHook()
 	}
 }
 
-__declspec(naked) void ChaosEnergyMidAsmHook()
+__declspec(naked) void ChaosEnergy_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x65FBE0;
 	static void* returnAddress = (void*)0x11246A9;
@@ -140,7 +140,7 @@ __declspec(naked) void ChaosEnergyMidAsmHook()
 	}
 }
 
-__declspec(naked) void TrickMidAsmHook()
+__declspec(naked) void Trick_MidAsmHook()
 {
 	static void* interruptAddress = (void*)0x6644C0;
 	static void* returnAddress = (void*)0xE4B6EC;
@@ -155,7 +155,7 @@ __declspec(naked) void TrickMidAsmHook()
 	}
 }
 
-__declspec(naked) void TrickFinishMidAsmHook()
+__declspec(naked) void TrickFinish_MidAsmHook()
 {
 	static void* returnAddress = (void*)0xE4BC44;
 
@@ -174,15 +174,15 @@ __declspec(naked) void TrickFinishMidAsmHook()
 void SonicHud::Install()
 {
 	// Jump to ring formatters to fix leading zeroes.
-	WRITE_JUMP(0x1098E71, &DefaultRingFormatterMidAsmHook);
-	WRITE_JUMP(0x1228245, &FinalBossRingFormatterMidAsmHook);
+	WRITE_JUMP(0x1098E71, &MillisecondsFormatter_MidAsmHook);
+	WRITE_JUMP(0x1228245, &FinalBossRingFormatter_MidAsmHook);
 
 	// Jump to chaos energy hook.
-	WRITE_JUMP(0x11246A4, &ChaosEnergyMidAsmHook);
+	WRITE_JUMP(0x11246A4, &ChaosEnergy_MidAsmHook);
 
 	// Jump to trick hooks to intercept the chaos energy hook.
-	WRITE_JUMP(0xE4B6E7, &TrickMidAsmHook);
-	WRITE_JUMP(0xE4BC3D, &TrickFinishMidAsmHook);
+	WRITE_JUMP(0xE4B6E7, &Trick_MidAsmHook);
+	WRITE_JUMP(0xE4BC3D, &TrickFinish_MidAsmHook);
 
 	// Install HUD update hook.
 	INSTALL_HOOK(CHudSonicStageUpdate);
