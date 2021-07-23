@@ -1,6 +1,6 @@
 #pragma once
 
-class SonicHud
+class HudSonicStage
 {
 public:
     /// <summary>

@@ -14,7 +14,7 @@ char* __fastcall CreateTripleDigits(char* buffer, int milliseconds)
 	if (millisecondsDigit3 > 9)
 		millisecondsDigit3 = 0;
 
-	// Change string format and write new milliseconds.
+	// Write new milliseconds to buffer.
 	if (milliseconds != 0)
 		sprintf(buffer, "%03d", (milliseconds * 10) + millisecondsDigit3++);
 
@@ -36,7 +36,7 @@ __declspec(naked) void MillisecondsFormatter_MidAsmHook()
 	}
 }
 
-void SonicHud::Install()
+void HudSonicStage::Install()
 {
 	// Jump to milliseconds formatter to create triple digits.
 	WRITE_JUMP(0x1098D7A, &MillisecondsFormatter_MidAsmHook);

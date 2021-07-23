@@ -117,7 +117,7 @@ copy /Y "$(MSBuildProjectDirectory)\ForcesHUD.json" "$(MSBuildProjectDirectory)\
     <ClInclude Include="Pch.h" />
     <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="Resources.h" />
-    <ClInclude Include="SonicHud.h" />
+    <ClInclude Include="HudSonicStage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArchiveTreePatcher.cpp" />
@@ -131,7 +131,7 @@ copy /Y "$(MSBuildProjectDirectory)\ForcesHUD.json" "$(MSBuildProjectDirectory)\
     </ClCompile>
     <ClCompile Include="Patches.cpp" />
     <ClCompile Include="PlayerListener.cpp" />
-    <ClCompile Include="SonicHud.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ForcesHUD.rc" />

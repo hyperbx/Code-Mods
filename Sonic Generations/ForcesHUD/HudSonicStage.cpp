@@ -171,7 +171,7 @@ __declspec(naked) void TrickFinish_MidAsmHook()
 
 #pragma endregion
 
-void SonicHud::Install()
+void HudSonicStage::Install()
 {
 	// Jump to ring formatters to fix leading zeroes.
 	WRITE_JUMP(0x1098E71, &MillisecondsFormatter_MidAsmHook);

@@ -14,4 +14,4 @@
 #include <Helpers.h>
 
 // Internal headers
-#include "SonicHud.h"
+#include "HudSonicStage.h"

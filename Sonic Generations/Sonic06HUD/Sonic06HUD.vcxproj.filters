@@ -2,12 +2,12 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Pch.h" />
-    <ClInclude Include="SonicHud.h" />
+    <ClInclude Include="HudSonicStage.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="Pch.cpp" />
-    <ClCompile Include="SonicHud.cpp" />
+    <ClCompile Include="HudSonicStage.cpp" />
   </ItemGroup>
 </Project>

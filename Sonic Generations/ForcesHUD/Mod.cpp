@@ -13,7 +13,7 @@ extern "C" _declspec(dllexport) void Init()
 	Patches::Install();
 
 	// Install mid-ASM hooks for HUD stuff.
-	SonicHud::Install();
+	HudSonicStage::Install();
 
 	// Patches the game to use different button prompts.
 	ControllerPatcher::Install();

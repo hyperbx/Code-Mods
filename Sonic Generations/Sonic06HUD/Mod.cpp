@@ -7,5 +7,5 @@ extern "C" _declspec(dllexport) void Init()
 	WRITE_MEMORY(0x1098CCA, char*, "%d");
 
 	// Install mid-ASM hooks for HUD stuff.
-	SonicHud::Install();
+	HudSonicStage::Install();
 }

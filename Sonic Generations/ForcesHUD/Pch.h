@@ -26,7 +26,7 @@
 #include "ArchiveTreePatcher.h"
 #include "Configuration.h"
 #include "DllMain.h"
+#include "HudSonicStage.h"
 #include "Patches.h"
 #include "PlayerListener.h"
-#include "SonicHud.h"
 #include "ControllerPatcher.h"
