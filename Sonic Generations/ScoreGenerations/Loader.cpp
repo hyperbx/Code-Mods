@@ -92,6 +92,7 @@ void Loader::ConfigureScoreGenerations()
 			if (IOHelper::FileExists(scoreGenerationsConfig))
 			{
 				Configuration::Read(scoreGenerationsConfig);
+
 #if _DEBUG
 				printf("[Score Generations] Configuration overridden by %s\n", modInfo.title.c_str());
 #endif
