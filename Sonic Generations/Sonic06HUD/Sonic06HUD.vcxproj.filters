@@ -3,11 +3,15 @@
   <ItemGroup>
     <ClInclude Include="Pch.h" />
     <ClInclude Include="HudSonicStage.h" />
+    <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="Patches.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="Pch.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
+    <ClCompile Include="Patches.cpp" />
   </ItemGroup>
 </Project>
