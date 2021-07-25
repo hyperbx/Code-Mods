@@ -3,8 +3,8 @@
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
-	// Use single digit for life counter.
-	WRITE_MEMORY(0x1098CCA, char*, "%d");
+	// Apply simple patches.
+	Patches::Install();
 
 	// Install mid-ASM hooks for HUD stuff.
 	HudSonicStage::Install();

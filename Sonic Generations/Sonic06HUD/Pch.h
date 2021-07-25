@@ -1,4 +1,6 @@
-﻿#pragma once
+﻿using namespace std;
+
+#pragma once
 
 #define WIN32_LEAN_AND_MEAN
 
@@ -7,6 +9,7 @@
 #include <detours.h>
 
 // Standard library
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
 
@@ -15,3 +18,5 @@
 
 // Internal headers
 #include "HudSonicStage.h"
+#include "Patches.h"
+#include "PlayerListener.h"
