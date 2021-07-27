@@ -26,11 +26,14 @@ char* __fastcall CreateTripleDigits(char* buffer, int milliseconds)
 /// </summary>
 HOOK(float*, __fastcall, MsgFadeIn, 0x10CEC90, void* This, void* Edx, float* a2)
 {
-	a2[6] = ((float*)This)[24]; // start alpha
-
-	if (a2[6] > 0.0f)
+	uint8_t* color = (uint8_t*)((uint32_t)a2 + 21);
+	if (color[0] == 0 && color[1] == 0 && color[2] == 0)
 	{
-		a2[4] = 0.2f; // transition time
+		a2[6] = ((float*)This)[24]; // start alpha
+		if (a2[6] > 0.0f)
+		{
+			a2[4] = 0.2f; // transition time
+		}
 	}
 
 	return originalMsgFadeIn(This, Edx, a2);
@@ -41,8 +44,12 @@ HOOK(float*, __fastcall, MsgFadeIn, 0x10CEC90, void* This, void* Edx, float* a2)
 /// </summary>
 HOOK(float*, __fastcall, MsgFadeOut, 0x10CEDB0, void* This, void* Edx, float* a2)
 {
-	a2[4] = 0.0f; // transition time
-	a2[6] = 1.0f; // start alpha
+	uint8_t* color = (uint8_t*)((uint32_t)a2 + 21);
+	if (color[0] == 0 && color[1] == 0 && color[2] == 0)
+	{
+		a2[4] = 0.0f; // transition time
+		a2[6] = 1.0f; // start alpha
+	}
 
 	return originalMsgFadeOut(This, Edx, a2);
 }
