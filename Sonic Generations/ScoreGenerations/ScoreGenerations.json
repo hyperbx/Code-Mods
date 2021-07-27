@@ -256,49 +256,6 @@
 			]
         },
 	    {
-			"Name": "Multiplier",
-			"DisplayName": "Multipliers",
-			"Elements":
-			[
-				{
-					"Name": "speedBonusMultiplier",
-					"Description":
-					[
-						"The multiplier used to increase the speed bonus."
-					],
-					"DisplayName": "Speed Bonus Multiplier",
-					"Type": "int",
-					"MinValue": null,
-					"MaxValue": null,
-					"DefaultValue": 10
-				},
-				{
-					"Name": "homingChainMultiplier",
-					"Description":
-					[
-						"The multiplier used to increase the homing chain bonus."
-					],
-					"DisplayName": "Homing Chain Multiplier",
-					"Type": "int",
-					"MinValue": null,
-					"MaxValue": null,
-					"DefaultValue": 2
-				},
-				{
-					"Name": "slamMultiplier",
-					"Description":
-					[
-						"The multiplier used to increase the slam bonus."
-					],
-					"DisplayName": "Slam Multiplier",
-					"Type": "int",
-					"MinValue": null,
-					"MaxValue": null,
-					"DefaultValue": 2
-				}
-			]
-        },
-	    {
 			"Name": "ResultBonus",
 			"DisplayName": "Results Bonuses",
 			"Elements":
@@ -450,6 +407,49 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": "0"
+				}
+			]
+        },
+	    {
+			"Name": "Multiplier",
+			"DisplayName": "Multipliers",
+			"Elements":
+			[
+				{
+					"Name": "speedBonusMultiplier",
+					"Description":
+					[
+						"The multiplier used to increase the speed bonus."
+					],
+					"DisplayName": "Speed Bonus Multiplier",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 10
+				},
+				{
+					"Name": "homingChainMultiplier",
+					"Description":
+					[
+						"The multiplier used to increase the homing chain bonus."
+					],
+					"DisplayName": "Homing Chain Multiplier",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 2
+				},
+				{
+					"Name": "slamMultiplier",
+					"Description":
+					[
+						"The multiplier used to increase the slam bonus."
+					],
+					"DisplayName": "Slam Multiplier",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 2
 				}
 			]
         },
