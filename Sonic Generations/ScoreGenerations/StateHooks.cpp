@@ -70,6 +70,17 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 	}
 }
 
+FUNCTION_PTR(bool, __cdecl, fpIsPerfectBonus, 0x10B8A90);
+
+HOOK(int*, __cdecl, MsgChangeResultStateConstructor, 0x587C40, void* a1, int* a2, int* rank, int* a4)
+{
+	// Set correct rank animation if there's no perfect bonus.
+	if (!fpIsPerfectBonus())
+		*rank = ResultListener::resultDescription.rank;
+
+	return originalMsgChangeResultStateConstructor(a1, a2, rank, a4);
+}
+
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
@@ -175,4 +186,7 @@ void StateHooks::Install()
 
 	// Install hook to set perfect bonus.
 	INSTALL_HOOK(IsPerfectBonus);
+
+	// Install hook to push the modified rank to MsgChangeResultStateConstructor.
+	INSTALL_HOOK(MsgChangeResultStateConstructor);
 }

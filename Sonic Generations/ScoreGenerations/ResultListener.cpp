@@ -17,21 +17,21 @@ ResultListener::RankType ResultListener::Rank()
 		{
 			if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].C)
 			{
-				return RankType::D; // D rank
+				return RankType::D;
 			}
 			else
 			{
-				return RankType::C; // C rank
+				return RankType::C;
 			}
 		}
 		else
 		{
-			return RankType::B; // B rank
+			return RankType::B;
 		}
 	}
 	else
 	{
-		return RankType::A; // A rank
+		return RankType::A;
 	}
 }
 
