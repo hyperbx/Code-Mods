@@ -1,26 +1,3 @@
-int millisecondsDigit3 = 0;
-
-/// <summary>
-/// Calculates a new set of milliseconds so it's compatible with three digits.
-/// </summary>
-/// <param name="buffer">Character buffer from EDX.</param>
-/// <param name="milliseconds">Milliseconds from ESI.</param>
-char* __fastcall CreateTripleDigits(char* buffer, int milliseconds)
-{
-	// Write zeroes to buffer.
-	sprintf(buffer, "%03d", 0);
-
-	// Reset third digit.
-	if (millisecondsDigit3 > 9)
-		millisecondsDigit3 = 0;
-
-	// Write new milliseconds to buffer.
-	if (milliseconds != 0)
-		sprintf(buffer, "%03d", (milliseconds * 10) + millisecondsDigit3++);
-
-	return buffer;
-}
-
 /// <summary>
 /// Fade in transition hook to correct transition times.
 /// </summary>
@@ -76,26 +53,20 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
 
-__declspec(naked) void MillisecondsFormatter_MidAsmHook()
+__declspec(naked) void MillisecondsCalculate_MidAsmHook()
 {
-	static void* returnAddress = (void*)0x1098D7F;
+	static void* returnAddress = (void*)0x10B3847;
 
 	__asm
 	{
-		mov ecx, eax
-		mov edx, esi
-		call CreateTripleDigits
-		mov edx, eax
-
+		imul edx, 3E8h
+		sub ecx, edx
 		jmp [returnAddress]
 	}
 }
 
 void HudSonicStage::Install()
 {
-	// Jump to milliseconds formatter to create triple digits.
-	WRITE_JUMP(0x1098D7A, &MillisecondsFormatter_MidAsmHook);
-
 	// Install HUD update hook.
 	INSTALL_HOOK(CHudSonicStageUpdate);
 
@@ -103,4 +74,28 @@ void HudSonicStage::Install()
 	INSTALL_HOOK(MsgFadeIn);
 	INSTALL_HOOK(MsgFadeOut);
 	INSTALL_HOOK(FadeOutCountDec);
+
+	// Calculate correct 3 digit milliseconds for stage time
+	static double const secMultiplier = 1000;
+	WRITE_MEMORY(0x10B37BF, double*, &secMultiplier);
+	WRITE_MEMORY(0x10B37F7, uint32_t, 9162597); // 9162597/2^39 ~= 1/60000
+	WRITE_MEMORY(0x10B3830, int32_t, -60000); // sec = total_sec + min * (-60000) = total_sec % 60000
+	WRITE_MEMORY(0x10B3837, uint32_t, 137438954); // 137438954/2^37 ~= 1/1000
+	WRITE_JUMP(0x10B3842, MillisecondsCalculate_MidAsmHook);
+	WRITE_MEMORY(0x10B3823, uint32_t, 999); // maximum milliseconds
+	WRITE_MEMORY(0x1098D75, uint32_t, 0x168E8E0); // %03d 
+
+	// Other instances using sub_10B37B0
+	WRITE_STRING(0x1689274, "--:--.---");
+	WRITE_STRING(0x1689280, "%02d:%02d.%03d");
+	WRITE_STRING(0x1689290, "--:--.---");
+	WRITE_STRING(0x168929C, "%02d:%02d.%03d");
+	WRITE_STRING(0x168CD0C, "99:59.999");
+	WRITE_STRING(0x168CD18, "%02d:%02d.%03d");
+	WRITE_STRING(0x16941C0, "%02d:%02d.%03d");
+	WRITE_MEMORY(0x117BF38, uint32_t, 0x168E8E0); // %03d 
+	WRITE_MEMORY(0x11CCCC2, uint32_t, 0x168E8E0); // %03d
+
+	// Fixed default result time to 99:59.999
+	WRITE_MEMORY(0x10B685B, uint32_t, 0x168CD0C);
 }

@@ -96,3 +96,11 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
             *((uint8_t*)(location) + i) = 0x90; \
         VirtualProtect((void*)(location), (size_t)(count), oldProtect, &oldProtect); \
     }
+
+#define WRITE_STRING(location, STR) \
+    { \
+        DWORD oldProtect; \
+        VirtualProtect((void*)location, sizeof(STR), PAGE_EXECUTE_READWRITE, &oldProtect); \
+        memcpy((void*)location, STR, sizeof(STR)); \
+        VirtualProtect((void*)location, sizeof(STR), oldProtect, NULL); \
+    }
