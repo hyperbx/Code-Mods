@@ -1,4 +1,13 @@
 /// <summary>
+/// Change 2 digit decisecond to 3 digit millsecond
+/// </summary>
+/// <param name="milliseconds">2 digit decisecond from ECX</param>
+uint32_t __fastcall CreateRandomThirdDigit(uint32_t milliseconds)
+{
+	return milliseconds * 10 + rand() % 10;
+}
+
+/// <summary>
 /// Fade in transition hook to correct transition times.
 /// </summary>
 HOOK(float*, __fastcall, MsgFadeIn, 0x10CEC90, void* This, void* Edx, float* a2)
@@ -65,6 +74,78 @@ __declspec(naked) void MillisecondsCalculate_MidAsmHook()
 	}
 }
 
+__declspec(naked) void MissionNextRankMaxTime_MidAsmHook()
+{
+	static void* returnAddress = (void*)0x10B16D5;
+
+	__asm
+	{
+		mov	esi, 99
+		mov edx, 59
+		mov ecx, 999
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void MissionNextRankRandomDigit_MidAsmHook()
+{
+	static void* returnAddress = (void*)0x10B16F9;
+
+	__asm
+	{
+		push eax
+		push edx
+		push esi
+		call CreateRandomThirdDigit
+		mov ecx, eax
+		pop esi
+		pop edx
+		pop eax
+
+		push ecx
+		push edx
+		push esi
+		lea ecx, [esp + 3Ch]
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void StageNextRankMaxTime_MidAsmHook()
+{
+	static void* returnAddress = (void*)0x10B6013;
+
+	__asm
+	{
+		mov	esi, 99
+		mov edx, 59
+		mov ecx, 999
+		jmp [returnAddress]
+	}
+}
+
+__declspec(naked) void StageNextRankRandomDigit_MidAsmHook()
+{
+	static void* returnAddress = (void*)0x10B6037;
+
+	__asm
+	{
+		push eax
+		push edx
+		push esi
+		call CreateRandomThirdDigit
+		mov ecx, eax
+		pop esi
+		pop edx
+		pop eax
+
+		push ecx
+		push edx
+		push esi
+		lea ecx, [esp + 14h]
+		jmp [returnAddress]
+	}
+}
+
 void HudSonicStage::Install()
 {
 	// Install HUD update hook.
@@ -84,6 +165,24 @@ void HudSonicStage::Install()
 	WRITE_JUMP(0x10B3842, MillisecondsCalculate_MidAsmHook);
 	WRITE_MEMORY(0x10B3823, uint32_t, 999); // maximum milliseconds
 	WRITE_MEMORY(0x1098D75, uint32_t, 0x168E8E0); // %03d 
+
+	// Set laptime always display current time
+	WRITE_MEMORY(0x1032FD1, uint8_t, 0xEB);
+	WRITE_MEMORY(0x1033040, uint8_t, 0xEB);
+	WRITE_NOP(0x10330A0, 6);
+	WRITE_JUMP(0x103312C, (void*)0x103313E);
+	WRITE_MEMORY(0x10978E4, double*, &secMultiplier);
+	WRITE_STRING(0x168ED20, "%02d:%02d.%03d");
+
+	// Display a random 3rd digit for next rank time in mission
+	WRITE_STRING(0x1693474, "%02d:%02d.%03d");
+	WRITE_JUMP(0x10B16CB, MissionNextRankMaxTime_MidAsmHook);
+	WRITE_JUMP(0x10B16F2, MissionNextRankRandomDigit_MidAsmHook);
+
+	// Display a random 3rd digit for next rank time in stages
+	WRITE_STRING(0x16940F4, "%02d:%02d.%03d");
+	WRITE_JUMP(0x10B6009, StageNextRankMaxTime_MidAsmHook);
+	WRITE_JUMP(0x10B6030, StageNextRankRandomDigit_MidAsmHook);
 
 	// Other instances using sub_10B37B0
 	WRITE_STRING(0x1689274, "--:--.---");
