@@ -197,4 +197,8 @@ void HudSonicStage::Install()
 
 	// Fixed default result time to 99:59.999
 	WRITE_MEMORY(0x10B685B, uint32_t, 0x168CD0C);
+
+	// Set mission count down have 3 digit millisecond
+	WRITE_MEMORY(0x124F0B1, double*, &secMultiplier);
+	WRITE_MEMORY(0x124F0BF, uint32_t, 0x168E8E0); // %03d
 }
