@@ -242,6 +242,19 @@
 					"DefaultValue": 100
 				},
 				{
+					"Name": "homingChainBonusLimit",
+					"Description":
+					[
+						"The limit the homing chain bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"DisplayName": "Homing Chain Bonus Limit",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 5000
+				},
+				{
 					"Name": "slamBonus",
 					"Description":
 					[
@@ -252,6 +265,19 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 100
+				},
+				{
+					"Name": "slamBonusLimit",
+					"Description":
+					[
+						"The limit the slam bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"DisplayName": "Slam Bonus Limit",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 5000
 				}
 			]
         },

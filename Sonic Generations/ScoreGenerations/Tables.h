@@ -133,8 +133,10 @@ public:
     struct BonusTable
     {
         // Algorithms for calculating bonuses.
-        int homingChainBonus;
-        int slamBonus;
+        int homingChainBonus = 0;
+        int homingChainBonusLimit = 0;
+        int slamBonus = 0;
+        int slamBonusLimit = 0;
         string timeBonusAlgorithm;
         string ringBonusAlgorithm;
         string speedBonusAlgorithm;
@@ -146,7 +148,9 @@ public:
 
             // Use the current configuration to get the bonuses.
             bonusTable.homingChainBonus = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", Tables::bonusTable.homingChainBonus);
+            bonusTable.homingChainBonusLimit = Configuration::config.GetInteger("GameplayBonus", "homingChainBonusLimit", Tables::bonusTable.homingChainBonusLimit);
             bonusTable.slamBonus = Configuration::config.GetInteger("GameplayBonus", "slamBonus", Tables::bonusTable.slamBonus);
+            bonusTable.slamBonusLimit = Configuration::config.GetInteger("GameplayBonus", "slamBonusLimit", Tables::bonusTable.slamBonusLimit);
             bonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", Tables::bonusTable.timeBonusAlgorithm);
             bonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", Tables::bonusTable.ringBonusAlgorithm);
             bonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", Tables::bonusTable.speedBonusAlgorithm);
@@ -154,7 +158,9 @@ public:
 
 #if _DEBUG
             printf("[Score Generations] homingChainBonus = %d\n", bonusTable.homingChainBonus);
+            printf("[Score Generations] homingChainBonusLimit = %d\n", bonusTable.homingChainBonusLimit);
             printf("[Score Generations] slamBonus = %d\n", bonusTable.slamBonus);
+            printf("[Score Generations] slamBonusLimit = %d\n", bonusTable.slamBonusLimit);
             printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
             printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
             printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());

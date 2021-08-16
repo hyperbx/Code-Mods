@@ -6,6 +6,7 @@ int multipliedSlamBonus = 0;
 int MultiplierListener::AddHomingChainBonus()
 {
 	int scoreToReward = 0;
+	int limit = Tables::bonusTable.homingChainBonusLimit;
 
 	if (!PlayerListener::isGrounded)
 	{
@@ -28,7 +29,7 @@ int MultiplierListener::AddHomingChainBonus()
 	printf("[Score Generations] Homing Chain Bonus = %d\n", scoreToReward);
 #endif
 
-	return scoreToReward;
+	return limit == 0 ? scoreToReward : clamp(scoreToReward, 0, limit);
 }
 
 void MultiplierListener::ResetHomingChainBonus()
@@ -40,6 +41,7 @@ void MultiplierListener::ResetHomingChainBonus()
 int MultiplierListener::AddSlamBonus()
 {
 	int scoreToReward = 0;
+	int limit = Tables::bonusTable.slamBonusLimit;
 
 	if (PlayerListener::isGrounded)
 	{
@@ -62,7 +64,7 @@ int MultiplierListener::AddSlamBonus()
 	printf("[Score Generations] Slam Bonus = %d\n", scoreToReward);
 #endif
 
-	return scoreToReward;
+	return limit == 0 ? scoreToReward : clamp(scoreToReward, 0, limit);
 }
 
 void MultiplierListener::ResetSlamBonus()
