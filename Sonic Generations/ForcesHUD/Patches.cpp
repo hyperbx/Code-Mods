@@ -76,12 +76,14 @@ void Patches::Install()
 			WRITE_MEMORY(0xE4B9DB, uint32_t, 0x31447); // 2002_trickfinish
 
 		case 3:
+		{
 			// The case for option 2 bleeds into this one, so we'll break here.
 			if (Configuration::trickSounds == 2)
 				break;
 
 			WRITE_MEMORY(0x11A129C, uint32_t, 0x313E6); // 2002_bdtrick_succ
 			break;
+		}
 	}
 
 	if (Configuration::homingSound)
