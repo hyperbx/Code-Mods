@@ -53,7 +53,7 @@ public:
 	static bool alwaysActiveReticle;
 
 	/// <summary>
-	/// Determines whether or not Forces' trick sounds will be used.
+	/// Determines how Forces' trick sounds should be used.
 	/// </summary>
 	static int trickSounds;
 
