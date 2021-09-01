@@ -23,45 +23,71 @@ void __fastcall SetMissionTime(char* buffer, int totalSeconds)
 /// <summary>
 /// Fade in transition hook to correct transition times.
 /// </summary>
-HOOK(float*, __fastcall, MsgFadeIn, 0x10CEC90, void* This, void* Edx, float* a2)
+void __fastcall SetLoadingFadeIn(float startAlpha, float* a2)
 {
 	uint8_t* color = (uint8_t*)((uint32_t)a2 + 21);
-
 	if (color[0] == 0 && color[1] == 0 && color[2] == 0)
 	{
-		a2[6] = ((float*)This)[24]; // start alpha
+		a2[6] = startAlpha; // start alpha
 
 		if (a2[6] > 0.0f)
+		{
 			a2[4] = 0.2f; // transition time
-	}
 
-	return originalMsgFadeIn(This, Edx, a2);
+			// Unlock player control
+			(*(uint32_t**)0x1E66B40)[2] = 0;
+		}
+	}
 }
 
 /// <summary>
 /// Fade out transition hook to correct transition times.
 /// </summary>
-HOOK(float*, __fastcall, MsgFadeOut, 0x10CEDB0, void* This, void* Edx, float* a2)
+void __fastcall SetLoadingFadeOut(float* a2)
 {
 	uint8_t* color = (uint8_t*)((uint32_t)a2 + 21);
-
 	if (color[0] == 0 && color[1] == 0 && color[2] == 0)
 	{
 		a2[4] = 0.0f; // transition time
 		a2[6] = 1.0f; // start alpha
 	}
-
-	return originalMsgFadeOut(This, Edx, a2);
 }
 
 /// <summary>
-/// Hook to lock player control whilst the fade out transition is occurring.
+/// Fade in transition hook to correct transition times. (for Fxp)
 /// </summary>
-HOOK(void, __stdcall, FadeOutCountDec, 0x10CE9A0)
+HOOK(float*, __fastcall, MsgFadeInFxp, 0x10CEC90, void* This, void* Edx, float* a2)
 {
-	originalFadeOutCountDec();
+	SetLoadingFadeIn(((float*)This)[24], a2);
+	return originalMsgFadeInFxp(This, Edx, a2);
+}
 
-	(*(uint32_t**)0x1E66B40)[2] = 0;
+/// <summary>
+/// Fade out transition hook to correct transition times. (for Fxp)
+/// </summary>
+HOOK(float*, __fastcall, MsgFadeOutFxp, 0x10CEDB0, void* This, void* Edx, float* a2)
+{
+	SetLoadingFadeOut(a2);
+	return originalMsgFadeOutFxp(This, Edx, a2);
+}
+
+/// <summary>
+/// Fade in transition hook to correct transition times. (for Mtfx)
+/// </summary>
+HOOK(float*, __fastcall, MsgFadeInMtfx, 0x57B290, void* This, void* Edx, float* a2)
+{
+	uint32_t actualThis = (uint32_t)This + 48 * *(uint32_t*)((uint32_t)a2 + 28) + 2064;
+	SetLoadingFadeIn(((float*)actualThis)[1], a2);
+	return originalMsgFadeInMtfx(This, Edx, a2);
+}
+
+/// <summary>
+/// Fade out transition hook to correct transition times. (for Mtfx)
+/// </summary>
+HOOK(float*, __fastcall, MsgFadeOutMtfx, 0x57B270, void* This, void* Edx, float* a2)
+{
+	SetLoadingFadeOut(a2);
+	return originalMsgFadeOutMtfx(This, Edx, a2);
 }
 
 /// <summary>
@@ -179,9 +205,13 @@ void HudSonicStage::Install()
 	INSTALL_HOOK(CHudSonicStageUpdate);
 
 	// Install hooks to improve fading transitions.
-	INSTALL_HOOK(MsgFadeIn);
-	INSTALL_HOOK(MsgFadeOut);
-	INSTALL_HOOK(FadeOutCountDec);
+	INSTALL_HOOK(MsgFadeInFxp);
+	INSTALL_HOOK(MsgFadeOutFxp);
+	INSTALL_HOOK(MsgFadeInMtfx);
+	INSTALL_HOOK(MsgFadeOutMtfx);
+
+	// Prevent timer getting reset twice after fade in is completed
+	WRITE_MEMORY(0xCFDD8F, uint8_t, 0xEB);
 
 	// Calculate correct 3 digit milliseconds for stage time
 	static double const secMultiplier = 1000;
