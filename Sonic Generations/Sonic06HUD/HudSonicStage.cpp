@@ -1,3 +1,4 @@
+#include "HudSonicStage.h"
 /// <summary>
 /// Change 2 digit decisecond to 3 digit millsecond
 /// </summary>
@@ -5,6 +6,18 @@
 uint32_t __fastcall CreateRandomThirdDigit(uint32_t milliseconds)
 {
 	return milliseconds * 10 + rand() % 10;
+}
+
+/// <summary>
+/// Change 2 digit decisecond to 3 digit millsecond
+/// </summary>
+/// <param name="buffer">buffer to print time (ecx)</param>
+/// <param name="totalSeconds">remaining time INT32 (edx)</param>
+void __fastcall SetMissionTime(char* buffer, int totalSeconds)
+{
+	int minutes = totalSeconds / 60;
+	int seconds = totalSeconds % 60;
+	sprintf(buffer, "%02d:%02d.", minutes, seconds);
 }
 
 /// <summary>
@@ -173,6 +186,9 @@ void HudSonicStage::Install()
 	WRITE_JUMP(0x103312C, (void*)0x103313E);
 	WRITE_MEMORY(0x10978E4, double*, &secMultiplier);
 	WRITE_STRING(0x168ED20, "%02d:%02d.%03d");
+
+	// Change mission countdown time to have MM:SS.xxx format
+	WRITE_JUMP(0x124F08D, MissionCurrentTime_MidAsmHook);
 
 	// Display a random 3rd digit for next rank time in mission
 	WRITE_STRING(0x1693474, "%02d:%02d.%03d");
