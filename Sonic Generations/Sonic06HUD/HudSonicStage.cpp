@@ -87,6 +87,20 @@ __declspec(naked) void MillisecondsCalculate_MidAsmHook()
 	}
 }
 
+__declspec(naked) void MissionCurrentTime_MidAsmHook()
+{
+	static void* returnAddress = (void*)0x124F098;
+
+	__asm
+	{
+		mov edx, esi
+		call SetMissionTime
+		pop esi
+		sub esp, 0Ch
+		jmp [returnAddress]
+	}
+}
+
 __declspec(naked) void MissionNextRankMaxTime_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x10B16D5;
