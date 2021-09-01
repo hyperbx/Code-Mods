@@ -66,9 +66,29 @@ void Patches::Install()
 		WRITE_MEMORY(0x109BC7C, uint8_t, 0xE9, 0x71, 0x01, 0x00, 0x00);
 	}
 
+	switch (Configuration::trickSounds)
+	{
+		case 1:
+		case 2:
+			WRITE_MEMORY(0xE4A45A, uint32_t, 0x313E5); // 2002_trick01
+			WRITE_MEMORY(0xE4A464, uint32_t, 0x313E6); // 2002_trick02
+			WRITE_MEMORY(0xE4A46E, uint32_t, 0x313E7); // 2002_trick03
+			WRITE_MEMORY(0xE4B9DB, uint32_t, 0x31447); // 2002_trickfinish
+
+		case 3:
+		{
+			// The case for option 2 bleeds into this one, so we'll break here.
+			if (Configuration::trickSounds == 2)
+				break;
+
+			WRITE_MEMORY(0x11A129C, uint32_t, 0x313E6); // 2002_bdtrick_succ
+			break;
+		}
+	}
+
 	if (Configuration::homingSound)
 	{
 		// Use custom sound ID for the homing sound.
-		WRITE_MEMORY(0xDEBDB7, uint8_t, 0x2C, 0x0F, 0x01);
+		WRITE_MEMORY(0xDEBDB7, uint32_t, 0x31429);
 	}
 }

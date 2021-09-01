@@ -111,10 +111,22 @@
 						"Choose what game you want the menu sounds to be from."
 					],
 					"DisplayName": "Menu Sounds",
-					"Type": "SoundType",
+					"Type": "MenuSoundType",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": "disk\\wars_3\\bb3-forces.ini"
+				},
+				{
+					"Name": "trickSounds",
+					"Description":
+					[
+						"Choose how you want the unused trick sounds to behave."
+					],
+					"DisplayName": "Trick Sounds",
+					"Type": "TrickSoundType",
+					"MinValue": 0,
+					"MaxValue": 3,
+					"DefaultValue": 1
 				},
 				{
 					"Name": "homingSound",
@@ -133,7 +145,7 @@
 	],
 	"Enums": 
 	{
-		"SoundType": 
+		"MenuSoundType": 
 		[
 			{
 				"DisplayName": "Forces",
@@ -149,6 +161,41 @@
 				"Description": 
 				[
 					"Use Sonic Generations menu sounds.",
+				]
+			}
+		],
+		"TrickSoundType": 
+		[
+			{
+				"DisplayName": "Enabled",
+				"Value": "1",
+				"Description": 
+				[
+					"Use Sonic Forces' unused trick sounds for air tricks and board tricks.",
+				]
+			},
+			{
+				"DisplayName": "Only for Air Tricks",
+				"Value": "2",
+				"Description": 
+				[
+					"Use Sonic Forces' unused trick sounds only for air tricks.",
+				]
+			},
+			{
+				"DisplayName": "Only for Board Tricks",
+				"Value": "3",
+				"Description": 
+				[
+					"Use Sonic Forces' unused trick sounds only for board tricks.",
+				]
+			},
+			{
+				"DisplayName": "Disabled",
+				"Value": "0",
+				"Description": 
+				[
+					"Use Sonic Generations trick sounds.",
 				]
 			}
 		],

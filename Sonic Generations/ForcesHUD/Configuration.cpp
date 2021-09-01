@@ -5,6 +5,7 @@ bool Configuration::boostText = true;
 int Configuration::buttonType = 0;
 int Configuration::difficultyType = 1;
 bool Configuration::alwaysActiveReticle = true;
+int Configuration::trickSounds = 1;
 bool Configuration::homingSound = true;
 
 void Configuration::Read()
@@ -23,5 +24,6 @@ void Configuration::Read()
 	Configuration::alwaysActiveReticle = reader.GetBoolean("Behaviour", "alwaysActiveReticle", alwaysActiveReticle);
 
 	// CPKs
+	Configuration::trickSounds = reader.GetInteger("CPKs", "trickSounds", trickSounds);
 	Configuration::homingSound = reader.GetBoolean("CPKs", "homingSound", homingSound);
 }
