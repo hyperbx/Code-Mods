@@ -28,7 +28,7 @@ inline bool IOHelper::FileExists(const string& path)
 	return stat(path.c_str(), &buffer) == 0;
 }
 
-inline bool IOHelper::Compare(const std::string& file1, const std::string& file2)
+inline bool IOHelper::Compare(const string& file1, const string& file2)
 {
 	ifstream f1(file1, ifstream::binary | ifstream::ate);
 	ifstream f2(file2, ifstream::binary | ifstream::ate);
