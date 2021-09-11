@@ -1,0 +1,78 @@
+{
+    "Groups":
+	[
+	    {
+            "Name": "Main",
+            "DisplayName": "Behaviour",
+            "Elements":
+			[
+				{
+					"Name": "IncludeDir1",
+					"Description":
+					[
+						"The design used for the boost gauge."
+					],
+					"DisplayName": "Gauge Type",
+					"Type": "GaugeType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": "Ultimate"
+				},
+				{
+					"Name": "IncludeDir2",
+					"Description":
+					[
+						"Determines whether or not Tails Save should be used in place of lives."
+					],
+					"DisplayName": "Tails Save",
+					"Type": "TailsSaveType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": "Enabled"
+				}
+            ]
+        }
+    ],
+	"Enums": 
+	{
+		"GaugeType": 
+		[
+			{
+				"DisplayName": "Original",
+				"Value": ".\\ui\\gauge\\",
+				"Description": 
+				[
+					"Uses the boost gauge design from Sonic Colours.",
+				]
+			},
+			{
+				"DisplayName": "Ultimate",
+				"Value": ".",
+				"Description": 
+				[
+					"Uses the boost gauge design from Sonic Colours: Ultimate.",
+				]
+			}
+		],
+		"TailsSaveType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Value": ".\\ui\\lives\\",
+				"Description": 
+				[
+					"Disables Tails Save and restores the life counter.",
+				]
+			},
+			{
+				"DisplayName": "Enabled",
+				"Value": ".",
+				"Description": 
+				[
+					"Enables Tails Save.",
+				]
+			}
+		],
+	},
+    "IniFile": "mod.ini"
+  }
