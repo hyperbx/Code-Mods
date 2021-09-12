@@ -44,6 +44,9 @@ HOOK(void, __fastcall, MsgPlayerPassTailsSaveMarkerCtor, sigMsgPlayerPassTailsSa
 	return;
 }
 
+// 0x1418B1380
+SIG_SCAN(sigCStateFallingDead, "\x48\x89\x5C\x24\x00\x57\x48\x83\xEC\x20\x83\x79\x1C\x00\x48\x8B\xDA\x48\x8B\xF9\x75\x41\x8B\x41\x18\xD1\xE8\xA8\x01\x74\x38\x48\x8B\xCA\xE8\x00\x00\x00\x00\x48\x8B\xC8\xE8\x00\x00\x00\x00\x48\x8B\xCB\x84\xC0\x75\x07\xE8\x00\x00\x00\x00\xEB\x05\xE8\x00\x00\x00\x00\x48\x8B\xCB\xE8\x00\x00\x00\x00\xBA\x00\x00\x00\x00\x48\x8B\xCF\xE8\x00\x00\x00\x00\x48\x8B\x5C\x24\x00\xB0\x01\x48\x83\xC4\x20\x5F\xC3", "xxxx?xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx????xxxx????xxxxxxxx????xxx????xxxx????x????xxxx????xxxx?xxxxxxxx");
+
 /// <summary>
 /// The main entry point for the injection.
 /// </summary>
@@ -54,7 +57,7 @@ extern "C" _declspec(dllexport) void Init()
 	if (!StringHelper::Compare(Configuration::tailsSave, "."))
 	{
 		// Skip MsgPLNotifyTailsSave.
-		WRITE_JUMP(0x1418B13B4, (void*)0x1418B13BD);
+		WRITE_JUMP((char*)sigCStateFallingDead() + 0x34, (char*)sigCStateFallingDead() + 0x3D);
 
 		INSTALL_HOOK(CLevelInfoCtor);
 		INSTALL_HOOK(CLevelInfoDtor);
