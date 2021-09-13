@@ -92,6 +92,10 @@ void CLevelInfo::OnFrame()
 		int* lives = (int*)((char*)CLevelInfoData + 112);
 		int* rings = (int*)((char*)CLevelInfoData + 116);
 
+		// Reset bonus cap if the player loses their rings.
+		if (*rings == 0)
+			ringLifeBonusCap = 100;
+
 		while (*rings >= ringLifeBonusCap && !ringLifeReceived)
 		{
 			// Increment life counter.
