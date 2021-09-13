@@ -15,9 +15,13 @@
 #include <string>
 
 // Dependencies
-#include "Configuration.h"
 #include <Helpers.h>
 #include <INIReader.h>
 #include <IOHelper.h>
 #include <Signature.h>
 #include <StringHelper.h>
+
+// Internal headers
+#include "Configuration.h"
+#include "CLevelInfo.h"
+#include "Navigator.h"

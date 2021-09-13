@@ -3,11 +3,15 @@
   <ItemGroup>
     <ClInclude Include="Pch.h" />
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="CLevelInfo.h" />
+    <ClInclude Include="Navigator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="Pch.cpp" />
     <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="CLevelInfo.cpp" />
+    <ClCompile Include="Navigator.cpp" />
   </ItemGroup>
 </Project>

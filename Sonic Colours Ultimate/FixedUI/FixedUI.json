@@ -29,6 +29,30 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": "Enabled"
+				},
+				{
+					"Name": "ringLifeType",
+					"Description":
+					[
+						"Determines whether or not collecting 100 rings should give you an extra life."
+					],
+					"DisplayName": "Ring Life Bonus",
+					"Type": "RingLifeType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": "Disabled"
+				},
+				{
+					"Name": "forceDisableNavi",
+					"Description":
+					[
+						"Determines whether or not the navigator is forced off - this can be useful if you made progress on a save with the navigator turned on, as there's no way to disable it in-game."
+					],
+					"DisplayName": "Force Disable Navigator",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": false
 				}
             ]
         }
@@ -73,6 +97,33 @@
 				]
 			}
 		],
+		"RingLifeType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Value": "0",
+				"Description": 
+				[
+					"Don't reward an extra life for collecting 100 rings.",
+				]
+			},
+			{
+				"DisplayName": "Once",
+				"Value": "1",
+				"Description": 
+				[
+					"Only reward an extra life once when collecting exactly 100 rings.",
+				]
+			},
+			{
+				"DisplayName": "Enabled",
+				"Value": "2",
+				"Description": 
+				[
+					"Always reward extra lives when collecting 100 rings.",
+				]
+			}
+		]
 	},
     "IniFile": "mod.ini"
   }
