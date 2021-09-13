@@ -49,5 +49,6 @@ inline void* sigScan(const char* signature, const char* mask)
             _##x = sigScan(signature, mask); \
             sigValid = false; \
         } \
+        printf("[Signature] %s received: 0x%08x\n", #x, _##x); \
         return _##x; \
     }
