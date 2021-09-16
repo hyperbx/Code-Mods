@@ -6,7 +6,6 @@ extern "C" _declspec(dllexport) void Init()
 	Configuration::Read();
 
 	CLevelInfo::Init();
-	Navigator::Init();
 }
 
 /// <summary>

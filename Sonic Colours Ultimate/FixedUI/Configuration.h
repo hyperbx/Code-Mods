@@ -34,9 +34,4 @@ public:
 	/// Determines whether or not you receive an extra life for getting 100 rings.
 	/// </summary>
 	static RingLifeType ringLifeType;
-
-	/// <summary>
-	/// Determines whether or not the navigator is forced off.
-	/// </summary>
-	static bool forceDisableNavi;
 };

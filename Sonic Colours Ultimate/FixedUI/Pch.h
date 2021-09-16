@@ -24,4 +24,3 @@
 // Internal headers
 #include "Configuration.h"
 #include "CLevelInfo.h"
-#include "Navigator.h"

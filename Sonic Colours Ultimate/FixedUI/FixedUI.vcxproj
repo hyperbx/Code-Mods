@@ -186,7 +186,6 @@ copy /Y "$(MSBuildProjectDirectory)\FixedUI.json" "$(MSBuildProjectDirectory)\bi
   <ItemGroup>
     <ClInclude Include="CLevelInfo.h" />
     <ClInclude Include="Configuration.h" />
-    <ClInclude Include="Navigator.h" />
     <ClInclude Include="Pch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +193,6 @@ copy /Y "$(MSBuildProjectDirectory)\FixedUI.json" "$(MSBuildProjectDirectory)\bi
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
-    <ClCompile Include="Navigator.cpp" />
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -41,18 +41,6 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": "Disabled"
-				},
-				{
-					"Name": "forceDisableNavi",
-					"Description":
-					[
-						"Determines whether or not the navigator is forced off - this can be useful if you made progress on a save with the navigator turned on, as there's no way to disable it in-game."
-					],
-					"DisplayName": "Force Disable Navigator",
-					"Type": "bool",
-					"MinValue": null,
-					"MaxValue": null,
-					"DefaultValue": false
 				}
             ]
         }
