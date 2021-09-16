@@ -12,4 +12,4 @@ A repository containing DLL mods for various games.
   - [Tails' Dash Rings in Stages](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/TailsDashRingsInStages)
 
 - Sonic Colours: Ultimate
-  - [Fixed UI](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Colours%20Ultimate/FixedUI)
+  - [Gameplay & UI Fixes](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Colours%20Ultimate/GameplayAndUIFixes)
