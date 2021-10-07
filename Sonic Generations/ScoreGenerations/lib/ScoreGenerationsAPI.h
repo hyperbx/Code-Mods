@@ -32,9 +32,14 @@ private:
 
 public:
 	/// <summary>
-	/// Default implementation of Score Generations SDK for static functions.
+	/// Gets the current instance of the API and creates a new one if it's a null pointer.
 	/// </summary>
-	static ScoreGenerationsAPI Instance;
+	static ScoreGenerationsAPI* GetInstance()
+	{
+		static ScoreGenerationsAPI* instance;
+
+		return instance != nullptr ? instance : instance = new ScoreGenerationsAPI();
+	}
 
 	/// <summary>
 	/// Adds score to the current score counter.
@@ -59,36 +64,34 @@ public:
 	static void ForceConfiguration(const char* path);
 };
 
-inline ScoreGenerationsAPI ScoreGenerationsAPI::Instance;
-
 inline void ScoreGenerationsAPI::AddScore(int scoreToReward)
 {
-	if (ScoreGenerationsAPI::Instance.API_AddScore == nullptr)
+	if (GetInstance()->API_AddScore == nullptr)
 		return;
 
-	ScoreGenerationsAPI::Instance.API_AddScore(scoreToReward);
+	GetInstance()->API_AddScore(scoreToReward);
 }
 
 inline void ScoreGenerationsAPI::SetScore(int score)
 {
-	if (ScoreGenerationsAPI::Instance.API_SetScore == nullptr)
+	if (GetInstance()->API_SetScore == nullptr)
 		return;
 
-	ScoreGenerationsAPI::Instance.API_SetScore(score);
+	GetInstance()->API_SetScore(score);
 }
 
 inline int ScoreGenerationsAPI::GetScore()
 {
-	if (ScoreGenerationsAPI::Instance.API_GetScore == nullptr)
+	if (GetInstance()->API_GetScore == nullptr)
 		return -1;
 
-	return ScoreGenerationsAPI::Instance.API_GetScore();
+	return GetInstance()->API_GetScore();
 }
 
 inline void ScoreGenerationsAPI::ForceConfiguration(const char* path)
 {
-	if (ScoreGenerationsAPI::Instance.API_ForceConfiguration == nullptr)
+	if (GetInstance()->API_ForceConfiguration == nullptr)
 		return;
 
-	ScoreGenerationsAPI::Instance.API_ForceConfiguration(path);
+	GetInstance()->API_ForceConfiguration(path);
 }
