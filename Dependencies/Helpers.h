@@ -28,6 +28,10 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
 #define PROC_ADDRESS(libraryName, procName) \
     GetProcAddress(LoadLibrary(TEXT(libraryName)), procName)
 
+#define LIB_FUNCTION(returnType, libraryName, procName, ...) \
+    typedef returnType _##procName(__VA_ARGS__); \
+    _##procName* procName = (_##procName*)GetProcAddress(GetModuleHandle(TEXT(libraryName)), #procName);
+
 #define HOOK(returnType, callingConvention, functionName, location, ...) \
     typedef returnType callingConvention functionName(__VA_ARGS__); \
     functionName* original##functionName = (functionName*)(location); \

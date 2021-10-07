@@ -7,7 +7,7 @@ void ScoreListener::Reset()
 	StatisticsListener::stats.Reset();
 }
 
-void ScoreListener::AddClamp(unsigned int scoreToReward)
+void ScoreListener::AddClamp(int scoreToReward)
 {
 	// Stop rewarding score if the player is over the maximum time.
 	if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > Tables::rankTables[StateHooks::stageID].maxSeconds)

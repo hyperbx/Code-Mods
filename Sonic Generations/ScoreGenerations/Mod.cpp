@@ -57,3 +57,23 @@ extern "C" _declspec(dllexport) void Init()
 	// Apply simple patches.
 	Patches::Install();
 }
+
+extern "C" __declspec(dllexport) void API_AddScore(int scoreToReward)
+{
+	ScoreListener::AddClamp(scoreToReward);
+}
+
+extern "C" __declspec(dllexport) void API_SetScore(int score)
+{
+	ScoreListener::score = score;
+}
+
+extern "C" __declspec(dllexport) int API_GetScore()
+{
+	return ScoreListener::score;
+}
+
+extern "C" __declspec(dllexport) void API_ForceConfiguration(const char* path)
+{
+	Configuration::Read(path);
+}

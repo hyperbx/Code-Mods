@@ -35,7 +35,7 @@ public:
     /// <summary>
     /// Adds the input score to reward and clamps it to the maximum allowed.
     /// </summary>
-    static void AddClamp(unsigned int scoreToReward);
+    static void AddClamp(int scoreToReward);
 
     /// <summary>
     /// Rewards the player with score based on the input type.
