@@ -1,4 +1,4 @@
-StatisticsListener::Statistics StatisticsListener::stats;
+Statistics::Totals StatisticsListener::totals;
 
 #pragma region ----- Hooked Functions -----
 
@@ -9,12 +9,12 @@ StatisticsListener::Statistics StatisticsListener::stats;
 void __fastcall UpdateRingCount(int rings)
 {
 	// Update current ring count.
-	StatisticsListener::stats.ringCount = rings;
+	StatisticsListener::totals.ringCount = rings;
 
 	// Update total ring count.
-	if (rings > StatisticsListener::stats.totalRingCount)
+	if (rings > StatisticsListener::totals.totalRingCount)
 	{
-		StatisticsListener::stats.totalRingCount = rings;
+		StatisticsListener::totals.totalRingCount = rings;
 	}
 }
 
@@ -26,8 +26,8 @@ void __fastcall UpdateRingCount(int rings)
 void __fastcall UpdateElapsedTime(int minutes, int seconds)
 {
 	// Update real-time minutes and seconds.
-	StatisticsListener::stats.minutes = minutes;
-	StatisticsListener::stats.seconds = seconds;
+	StatisticsListener::totals.minutes = minutes;
+	StatisticsListener::totals.seconds = seconds;
 }
 
 #pragma endregion
@@ -96,7 +96,7 @@ __declspec(naked) void TimeFormatter_MidAsmHook()
 
 int StatisticsListener::GetElapsedTime()
 {
-	return (StatisticsListener::stats.minutes * 60) + StatisticsListener::stats.seconds;
+	return (StatisticsListener::totals.minutes * 60) + StatisticsListener::totals.seconds;
 }
 
 void StatisticsListener::Install()

@@ -35,7 +35,7 @@ public:
     /// <summary>
     /// Adds the input score to reward and clamps it to the maximum allowed.
     /// </summary>
-    static void AddClamp(int scoreToReward);
+    static void AddClamp(int& score, int scoreToReward, bool timeout = true);
 
     /// <summary>
     /// Rewards the player with score based on the input type.
@@ -46,6 +46,11 @@ public:
     /// Score calculated locally.
     /// </summary>
     static int score;
+
+    /// <summary>
+    /// Score calculated at the results screen.
+    /// </summary>
+    static int totalScore;
 
     /// <summary>
     /// The last score calculated before a checkpoint was hit.

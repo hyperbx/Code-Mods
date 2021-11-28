@@ -24,16 +24,16 @@ void Configuration::Read(string path = "")
 	Configuration::config = configPath = path.empty() ? INI_FILE : path;
 
 	// Get the score for the objects.
-	Tables::scoreTable = Tables::ScoreTable::GetScore();
+	TableListener::scoreTable = TableListener::GetScore();
 
 	// Get the bonuses.
-	Tables::bonusTable = Tables::BonusTable::GetBonuses();
+	TableListener::bonusTable = TableListener::GetBonuses();
 
 	// Get the multipliers.
-	Tables::multiplierTable = Tables::MultiplierTable::GetMultipliers();
+	TableListener::multiplierTable = TableListener::GetMultipliers();
 
 	// Get the timers.
-	Tables::timerTable = Tables::TimerTable::GetTimers();
+	TableListener::timerTable = TableListener::GetTimers();
 
 	// GameplayBonus
 	Configuration::rewardSpeedBonus = config.GetBoolean("GameplayBonus", "rewardSpeedBonus", rewardSpeedBonus);
@@ -74,7 +74,7 @@ void Configuration::Read(string path = "")
 	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
 
 	// Get the ranks.
-	Tables::RankTable::GetRanks();
+	TableListener::GetRanks();
 
 	// Set the override flag now that we have read a config.
 	overrideFlag = true;

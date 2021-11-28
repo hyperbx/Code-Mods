@@ -3,19 +3,19 @@ ResultListener::ResultDescription ResultListener::resultDescription;
 void ResultListener::Bonus()
 {
 	// Rewards the Lua bonuses and clamps them.
-	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.timeBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.ringBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.speedBonusAlgorithm));
-	ScoreListener::AddClamp(LuaCallback::RunAlgorithm(Tables::bonusTable.userAlgorithm));
+	ScoreListener::AddClamp(ScoreListener::totalScore, LuaCallback::RunAlgorithm(TableListener::bonusTable.timeBonusAlgorithm), false);
+	ScoreListener::AddClamp(ScoreListener::totalScore, LuaCallback::RunAlgorithm(TableListener::bonusTable.ringBonusAlgorithm), false);
+	ScoreListener::AddClamp(ScoreListener::totalScore, LuaCallback::RunAlgorithm(TableListener::bonusTable.speedBonusAlgorithm), false);
+	ScoreListener::AddClamp(ScoreListener::totalScore, LuaCallback::RunAlgorithm(TableListener::bonusTable.userAlgorithm), false);
 }
 
 ResultListener::RankType ResultListener::Rank()
 {
-	if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].A)
+	if (ScoreListener::score < TableListener::rankTables[StateHooks::stageID].A)
 	{
-		if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].B)
+		if (ScoreListener::score < TableListener::rankTables[StateHooks::stageID].B)
 		{
-			if (ScoreListener::score < Tables::rankTables[StateHooks::stageID].C)
+			if (ScoreListener::score < TableListener::rankTables[StateHooks::stageID].C)
 			{
 				return RankType::D;
 			}
@@ -40,18 +40,18 @@ float ResultListener::Progress(RankType rank)
 	switch (rank)
 	{
 		case D:
-			return ((float)ScoreListener::score / (float)Tables::rankTables[StateHooks::stageID].C) / 3.0f;
+			return ((float)ScoreListener::score / (float)TableListener::rankTables[StateHooks::stageID].C) / 3.0f;
 
 		case C:
 		{
-			const float baseScore = (float)Tables::rankTables[StateHooks::stageID].C;
-			return (1.0f / 3.0f) + (((float)ScoreListener::score - baseScore) / ((float)Tables::rankTables[StateHooks::stageID].B - baseScore)) / 3.0f;
+			const float baseScore = (float)TableListener::rankTables[StateHooks::stageID].C;
+			return (1.0f / 3.0f) + (((float)ScoreListener::score - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].B - baseScore)) / 3.0f;
 		}
 
 		case B:
 		{
-			const float baseScore = (float)Tables::rankTables[StateHooks::stageID].B;
-			return (2.0f / 3.0f) + (((float)ScoreListener::score - baseScore) / ((float)Tables::rankTables[StateHooks::stageID].A - baseScore)) / 3.0f;
+			const float baseScore = (float)TableListener::rankTables[StateHooks::stageID].B;
+			return (2.0f / 3.0f) + (((float)ScoreListener::score - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].A - baseScore)) / 3.0f;
 		}
 
 		case A:
@@ -61,14 +61,14 @@ float ResultListener::Progress(RankType rank)
 
 void ResultListener::Result()
 {
-	// Print exposed Lua data before results manipulation.
-	LuaCallback::PrintExposedData();
-
 	// Calculate the bonuses.
 	ResultListener::Bonus();
 
 	// Set the final score.
-	resultDescription.score = ScoreListener::score;
+	resultDescription.score = ScoreListener::totalScore;
+
+	// Print exposed Lua data before results manipulation.
+	LuaCallback::PrintExposedData();
 
 	// Set up ranks.
 	resultDescription.rank = Rank();

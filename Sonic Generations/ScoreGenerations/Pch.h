@@ -45,5 +45,7 @@
 #include "ResultListener.h"
 #include "ScoreHooks.h"
 #include "ScoreListener.h"
+#include "lib\Statistics.h"
 #include "StatisticsListener.h"
-#include "Tables.h"
+#include "lib\Tables.h"
+#include "TableListener.h"

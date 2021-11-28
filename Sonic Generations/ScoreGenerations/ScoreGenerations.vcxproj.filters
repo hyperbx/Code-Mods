@@ -5,7 +5,6 @@
     <ClInclude Include="Patches.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="LuaCallback.h" />
-    <ClInclude Include="Tables.h" />
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="MultiplierListener.h" />
     <ClInclude Include="PlayerListener.h" />
@@ -16,6 +15,16 @@
     <ClInclude Include="HudSonicStage.h" />
     <ClInclude Include="ScoreHooks.h" />
     <ClInclude Include="StateHooks.h" />
+    <ClInclude Include="TableListener.h" />
+    <ClInclude Include="lib\ScoreGenerationsAPI.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Statistics.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\Tables.h">
+      <Filter>lib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -24,7 +33,6 @@
     <ClCompile Include="Patches.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
-    <ClCompile Include="Tables.cpp" />
     <ClCompile Include="MultiplierListener.cpp" />
     <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="ResultListener.cpp" />
@@ -35,5 +43,11 @@
     <ClCompile Include="HudSonicStage.cpp" />
     <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
+    <ClCompile Include="ApiExports.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="lib">
+      <UniqueIdentifier>{07842645-e56c-4a33-a46c-770ba09821a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

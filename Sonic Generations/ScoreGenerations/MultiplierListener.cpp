@@ -6,19 +6,19 @@ int multipliedSlamBonus = 0;
 int MultiplierListener::AddHomingChainBonus()
 {
 	int scoreToReward = 0;
-	int limit = Tables::bonusTable.homingChainBonusLimit;
+	int limit = TableListener::bonusTable.homingChainBonusLimit;
 
 	if (!PlayerListener::isGrounded)
 	{
 		if (homingChainCount == 1)
 		{
 			// Set pre-multiplied bonus total.
-			scoreToReward += multipliedHomingChainBonus = Tables::bonusTable.homingChainBonus;
+			scoreToReward += multipliedHomingChainBonus = TableListener::bonusTable.homingChainBonus;
 		}
 		else if (homingChainCount > 1)
 		{
 			// Increase by configured multiplier.
-			scoreToReward += multipliedHomingChainBonus *= Tables::multiplierTable.homingChainMultiplier;
+			scoreToReward += multipliedHomingChainBonus *= TableListener::multiplierTable.homingChainMultiplier;
 		}
 
 		// Increment homing chain count.
@@ -41,19 +41,19 @@ void MultiplierListener::ResetHomingChainBonus()
 int MultiplierListener::AddSlamBonus()
 {
 	int scoreToReward = 0;
-	int limit = Tables::bonusTable.slamBonusLimit;
+	int limit = TableListener::bonusTable.slamBonusLimit;
 
 	if (PlayerListener::isGrounded)
 	{
 		if (slamCount == 1)
 		{
 			// Set pre-multiplied bonus total.
-			scoreToReward += multipliedSlamBonus = Tables::bonusTable.slamBonus;
+			scoreToReward += multipliedSlamBonus = TableListener::bonusTable.slamBonus;
 		}
 		else if (slamCount > 1)
 		{
 			// Increase by configured multiplier.
-			scoreToReward += multipliedSlamBonus *= Tables::multiplierTable.slamMultiplier;
+			scoreToReward += multipliedSlamBonus *= TableListener::multiplierTable.slamMultiplier;
 		}
 
 		// Increment slam count.

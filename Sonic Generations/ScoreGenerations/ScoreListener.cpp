@@ -1,22 +1,26 @@
 int ScoreListener::score = 0;
+int ScoreListener::totalScore = 0;
 int ScoreListener::lastCheckpointScore = 0;
 
 void ScoreListener::Reset()
 {
-	score = Configuration::restoreLastCheckpointScore && PlayerListener::isDead ? lastCheckpointScore : 0;
-	StatisticsListener::stats.Reset();
+	totalScore = score = Configuration::restoreLastCheckpointScore && PlayerListener::isDead ? lastCheckpointScore : 0;
+	StatisticsListener::totals.Reset();
 }
 
-void ScoreListener::AddClamp(int scoreToReward)
+void ScoreListener::AddClamp(int& score, int scoreToReward, bool timeout)
 {
-	// Stop rewarding score if the player is over the maximum time.
-	if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > Tables::rankTables[StateHooks::stageID].maxSeconds)
+	if (timeout)
 	{
+		// Stop rewarding score if the player is over the maximum time.
+		if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > TableListener::rankTables[StateHooks::stageID].maxSeconds)
+		{
 #if _DEBUG
-		printf("[Score Generations] Time bonus expired! No longer rewarding score...\n");
+			printf("[Score Generations] Time bonus expired! No longer rewarding score...\n");
 #endif
 
-		return;
+			return;
+		}
 	}
 
 	// Clamp the maximum score.
@@ -33,12 +37,12 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 	switch (type)
 	{
 		case Ring:
-			scoreToReward = Tables::scoreTable.Ring;
+			scoreToReward = TableListener::scoreTable.Ring;
 			break;
 
 		case Enemy:
 		{
-			scoreToReward = Tables::scoreTable.Enemy;
+			scoreToReward = TableListener::scoreTable.Enemy;
 
 			// Calculate homing chain bonus.
 			scoreToReward += MultiplierListener::AddHomingChainBonus();
@@ -47,27 +51,27 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			scoreToReward += MultiplierListener::AddSlamBonus();
 
 			// Increase total enemy count.
-			StatisticsListener::stats.totalEnemies++;
+			StatisticsListener::totals.totalEnemies++;
 
 			break;
 		}
 
 		case Physics:
-			scoreToReward = Tables::scoreTable.Physics;
-			StatisticsListener::stats.totalPhysics++;
+			scoreToReward = TableListener::scoreTable.Physics;
+			StatisticsListener::totals.totalPhysics++;
 			break;
 
 		case PointMarker:
 		{
-			scoreToReward = Tables::scoreTable.PointMarker;
+			scoreToReward = TableListener::scoreTable.PointMarker;
 
 			// Increase total velocity for the speed bonus.
 			if (Configuration::rewardSpeedBonus)
 			{
-				StatisticsListener::stats.totalVelocity += PlayerListener::GetVelocity() * Tables::multiplierTable.speedBonusMultiplier;
+				StatisticsListener::totals.totalVelocity += PlayerListener::GetVelocity() * TableListener::multiplierTable.speedBonusMultiplier;
 
 #if _DEBUG
-				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::stats.totalVelocity);
+				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::totals.totalVelocity);
 #endif
 			}
 
@@ -76,69 +80,72 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 				lastCheckpointScore = score;
 
 			// Increase total checkpoint count.
-			StatisticsListener::stats.totalPointMarkers++;
+			StatisticsListener::totals.totalPointMarkers++;
 
 			break;
 		}
 
 		case RedRing:
-			scoreToReward = Tables::scoreTable.RedRing;
-			StatisticsListener::stats.totalRedRings++;
+			scoreToReward = TableListener::scoreTable.RedRing;
+			StatisticsListener::totals.totalRedRings++;
 			break;
 
 		case RainbowRing:
-			scoreToReward = Tables::scoreTable.RainbowRing;
-			StatisticsListener::stats.totalRainbowRings++;
+			scoreToReward = TableListener::scoreTable.RainbowRing;
+			StatisticsListener::totals.totalRainbowRings++;
 			break;
 
 		case ItemBox:
-			scoreToReward = Tables::scoreTable.ItemBox;
-			StatisticsListener::stats.totalItemBoxes++;
+			scoreToReward = TableListener::scoreTable.ItemBox;
+			StatisticsListener::totals.totalItemBoxes++;
 			break;
 
 		case SuperRing:
-			scoreToReward = Tables::scoreTable.SuperRing;
-			StatisticsListener::stats.totalSuperRings++;
+			scoreToReward = TableListener::scoreTable.SuperRing;
+			StatisticsListener::totals.totalSuperRings++;
 			break;
 
 		case Trick:
 		case TrickFinish:
 		case BoardTrick:
-			scoreToReward = type == Trick ? Tables::scoreTable.Trick : type == BoardTrick ? Tables::scoreTable.BoardTrick : Tables::scoreTable.TrickFinish;
-			StatisticsListener::stats.totalTricks++;
+			scoreToReward = type == Trick ? TableListener::scoreTable.Trick : type == BoardTrick ? TableListener::scoreTable.BoardTrick : TableListener::scoreTable.TrickFinish;
+			StatisticsListener::totals.totalTricks++;
 			break;
 
 		case Life:
-			scoreToReward = Tables::scoreTable.Life;
+			scoreToReward = TableListener::scoreTable.Life;
 			break;
 
 		case DashRing:
-			scoreToReward = Tables::scoreTable.DashRing;
-			StatisticsListener::stats.totalDashRings++;
+			scoreToReward = TableListener::scoreTable.DashRing;
+			StatisticsListener::totals.totalDashRings++;
 			break;
 
 		case QuickStep:
-			scoreToReward = Tables::scoreTable.QuickStep;
-			StatisticsListener::stats.totalQuickSteps++;
+			scoreToReward = TableListener::scoreTable.QuickStep;
+			StatisticsListener::totals.totalQuickSteps++;
 			break;
 
 		case Drift:
-			scoreToReward = Tables::scoreTable.Drift;
-			StatisticsListener::stats.totalDrifts++;
+			scoreToReward = TableListener::scoreTable.Drift;
+			StatisticsListener::totals.totalDrifts++;
 			break;
 
 		case Balloon:
-			scoreToReward = Tables::scoreTable.Balloon;
-			StatisticsListener::stats.totalBalloons++;
+			scoreToReward = TableListener::scoreTable.Balloon;
+			StatisticsListener::totals.totalBalloons++;
 			break;
 
 		case Super:
-			scoreToReward = Tables::scoreTable.Super;
+			scoreToReward = TableListener::scoreTable.Super;
 			break;
 	}
 
 	// Rewards the score and clamps it.
-	AddClamp(scoreToReward);
+	AddClamp(ScoreListener::score, scoreToReward);
+
+	// Update total score.
+	totalScore = score;
 
 #if _DEBUG
 	printf("[Score Generations] Type %d rewarded player with %d score!\n", type, scoreToReward);

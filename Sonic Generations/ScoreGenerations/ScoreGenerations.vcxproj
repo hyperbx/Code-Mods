@@ -126,6 +126,9 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="ArchiveTreePatcher.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="HudSonicStage.h" />
+    <ClInclude Include="lib\ScoreGenerationsAPI.h" />
+    <ClInclude Include="lib\Statistics.h" />
+    <ClInclude Include="lib\Tables.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
     <ClInclude Include="MultiplierListener.h" />
@@ -137,9 +140,10 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="StateHooks.h" />
-    <ClInclude Include="Tables.h" />
+    <ClInclude Include="TableListener.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ApiExports.cpp" />
     <ClCompile Include="ArchiveTreePatcher.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
@@ -159,7 +163,6 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
     <ClCompile Include="StateHooks.cpp" />
-    <ClCompile Include="Tables.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

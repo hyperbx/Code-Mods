@@ -22,28 +22,28 @@ bool IsLuaSafe(lua_State* L, int result)
 void LuaCallback::PushExposedData(lua_State* L)
 {
 	// Push needed exposed integers to the stack.
-	PushExposedInteger(L, "totalRingCount", StatisticsListener::stats.totalRingCount);
-	PushExposedInteger(L, "totalEnemies", StatisticsListener::stats.totalEnemies);
-	PushExposedInteger(L, "totalPhysics", StatisticsListener::stats.totalPhysics);
-	PushExposedInteger(L, "totalPointMarkers", StatisticsListener::stats.totalPointMarkers);
-	PushExposedInteger(L, "totalRedRings", StatisticsListener::stats.totalRedRings);
-	PushExposedInteger(L, "totalRainbowRings", StatisticsListener::stats.totalRainbowRings);
-	PushExposedInteger(L, "totalItemBoxes", StatisticsListener::stats.totalItemBoxes);
-	PushExposedInteger(L, "totalSuperRings", StatisticsListener::stats.totalSuperRings);
-	PushExposedInteger(L, "totalTricks", StatisticsListener::stats.totalTricks);
-	PushExposedInteger(L, "totalDashRings", StatisticsListener::stats.totalDashRings);
-	PushExposedInteger(L, "totalQuickSteps", StatisticsListener::stats.totalQuickSteps);
-	PushExposedInteger(L, "totalDrifts", StatisticsListener::stats.totalDrifts);
-	PushExposedInteger(L, "totalBalloons", StatisticsListener::stats.totalBalloons);
-	PushExposedInteger(L, "totalVelocity", StatisticsListener::stats.totalVelocity);
-	PushExposedInteger(L, "ringCount", StatisticsListener::stats.ringCount);
-	PushExposedInteger(L, "minutes", StatisticsListener::stats.minutes);
-	PushExposedInteger(L, "seconds", StatisticsListener::stats.seconds);
+	PushExposedInteger(L, "totalRingCount", StatisticsListener::totals.totalRingCount);
+	PushExposedInteger(L, "totalEnemies", StatisticsListener::totals.totalEnemies);
+	PushExposedInteger(L, "totalPhysics", StatisticsListener::totals.totalPhysics);
+	PushExposedInteger(L, "totalPointMarkers", StatisticsListener::totals.totalPointMarkers);
+	PushExposedInteger(L, "totalRedRings", StatisticsListener::totals.totalRedRings);
+	PushExposedInteger(L, "totalRainbowRings", StatisticsListener::totals.totalRainbowRings);
+	PushExposedInteger(L, "totalItemBoxes", StatisticsListener::totals.totalItemBoxes);
+	PushExposedInteger(L, "totalSuperRings", StatisticsListener::totals.totalSuperRings);
+	PushExposedInteger(L, "totalTricks", StatisticsListener::totals.totalTricks);
+	PushExposedInteger(L, "totalDashRings", StatisticsListener::totals.totalDashRings);
+	PushExposedInteger(L, "totalQuickSteps", StatisticsListener::totals.totalQuickSteps);
+	PushExposedInteger(L, "totalDrifts", StatisticsListener::totals.totalDrifts);
+	PushExposedInteger(L, "totalBalloons", StatisticsListener::totals.totalBalloons);
+	PushExposedInteger(L, "totalVelocity", StatisticsListener::totals.totalVelocity);
+	PushExposedInteger(L, "ringCount", StatisticsListener::totals.ringCount);
+	PushExposedInteger(L, "minutes", StatisticsListener::totals.minutes);
+	PushExposedInteger(L, "seconds", StatisticsListener::totals.seconds);
 	PushExposedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
 	PushExposedInteger(L, "score", ScoreListener::score);
 	PushExposedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedInteger(L, "minSeconds", Tables::rankTables[StateHooks::stageID].minSeconds);
-	PushExposedInteger(L, "maxSeconds", Tables::rankTables[StateHooks::stageID].maxSeconds);
+	PushExposedInteger(L, "minSeconds", TableListener::rankTables[StateHooks::stageID].minSeconds);
+	PushExposedInteger(L, "maxSeconds", TableListener::rankTables[StateHooks::stageID].maxSeconds);
 
 	// Push needed exposed strings to the stack.
 	PushExposedString(L, "stageID", StateHooks::stageID);
@@ -129,28 +129,28 @@ void LuaCallback::PrintExposedData()
 {
 	if (Configuration::debugLua)
 	{
-		printf("[Score Generations] [Lua Debug] totalRingCount = %d\n", StatisticsListener::stats.totalRingCount);
-		printf("[Score Generations] [Lua Debug] totalEnemies = %d\n", StatisticsListener::stats.totalEnemies);
-		printf("[Score Generations] [Lua Debug] totalPhysics = %d\n", StatisticsListener::stats.totalPhysics);
-		printf("[Score Generations] [Lua Debug] totalPointMarkers = %d\n", StatisticsListener::stats.totalPointMarkers);
-		printf("[Score Generations] [Lua Debug] totalRedRings = %d\n", StatisticsListener::stats.totalRedRings);
-		printf("[Score Generations] [Lua Debug] totalRainbowRings = %d\n", StatisticsListener::stats.totalRainbowRings);
-		printf("[Score Generations] [Lua Debug] totalItemBoxes = %d\n", StatisticsListener::stats.totalItemBoxes);
-		printf("[Score Generations] [Lua Debug] totalSuperRings = %d\n", StatisticsListener::stats.totalSuperRings);
-		printf("[Score Generations] [Lua Debug] totalTricks = %d\n", StatisticsListener::stats.totalTricks);
-		printf("[Score Generations] [Lua Debug] totalDashRings = %d\n", StatisticsListener::stats.totalDashRings);
-		printf("[Score Generations] [Lua Debug] totalQuickSteps = %d\n", StatisticsListener::stats.totalQuickSteps);
-		printf("[Score Generations] [Lua Debug] totalDrifts = %d\n", StatisticsListener::stats.totalDrifts);
-		printf("[Score Generations] [Lua Debug] totalBalloons = %d\n", StatisticsListener::stats.totalBalloons);
-		printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::stats.totalVelocity);
-		printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::stats.ringCount);
-		printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::stats.minutes);
-		printf("[Score Generations] [Lua Debug] seconds = %d\n", StatisticsListener::stats.seconds);
+		printf("[Score Generations] [Lua Debug] totalRingCount = %d\n", StatisticsListener::totals.totalRingCount);
+		printf("[Score Generations] [Lua Debug] totalEnemies = %d\n", StatisticsListener::totals.totalEnemies);
+		printf("[Score Generations] [Lua Debug] totalPhysics = %d\n", StatisticsListener::totals.totalPhysics);
+		printf("[Score Generations] [Lua Debug] totalPointMarkers = %d\n", StatisticsListener::totals.totalPointMarkers);
+		printf("[Score Generations] [Lua Debug] totalRedRings = %d\n", StatisticsListener::totals.totalRedRings);
+		printf("[Score Generations] [Lua Debug] totalRainbowRings = %d\n", StatisticsListener::totals.totalRainbowRings);
+		printf("[Score Generations] [Lua Debug] totalItemBoxes = %d\n", StatisticsListener::totals.totalItemBoxes);
+		printf("[Score Generations] [Lua Debug] totalSuperRings = %d\n", StatisticsListener::totals.totalSuperRings);
+		printf("[Score Generations] [Lua Debug] totalTricks = %d\n", StatisticsListener::totals.totalTricks);
+		printf("[Score Generations] [Lua Debug] totalDashRings = %d\n", StatisticsListener::totals.totalDashRings);
+		printf("[Score Generations] [Lua Debug] totalQuickSteps = %d\n", StatisticsListener::totals.totalQuickSteps);
+		printf("[Score Generations] [Lua Debug] totalDrifts = %d\n", StatisticsListener::totals.totalDrifts);
+		printf("[Score Generations] [Lua Debug] totalBalloons = %d\n", StatisticsListener::totals.totalBalloons);
+		printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::totals.totalVelocity);
+		printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::totals.ringCount);
+		printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::totals.minutes);
+		printf("[Score Generations] [Lua Debug] seconds = %d\n", StatisticsListener::totals.seconds);
 		printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
 		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
-		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", Tables::rankTables[StateHooks::stageID].minSeconds);
-		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", Tables::rankTables[StateHooks::stageID].maxSeconds);
+		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[StateHooks::stageID].minSeconds);
+		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", TableListener::rankTables[StateHooks::stageID].maxSeconds);
 		printf("[Score Generations] [Lua Debug] stageID = %s\n", StateHooks::stageID);
 	}
 }
