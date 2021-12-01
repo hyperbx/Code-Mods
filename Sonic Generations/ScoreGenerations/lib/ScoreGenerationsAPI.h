@@ -31,6 +31,18 @@
 		return returnType(); \
 	return GetInstance()->libFunctionName(__VA_ARGS__);
 
+/// <summary>
+/// Index-based ranks.
+/// </summary>
+enum RankType
+{
+	D,
+	C,
+	B,
+	A,
+	S
+};
+
 class ScoreGenerationsAPI
 {
 private:
@@ -43,6 +55,8 @@ private:
 	LIB_FUNCTION(int, "ScoreGenerations.dll", API_GetScore);
 
 	LIB_FUNCTION(int, "ScoreGenerations.dll", API_GetTotalScore);
+
+	LIB_FUNCTION(RankType, "ScoreGenerations.dll", API_GetRank);
 
 	LIB_FUNCTION(int, "ScoreGenerations.dll", API_ComputeTimeBonus);
 
@@ -103,6 +117,11 @@ public:
 	/// Returns the current total score.
 	/// </summary>
 	static int GetTotalScore();
+
+	/// <summary>
+	/// Returns the current rank based on the total score.
+	/// </summary>
+	static int GetRank();
 
 	/// <summary>
 	/// Computes and returns the current time bonus.
@@ -178,6 +197,11 @@ inline int ScoreGenerationsAPI::GetScore()
 inline int ScoreGenerationsAPI::GetTotalScore()
 {
 	INT_EXPORT(API_GetTotalScore);
+}
+
+inline int ScoreGenerationsAPI::GetRank()
+{
+	INT_EXPORT(API_GetRank);
 }
 
 inline int ScoreGenerationsAPI::ComputeTimeBonus()

@@ -23,6 +23,11 @@ extern "C" __declspec(dllexport) int API_GetTotalScore()
 	return ScoreListener::totalScore;
 }
 
+extern "C" __declspec(dllexport) int API_GetRank()
+{
+	return ResultListener::Rank();
+}
+
 extern "C" __declspec(dllexport) int API_ComputeTimeBonus()
 {
 	return LuaCallback::RunAlgorithm(TableListener::bonusTable.timeBonusAlgorithm);
