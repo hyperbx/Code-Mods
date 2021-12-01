@@ -145,9 +145,6 @@ __declspec(naked) void ResultsCalculate_MidAsmHook()
 		// Gather the results.
 		call ResultListener::Result
 
-		// Reset statistics.
-		call ScoreListener::Reset
-
 		// Load descriptors for results.
 		lea eax, ResultListener::resultDescription
 
