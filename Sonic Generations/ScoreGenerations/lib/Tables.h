@@ -42,6 +42,7 @@ public:
         int maxSeconds = 0;
 
         // Score required for ranks.
+        int S = 0;
         int A = 0;
         int B = 0;
         int C = 0;

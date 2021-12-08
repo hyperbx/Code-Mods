@@ -23,7 +23,7 @@ public:
     /// <summary>
     /// Calculates the rank using the total score.
     /// </summary>
-    static RankType Rank();
+    static RankType Rank(bool perfect = false);
 
     /// <summary>
     /// Calculates the progress the bar should land on.

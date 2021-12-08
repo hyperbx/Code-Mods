@@ -9,30 +9,46 @@ void ResultListener::Bonus()
 	ScoreListener::AddClamp(ScoreListener::totalScore, LuaCallback::RunAlgorithm(TableListener::bonusTable.userAlgorithm), false);
 }
 
-ResultListener::RankType ResultListener::Rank()
+ResultListener::RankType ResultListener::Rank(bool perfect)
 {
-	if (ScoreListener::totalScore < TableListener::rankTables[StateHooks::stageID].A)
+	RankType rank;
+	int total = ScoreListener::totalScore;
+	int S = TableListener::rankTables[StateHooks::stageID].S;
+	int A = TableListener::rankTables[StateHooks::stageID].A;
+	int B = TableListener::rankTables[StateHooks::stageID].B;
+	int C = TableListener::rankTables[StateHooks::stageID].C;
+
+	if (Configuration::perfectBonus == 0 && S != -1 && total > S)
 	{
-		if (ScoreListener::totalScore < TableListener::rankTables[StateHooks::stageID].B)
+		/* Only use S rank if perfect bonus is disabled
+		   and S rank isn't the default value. */
+		return RankType::S;
+	}
+
+	if (total < A)
+	{
+		if (total < B)
 		{
-			if (ScoreListener::totalScore < TableListener::rankTables[StateHooks::stageID].C)
+			if (total < C)
 			{
-				return RankType::D;
+				rank = RankType::D;
 			}
 			else
 			{
-				return RankType::C;
+				rank = RankType::C;
 			}
 		}
 		else
 		{
-			return RankType::B;
+			rank = RankType::B;
 		}
 	}
 	else
 	{
-		return RankType::A;
+		rank = RankType::A;
 	}
+
+	return (RankType)(perfect ? rank + 1 : rank);
 }
 
 float ResultListener::Progress(RankType rank)
@@ -55,6 +71,7 @@ float ResultListener::Progress(RankType rank)
 		}
 
 		case A:
+		case S:
 			return 1.0f;
 	}
 }
@@ -72,7 +89,7 @@ void ResultListener::Result()
 
 	// Set up ranks.
 	resultDescription.rank = Rank();
-	resultDescription.perfectRank = Rank() + 1;
+	resultDescription.perfectRank = Rank(true);
 
 	// Set up progress bar.
 	resultDescription.scoreProgress = Progress(Rank());

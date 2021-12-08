@@ -74,13 +74,15 @@ public:
                 rankTable.maxSeconds = Configuration::config.GetInteger(section, "maxSeconds", 0);
 
                 // Use the current stage ID to get the ranks.
-                rankTable.A = Configuration::config.GetInteger(section, "A", 50000);
-                rankTable.B = Configuration::config.GetInteger(section, "B", 25000);
-                rankTable.C = Configuration::config.GetInteger(section, "C", 7500);
+                rankTable.S = Configuration::config.GetInteger(section, "S", -1);
+                rankTable.A = Configuration::config.GetInteger(section, "A", -1);
+                rankTable.B = Configuration::config.GetInteger(section, "B", -1);
+                rankTable.C = Configuration::config.GetInteger(section, "C", -1);
 
 #if _DEBUG
                 printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
                 printf("[Score Generations] maxSeconds = %d\n", rankTable.maxSeconds);
+                printf("[Score Generations] S = %d\n", rankTable.S);
                 printf("[Score Generations] A = %d\n", rankTable.A);
                 printf("[Score Generations] B = %d\n", rankTable.B);
                 printf("[Score Generations] C = %d\n", rankTable.C);
