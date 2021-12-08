@@ -20,6 +20,7 @@
 #include <sstream>
 #include <stdint.h>
 #include <string>
+#include <tuple>
 #include <unordered_map>
 #include <vector>
 #include <xmmintrin.h>

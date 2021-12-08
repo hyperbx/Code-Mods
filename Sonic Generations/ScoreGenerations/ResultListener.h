@@ -26,9 +26,9 @@ public:
     static RankType Rank(bool perfect = false);
 
     /// <summary>
-    /// Calculates the progress the bar should land on.
+    /// Computes the progress the results bars should land on.
     /// </summary>
-    static float Progress(RankType rank);
+    static tuple<float, float> ComputeProgressBars(RankType rank);
 
     /// <summary>
     /// Gathers the final results.

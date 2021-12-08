@@ -51,29 +51,50 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 	return (RankType)(perfect ? rank + 1 : rank);
 }
 
-float ResultListener::Progress(RankType rank)
+/// <summary>
+/// Computes the progress bar percentage based on the input rank and divider.
+/// </summary>
+/// <param name="rank">Rank to line up with.</param>
+/// <param name="divider">Divider to set up rank results.</param>
+float ComputeProgressBar(ResultListener::RankType rank, int divider)
 {
 	switch (rank)
 	{
-		case D:
-			return ((float)ScoreListener::totalScore / (float)TableListener::rankTables[StateHooks::stageID].C) / 3.0f;
+		case ResultListener::RankType::D:
+			return ((float)divider / (float)TableListener::rankTables[StateHooks::stageID].C) / 3.0f;
 
-		case C:
+		case ResultListener::RankType::C:
 		{
 			const float baseScore = (float)TableListener::rankTables[StateHooks::stageID].C;
-			return (1.0f / 3.0f) + (((float)ScoreListener::totalScore - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].B - baseScore)) / 3.0f;
+			return (1.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].B - baseScore)) / 3.0f;
 		}
 
-		case B:
+		case ResultListener::RankType::B:
 		{
 			const float baseScore = (float)TableListener::rankTables[StateHooks::stageID].B;
-			return (2.0f / 3.0f) + (((float)ScoreListener::totalScore - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].A - baseScore)) / 3.0f;
+			return (2.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[StateHooks::stageID].A - baseScore)) / 3.0f;
 		}
 
-		case A:
-		case S:
+		case ResultListener::RankType::A:
+		case ResultListener::RankType::S:
 			return 1.0f;
 	}
+}
+
+tuple<float, float> ResultListener::ComputeProgressBars(RankType rank)
+{
+	float scoreProgress;
+	float ringProgress;
+
+	int ringBonus = LuaCallback::RunAlgorithm(TableListener::bonusTable.ringBonusAlgorithm);
+
+	// Compute score progress.
+	scoreProgress = ComputeProgressBar(rank, ScoreListener::totalScore - ringBonus);
+
+	// Compute ring progress.
+	ringProgress = ComputeProgressBar(rank, ScoreListener::totalScore + ringBonus / StatisticsListener::totals.ringCount) + 0.0001;
+
+	return { scoreProgress, ringProgress };
 }
 
 void ResultListener::Result()
@@ -91,7 +112,10 @@ void ResultListener::Result()
 	resultDescription.rank = Rank();
 	resultDescription.perfectRank = Rank(true);
 
-	// Set up progress bar.
-	resultDescription.scoreProgress = Progress(Rank());
-	resultDescription.ringProgress = resultDescription.scoreProgress + 0.0001; // Increment the tiniest amount so the ring count appears.
+	// Compute results progress bar.
+	auto [score, ring] = ComputeProgressBars(Rank());
+
+	// Set up progress bars.
+	resultDescription.scoreProgress = score;
+	resultDescription.ringProgress = ring;
 }
