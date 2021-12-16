@@ -6,7 +6,7 @@ bool Configuration::rewardSpeedBonus = true;
 bool Configuration::scoreTimeout = false;
 bool Configuration::restoreLastCheckpointScore = false;
 int Configuration::scoreLimit = 999999;
-int Configuration::perfectBonus = 1;
+Configuration::PerfectBonusType Configuration::perfectBonus = OnlyForA;
 string Configuration::scoreFormat = "%06d";
 bool Configuration::customXNCP = false;
 bool Configuration::debugLua = false;
@@ -44,7 +44,7 @@ void Configuration::Read(string path = "")
 	// Behaviour
 	Configuration::restoreLastCheckpointScore = config.GetBoolean("Behaviour", "restoreLastCheckpointScore", restoreLastCheckpointScore);
 	Configuration::scoreLimit = config.GetInteger("Behaviour", "scoreLimit", scoreLimit);
-	Configuration::perfectBonus = config.GetInteger("Behaviour", "perfectBonus", perfectBonus);
+	Configuration::perfectBonus = (PerfectBonusType)config.GetInteger("Behaviour", "perfectBonus", perfectBonus);
 
 	// Appearance
 	Configuration::scoreFormat = config.Get("Appearance", "scoreFormat", scoreFormat);

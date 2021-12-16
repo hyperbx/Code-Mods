@@ -53,10 +53,10 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 
 	switch (Configuration::perfectBonus)
 	{
-		case 0:
+		case Configuration::PerfectBonusType::Disabled:
 			return false;
 
-		case 1:
+		case Configuration::PerfectBonusType::OnlyForA:
 		{
 			// Give perfect bonus only for A rank.
 			if (ResultListener::resultDescription.rank == 3)
@@ -65,7 +65,7 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 			return false;
 		}
 
-		case 2:
+		case Configuration::PerfectBonusType::Enabled:
 			return originalIsPerfectBonus();
 	}
 }

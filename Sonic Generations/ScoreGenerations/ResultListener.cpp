@@ -18,7 +18,7 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 	int B = TableListener::rankTables[StateHooks::stageID].B;
 	int C = TableListener::rankTables[StateHooks::stageID].C;
 
-	if (Configuration::perfectBonus == 0 && S != -1 && total > S)
+	if (Configuration::perfectBonus == Configuration::PerfectBonusType::Disabled && S != -1 && total > S)
 	{
 		/* Only use S rank if perfect bonus is disabled
 		   and S rank isn't the default value. */
@@ -48,7 +48,7 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 		rank = RankType::A;
 	}
 
-	return (RankType)(perfect && Configuration::perfectBonus != 0 ? rank + 1 : rank);
+	return (RankType)(perfect && Configuration::perfectBonus != Configuration::PerfectBonusType::Disabled ? rank + 1 : rank);
 }
 
 /// <summary>

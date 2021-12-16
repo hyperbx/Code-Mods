@@ -55,10 +55,17 @@ public:
 	/// </summary>
 	static int scoreLimit;
 
+	static enum PerfectBonusType
+	{
+		Disabled,
+		OnlyForA,
+		Enabled
+	};
+
 	/// <summary>
 	/// The state that determines how the perfect bonus will behave.
 	/// </summary>
-	static int perfectBonus;
+	static PerfectBonusType perfectBonus;
 
 	/// <summary>
 	/// Formatting used for the string printer for score.
