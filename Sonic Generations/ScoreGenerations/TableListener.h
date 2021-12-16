@@ -14,48 +14,48 @@ public:
     /// </summary>
     static Tables::ScoreTable GetScore()
     {
-        Tables::ScoreTable scoreTable;
+        Tables::ScoreTable newScoreTable;
 
         // Use the current configuration to get the score for objects.
-        scoreTable.Ring = Configuration::config.GetInteger("Score", "Ring", scoreTable.Ring);
-        scoreTable.Enemy = Configuration::config.GetInteger("Score", "Enemy", scoreTable.Enemy);
-        scoreTable.Physics = Configuration::config.GetInteger("Score", "Physics", scoreTable.Physics);
-        scoreTable.PointMarker = Configuration::config.GetInteger("Score", "PointMarker", scoreTable.PointMarker);
-        scoreTable.RedRing = Configuration::config.GetInteger("Score", "RedRing", scoreTable.RedRing);
-        scoreTable.RainbowRing = Configuration::config.GetInteger("Score", "RainbowRing", scoreTable.RainbowRing);
-        scoreTable.ItemBox = Configuration::config.GetInteger("Score", "ItemBox", scoreTable.ItemBox);
-        scoreTable.SuperRing = Configuration::config.GetInteger("Score", "SuperRing", scoreTable.SuperRing);
-        scoreTable.TrickFinish = Configuration::config.GetInteger("Score", "TrickFinish", scoreTable.TrickFinish);
-        scoreTable.Trick = Configuration::config.GetInteger("Score", "Trick", scoreTable.Trick);
-        scoreTable.Life = Configuration::config.GetInteger("Score", "Life", scoreTable.Life);
-        scoreTable.DashRing = Configuration::config.GetInteger("Score", "DashRing", scoreTable.DashRing);
-        scoreTable.QuickStep = Configuration::config.GetInteger("Score", "QuickStep", scoreTable.QuickStep);
-        scoreTable.Drift = Configuration::config.GetInteger("Score", "Drift", scoreTable.Drift);
-        scoreTable.Balloon = Configuration::config.GetInteger("Score", "Balloon", scoreTable.Balloon);
-        scoreTable.Super = Configuration::config.GetInteger("Score", "Super", scoreTable.Super);
-        scoreTable.BoardTrick = Configuration::config.GetInteger("Score", "BoardTrick", scoreTable.BoardTrick);
+        newScoreTable.Ring = Configuration::config.GetInteger("Score", "Ring", scoreTable.Ring);
+        newScoreTable.Enemy = Configuration::config.GetInteger("Score", "Enemy", scoreTable.Enemy);
+        newScoreTable.Physics = Configuration::config.GetInteger("Score", "Physics", scoreTable.Physics);
+        newScoreTable.PointMarker = Configuration::config.GetInteger("Score", "PointMarker", scoreTable.PointMarker);
+        newScoreTable.RedRing = Configuration::config.GetInteger("Score", "RedRing", scoreTable.RedRing);
+        newScoreTable.RainbowRing = Configuration::config.GetInteger("Score", "RainbowRing", scoreTable.RainbowRing);
+        newScoreTable.ItemBox = Configuration::config.GetInteger("Score", "ItemBox", scoreTable.ItemBox);
+        newScoreTable.SuperRing = Configuration::config.GetInteger("Score", "SuperRing", scoreTable.SuperRing);
+        newScoreTable.TrickFinish = Configuration::config.GetInteger("Score", "TrickFinish", scoreTable.TrickFinish);
+        newScoreTable.Trick = Configuration::config.GetInteger("Score", "Trick", scoreTable.Trick);
+        newScoreTable.Life = Configuration::config.GetInteger("Score", "Life", scoreTable.Life);
+        newScoreTable.DashRing = Configuration::config.GetInteger("Score", "DashRing", scoreTable.DashRing);
+        newScoreTable.QuickStep = Configuration::config.GetInteger("Score", "QuickStep", scoreTable.QuickStep);
+        newScoreTable.Drift = Configuration::config.GetInteger("Score", "Drift", scoreTable.Drift);
+        newScoreTable.Balloon = Configuration::config.GetInteger("Score", "Balloon", scoreTable.Balloon);
+        newScoreTable.Super = Configuration::config.GetInteger("Score", "Super", scoreTable.Super);
+        newScoreTable.BoardTrick = Configuration::config.GetInteger("Score", "BoardTrick", scoreTable.BoardTrick);
 
 #if _DEBUG
-        printf("[Score Generations] Ring = %d\n", scoreTable.Ring);
-        printf("[Score Generations] Enemy = %d\n", scoreTable.Enemy);
-        printf("[Score Generations] Physics = %d\n", scoreTable.Physics);
-        printf("[Score Generations] PointMarker = %d\n", scoreTable.PointMarker);
-        printf("[Score Generations] RedRing = %d\n", scoreTable.RedRing);
-        printf("[Score Generations] RainbowRing = %d\n", scoreTable.RainbowRing);
-        printf("[Score Generations] ItemBox = %d\n", scoreTable.ItemBox);
-        printf("[Score Generations] SuperRing = %d\n", scoreTable.SuperRing);
-        printf("[Score Generations] TrickFinish = %d\n", scoreTable.TrickFinish);
-        printf("[Score Generations] Trick = %d\n", scoreTable.Trick);
-        printf("[Score Generations] Life = %d\n", scoreTable.Life);
-        printf("[Score Generations] DashRing = %d\n", scoreTable.DashRing);
-        printf("[Score Generations] QuickStep = %d\n", scoreTable.QuickStep);
-        printf("[Score Generations] Drift = %d\n", scoreTable.Drift);
-        printf("[Score Generations] Balloon = %d\n", scoreTable.Balloon);
-        printf("[Score Generations] Super = %d\n", scoreTable.Balloon);
-        printf("[Score Generations] BoardTrick = %d\n", scoreTable.BoardTrick);
+        printf("[Score Generations] Ring = %d\n", newScoreTable.Ring);
+        printf("[Score Generations] Enemy = %d\n", newScoreTable.Enemy);
+        printf("[Score Generations] Physics = %d\n", newScoreTable.Physics);
+        printf("[Score Generations] PointMarker = %d\n", newScoreTable.PointMarker);
+        printf("[Score Generations] RedRing = %d\n", newScoreTable.RedRing);
+        printf("[Score Generations] RainbowRing = %d\n", newScoreTable.RainbowRing);
+        printf("[Score Generations] ItemBox = %d\n", newScoreTable.ItemBox);
+        printf("[Score Generations] SuperRing = %d\n", newScoreTable.SuperRing);
+        printf("[Score Generations] TrickFinish = %d\n", newScoreTable.TrickFinish);
+        printf("[Score Generations] Trick = %d\n", newScoreTable.Trick);
+        printf("[Score Generations] Life = %d\n", newScoreTable.Life);
+        printf("[Score Generations] DashRing = %d\n", newScoreTable.DashRing);
+        printf("[Score Generations] QuickStep = %d\n", newScoreTable.QuickStep);
+        printf("[Score Generations] Drift = %d\n", newScoreTable.Drift);
+        printf("[Score Generations] Balloon = %d\n", newScoreTable.Balloon);
+        printf("[Score Generations] Super = %d\n", newScoreTable.Balloon);
+        printf("[Score Generations] BoardTrick = %d\n", newScoreTable.BoardTrick);
 #endif
 
-        return scoreTable;
+        return newScoreTable;
     }
 
     /// <summary>
@@ -105,30 +105,30 @@ public:
     /// </summary>
     static Tables::BonusTable GetBonuses()
     {
-        Tables::BonusTable bonusTable;
+        Tables::BonusTable newBonusTable;
 
         // Use the current configuration to get the bonuses.
-        bonusTable.homingChainBonus = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", bonusTable.homingChainBonus);
-        bonusTable.homingChainBonusLimit = Configuration::config.GetInteger("GameplayBonus", "homingChainBonusLimit", bonusTable.homingChainBonusLimit);
-        bonusTable.slamBonus = Configuration::config.GetInteger("GameplayBonus", "slamBonus", bonusTable.slamBonus);
-        bonusTable.slamBonusLimit = Configuration::config.GetInteger("GameplayBonus", "slamBonusLimit", bonusTable.slamBonusLimit);
-        bonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", bonusTable.timeBonusAlgorithm);
-        bonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", bonusTable.ringBonusAlgorithm);
-        bonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", bonusTable.speedBonusAlgorithm);
-        bonusTable.userAlgorithm = Configuration::config.Get("ResultBonus", "userAlgorithm", bonusTable.userAlgorithm);
+        newBonusTable.homingChainBonus = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", bonusTable.homingChainBonus);
+        newBonusTable.homingChainBonusLimit = Configuration::config.GetInteger("GameplayBonus", "homingChainBonusLimit", bonusTable.homingChainBonusLimit);
+        newBonusTable.slamBonus = Configuration::config.GetInteger("GameplayBonus", "slamBonus", bonusTable.slamBonus);
+        newBonusTable.slamBonusLimit = Configuration::config.GetInteger("GameplayBonus", "slamBonusLimit", bonusTable.slamBonusLimit);
+        newBonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", bonusTable.timeBonusAlgorithm);
+        newBonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", bonusTable.ringBonusAlgorithm);
+        newBonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", bonusTable.speedBonusAlgorithm);
+        newBonusTable.userAlgorithm = Configuration::config.Get("ResultBonus", "userAlgorithm", bonusTable.userAlgorithm);
 
 #if _DEBUG
-        printf("[Score Generations] homingChainBonus = %d\n", bonusTable.homingChainBonus);
-        printf("[Score Generations] homingChainBonusLimit = %d\n", bonusTable.homingChainBonusLimit);
-        printf("[Score Generations] slamBonus = %d\n", bonusTable.slamBonus);
-        printf("[Score Generations] slamBonusLimit = %d\n", bonusTable.slamBonusLimit);
-        printf("[Score Generations] timeBonusAlgorithm = %s\n", bonusTable.timeBonusAlgorithm.c_str());
-        printf("[Score Generations] ringBonusAlgorithm = %s\n", bonusTable.ringBonusAlgorithm.c_str());
-        printf("[Score Generations] speedBonusAlgorithm = %s\n", bonusTable.speedBonusAlgorithm.c_str());
-        printf("[Score Generations] userAlgorithm = %s\n", bonusTable.userAlgorithm.c_str());
+        printf("[Score Generations] homingChainBonus = %d\n", newBonusTable.homingChainBonus);
+        printf("[Score Generations] homingChainBonusLimit = %d\n", newBonusTable.homingChainBonusLimit);
+        printf("[Score Generations] slamBonus = %d\n", newBonusTable.slamBonus);
+        printf("[Score Generations] slamBonusLimit = %d\n", newBonusTable.slamBonusLimit);
+        printf("[Score Generations] timeBonusAlgorithm = %s\n", newBonusTable.timeBonusAlgorithm.c_str());
+        printf("[Score Generations] ringBonusAlgorithm = %s\n", newBonusTable.ringBonusAlgorithm.c_str());
+        printf("[Score Generations] speedBonusAlgorithm = %s\n", newBonusTable.speedBonusAlgorithm.c_str());
+        printf("[Score Generations] userAlgorithm = %s\n", newBonusTable.userAlgorithm.c_str());
 #endif
 
-        return bonusTable;
+        return newBonusTable;
     }
 
     /// <summary>
@@ -136,20 +136,20 @@ public:
     /// </summary>
     static Tables::MultiplierTable GetMultipliers()
     {
-        Tables::MultiplierTable multiplierTable;
+        Tables::MultiplierTable newMultiplierTable;
 
         // Use the current configuration to get the multipliers.
-        multiplierTable.homingChainMultiplier = Configuration::config.GetInteger("Multiplier", "homingChainMultiplier", multiplierTable.homingChainMultiplier);
-        multiplierTable.slamMultiplier = Configuration::config.GetInteger("Multiplier", "slamMultiplier", multiplierTable.slamMultiplier);
-        multiplierTable.speedBonusMultiplier = Configuration::config.GetInteger("Multiplier", "speedBonusMultiplier", multiplierTable.speedBonusMultiplier);
+        newMultiplierTable.homingChainMultiplier = Configuration::config.GetInteger("Multiplier", "homingChainMultiplier", multiplierTable.homingChainMultiplier);
+        newMultiplierTable.slamMultiplier = Configuration::config.GetInteger("Multiplier", "slamMultiplier", multiplierTable.slamMultiplier);
+        newMultiplierTable.speedBonusMultiplier = Configuration::config.GetInteger("Multiplier", "speedBonusMultiplier", multiplierTable.speedBonusMultiplier);
 
 #if _DEBUG
-        printf("[Score Generations] homingChainMultiplier = %d\n", multiplierTable.homingChainMultiplier);
-        printf("[Score Generations] slamMultiplier = %d\n", multiplierTable.slamMultiplier);
-        printf("[Score Generations] speedBonusMultiplier = %d\n", multiplierTable.speedBonusMultiplier);
+        printf("[Score Generations] homingChainMultiplier = %d\n", newMultiplierTable.homingChainMultiplier);
+        printf("[Score Generations] slamMultiplier = %d\n", newMultiplierTable.slamMultiplier);
+        printf("[Score Generations] speedBonusMultiplier = %d\n", newMultiplierTable.speedBonusMultiplier);
 #endif
 
-        return multiplierTable;
+        return newMultiplierTable;
     }
 
     /// <summary>
@@ -157,18 +157,18 @@ public:
     /// </summary>
     static Tables::TimerTable GetTimers()
     {
-        Tables::TimerTable timerTable;
+        Tables::TimerTable newTimerTable;
 
         // Use the current configuration to get the timers.
-        timerTable.superSonicTimer = Configuration::config.GetInteger("Timer", "superSonicTimer", timerTable.superSonicTimer);
-        timerTable.slamTimer = Configuration::config.GetInteger("Timer", "slamTimer", timerTable.slamTimer);
+        newTimerTable.superSonicTimer = Configuration::config.GetInteger("Timer", "superSonicTimer", timerTable.superSonicTimer);
+        newTimerTable.slamTimer = Configuration::config.GetInteger("Timer", "slamTimer", timerTable.slamTimer);
 
 #if _DEBUG
-        printf("[Score Generations] superSonicTimer = %d\n", timerTable.superSonicTimer);
-        printf("[Score Generations] slamTimer = %d\n", timerTable.slamTimer);
+        printf("[Score Generations] superSonicTimer = %d\n", newTimerTable.superSonicTimer);
+        printf("[Score Generations] slamTimer = %d\n", newTimerTable.slamTimer);
 #endif
 
-        return timerTable;
+        return newTimerTable;
     }
 };
 
