@@ -28,6 +28,11 @@ extern "C" __declspec(dllexport) int API_GetRank()
 	return ResultListener::Rank();
 }
 
+extern "C" __declspec(dllexport) bool API_IsStageForbidden()
+{
+	return HudSonicStage::IsStageForbidden();
+}
+
 extern "C" __declspec(dllexport) int API_ComputeTimeBonus()
 {
 	return LuaCallback::RunAlgorithm(TableListener::bonusTable.timeBonusAlgorithm);

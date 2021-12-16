@@ -25,6 +25,12 @@
 		return -1; \
 	return GetInstance()->libFunctionName(__VA_ARGS__);
 
+// Creates a Boolean export based on the API's requirements.
+#define BOOL_EXPORT(libFunctionName, ...) \
+	if (GetInstance()->libFunctionName == nullptr) \
+		return false; \
+	return GetInstance()->libFunctionName(__VA_ARGS__);
+
 // Creates a generic export based on the API's requirements.
 #define GENERIC_EXPORT(returnType, libFunctionName, ...) \
 	if (GetInstance()->libFunctionName == nullptr) \
@@ -57,6 +63,8 @@ private:
 	LIB_FUNCTION(int, "ScoreGenerations.dll", API_GetTotalScore);
 
 	LIB_FUNCTION(RankType, "ScoreGenerations.dll", API_GetRank);
+
+	LIB_FUNCTION(bool, "ScoreGenerations.dll", API_IsStageForbidden);
 
 	LIB_FUNCTION(int, "ScoreGenerations.dll", API_ComputeTimeBonus);
 
@@ -122,6 +130,11 @@ public:
 	/// Returns the current rank based on the total score.
 	/// </summary>
 	static int GetRank();
+
+	/// <summary>
+	/// Determines if the current stage ID is forbidden.
+	/// </summary>
+	static bool IsStageForbidden();
 
 	/// <summary>
 	/// Computes and returns the current time bonus.
@@ -202,6 +215,11 @@ inline int ScoreGenerationsAPI::GetTotalScore()
 inline int ScoreGenerationsAPI::GetRank()
 {
 	INT_EXPORT(API_GetRank);
+}
+
+inline bool ScoreGenerationsAPI::IsStageForbidden()
+{
+	BOOL_EXPORT(API_IsStageForbidden);
 }
 
 inline int ScoreGenerationsAPI::ComputeTimeBonus()
