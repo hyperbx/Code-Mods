@@ -4,7 +4,10 @@
 
 class LuaCallback
 {
+	static string LuaPath;
+
 public:
+	static bool SetLuaPath(string path);
 	static void PushExposedData(lua_State* L);
 	static void PushExposedInteger(lua_State* L, string name, unsigned int pushToStack);
 	static void PushExposedString(lua_State* L, string name, string value);

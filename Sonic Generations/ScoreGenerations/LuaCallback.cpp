@@ -1,3 +1,5 @@
+string LuaCallback::LuaPath = LUA_FILE;
+
 const struct luaL_Reg LuaCallback::Functions[] =
 {
 	{ "print", LuaCallback::print },
@@ -15,6 +17,17 @@ bool IsLuaSafe(lua_State* L, int result)
 
 		return false;
 	}
+
+	return true;
+}
+
+bool LuaCallback::SetLuaPath(string path)
+{
+	if (!IOHelper::FileExists(path))
+		return false;
+
+	// Set new active Lua path.
+	LuaPath = path;
 
 	return true;
 }
@@ -103,20 +116,8 @@ bool LuaCallback::LoadExternalLibrary(lua_State* L)
 	// Load C++ callback functions.
 	luaL_setfuncs(L, Functions, 0);
 
-	string lib = Configuration::GetConfigDirectory() + "\\" + LUA_FILE;
-
-	/* If the mod overriding the configuration doesn't have a Lua script,
-	   then just use the one provided in Score Generations. */
-	if (!IOHelper::FileExists(lib))
-	{
-		lib = LUA_FILE;
-
-		if (Configuration::debugLua)
-			printf("[Score Generations] [Lua Debug] The overridden mod doesn't have a Lua script - reverting to default script...\n");
-	}
-
 	// Try loading the external library.
-	if (IsLuaSafe(L, luaL_dofile(L, lib.c_str())))
+	if (IsLuaSafe(L, luaL_dofile(L, LuaPath.c_str())))
 		return true;
 
 	if (Configuration::debugLua)

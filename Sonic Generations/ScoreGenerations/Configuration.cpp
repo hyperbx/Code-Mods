@@ -23,6 +23,13 @@ void Configuration::Read(string path = "")
 	// Sets the config path and reads it.
 	Configuration::config = configPath = path.empty() ? INI_FILE : path;
 
+	// Sets the Lua path to the current working directory.
+	if (!LuaCallback::SetLuaPath(Configuration::GetConfigDirectory() + "\\" + LUA_FILE))
+	{
+		if (Configuration::debugLua)
+			printf("[Score Generations] [Lua Debug] The overridden mod doesn't have a Lua script - reverting to previous script...\n");
+	}
+
 	// Get the score for the objects.
 	TableListener::scoreTable = TableListener::GetScore();
 
