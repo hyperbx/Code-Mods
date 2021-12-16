@@ -48,7 +48,7 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 		rank = RankType::A;
 	}
 
-	return (RankType)(perfect ? rank + 1 : rank);
+	return (RankType)(perfect && Configuration::perfectBonus != 0 ? rank + 1 : rank);
 }
 
 /// <summary>
