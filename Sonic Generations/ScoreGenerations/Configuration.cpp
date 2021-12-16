@@ -71,7 +71,14 @@ void Configuration::Read(string path = "")
 	Configuration::customXNCP = config.GetBoolean("Developer", "customXNCP", customXNCP);
 	Configuration::debugLua = config.GetBoolean("Developer", "debugLua", debugLua);
 	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", overrideForbiddenCasino);
-	Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(config.Get("Developer", "forbiddenStages", "")));
+
+	// Get forbidden stages.
+	string forbiddenStagesCSV = config.Get("Developer", "forbiddenStages", "");
+	{
+		// Set configuration if the returned CSV list is populated.
+		if (!forbiddenStagesCSV.empty())
+			Configuration::forbiddenStages = StringHelper::GetCommaSeparatedStrings(StringHelper::RemoveSpaces(forbiddenStagesCSV));
+	}
 
 	// Get the ranks.
 	TableListener::GetRanks();
