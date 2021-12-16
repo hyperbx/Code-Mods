@@ -37,8 +37,8 @@ bool HudSonicStage::IsCasino()
 
 bool HudSonicStage::IsStageForbidden()
 {
-	// Forbid missions from using the score counter.
-	if (isMission)
+	// Forbid missions and Casino Night from using the score counter.
+	if (isMission || IsCasino())
 		return true;
 
 	// Check if the current stage ID matches any in the list.
