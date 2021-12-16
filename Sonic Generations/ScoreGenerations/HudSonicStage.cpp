@@ -37,9 +37,16 @@ bool HudSonicStage::IsCasino()
 
 bool HudSonicStage::IsStageForbidden()
 {
-	// Forbid missions and Casino Night from using the score counter.
-	if (isMission || IsCasino())
+	// Forbid missions, Casino Night and stages lacking rank tables from using the score counter.
+	if
+	(
+		isMission  ||
+		IsCasino() ||
+		TableListener::rankTables.find(string(StateHooks::stageID)) == TableListener::rankTables.end()
+	)
+	{
 		return true;
+	}
 
 	// Check if the current stage ID matches any in the list.
 	for (vector<string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
