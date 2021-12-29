@@ -40,15 +40,21 @@ inline void* sigScan(const char* signature, const char* mask)
     return nullptr;
 }
 
-#define SIG_SCAN(x, signature, mask) \
-    void* _##x; \
-    void* x() \
+#define SIG_SCAN(x, ...) \
+void* x##Addr; \
+void* x() \
+{ \
+    static const char* x##Data[] = { __VA_ARGS__ }; \
+    if (!x##Addr) \
     { \
-        if (!_##x) \
+        for (int i = 0; i < _countof(x##Data); i += 2) \
         { \
-            _##x = sigScan(signature, mask); \
-            sigValid = false; \
+            x##Addr = sigScan(x##Data[i], x##Data[i + 1]); \
+			printf("[Signature] %s received: 0x%08x\n", #x, x##Addr); \
+            if (x##Addr) \
+                return x##Addr; \
         } \
-        printf("[Signature] %s received: 0x%08x\n", #x, _##x); \
-        return _##x; \
-    }
+        sigValid = false; \
+    } \
+    return x##Addr; \
+}
