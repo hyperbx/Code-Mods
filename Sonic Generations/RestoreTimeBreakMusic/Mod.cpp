@@ -1,19 +1,13 @@
 float timeBreakTimer = 8.0f;
 
-FUNCTION_PTR(unsigned int, __stdcall, PlayAudioFromCueName, 0xD62440, int* gameDocument, Hedgehog::Base::CSharedString& cueName, float fadeInTime);
-
-FUNCTION_PTR(int, __stdcall, StopAudioFromCueName, 0xD61E40, int* gameDocument, Hedgehog::Base::CSharedString& cueName, float fadeOutTime);
-
 void PlayTimeBreakMusic()
 {
-	Hedgehog::Base::CSharedString timeBreak = Hedgehog::Base::CSharedString("Time_Break");
-	PlayAudioFromCueName(*(int**)0x1E0BE5C, timeBreak, 0.0);
+	PlayMusic("Time_Break", 0.0);
 }
 
-void PlayStageMusic()
+void StopTimeBreakMusic()
 {
-	Hedgehog::Base::CSharedString timeBreak = Hedgehog::Base::CSharedString("Time_Break");
-	StopAudioFromCueName(*(int**)0x1E0BE5C, timeBreak, 0.0);
+	StopMusic("Time_Break", 0.0);
 }
 
 __declspec(naked) void TimeBreakBegin_MidAsmHook()
@@ -40,7 +34,7 @@ __declspec(naked) void TimeBreakEnd_MidAsmHook()
 	{
 		call [interruptAddress]
 
-		call [PlayStageMusic]
+		call [StopTimeBreakMusic]
 
 		jmp [returnAddress]
 	}

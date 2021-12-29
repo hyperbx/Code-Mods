@@ -15,6 +15,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RestoreTimeBreakMusic", "So
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RestoreSilverPinchMusic", "Sonic Generations\RestoreSilverPinchMusic\RestoreSilverPinchMusic.vcxproj", "{E566C733-73F5-425C-9BFF-DC30CA49E92C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0D6EA313-F767-4163-BDC2-73B07305F10B}"
+	ProjectSection(SolutionItems) = preProject
+		Sonic Generations\Common.h = Sonic Generations\Common.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

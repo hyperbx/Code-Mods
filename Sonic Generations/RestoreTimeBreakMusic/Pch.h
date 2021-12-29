@@ -12,5 +12,4 @@
 
 // Dependencies
 #include <Helpers.h>
-#include <Hedgehog.h>
-#include <Sonic.h>
+#include "..\Common.h"
