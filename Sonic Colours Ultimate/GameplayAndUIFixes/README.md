@@ -1,4 +1,4 @@
-# Gameplay & UI Fixes
+# [Gameplay & UI Fixes](https://gamebanana.com/mods/322057)
 A collection of various gameplay and UI fixes for Sonic Colours: Ultimate.
 
 ## Credits
