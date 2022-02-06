@@ -2,7 +2,6 @@
 
 #include <Helpers.h>
 #include <Hedgehog.h>
-#include <Sonic.h>
 
 void** const GameDocument = (void**)0x1E0BE5C;
 

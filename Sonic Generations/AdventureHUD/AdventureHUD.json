@@ -1,0 +1,22 @@
+{
+  "Groups": [
+    {
+      "Name": "Behaviour",
+      "DisplayName": "Behaviour",
+      "Elements": [
+        {
+          "Name": "disableGauge",
+          "Description": [
+            "Hides the boost gauge."
+          ],
+          "DisplayName": "Disable Boost Gauge",
+          "Type": "bool",
+          "MinValue": null,
+          "MaxValue": null,
+          "DefaultValue": true
+        }
+      ]
+    }
+  ],
+  "IniFile": "mod.ini"
+}

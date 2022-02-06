@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0D6EA3
 		Sonic Generations\Common.h = Sonic Generations\Common.h
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventureHUD", "Sonic Generations\AdventureHUD\AdventureHUD.vcxproj", "{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -50,6 +52,10 @@ Global
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Debug|x86.Build.0 = Debug|Win32
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Release|x86.ActiveCfg = Release|Win32
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Release|x86.Build.0 = Release|Win32
+		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Debug|x86.ActiveCfg = Debug|Win32
+		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Debug|x86.Build.0 = Debug|Win32
+		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Release|x86.ActiveCfg = Release|Win32
+		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
