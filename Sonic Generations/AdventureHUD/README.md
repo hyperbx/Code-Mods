@@ -1,4 +1,4 @@
-# [Adventure HUD](https://gamebanana.com/mods/356015)
+# [Sonic Adventure HUD](https://gamebanana.com/mods/356015)
 Source code for the DLL used in the Sonic Adventure HUD mod for Sonic Generations.
 
 ## Credits

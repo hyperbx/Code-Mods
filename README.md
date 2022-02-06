@@ -3,9 +3,9 @@ A repository containing DLL mods for various games.
 
 ## Index
 - Sonic Generations
-  - [Adventure HUD](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/AdventureHUD)
+  - [Sonic Adventure HUD](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/AdventureHUD)
   - [Fix Window Title](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/FixWindowTitle)
-  - [Forces HUD](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/ForcesHUD)
+  - [Sonic Forces HUD & UI](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/ForcesHUD)
   - [Restore Silver Pinch Music](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/RestoreSilverPinchMusic)
   - [Restore Time Break Music](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/RestoreTimeBreakMusic)
   - [Score Generations](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/ScoreGenerations)
