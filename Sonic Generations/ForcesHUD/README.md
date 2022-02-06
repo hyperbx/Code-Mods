@@ -1,4 +1,4 @@
-# Forces HUD
+# [Forces HUD](https://gamebanana.com/mods/288929)
 Source code for the DLL used in the Sonic Forces HUD mod for Sonic Generations.
 
 ## Credits

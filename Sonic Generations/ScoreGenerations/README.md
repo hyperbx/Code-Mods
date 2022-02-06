@@ -1,4 +1,4 @@
-# Score Generations
+# [Score Generations](https://gamebanana.com/mods/292798)
 A mod for Sonic Generations that restores a real-time scoring system.
 
 ## Credits

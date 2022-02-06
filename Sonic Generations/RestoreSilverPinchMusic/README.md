@@ -1,4 +1,4 @@
-# Restore Silver Pinch Music
+# [Restore Silver Pinch Music](https://gamebanana.com/sounds/56128)
 A mod for Sonic Generations that restores the unused track for Silver's rival boss.
 
 ## Credits

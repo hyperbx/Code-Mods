@@ -1,4 +1,4 @@
-# Tails' Dash Rings in Stages
+# [Tails' Dash Rings in Stages](https://gamebanana.com/mods/294538)
 A mod for Sonic Generations that replaces normal dash rings with Tails' ones.
 
 ## Credits
