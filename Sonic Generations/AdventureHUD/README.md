@@ -1,4 +1,4 @@
-# Forces HUD
+# Adventure HUD
 Source code for the DLL used in the Sonic Adventure HUD mod for Sonic Generations.
 
 ## Credits
