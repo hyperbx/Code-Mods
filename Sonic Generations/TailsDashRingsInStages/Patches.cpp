@@ -24,66 +24,33 @@ void Patches::Install()
 {
 	PatchDashRingNames();
 
+	int sound = 0x3D0CFC;
+
 	switch (Configuration::soundType)
 	{
 		case Configuration::DashRing:
-		{
-			int sound = 0x3D0CFC;
-
-			WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
-
-			if (Configuration::overrideTailsDashRing)
-				WRITE_MEMORY(0x1A6B800, uint32_t, sound);
-
+			sound = 0x3D0CFC;
 			break;
-		}
 
 		case Configuration::RainbowRing:
-		{
-			int sound = 0x3D10E5;
-
-			WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
-
-			if (Configuration::overrideTailsDashRing)
-				WRITE_MEMORY(0x1A6B800, uint32_t, sound);
-
+			sound = 0x3D10E5;
 			break;
-		}
 
 		case Configuration::DashPanel:
-		{
-			int sound = 0x3D10E6;
-
-			WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
-
-			if (Configuration::overrideTailsDashRing)
-				WRITE_MEMORY(0x1A6B800, uint32_t, sound);
-
+			sound = 0x3D10E6;
 			break;
-		}
 
 		case Configuration::ClassicSpring:
-		{
-			int sound = 0x3D10DF;
-
-			WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
-
-			if (Configuration::overrideTailsDashRing)
-				WRITE_MEMORY(0x1A6B800, uint32_t, sound);
-
+			sound = 0x3D10DF;
 			break;
-		}
 
 		case Configuration::ModernSpring:
-		{
-			int sound = 0x3D10DE;
-
-			WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
-
-			if (Configuration::overrideTailsDashRing)
-				WRITE_MEMORY(0x1A6B800, uint32_t, sound);
-
+			sound = 0x3D10DE;
 			break;
-		}
 	}
+
+	WRITE_MEMORY(0x1A6B7FC, uint32_t, sound);
+
+	if (Configuration::overrideTailsDashRing)
+		WRITE_MEMORY(0x1A6B800, uint32_t, sound);
 }
