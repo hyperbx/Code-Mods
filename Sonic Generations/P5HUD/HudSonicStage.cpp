@@ -29,7 +29,6 @@ char* __fastcall HideZeroesInRingDisplay(char* buffer, unsigned int rings)
 /// Replaces leading nulls from the string printer with dashes which are invisible in the textures.
 /// </summary>
 /// <param name="buffer">Character buffer from EDX.</param>
-/// <param name="score">Score count from ESI.</param>
 char* __fastcall HideZeroesInScoreDisplay(char* buffer)
 {
 	int score = ScoreGenerationsAPI::GetScore();
