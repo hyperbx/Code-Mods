@@ -1,6 +1,6 @@
 HOOK(int, __cdecl, MeteorSmashConstructor, 0xC880B0, int a1)
 {
-	PlayMusic("vs_Silver2", 0.25);
+	BlueBlurCommon::PlayMusic("vs_Silver2", 0.25);
 
 	return originalMeteorSmashConstructor(a1);
 }

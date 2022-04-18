@@ -12,4 +12,4 @@
 
 // Dependencies
 #include <Helpers.h>
-#include "..\Common.h"
+#include "..\BlueBlurCommon.h"

@@ -2,12 +2,12 @@ float timeBreakTimer = 8.0f;
 
 void PlayTimeBreakMusic()
 {
-	PlayMusic("Time_Break", 0.0);
+	BlueBlurCommon::PlayMusic("Time_Break", 0.0);
 }
 
 void StopTimeBreakMusic()
 {
-	StopMusic("Time_Break", 0.0);
+	BlueBlurCommon::StopMusic("Time_Break", 0.0);
 }
 
 __declspec(naked) void TimeBreakBegin_MidAsmHook()
