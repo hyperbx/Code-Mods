@@ -2,9 +2,9 @@
 A mod for Sonic Generations that restores a real-time scoring system.
 
 ## Credits
-- [Hyper](https://github.com/HyperBE32) - lead programming, reverse-engineering and XNCP editing
+- [Hyper](https://github.com/HyperBE32) - programming, reverse-engineering and UI editing
 - [brianuuu](https://github.com/brianuuu) - programming, reverse-engineering and API testing
-- [PTKickass](https://github.com/PTKickass) - XNCP editing
+- [PTKickass](https://github.com/PTKickass) - UI editing
 - [Skyth](https://github.com/blueskythlikesclouds) - reverse-engineering, [Archive Tree Patcher](https://github.com/HyperBE32/ScoreGenerations/blob/main/ScoreGenerations/ArchiveTreePatcher.cpp) and x86 assembly assistance
 - [Sajid](https://github.com/Sajidur78) - reverse-engineering, [Lost Code Loader](https://github.com/Sajidur78/LostCodeLoader) and x86 assembly assistance
 - [Chimera](https://github.com/ChimeraReyat) - reverse-engineering

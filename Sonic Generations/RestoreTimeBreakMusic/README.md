@@ -2,5 +2,5 @@
 A mod for Sonic Generations that restores the Time Break music.
 
 ## Credits
-- [Hyper](https://github.com/HyperBE32) - lead programming and reverse-engineering
+- [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
 - [brianuuu](https://github.com/brianuuu) - reverse-engineering
