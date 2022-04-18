@@ -24,6 +24,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventureHUD", "Sonic Gener
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P5HUD", "Sonic Generations\P5HUD\P5HUD.vcxproj", "{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColorsHUD", "Sonic Generations\ColorsHUD\ColorsHUD.vcxproj", "{5BD6599F-193F-4019-9940-60CD2F88B924}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -62,6 +64,10 @@ Global
 		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Debug|x86.Build.0 = Debug|Win32
 		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Release|x86.ActiveCfg = Release|Win32
 		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Release|x86.Build.0 = Release|Win32
+		{5BD6599F-193F-4019-9940-60CD2F88B924}.Debug|x86.ActiveCfg = Debug|Win32
+		{5BD6599F-193F-4019-9940-60CD2F88B924}.Debug|x86.Build.0 = Debug|Win32
+		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.ActiveCfg = Release|Win32
+		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
