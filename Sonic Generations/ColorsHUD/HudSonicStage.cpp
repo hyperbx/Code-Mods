@@ -10,12 +10,10 @@ HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, v
 // https://github.com/brianuuu/DllMods/blob/master/Source/Sonic06HUD/Stage.cpp#L174
 HOOK(int, __fastcall, MsgRestartStage, 0xE76810, uint32_t* thisDeclaration, void* edx, void* message)
 {
-	int result = originalMsgRestartStage(thisDeclaration, edx, message);
-
 	// Force disable extended boost.
 	*(uint32_t*)((uint32_t)*BlueBlurCommon::PlayerContext + 0x680) = 1;
 
-	return result;
+	return originalMsgRestartStage(thisDeclaration, edx, message);
 }
 
 void HudSonicStage::Install()

@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
 #include <Hedgehog/Base/hhObject.h>
 
 namespace Hedgehog::Base
@@ -13,13 +12,15 @@ namespace Hedgehog::Database
     class CDatabase;
     class CRawData;
 
-    static FUNCTION_PTR(void, __thiscall, fpCDatabaseGetRawData, 0x40F010,
+    static inline BB_FUNCTION_PTR(void, __thiscall, fpCDatabaseGetRawData, 0x40F010,
         CDatabase* This, boost::shared_ptr<CRawData>& spRawData, const Hedgehog::Base::CSharedString& name, uint32_t unknown);
 
     class CDatabase : public Base::CObject
     {
     public:
-        INSERT_PADDING(0xEC);
+        BB_INSERT_PADDING(0xEC);
+
+        virtual ~CDatabase() = default;
 
         void GetRawData(boost::shared_ptr<CRawData>& spRawData, const Base::CSharedString& name, uint32_t unknown)
         {
@@ -27,5 +28,5 @@ namespace Hedgehog::Database
         }
     };
 
-    ASSERT_SIZEOF(CDatabase, 0xF0);
+    BB_ASSERT_SIZEOF(CDatabase, 0xF0);
 }

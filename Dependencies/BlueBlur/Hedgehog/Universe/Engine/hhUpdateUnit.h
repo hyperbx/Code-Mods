@@ -1,18 +1,35 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
-#include <Hedgehog/Universe/Engine/hhParallelJob.h>
+#include <Hedgehog/Universe/Thread/hhParallelJob.h>
 
 namespace Hedgehog::Universe
 {
-    class CUpdateUnit : public IParallelJob
+    class CUpdateUnit;
+
+    static inline BB_FUNCTION_PTR(CUpdateUnit*, __thiscall, fpCUpdateUnitCtor, 0x76A950, CUpdateUnit* This);
+
+    class CUpdateUnit : public Base::CObject, public IParallelJob
     {
     public:
-        INSERT_PADDING(0x24);
+        BB_INSERT_PADDING(0x24);
 
-        virtual void _8() = 0;
-        virtual void _C() = 0;
+        CUpdateUnit(const bb_null_ctor&) : CObject(bb_null_ctor{}), IParallelJob(bb_null_ctor{}) {}
+
+        CUpdateUnit() : CUpdateUnit(bb_null_ctor{})
+        {
+            fpCUpdateUnitCtor(this);
+        }
+
+        virtual ~CUpdateUnit();
+
+        virtual void ExecuteParallelJob(const SUpdateInfo& updateInfo) override
+        {
+            UpdateParallel(updateInfo);
+        }
+
+        virtual void UpdateParallel(const SUpdateInfo& updateInfo) {}
+        virtual void CUpdateUnit0C(void*) {}
     };
 
-    ASSERT_SIZEOF(CUpdateUnit, 0x28);
+    BB_ASSERT_SIZEOF(CUpdateUnit, 0x28);
 }

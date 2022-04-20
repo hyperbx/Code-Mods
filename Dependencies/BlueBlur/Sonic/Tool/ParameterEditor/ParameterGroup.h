@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
-
 #include <Hedgehog/Base/Type/hhSharedString.h>
 #include <Sonic/Tool/ParameterEditor/AbstractParameterNode.h>
 
@@ -25,7 +23,7 @@ namespace Sonic
         }
     }
 
-    static FUNCTION_PTR(void, __stdcall, fpCParameterGroupFlush, 0xCE8EF0, CParameterGroup* pParameterGroup);
+    static inline BB_FUNCTION_PTR(void, __stdcall, fpCParameterGroupFlush, 0xCE8EF0, CParameterGroup* pParameterGroup);
 
     class CParameterGroup : public CAbstractParameterNode
     {
@@ -44,5 +42,5 @@ namespace Sonic
         }
     };
 
-    ASSERT_SIZEOF(CParameterGroup, 0x3C);
+    BB_ASSERT_SIZEOF(CParameterGroup, 0x3C);
 }

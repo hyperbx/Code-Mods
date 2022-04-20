@@ -1,14 +1,18 @@
 ﻿#pragma once 
 
-#include <BlueBlur.h>
+#include <BlueBlur.inl>
 
 namespace Hedgehog::Universe
 {
+    class Message;
+
     class IStateMachineMessageReceiver
     {
     public:
-        virtual void _0() = 0;
+        IStateMachineMessageReceiver(const bb_null_ctor&) {}
+
+        virtual bool ProcessMessageInStateMachine(Message& message, bool flag) = 0;
     };
 
-    ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);
+    BB_ASSERT_SIZEOF(IStateMachineMessageReceiver, 4);
 }

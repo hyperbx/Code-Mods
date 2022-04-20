@@ -1,7 +1,7 @@
 #pragma once
 
+#include <BlueBlur.h>
 #include <Helpers.h>
-#include <Hedgehog.h>
 
 namespace BlueBlurCommon
 {

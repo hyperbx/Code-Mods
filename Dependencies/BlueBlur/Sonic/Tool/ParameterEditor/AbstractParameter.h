@@ -1,7 +1,5 @@
 #pragma once
 
-#include <BlueBlur.h>
-
 #include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Container/hhVector.h>
 #include <Hedgehog/Base/Type/hhSharedString.h>
@@ -16,13 +14,15 @@ namespace Sonic
         CEditParam* m_pEditParam;
         Hedgehog::Base::CSharedString m_Name;
         Hedgehog::Base::CSharedString m_Description;
-        Hedgehog::vector<boost::shared_ptr<CAbstractParameter>> m_Children;
-        INSERT_PADDING(0x14);
+        hh::vector<boost::shared_ptr<CAbstractParameter>> m_Children;
+        BB_INSERT_PADDING(0x14);
+
+        virtual ~CAbstractParameter() = default;
     };
 
-    ASSERT_OFFSETOF(CAbstractParameter, m_pEditParam, 0x4);
-    ASSERT_OFFSETOF(CAbstractParameter, m_Name, 0x8);
-    ASSERT_OFFSETOF(CAbstractParameter, m_Description, 0xC);
-    ASSERT_OFFSETOF(CAbstractParameter, m_Children, 0x10);
-    ASSERT_SIZEOF(CAbstractParameter, 0x34);
+    BB_ASSERT_OFFSETOF(CAbstractParameter, m_pEditParam, 0x4);
+    BB_ASSERT_OFFSETOF(CAbstractParameter, m_Name, 0x8);
+    BB_ASSERT_OFFSETOF(CAbstractParameter, m_Description, 0xC);
+    BB_ASSERT_OFFSETOF(CAbstractParameter, m_Children, 0x10);
+    BB_ASSERT_SIZEOF(CAbstractParameter, 0x34);
 }

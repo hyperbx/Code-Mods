@@ -1,30 +1,94 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include <Hedgehog/Base/Type/hhCowData.h>
 
 namespace Hedgehog::Base
 {
     class CSharedString;
 
-    static FUNCTION_PTR(CSharedString*, __thiscall, fpCSharedStringCtor, 0x6621A0, CSharedString* This, const char* pValue);
-    static FUNCTION_PTR(void, __thiscall, fpCSharedStringDtor, 0x661550, CSharedString* This);
+    static inline BB_FUNCTION_PTR(int, __thiscall, fpCSharedStringCompare, 0x6618C0,
+        const CSharedString* This, const CSharedString& other);
 
     class CSharedString
     {
-    public:
-        const char* m_pStr;
+    private:
+        CCowData<char> m_data;
 
-        CSharedString(const char* pValue)
+    public:
+        CSharedString()
         {
-            fpCSharedStringCtor(this, pValue);
+
         }
 
-        ~CSharedString()
+        CSharedString(const char* data)
         {
-            fpCSharedStringDtor(this);
+            m_data.Set(data, data ? strlen(data) : 0);
+        }
+
+        const char* c_str() const
+        {
+            return m_data.Get();
+        }
+
+        int compare(const CSharedString& other) const
+        {
+            return fpCSharedStringCompare(this, other);
+        }
+
+        CSharedString& operator=(const CSharedString& other)
+        {
+            m_data.Unset();
+            m_data.Set(other.m_data);
+            return *this;
+        }        
+        
+        CSharedString& operator=(const char* other)
+        {
+            m_data.Unset();
+            m_data.Set(other, other ? strlen(other) : 0);
+            return *this;
+        }
+
+        bool operator>(const CSharedString& other) const
+        {
+            return compare(other) > 0;
+        }
+
+        bool operator>=(const CSharedString& other) const
+        {
+            return compare(other) >= 0;
+        }
+
+        bool operator<(const CSharedString& other) const
+        {
+            return compare(other) < 0;
+        }
+
+        bool operator<=(const CSharedString& other) const
+        {
+            return compare(other) <= 0;
+        }
+
+        bool operator==(const CSharedString& other) const
+        {
+            return compare(other) == 0;
+        }              
+        
+        bool operator!=(const CSharedString& other) const
+        {
+            return !(*this == other);
+        }
+
+        bool operator==(const char* other) const
+        {
+            return strcmp(c_str(), other) == 0;
+        }       
+        
+        bool operator!=(const char* other) const
+        {
+            return !(*this == other);
         }
     };
 
-    ASSERT_OFFSETOF(CSharedString, m_pStr, 0x0);
-    ASSERT_SIZEOF(CSharedString, 0x4);
+    BB_ASSERT_SIZEOF(CSharedString, 0x4);
 }

@@ -1,6 +1,5 @@
 #pragma once
 
-#include <BlueBlur.h>
 #include <Sonic/FxPipeline/Jobs/FxJobBase.h>
 
 namespace Sonic
@@ -9,5 +8,5 @@ namespace Sonic
     {
     };
 
-    ASSERT_SIZEOF(CFxJob, 0x48);
+    BB_ASSERT_SIZEOF(CFxJob, 0x48);
 }

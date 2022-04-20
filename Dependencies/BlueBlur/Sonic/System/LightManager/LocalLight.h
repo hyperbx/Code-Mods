@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
+#include <Hedgehog/Base/hhObject.h>
 #include <Hedgehog/Base/Container/hhVector.h>
 
 namespace Hedgehog::Mirage
@@ -10,23 +10,23 @@ namespace Hedgehog::Mirage
 
 namespace Sonic
 {
-    class CLocalLight
+    class CLocalLight : public Hedgehog::Base::CObject
     {
     public:
         boost::shared_ptr<Hedgehog::Mirage::CLightData> m_spLightData;
-        INSERT_PADDING(0x8);
+        BB_INSERT_PADDING(0x8);
     };
 
-    ASSERT_OFFSETOF(CLocalLight, m_spLightData, 0x0);
-    ASSERT_SIZEOF(CLocalLight, 0x10);
+    BB_ASSERT_OFFSETOF(CLocalLight, m_spLightData, 0x0);
+    BB_ASSERT_SIZEOF(CLocalLight, 0x10);
 
-    class CLocalLightContext
+    class CLocalLightContext : public Hedgehog::Base::CObject
     {
     public:
-        INSERT_PADDING(0x8);
-        Hedgehog::vector<CLocalLight*> m_LocalLights;
+        BB_INSERT_PADDING(0x8);
+        hh::vector<CLocalLight*> m_LocalLights; 
     };
 
-    ASSERT_OFFSETOF(CLocalLightContext, m_LocalLights, 0x8);
-    ASSERT_SIZEOF(CLocalLightContext, 0x18);
+    BB_ASSERT_OFFSETOF(CLocalLightContext, m_LocalLights, 0x8);
+    BB_ASSERT_SIZEOF(CLocalLightContext, 0x18);
 }

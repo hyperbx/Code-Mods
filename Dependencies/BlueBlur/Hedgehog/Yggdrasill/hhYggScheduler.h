@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <BlueBlur.h>
 #include <Hedgehog/Base/hhObject.h>
 
 namespace Hedgehog::Mirage
@@ -21,10 +20,10 @@ namespace Hedgehog::Yggdrasill
     class CYggPicture;
     class CYggScheduler;
 
-    static FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetShader, 0x789DB0,
+    static inline BB_FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetShader, 0x789DB0,
         CYggScheduler* This, Hedgehog::Mirage::SShaderPair& pair, const char* pVertexShaderName, const char* pPixelShaderName);
 
-    static FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetPicture, 0x789DD0,
+    static inline BB_FUNCTION_PTR(void*, __thiscall, fpCYggSchedulerGetPicture, 0x789DD0,
         CYggScheduler* This, boost::shared_ptr<CYggPicture>& spPicture, const char* name);
 
 
@@ -32,12 +31,9 @@ namespace Hedgehog::Yggdrasill
     {
     public:
         CYggMisc* m_pMisc;
-        INSERT_PADDING(0x4);
+        BB_INSERT_PADDING(0x4);
 
-        virtual void _4() = 0;
-        virtual void _8() = 0;
-        virtual void _C() = 0;
-        virtual void _10() = 0;
+        virtual ~CYggScheduler() = default;
 
         void GetShader(Mirage::SShaderPair& pair, const char* pVertexShaderName, const char* pPixelShaderName)
         {
@@ -50,6 +46,6 @@ namespace Hedgehog::Yggdrasill
         }
     };
 
-    ASSERT_OFFSETOF(CYggScheduler, m_pMisc, 0x4);
-    ASSERT_SIZEOF(CYggScheduler, 0xC);
+    BB_ASSERT_OFFSETOF(CYggScheduler, m_pMisc, 0x4);
+    BB_ASSERT_SIZEOF(CYggScheduler, 0xC);
 }
