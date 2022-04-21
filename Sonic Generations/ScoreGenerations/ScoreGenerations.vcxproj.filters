@@ -25,6 +25,7 @@
     <ClInclude Include="lib\Tables.h">
       <Filter>lib</Filter>
     </ClInclude>
+    <ClInclude Include="Memory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -44,6 +45,7 @@
     <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="ApiExports.cpp" />
+    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lib">

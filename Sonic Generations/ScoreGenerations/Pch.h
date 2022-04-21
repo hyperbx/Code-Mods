@@ -34,12 +34,14 @@
 #include "Configuration.h"
 #include <ModIntegrity.h>
 #include "StateHooks.h"
+#include <MemoryPreserver.h>
 
 // Internal headers
 #include "ArchiveTreePatcher.h"
 #include "HudSonicStage.h"
 #include "Loader.h"
 #include "LuaCallback.h"
+#include "Memory.h"
 #include "MultiplierListener.h"
 #include "Patches.h"
 #include "PlayerListener.h"

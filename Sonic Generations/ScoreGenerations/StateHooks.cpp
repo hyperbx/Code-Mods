@@ -39,7 +39,7 @@ void OnLoad()
 		}
 
 		// Execute Casino Night score instructions.
-		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x00);
+		RESTORE_MEMORY(0x109C1DA);
 
 		// Hook to results for local score.
 		StateHooks::HookResults(true);
@@ -166,7 +166,7 @@ void StateHooks::HookResults(bool enabled)
 	else
 	{
 		// Restore default results calculation.
-		WRITE_MEMORY(0xD5A18C, uint8_t, 0xE8, 0x1F, 0x9C, 0x35, 0x00);
+		RESTORE_MEMORY(0xD5A18C);
 
 		isResultsHooked = false;
 	}

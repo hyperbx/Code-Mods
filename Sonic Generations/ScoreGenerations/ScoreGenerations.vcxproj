@@ -131,6 +131,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="lib\Tables.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
+    <ClInclude Include="Memory.h" />
     <ClInclude Include="MultiplierListener.h" />
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="ScoreHooks.h" />
@@ -150,6 +151,7 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClCompile Include="HudSonicStage.cpp" />
     <ClCompile Include="Loader.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Mod.cpp" />
     <ClCompile Include="MultiplierListener.cpp" />
     <ClCompile Include="ResultListener.cpp" />
