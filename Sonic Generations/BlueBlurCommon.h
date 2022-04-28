@@ -36,4 +36,9 @@ namespace BlueBlurCommon
 
 		return (float*)((uint32_t)*PlayerContext + 0x5BC);
 	}
+
+	inline const char* GetStageID()
+	{
+		return (const char*)0x1E774D4;
+	}
 };
