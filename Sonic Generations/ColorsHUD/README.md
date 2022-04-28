@@ -1,5 +1,5 @@
-# Sonic Colors HUD
-Source code for the DLL used in the Sonic Colors HUD mod for Sonic Generations.
+# [Sonic Colors HUD and UI](https://gamebanana.com/mods/374215)
+Source code for the DLL used in the Sonic Colors HUD and UI mod for Sonic Generations.
 
 ## Credits
 - [Hyper](https://github.com/HyperBE32) - programming
