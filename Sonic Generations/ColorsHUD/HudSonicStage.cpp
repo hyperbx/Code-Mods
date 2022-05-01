@@ -23,4 +23,8 @@ void HudSonicStage::Install()
 
 	// Install hook to disable the extended boost gauge.
 	INSTALL_HOOK(MsgRestartStage);
+
+	// Patch ring counter to use four digits.
+	WRITE_MEMORY(0x168D33C, const char, "%04d");
+	WRITE_MEMORY(0x168E8E0, const char, "%04d");
 }
