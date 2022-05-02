@@ -19,3 +19,5 @@
 #include "HudSonicStage.h"
 #include <Helpers.h>
 #include <INIReader.h>
+#include "Patches.h"
+#include <StringHelper.h>

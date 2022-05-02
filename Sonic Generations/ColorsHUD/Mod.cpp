@@ -5,6 +5,7 @@ extern "C" _declspec(dllexport) void Init()
 {
 	Configuration::Read();
 
+	Patches::Install();
 	HudResult::Install();
 	HudSonicStage::Install();
 }

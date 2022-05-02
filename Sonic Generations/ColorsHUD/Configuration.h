@@ -14,5 +14,10 @@ public:
 	/// Determines whether the gauge plays a shaking animation.
 	/// </summary>
 	static bool GaugeShake;
+
+	/// <summary>
+	/// The current UI type being used.
+	/// </summary>
+	static std::string UIType;
 };
 
