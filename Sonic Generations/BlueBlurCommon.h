@@ -58,18 +58,14 @@ public:
 
 	static const void PlayMusic(char const* cueName, float fadeInTime)
 	{
-		FUNCTION_PTR(unsigned int, __stdcall, PlayAudioFromCueName, 0xD62440, Hedgehog::Base::TSynchronizedPtr<Sonic::CGameDocument> gameDocument, Hedgehog::Base::CSharedString& cueName, float fadeInTime);
-
-		Hedgehog::Base::CSharedString name = Hedgehog::Base::CSharedString(cueName);
-		PlayAudioFromCueName(CONTEXT->m_pPlayer->GetGameDocument(), name, fadeInTime);
+		FUNCTION_PTR(unsigned int, __stdcall, PlayAudioFromCueName, 0xD62440, Hedgehog::Base::TSynchronizedPtr<Sonic::CGameDocument> gameDocument, const Hedgehog::Base::CSharedString& cueName, float fadeInTime);
+		PlayAudioFromCueName(CONTEXT->m_pPlayer->GetGameDocument(), cueName, fadeInTime);
 	}
 
 	static const void StopMusic(char const* cueName, float fadeOutTime)
 	{
-		FUNCTION_PTR(int, __stdcall, StopAudioFromCueName, 0xD61E40, Hedgehog::Base::TSynchronizedPtr<Sonic::CGameDocument> gameDocument, Hedgehog::Base::CSharedString& cueName, float fadeOutTime);
-
-		Hedgehog::Base::CSharedString name = Hedgehog::Base::CSharedString(cueName);
-		StopAudioFromCueName(CONTEXT->m_pPlayer->GetGameDocument(), name, fadeOutTime);
+		FUNCTION_PTR(int, __stdcall, StopAudioFromCueName, 0xD61E40, Hedgehog::Base::TSynchronizedPtr<Sonic::CGameDocument> gameDocument, const Hedgehog::Base::CSharedString& cueName, float fadeOutTime);
+		StopAudioFromCueName(CONTEXT->m_pPlayer->GetGameDocument(), cueName, fadeOutTime);
 	}
 
 	static const char* GetStageID()
