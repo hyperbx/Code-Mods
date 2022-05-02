@@ -13,9 +13,9 @@ public:
 	static void Install();
 
 	// Various methods to get the XNCP names of the different controllers.
-	static void GetXboxNames();
-	static void GetPlayStationNames();
-	static void GetSwitchNames();
+	static void SetXboxNames();
+	static void SetPlayStationNames();
+	static void SetSwitchNames();
 
 	// Controller ID based on pre-processor definitions.
 	static int controllerType;

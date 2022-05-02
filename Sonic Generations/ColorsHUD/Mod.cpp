@@ -3,6 +3,8 @@
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
+	Configuration::Read();
+
 	HudResult::Install();
 	HudSonicStage::Install();
 }

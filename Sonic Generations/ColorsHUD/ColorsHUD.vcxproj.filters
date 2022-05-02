@@ -4,6 +4,7 @@
     <ClInclude Include="Pch.h" />
     <ClInclude Include="HudSonicStage.h" />
     <ClInclude Include="HudResult.h" />
+    <ClInclude Include="Configuration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -11,5 +12,6 @@
     <ClCompile Include="Pch.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />
     <ClCompile Include="HudResult.cpp" />
+    <ClCompile Include="Configuration.cpp" />
   </ItemGroup>
 </Project>

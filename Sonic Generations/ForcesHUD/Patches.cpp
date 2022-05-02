@@ -36,13 +36,20 @@ void Patches::Install()
 	WRITE_NOP(0x1124733, 5);
 
 	// Disable title loading video (fixes hang on title screen).
-	WRITE_MEMORY(0xD6966E, uint8_t, 0xE9, 0x14, 0x01, 0x00, 0x00);
+	WRITE_JUMP(0xD69666, (void*)0xD69787);
 
 	// Disable loading hints (fixes mission text appearing on the loading screen).
-	WRITE_MEMORY(0x448959, uint8_t, 0xE9, 0x12, 0x01, 0x00, 0x00);
+	WRITE_JUMP(0x448959, (void*)0x448A70);
 
 	// Use Sonic Unleashed's intro XNCP for normal stages.
 	WRITE_MEMORY(0x168F1F8, uint8_t, "_b\0");
+
+	// Instantly collect Chaos Energy from enemies (code by brianuuu).
+	WRITE_NOP(0x1124433, 6);
+	WRITE_JUMP(0x1124489, (void*)0x11244BD);
+	WRITE_NOP(0x11244C1, 6);
+	WRITE_NOP(0x11244D0, 6);
+	WRITE_MEMORY(0x112459B, uint32_t, 0xFFFFFFFF);
 
 	if (!Configuration::homingReticle)
 	{

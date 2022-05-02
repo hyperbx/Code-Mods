@@ -1,4 +1,3 @@
-const char* StateHooks::stageID = (const char*)0x1E774D4;
 bool StateHooks::isResultsHooked = false;
 
 #pragma region ----- Hooked Functions -----
@@ -70,12 +69,13 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 	}
 }
 
-FUNCTION_PTR(bool, __cdecl, fpIsPerfectBonus, 0x10B8A90);
 
 HOOK(int*, __cdecl, MsgChangeResultStateConstructor, 0x587C40, void* a1, int* a2, int* rank, int* a4)
 {
+	FUNCTION_PTR(bool, __cdecl, IsPerfectBonus, 0x10B8A90);
+
 	// Set correct rank animation if there's no perfect bonus.
-	if (!fpIsPerfectBonus())
+	if (!IsPerfectBonus())
 		*rank = ResultListener::resultDescription.rank;
 
 	return originalMsgChangeResultStateConstructor(a1, a2, rank, a4);

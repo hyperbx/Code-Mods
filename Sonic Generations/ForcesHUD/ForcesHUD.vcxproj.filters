@@ -8,7 +8,6 @@
     <ClInclude Include="Resources.h" />
     <ClInclude Include="DllMain.h" />
     <ClInclude Include="ControllerPatcher.h" />
-    <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="ArchiveTreePatcher.h" />
   </ItemGroup>
   <ItemGroup>
@@ -19,7 +18,6 @@
     <ClCompile Include="Patches.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="ControllerPatcher.cpp" />
-    <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="ArchiveTreePatcher.cpp" />
   </ItemGroup>
   <ItemGroup>

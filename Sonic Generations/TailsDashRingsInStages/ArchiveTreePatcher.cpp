@@ -45,32 +45,36 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
 
 void ArchiveTreePatcher::Install()
 {
+    const char* type = "cmn_dashring_tails_green";
+
     switch (Configuration::colourType)
     {
         case Configuration::Orange:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_orange", { commonArchives }));
+            type = "cmn_dashring_tails_orange";
             break;
 
         case Configuration::Red:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_red", { commonArchives }));
+            type = "cmn_dashring_tails_red";
             break;
 
         case Configuration::Green:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_green", { commonArchives }));
+            type = "cmn_dashring_tails_green";
             break;
 
         case Configuration::GreenDiffuse:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_green_dif", { commonArchives }));
+            type = "cmn_dashring_tails_green_dif";
             break;
 
         case Configuration::Purple:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_purple", { commonArchives }));
+            type = "cmn_dashring_tails_purple";
             break;
 
         case Configuration::Blue:
-            ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_blue", { commonArchives }));
+            type = "cmn_dashring_tails_blue";
             break;
     }
+
+    ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency(type, { commonArchives }));
 
     if (Configuration::useCustomRainbowRings)
         ArchiveTreePatcher::archiveDependencies.push_back(ArchiveDependency("cmn_dashring_tails_rainbow", { commonArchives }));

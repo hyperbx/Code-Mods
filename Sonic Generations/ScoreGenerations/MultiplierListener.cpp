@@ -8,7 +8,7 @@ int MultiplierListener::AddHomingChainBonus()
 	int scoreToReward = 0;
 	int limit = TableListener::bonusTable.homingChainBonusLimit;
 
-	if (!PlayerListener::isGrounded)
+	if (!CONTEXT->m_Grounded)
 	{
 		if (homingChainCount == 1)
 		{
@@ -43,7 +43,7 @@ int MultiplierListener::AddSlamBonus()
 	int scoreToReward = 0;
 	int limit = TableListener::bonusTable.slamBonusLimit;
 
-	if (PlayerListener::isGrounded)
+	if (CONTEXT->m_Grounded)
 	{
 		if (slamCount == 1)
 		{

@@ -1,30 +1,37 @@
 // https://github.com/brianuuu/DllMods/blob/master/Source/Sonic06HUD/Stage.cpp#L166
 HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
+	Sonic::Player::CSonicContext* sonic = Sonic::Player::CSonicContext::GetInstance();
+
+	// Force disable extended boost.
+	*(uint32_t*)((uint32_t)*sonic->ms_pInstance + 0x680) = 1;
+
 	// Always clamp boost to 100.
-	*BlueBlurCommon::GetBoost() = min(*BlueBlurCommon::GetBoost(), 100.0f);
+	sonic->m_ChaosEnergy = min(sonic->m_ChaosEnergy, 100.0f);
 
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
 
-// https://github.com/brianuuu/DllMods/blob/master/Source/Sonic06HUD/Stage.cpp#L174
-HOOK(int, __fastcall, MsgRestartStage, 0xE76810, uint32_t* thisDeclaration, void* edx, void* message)
+// https://github.com/brianuuu/DllMods/blob/master/Source/NavigationLightdashSound/NavigationSound.cpp#L14
+HOOK(void, __fastcall, MsgStartCommonButtonSign, 0x5289A0, void* thisDeclaration, void* edx, uint32_t a2)
 {
-	// Force disable extended boost.
-	*(uint32_t*)((uint32_t)*BlueBlurCommon::PlayerContext + 0x680) = 1;
+	// Disable Y button prompt.
+	if (*(uint32_t*)(a2 + 16) == 3)
+		return;
 
-	return originalMsgRestartStage(thisDeclaration, edx, message);
+	originalMsgStartCommonButtonSign(thisDeclaration, edx, a2);
 }
 
 void HudSonicStage::Install()
 {
-	// Install hook to cap the boost gauge to 100%.
 	INSTALL_HOOK(CHudSonicStageUpdate);
-
-	// Install hook to disable the extended boost gauge.
-	INSTALL_HOOK(MsgRestartStage);
+	INSTALL_HOOK(MsgStartCommonButtonSign);
 
 	// Patch ring counter to use four digits.
 	WRITE_MEMORY(0x168D33C, const char, "%04d");
 	WRITE_MEMORY(0x168E8E0, const char, "%04d");
+
+	// Disable boost button guide animation.
+	if (!Configuration::GaugeShake)
+		WRITE_NOP(0x124F4A1, 2);
 }

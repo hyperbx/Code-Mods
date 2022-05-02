@@ -45,45 +45,16 @@ char* __fastcall HideZeroesInRingDisplay(char* buffer, unsigned int rings)
 }
 
 /// <summary>
-/// Rewards the player with chaos energy.
-/// </summary>
-void RewardChaosEnergy()
-{
-	if ((*PlayerListener::GetBoost() + 10) < 100.0f || isTrick)
-	{
-		/* Immediately add chaos energy to the boost gauge when
-		   enemies are destroyed. The default function would only add
-		   boost in small amounts and it was a bit jarring without the particles.
-
-		   5 points are added for tricks and 10 points are added for enemies;
-		   both amounts are rough guesses on how much the game gives by default. */
-		if (isTrick)
-		{
-			*PlayerListener::GetBoost() += 5;
-		}
-		else if (!(*PlayerListener::GetBoost() >= 100.0f))
-		{
-			*PlayerListener::GetBoost() = clamp((int)(*PlayerListener::GetBoost() + 10), 0, 100);
-		}
-	}
-}
-
-/// <summary>
-/// Homing update hook for updating on every frame.
-/// </summary>
-HOOK(int, __stdcall, HomingUpdate, 0xE5FF10, int thisDeclaration)
-{
-	return originalHomingUpdate(thisDeclaration);
-}
-
-/// <summary>
 /// HUD update hook to perform actions on every frame.
 /// </summary>
 HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, void* pUpdateInfo)
 {
 	// Call the homing update function using the current player context if we're Modern Sonic.
-	if (Configuration::alwaysActiveReticle && !PlayerListener::IsClassic())
-		originalHomingUpdate(PlayerListener::GetContext());
+	if (Configuration::alwaysActiveReticle && !BlueBlurCommon::IsClassic())
+	{
+		FUNCTION_PTR(int, __stdcall, HomingUpdate, 0xE5FF10, Sonic::Player::CPlayerSpeedContext* thisDeclaration);
+		HomingUpdate(CONTEXT);
+	}
 
 	originalCHudSonicStageUpdate(thisDeclaration, edx, pUpdateInfo);
 }
@@ -118,22 +89,6 @@ __declspec(naked) void FinalBossRingFormatter_MidAsmHook()
 		push ebx
 		pop edx
 		call HideZeroesInRingDisplay
-		mov edx, eax
-
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void ChaosEnergy_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x65FBE0;
-	static void* returnAddress = (void*)0x11246A9;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		call RewardChaosEnergy
 		mov edx, eax
 
 		jmp [returnAddress]
@@ -176,9 +131,6 @@ void HudSonicStage::Install()
 	// Jump to ring formatters to fix leading zeroes.
 	WRITE_JUMP(0x1098E71, &MillisecondsFormatter_MidAsmHook);
 	WRITE_JUMP(0x1228245, &FinalBossRingFormatter_MidAsmHook);
-
-	// Jump to chaos energy hook.
-	WRITE_JUMP(0x11246A4, &ChaosEnergy_MidAsmHook);
 
 	// Jump to trick hooks to intercept the chaos energy hook.
 	WRITE_JUMP(0xE4B6E7, &Trick_MidAsmHook);

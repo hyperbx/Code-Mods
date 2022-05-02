@@ -1,12 +1,13 @@
-﻿using namespace std; // lol
-
-#pragma once
+﻿#pragma once
 
 #define WIN32_LEAN_AND_MEAN
 
 // Detours
 #include <Windows.h>
 #include <detours.h>
+
+// BlueBlur must be included before STL
+#include "..\BlueBlurCommon.h"
 
 // Standard library
 #include <algorithm>
@@ -44,7 +45,6 @@
 #include "Memory.h"
 #include "MultiplierListener.h"
 #include "Patches.h"
-#include "PlayerListener.h"
 #include "ResultListener.h"
 #include "ScoreHooks.h"
 #include "ScoreListener.h"

@@ -55,11 +55,11 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
 	PushExposedInteger(L, "score", ScoreListener::score);
 	PushExposedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedInteger(L, "minSeconds", TableListener::rankTables[StateHooks::stageID].minSeconds);
-	PushExposedInteger(L, "maxSeconds", TableListener::rankTables[StateHooks::stageID].maxSeconds);
+	PushExposedInteger(L, "minSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
+	PushExposedInteger(L, "maxSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
 
 	// Push needed exposed strings to the stack.
-	PushExposedString(L, "stageID", StateHooks::stageID);
+	PushExposedString(L, "stageID", BlueBlurCommon::GetStageID());
 }
 
 void LuaCallback::PushExposedInteger(lua_State* L, string name, unsigned int pushToStack)
@@ -150,9 +150,9 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
 		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
-		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[StateHooks::stageID].minSeconds);
-		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", TableListener::rankTables[StateHooks::stageID].maxSeconds);
-		printf("[Score Generations] [Lua Debug] stageID = %s\n", StateHooks::stageID);
+		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
+		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
+		printf("[Score Generations] [Lua Debug] stageID = %s\n", BlueBlurCommon::GetStageID());
 	}
 }
 

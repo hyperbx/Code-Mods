@@ -7,7 +7,6 @@
     <ClInclude Include="LuaCallback.h" />
     <ClInclude Include="StatisticsListener.h" />
     <ClInclude Include="MultiplierListener.h" />
-    <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="ScoreListener.h" />
     <ClInclude Include="Loader.h" />
@@ -35,7 +34,6 @@
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="LuaCallback.cpp" />
     <ClCompile Include="MultiplierListener.cpp" />
-    <ClCompile Include="PlayerListener.cpp" />
     <ClCompile Include="ResultListener.cpp" />
     <ClCompile Include="ScoreListener.cpp" />
     <ClCompile Include="StatisticsListener.cpp" />
@@ -45,7 +43,6 @@
     <ClCompile Include="ScoreHooks.cpp" />
     <ClCompile Include="StateHooks.cpp" />
     <ClCompile Include="ApiExports.cpp" />
-    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="lib">

@@ -29,7 +29,7 @@ bool HudSonicStage::IsCasino()
 	if (Configuration::overrideForbiddenCasino)
 		return false;
 
-	if (StringHelper::Compare(StateHooks::stageID, "cnz100"))
+	if (StringHelper::Compare(BlueBlurCommon::GetStageID(), "cnz100"))
 		return true;
 
 	return false;
@@ -42,7 +42,7 @@ bool HudSonicStage::IsStageForbidden()
 	(
 		isMission  ||
 		IsCasino() ||
-		TableListener::rankTables.find(string(StateHooks::stageID)) == TableListener::rankTables.end()
+		TableListener::rankTables.find(string(BlueBlurCommon::GetStageID())) == TableListener::rankTables.end()
 	)
 	{
 		return true;
@@ -52,7 +52,7 @@ bool HudSonicStage::IsStageForbidden()
 	for (vector<string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
 	{
 		// Stage ID matches - HUD must be special.
-		if (StringHelper::Compare(StateHooks::stageID, i->c_str()))
+		if (StringHelper::Compare(BlueBlurCommon::GetStageID(), i->c_str()))
 			return true;
 	}
 
@@ -80,7 +80,7 @@ void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)
 		superSonicDeltaTimer = 0;
 
 		// Reward score every two seconds if the player is Super Sonic.
-		if (PlayerListener::IsSuper())
+		if (BlueBlurCommon::IsSuper())
 			ScoreListener::Reward(ScoreListener::ScoreType::Super);
 	}
 }
@@ -90,7 +90,7 @@ void HudSonicStage::UpdateMultipliers(float* pUpdateInfo)
 	// Update the timer using delta time.
 	slamBonusDeltaTimer += *pUpdateInfo;
 
-	if (PlayerListener::isGrounded)
+	if (CONTEXT->m_Grounded)
 	{
 		// Reset the homing chain bonus if the player is grounded.
 		MultiplierListener::ResetHomingChainBonus();

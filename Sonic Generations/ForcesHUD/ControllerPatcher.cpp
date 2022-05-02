@@ -7,7 +7,7 @@ const char* ControllerPatcher::ui_howto;
 const char* ControllerPatcher::ui_btn_guide;
 const char* ControllerPatcher::ui_gameplay;
 
-void ControllerPatcher::GetXboxNames()
+void ControllerPatcher::SetXboxNames()
 {
 	controllerType = XBOX;
 
@@ -20,7 +20,7 @@ void ControllerPatcher::GetXboxNames()
 	ui_gameplay     = "ui_gameplay";
 }
 
-void ControllerPatcher::GetPlayStationNames()
+void ControllerPatcher::SetPlayStationNames()
 {
 	controllerType = PLAYSTATION;
 
@@ -33,7 +33,7 @@ void ControllerPatcher::GetPlayStationNames()
 	ui_gameplay     = "ui_gamepsay";
 }
 
-void ControllerPatcher::GetSwitchNames()
+void ControllerPatcher::SetSwitchNames()
 {
 	controllerType = SWITCH;
 
@@ -51,19 +51,19 @@ void ControllerPatcher::Install()
 	switch (Configuration::buttonType)
 	{
 		case XBOX:
-			GetXboxNames();
+			SetXboxNames();
 			break;
 
 		case PLAYSTATION:
-			GetPlayStationNames();
+			SetPlayStationNames();
 			break;
 
 		case SWITCH:
-			GetSwitchNames();
+			SetSwitchNames();
 			break;
 
 		default:
-			GetXboxNames();
+			SetXboxNames();
 			break;
 	}
 

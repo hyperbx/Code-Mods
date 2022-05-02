@@ -49,7 +49,6 @@ extern "C" _declspec(dllexport) void Init()
 
 	// Install listeners.
 	StatisticsListener::Install();
-	PlayerListener::Install();
 
 	// Install hooks.
 	HudSonicStage::Install();

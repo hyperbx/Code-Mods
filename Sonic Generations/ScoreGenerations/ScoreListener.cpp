@@ -4,7 +4,7 @@ int ScoreListener::lastCheckpointScore = 0;
 
 void ScoreListener::Reset()
 {
-	totalScore = score = Configuration::restoreLastCheckpointScore && PlayerListener::isDead ? lastCheckpointScore : 0;
+	totalScore = score = Configuration::restoreLastCheckpointScore && BlueBlurCommon::HasFlag(CONTEXT->eStateFlag_Dead) ? lastCheckpointScore : 0;
 	StatisticsListener::totals.Reset();
 }
 
@@ -13,7 +13,7 @@ void ScoreListener::AddClamp(int& score, int scoreToReward, bool timeout)
 	if (timeout)
 	{
 		// Stop rewarding score if the player is over the maximum time.
-		if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > TableListener::rankTables[StateHooks::stageID].maxSeconds)
+		if (Configuration::scoreTimeout && StatisticsListener::GetElapsedTime() > TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds)
 		{
 #if _DEBUG
 			printf("[Score Generations] Time bonus expired! No longer rewarding score...\n");
@@ -68,7 +68,7 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			// Increase total velocity for the speed bonus.
 			if (Configuration::rewardSpeedBonus)
 			{
-				StatisticsListener::totals.totalVelocity += PlayerListener::GetVelocity() * TableListener::multiplierTable.speedBonusMultiplier;
+				StatisticsListener::totals.totalVelocity += BlueBlurCommon::GetVelocity() * TableListener::multiplierTable.speedBonusMultiplier;
 
 #if _DEBUG
 				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::totals.totalVelocity);
