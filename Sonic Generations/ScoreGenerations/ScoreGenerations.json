@@ -124,7 +124,7 @@
 					"Type": "int",
 					"MinValue": null,
 					"MaxValue": null,
-					"DefaultValue": 100
+					"DefaultValue": 25
 				},
 				{
 					"Name": "Life",
@@ -290,7 +290,7 @@
 					"Type": "int",
 					"MinValue": null,
 					"MaxValue": null,
-					"DefaultValue": 12000
+					"DefaultValue": 12800
 				}
 			]
         },
