@@ -68,9 +68,9 @@ public:
     /// </summary>
     struct MultiplierTable
     {
-        int homingChainMultiplier = 0;
-        int slamMultiplier = 0;
-        int speedBonusMultiplier = 0;
+        float homingChainMultiplier = 0;
+        float slamMultiplier = 0;
+        float speedBonusMultiplier = 0;
     };
 
     /// <summary>
@@ -78,7 +78,7 @@ public:
     /// </summary>
     struct TimerTable
     {
-        int superSonicTimer = 0;
-        int slamTimer = 0;
+        float superSonicTimer = 0;
+        float slamTimer = 0;
     };
 };

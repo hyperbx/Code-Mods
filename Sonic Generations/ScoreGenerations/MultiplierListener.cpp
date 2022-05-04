@@ -1,7 +1,7 @@
 int homingChainCount = 0;
-int multipliedHomingChainBonus = 0;
+float multipliedHomingChainBonus = 0;
 int slamCount = 0;
-int multipliedSlamBonus = 0;
+float multipliedSlamBonus = 0;
 
 int MultiplierListener::AddHomingChainBonus()
 {

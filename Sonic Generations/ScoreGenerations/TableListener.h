@@ -139,9 +139,9 @@ public:
         Tables::MultiplierTable newMultiplierTable;
 
         // Use the current configuration to get the multipliers.
-        newMultiplierTable.homingChainMultiplier = Configuration::config.GetInteger("Multiplier", "homingChainMultiplier", multiplierTable.homingChainMultiplier);
-        newMultiplierTable.slamMultiplier = Configuration::config.GetInteger("Multiplier", "slamMultiplier", multiplierTable.slamMultiplier);
-        newMultiplierTable.speedBonusMultiplier = Configuration::config.GetInteger("Multiplier", "speedBonusMultiplier", multiplierTable.speedBonusMultiplier);
+        newMultiplierTable.homingChainMultiplier = Configuration::config.GetReal("Multiplier", "homingChainMultiplier", multiplierTable.homingChainMultiplier);
+        newMultiplierTable.slamMultiplier        = Configuration::config.GetReal("Multiplier", "slamMultiplier", multiplierTable.slamMultiplier);
+        newMultiplierTable.speedBonusMultiplier  = Configuration::config.GetReal("Multiplier", "speedBonusMultiplier", multiplierTable.speedBonusMultiplier);
 
 #if _DEBUG
         printf("[Score Generations] homingChainMultiplier = %d\n", newMultiplierTable.homingChainMultiplier);
@@ -160,8 +160,8 @@ public:
         Tables::TimerTable newTimerTable;
 
         // Use the current configuration to get the timers.
-        newTimerTable.superSonicTimer = Configuration::config.GetInteger("Timer", "superSonicTimer", timerTable.superSonicTimer);
-        newTimerTable.slamTimer = Configuration::config.GetInteger("Timer", "slamTimer", timerTable.slamTimer);
+        newTimerTable.superSonicTimer = Configuration::config.GetReal("Timer", "superSonicTimer", timerTable.superSonicTimer);
+        newTimerTable.slamTimer       = Configuration::config.GetReal("Timer", "slamTimer", timerTable.slamTimer);
 
 #if _DEBUG
         printf("[Score Generations] superSonicTimer = %d\n", newTimerTable.superSonicTimer);

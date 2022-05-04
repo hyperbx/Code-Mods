@@ -448,7 +448,7 @@
 						"The multiplier used to increase the speed bonus."
 					],
 					"DisplayName": "Speed Bonus Multiplier",
-					"Type": "int",
+					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 10
@@ -460,7 +460,7 @@
 						"The multiplier used to increase the homing chain bonus."
 					],
 					"DisplayName": "Homing Chain Multiplier",
-					"Type": "int",
+					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 2
@@ -472,7 +472,7 @@
 						"The multiplier used to increase the slam bonus."
 					],
 					"DisplayName": "Slam Multiplier",
-					"Type": "int",
+					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 2
@@ -503,7 +503,7 @@
 						"The amount of time in seconds the player is rewarded for being Super Sonic."
 					],
 					"DisplayName": "Super Sonic Timer",
-					"Type": "int",
+					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 2
@@ -515,7 +515,7 @@
 						"The amount of time in seconds the slam bonus times out after when the player is grounded."
 					],
 					"DisplayName": "Slam Timer",
-					"Type": "int",
+					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 2
