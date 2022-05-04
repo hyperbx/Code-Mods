@@ -82,3 +82,13 @@ extern "C" __declspec(dllexport) Tables::TimerTable API_GetTimerTable()
 {
 	return TableListener::timerTable;
 }
+
+extern "C" __declspec(dllexport) void API_SetVisibility(bool isVisible)
+{
+	HudSonicStage::isVisible = isVisible;
+}
+
+extern "C" __declspec(dllexport) bool API_GetVisibility()
+{
+	return HudSonicStage::isVisible;
+}

@@ -9,6 +9,17 @@ public:
     static void Install();
 
     /// <summary>
+    /// Reverse-engineered struct for MsgSetPinballHud - by Skyth.
+    /// </summary>
+    struct MsgSetPinballHud
+    {
+        uint8_t padding_1[0x10];
+        uint32_t flags;
+        uint32_t score;
+        uint8_t padding_2[0x8];
+    };
+
+    /// <summary>
     /// Sends MsgSetPinballHud to the message receiver.
     /// </summary>
     static void ProcessMsgSetPinballHud(void* thisDeclaration);
@@ -35,19 +46,13 @@ public:
     static bool IsCasino();
 
     /// <summary>
+    /// Determines if the score HUD is visible.
+    /// </summary>
+    static bool isVisible;
+
+    /// <summary>
     /// Determines if the current stage is a mission.
     /// </summary>
     static bool isMission;
-
-    /// <summary>
-    /// Reverse-engineered struct for MsgSetPinballHud - by Skyth.
-    /// </summary>
-    struct MsgSetPinballHud
-    {
-        uint8_t padding_1[0x10];
-        uint32_t flags;
-        uint32_t score;
-        uint8_t padding_2[0x8];
-    };
 };
 

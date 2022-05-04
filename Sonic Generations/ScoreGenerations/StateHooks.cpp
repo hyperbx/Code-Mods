@@ -7,41 +7,53 @@ void OnLoad()
 	// Reset statistics.
 	ScoreListener::Reset();
 
-	// Disable the score counter for forbidden stages.
 	if (HudSonicStage::IsStageForbidden())
 	{
-		// Use Sonic Generations' HUD XNCP.
-		if (!Configuration::customXNCP)
-			WRITE_MEMORY(0x168E333, uint8_t, "_default\0");
-
-		// Skip Casino Night score instructions.
-		if (!HudSonicStage::IsCasino())
-			WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
-
 		// Disable results hooks.
 		StateHooks::HookResults(false);
 	}
 	else
 	{
-		if (!Configuration::customXNCP)
-		{
-			if (StringHelper::GetDigits(Configuration::scoreFormat) == 6)
-			{
-				// Use Score Generations' HUD XNCP for six digit padding.
-				WRITE_MEMORY(0x168E333, uint8_t, "_low_padding\0");
-			}
-			else
-			{
-				// Use Score Generations' HUD XNCP for high amounts of padding.
-				WRITE_MEMORY(0x168E333, uint8_t, "_high_padding\0");
-			}
-		}
-
-		// Execute Casino Night score instructions.
-		WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x00);
-
 		// Hook to results for local score.
 		StateHooks::HookResults(true);
+	}
+
+	if (HudSonicStage::isVisible)
+	{
+		if (HudSonicStage::IsStageForbidden())
+		{
+			// Use Sonic Generations' HUD XNCP.
+			if (!Configuration::customXNCP)
+				WRITE_MEMORY(0x168E333, uint8_t, "_default\0");
+
+			goto SkipScoreDraw;
+		}
+		else
+		{
+			if (!Configuration::customXNCP)
+			{
+				if (StringHelper::GetDigits(Configuration::scoreFormat) == 6)
+				{
+					// Use Score Generations' HUD XNCP for six digit padding.
+					WRITE_MEMORY(0x168E333, uint8_t, "_low_padding\0");
+				}
+				else
+				{
+					// Use Score Generations' HUD XNCP for high amounts of padding.
+					WRITE_MEMORY(0x168E333, uint8_t, "_high_padding\0");
+				}
+			}
+
+			// Execute Casino Night score instructions.
+			WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x00);
+		}
+	}
+	else
+	{
+	SkipScoreDraw:
+		// Skip Casino Night score instructions.
+		if (!HudSonicStage::IsCasino())
+			WRITE_MEMORY(0x109C1DA, uint8_t, 0xEB, 0x78);
 	}
 }
 

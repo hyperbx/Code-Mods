@@ -1,8 +1,7 @@
+bool HudSonicStage::isVisible = true;
 bool HudSonicStage::isMission = false;
 float superSonicDeltaTimer = 0;
 float slamBonusDeltaTimer = 0;
-
-FUNCTION_PTR(void, __thiscall, SendMsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
 
 HOOK(void, __fastcall, CHudSonicStageUpdate, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
@@ -61,12 +60,14 @@ bool HudSonicStage::IsStageForbidden()
 
 void HudSonicStage::ProcessMsgSetPinballHud(void* thisDeclaration)
 {
+	FUNCTION_PTR(void, __thiscall, MsgSetPinballHud, 0x1095D40, void* thisDeclaration, const HudSonicStage::MsgSetPinballHud& msgSetPinballHud);
+
 	// Set up message for Casino Night score.
 	HudSonicStage::MsgSetPinballHud msgSetPinballHud;
 	msgSetPinballHud.flags = 1;
 	msgSetPinballHud.score = ScoreListener::score;
 
-	SendMsgSetPinballHud(thisDeclaration, msgSetPinballHud);
+	MsgSetPinballHud(thisDeclaration, msgSetPinballHud);
 }
 
 void HudSonicStage::UpdateSuperSonicTimer(float* pUpdateInfo)

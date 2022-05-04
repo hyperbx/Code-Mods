@@ -88,6 +88,10 @@ private:
 
 	LIB_FUNCTION(Tables::TimerTable, "ScoreGenerations.dll", API_GetTimerTable);
 
+	LIB_FUNCTION(void, "ScoreGenerations.dll", API_SetVisibility, bool isVisible);
+
+	LIB_FUNCTION(bool, "ScoreGenerations.dll", API_GetVisibility);
+
 public:
 	/// <summary>
 	/// Gets the current instance of the API and creates a new one if it's a null pointer.
@@ -103,174 +107,167 @@ public:
 	/// Adds score to the current score counter.
 	/// </summary>
 	/// <param name="scoreToReward">The amount of score to reward.</param>
-	static void AddScore(int scoreToReward);
+	static void AddScore(int scoreToReward)
+	{
+		VOID_EXPORT(API_AddScore, scoreToReward);
+	}
 
 	/// <summary>
 	/// Sets the current score counter to the input number.
 	/// </summary>
 	/// <param name="score">Score to set to.</param>
-	static void SetScore(int score);
+	static void SetScore(int score)
+	{
+		VOID_EXPORT(API_SetScore, score);
+	}
 
 	/// <summary>
 	/// Forces Score Generations to use the configuration from the current mod.
 	/// </summary>
-	static void ForceConfiguration(const char* path);
+	static void ForceConfiguration(const char* path)
+	{
+		VOID_EXPORT(API_ForceConfiguration, path);
+	}
 
 	/// <summary>
 	/// Returns the current score.
 	/// </summary>
-	static int GetScore();
+	static int GetScore()
+	{
+		INT_EXPORT(API_GetScore);
+	}
 
 	/// <summary>
 	/// Returns the current total score.
 	/// </summary>
-	static int GetTotalScore();
+	static int GetTotalScore()
+	{
+		INT_EXPORT(API_GetTotalScore);
+	}
 
 	/// <summary>
 	/// Returns the current rank based on the total score.
 	/// </summary>
-	static int GetRank();
+	static int GetRank()
+	{
+		INT_EXPORT(API_GetRank);
+	}
 
 	/// <summary>
 	/// Determines if the current stage ID is forbidden.
 	/// </summary>
-	static bool IsStageForbidden();
+	static bool IsStageForbidden()
+	{
+		BOOL_EXPORT(API_IsStageForbidden);
+	}
 
 	/// <summary>
 	/// Computes and returns the current time bonus.
 	/// </summary>
-	static int ComputeTimeBonus();
+	static int ComputeTimeBonus()
+	{
+		INT_EXPORT(API_ComputeTimeBonus);
+	}
 
 	/// <summary>
 	/// Computes and returns the current ring bonus.
 	/// </summary>
-	static int ComputeRingBonus();
+	static int ComputeRingBonus()
+	{
+		INT_EXPORT(API_ComputeRingBonus);
+	}
 
 	/// <summary>
 	/// Computes and returns the current speed bonus.
 	/// </summary>
-	static int ComputeSpeedBonus();
+	static int ComputeSpeedBonus()
+	{
+		INT_EXPORT(API_ComputeSpeedBonus);
+	}
 
 	/// <summary>
 	/// Computes and returns the current user bonus.
 	/// </summary>
-	static int ComputeUserBonus();
+	static int ComputeUserBonus()
+	{
+		INT_EXPORT(API_ComputeUserBonus);
+	}
 
 	/// <summary>
 	/// Returns the table of statistics for current totals.
 	/// </summary>
-	static Statistics::Totals GetStatistics();
+	static Statistics::Totals GetStatistics()
+	{
+		GENERIC_EXPORT(Statistics::Totals, API_GetStatistics);
+	}
 
 	/// <summary>
 	/// Returns the score table.
 	/// </summary>
-	static Tables::ScoreTable GetScoreTable();
+	static Tables::ScoreTable GetScoreTable()
+	{
+		GENERIC_EXPORT(Tables::ScoreTable, API_GetScoreTable);
+	}
 
 	/// <summary>
 	/// Returns the rank tables as an unordered map.
 	/// </summary>
-	static std::unordered_map<std::string, Tables::RankTable> GetRankTables();
+	static std::unordered_map<std::string, Tables::RankTable> GetRankTables()
+	{
+		if (GetInstance()->API_GetRankTables == nullptr)
+			return std::unordered_map<std::string, Tables::RankTable>();
+
+		GetInstance()->API_GetRankTables();
+	}
 
 	/// <summary>
 	/// Returns the bonus table.
 	/// </summary>
-	static Tables::BonusTable GetBonusTable();
+	static Tables::BonusTable GetBonusTable()
+	{
+		GENERIC_EXPORT(Tables::BonusTable, API_GetBonusTable);
+	}
 
 	/// <summary>
 	/// Returns the multiplier table.
 	/// </summary>
-	static Tables::MultiplierTable GetMultiplierTable();
+	static Tables::MultiplierTable GetMultiplierTable()
+	{
+		GENERIC_EXPORT(Tables::MultiplierTable, API_GetMultiplierTable);
+	}
 
 	/// <summary>
 	/// Returns the timer table.
 	/// </summary>
-	static Tables::TimerTable GetTimerTable();
+	static Tables::TimerTable GetTimerTable()
+	{
+		GENERIC_EXPORT(Tables::TimerTable, API_GetTimerTable);
+	}
+
+	/// <summary>
+	/// Sets the visibility of the score counter (requires stage reload).
+	/// </summary>
+	static void SetVisibility(bool isVisible)
+	{
+		VOID_EXPORT(API_SetVisibility, isVisible);
+	}
+
+	/// <summary>
+	/// Gets the visibility of the score counter.
+	/// </summary>
+	static bool GetVisibility()
+	{
+		BOOL_EXPORT(API_GetVisibility);
+	}
+
+	/// <summary>
+	/// Checks if the Score Generations module is attached to the current process.
+	/// </summary>
+	static bool IsAttached()
+	{
+		if (GetModuleHandle(TEXT("ScoreGenerations.dll")) == nullptr)
+			return false;
+
+		return true;
+	}
 };
-
-inline void ScoreGenerationsAPI::AddScore(int scoreToReward)
-{
-	VOID_EXPORT(API_AddScore, scoreToReward);
-}
-
-inline void ScoreGenerationsAPI::SetScore(int score)
-{
-	VOID_EXPORT(API_SetScore, score);
-}
-
-inline void ScoreGenerationsAPI::ForceConfiguration(const char* path)
-{
-	VOID_EXPORT(API_ForceConfiguration, path);
-}
-
-inline int ScoreGenerationsAPI::GetScore()
-{
-	INT_EXPORT(API_GetScore);
-}
-
-inline int ScoreGenerationsAPI::GetTotalScore()
-{
-	INT_EXPORT(API_GetTotalScore);
-}
-
-inline int ScoreGenerationsAPI::GetRank()
-{
-	INT_EXPORT(API_GetRank);
-}
-
-inline bool ScoreGenerationsAPI::IsStageForbidden()
-{
-	BOOL_EXPORT(API_IsStageForbidden);
-}
-
-inline int ScoreGenerationsAPI::ComputeTimeBonus()
-{
-	INT_EXPORT(API_ComputeTimeBonus);
-}
-
-inline int ScoreGenerationsAPI::ComputeRingBonus()
-{
-	INT_EXPORT(API_ComputeRingBonus);
-}
-
-inline int ScoreGenerationsAPI::ComputeSpeedBonus()
-{
-	INT_EXPORT(API_ComputeSpeedBonus);
-}
-
-inline int ScoreGenerationsAPI::ComputeUserBonus()
-{
-	INT_EXPORT(API_ComputeUserBonus);
-}
-
-inline Statistics::Totals ScoreGenerationsAPI::GetStatistics()
-{
-	GENERIC_EXPORT(Statistics::Totals, API_GetStatistics);
-}
-
-inline Tables::ScoreTable ScoreGenerationsAPI::GetScoreTable()
-{
-	GENERIC_EXPORT(Tables::ScoreTable, API_GetScoreTable);
-}
-
-inline std::unordered_map<std::string, Tables::RankTable> ScoreGenerationsAPI::GetRankTables()
-{
-	if (GetInstance()->API_GetRankTables == nullptr)
-		return std::unordered_map<std::string, Tables::RankTable>();
-
-	GetInstance()->API_GetRankTables();
-}
-
-inline Tables::BonusTable ScoreGenerationsAPI::GetBonusTable()
-{
-	GENERIC_EXPORT(Tables::BonusTable, API_GetBonusTable);
-}
-
-inline Tables::MultiplierTable ScoreGenerationsAPI::GetMultiplierTable()
-{
-	GENERIC_EXPORT(Tables::MultiplierTable, API_GetMultiplierTable);
-}
-
-inline Tables::TimerTable ScoreGenerationsAPI::GetTimerTable()
-{
-	GENERIC_EXPORT(Tables::TimerTable, API_GetTimerTable);
-}
