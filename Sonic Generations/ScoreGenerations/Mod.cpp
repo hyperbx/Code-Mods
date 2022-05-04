@@ -1,4 +1,4 @@
-vector<ModIntegrity::Hash> Hashes =
+std::vector<ModIntegrity::Hash> Hashes =
 {
 	{ "disk\\bb\\SonicActionCommonScoreHud.ar.00", "3fcf87b4d6ef72142e070645e022f6f3" },
 	{ "disk\\bb\\SonicActionCommonScoreHud.arl", "cab307ae5ea4de45a0feb60382928be9" }

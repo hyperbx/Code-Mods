@@ -4,18 +4,18 @@
 
 class LuaCallback
 {
-	static string LuaPath;
+	static std::string LuaPath;
 
 public:
-	static bool SetLuaPath(string path);
+	static bool SetLuaPath(std::string path);
 	static void PushExposedData(lua_State* L);
-	static void PushExposedInteger(lua_State* L, string name, unsigned int pushToStack);
-	static void PushExposedString(lua_State* L, string name, string value);
+	static void PushExposedInteger(lua_State* L, std::string name, unsigned int pushToStack);
+	static void PushExposedString(lua_State* L, std::string name, std::string value);
 	static void PushLuaLibrary(lua_State* L, const char* name, lua_CFunction function);
 	static bool LoadInternalLibrary(lua_State* L);
 	static bool LoadExternalLibrary(lua_State* L);
 	static void PrintExposedData();
-	static int RunAlgorithm(string algorithm);
+	static int RunAlgorithm(std::string algorithm);
 
 	static int print(lua_State* L)
 	{
@@ -23,10 +23,10 @@ public:
 
 		// Print characters from string.
 		for (int i = 1; i <= nargs; ++i)
-			cout << lua_tostring(L, i);
+			std::cout << lua_tostring(L, i);
 
 		// Print line break.
-		cout << endl;
+		std::cout << std::endl;
 
 		return 0;
 	}

@@ -1,4 +1,4 @@
-string Loader::GetExecutablePath()
+std::string Loader::GetExecutablePath()
 {
 	char buffer[MAX_PATH];
 
@@ -7,23 +7,23 @@ string Loader::GetExecutablePath()
 	return buffer;
 }
 
-string Loader::GetWorkingDirectory()
+std::string Loader::GetWorkingDirectory()
 {
-	string executablePath = Loader::GetExecutablePath();
+	std::string executablePath = Loader::GetExecutablePath();
 
 	return executablePath.substr(0, executablePath.find_last_of("\\"));
 }
 
-string Loader::GetCpkRedirConfig()
+std::string Loader::GetCpkRedirConfig()
 {
 	return Loader::GetWorkingDirectory() + "\\cpkredir.ini";
 }
 
-string Loader::GetModsDatabase()
+std::string Loader::GetModsDatabase()
 {
-	string cpkRedirConfig = Loader::GetCpkRedirConfig();
+	std::string cpkRedirConfig = Loader::GetCpkRedirConfig();
 
-	string modsDatabase;
+	std::string modsDatabase;
 
 	if (IOHelper::FileExists(cpkRedirConfig))
 	{
@@ -39,16 +39,16 @@ string Loader::GetModsDatabase()
 	return modsDatabase;
 }
 
-string Loader::GetModsDirectory()
+std::string Loader::GetModsDirectory()
 {
-	string modsDirectory = Loader::GetModsDatabase();
+	std::string modsDirectory = Loader::GetModsDatabase();
 
 	return modsDirectory.substr(0, modsDirectory.find_last_of("\\"));
 }
 
 void Loader::ConfigureScoreGenerations()
 {
-	string modsDatabase = Loader::GetModsDatabase();
+	std::string modsDatabase = Loader::GetModsDatabase();
 
 	if (IOHelper::FileExists(modsDatabase))
 	{
@@ -72,12 +72,12 @@ void Loader::ConfigureScoreGenerations()
 		{
 			Loader::ModInformation modInfo;
 
-			string guid;
+			std::string guid;
 			{
-				guid = reader.Get("Main", "ActiveMod" + to_string(i), "");
+				guid = reader.Get("Main", "ActiveMod" + std::to_string(i), "");
 			}
 
-			string config;
+			std::string config;
 			{
 				config = reader.Get("Mods", guid, "");
 
@@ -87,7 +87,7 @@ void Loader::ConfigureScoreGenerations()
 #endif
 			}
 
-			string scoreGenerationsConfig = config.substr(0, config.find_last_of("\\")) + "\\" + INI_FILE;
+			std::string scoreGenerationsConfig = config.substr(0, config.find_last_of("\\")) + "\\" + INI_FILE;
 
 			if (IOHelper::FileExists(scoreGenerationsConfig))
 			{

@@ -1,4 +1,4 @@
-string LuaCallback::LuaPath = LUA_FILE;
+std::string LuaCallback::LuaPath = LUA_FILE;
 
 const struct luaL_Reg LuaCallback::Functions[] =
 {
@@ -21,7 +21,7 @@ bool IsLuaSafe(lua_State* L, int result)
 	return true;
 }
 
-bool LuaCallback::SetLuaPath(string path)
+bool LuaCallback::SetLuaPath(std::string path)
 {
 	if (!IOHelper::FileExists(path))
 		return false;
@@ -62,7 +62,7 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedString(L, "stageID", BlueBlurCommon::GetStageID());
 }
 
-void LuaCallback::PushExposedInteger(lua_State* L, string name, unsigned int pushToStack)
+void LuaCallback::PushExposedInteger(lua_State* L, std::string name, unsigned int pushToStack)
 {
 	// Push the input value to the stack.
 	lua_pushnumber(L, pushToStack);
@@ -71,7 +71,7 @@ void LuaCallback::PushExposedInteger(lua_State* L, string name, unsigned int pus
 	lua_setglobal(L, name.c_str());
 }
 
-void LuaCallback::PushExposedString(lua_State* L, string name, string value)
+void LuaCallback::PushExposedString(lua_State* L, std::string name, std::string value)
 {
 	// Push the input value to the stack.
 	lua_pushstring(L, value.c_str());
@@ -156,7 +156,7 @@ void LuaCallback::PrintExposedData()
 	}
 }
 
-int LuaCallback::RunAlgorithm(string algorithm)
+int LuaCallback::RunAlgorithm(std::string algorithm)
 {
 	// Create Lua virtual machine.
 	lua_State* L = luaL_newstate();
@@ -172,7 +172,7 @@ int LuaCallback::RunAlgorithm(string algorithm)
 	PushExposedData(L);
 
 	// Try running the in-line Lua script.
-	if (IsLuaSafe(L, luaL_dostring(L, string("return " + algorithm).c_str())))
+	if (IsLuaSafe(L, luaL_dostring(L, std::string("return " + algorithm).c_str())))
 	{
 		// Return and store the Lua result.
 		int result = lua_tonumber(L, -1);

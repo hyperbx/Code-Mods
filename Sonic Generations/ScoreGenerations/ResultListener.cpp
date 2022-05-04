@@ -80,7 +80,7 @@ float ComputeProgressBar(ResultListener::RankType rank, int divider)
 	}
 }
 
-tuple<float, float> ResultListener::ComputeProgressBars(RankType rank)
+std::tuple<float, float> ResultListener::ComputeProgressBars(RankType rank)
 {
 	float scoreProgress;
 	float ringProgress;

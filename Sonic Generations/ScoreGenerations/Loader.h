@@ -5,33 +5,33 @@
 class Loader
 {
 public:
-	static string GetExecutablePath();
-	static string GetWorkingDirectory();
-	static string GetCpkRedirConfig();
-	static string GetModsDatabase();
-	static string GetModsDirectory();
+	static std::string GetExecutablePath();
+	static std::string GetWorkingDirectory();
+	static std::string GetCpkRedirConfig();
+	static std::string GetModsDatabase();
+	static std::string GetModsDirectory();
 
 	static void ConfigureScoreGenerations();
 
 	struct ModInformation
 	{
-		string title;
-		string description;
-		string version;
-		string date;
-		string author;
-		string authorURL;
+		std::string title;
+		std::string description;
+		std::string version;
+		std::string date;
+		std::string author;
+		std::string authorURL;
 
-		string dll;
-		string code;
-		string schema;
+		std::string dll;
+		std::string code;
+		std::string schema;
 
-		string config;
+		std::string config;
 
 		/// <summary>
 		/// Reads the configuration for the active mod.
 		/// </summary>
-		static ModInformation ReadConfig(string path)
+		static ModInformation ReadConfig(std::string path)
 		{
 			ModInformation modInfo;
 

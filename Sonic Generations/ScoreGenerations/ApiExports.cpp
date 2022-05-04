@@ -63,7 +63,7 @@ extern "C" __declspec(dllexport) Tables::ScoreTable API_GetScoreTable()
 	return TableListener::scoreTable;
 }
 
-extern "C" __declspec(dllexport) unordered_map<string, Tables::RankTable> API_GetRankTables()
+extern "C" __declspec(dllexport) std::unordered_map<std::string, Tables::RankTable> API_GetRankTables()
 {
 	return TableListener::rankTables;
 }

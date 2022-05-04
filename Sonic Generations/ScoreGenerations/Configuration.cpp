@@ -1,24 +1,24 @@
 bool Configuration::overrideFlag = false;
 
 INIReader Configuration::config;
-string Configuration::configPath = INI_FILE;
+std::string Configuration::configPath = INI_FILE;
 bool Configuration::rewardSpeedBonus = true;
 bool Configuration::scoreTimeout = false;
 bool Configuration::restoreLastCheckpointScore = false;
 int Configuration::scoreLimit = 999999;
 Configuration::PerfectBonusType Configuration::perfectBonus = OnlyForA;
-string Configuration::scoreFormat = "%06d";
+std::string Configuration::scoreFormat = "%06d";
 bool Configuration::customXNCP = false;
 bool Configuration::debugLua = false;
 bool Configuration::overrideForbiddenCasino = false;
-vector<string> Configuration::forbiddenStages;
+std::vector<std::string> Configuration::forbiddenStages;
 
-string Configuration::GetConfigDirectory()
+std::string Configuration::GetConfigDirectory()
 {
 	return configPath.substr(0, configPath.find_last_of("\\"));
 }
 
-void Configuration::Read(string path = "")
+void Configuration::Read(std::string path = "")
 {
 	// Sets the config path and reads it.
 	Configuration::config = configPath = path.empty() ? INI_FILE : path;
@@ -80,7 +80,7 @@ void Configuration::Read(string path = "")
 	Configuration::overrideForbiddenCasino = config.GetBoolean("Developer", "overrideForbiddenCasino", overrideForbiddenCasino);
 
 	// Get forbidden stages.
-	string forbiddenStagesCSV = config.Get("Developer", "forbiddenStages", "");
+	std::string forbiddenStagesCSV = config.Get("Developer", "forbiddenStages", "");
 	{
 		// Set configuration if the returned CSV list is populated.
 		if (!forbiddenStagesCSV.empty())

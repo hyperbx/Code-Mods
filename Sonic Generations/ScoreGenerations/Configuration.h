@@ -18,17 +18,17 @@ public:
 	/// <summary>
 	/// The path to the configuration.
 	/// </summary>
-	static string configPath;
+	static std::string configPath;
 
 	/// <summary>
 	/// Gets the directory containing the configuration.
 	/// </summary>
-	static string GetConfigDirectory();
+	static std::string GetConfigDirectory();
 
 	/// <summary>
 	/// Reads the INI configuration file for the mod.
 	/// </summary>
-	static void Read(string path);
+	static void Read(std::string path);
 
 	/// <summary>
 	/// Force enables non-default debugging features.
@@ -70,7 +70,7 @@ public:
 	/// <summary>
 	/// Formatting used for the string printer for score.
 	/// </summary>
-	static string scoreFormat;
+	static std::string scoreFormat;
 
 	/// <summary>
 	/// Determines if the mod overriding the configuration uses a custom XNCP.
@@ -90,5 +90,5 @@ public:
 	/// <summary>
 	/// List of forbidden stages that should not display the score counter.
 	/// </summary>
-	static vector<string> forbiddenStages;
+	static std::vector<std::string> forbiddenStages;
 };

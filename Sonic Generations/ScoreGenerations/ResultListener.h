@@ -28,7 +28,7 @@ public:
     /// <summary>
     /// Computes the progress the results bars should land on.
     /// </summary>
-    static tuple<float, float> ComputeProgressBars(RankType rank);
+    static std::tuple<float, float> ComputeProgressBars(RankType rank);
 
     /// <summary>
     /// Gathers the final results.

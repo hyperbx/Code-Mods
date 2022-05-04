@@ -1,13 +1,13 @@
-vector<ArchiveDependency> ArchiveTreePatcher::archiveDependencies =
+std::vector<ArchiveDependency> ArchiveTreePatcher::archiveDependencies =
 {
     { "SonicActionCommonScoreHud", { "SonicActionCommonHud" } }
 };
 
 HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const size_t size, void* pDatabase)
 {
-    string str;
+    std::string str;
     {
-        stringstream stream;
+        std::stringstream stream;
 
         for (ArchiveDependency const& node : ArchiveTreePatcher::archiveDependencies)
         {
@@ -17,7 +17,7 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
             stream << "    <Order>" << 0 << "</Order>\n";
             stream << "    <DefAppend>" << node.archive << "</DefAppend>\n";
 
-            for (string const& dependency : node.dependencies)
+            for (std::string const& dependency : node.dependencies)
             {
                 stream << "    <Node>\n";
                 stream << "      <Name>" << dependency << "</Name>\n";
@@ -33,7 +33,7 @@ HOOK(bool, __stdcall, ParseArchiveTree, 0xD4C8E0, void* a1, char* pData, const s
     }
 
     const size_t newSize = size + str.size();
-    const unique_ptr<char[]> pBuffer = std::make_unique<char[]>(newSize);
+    const std::unique_ptr<char[]> pBuffer = std::make_unique<char[]>(newSize);
 
     memcpy(pBuffer.get(), pData, size);
 

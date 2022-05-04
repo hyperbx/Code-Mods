@@ -46,7 +46,7 @@ public:
     static bool IsCasino();
 
     /// <summary>
-    /// Determines if the score HUD is visible.
+    /// Determines if the score counter is visible.
     /// </summary>
     static bool isVisible;
 

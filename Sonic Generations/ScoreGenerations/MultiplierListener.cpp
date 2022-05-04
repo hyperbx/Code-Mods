@@ -29,7 +29,7 @@ int MultiplierListener::AddHomingChainBonus()
 	printf("[Score Generations] Homing Chain Bonus = %d\n", scoreToReward);
 #endif
 
-	return limit == 0 ? scoreToReward : clamp(scoreToReward, 0, limit);
+	return limit == 0 ? scoreToReward : std::clamp(scoreToReward, 0, limit);
 }
 
 void MultiplierListener::ResetHomingChainBonus()
@@ -64,7 +64,7 @@ int MultiplierListener::AddSlamBonus()
 	printf("[Score Generations] Slam Bonus = %d\n", scoreToReward);
 #endif
 
-	return limit == 0 ? scoreToReward : clamp(scoreToReward, 0, limit);
+	return limit == 0 ? scoreToReward : std::clamp(scoreToReward, 0, limit);
 }
 
 void MultiplierListener::ResetSlamBonus()

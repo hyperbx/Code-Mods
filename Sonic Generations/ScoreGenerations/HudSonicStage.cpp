@@ -41,14 +41,14 @@ bool HudSonicStage::IsStageForbidden()
 	(
 		isMission  ||
 		IsCasino() ||
-		TableListener::rankTables.find(string(BlueBlurCommon::GetStageID())) == TableListener::rankTables.end()
+		TableListener::rankTables.find(std::string(BlueBlurCommon::GetStageID())) == TableListener::rankTables.end()
 	)
 	{
 		return true;
 	}
 
 	// Check if the current stage ID matches any in the list.
-	for (vector<string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
+	for (std::vector<std::string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
 	{
 		// Stage ID matches - HUD must be special.
 		if (StringHelper::Compare(BlueBlurCommon::GetStageID(), i->c_str()))

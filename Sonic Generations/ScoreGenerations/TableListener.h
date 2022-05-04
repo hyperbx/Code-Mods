@@ -89,7 +89,7 @@ public:
 #endif
 
                 // Section without the hash is the stage ID.
-                string sectionStageID = section.substr(1);
+                std::string sectionStageID = section.substr(1);
 
                 // Remove the current stage ID if it already exists in the rank database.
                 if (rankTables.find(sectionStageID) != rankTables.end())

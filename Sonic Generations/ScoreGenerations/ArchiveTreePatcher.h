@@ -2,18 +2,18 @@
 
 struct ArchiveDependency
 {
-    string archive;
-    vector<string> dependencies;
+    std::string archive;
+    std::vector<std::string> dependencies;
 
     ArchiveDependency() {};
 
-    ArchiveDependency(string archive, vector<string> dependencies) : archive(archive), dependencies(dependencies) {};
+    ArchiveDependency(std::string archive, std::vector<std::string> dependencies) : archive(archive), dependencies(dependencies) {};
 };
 
 class ArchiveTreePatcher
 {
 public:
-    static vector<ArchiveDependency> archiveDependencies;
+    static std::vector<ArchiveDependency> archiveDependencies;
 
     /// <summary>
     /// Installs the mid-ASM hooks.
