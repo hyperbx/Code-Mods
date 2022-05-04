@@ -98,6 +98,17 @@ public:
 	}
 
 	/// <summary>
+	/// Removes the last character from a string.
+	/// </summary>
+	/// <param name="str">String to remove last character from.</param>
+	/// <returns>String without last character.</returns>
+	static std::string RemoveLastCharacter(std::string str)
+	{
+		str.pop_back();
+		return str;
+	}
+
+	/// <summary>
 	/// Extracts comma separated strings.
 	/// </summary>
 	/// <param name="str">String to extract from.</param>

@@ -41,20 +41,11 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			break;
 
 		case Enemy:
-		{
 			scoreToReward = TableListener::scoreTable.Enemy;
-
-			// Calculate homing chain bonus.
-			scoreToReward += MultiplierListener::AddHomingChainBonus();
-
-			// Calculate slam bonus.
-			scoreToReward += MultiplierListener::AddSlamBonus();
-
-			// Increase total enemy count.
+			scoreToReward += MultiplierListener::GetHomingChainBonus();
+			scoreToReward += MultiplierListener::GetSlamBonus();
 			StatisticsListener::totals.totalEnemies++;
-
 			break;
-		}
 
 		case Physics:
 			scoreToReward = TableListener::scoreTable.Physics;
@@ -106,9 +97,14 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 			break;
 
 		case Trick:
-		case TrickFinish:
 		case BoardTrick:
-			scoreToReward = type == Trick ? TableListener::scoreTable.Trick : type == BoardTrick ? TableListener::scoreTable.BoardTrick : TableListener::scoreTable.TrickFinish;
+			scoreToReward = MultiplierListener::GetTrickBonus(type == Trick ? TableListener::scoreTable.Trick : TableListener::scoreTable.BoardTrick);
+			StatisticsListener::totals.totalTricks++;
+			break;
+
+		case TrickFinish:
+			scoreToReward = TableListener::scoreTable.TrickFinish;
+			MultiplierListener::ResetTrickBonus();
 			StatisticsListener::totals.totalTricks++;
 			break;
 

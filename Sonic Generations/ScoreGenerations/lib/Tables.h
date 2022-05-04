@@ -57,6 +57,7 @@ public:
         int homingChainBonusLimit = 0;
         int slamBonus = 0;
         int slamBonusLimit = 0;
+        int trickBonusLimit = 0;
         std::string timeBonusAlgorithm;
         std::string ringBonusAlgorithm;
         std::string speedBonusAlgorithm;
@@ -70,6 +71,7 @@ public:
     {
         float homingChainMultiplier = 0;
         float slamMultiplier = 0;
+        float trickMultiplier = 0;
         float speedBonusMultiplier = 0;
     };
 

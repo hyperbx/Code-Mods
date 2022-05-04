@@ -278,6 +278,19 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 5000
+				},
+				{
+					"Name": "trickBonusLimit",
+					"Description":
+					[
+						"The limit the trick bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"DisplayName": "Trick Bonus Limit",
+					"Type": "int",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 12000
 				}
 			]
         },
@@ -472,6 +485,18 @@
 						"The multiplier used to increase the slam bonus."
 					],
 					"DisplayName": "Slam Multiplier",
+					"Type": "float",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 2
+				},
+				{
+					"Name": "trickMultiplier",
+					"Description":
+					[
+						"The multiplier used to increase the trick bonus."
+					],
+					"DisplayName": "Trick Multiplier",
 					"Type": "float",
 					"MinValue": null,
 					"MaxValue": null,

@@ -17,23 +17,23 @@ public:
         Tables::ScoreTable newScoreTable;
 
         // Use the current configuration to get the score for objects.
-        newScoreTable.Ring = Configuration::config.GetInteger("Score", "Ring", scoreTable.Ring);
-        newScoreTable.Enemy = Configuration::config.GetInteger("Score", "Enemy", scoreTable.Enemy);
-        newScoreTable.Physics = Configuration::config.GetInteger("Score", "Physics", scoreTable.Physics);
+        newScoreTable.Ring        = Configuration::config.GetInteger("Score", "Ring", scoreTable.Ring);
+        newScoreTable.Enemy       = Configuration::config.GetInteger("Score", "Enemy", scoreTable.Enemy);
+        newScoreTable.Physics     = Configuration::config.GetInteger("Score", "Physics", scoreTable.Physics);
         newScoreTable.PointMarker = Configuration::config.GetInteger("Score", "PointMarker", scoreTable.PointMarker);
-        newScoreTable.RedRing = Configuration::config.GetInteger("Score", "RedRing", scoreTable.RedRing);
+        newScoreTable.RedRing     = Configuration::config.GetInteger("Score", "RedRing", scoreTable.RedRing);
         newScoreTable.RainbowRing = Configuration::config.GetInteger("Score", "RainbowRing", scoreTable.RainbowRing);
-        newScoreTable.ItemBox = Configuration::config.GetInteger("Score", "ItemBox", scoreTable.ItemBox);
-        newScoreTable.SuperRing = Configuration::config.GetInteger("Score", "SuperRing", scoreTable.SuperRing);
+        newScoreTable.ItemBox     = Configuration::config.GetInteger("Score", "ItemBox", scoreTable.ItemBox);
+        newScoreTable.SuperRing   = Configuration::config.GetInteger("Score", "SuperRing", scoreTable.SuperRing);
         newScoreTable.TrickFinish = Configuration::config.GetInteger("Score", "TrickFinish", scoreTable.TrickFinish);
-        newScoreTable.Trick = Configuration::config.GetInteger("Score", "Trick", scoreTable.Trick);
-        newScoreTable.Life = Configuration::config.GetInteger("Score", "Life", scoreTable.Life);
-        newScoreTable.DashRing = Configuration::config.GetInteger("Score", "DashRing", scoreTable.DashRing);
-        newScoreTable.QuickStep = Configuration::config.GetInteger("Score", "QuickStep", scoreTable.QuickStep);
-        newScoreTable.Drift = Configuration::config.GetInteger("Score", "Drift", scoreTable.Drift);
-        newScoreTable.Balloon = Configuration::config.GetInteger("Score", "Balloon", scoreTable.Balloon);
-        newScoreTable.Super = Configuration::config.GetInteger("Score", "Super", scoreTable.Super);
-        newScoreTable.BoardTrick = Configuration::config.GetInteger("Score", "BoardTrick", scoreTable.BoardTrick);
+        newScoreTable.Trick       = Configuration::config.GetInteger("Score", "Trick", scoreTable.Trick);
+        newScoreTable.Life        = Configuration::config.GetInteger("Score", "Life", scoreTable.Life);
+        newScoreTable.DashRing    = Configuration::config.GetInteger("Score", "DashRing", scoreTable.DashRing);
+        newScoreTable.QuickStep   = Configuration::config.GetInteger("Score", "QuickStep", scoreTable.QuickStep);
+        newScoreTable.Drift       = Configuration::config.GetInteger("Score", "Drift", scoreTable.Drift);
+        newScoreTable.Balloon     = Configuration::config.GetInteger("Score", "Balloon", scoreTable.Balloon);
+        newScoreTable.Super       = Configuration::config.GetInteger("Score", "Super", scoreTable.Super);
+        newScoreTable.BoardTrick  = Configuration::config.GetInteger("Score", "BoardTrick", scoreTable.BoardTrick);
 
 #if _DEBUG
         printf("[Score Generations] Ring = %d\n", newScoreTable.Ring);
@@ -108,14 +108,15 @@ public:
         Tables::BonusTable newBonusTable;
 
         // Use the current configuration to get the bonuses.
-        newBonusTable.homingChainBonus = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", bonusTable.homingChainBonus);
+        newBonusTable.homingChainBonus      = Configuration::config.GetInteger("GameplayBonus", "homingChainBonus", bonusTable.homingChainBonus);
         newBonusTable.homingChainBonusLimit = Configuration::config.GetInteger("GameplayBonus", "homingChainBonusLimit", bonusTable.homingChainBonusLimit);
-        newBonusTable.slamBonus = Configuration::config.GetInteger("GameplayBonus", "slamBonus", bonusTable.slamBonus);
-        newBonusTable.slamBonusLimit = Configuration::config.GetInteger("GameplayBonus", "slamBonusLimit", bonusTable.slamBonusLimit);
-        newBonusTable.timeBonusAlgorithm = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", bonusTable.timeBonusAlgorithm);
-        newBonusTable.ringBonusAlgorithm = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", bonusTable.ringBonusAlgorithm);
-        newBonusTable.speedBonusAlgorithm = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", bonusTable.speedBonusAlgorithm);
-        newBonusTable.userAlgorithm = Configuration::config.Get("ResultBonus", "userAlgorithm", bonusTable.userAlgorithm);
+        newBonusTable.slamBonus             = Configuration::config.GetInteger("GameplayBonus", "slamBonus", bonusTable.slamBonus);
+        newBonusTable.slamBonusLimit        = Configuration::config.GetInteger("GameplayBonus", "slamBonusLimit", bonusTable.slamBonusLimit);
+        newBonusTable.trickBonusLimit       = Configuration::config.GetInteger("GameplayBonus", "trickBonusLimit", bonusTable.trickBonusLimit);
+        newBonusTable.timeBonusAlgorithm    = Configuration::config.Get("ResultBonus", "timeBonusAlgorithm", bonusTable.timeBonusAlgorithm);
+        newBonusTable.ringBonusAlgorithm    = Configuration::config.Get("ResultBonus", "ringBonusAlgorithm", bonusTable.ringBonusAlgorithm);
+        newBonusTable.speedBonusAlgorithm   = Configuration::config.Get("ResultBonus", "speedBonusAlgorithm", bonusTable.speedBonusAlgorithm);
+        newBonusTable.userAlgorithm         = Configuration::config.Get("ResultBonus", "userAlgorithm", bonusTable.userAlgorithm);
 
 #if _DEBUG
         printf("[Score Generations] homingChainBonus = %d\n", newBonusTable.homingChainBonus);
@@ -141,11 +142,13 @@ public:
         // Use the current configuration to get the multipliers.
         newMultiplierTable.homingChainMultiplier = Configuration::config.GetReal("Multiplier", "homingChainMultiplier", multiplierTable.homingChainMultiplier);
         newMultiplierTable.slamMultiplier        = Configuration::config.GetReal("Multiplier", "slamMultiplier", multiplierTable.slamMultiplier);
+        newMultiplierTable.trickMultiplier       = Configuration::config.GetReal("Multiplier", "trickMultiplier", multiplierTable.trickMultiplier);
         newMultiplierTable.speedBonusMultiplier  = Configuration::config.GetReal("Multiplier", "speedBonusMultiplier", multiplierTable.speedBonusMultiplier);
 
 #if _DEBUG
         printf("[Score Generations] homingChainMultiplier = %d\n", newMultiplierTable.homingChainMultiplier);
         printf("[Score Generations] slamMultiplier = %d\n", newMultiplierTable.slamMultiplier);
+        printf("[Score Generations] trickMultiplier = %d\n", newMultiplierTable.trickMultiplier);
         printf("[Score Generations] speedBonusMultiplier = %d\n", newMultiplierTable.speedBonusMultiplier);
 #endif
 

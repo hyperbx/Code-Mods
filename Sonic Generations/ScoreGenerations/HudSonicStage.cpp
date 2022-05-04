@@ -93,8 +93,9 @@ void HudSonicStage::UpdateMultipliers(float* pUpdateInfo)
 
 	if (CONTEXT->m_Grounded)
 	{
-		// Reset the homing chain bonus if the player is grounded.
+		// Reset bonuses if the player is grounded.
 		MultiplierListener::ResetHomingChainBonus();
+		MultiplierListener::ResetTrickBonus();
 
 		if (slamBonusDeltaTimer > TableListener::timerTable.slamTimer)
 		{
