@@ -33,6 +33,9 @@ public:
 
 	static bool HasFlag(Sonic::Player::CPlayerSpeedContext::EStateFlag flag)
 	{
+		if (CONTEXT == nullptr)
+			return false;
+
 		return CONTEXT->m_pStateFlag->m_Flags[flag];
 	}
 
