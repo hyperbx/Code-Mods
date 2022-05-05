@@ -24,7 +24,7 @@ void OnLoad()
 		{
 			// Use Sonic Generations' HUD XNCP.
 			if (!Configuration::customXNCP)
-				WRITE_MEMORY(0x168E333, uint8_t, "_default\0");
+				WRITE_MEMORY(0x168E333, const char, "_default");
 
 			goto SkipScoreDraw;
 		}
@@ -35,12 +35,12 @@ void OnLoad()
 				if (StringHelper::GetDigits(Configuration::scoreFormat) == 6)
 				{
 					// Use Score Generations' HUD XNCP for six digit padding.
-					WRITE_MEMORY(0x168E333, uint8_t, "_low_padding\0");
+					WRITE_MEMORY(0x168E333, const char, "_low_padding");
 				}
 				else
 				{
 					// Use Score Generations' HUD XNCP for high amounts of padding.
-					WRITE_MEMORY(0x168E333, uint8_t, "_high_padding\0");
+					WRITE_MEMORY(0x168E333, const char, "_high_padding");
 				}
 			}
 
@@ -82,7 +82,7 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 }
 
 
-HOOK(int*, __cdecl, MsgChangeResultStateConstructor, 0x587C40, void* a1, int* a2, int* rank, int* a4)
+HOOK(int*, __cdecl, MsgChangeResultState, 0x587C40, void* a1, int* a2, int* rank, int* a4)
 {
 	FUNCTION_PTR(bool, __cdecl, IsPerfectBonus, 0x10B8A90);
 
@@ -90,28 +90,19 @@ HOOK(int*, __cdecl, MsgChangeResultStateConstructor, 0x587C40, void* a1, int* a2
 	if (!IsPerfectBonus())
 		*rank = ResultListener::resultDescription.rank;
 
-	return originalMsgChangeResultStateConstructor(a1, a2, rank, a4);
+	return originalMsgChangeResultState(a1, a2, rank, a4);
+}
+
+HOOK(int, __fastcall, MsgRestartStage, 0xE76810, uint32_t* thisDeclaration, void* edx, void* message)
+{
+	OnLoad();
+
+	return originalMsgRestartStage(thisDeclaration, edx, message);
 }
 
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
-
-__declspec(naked) void Loading_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x65FCC0;
-	static void* returnAddress = (void*)0x448E98;
-
-	__asm
-	{
-		// Perform actions on the loading screen.
-		call OnLoad
-
-		call [interruptAddress]
-
-		jmp [returnAddress]
-	}
-}
 
 __declspec(naked) void GameOver_MidAsmHook()
 {
@@ -186,16 +177,16 @@ void StateHooks::HookResults(bool enabled)
 
 void StateHooks::Install()
 {
-	// Update local loading function.
-	WRITE_JUMP(0x448E93, &Loading_MidAsmHook);
+	// Install hook to set perfect bonus.
+	INSTALL_HOOK(IsPerfectBonus);
+
+	// Install hook to push the modified rank to MsgChangeResultState.
+	INSTALL_HOOK(MsgChangeResultState);
+
+	// Install hook to update during restart.
+	INSTALL_HOOK(MsgRestartStage);
 
 	// Reset statistics upon exiting.
 	WRITE_JUMP(0x584777, &GameOver_MidAsmHook);
 	WRITE_JUMP(0x42AD71, &Exit_MidAsmHook);
-
-	// Install hook to set perfect bonus.
-	INSTALL_HOOK(IsPerfectBonus);
-
-	// Install hook to push the modified rank to MsgChangeResultStateConstructor.
-	INSTALL_HOOK(MsgChangeResultStateConstructor);
 }

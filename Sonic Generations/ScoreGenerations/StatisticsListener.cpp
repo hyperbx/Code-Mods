@@ -34,7 +34,7 @@ void __fastcall UpdateElapsedTime(int minutes, int seconds)
 
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void MillisecondsFormatter_MidAsmHook()
+__declspec(naked) void RingFormatter_MidAsmHook()
 {
 	static void* returnAddress = (void*)0x1098E59;
 
@@ -102,12 +102,12 @@ int StatisticsListener::GetElapsedTime()
 void StatisticsListener::Install()
 {
 	// Set score string format.
-	WRITE_MEMORY(0x1095D7D, char*, Configuration::scoreFormat.c_str());
+	WRITE_MEMORY(0x1095D7D, const char*, Configuration::scoreFormat.c_str());
 
 	// Store elapsed time locally for the time bonus.
 	WRITE_JUMP(0x1098D40, &TimeFormatter_MidAsmHook);
 
 	// Update the ring count.
-	WRITE_JUMP(0x1098E4C, &MillisecondsFormatter_MidAsmHook);
+	WRITE_JUMP(0x1098E4C, &RingFormatter_MidAsmHook);
 	WRITE_JUMP(0x12281B8, &FinalBossRingFormatter_MidAsmHook);
 }
