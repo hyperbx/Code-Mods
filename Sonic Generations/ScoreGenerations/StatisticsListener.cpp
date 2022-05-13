@@ -30,6 +30,20 @@ void __fastcall UpdateElapsedTime(int minutes, int seconds)
 	StatisticsListener::totals.seconds = seconds;
 }
 
+/// <summary>
+/// Updates current ring count
+/// </summary>
+HOOK(void, __fastcall, CHudSonicStageUpdate_RingCount, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
+{
+	auto context = Sonic::Player::CPlayerSpeedContext::GetInstance();
+	if (context)
+	{
+		UpdateRingCount(context->m_RingCount);
+	}
+
+	originalCHudSonicStageUpdate_RingCount(thisDeclaration, edx, pUpdateInfo);
+}
+
 #pragma endregion
 
 #pragma region ----- Mid-ASM Hooks -----
@@ -108,6 +122,6 @@ void StatisticsListener::Install()
 	WRITE_JUMP(0x1098D40, &TimeFormatter_MidAsmHook);
 
 	// Update the ring count.
-	WRITE_JUMP(0x1098E4C, &RingFormatter_MidAsmHook);
+	INSTALL_HOOK(CHudSonicStageUpdate_RingCount);
 	WRITE_JUMP(0x12281B8, &FinalBossRingFormatter_MidAsmHook);
 }
