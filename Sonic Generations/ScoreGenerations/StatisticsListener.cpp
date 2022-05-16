@@ -31,15 +31,12 @@ void __fastcall UpdateElapsedTime(int minutes, int seconds)
 }
 
 /// <summary>
-/// Updates current ring count
+/// Updates current ring count.
 /// </summary>
 HOOK(void, __fastcall, CHudSonicStageUpdate_RingCount, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
-	auto context = Sonic::Player::CPlayerSpeedContext::GetInstance();
-	if (context)
-	{
-		UpdateRingCount(context->m_RingCount);
-	}
+	if (CONTEXT != nullptr)
+		UpdateRingCount(CONTEXT->m_RingCount);
 
 	originalCHudSonicStageUpdate_RingCount(thisDeclaration, edx, pUpdateInfo);
 }

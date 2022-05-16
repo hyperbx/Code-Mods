@@ -8,6 +8,8 @@
 #define SONIC_CLASSIC_CONTEXT BlueBlurCommon::GetSonicClassicContext()
 #define SONIC_SUPER_CONTEXT BlueBlurCommon::GetSonicSpContext()
 
+#define CHECK_CONTEXT_SAFE(returnValue) if (CONTEXT == nullptr) return returnValue;
+
 class BlueBlurCommon
 {
 public:
@@ -33,9 +35,7 @@ public:
 
 	static bool HasFlag(Sonic::Player::CPlayerSpeedContext::EStateFlag flag)
 	{
-		if (CONTEXT == nullptr)
-			return false;
-
+		CHECK_CONTEXT_SAFE(false);
 		return CONTEXT->m_pStateFlag->m_Flags[flag];
 	}
 
@@ -49,14 +49,31 @@ public:
 		return SONIC_CLASSIC_CONTEXT != nullptr;
 	}
 
+	static bool IsBossSuper()
+	{
+		return SONIC_SUPER_CONTEXT != nullptr;
+	}
+
 	static bool IsSuper()
 	{
 		return HasFlag(CONTEXT->eStateFlag_InvokeSuperSonic);
 	}
 
-	static bool IsBossSuper()
+	static bool IsGrounded()
 	{
-		return SONIC_SUPER_CONTEXT != nullptr;
+		CHECK_CONTEXT_SAFE(false);
+		return CONTEXT->m_Grounded;
+	}
+
+	static const float GetVelocity()
+	{
+		CHECK_CONTEXT_SAFE(0.0f);
+		return CONTEXT->m_Velocity.norm();
+	}
+
+	static const char* GetStageID()
+	{
+		return (const char*)0x1E774D4;
 	}
 
 	static const void PlayMusic(char const* cueName, float fadeInTime)
@@ -69,15 +86,5 @@ public:
 	{
 		FUNCTION_PTR(int, __stdcall, StopAudioFromCueName, 0xD61E40, Hedgehog::Base::TSynchronizedPtr<Sonic::CGameDocument> gameDocument, const Hedgehog::Base::CSharedString& cueName, float fadeOutTime);
 		StopAudioFromCueName(CONTEXT->m_pPlayer->GetGameDocument(), cueName, fadeOutTime);
-	}
-
-	static const char* GetStageID()
-	{
-		return (const char*)0x1E774D4;
-	}
-
-	static const float GetVelocity()
-	{
-		return CONTEXT->m_Velocity.norm();
 	}
 };

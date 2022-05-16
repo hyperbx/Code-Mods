@@ -1,23 +1,5 @@
 #pragma region ----- Mid-ASM Hooks -----
 
-__declspec(naked) void Ring_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x10534B0;
-	static void* returnAddress = (void*)0x1054425;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		// Reward player with Ring score.
-		mov ecx, 0
-		call ScoreListener::Reward
-		mov edx, eax
-
-		jmp [returnAddress]
-	}
-}
-
 __declspec(naked) void Enemy_MidAsmHook()
 {
 	static void* returnAddress = (void*)0xBDDDA1;
@@ -308,7 +290,6 @@ __declspec(naked) void BoardTrick_MidAsmHook()
 void ScoreHooks::Install()
 {
 	// Hook objects and states to add score to the counter.
-	WRITE_JUMP(0x1054420, &Ring_MidAsmHook);
 	WRITE_JUMP(0xBDDD9A, &Enemy_MidAsmHook);
 	WRITE_JUMP(0xEA5412, &Physics_MidAsmHook);
 	WRITE_JUMP(0x1131D97, &PlanetWispFallBlock_MidAsmHook);
