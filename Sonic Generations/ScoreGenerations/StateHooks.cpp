@@ -7,16 +7,8 @@ void OnLoad()
 	// Reset statistics.
 	ScoreListener::Reset();
 
-	if (HudSonicStage::IsStageForbidden())
-	{
-		// Disable results hooks.
-		StateHooks::isResultsHooked = false;
-	}
-	else
-	{
-		// Hook to results for local score.
-		StateHooks::isResultsHooked = true;
-	}
+	// Set results hook state.
+	StateHooks::isResultsHooked = HudSonicStage::IsStageForbidden() ? false : true;
 
 	if (HudSonicStage::isVisible)
 	{
@@ -144,12 +136,9 @@ __declspec(naked) void ResultsCalculate_MidAsmHook()
 	static void* interruptAddress = (void*)0x10B3DB0;
 	static void* returnAddress = (void*)0xD5A191;
 
-	static int isResultsHooked = StateHooks::isResultsHooked ? 1 : 0;
-
 	__asm
 	{
-		mov eax, isResultsHooked
-		cmp eax, 0
+		cmp StateHooks::isResultsHooked, 0
 		jnz Hooked
 
 		// Call original results function.
