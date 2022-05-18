@@ -10,12 +10,12 @@ void OnLoad()
 	if (HudSonicStage::IsStageForbidden())
 	{
 		// Disable results hooks.
-		StateHooks::HookResults(false);
+		StateHooks::isResultsHooked = false;
 	}
 	else
 	{
 		// Hook to results for local score.
-		StateHooks::HookResults(true);
+		StateHooks::isResultsHooked = true;
 	}
 
 	if (HudSonicStage::isVisible)
@@ -141,39 +141,34 @@ __declspec(naked) void Exit_MidAsmHook()
 
 __declspec(naked) void ResultsCalculate_MidAsmHook()
 {
+	static void* interruptAddress = (void*)0x10B3DB0;
 	static void* returnAddress = (void*)0xD5A191;
+
+	static int isResultsHooked = StateHooks::isResultsHooked ? 1 : 0;
 
 	__asm
 	{
+		mov eax, isResultsHooked
+		cmp eax, 0
+		jnz Hooked
+
+		// Call original results function.
+		call [interruptAddress]
+		jmp Exit
+
+	Hooked:
 		// Gather the results.
 		call ResultListener::Result
 
 		// Load descriptors for results.
 		lea eax, ResultListener::resultDescription
 
+	Exit:
 		jmp [returnAddress]
 	}
 }
 
 #pragma endregion
-
-void StateHooks::HookResults(bool enabled)
-{
-	if (enabled)
-	{
-		// Calculate results with local statistics.
-		WRITE_JUMP(0xD5A18C, &ResultsCalculate_MidAsmHook);
-
-		isResultsHooked = true;
-	}
-	else
-	{
-		// Restore default results calculation.
-		RESTORE_MEMORY(0xD5A18C);
-
-		isResultsHooked = false;
-	}
-}
 
 void StateHooks::Install()
 {
@@ -189,4 +184,7 @@ void StateHooks::Install()
 	// Reset statistics upon exiting.
 	WRITE_JUMP(0x584777, &GameOver_MidAsmHook);
 	WRITE_JUMP(0x42AD71, &Exit_MidAsmHook);
+
+	// Calculate results with local statistics.
+	WRITE_JUMP(0xD5A18C, &ResultsCalculate_MidAsmHook);
 }

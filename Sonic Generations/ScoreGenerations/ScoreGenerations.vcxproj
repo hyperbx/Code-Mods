@@ -131,7 +131,6 @@ xcopy /Y /E /I "$(MSBuildProjectDirectory)\disk" "$(MSBuildProjectDirectory)\bin
     <ClInclude Include="lib\Tables.h" />
     <ClInclude Include="Loader.h" />
     <ClInclude Include="LuaCallback.h" />
-    <ClInclude Include="Memory.h" />
     <ClInclude Include="MultiplierListener.h" />
     <ClInclude Include="ResultListener.h" />
     <ClInclude Include="ScoreHooks.h" />

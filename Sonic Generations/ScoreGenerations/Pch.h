@@ -42,7 +42,6 @@
 #include "HudSonicStage.h"
 #include "Loader.h"
 #include "LuaCallback.h"
-#include "Memory.h"
 #include "MultiplierListener.h"
 #include "Patches.h"
 #include "ResultListener.h"

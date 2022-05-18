@@ -41,8 +41,6 @@ extern "C" _declspec(dllexport) void Init()
 	}
 #endif
 
-	Memory::Preserve();
-
 	// Patch archive tree for Score Generations HUD.
 	if (!Configuration::customXNCP)
 		ArchiveTreePatcher::Install();
