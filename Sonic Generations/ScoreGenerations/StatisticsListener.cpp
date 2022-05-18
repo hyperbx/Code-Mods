@@ -33,12 +33,12 @@ void __fastcall UpdateElapsedTime(int minutes, int seconds)
 /// <summary>
 /// Updates current ring count.
 /// </summary>
-HOOK(void, __fastcall, CHudSonicStageUpdate_RingCount, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
+HOOK(void, __fastcall, CHudSonicStageUpdateRingCount, 0x1098A50, void* thisDeclaration, void* edx, float* pUpdateInfo)
 {
 	if (CONTEXT != nullptr)
 		UpdateRingCount(CONTEXT->m_RingCount);
 
-	originalCHudSonicStageUpdate_RingCount(thisDeclaration, edx, pUpdateInfo);
+	originalCHudSonicStageUpdateRingCount(thisDeclaration, edx, pUpdateInfo);
 }
 
 #pragma endregion
@@ -119,6 +119,6 @@ void StatisticsListener::Install()
 	WRITE_JUMP(0x1098D40, &TimeFormatter_MidAsmHook);
 
 	// Update the ring count.
-	INSTALL_HOOK(CHudSonicStageUpdate_RingCount);
+	INSTALL_HOOK(CHudSonicStageUpdateRingCount);
 	WRITE_JUMP(0x12281B8, &FinalBossRingFormatter_MidAsmHook);
 }
