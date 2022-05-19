@@ -1,6 +1,7 @@
 int ScoreListener::score = 0;
 int ScoreListener::totalScore = 0;
 int ScoreListener::lastCheckpointScore = 0;
+float ScoreListener::lastCheckpointVelocity = 0;
 
 void ScoreListener::Reset()
 {
@@ -56,13 +57,25 @@ void __fastcall ScoreListener::Reward(ScoreType type)
 		{
 			scoreToReward = TableListener::scoreTable.PointMarker;
 
+			// Update current velocity.
+			lastCheckpointVelocity = BlueBlurCommon::GetVelocity();
+			{
+				// Update max velocity if current velocity is higher.
+				if (lastCheckpointVelocity > StatisticsListener::totals.maxVelocity)
+					StatisticsListener::totals.maxVelocity = lastCheckpointVelocity;
+
+#if _DEBUG
+				printf("[Score Generations] Max Velocity = %f\n", StatisticsListener::totals.maxVelocity);
+#endif
+			}
+
 			// Increase total velocity for the speed bonus.
 			if (Configuration::rewardSpeedBonus)
 			{
-				StatisticsListener::totals.totalVelocity += BlueBlurCommon::GetVelocity() * TableListener::multiplierTable.speedBonusMultiplier;
+				StatisticsListener::totals.totalVelocity += lastCheckpointVelocity * TableListener::multiplierTable.speedBonusMultiplier;
 
 #if _DEBUG
-				printf("[Score Generations] Total Velocity = %d\n", StatisticsListener::totals.totalVelocity);
+				printf("[Score Generations] Total Velocity = %f\n", StatisticsListener::totals.totalVelocity);
 #endif
 			}
 

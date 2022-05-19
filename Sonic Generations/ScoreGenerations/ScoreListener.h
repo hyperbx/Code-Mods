@@ -56,4 +56,9 @@ public:
     /// The last score calculated before a checkpoint was hit.
     /// </summary>
     static int lastCheckpointScore;
+
+    /// <summary>
+    /// The last velocity logged when a checkpoint was hit.
+    /// </summary>
+    static float lastCheckpointVelocity;
 };

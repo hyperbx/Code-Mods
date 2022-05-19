@@ -73,7 +73,12 @@ public:
         /// <summary>
         /// Total amount of speed from checkpoints.
         /// </summary>
-        int totalVelocity;
+        float totalVelocity;
+
+        /// <summary>
+        /// Highest amount of speed from checkpoints.
+        /// </summary>
+        float maxVelocity;
 
         /// <summary>
         /// Current number of rings obtained by the player.
@@ -119,6 +124,7 @@ public:
             totalDrifts = 0;
             totalBalloons = 0;
             totalVelocity = 0;
+            maxVelocity = 0;
             ringCount = 0;
             elapsedTime = 0;
             minutes = 0;

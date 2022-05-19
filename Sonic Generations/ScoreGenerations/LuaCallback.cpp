@@ -49,6 +49,7 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedNumber<int>(L, "totalDrifts", StatisticsListener::totals.totalDrifts);
 	PushExposedNumber<int>(L, "totalBalloons", StatisticsListener::totals.totalBalloons);
 	PushExposedNumber<float>(L, "totalVelocity", StatisticsListener::totals.totalVelocity);
+	PushExposedNumber<float>(L, "maxVelocity", StatisticsListener::totals.maxVelocity);
 	PushExposedNumber<int>(L, "ringCount", StatisticsListener::totals.ringCount);
 	PushExposedNumber<float>(L, "elapsedTime", StatisticsListener::totals.elapsedTime);
 	PushExposedNumber<int>(L, "minutes", StatisticsListener::totals.minutes);
@@ -144,7 +145,8 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] totalQuickSteps = %d\n", StatisticsListener::totals.totalQuickSteps);
 		printf("[Score Generations] [Lua Debug] totalDrifts = %d\n", StatisticsListener::totals.totalDrifts);
 		printf("[Score Generations] [Lua Debug] totalBalloons = %d\n", StatisticsListener::totals.totalBalloons);
-		printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::totals.totalVelocity);
+		printf("[Score Generations] [Lua Debug] totalVelocity = %f\n", StatisticsListener::totals.totalVelocity);
+		printf("[Score Generations] [Lua Debug] maxVelocity = %f\n", StatisticsListener::totals.maxVelocity);
 		printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::totals.ringCount);
 		printf("[Score Generations] [Lua Debug] elapsedTime = %f\n", StatisticsListener::totals.elapsedTime);
 		printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::totals.minutes);
