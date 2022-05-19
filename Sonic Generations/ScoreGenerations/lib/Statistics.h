@@ -81,6 +81,11 @@ public:
         int ringCount;
 
         /// <summary>
+        /// The amount of time passed in the stage.
+        /// </summary>
+        float elapsedTime;
+
+        /// <summary>
         /// Minutes counted by the game.
         /// </summary>
         int minutes;
@@ -89,6 +94,11 @@ public:
         /// Seconds counted by the game.
         /// </summary>
         int seconds;
+
+        /// <summary>
+        /// Milliseconds counted by the game.
+        /// </summary>
+        int milliseconds;
 
         /// <summary>
         /// Resets the current statistics.
@@ -110,8 +120,10 @@ public:
             totalBalloons = 0;
             totalVelocity = 0;
             ringCount = 0;
+            elapsedTime = 0;
             minutes = 0;
             seconds = 0;
+            milliseconds = 0;
         }
     };
 };

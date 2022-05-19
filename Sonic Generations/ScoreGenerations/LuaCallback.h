@@ -9,7 +9,10 @@ class LuaCallback
 public:
 	static bool SetLuaPath(std::string path);
 	static void PushExposedData(lua_State* L);
-	static void PushExposedInteger(lua_State* L, std::string name, unsigned int pushToStack);
+
+	template <typename T, typename std::enable_if<std::is_arithmetic<T>::value>::type* = nullptr>
+	static void PushExposedNumber(lua_State* L, std::string name, T pushToStack);
+
 	static void PushExposedString(lua_State* L, std::string name, std::string value);
 	static void PushLuaLibrary(lua_State* L, const char* name, lua_CFunction function);
 	static bool LoadInternalLibrary(lua_State* L);

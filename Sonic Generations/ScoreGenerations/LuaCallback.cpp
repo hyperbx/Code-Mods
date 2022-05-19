@@ -35,34 +35,35 @@ bool LuaCallback::SetLuaPath(std::string path)
 void LuaCallback::PushExposedData(lua_State* L)
 {
 	// Push needed exposed integers to the stack.
-	PushExposedInteger(L, "totalRingCount", StatisticsListener::totals.totalRingCount);
-	PushExposedInteger(L, "totalEnemies", StatisticsListener::totals.totalEnemies);
-	PushExposedInteger(L, "totalPhysics", StatisticsListener::totals.totalPhysics);
-	PushExposedInteger(L, "totalPointMarkers", StatisticsListener::totals.totalPointMarkers);
-	PushExposedInteger(L, "totalRedRings", StatisticsListener::totals.totalRedRings);
-	PushExposedInteger(L, "totalRainbowRings", StatisticsListener::totals.totalRainbowRings);
-	PushExposedInteger(L, "totalItemBoxes", StatisticsListener::totals.totalItemBoxes);
-	PushExposedInteger(L, "totalSuperRings", StatisticsListener::totals.totalSuperRings);
-	PushExposedInteger(L, "totalTricks", StatisticsListener::totals.totalTricks);
-	PushExposedInteger(L, "totalDashRings", StatisticsListener::totals.totalDashRings);
-	PushExposedInteger(L, "totalQuickSteps", StatisticsListener::totals.totalQuickSteps);
-	PushExposedInteger(L, "totalDrifts", StatisticsListener::totals.totalDrifts);
-	PushExposedInteger(L, "totalBalloons", StatisticsListener::totals.totalBalloons);
-	PushExposedInteger(L, "totalVelocity", StatisticsListener::totals.totalVelocity);
-	PushExposedInteger(L, "ringCount", StatisticsListener::totals.ringCount);
-	PushExposedInteger(L, "minutes", StatisticsListener::totals.minutes);
-	PushExposedInteger(L, "seconds", StatisticsListener::totals.seconds);
-	PushExposedInteger(L, "elapsedTime", StatisticsListener::GetElapsedTime());
-	PushExposedInteger(L, "score", ScoreListener::score);
-	PushExposedInteger(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedInteger(L, "minSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
-	PushExposedInteger(L, "maxSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
+	PushExposedNumber<int>(L, "totalRingCount", StatisticsListener::totals.totalRingCount);
+	PushExposedNumber<int>(L, "totalEnemies", StatisticsListener::totals.totalEnemies);
+	PushExposedNumber<int>(L, "totalPhysics", StatisticsListener::totals.totalPhysics);
+	PushExposedNumber<int>(L, "totalPointMarkers", StatisticsListener::totals.totalPointMarkers);
+	PushExposedNumber<int>(L, "totalRedRings", StatisticsListener::totals.totalRedRings);
+	PushExposedNumber<int>(L, "totalRainbowRings", StatisticsListener::totals.totalRainbowRings);
+	PushExposedNumber<int>(L, "totalItemBoxes", StatisticsListener::totals.totalItemBoxes);
+	PushExposedNumber<int>(L, "totalSuperRings", StatisticsListener::totals.totalSuperRings);
+	PushExposedNumber<int>(L, "totalTricks", StatisticsListener::totals.totalTricks);
+	PushExposedNumber<int>(L, "totalDashRings", StatisticsListener::totals.totalDashRings);
+	PushExposedNumber<int>(L, "totalQuickSteps", StatisticsListener::totals.totalQuickSteps);
+	PushExposedNumber<int>(L, "totalDrifts", StatisticsListener::totals.totalDrifts);
+	PushExposedNumber<int>(L, "totalBalloons", StatisticsListener::totals.totalBalloons);
+	PushExposedNumber<float>(L, "totalVelocity", StatisticsListener::totals.totalVelocity);
+	PushExposedNumber<int>(L, "ringCount", StatisticsListener::totals.ringCount);
+	PushExposedNumber<float>(L, "elapsedTime", StatisticsListener::totals.elapsedTime);
+	PushExposedNumber<int>(L, "minutes", StatisticsListener::totals.minutes);
+	PushExposedNumber<int>(L, "seconds", StatisticsListener::totals.seconds);
+	PushExposedNumber<int>(L, "milliseconds", StatisticsListener::totals.milliseconds);
+	PushExposedNumber<int>(L, "score", ScoreListener::score);
+	PushExposedNumber<int>(L, "scoreLimit", Configuration::scoreLimit);
+	PushExposedNumber<int>(L, "minSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
+	PushExposedNumber<int>(L, "maxSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
 
 	// Push needed exposed strings to the stack.
 	PushExposedString(L, "stageID", BlueBlurCommon::GetStageID());
 }
-
-void LuaCallback::PushExposedInteger(lua_State* L, std::string name, unsigned int pushToStack)
+template <typename T, typename std::enable_if<std::is_arithmetic<T>::value>::type*>
+void LuaCallback::PushExposedNumber(lua_State* L, std::string name, T pushToStack)
 {
 	// Push the input value to the stack.
 	lua_pushnumber(L, pushToStack);
@@ -145,9 +146,10 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] totalBalloons = %d\n", StatisticsListener::totals.totalBalloons);
 		printf("[Score Generations] [Lua Debug] totalVelocity = %d\n", StatisticsListener::totals.totalVelocity);
 		printf("[Score Generations] [Lua Debug] ringCount = %d\n", StatisticsListener::totals.ringCount);
+		printf("[Score Generations] [Lua Debug] elapsedTime = %f\n", StatisticsListener::totals.elapsedTime);
 		printf("[Score Generations] [Lua Debug] minutes = %d\n", StatisticsListener::totals.minutes);
 		printf("[Score Generations] [Lua Debug] seconds = %d\n", StatisticsListener::totals.seconds);
-		printf("[Score Generations] [Lua Debug] elapsedTime = %d\n", StatisticsListener::GetElapsedTime());
+		printf("[Score Generations] [Lua Debug] milliseconds = %d\n", StatisticsListener::totals.milliseconds);
 		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
 		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
