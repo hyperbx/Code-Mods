@@ -91,7 +91,9 @@ std::tuple<float, float> ResultListener::ComputeProgressBars(RankType rank)
 	scoreProgress = ComputeProgressBar(rank, ScoreListener::totalScore - ringBonus);
 
 	// Compute ring progress.
-	ringProgress = StatisticsListener::totals.ringCount == 0 ? 0.0001 : ComputeProgressBar(rank, ScoreListener::totalScore + ringBonus / StatisticsListener::totals.ringCount) + 0.0001;
+	ringProgress = (scoreProgress == 1.0f || StatisticsListener::totals.ringCount == 0)
+				   ? scoreProgress + 0.0001f
+				   : ComputeProgressBar(rank, ScoreListener::totalScore + static_cast<float>(ringBonus) / StatisticsListener::totals.ringCount) + 0.0001f;
 
 	return { scoreProgress, ringProgress };
 }
