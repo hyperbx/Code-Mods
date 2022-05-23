@@ -17,6 +17,7 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 	int A = TableListener::rankTables[BlueBlurCommon::GetStageID()].A;
 	int B = TableListener::rankTables[BlueBlurCommon::GetStageID()].B;
 	int C = TableListener::rankTables[BlueBlurCommon::GetStageID()].C;
+	int D = TableListener::rankTables[BlueBlurCommon::GetStageID()].D;
 
 	if (Configuration::perfectBonus == Configuration::PerfectBonusType::Disabled && S != -1 && total > S)
 	{
@@ -32,6 +33,11 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 			if (total < C)
 			{
 				rank = RankType::D;
+
+				if (D != -1 && total < D)
+				{
+					rank = RankType::E;
+				}
 			}
 			else
 			{
@@ -60,6 +66,9 @@ float ComputeProgressBar(ResultListener::RankType rank, int divider)
 {
 	switch (rank)
 	{
+		case ResultListener::RankType::E:
+			return 0.0f;
+
 		case ResultListener::RankType::D:
 			return ((float)divider / (float)TableListener::rankTables[BlueBlurCommon::GetStageID()].C) / 3.0f;
 

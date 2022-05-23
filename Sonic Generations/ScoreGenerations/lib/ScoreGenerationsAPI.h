@@ -42,6 +42,7 @@
 /// </summary>
 enum RankType
 {
+	E = -1,
 	D,
 	C,
 	B,

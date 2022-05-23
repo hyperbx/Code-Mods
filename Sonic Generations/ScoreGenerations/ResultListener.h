@@ -8,6 +8,7 @@ public:
     /// </summary>
     enum RankType
     {
+        E = -1,
         D,
         C,
         B,
@@ -46,11 +47,7 @@ public:
         int score;
 
         /// <summary>
-        /// 0 - D rank
-        /// 1 - C rank
-        /// 2 - B rank
-        /// 3 - A rank
-        /// 4 - S rank
+        /// The final rank.
         /// </summary>
         int rank;
 
@@ -71,10 +68,6 @@ public:
 
         /// <summary>
         /// The amount of progress related to score in the progress bar between 0.0 - 1.0.
-        /// 
-        /// C = 0.335
-        /// B = 0.67
-        /// A = 1.005
         /// </summary>
         float scoreProgress;
     };

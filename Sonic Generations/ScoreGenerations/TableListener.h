@@ -78,6 +78,7 @@ public:
                 rankTable.A = Configuration::config.GetInteger(section, "A", -1);
                 rankTable.B = Configuration::config.GetInteger(section, "B", -1);
                 rankTable.C = Configuration::config.GetInteger(section, "C", -1);
+                rankTable.D = Configuration::config.GetInteger(section, "D", -1);
 
 #if _DEBUG
                 printf("[Score Generations] minSeconds = %d\n", rankTable.minSeconds);
@@ -86,6 +87,7 @@ public:
                 printf("[Score Generations] A = %d\n", rankTable.A);
                 printf("[Score Generations] B = %d\n", rankTable.B);
                 printf("[Score Generations] C = %d\n", rankTable.C);
+                printf("[Score Generations] D = %d\n", rankTable.D);
 #endif
 
                 // Section without the hash is the stage ID.
