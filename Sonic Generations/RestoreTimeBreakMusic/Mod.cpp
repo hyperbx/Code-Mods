@@ -1,43 +1,16 @@
-float timeBreakTimer = 8.0f;
-
-void PlayTimeBreakMusic()
+HOOK(void, __fastcall, CPlayerSpeedStatePluginTimeBreakUpdate, 0x111B030, Hedgehog::Universe::TStateMachine<Sonic::Player::CPlayerSpeedContext>::TState* thisDeclaration)
 {
 	BlueBlurCommon::PlayMusic("Time_Break", 0.0);
+
+	if (thisDeclaration->m_Time > 8.0f)
+		originalCPlayerSpeedStatePluginTimeBreakUpdate(thisDeclaration);
 }
 
-void StopTimeBreakMusic()
+HOOK(void, __fastcall, CPlayerSpeedStatePluginTimeBreakEnd, 0x111AE00, Hedgehog::Universe::TStateMachine<Sonic::Player::CPlayerSpeedContext>::TState* thisDeclaration)
 {
 	BlueBlurCommon::StopMusic("Time_Break", 0.0);
-}
 
-__declspec(naked) void TimeBreakBegin_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x76AD90;
-	static void* returnAddress = (void*)0x111B042;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		call [PlayTimeBreakMusic]
-
-		jmp [returnAddress]
-	}
-}
-
-__declspec(naked) void TimeBreakEnd_MidAsmHook()
-{
-	static void* interruptAddress = (void*)0x65FBE0;
-	static void* returnAddress = (void*)0x111AE26;
-
-	__asm
-	{
-		call [interruptAddress]
-
-		call [StopTimeBreakMusic]
-
-		jmp [returnAddress]
-	}
+	originalCPlayerSpeedStatePluginTimeBreakEnd(thisDeclaration);
 }
 
 /// <summary>
@@ -45,12 +18,6 @@ __declspec(naked) void TimeBreakEnd_MidAsmHook()
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
-	// Play Time Break music upon activation.
-	WRITE_JUMP(0x111B03D, &TimeBreakBegin_MidAsmHook);
-
-	// Restore original stage music upon ending.
-	WRITE_JUMP(0x111AE21, &TimeBreakEnd_MidAsmHook);
-
-	// Increase Time Break timer to fit the length of the soundtrack.
-	WRITE_MEMORY(0x111B044, float*, &timeBreakTimer);
+	INSTALL_HOOK(CPlayerSpeedStatePluginTimeBreakUpdate);
+	INSTALL_HOOK(CPlayerSpeedStatePluginTimeBreakEnd);
 }
