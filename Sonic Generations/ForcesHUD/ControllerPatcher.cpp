@@ -1,4 +1,3 @@
-int ControllerPatcher::controllerType = XBOX;
 const char* ControllerPatcher::ui_gp_btn_guide;
 const char* ControllerPatcher::ui_window;
 const char* ControllerPatcher::ui_pam;
@@ -7,63 +6,38 @@ const char* ControllerPatcher::ui_howto;
 const char* ControllerPatcher::ui_btn_guide;
 const char* ControllerPatcher::ui_gameplay;
 
-void ControllerPatcher::SetXboxNames()
-{
-	controllerType = XBOX;
-
-	ui_gp_btn_guide = "ui_gp_btn_guide";
-	ui_window       = "ui_window";
-	ui_pam          = "ui_pam";
-	ui_gp_trick     = "ui_gp_trick";
-	ui_howto        = "ui_howto";
-	ui_btn_guide    = "ui_btn_guide";
-	ui_gameplay     = "ui_gameplay";
-}
-
-void ControllerPatcher::SetPlayStationNames()
-{
-	controllerType = PLAYSTATION;
-
-	ui_gp_btn_guide = "ui_gp_btn_pside";
-	ui_window       = "ui_psndow";
-	ui_pam          = "ui_psm";
-	ui_gp_trick     = "ui_gp_psick";
-	ui_howto        = "ui_howps";
-	ui_btn_guide    = "ui_btn_pside";
-	ui_gameplay     = "ui_gamepsay";
-}
-
-void ControllerPatcher::SetSwitchNames()
-{
-	controllerType = SWITCH;
-
-	ui_gp_btn_guide = "ui_gp_btn_nswit";
-	ui_window       = "ui_nswdow";
-	ui_pam          = "ui_nsm";
-	ui_gp_trick     = "ui_gp_nswit";
-	ui_howto        = "ui_howns";
-	ui_btn_guide    = "ui_btn_nside";
-	ui_gameplay     = "ui_gamensay";
-}
-
 void ControllerPatcher::Install()
 {
 	switch (Configuration::buttonType)
 	{
-		case XBOX:
-			SetXboxNames();
+		case Configuration::ButtonType::PlayStation:
+			ui_gp_btn_guide = "ui_gp_btn_pside";
+			ui_window = "ui_psndow";
+			ui_pam = "ui_psm";
+			ui_gp_trick = "ui_gp_psick";
+			ui_howto = "ui_howps";
+			ui_btn_guide = "ui_btn_pside";
+			ui_gameplay = "ui_gamepsay";
 			break;
 
-		case PLAYSTATION:
-			SetPlayStationNames();
-			break;
-
-		case SWITCH:
-			SetSwitchNames();
+		case Configuration::ButtonType::Switch:
+			ui_gp_btn_guide = "ui_gp_btn_nswit";
+			ui_window = "ui_nswdow";
+			ui_pam = "ui_nsm";
+			ui_gp_trick = "ui_gp_nswit";
+			ui_howto = "ui_howns";
+			ui_btn_guide = "ui_btn_nside";
+			ui_gameplay = "ui_gamensay";
 			break;
 
 		default:
-			SetXboxNames();
+			ui_gp_btn_guide = "ui_gp_btn_guide";
+			ui_window = "ui_window";
+			ui_pam = "ui_pam";
+			ui_gp_trick = "ui_gp_trick";
+			ui_howto = "ui_howto";
+			ui_btn_guide = "ui_btn_guide";
+			ui_gameplay = "ui_gameplay";
 			break;
 	}
 

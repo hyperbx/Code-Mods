@@ -11,33 +11,36 @@ public:
 	static void Read();
 
 	/// <summary>
-	/// Determines whether or not the ring formatter should have fixed justification.
+	/// Determines whether the ring formatter should have fixed justification.
 	/// </summary>
 	static bool ringFormatter;
 
 	/// <summary>
-	/// Determines whether or not the Forces homing reticle will be used.
+	/// Determines whether the Forces homing reticle will be used.
 	/// </summary>
 	static bool homingReticle;
 
 	/// <summary>
-	/// Determines whether or not the Forces window title will be used.
+	/// Determines whether the Forces window title will be used.
 	/// </summary>
 	static bool windowTitle;
 
 	/// <summary>
-	/// Determines whether or not the BOOST text is visible below the boost gauge.
+	/// Determines whether the BOOST text is visible below the boost gauge.
 	/// </summary>
 	static bool boostText;
 
+	static enum ButtonType
+	{
+		Xbox,
+		PlayStation,
+		Switch
+	};
+
 	/// <summary>
-	/// Controls what button prompts to show in game.
-	/// 
-	/// Xbox        (0)
-	/// PlayStation (1)
-	/// Switch      (2)
+	/// Controls what button prompts to show in-game.
 	/// </summary>
-	static int buttonType;
+	static ButtonType buttonType;
 
 	/// <summary>
 	/// Controls what difficulty is used like Forces.
@@ -48,7 +51,7 @@ public:
 	static int difficultyType;
 
 	/// <summary>
-	/// Determines whether or not the homing reticle will be active at all times.
+	/// Determines whether the homing reticle will be active at all times.
 	/// </summary>
 	static bool alwaysActiveReticle;
 
@@ -58,7 +61,7 @@ public:
 	static int trickSounds;
 
 	/// <summary>
-	/// Determines whether or not Forces' homing sound will be used.
+	/// Determines whether Forces' homing sound will be used.
 	/// </summary>
 	static bool homingSound;
 };

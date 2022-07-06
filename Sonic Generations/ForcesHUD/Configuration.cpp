@@ -2,7 +2,7 @@ bool Configuration::ringFormatter = true;
 bool Configuration::homingReticle = true;
 bool Configuration::windowTitle = true;
 bool Configuration::boostText = true;
-int Configuration::buttonType = 0;
+Configuration::ButtonType Configuration::buttonType = ButtonType::Xbox;
 int Configuration::difficultyType = 1;
 bool Configuration::alwaysActiveReticle = true;
 int Configuration::trickSounds = 1;
@@ -17,7 +17,7 @@ void Configuration::Read()
 	Configuration::homingReticle = reader.GetBoolean("Appearance", "homingReticle", homingReticle);
 	Configuration::windowTitle   = reader.GetBoolean("Appearance", "windowTitle", windowTitle);
 	Configuration::boostText     = reader.GetBoolean("Appearance", "boostText", boostText);
-	Configuration::buttonType    = reader.GetInteger("Appearance", "buttonType", buttonType);
+	Configuration::buttonType    = (ButtonType)reader.GetInteger("Appearance", "buttonType", buttonType);
 
 	// Behaviour
 	Configuration::difficultyType      = reader.GetInteger("Behaviour", "difficultyType", difficultyType);
