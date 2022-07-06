@@ -3,9 +3,13 @@ int ScoreListener::totalScore = 0;
 int ScoreListener::lastCheckpointScore = 0;
 float ScoreListener::lastCheckpointVelocity = 0;
 
-void ScoreListener::Reset()
+void ScoreListener::Reset(bool useLastCheckpointScore)
 {
-	totalScore = score = Configuration::restoreLastCheckpointScore && BlueBlurCommon::HasFlag(CONTEXT->eStateFlag_Dead) ? lastCheckpointScore : 0;
+	// Reset last checkpoint score if not used.
+	if (!useLastCheckpointScore)
+		lastCheckpointScore = 0;
+
+	totalScore = score = useLastCheckpointScore ? lastCheckpointScore : 0;
 	StatisticsListener::totals.Reset();
 }
 

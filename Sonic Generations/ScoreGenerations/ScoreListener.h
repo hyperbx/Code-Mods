@@ -30,7 +30,7 @@ public:
     /// <summary>
     /// Resets all statistics used for score calculation.
     /// </summary>
-    static void Reset();
+    static void Reset(bool useLastCheckpointScore = false);
 
     /// <summary>
     /// Adds the input score to reward and clamps it to the maximum allowed.

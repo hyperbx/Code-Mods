@@ -4,9 +4,6 @@ bool StateHooks::isResultsHooked = false;
 
 void OnLoad()
 {
-	// Reset statistics.
-	ScoreListener::Reset();
-
 	// Set results hook state.
 	StateHooks::isResultsHooked = HudSonicStage::IsStageForbidden() ? false : true;
 
@@ -73,7 +70,6 @@ HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 	}
 }
 
-
 HOOK(int*, __cdecl, MsgChangeResultState, 0x587C40, void* a1, int* a2, int* rank, int* a4)
 {
 	FUNCTION_PTR(bool, __cdecl, IsPerfectBonus, 0x10B8A90);
@@ -85,8 +81,15 @@ HOOK(int*, __cdecl, MsgChangeResultState, 0x587C40, void* a1, int* a2, int* rank
 	return originalMsgChangeResultState(a1, a2, rank, a4);
 }
 
-HOOK(int, __fastcall, MsgRestartStage, 0xE76810, uint32_t* thisDeclaration, void* edx, void* message)
+HOOK(int, __fastcall, MsgRestartStage, 0xE76810, int* thisDeclaration, void* edx, int* message)
 {
+	ScoreListener::Reset
+	(
+		Configuration::restoreLastCheckpointScore &&		 // Check if last checkpoint score should be used.
+		BlueBlurCommon::HasFlag(CONTEXT->eStateFlag_Dead) && // Check if the player is currently dead.
+		StatisticsListener::totals.totalPointMarkers > 0	 // Check if the total passed point markers is at least 1.
+	);
+
 	OnLoad();
 
 	return originalMsgRestartStage(thisDeclaration, edx, message);
@@ -101,14 +104,10 @@ __declspec(naked) void GameOver_MidAsmHook()
 	static void* interruptAddress = (void*)0x6621A0;
 	static void* returnAddress = (void*)0x58477C;
 
-	// Reset the last checkpoint score.
-	ScoreListener::lastCheckpointScore = 0;
-
 	__asm
 	{
 		call [interruptAddress]
 
-		// Reset statistics.
 		call ScoreListener::Reset
 
 		jmp [returnAddress]
@@ -124,7 +123,6 @@ __declspec(naked) void Exit_MidAsmHook()
 	{
 		call [interruptAddress]
 
-		// Reset statistics.
 		call ScoreListener::Reset
 
 		jmp [returnAddress]
