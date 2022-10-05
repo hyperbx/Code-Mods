@@ -26,6 +26,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P5HUD", "Sonic Generations\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColorsHUD", "Sonic Generations\ColorsHUD\ColorsHUD.vcxproj", "{5BD6599F-193F-4019-9940-60CD2F88B924}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FFXVPracticeArea", "Sonic Generations\FFXVPracticeArea\FFXVPracticeArea.vcxproj", "{D4CC498A-D60A-4563-A7B4-AEFAC14FAC23}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SweetSpotHomingAttack", "Sonic Generations\SweetSpotHomingAttack\SweetSpotHomingAttack.vcxproj", "{93223E70-E12D-438B-AA76-963B9C662E0A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrototypeHUD", "Sonic Generations\PrototypeHUD\PrototypeHUD.vcxproj", "{8C147E97-D0E2-4055-815B-D2C36D664B60}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MetalSonic", "Sonic Generations\MetalSonic\MetalSonic.vcxproj", "{DE7715DF-0242-4E19-8F10-A277F46C30DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -68,6 +76,22 @@ Global
 		{5BD6599F-193F-4019-9940-60CD2F88B924}.Debug|x86.Build.0 = Debug|Win32
 		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.ActiveCfg = Release|Win32
 		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.Build.0 = Release|Win32
+		{D4CC498A-D60A-4563-A7B4-AEFAC14FAC23}.Debug|x86.ActiveCfg = Debug|Win32
+		{D4CC498A-D60A-4563-A7B4-AEFAC14FAC23}.Debug|x86.Build.0 = Debug|Win32
+		{D4CC498A-D60A-4563-A7B4-AEFAC14FAC23}.Release|x86.ActiveCfg = Release|Win32
+		{D4CC498A-D60A-4563-A7B4-AEFAC14FAC23}.Release|x86.Build.0 = Release|Win32
+		{93223E70-E12D-438B-AA76-963B9C662E0A}.Debug|x86.ActiveCfg = Debug|Win32
+		{93223E70-E12D-438B-AA76-963B9C662E0A}.Debug|x86.Build.0 = Debug|Win32
+		{93223E70-E12D-438B-AA76-963B9C662E0A}.Release|x86.ActiveCfg = Release|Win32
+		{93223E70-E12D-438B-AA76-963B9C662E0A}.Release|x86.Build.0 = Release|Win32
+		{8C147E97-D0E2-4055-815B-D2C36D664B60}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C147E97-D0E2-4055-815B-D2C36D664B60}.Debug|x86.Build.0 = Debug|Win32
+		{8C147E97-D0E2-4055-815B-D2C36D664B60}.Release|x86.ActiveCfg = Release|Win32
+		{8C147E97-D0E2-4055-815B-D2C36D664B60}.Release|x86.Build.0 = Release|Win32
+		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Debug|x86.ActiveCfg = Debug|Win32
+		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Debug|x86.Build.0 = Debug|Win32
+		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.ActiveCfg = Release|Win32
+		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

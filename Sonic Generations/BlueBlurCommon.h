@@ -65,6 +65,70 @@ public:
 		return CONTEXT->m_Grounded;
 	}
 
+	static void* CreateParticle
+	(
+		void* pContext,
+		boost::shared_ptr<void>& handle,
+		void* pMatrixTransformNode,
+		Hedgehog::Base::CSharedString const& name,
+		uint32_t flag
+	)
+	{
+		static void* const pCGlitterCreate = (void*)0xE73890;
+
+		__asm
+		{
+			push flag
+			push name
+			push pMatrixTransformNode
+			mov  eax, pContext
+			mov  esi, handle
+
+			call [pCGlitterCreate]
+		}
+	}
+
+	static void DestroyParticle
+	(
+		void* pContext,
+		boost::shared_ptr<void>& handle,
+		bool instantStop
+	)
+	{
+		static void* const pCGlitterEnd  = (void*)0xE72650;
+		static void* const pCGlitterKill = (void*)0xE72570;
+
+		__asm
+		{
+			mov  eax, [handle]
+			mov  ebx, [eax + 4]
+			push ebx
+			test ebx, ebx
+			jz	 noIncrement
+			mov	 edx, 1
+			add	 ebx, 4
+			lock xadd[ebx], edx
+
+		noIncrement:
+			mov  ebx, [eax]
+			push ebx
+			mov  eax, pContext
+			cmp  instantStop, 0
+			jnz  jump
+
+			call [pCGlitterEnd]
+
+			jmp end
+
+		jump:
+			call [pCGlitterKill]
+
+		end:
+		}
+
+		handle = nullptr;
+	}
+
 	static const float GetVelocity()
 	{
 		CHECK_CONTEXT_SAFE(0.0f);
