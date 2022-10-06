@@ -6,6 +6,9 @@ boost::shared_ptr<Hedgehog::Sound::CSoundHandle> hoverSoundHandle;
 
 int GetBrakeCollisionSound(Sonic::Player::CPlayerSpeedContext* context)
 {
+	if (BlueBlurCommon::IsClassic())
+		return 2001002;
+
 	switch (context->m_Field164)
 	{
 		case 4: // Dirt
@@ -35,13 +38,14 @@ void CreateJetBoostParticle(Sonic::Player::CPlayer* player)
 {
 	if (!jetBoostParticleHandle)
 	{
-		auto spine = player->m_spCharacterModel->GetNode("Spine");
+		// Custom bone for the jet particle.
+		auto jet = player->m_spCharacterModel->GetNode("Jet");
 
 		BlueBlurCommon::CreateParticle
 		(
 			player->m_spContext.get(),
 			jetBoostParticleHandle,
-			&spine,
+			&jet,
 			"",
 			1
 		);
@@ -60,8 +64,11 @@ bool IsBlacklistedAnimation(const char* animationName)
 	{
 		"Board",
 		"Brake",
+		"Fall",
 		"Grind",
-		"Slid"
+		"Jump",
+		"Slid",
+		"Spin"
 	};
 
 	for (auto name : blacklist)
@@ -79,18 +86,23 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 
 	if
 	(
-		context->m_HorizontalVelocity.norm() >= 8.0f &&
-		context->m_Grounded &&
+		context->m_HorizontalVelocity.norm() >= (BlueBlurCommon::IsModern() ? 8.0f : 17.0f) &&
 		!IsBlacklistedAnimation(context->GetCurrentAnimationName().c_str())
 	)
 	{
+		if (BlueBlurCommon::IsModern() && !context->m_Grounded)
+			goto Kill;
+
 		if (!isHovering)
 		{
 			// TODO: create a particle for this.
 			// CreateJetBoostParticle(context->m_pPlayer);
 
-			// Play hover sound.
-			hoverSoundHandle = context->PlaySound(20020820, true);
+			if (Configuration::soundEffects)
+			{
+				// Play hover sound.
+				hoverSoundHandle = context->PlaySound(BlueBlurCommon::IsModern() ? 20020820 : 20010820, true);
+			}
 
 			isHovering = true;
 		}
@@ -99,6 +111,18 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 	}
 	else
 	{
+	Kill:
+		// Classic Sonic continues running in mid-air.
+		if
+		(
+			BlueBlurCommon::IsClassic() &&
+			!context->m_Grounded &&
+			!IsBlacklistedAnimation(context->GetCurrentAnimationName().c_str())
+		)
+		{
+			goto Exit;
+		}
+
 		// Stop hover sound.
 		hoverSoundHandle.reset();
 
@@ -115,26 +139,55 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 			// TODO: create a particle for this.
 			// DestroyJetBoostParticle(context->m_pPlayer);
 
-			// Play brake sound.
-			context->PlaySound(20020821, true);
+			if (Configuration::soundEffects)
+			{
+				// Play brake sound.
+				context->PlaySound(BlueBlurCommon::IsModern() ? 20020821 : 20010821, true);
+			}
 
 			isHovering = false;
 		}
 	}
 
+Exit:
 	originalCPlayerSpeedUpdateParallel(_this, _, updateInfo);
 }
 
-HOOK(int, __fastcall, ImpactManager, 0xDFD420, int _this, void* _, int a2)
+HOOK(int, __fastcall, ImpactManagerGeneric, 0xDFD420, int _this, void* _, int a2)
 {
 	if (isHovering)
 		return -1;
 
-	return originalImpactManager(_this, _, a2);
+	return originalImpactManagerGeneric(_this, _, a2);
+}
+
+HOOK(int, __fastcall, ImpactManagerClassic, 0xDC3400, int _this, void* _, int a2)
+{
+	if (isHovering)
+		return -1;
+
+	return originalImpactManagerClassic(_this, _, a2);
 }
 
 void Player::Install()
 {
 	INSTALL_HOOK(CPlayerSpeedUpdateParallel);
-	INSTALL_HOOK(ImpactManager);
+	INSTALL_HOOK(ImpactManagerGeneric);
+	INSTALL_HOOK(ImpactManagerClassic);
+
+	if (Configuration::disableDrowning)
+	{
+		// Disable water bubbles.
+		WRITE_JUMP(0xFBCD56, 0xFBCD6A);
+		WRITE_JUMP(0xFBCD78, 0xFBCFBE);
+
+		// Disable drowning attention.
+		WRITE_NOP(0x119B8F5, 5);
+
+		// Disable drowning countdown.
+		WRITE_JUMP(0x119B90F, 0x119B997);
+
+		// Disable drowning.
+		WRITE_JUMP(0x119C2C5, 0x119C2F8);
+	}
 }

@@ -1,0 +1,27 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "Behaviour",
+			"DisplayName": "Behaviour",
+			"Elements":
+			[
+				{
+					"Name": "soundEffects",
+					"Description": [ "Uses custom sound effects when hovering and braking." ],
+					"DisplayName": "Enable Sound Effects",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "disableDrowning",
+					"Description": [ "Disables drowning, because it doesn't make sense for a robot to drown." ],
+					"DisplayName": "Disable Drowning",
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+        }
+    ],
+    "IniFile": "MetalSonic.ini"
+}

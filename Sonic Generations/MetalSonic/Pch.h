@@ -15,7 +15,9 @@
 
 // Dependencies
 #include <Helpers.h>
+#include <INIReader.h>
 #include <StringHelper.h>
 
 // Internal headers
+#include "Configuration.h"
 #include "Player.h"

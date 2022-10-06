@@ -3,5 +3,7 @@
 /// </summary>
 extern "C" _declspec(dllexport) void Init()
 {
+	Configuration::Read();
+
 	Player::Install();
 }
