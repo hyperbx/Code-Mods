@@ -75,7 +75,7 @@ HOOK(int, __fastcall, JumpUpdate, 0x11BCB00, float* _this)
 {
     auto input = Sonic::CInputState::GetInstance()->GetPadState();
 
-    // Disable jump dashing.
+    // Disable jump dashing if homing is on A.
     if (Configuration::doubleJump && !Configuration::homingOnX)
         CONTEXT->StateFlag(eStateFlag_EnableHomingAttack) = 0;
 
