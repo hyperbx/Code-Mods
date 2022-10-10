@@ -34,6 +34,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrototypeHUD", "Sonic Gener
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MetalSonic", "Sonic Generations\MetalSonic\MetalSonic.vcxproj", "{DE7715DF-0242-4E19-8F10-A277F46C30DA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrontiersSonic", "Sonic Generations\FrontiersSonic\FrontiersSonic.vcxproj", "{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -92,6 +94,10 @@ Global
 		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Debug|x86.Build.0 = Debug|Win32
 		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.ActiveCfg = Release|Win32
 		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.Build.0 = Release|Win32
+		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Debug|x86.ActiveCfg = Debug|Win32
+		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Debug|x86.Build.0 = Debug|Win32
+		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Release|x86.ActiveCfg = Release|Win32
+		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

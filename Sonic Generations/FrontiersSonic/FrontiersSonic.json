@@ -1,0 +1,77 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "Behaviour",
+			"DisplayName": "Behaviour",
+			"Elements":
+			[
+				{
+					"Name": "alwaysActiveReticle",
+					"Description": [ "Enable this to make the homing reticle active at all times, just like Sonic Frontiers." ],
+					"DisplayName": "Always Active Homing Reticle",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "doubleJump",
+					"Description":
+					[
+						"Enable this to allow Sonic to double jump where available.\n",
+						"This cannot be used with the Double Jump mod."
+					],
+					"DisplayName": "Enable Double Jump",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "groundHoming",
+					"Description":
+					[
+						"Enable this to allow Sonic to homing attack whilst grounded.\n",
+						"It is highly recommended to use this with Remap Homing Attack on X enabled."
+					],
+					"DisplayName": "Enable Ground Homing",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "stompBounce",
+					"Description": [ "Enable this to allow Sonic to bounce when holding B after stomping." ],
+					"DisplayName": "Enable Stomp Bounce",
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+        },
+	    {
+			"Name": "Controls",
+			"DisplayName": "Controls",
+			"Elements":
+			[
+				{
+					"Name": "boostOnRT",
+					"Description": [ "" ],
+					"DisplayName": "Remap Boost to Right Trigger",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "homingOnX",
+					"Description": [ "This cannot be used with the Homing Attack on Boost code." ],
+					"DisplayName": "Remap Homing Attack to X",
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "lightDashOnLS",
+					"Description": [ "" ],
+					"DisplayName": "Remap Light Dash to Left Stick",
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+        }
+    ],
+    "IniFile": "FrontiersSonic.ini"
+}
