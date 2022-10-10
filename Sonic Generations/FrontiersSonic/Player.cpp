@@ -1,7 +1,16 @@
-bool isDoubleJump    = false;
 bool hasStompBounced = false;
 
 float bounceDeltaTime = 0.0f;
+
+bool GetDoubleJumpFlag()
+{
+    return CONTEXT->StateFlag(eStateFlag_DoubleJumping);
+}
+
+void SetDoubleJumpFlag(bool value)
+{
+    CONTEXT->StateFlag(eStateFlag_DoubleJumping) = value;
+}
 
 HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPlayerSpeed* _this, void* _, const hh::fnd::SUpdateInfo& updateInfo)
 {
@@ -11,7 +20,7 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 
     if (context->m_Grounded)
     {
-        isDoubleJump = false;
+        SetDoubleJumpFlag(false);
 
         if (Configuration::boostOnRT)
         {
@@ -79,7 +88,7 @@ HOOK(int, __fastcall, JumpUpdate, 0x11BCB00, float* _this)
     if (Configuration::doubleJump && !Configuration::homingOnX)
         CONTEXT->StateFlag(eStateFlag_EnableHomingAttack) = 0;
 
-    if (!isDoubleJump && input.IsTapped(Sonic::eKeyState_A))
+    if (!GetDoubleJumpFlag() && input.IsTapped(Sonic::eKeyState_A))
     {
         CONTEXT->PlaySound(2002027, 1);
 
@@ -87,7 +96,7 @@ HOOK(int, __fastcall, JumpUpdate, 0x11BCB00, float* _this)
 
         CONTEXT->m_Velocity.y() = (CONTEXT->m_Velocity.y() - CONTEXT->m_PreviousVelocity.y()) + 15.0f;
 
-        isDoubleJump = true;
+        SetDoubleJumpFlag(true);
     }
 
     return originalJumpUpdate(_this);
