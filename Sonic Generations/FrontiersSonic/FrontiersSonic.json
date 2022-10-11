@@ -1,6 +1,20 @@
 {
     "Groups":
 	[
+		{
+			"Name": "Main",
+			"DisplayName": "Cosmetics",
+			"Elements":
+			[
+			   {
+					"Name": "IncludeDir0",
+					"DisplayName": "Costume",
+					"Description": [ "Select a costume for Sonic to wear." ],
+					"Type": "CostumeType",
+					"DefaultValue": "disk"
+			   }
+			]
+		 },
 	    {
 			"Name": "Behaviour",
 			"DisplayName": "Behaviour",
@@ -41,6 +55,62 @@
 					"DisplayName": "Enable Stomp Bounce",
 					"Type": "bool",
 					"DefaultValue": true
+				},
+				{
+					"Name": "dropDashType",
+					"Description": [ "Determines how Sonic can perform the drop dash." ],
+					"DisplayName": "Drop Dash",
+					"Type": "DropDashType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "dropDashVelocity",
+					"Description": [ "Determines how fast Sonic will be propelled when performing a drop dash." ],
+					"DisplayName": "Drop Dash Velocity",
+					"Type": "float",
+					"DefaultValue": 75.0
+				},
+				{
+					"Name": "spinAttackRollDuration",
+					"Description": [ "Determines how long Sonic will remain in a ball after rolling." ],
+					"DisplayName": "Drop Dash Duration",
+					"Type": "float",
+					"DefaultValue": 3.5
+				},
+				{
+					"Name": "doubleJumpVelocity",
+					"Description": [ "Determines how high Sonic will double jump." ],
+					"DisplayName": "Double Jump Velocity",
+					"Type": "float",
+					"DefaultValue": 15
+				},
+				{
+					"Name": "doubleJumpVelocityWater",
+					"Description": [ "Determines how high Sonic will double jump underwater." ],
+					"DisplayName": "Double Jump Velocity Underwater",
+					"Type": "float",
+					"DefaultValue": 10
+				},
+				{
+					"Name": "stompBounceDelay",
+					"Description": [ "Determines how long the B button must be held for Sonic to bounce." ],
+					"DisplayName": "Stomp Bounce Delay",
+					"Type": "float",
+					"DefaultValue": 0.08
+				},
+				{
+					"Name": "stompBounceVelocity",
+					"Description": [ "Determines how high Sonic will bounce." ],
+					"DisplayName": "Stomp Bounce Velocity",
+					"Type": "float",
+					"DefaultValue": 20
+				},
+				{
+					"Name": "stompBounceVelocityWater",
+					"Description": [ "Determines how high Sonic will bounce underwater." ],
+					"DisplayName": "Stomp Bounce Velocity Underwater",
+					"Type": "float",
+					"DefaultValue": 100
 				}
 			]
         },
@@ -73,5 +143,49 @@
 			]
         }
     ],
-    "IniFile": "FrontiersSonic.ini"
+	"Enums": 
+	{
+		"CostumeType":
+		[
+		   {
+			  "DisplayName": "None",
+			  "Value": "disk",
+			  "Description": [ "" ]
+		   },
+		   {
+			  "DisplayName": "Korone",
+			  "Value": "disk_Korone",
+			  "Description": [ "" ]
+		   },
+		   {
+			  "DisplayName": "Soap Shoes",
+			  "Value": "disk_SoapShoe",
+			  "Description": [ "" ]
+		   }
+		],
+		"DropDashType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Value": 0,
+				"Description": [ "Drop Dash will be disabled." ]
+			},
+			{
+				"DisplayName": "2D",
+				"Value": 1,
+				"Description": [ "Drop Dash will only be usable in 2D." ]
+			},
+			{
+				"DisplayName": "3D",
+				"Value": 2,
+				"Description": [ "Drop Dash will only be usable in 3D." ]
+			},
+			{
+				"DisplayName": "Both",
+				"Value": 3,
+				"Description": [ "Drop Dash will be usable in both 2D and 3D." ]
+			}
+		]
+	},
+    "IniFile": "mod.ini"
 }

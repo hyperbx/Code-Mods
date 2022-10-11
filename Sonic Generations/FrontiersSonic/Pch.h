@@ -21,4 +21,5 @@
 // Internal headers
 #include "Configuration.h"
 #include "HudSonicStage.h"
+#include "Impulse.h"
 #include "Player.h"
