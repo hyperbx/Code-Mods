@@ -92,6 +92,17 @@
 					"DefaultValue": 10
 				},
 				{
+					"Name": "stompBounceCount",
+					"Description":
+					[
+						"Determines how many times Sonic can bounce.\n",
+						"This limit can be disabled with a value of -1."
+					],
+					"DisplayName": "Stomp Bounce Count",
+					"Type": "int",
+					"DefaultValue": 2
+				},
+				{
 					"Name": "stompBounceDelay",
 					"Description": [ "Determines how long the B button must be held for Sonic to bounce." ],
 					"DisplayName": "Stomp Bounce Delay",

@@ -64,6 +64,11 @@ public:
 	static float spinAttackRollDuration;
 
 	/// <summary>
+	/// Determines how many times Sonic can bounce.
+	/// </summary>
+	static int stompBounceCount;
+
+	/// <summary>
 	/// Determines how long the B button must be held for Sonic to bounce.
 	/// </summary>
 	static float stompBounceDelay;

@@ -14,6 +14,8 @@ float Configuration::stompBounceDelay         = 0.08f;
 float Configuration::stompBounceVelocity      = 20.0f;
 float Configuration::stompBounceVelocityWater = 100.0f;
 
+int Configuration::stompBounceCount = 2;
+
 Configuration::DropDashType Configuration::dropDashType = Configuration::DropDashType::ForwardView;
 
 void Configuration::Read()
@@ -30,6 +32,7 @@ void Configuration::Read()
 	Configuration::doubleJumpVelocityWater  = reader.GetReal("Behaviour", "doubleJumpVelocityWater", doubleJumpVelocityWater);
 	Configuration::dropDashVelocity         = reader.GetReal("Behaviour", "dropDashVelocity", dropDashVelocity);
 	Configuration::spinAttackRollDuration   = reader.GetReal("Behaviour", "spinAttackRollDuration", spinAttackRollDuration);
+	Configuration::stompBounceCount         = reader.GetInteger("Behaviour", "stompBounceCount", stompBounceCount);
 	Configuration::stompBounceDelay         = reader.GetReal("Behaviour", "stompBounceDelay", stompBounceDelay);
 	Configuration::stompBounceVelocity      = reader.GetReal("Behaviour", "stompBounceVelocity", stompBounceVelocity);
 	Configuration::stompBounceVelocityWater = reader.GetReal("Behaviour", "stompBounceVelocityWater", stompBounceVelocityWater);
