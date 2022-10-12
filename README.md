@@ -4,6 +4,7 @@ A repository containing DLL mods for various games.
 ## Index
 - Sonic Generations
   - [Fix Window Title](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/FixWindowTitle)
+  - [Frontiers Sonic](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/FrontiersSonic)
   - [Metal Sonic](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/MetalSonic)
   - [Persona 5 HUD](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/P5HUD)
   - [Restore Silver Pinch Music](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/RestoreSilverPinchMusic)

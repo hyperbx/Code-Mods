@@ -1,11 +1,12 @@
 bool hasStompBounced      = false;
 bool isAirBoostToFall     = false;
 bool isBoostToFall        = false;
+bool isJumpShort          = false;
 bool isRolling            = false;
 bool updateDropDash       = false;
 bool updateSpinAttackRoll = false;
 
-float bounceDeltaTime = 0.0f;
+float bounceDeltaTime         = 0.0f;
 float spinAttackRollDeltaTime = 0.0f;
 
 int bounceCount = 0;
@@ -70,11 +71,10 @@ bool IsGrinding(const char* animName)
     return IsBlacklistedAnimation(animations, animName);
 }
 
-bool IsSpinJumpAnimation(const char* animName)
+bool IsSpinJump(const char* animName)
 {
     std::vector<const char*> animations =
     {
-        "Homing",
         "JumpBall",
         "JumpHurdle",
         "JumpShort",
@@ -94,7 +94,21 @@ bool CanDropDash()
     return Configuration::dropDashType != Configuration::DropDashType::Disabled &&
            !CONTEXT->StateFlag(eStateFlag_OnWater) &&
            !(Configuration::dropDashType == Configuration::DropDashType::SideView && !CONTEXT->m_Is2DMode) &&
-           !(Configuration::dropDashType == Configuration::DropDashType::ForwardView && CONTEXT->m_Is2DMode);
+           !(Configuration::dropDashType == Configuration::DropDashType::ForwardView && CONTEXT->m_Is2DMode) &&
+           !IsGrinding(CONTEXT->GetCurrentAnimationName().c_str());
+}
+
+bool CanSpinAttackRoll()
+{
+    auto input = Sonic::CInputState::GetInstance()->GetPadState();
+
+    // TODO: reset on springs and jump boards.
+
+    return !CONTEXT->StateFlag(eStateFlag_OnWater) &&
+           !CONTEXT->StateFlag(eStateFlag_Boost) &&
+           !CONTEXT->StateFlag(eStateFlag_Drifting) &&
+           !(input.IsTapped(Sonic::eKeyState_LeftBumper) || input.IsTapped(Sonic::eKeyState_RightBumper)) &&
+           !IsGrinding(CONTEXT->GetCurrentAnimationName().c_str());
 }
 
 void DriftUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
@@ -105,10 +119,12 @@ void DriftUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUp
     (
         !context->m_Is2DMode &&
         !context->StateFlag(eStateFlag_InvokeSkateBoard) &&
-        !context->StateFlag(eStateFlag_OutOfControl)
+        !context->StateFlag(eStateFlag_OutOfControl) &&
+        !IsGrinding(context->GetCurrentAnimationName().c_str())
     )
     {
         // TODO: fix this for board.
+        // TODO: fix deadzone.
         if (input.IsDown(Sonic::eKeyState_LeftTrigger))
         {
             if (!context->StateFlag(eStateFlag_Drifting))
@@ -122,82 +138,95 @@ void DriftUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUp
     }
 }
 
+void DropDashStart()
+{
+    if (!updateDropDash && CanDropDash())
+    {
+        CONTEXT->PlaySound(2002055, 1);
+
+        updateDropDash = true;
+    }
+}
+
+void DropDashEnd()
+{
+    updateDropDash = false;
+}
+
 void DropDashUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
 {
     auto input = Sonic::CInputState::GetInstance()->GetPadState();
 
-    if (!CanDropDash())
-        goto ExitDropDash;
-
-    if (input.IsDown(Sonic::eKeyState_A))
+    if (context->m_Grounded)
     {
-        if (updateDropDash)
+        if (input.IsDown(Sonic::eKeyState_A))
         {
-            Impulse::VelocityZ(Configuration::dropDashVelocity);
+            if (updateDropDash && CanDropDash())
+            {
+                Impulse::VelocityZ
+                (
+                    context->GetVelocity().norm() + (context->m_Is2DMode
+                        ? Configuration::dropDashVelocitySideView
+                        : Configuration::dropDashVelocityForwardView)
+                );
 
-            updateDropDash = false;
-            updateSpinAttackRoll = true;
+                DropDashEnd();
+
+                updateSpinAttackRoll = true;
+            }
         }
-    }
-    else
-    {
-    ExitDropDash:
-        updateDropDash = false;
+        else
+        {
+            DropDashEnd();
+        }
     }
 }
 
 void DoubleJumpUpdate()
 {
-    if (!Configuration::doubleJump)
-        return;
-
     auto input = Sonic::CInputState::GetInstance()->GetPadState();
 
-    // Disable jump dashing if homing is on A.
-    if (!Configuration::homingOnX)
-        CONTEXT->StateFlag(eStateFlag_EnableHomingAttack) = 0;
-
-    if (input.IsTapped(Sonic::eKeyState_A) && !CONTEXT->StateFlag(eStateFlag_Dead))
+    if (Configuration::doubleJump)
     {
-        if (GetDoubleJumpFlag())
+        // Disable jump dashing if homing is on A.
+        if (!Configuration::homingOnX)
+            CONTEXT->StateFlag(eStateFlag_EnableHomingAttack) = 0;
+
+        if (input.IsTapped(Sonic::eKeyState_A))
         {
-            if (!updateDropDash && CanDropDash())
+            if (GetDoubleJumpFlag())
             {
-                CONTEXT->PlaySound(2002055, 1);
-
-                updateDropDash = true;
+                DropDashStart();
             }
-        }
-        else
-        {
-            CONTEXT->PlaySound(2002027, 1);
+            else
+            {
+                CONTEXT->PlaySound(2002027, 1);
 
-            CONTEXT->ChangeState("Jump");
+                CONTEXT->ChangeState("Jump");
 
-            BlueBlurCommon::SetVelocityY
-            (
-                (CONTEXT->GetVelocity().y() - CONTEXT->m_PreviousVelocity.y()) + CONTEXT->StateFlag(eStateFlag_OnWater)
+                BlueBlurCommon::SetVelocityY
+                (
+                    (CONTEXT->GetVelocity().y() - CONTEXT->m_PreviousVelocity.y()) + CONTEXT->StateFlag(eStateFlag_OnWater)
                     ? Configuration::doubleJumpVelocityWater
                     : Configuration::doubleJumpVelocity
-            );
+                );
 
-            // Don't set double jump flag underwater.
-            if (!CONTEXT->StateFlag(eStateFlag_OnWater))
-                SetDoubleJumpFlag(true);
+                // Don't set double jump flag underwater.
+                if (!CONTEXT->StateFlag(eStateFlag_OnWater))
+                    SetDoubleJumpFlag(true);
+            }
         }
+    }
+    else
+    {
+        if (input.IsTapped(Sonic::eKeyState_A))
+            DropDashStart();
     }
 }
 
 void SpinAttackRollEnd(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
 {
-    if (isRolling)
-    {
-        DestroySpinJumpParticle(context->m_pPlayer);
-
-        context->ChangeAnimation("Walk");
-    }
-
-    isRolling = false;
+    isRolling            = false;
     updateSpinAttackRoll = false;
 
     spinAttackRollDeltaTime = 0.0f;
@@ -205,11 +234,11 @@ void SpinAttackRollEnd(Sonic::Player::CPlayerSpeedContext* context, const hh::fn
 
 void SpinAttackRollUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
 {
-    if (!updateSpinAttackRoll || CONTEXT->StateFlag(eStateFlag_OnWater))
-        return;
-
     auto velocityMag = context->GetVelocity().norm();
     {
+        if (!updateSpinAttackRoll || !CanSpinAttackRoll())
+            goto EndSpinAttackRoll;
+
         spinAttackRollDeltaTime += updateInfo.DeltaTime;
         {
             if (spinAttackRollDeltaTime > Configuration::spinAttackRollDuration)
@@ -223,6 +252,8 @@ void SpinAttackRollUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh:
                 CreateSpinJumpParticle(context->m_pPlayer);
 
                 context->PlaySound(2002056, 1);
+
+                isRolling = true;
             }
 
             // Force SpinAttack animation for this state.
@@ -247,11 +278,15 @@ void SpinAttackRollUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh:
 
             Impulse::VelocityZ(velocityMag);
 
-            isRolling = true;
+            BlueBlurCommon::SetCollision(context, BlueBlurCommon::TypeSonicSliding, true);
         }
         else
         {
+            context->ChangeAnimation("Walk");
+
         EndSpinAttackRoll:
+            DestroySpinJumpParticle(context->m_pPlayer);
+
             SpinAttackRollEnd(context, updateInfo);
         }
     }
@@ -279,7 +314,19 @@ void StompBounceUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fn
 
                         bounceDeltaTime = 0.0f;
 
-                        context->ChangeState("Jump");
+                        context->ChangeState
+                        (
+                            context->StateFlag(eStateFlag_OnWater)
+                                ? "HomingAttackAfter"
+                                : "Jump"
+                        );
+
+                        if (context->StateFlag(eStateFlag_OnWater))
+                        {
+                            context->ChangeAnimation("SpinAttack");
+
+                            CreateSpinJumpParticle(context->m_pPlayer);
+                        }
 
                         Impulse::VelocityY
                         (
@@ -313,7 +360,8 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
     auto currentAnim = context->GetCurrentAnimationName().c_str();
     auto input       = Sonic::CInputState::GetInstance()->GetPadState();
 
-    // printf("%s\n", currentAnim);
+    if (CONTEXT->StateFlag(eStateFlag_Dead))
+        goto Return;
 
     if (context->m_Grounded)
     {
@@ -329,7 +377,7 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 
         if (Configuration::groundHoming)
         {
-            FUNCTION_PTR(char, __fastcall, HomingUpdate, 0xDFFE30, Sonic::Player::CPlayerSpeedContext * _this, void* _, int a2);
+            FUNCTION_PTR(char, __fastcall, HomingUpdate, 0xDFFE30, Sonic::Player::CPlayerSpeedContext* _this, void* _, int a2);
             {
                 HomingUpdate(context, (void*)0xDFFE30, -1);
             }
@@ -352,32 +400,13 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
         StompBounceEnd(context, updateInfo);
     }
 
-    if (!IsSpinJumpAnimation(currentAnim))
+    if (!IsSpinJump(currentAnim) && !isRolling)
         DestroySpinJumpParticle(context->m_pPlayer);
 
     lastAnimation = currentAnim;
 
+Return:
     originalCPlayerSpeedUpdateParallel(_this, _, updateInfo);
-}
-
-HOOK(int, __fastcall, CSonicStateHomingAttackStart, 0x1232040, hh::fnd::CStateMachineBase::CStateBase* _this)
-{
-    auto context = (Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase();
-    {
-        CreateSpinJumpParticle(context->m_pPlayer);
-    }
-
-    return originalCSonicStateHomingAttackStart(_this);
-}
-
-HOOK(int, __fastcall, CSonicStateHomingAttackEnd, 0x1231F80, hh::fnd::CStateMachineBase::CStateBase* _this)
-{
-    auto context = (Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase();
-    {
-        DestroySpinJumpParticle(context->m_pPlayer);
-    }
-
-    return originalCSonicStateHomingAttackEnd(_this);
 }
 
 HOOK(char, __fastcall, CSonicContextHomingUpdate, 0xDFFE30, int* _this, void* _, int a2)
@@ -393,7 +422,8 @@ HOOK(char, __fastcall, CSonicContextHomingUpdate, 0xDFFE30, int* _this, void* _,
 
     bool canHomingAttack = _this[934] != 0 &&
         !CONTEXT->StateFlag(eStateFlag_InvokeSkateBoard) &&
-        !CONTEXT->StateFlag(eStateFlag_OutOfControl);
+        !CONTEXT->StateFlag(eStateFlag_OutOfControl) &&
+        !IsGrinding(CONTEXT->GetCurrentAnimationName().c_str());
 
     if
     (
@@ -410,7 +440,14 @@ HOOK(char, __fastcall, CSonicContextHomingUpdate, 0xDFFE30, int* _this, void* _,
         if (Configuration::groundHoming)
         {
             if (CONTEXT->m_Grounded)
-                CONTEXT->ChangeState("Jump");
+            {
+                CONTEXT->ChangeState
+                (
+                    CONTEXT->StateFlag(eStateFlag_OnWater)
+                        ? "HomingAttackAfter"
+                        : "Jump"
+                );
+            }
 
             CONTEXT->ChangeState("HomingAttack");
         }
@@ -424,6 +461,53 @@ HOOK(char, __fastcall, CSonicContextHomingUpdate, 0xDFFE30, int* _this, void* _,
     }
 
     return originalCSonicContextHomingUpdate(_this, _, a2);
+}
+
+HOOK(int, __fastcall, CSonicStateJumpBallUpdate, 0x11BCB00, float* _this)
+{
+    DoubleJumpUpdate();
+
+    return originalCSonicStateJumpBallUpdate(_this);
+}
+
+HOOK(int, __fastcall, CSonicStateHomingAttackStart, 0x1232040, hh::fnd::CStateMachineBase::CStateBase* _this)
+{
+    CreateSpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
+
+    return originalCSonicStateHomingAttackStart(_this);
+}
+
+HOOK(int, __fastcall, CSonicStateHomingAttackEnd, 0x1231F80, hh::fnd::CStateMachineBase::CStateBase* _this)
+{
+    DestroySpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
+
+    return originalCSonicStateHomingAttackEnd(_this);
+}
+
+HOOK(void, __fastcall, CStateJumpShortStart, 0x1255820, hh::fnd::CStateMachineBase::CStateBase* _this)
+{
+    isJumpShort = true;
+
+    DoubleJumpUpdate();
+
+     if (!BlueBlurCommon::IsSuper())
+         CreateSpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
+
+    originalCStateJumpShortStart(_this);
+}
+
+HOOK(void, __fastcall, CStateJumpShortEnd, 0x11BF3A0, hh::fnd::CStateMachineBase::CStateBase* _this)
+{
+    DestroySpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
+
+    originalCStateJumpShortEnd(_this);
+}
+
+HOOK(void, __fastcall, CStateLandJumpShortUpdate, 0x111C870, hh::fnd::CStateMachineBase::CStateBase* _this)
+{
+    DestroySpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
+
+    originalCStateLandJumpShortUpdate(_this);
 }
 
 HOOK(int, __fastcall, CSonicStateFallStart, 0x1118FB0, hh::fnd::CStateMachineBase::CStateBase* _this)
@@ -469,6 +553,24 @@ HOOK(void, __fastcall, CSonicStateFallUpdate, 0x1118C50, hh::fnd::CStateMachineB
 
     DoubleJumpUpdate();
 
+    if (updateDropDash)
+    {
+        CreateSpinJumpParticle(context->m_pPlayer);
+
+        context->ChangeAnimation("SpinAttack");
+    }
+    else
+    {
+        DestroySpinJumpParticle(context->m_pPlayer);
+
+        if (isJumpShort)
+        {
+            context->ChangeAnimation("Fall");
+
+            isJumpShort = false;
+        }
+    }
+
     originalCSonicStateFallUpdate(_this);
 }
 
@@ -480,39 +582,13 @@ HOOK(int, __fastcall, CSonicStateFallEnd, 0x1118F20, hh::fnd::CStateMachineBase:
     return originalCSonicStateFallEnd(_this);
 }
 
-HOOK(int, __fastcall, CSonicStateJumpBallUpdate, 0x11BCB00, float* _this)
+HOOK(int, __fastcall, MsgRestartStage, 0xE76810, int* _this, void* _, int* message)
 {
-    DoubleJumpUpdate();
+    DropDashEnd();
+    SpinAttackRollEnd(CONTEXT, hh::fnd::SUpdateInfo());
+    StompBounceEnd(CONTEXT, hh::fnd::SUpdateInfo());
 
-    return originalCSonicStateJumpBallUpdate(_this);
-}
-
-HOOK(void, __fastcall, CStateJumpShortStart, 0x1255820, hh::fnd::CStateMachineBase::CStateBase* _this)
-{
-    DoubleJumpUpdate();
-
-    if (!BlueBlurCommon::IsSuper())
-    {
-        auto context = (Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase();
-        {
-            CreateSpinJumpParticle(context->m_pPlayer);
-        }
-    }
-
-    originalCStateJumpShortStart(_this);
-}
-
-HOOK(void, __fastcall, CStateJumpShortEnd, 0x11BF3A0, hh::fnd::CStateMachineBase::CStateBase* _this)
-{
-    if (!BlueBlurCommon::IsSuper())
-    {
-        auto context = (Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase();
-        {
-            DestroySpinJumpParticle(context->m_pPlayer);
-        }
-    }
-
-    originalCStateJumpShortEnd(_this);
+    return originalMsgRestartStage(_this, _, message);
 }
 
 ASM_HOOK(0xF368BF, CObjPlaTramCarBoostButtonChange)
@@ -532,7 +608,7 @@ ASM_HOOK(0xF368BF, CObjPlaTramCarBoostButtonChange)
     }
 }
 
-ASM_HOOK(0x123332B, AirBoostFall)
+ASM_HOOK(0x123332B, AirBoostToFallFlag)
 {
     static void* returnAddress = (void*)0x1233330;
 
@@ -548,11 +624,11 @@ ASM_HOOK(0x123332B, AirBoostFall)
     }
 }
 
-ASM_HOOK(0x1119125, FallStart)
+ASM_HOOK(0x1119125, WalkFallFlag)
 {
-    static void* returnAddress = (void*)0x111912A;
+    static void* returnAddress    = (void*)0x111912A;
     static void* interruptAddress = (void*)0x9BF710;
-    static void* skipAddress = (void*)0x1119188;
+    static void* skipAddress      = (void*)0x1119188;
 
     __asm
     {
@@ -571,18 +647,20 @@ ASM_HOOK(0x1119125, FallStart)
 void Player::Install()
 {
     INSTALL_HOOK(CPlayerSpeedUpdateParallel);
+    INSTALL_HOOK(CSonicContextHomingUpdate);
+    INSTALL_HOOK(CSonicStateJumpBallUpdate);
     INSTALL_HOOK(CSonicStateHomingAttackStart);
     INSTALL_HOOK(CSonicStateHomingAttackEnd);
-    INSTALL_HOOK(CSonicContextHomingUpdate);
+    INSTALL_HOOK(CStateJumpShortStart);
+    INSTALL_HOOK(CStateJumpShortEnd);
+    INSTALL_HOOK(CStateLandJumpShortUpdate);
     INSTALL_HOOK(CSonicStateFallStart);
     INSTALL_HOOK(CSonicStateFallUpdate);
     INSTALL_HOOK(CSonicStateFallEnd);
-    INSTALL_HOOK(CSonicStateJumpBallUpdate);
-    INSTALL_HOOK(CStateJumpShortStart);
-    INSTALL_HOOK(CStateJumpShortEnd);
+    INSTALL_HOOK(MsgRestartStage);
 
-    INSTALL_ASM_HOOK(AirBoostFall);
-    INSTALL_ASM_HOOK(FallStart);
+    INSTALL_ASM_HOOK(AirBoostToFallFlag);
+    INSTALL_ASM_HOOK(WalkFallFlag);
 
     // Restore XButtonHoming string to disable the HMM code.
     WRITE_STRING(0x15FA418, "XButtonHoming");

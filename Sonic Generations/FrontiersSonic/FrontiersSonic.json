@@ -11,7 +11,7 @@
 					"DisplayName": "Costume",
 					"Description": [ "Select a costume for Sonic to wear." ],
 					"Type": "CostumeType",
-					"DefaultValue": "disk"
+					"DefaultValue": "disk_None"
 			   }
 			]
 		 },
@@ -64,13 +64,6 @@
 					"DefaultValue": 2
 				},
 				{
-					"Name": "dropDashVelocity",
-					"Description": [ "Determines how fast Sonic will be propelled when performing a drop dash." ],
-					"DisplayName": "Drop Dash Velocity",
-					"Type": "float",
-					"DefaultValue": 75.0
-				},
-				{
 					"Name": "spinAttackRollDuration",
 					"Description": [ "Determines how long Sonic will remain in a ball after rolling." ],
 					"DisplayName": "Drop Dash Duration",
@@ -78,18 +71,32 @@
 					"DefaultValue": 3.5
 				},
 				{
+					"Name": "dropDashVelocitySideView",
+					"Description": [ "Determines how fast Sonic will be propelled when performing a drop dash in 2D." ],
+					"DisplayName": "Drop Dash Velocity 2D",
+					"Type": "float",
+					"DefaultValue": 45.0
+				},
+				{
+					"Name": "dropDashVelocityForwardView",
+					"Description": [ "Determines how fast Sonic will be propelled when performing a drop dash in 3D." ],
+					"DisplayName": "Drop Dash Velocity 3D",
+					"Type": "float",
+					"DefaultValue": 75.0
+				},
+				{
 					"Name": "doubleJumpVelocity",
 					"Description": [ "Determines how high Sonic will double jump." ],
 					"DisplayName": "Double Jump Velocity",
 					"Type": "float",
-					"DefaultValue": 15
+					"DefaultValue": 15.0
 				},
 				{
 					"Name": "doubleJumpVelocityWater",
 					"Description": [ "Determines how high Sonic will double jump underwater." ],
 					"DisplayName": "Double Jump Velocity Underwater",
 					"Type": "float",
-					"DefaultValue": 10
+					"DefaultValue": 10.0
 				},
 				{
 					"Name": "stompBounceCount",
@@ -114,14 +121,14 @@
 					"Description": [ "Determines how high Sonic will bounce." ],
 					"DisplayName": "Stomp Bounce Velocity",
 					"Type": "float",
-					"DefaultValue": 20
+					"DefaultValue": 20.0
 				},
 				{
 					"Name": "stompBounceVelocityWater",
 					"Description": [ "Determines how high Sonic will bounce underwater." ],
 					"DisplayName": "Stomp Bounce Velocity Underwater",
 					"Type": "float",
-					"DefaultValue": 100
+					"DefaultValue": 10.0
 				}
 			]
         },
@@ -160,7 +167,7 @@
 		[
 		   {
 			  "DisplayName": "None",
-			  "Value": "disk",
+			  "Value": "disk_None",
 			  "Description": [ "" ]
 		   },
 		   {

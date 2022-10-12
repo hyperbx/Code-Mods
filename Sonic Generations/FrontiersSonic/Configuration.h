@@ -54,9 +54,14 @@ public:
 	static float doubleJumpVelocityWater;
 
 	/// <summary>
-	/// Determines how fast Sonic will be propelled when performing a drop dash.
+	/// Determines how fast Sonic will be propelled when performing a drop dash in 2D.
 	/// </summary>
-	static float dropDashVelocity;
+	static float dropDashVelocitySideView;
+
+	/// <summary>
+	/// Determines how fast Sonic will be propelled when performing a drop dash in 3D.
+	/// </summary>
+	static float dropDashVelocityForwardView;
 
 	/// <summary>
 	/// Determines how long Sonic will remain in a ball after rolling.
