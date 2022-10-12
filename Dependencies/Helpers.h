@@ -35,6 +35,10 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     typedef returnType _##procName(__VA_ARGS__); \
     _##procName* procName = (_##procName*)GetProcAddress(GetModuleHandle(TEXT(libraryName)), #procName);
 
+#define ASM_HOOK(startAddress, functionName) \
+	static void* functionName##StartAddress = (void*)startAddress; \
+	void __declspec(naked) functionName()
+
 #define HOOK(returnType, callingConvention, functionName, location, ...) \
     typedef returnType callingConvention functionName(__VA_ARGS__); \
     functionName* original##functionName = (functionName*)(location); \
@@ -97,6 +101,9 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
         WRITE_MEMORY(source + 1, uint32_t, length - 5); \
     }\
 }
+
+#define INSTALL_ASM_HOOK(functionName) \
+    WRITE_JUMP(functionName##StartAddress, functionName);
 
 #define WRITE_CALL(location, function) \
 { \
