@@ -83,10 +83,19 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     VirtualProtect((void*)(location), size, oldProtect, &oldProtect); \
 }
 
-#define WRITE_JUMP(location, function) \
+#define WRITE_JUMP(source, destination) \
 { \
-    WRITE_MEMORY(location, uint8_t, 0xE9); \
-    WRITE_MEMORY(location + 1, uint32_t, (uint32_t)(function) - (size_t)(location) - 5); \
+    int length = (size_t)(destination) - (size_t)(source); \
+    if (length - 2 <= 0x7F) \
+    { \
+        WRITE_MEMORY(source, uint8_t, 0xEB); \
+        WRITE_MEMORY(source + 1, uint8_t, length - 2); \
+    } \
+    else \
+    {\
+        WRITE_MEMORY(source, uint8_t, 0xE9); \
+        WRITE_MEMORY(source + 1, uint32_t, length - 5); \
+    }\
 }
 
 #define WRITE_CALL(location, function) \
