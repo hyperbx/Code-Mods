@@ -36,7 +36,7 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     _##procName* procName = (_##procName*)GetProcAddress(GetModuleHandle(TEXT(libraryName)), #procName);
 
 #define ASM_HOOK(startAddress, functionName) \
-	static void* functionName##StartAddress = (void*)startAddress; \
+	static uint32_t functionName##StartAddress = startAddress; \
 	void __declspec(naked) functionName()
 
 #define HOOK(returnType, callingConvention, functionName, location, ...) \
@@ -96,14 +96,14 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
         WRITE_MEMORY(source + 1, uint8_t, length - 2); \
     } \
     else \
-    {\
+    { \
         WRITE_MEMORY(source, uint8_t, 0xE9); \
         WRITE_MEMORY(source + 1, uint32_t, length - 5); \
-    }\
+    } \
 }
 
 #define INSTALL_ASM_HOOK(functionName) \
-    WRITE_JUMP(functionName##StartAddress, functionName);
+    WRITE_JUMP(functionName##StartAddress, &functionName);
 
 #define WRITE_CALL(location, function) \
 { \
