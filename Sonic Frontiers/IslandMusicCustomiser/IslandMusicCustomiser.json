@@ -335,15 +335,18 @@
 		[
 			{
 				"DisplayName": "None",
-				"Value": "0"
+				"Value": "0",
+				"Description": [ "Disable randomisation for this island." ]
 			},
 			{
 				"DisplayName": "Select Any Track",
-				"Value": "1"
+				"Value": "1",
+				"Description": [ "Play a random track from the music list." ]
 			},
 			{
 				"DisplayName": "Select Any Track from Any Island",
-				"Value": "2"
+				"Value": "2",
+				"Description": [ "Play a random track from Kronos, Ares or Chaos." ]
 			},
 			{
 				"DisplayName": "Select Any Track from Kronos Island",
