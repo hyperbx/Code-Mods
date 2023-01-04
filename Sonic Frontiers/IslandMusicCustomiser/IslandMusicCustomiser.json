@@ -1,0 +1,307 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "Music",
+			"DisplayName": "Music",
+			"Elements":
+			[
+				{
+					"Name": "kronosBgmType",
+					"DisplayName": "Kronos Island",
+					"Type": "BgmType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": -1
+				},
+				{
+					"Name": "aresBgmType",
+					"DisplayName": "Ares Island",
+					"Type": "BgmType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": -1
+				},
+				{
+					"Name": "chaosBgmType",
+					"DisplayName": "Chaos Island",
+					"Type": "BgmType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": -1
+				},
+				{
+					"Name": "rheaBgmType",
+					"DisplayName": "Rhea Island",
+					"Type": "BgmType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": -1
+				},
+				{
+					"Name": "ouranosBgmType",
+					"DisplayName": "Ouranos Island",
+					"Type": "BgmType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": -1
+				}
+			]
+        },
+	    {
+			"Name": "Random",
+			"DisplayName": "Randomisation",
+			"Elements":
+			[
+				{
+					"Name": "kronosBgmRandomType",
+					"Description":
+					[
+						"The randomisation mode for Kronos Island.\n",
+						"This will override your selected soundtrack in the Music section."
+					],
+					"DisplayName": "Kronos Island",
+					"Type": "BgmRandomType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				},
+				{
+					"Name": "aresBgmRandomType",
+					"Description":
+					[
+						"The randomisation mode for Ares Island.\n",
+						"This will override your selected soundtrack in the Music section."
+					],
+					"DisplayName": "Ares Island",
+					"Type": "BgmRandomType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				},
+				{
+					"Name": "chaosBgmRandomType",
+					"Description":
+					[
+						"The randomisation mode for Chaos Island.\n",
+						"This will override your selected soundtrack in the Music section."
+					],
+					"DisplayName": "Chaos Island",
+					"Type": "BgmRandomType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				},
+				{
+					"Name": "rheaBgmRandomType",
+					"Description":
+					[
+						"The randomisation mode for Rhea Island.\n",
+						"This will override your selected soundtrack in the Music section."
+					],
+					"DisplayName": "Rhea Island",
+					"Type": "BgmRandomType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				},
+				{
+					"Name": "ouranosBgmRandomType",
+					"Description":
+					[
+						"The randomisation mode for Ouranos Island.\n",
+						"This will override your selected soundtrack in the Music section."
+					],
+					"DisplayName": "Ouranos Island",
+					"Type": "BgmRandomType",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": 0
+				}
+			]
+        }
+    ],
+	"Enums": 
+	{
+		"BgmType": 
+		[
+			{
+				"DisplayName": "Default",
+				"Value": "-1",
+				"Description": [ "This will use the default soundtrack based on your story progression." ]
+			},
+			{
+				"DisplayName": "Kronos Island: 1st Mvt.",
+				"Value": "12"
+			},
+			{
+				"DisplayName": "Kronos Island: 2nd Mvt.",
+				"Value": "13"
+			},
+			{
+				"DisplayName": "Kronos Island: 3rd Mvt.",
+				"Value": "14"
+			},
+			{
+				"DisplayName": "Kronos Island: 4th Mvt.",
+				"Value": "15"
+			},
+			{
+				"DisplayName": "Kronos Island: 5th Mvt.",
+				"Value": "16"
+			},
+			{
+				"DisplayName": "Kronos Island: 6th Mvt.",
+				"Value": "17"
+			},
+			{
+				"DisplayName": "Kronos Island: 7th Mvt.",
+				"Value": "18"
+			},
+			{
+				"DisplayName": "Ares Island: 1st Mvt.",
+				"Value": "22"
+			},
+			{
+				"DisplayName": "Ares Island: 2nd Mvt.",
+				"Value": "23"
+			},
+			{
+				"DisplayName": "Ares Island: 3rd Mvt.",
+				"Value": "24"
+			},
+			{
+				"DisplayName": "Ares Island: 4th Mvt.",
+				"Value": "25"
+			},
+			{
+				"DisplayName": "Ares Island: 5th Mvt.",
+				"Value": "26"
+			},
+			{
+				"DisplayName": "Ares Island: 6th Mvt.",
+				"Value": "27"
+			},
+			{
+				"DisplayName": "Ares Island: 7th Mvt.",
+				"Value": "28"
+			},
+			{
+				"DisplayName": "Chaos Island: 1st Mvt.",
+				"Value": "29"
+			},
+			{
+				"DisplayName": "Chaos Island: 2nd Mvt.",
+				"Value": "30"
+			},
+			{
+				"DisplayName": "Chaos Island: 3rd Mvt.",
+				"Value": "31"
+			},
+			{
+				"DisplayName": "Chaos Island: 4th Mvt.",
+				"Value": "32"
+			},
+			{
+				"DisplayName": "Chaos Island: 5th Mvt.",
+				"Value": "33"
+			},
+			{
+				"DisplayName": "Chaos Island: 6th Mvt.",
+				"Value": "34"
+			},
+			{
+				"DisplayName": "Chaos Island: 7th Mvt.",
+				"Value": "35"
+			},
+			{
+				"DisplayName": "Rhea Island",
+				"Value": "21"
+			},
+			{
+				"DisplayName": "Ouranos Island",
+				"Value": "19"
+			},
+			{
+				"DisplayName": "Theme of Starfall Islands",
+				"Value": "20"
+			},
+			{
+				"DisplayName": "I'm Here (feat. Merry Kirk-Holmes)",
+				"Value": "4"
+			},
+			{
+				"DisplayName": "Dear Father",
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Vandalize",
+				"Value": "5"
+			},
+			{
+				"DisplayName": "One Way Dream",
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Arcade Mode",
+				"Value": "10"
+			},
+			{
+				"DisplayName": "Enemy: WOLF",
+				"Value": "2"
+			},
+			{
+				"DisplayName": "Island Mystery: Hacking Mission",
+				"Value": "3"
+			},
+			{
+				"DisplayName": "Island Mystery: Pinball",
+				"Value": "6"
+			},
+			{
+				"DisplayName": "Quest: SOS Backup",
+				"Value": "7"
+			},
+			{
+				"DisplayName": "Quest: The Best Defense",
+				"Value": "8"
+			},
+			{
+				"DisplayName": "Quest: Bridge the Gap",
+				"Value": "9"
+			},
+			{
+				"DisplayName": "Theme of Koco",
+				"Value": "11"
+			}
+		],
+		"BgmRandomType":
+		[
+			{
+				"DisplayName": "None",
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Select Any Track",
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Select Any Track from Any Island",
+				"Value": "2"
+			},
+			{
+				"DisplayName": "Select Any Track from Kronos Island",
+				"Value": "3"
+			},
+			{
+				"DisplayName": "Select Any Track from Ares Island",
+				"Value": "4"
+			},
+			{
+				"DisplayName": "Select Any Track from Chaos Island",
+				"Value": "5"
+			}
+		]
+	},
+    "IniFile": "IslandBgmCustomiser.ini"
+}
