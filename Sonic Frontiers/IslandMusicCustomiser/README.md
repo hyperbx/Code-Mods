@@ -1,4 +1,4 @@
-# Island Music Customiser
+# [Island Music Customiser](https://gamebanana.com/mods/420614)
 A mod for Sonic Frontiers that allows you to customise the music used for each island.
 
 ## Credits
