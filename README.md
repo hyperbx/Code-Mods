@@ -2,6 +2,9 @@
 A repository containing DLL mods for various games.
 
 ## Index
+- Sonic Colours: Ultimate
+  - [Gameplay & UI Fixes](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Colours%20Ultimate/GameplayAndUIFixes)
+
 - Sonic Generations
   - [Fix Window Title](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/FixWindowTitle)
   - [Frontiers Sonic](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/FrontiersSonic)
@@ -15,5 +18,5 @@ A repository containing DLL mods for various games.
   - [Sonic Forces HUD & UI](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/ForcesHUD)
   - [Tails' Dash Rings in Stages](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/TailsDashRingsInStages)
 
-- Sonic Colours: Ultimate
-  - [Gameplay & UI Fixes](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Colours%20Ultimate/GameplayAndUIFixes)
+- Sonic Frontiers
+  - [Island Music Customiser](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/IslandMusicCustomiser)
