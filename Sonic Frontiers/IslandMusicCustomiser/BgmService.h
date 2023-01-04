@@ -2,51 +2,43 @@
 
 class BgmService
 {
-	static Configuration::EBgmType m_bgmStack[7];
+	static Configuration::EBgmType ms_lastBgmType;
 
 public:
 	static void Install();
 
-	static int GetRandom(int in_min, int in_max)
+	static Configuration::EBgmType GetRandomBgmType(int in_min, int in_max)
 	{
-		static bool first = true;
+		int result;
 
-		if (first)
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<int> dis(in_min, in_max);
+
+		if (Configuration::s_ExcludedBgm.size() == in_max - in_min || Configuration::s_ExcludedBgm.size() == in_max - in_min + 1)
 		{
-			srand(time(0));
+			printf("[IslandMusicCustomiser] Exclusion list contains entire randomisation source!\n");
 
-			first = false;
+			return Configuration::bgm_none;
 		}
 
-		return in_min + rand() % ((in_max + 1) - in_min);
-	}
-
-	static void PushBgmType(Configuration::EBgmType in_bgmType)
-	{
-		for (int i = 5; i >= 0; i--)
+		// Keep randomising until we have a unique and non-excluded result.
+		do
 		{
-			// Shift current array element to the right.
-			m_bgmStack[i + 1] = m_bgmStack[i];
-
-			// Push current type to the stack.
-			m_bgmStack[i] = in_bgmType;
+			result = dis(gen);
 		}
+		while
+		(
+			std::find
+			(
+				Configuration::s_ExcludedBgm.begin(),
+				Configuration::s_ExcludedBgm.end(),
+				result
+			)
+			!= Configuration::s_ExcludedBgm.end()
+		);
 
-#if _DEBUG
-		for (int i = 0; i <= 5; i++)
-			printf("[IslandMusicRandomiser] m_bgmStack[%d]: %d\n", i, m_bgmStack[i]);
-#endif
-	}
-
-	static bool IsBgmRandomUnique(Configuration::EBgmType in_bgmType)
-	{
-		for (int i = 0; i <= 5; i++)
-		{
-			if (m_bgmStack[i] == in_bgmType)
-				return false;
-		}
-
-		return true;
+		return (Configuration::EBgmType)result;
 	}
 
 	static Configuration::EBgmType GetBgmType(Configuration::EBgmType in_bgmType, Configuration::EBgmRandomType in_randomType)
@@ -56,42 +48,39 @@ public:
 		switch (in_randomType)
 		{
 			case Configuration::Any:
-				result = (Configuration::EBgmType)GetRandom(Configuration::bgm_ending1, Configuration::bgm_w3r01_7);
+				result = GetRandomBgmType(Configuration::bgm_ending1, Configuration::bgm_w3r01_7);
 				break;
 
 			case Configuration::IslandAny:
-				result = (Configuration::EBgmType)GetRandom(Configuration::bgm_w1r02_1, Configuration::bgm_w3r01_7);
+				result = GetRandomBgmType(Configuration::bgm_w1r02_1, Configuration::bgm_w3r01_7);
 				break;
 
 			case Configuration::KronosAny:
-				result = (Configuration::EBgmType)GetRandom(Configuration::bgm_w1r02_1, Configuration::bgm_w1r02_7);
+				result = GetRandomBgmType(Configuration::bgm_w1r02_1, Configuration::bgm_w1r02_7);
 				break;
 
 			case Configuration::AresAny:
-				result = (Configuration::EBgmType)GetRandom(Configuration::bgm_w2r01_1, Configuration::bgm_w2r01_7);
+				result = GetRandomBgmType(Configuration::bgm_w2r01_1, Configuration::bgm_w2r01_7);
 				break;
 
 			case Configuration::ChaosAny:
-				result = (Configuration::EBgmType)GetRandom(Configuration::bgm_w3r01_1, Configuration::bgm_w3r01_7);
+				result = GetRandomBgmType(Configuration::bgm_w3r01_1, Configuration::bgm_w3r01_7);
 				break;
 
 			default:
 				return in_bgmType;
 		}
 
-		if (!IsBgmRandomUnique(result))
+		if (result == ms_lastBgmType)
 		{
 #if _DEBUG
-			printf("[IslandMusicRandomiser] %d is not unique - rerolling!\n", result);
+			printf("[IslandMusicCustomiser] Index %d was played previously - rerolling!\n", result);
 #endif
 
-			// Randomise again so we always have a unique track.
 			return GetBgmType(in_bgmType, in_randomType);
 		}
-		else
-		{
-			PushBgmType(result);
-		}
+
+		ms_lastBgmType = result;
 
 		return result;
 	}

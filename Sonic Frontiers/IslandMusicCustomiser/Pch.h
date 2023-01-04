@@ -7,19 +7,21 @@
 #include <detours.h>
 
 // Standard library
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
+#include <random>
 #include <string>
-#include <list>
 
 // Dependencies
 #include <Helpers.h>
+#include <INIReader.h>
+#include <Signature.h>
+#include <StringHelper.h>
 
 // Hedgehog Engine
 #include "BgmIdExtension.h"
 
 // Internal headers
 #include "Configuration.h"
-#include "INIReader.h"
-#include "StringHelper.h"
 #include "BgmService.h"

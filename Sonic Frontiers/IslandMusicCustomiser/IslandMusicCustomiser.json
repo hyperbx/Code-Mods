@@ -117,6 +117,26 @@
 					"MinValue": null,
 					"MaxValue": null,
 					"DefaultValue": 0
+				},
+				{
+					"Name": "exclusionList",
+					"Description":
+					[
+						"This is a comma-separated list of indicies that pertain to the soundtracks.\n",
+						"Hover over a soundtrack in the music lists to see its index.\n",
+						"If you don't want a soundtrack to be included in the randomiser, add its index to this list.\n",
+						"For example: 0, 4, 10, 20\n",
+						"This will remove the following tracks from the randomiser;",
+						"- Dear Father",
+						"- I'm Here (feat. Merry Kirk-Holmes)",
+						"- Arcade Mode",
+						"- Theme of Starfall Islands"
+					],
+					"DisplayName": "Excluded BGM",
+					"Type": "string",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": ""
 				}
 			]
         }
@@ -132,147 +152,183 @@
 			},
 			{
 				"DisplayName": "Kronos Island: 1st Mvt.",
-				"Value": "12"
+				"Value": "12",
+				"Description": [ "Index: 12" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 2nd Mvt.",
-				"Value": "13"
+				"Value": "13",
+				"Description": [ "Index: 13" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 3rd Mvt.",
-				"Value": "14"
+				"Value": "14",
+				"Description": [ "Index: 14" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 4th Mvt.",
-				"Value": "15"
+				"Value": "15",
+				"Description": [ "Index: 15" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 5th Mvt.",
-				"Value": "16"
+				"Value": "16",
+				"Description": [ "Index: 16" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 6th Mvt.",
-				"Value": "17"
+				"Value": "17",
+				"Description": [ "Index: 17" ]
 			},
 			{
 				"DisplayName": "Kronos Island: 7th Mvt.",
-				"Value": "18"
+				"Value": "18",
+				"Description": [ "Index: 18" ]
 			},
 			{
 				"DisplayName": "Ares Island: 1st Mvt.",
-				"Value": "22"
+				"Value": "22",
+				"Description": [ "Index: 22" ]
 			},
 			{
 				"DisplayName": "Ares Island: 2nd Mvt.",
-				"Value": "23"
+				"Value": "23",
+				"Description": [ "Index: 23" ]
 			},
 			{
 				"DisplayName": "Ares Island: 3rd Mvt.",
-				"Value": "24"
+				"Value": "24",
+				"Description": [ "Index: 24" ]
 			},
 			{
 				"DisplayName": "Ares Island: 4th Mvt.",
-				"Value": "25"
+				"Value": "25",
+				"Description": [ "Index: 25" ]
 			},
 			{
 				"DisplayName": "Ares Island: 5th Mvt.",
-				"Value": "26"
+				"Value": "26",
+				"Description": [ "Index: 26" ]
 			},
 			{
 				"DisplayName": "Ares Island: 6th Mvt.",
-				"Value": "27"
+				"Value": "27",
+				"Description": [ "Index: 27" ]
 			},
 			{
 				"DisplayName": "Ares Island: 7th Mvt.",
-				"Value": "28"
+				"Value": "28",
+				"Description": [ "Index: 28" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 1st Mvt.",
-				"Value": "29"
+				"Value": "29",
+				"Description": [ "Index: 29" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 2nd Mvt.",
-				"Value": "30"
+				"Value": "30",
+				"Description": [ "Index: 30" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 3rd Mvt.",
-				"Value": "31"
+				"Value": "31",
+				"Description": [ "Index: 31" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 4th Mvt.",
-				"Value": "32"
+				"Value": "32",
+				"Description": [ "Index: 32" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 5th Mvt.",
-				"Value": "33"
+				"Value": "33",
+				"Description": [ "Index: 33" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 6th Mvt.",
-				"Value": "34"
+				"Value": "34",
+				"Description": [ "Index: 34" ]
 			},
 			{
 				"DisplayName": "Chaos Island: 7th Mvt.",
-				"Value": "35"
+				"Value": "35",
+				"Description": [ "Index: 35" ]
 			},
 			{
 				"DisplayName": "Rhea Island",
-				"Value": "21"
+				"Value": "21",
+				"Description": [ "Index: 21" ]
 			},
 			{
 				"DisplayName": "Ouranos Island",
-				"Value": "19"
+				"Value": "19",
+				"Description": [ "Index: 19" ]
 			},
 			{
 				"DisplayName": "Theme of Starfall Islands",
-				"Value": "20"
+				"Value": "20",
+				"Description": [ "Index: 20" ]
 			},
 			{
 				"DisplayName": "I'm Here (feat. Merry Kirk-Holmes)",
-				"Value": "4"
+				"Value": "4",
+				"Description": [ "Index: 4" ]
 			},
 			{
 				"DisplayName": "Dear Father",
-				"Value": "0"
+				"Value": "0",
+				"Description": [ "Index: 0" ]
 			},
 			{
 				"DisplayName": "Vandalize",
-				"Value": "5"
+				"Value": "5",
+				"Description": [ "Index: 5" ]
 			},
 			{
 				"DisplayName": "One Way Dream",
-				"Value": "1"
+				"Value": "1",
+				"Description": [ "Index: 1" ]
 			},
 			{
 				"DisplayName": "Arcade Mode",
-				"Value": "10"
+				"Value": "10",
+				"Description": [ "Index: 10" ]
 			},
 			{
 				"DisplayName": "Enemy: WOLF",
-				"Value": "2"
+				"Value": "2",
+				"Description": [ "Index: 2" ]
 			},
 			{
 				"DisplayName": "Island Mystery: Hacking Mission",
-				"Value": "3"
+				"Value": "3",
+				"Description": [ "Index: 3" ]
 			},
 			{
 				"DisplayName": "Island Mystery: Pinball",
-				"Value": "6"
+				"Value": "6",
+				"Description": [ "Index: 6" ]
 			},
 			{
 				"DisplayName": "Quest: SOS Backup",
-				"Value": "7"
+				"Value": "7",
+				"Description": [ "Index: 7" ]
 			},
 			{
 				"DisplayName": "Quest: The Best Defense",
-				"Value": "8"
+				"Value": "8",
+				"Description": [ "Index: 8" ]
 			},
 			{
 				"DisplayName": "Quest: Bridge the Gap",
-				"Value": "9"
+				"Value": "9",
+				"Description": [ "Index: 9" ]
 			},
 			{
 				"DisplayName": "Theme of Koco",
-				"Value": "11"
+				"Value": "11",
+				"Description": [ "Index: 11" ]
 			}
 		],
 		"BgmRandomType":
@@ -303,5 +359,5 @@
 			}
 		]
 	},
-    "IniFile": "IslandBgmCustomiser.ini"
+    "IniFile": "IslandMusicCustomiser.ini"
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#define INI_FILE "IslandBgmCustomiser.ini"
+#define INI_FILE "IslandMusicCustomiser.ini"
 
 class Configuration
 {
@@ -62,21 +62,25 @@ public:
 
 	static EBgmType s_KronosBgmType;
 
-	static EBgmRandomType s_KronosBgmRandomType;
-
 	static EBgmType s_AresBgmType;
-
-	static EBgmRandomType s_AresBgmRandomType;
 
 	static EBgmType s_ChaosBgmType;
 
-	static EBgmRandomType s_ChaosBgmRandomType;
-
 	static EBgmType s_RheaBgmType;
-
-	static EBgmRandomType s_RheaBgmRandomType;
 
 	static EBgmType s_OuranosBgmType;
 
+	static EBgmRandomType s_KronosBgmRandomType;
+
+	static EBgmRandomType s_AresBgmRandomType;
+
+	static EBgmRandomType s_ChaosBgmRandomType;
+
+	static EBgmRandomType s_RheaBgmRandomType;
+
 	static EBgmRandomType s_OuranosBgmRandomType;
+
+	static std::string s_ExclusionList;
+
+	static std::vector<Configuration::EBgmType> s_ExcludedBgm;
 };

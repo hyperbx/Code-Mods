@@ -1,14 +1,18 @@
-Configuration::EBgmType Configuration::s_KronosBgmType  = Configuration::EBgmType::bgm_w1r02_1;
-Configuration::EBgmType Configuration::s_AresBgmType    = Configuration::EBgmType::bgm_w2r01_1;
-Configuration::EBgmType Configuration::s_ChaosBgmType   = Configuration::EBgmType::bgm_w3r01_1;
-Configuration::EBgmType Configuration::s_RheaBgmType    = Configuration::EBgmType::bgm_w1r05;
-Configuration::EBgmType Configuration::s_OuranosBgmType = Configuration::EBgmType::bgm_w1r04_1;
+Configuration::EBgmType Configuration::s_KronosBgmType  = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_AresBgmType    = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_ChaosBgmType   = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_RheaBgmType    = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_OuranosBgmType = Configuration::EBgmType::bgm_none;
 
 Configuration::EBgmRandomType Configuration::s_KronosBgmRandomType  = Configuration::EBgmRandomType::None;
 Configuration::EBgmRandomType Configuration::s_AresBgmRandomType    = Configuration::EBgmRandomType::None;
 Configuration::EBgmRandomType Configuration::s_ChaosBgmRandomType   = Configuration::EBgmRandomType::None;
 Configuration::EBgmRandomType Configuration::s_RheaBgmRandomType    = Configuration::EBgmRandomType::None;
 Configuration::EBgmRandomType Configuration::s_OuranosBgmRandomType = Configuration::EBgmRandomType::None;
+
+std::string Configuration::s_ExclusionList;
+
+std::vector<Configuration::EBgmType> Configuration::s_ExcludedBgm;
 
 const char* Configuration::s_BgmList[] =
 {
@@ -67,4 +71,14 @@ void Configuration::Read()
 	Configuration::s_ChaosBgmRandomType   = (Configuration::EBgmRandomType)reader.GetInteger("Random", "chaosBgmRandomType",   s_ChaosBgmRandomType);
 	Configuration::s_RheaBgmRandomType    = (Configuration::EBgmRandomType)reader.GetInteger("Random", "rheaBgmRandomType",    s_RheaBgmRandomType);
 	Configuration::s_OuranosBgmRandomType = (Configuration::EBgmRandomType)reader.GetInteger("Random", "ouranosBgmRandomType", s_OuranosBgmRandomType);
+	Configuration::s_ExclusionList        = reader.Get("Random", "exclusionList", s_ExclusionList);
+
+	// Populate exclusion list.
+	for (auto& str : StringHelper::GetCommaSeparatedStrings(Configuration::s_ExclusionList))
+		s_ExcludedBgm.push_back((Configuration::EBgmType)stoi(str));
+
+#if _DEBUG
+	for (int i = 0; i < s_ExcludedBgm.size(); i++)
+		printf("[IslandMusicCustomiser] s_ExcludedBgm[%d]: %d\n", i, s_ExcludedBgm[i]);
+#endif
 }

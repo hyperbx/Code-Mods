@@ -1,6 +1,15 @@
-Configuration::EBgmType BgmService::m_bgmStack[];
+Configuration::EBgmType BgmService::ms_lastBgmType;
 
-HOOK(void, __fastcall, SetIslandBgm, 0x14C1A3750, app::snd::BgmIdExtension* in_pBgmIdExtension, int64_t a2, const char** out_ppMusicId)
+SIG_SCAN
+(
+	m_sigSetIslandBgm,
+
+	/* 0x14C1A3750 */
+	"\x48\x85\xD2\x0F\x84\x46\x01\x00\x00\x48\x89\xE0",
+	"xxxxxxxxxxxx"
+);
+
+HOOK(void, __fastcall, SetIslandBgm, m_sigSetIslandBgm(), app::snd::BgmIdExtension* in_pBgmIdExtension, int64_t a2, const char** out_ppMusicId)
 {
 	originalSetIslandBgm(in_pBgmIdExtension, a2, out_ppMusicId);
 
@@ -28,7 +37,7 @@ HOOK(void, __fastcall, SetIslandBgm, 0x14C1A3750, app::snd::BgmIdExtension* in_p
 	}
 
 #if _DEBUG
-	printf("[IslandMusicRandomiser] Index: %d\n", bgmType);
+	printf("[IslandMusicCustomiser] Index: %d\n", bgmType);
 #endif
 
 	if (bgmType != Configuration::bgm_none)
@@ -37,8 +46,5 @@ HOOK(void, __fastcall, SetIslandBgm, 0x14C1A3750, app::snd::BgmIdExtension* in_p
 
 void BgmService::Install()
 {
-	// Fill array with -1 to prevent zero being identified as a duplicate.
-	std::fill_n(m_bgmStack, 8, Configuration::EBgmType::bgm_none);
-
 	INSTALL_HOOK(SetIslandBgm);
 }
