@@ -127,3 +127,20 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     memcpy((void*)location, STR, sizeof(STR)); \
     VirtualProtect((void*)location, sizeof(STR), oldProtect, NULL); \
 }
+
+#define READ_POINTER(name, location, ...) \
+const std::vector<uint32_t> name##offsets = { __VA_ARGS__ }; \
+uint32_t name = *(uint32_t*)location; \
+{ \
+    for (uint32_t i = 0; i < name##offsets.size(); i++) \
+    { \
+        uint32_t const& offset = name##offsets[i]; \
+        { \
+            name += offset; \
+            if (i < name##offsets.size() - 1) \
+                name = *(uint32_t*)name; \
+        } \
+    } \
+}
+
+#define LERP(a, b, t) a + (b - a) * t

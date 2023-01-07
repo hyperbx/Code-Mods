@@ -22,6 +22,15 @@ public:
 	}
 
 	/// <summary>
+	/// Converts the input string to a Boolean value.
+	/// </summary>
+	/// <param name="str">String to parse Boolean value from.</param>
+	static bool ToBoolean(std::string str)
+	{
+		return StringHelper::Compare(StringHelper::ToLower(str), "true") || StringHelper::Compare(str, "1");
+	}
+
+	/// <summary>
 	/// Unquotes the string - useful for string to char conversion.
 	/// </summary>
 	/// <param name="str">String to unquote.</param>
