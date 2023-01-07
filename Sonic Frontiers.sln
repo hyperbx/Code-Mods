@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NewFrontiers", "Sonic Frontiers\NewFrontiers\NewFrontiers.vcxproj", "{B87A269C-5A69-49C3-8CAF-1548B442B158}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IslandMusicCustomiser", "Sonic Frontiers\IslandMusicCustomiser\IslandMusicCustomiser.vcxproj", "{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CombatDX", "Sonic Frontiers\CombatDX\CombatDX.vcxproj", "{B87A269C-5A69-49C3-8CAF-1548B442B158}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,14 +15,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x64.ActiveCfg = Debug|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x64.Build.0 = Debug|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x86.ActiveCfg = Debug|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x86.Build.0 = Debug|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x64.ActiveCfg = Release|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x64.Build.0 = Release|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x86.ActiveCfg = Release|Win32
-		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x86.Build.0 = Release|Win32
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x64.ActiveCfg = Debug|x64
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x64.Build.0 = Debug|x64
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x86.ActiveCfg = Debug|Win32
@@ -31,6 +23,14 @@ Global
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x64.Build.0 = Release|x64
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x86.ActiveCfg = Release|Win32
 		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x86.Build.0 = Release|Win32
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x64.ActiveCfg = Debug|x64
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x64.Build.0 = Debug|x64
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x86.ActiveCfg = Debug|Win32
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Debug|x86.Build.0 = Debug|Win32
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x64.ActiveCfg = Release|x64
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x64.Build.0 = Release|x64
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x86.ActiveCfg = Release|Win32
+		{B87A269C-5A69-49C3-8CAF-1548B442B158}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

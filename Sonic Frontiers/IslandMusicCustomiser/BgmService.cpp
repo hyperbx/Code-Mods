@@ -17,23 +17,23 @@ HOOK(void, __fastcall, SetIslandBgm, m_sigSetIslandBgm(), app::snd::BgmIdExtensi
 
 	if (StringHelper::ContainsSubstring(*out_ppMusicId, "w1r02"))
 	{
-		bgmType = BgmService::GetBgmType(Configuration::s_KronosBgmType, Configuration::s_KronosBgmRandomType);
+		bgmType = BgmService::GetBgmType(Configuration::s_kronosBgmType, Configuration::s_kronosBgmRandomType);
 	}
 	else if (StringHelper::ContainsSubstring(*out_ppMusicId, "w2r01"))
 	{
-		bgmType = BgmService::GetBgmType(Configuration::s_AresBgmType, Configuration::s_AresBgmRandomType);
+		bgmType = BgmService::GetBgmType(Configuration::s_aresBgmType, Configuration::s_aresBgmRandomType);
 	}
 	else if (StringHelper::ContainsSubstring(*out_ppMusicId, "w3r01"))
 	{
-		bgmType = BgmService::GetBgmType(Configuration::s_ChaosBgmType, Configuration::s_ChaosBgmRandomType);
+		bgmType = BgmService::GetBgmType(Configuration::s_chaosBgmType, Configuration::s_chaosBgmRandomType);
 	}
 	else if (StringHelper::ContainsSubstring(*out_ppMusicId, "w1r05"))
 	{
-		bgmType = BgmService::GetBgmType(Configuration::s_RheaBgmType, Configuration::s_RheaBgmRandomType);
+		bgmType = BgmService::GetBgmType(Configuration::s_rheaBgmType, Configuration::s_rheaBgmRandomType);
 	}
 	else if (StringHelper::ContainsSubstring(*out_ppMusicId, "w1r04"))
 	{
-		bgmType = BgmService::GetBgmType(Configuration::s_OuranosBgmType, Configuration::s_OuranosBgmRandomType);
+		bgmType = BgmService::GetBgmType(Configuration::s_ouranosBgmType, Configuration::s_ouranosBgmRandomType);
 	}
 
 #if _DEBUG
@@ -41,7 +41,7 @@ HOOK(void, __fastcall, SetIslandBgm, m_sigSetIslandBgm(), app::snd::BgmIdExtensi
 #endif
 
 	if (bgmType != Configuration::bgm_none)
-		*out_ppMusicId = Configuration::s_BgmList[bgmType];
+		*out_ppMusicId = Configuration::s_bgmList[bgmType];
 }
 
 void BgmService::Install()

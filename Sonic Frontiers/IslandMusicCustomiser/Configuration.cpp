@@ -1,20 +1,20 @@
-Configuration::EBgmType Configuration::s_KronosBgmType  = Configuration::EBgmType::bgm_none;
-Configuration::EBgmType Configuration::s_AresBgmType    = Configuration::EBgmType::bgm_none;
-Configuration::EBgmType Configuration::s_ChaosBgmType   = Configuration::EBgmType::bgm_none;
-Configuration::EBgmType Configuration::s_RheaBgmType    = Configuration::EBgmType::bgm_none;
-Configuration::EBgmType Configuration::s_OuranosBgmType = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_kronosBgmType  = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_aresBgmType    = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_chaosBgmType   = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_rheaBgmType    = Configuration::EBgmType::bgm_none;
+Configuration::EBgmType Configuration::s_ouranosBgmType = Configuration::EBgmType::bgm_none;
 
-Configuration::EBgmRandomType Configuration::s_KronosBgmRandomType  = Configuration::EBgmRandomType::None;
-Configuration::EBgmRandomType Configuration::s_AresBgmRandomType    = Configuration::EBgmRandomType::None;
-Configuration::EBgmRandomType Configuration::s_ChaosBgmRandomType   = Configuration::EBgmRandomType::None;
-Configuration::EBgmRandomType Configuration::s_RheaBgmRandomType    = Configuration::EBgmRandomType::None;
-Configuration::EBgmRandomType Configuration::s_OuranosBgmRandomType = Configuration::EBgmRandomType::None;
+Configuration::EBgmRandomType Configuration::s_kronosBgmRandomType  = Configuration::EBgmRandomType::None;
+Configuration::EBgmRandomType Configuration::s_aresBgmRandomType    = Configuration::EBgmRandomType::None;
+Configuration::EBgmRandomType Configuration::s_chaosBgmRandomType   = Configuration::EBgmRandomType::None;
+Configuration::EBgmRandomType Configuration::s_rheaBgmRandomType    = Configuration::EBgmRandomType::None;
+Configuration::EBgmRandomType Configuration::s_ouranosBgmRandomType = Configuration::EBgmRandomType::None;
 
-std::string Configuration::s_ExclusionList;
+std::string Configuration::s_exclusionList;
 
-std::vector<Configuration::EBgmType> Configuration::s_ExcludedBgm;
+std::vector<Configuration::EBgmType> Configuration::s_excludedBgm;
 
-const char* Configuration::s_BgmList[] =
+const char* Configuration::s_bgmList[] =
 {
 	"bgm_ending1",
 	"bgm_ending2",
@@ -59,26 +59,26 @@ void Configuration::Read()
 	INIReader reader(INI_FILE);
 
 	// Music
-	Configuration::s_KronosBgmType  = (Configuration::EBgmType)reader.GetInteger("Music", "kronosBgmType",  s_KronosBgmType);
-	Configuration::s_AresBgmType    = (Configuration::EBgmType)reader.GetInteger("Music", "aresBgmType",    s_AresBgmType);
-	Configuration::s_ChaosBgmType   = (Configuration::EBgmType)reader.GetInteger("Music", "chaosBgmType",   s_ChaosBgmType);
-	Configuration::s_RheaBgmType    = (Configuration::EBgmType)reader.GetInteger("Music", "rheaBgmType",    s_RheaBgmType);
-	Configuration::s_OuranosBgmType = (Configuration::EBgmType)reader.GetInteger("Music", "ouranosBgmType", s_OuranosBgmType);
+	Configuration::s_kronosBgmType  = (Configuration::EBgmType)reader.GetInteger("Music", "kronosBgmType",  s_kronosBgmType);
+	Configuration::s_aresBgmType    = (Configuration::EBgmType)reader.GetInteger("Music", "aresBgmType",    s_aresBgmType);
+	Configuration::s_chaosBgmType   = (Configuration::EBgmType)reader.GetInteger("Music", "chaosBgmType",   s_chaosBgmType);
+	Configuration::s_rheaBgmType    = (Configuration::EBgmType)reader.GetInteger("Music", "rheaBgmType",    s_rheaBgmType);
+	Configuration::s_ouranosBgmType = (Configuration::EBgmType)reader.GetInteger("Music", "ouranosBgmType", s_ouranosBgmType);
 
 	// Random
-	Configuration::s_KronosBgmRandomType  = (Configuration::EBgmRandomType)reader.GetInteger("Random", "kronosBgmRandomType",  s_KronosBgmRandomType);
-	Configuration::s_AresBgmRandomType    = (Configuration::EBgmRandomType)reader.GetInteger("Random", "aresBgmRandomType",    s_AresBgmRandomType);
-	Configuration::s_ChaosBgmRandomType   = (Configuration::EBgmRandomType)reader.GetInteger("Random", "chaosBgmRandomType",   s_ChaosBgmRandomType);
-	Configuration::s_RheaBgmRandomType    = (Configuration::EBgmRandomType)reader.GetInteger("Random", "rheaBgmRandomType",    s_RheaBgmRandomType);
-	Configuration::s_OuranosBgmRandomType = (Configuration::EBgmRandomType)reader.GetInteger("Random", "ouranosBgmRandomType", s_OuranosBgmRandomType);
-	Configuration::s_ExclusionList        = reader.Get("Random", "exclusionList", s_ExclusionList);
+	Configuration::s_kronosBgmRandomType  = (Configuration::EBgmRandomType)reader.GetInteger("Random", "kronosBgmRandomType",  s_kronosBgmRandomType);
+	Configuration::s_aresBgmRandomType    = (Configuration::EBgmRandomType)reader.GetInteger("Random", "aresBgmRandomType",    s_aresBgmRandomType);
+	Configuration::s_chaosBgmRandomType   = (Configuration::EBgmRandomType)reader.GetInteger("Random", "chaosBgmRandomType",   s_chaosBgmRandomType);
+	Configuration::s_rheaBgmRandomType    = (Configuration::EBgmRandomType)reader.GetInteger("Random", "rheaBgmRandomType",    s_rheaBgmRandomType);
+	Configuration::s_ouranosBgmRandomType = (Configuration::EBgmRandomType)reader.GetInteger("Random", "ouranosBgmRandomType", s_ouranosBgmRandomType);
+	Configuration::s_exclusionList        = reader.Get("Random", "exclusionList", s_exclusionList);
 
 	// Populate exclusion list.
-	for (auto& str : StringHelper::GetCommaSeparatedStrings(Configuration::s_ExclusionList))
-		s_ExcludedBgm.push_back((Configuration::EBgmType)stoi(str));
+	for (auto& str : StringHelper::GetCommaSeparatedStrings(Configuration::s_exclusionList))
+		s_excludedBgm.push_back((Configuration::EBgmType)stoi(str));
 
 #if _DEBUG
-	for (int i = 0; i < s_ExcludedBgm.size(); i++)
-		printf("[IslandMusicCustomiser] s_ExcludedBgm[%d]: %d\n", i, s_ExcludedBgm[i]);
+	for (int i = 0; i < s_excludedBgm.size(); i++)
+		printf("[IslandMusicCustomiser] s_excludedBgm[%d]: %d\n", i, s_excludedBgm[i]);
 #endif
 }

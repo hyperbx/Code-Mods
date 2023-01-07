@@ -15,7 +15,7 @@ public:
 		std::mt19937 gen(rd());
 		std::uniform_int_distribution<int> dis(in_min, in_max);
 
-		if (Configuration::s_ExcludedBgm.size() == in_max - in_min || Configuration::s_ExcludedBgm.size() == in_max - in_min + 1)
+		if (Configuration::s_excludedBgm.size() == in_max - in_min || Configuration::s_excludedBgm.size() == in_max - in_min + 1)
 		{
 			printf("[IslandMusicCustomiser] Exclusion list contains entire randomisation source!\n");
 
@@ -31,11 +31,11 @@ public:
 		(
 			std::find
 			(
-				Configuration::s_ExcludedBgm.begin(),
-				Configuration::s_ExcludedBgm.end(),
+				Configuration::s_excludedBgm.begin(),
+				Configuration::s_excludedBgm.end(),
 				result
 			)
-			!= Configuration::s_ExcludedBgm.end()
+			!= Configuration::s_excludedBgm.end()
 		);
 
 		return (Configuration::EBgmType)result;
