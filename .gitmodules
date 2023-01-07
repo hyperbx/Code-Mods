@@ -1,3 +1,6 @@
 [submodule "Dependencies/BlueBlur"]
 	path = Dependencies/BlueBlur
 	url = https://github.com/blueskythlikesclouds/BlueBlur.git
+[submodule "Dependencies/rangers-api"]
+	path = Dependencies/rangers-api
+	url = https://github.com/DeaTh-G/rangers-api.git
