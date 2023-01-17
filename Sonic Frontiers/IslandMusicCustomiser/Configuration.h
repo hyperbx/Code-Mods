@@ -56,31 +56,31 @@ public:
 		ChaosAny
 	};
 
-	static const char* s_bgmList[36];
+	static const char* s_BgmList[36];
+
+	static EBgmType s_KronosBgmType;
+
+	static EBgmType s_AresBgmType;
+
+	static EBgmType s_ChaosBgmType;
+
+	static EBgmType s_RheaBgmType;
+
+	static EBgmType s_OuranosBgmType;
+
+	static EBgmRandomType s_KronosBgmRandomType;
+
+	static EBgmRandomType s_AresBgmRandomType;
+
+	static EBgmRandomType s_ChaosBgmRandomType;
+
+	static EBgmRandomType s_RheaBgmRandomType;
+
+	static EBgmRandomType s_OuranosBgmRandomType;
+
+	static std::string s_ExclusionList;
+
+	static std::vector<Configuration::EBgmType> s_ExcludedBgm;
 
 	static void Read();
-
-	static EBgmType s_kronosBgmType;
-
-	static EBgmType s_aresBgmType;
-
-	static EBgmType s_chaosBgmType;
-
-	static EBgmType s_rheaBgmType;
-
-	static EBgmType s_ouranosBgmType;
-
-	static EBgmRandomType s_kronosBgmRandomType;
-
-	static EBgmRandomType s_aresBgmRandomType;
-
-	static EBgmRandomType s_chaosBgmRandomType;
-
-	static EBgmRandomType s_rheaBgmRandomType;
-
-	static EBgmRandomType s_ouranosBgmRandomType;
-
-	static std::string s_exclusionList;
-
-	static std::vector<Configuration::EBgmType> s_excludedBgm;
 };

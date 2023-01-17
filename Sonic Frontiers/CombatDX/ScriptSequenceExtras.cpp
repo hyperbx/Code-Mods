@@ -49,11 +49,11 @@ SIGNATURE_SCAN
 	"\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x81\xEC\x80\x00\x00\x00\x0F\xB6", "xxxxxxxxxxxxxxxxxxxxxxxxx"
 );
 
-HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_sigSetLifeGaugeVisibility(), int64_t a1, char showHealth)
+HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_sigSetLifeGaugeVisibility(), int64_t a1, char in_showHealth)
 {
-	ScriptSequenceExtras::s_isPlayerInCombat = showHealth == 1;
+	ScriptSequenceExtras::s_IsPlayerInCombat = in_showHealth == 1;
 
-	return originalSetLifeGaugeVisibility(a1, showHealth);
+	return originalSetLifeGaugeVisibility(a1, in_showHealth);
 }
 
 SIGNATURE_SCAN
@@ -65,11 +65,11 @@ SIGNATURE_SCAN
 	"\x40\x53\x48\x83\xEC\x20\x48\x8B\xDA\x41\x80", "xxxxxxxxxxx"
 );
 
-HOOK(int64_t, __fastcall, ChangeAnimation, m_sigChangeAnimation(), int64_t a1, const char* animName, char a3)
+HOOK(int64_t, __fastcall, ChangeAnimation, m_sigChangeAnimation(), int64_t a1, const char* in_animationName, char a3)
 {
-	ScriptSequenceExtras::s_pAnimationName = animName;
+	ScriptSequenceExtras::s_pAnimationName = in_animationName;
 
-	return originalChangeAnimation(a1, animName, a3);
+	return originalChangeAnimation(a1, in_animationName, a3);
 }
 
 SIGNATURE_SCAN
@@ -83,7 +83,7 @@ SIGNATURE_SCAN
 
 HOOK(float, __fastcall, FrameLimiter, m_sigFrameLimiter(), int64_t a1, char a2)
 {
-	ScriptSequenceExtras::s_framerate = *(float*)(a1 + 0x14);
+	ScriptSequenceExtras::s_Framerate = *(float*)(a1 + 0x14);
 
 	if (!ScriptSequenceExtras::s_timers.empty())
 	{
@@ -91,8 +91,8 @@ HOOK(float, __fastcall, FrameLimiter, m_sigFrameLimiter(), int64_t a1, char a2)
 		{
 			auto& timer = ScriptSequenceExtras::s_timers[t.first];
 
-			if (timer.m_isRunning)
-				timer.m_time += 1.0f / ScriptSequenceExtras::s_framerate;
+			if (timer.m_IsRunning)
+				timer.m_Time += 1.0f / ScriptSequenceExtras::s_Framerate;
 		}
 	}
 

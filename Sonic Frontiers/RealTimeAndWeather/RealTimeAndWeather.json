@@ -1,0 +1,29 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "General",
+			"DisplayName": "General",
+			"Elements":
+			[
+				{
+					"Name": "isRealTime",
+					"DisplayName": "Enable Real Time",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": true
+				},
+				{
+					"Name": "isRealWeather",
+					"DisplayName": "Enable Real Weather",
+					"Type": "bool",
+					"MinValue": null,
+					"MaxValue": null,
+					"DefaultValue": true
+				}
+			]
+        }
+    ],
+    "IniFile": "RealTimeAndWeather.ini"
+}

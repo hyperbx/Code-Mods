@@ -78,7 +78,7 @@ namespace Signature
             { \
                 if constexpr (x##Size == 2) \
                 { \
-                    x##Addr = sigScan(x##Data[0], x##Data[1], (void*)(y)); \
+                    x##Addr = Signature::sigScan(x##Data[0], x##Data[1], (void*)(y)); \
 			        printf("[Signature] %s received: 0x%08x\n", #x, x##Addr); \
                     if (x##Addr) \
                         return x##Addr; \
@@ -87,13 +87,13 @@ namespace Signature
                 { \
                     for (int i = 0; i < x##Size; i += 2) \
                     { \
-                        x##Addr = sigScan(x##Data[i], x##Data[i + 1], (void*)(y)); \
+                        x##Addr = Signature::sigScan(x##Data[i], x##Data[i + 1], (void*)(y)); \
 			            printf("[Signature] %s received: 0x%08x\n", #x, x##Addr); \
                         if (x##Addr) \
                             return x##Addr; \
                     } \
                 } \
-                sigValid = false; \
+                Signature::sigValid = false; \
             } \
             return x##Addr; \
         }

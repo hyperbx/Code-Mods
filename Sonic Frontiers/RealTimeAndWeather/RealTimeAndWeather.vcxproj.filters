@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Pch.h" />
+    <ClInclude Include="WeatherService.h" />
+    <ClInclude Include="TimeService.h" />
+    <ClInclude Include="WeatherListener.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="StageListener.h" />
+    <ClInclude Include="Time.h" />
+    <ClInclude Include="RegistryHelper.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Mod.cpp" />
+    <ClCompile Include="Pch.cpp" />
+    <ClCompile Include="WeatherService.cpp" />
+    <ClCompile Include="TimeService.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="StageListener.cpp" />
+  </ItemGroup>
+</Project>

@@ -2,7 +2,7 @@
 
 class BgmService
 {
-	static Configuration::EBgmType ms_lastBgmType;
+	static Configuration::EBgmType ms_LastBgmType;
 
 public:
 	static void Install();
@@ -15,7 +15,7 @@ public:
 		std::mt19937 gen(rd());
 		std::uniform_int_distribution<int> dis(in_min, in_max);
 
-		if (Configuration::s_excludedBgm.size() == in_max - in_min || Configuration::s_excludedBgm.size() == in_max - in_min + 1)
+		if (Configuration::s_ExcludedBgm.size() == in_max - in_min || Configuration::s_ExcludedBgm.size() == in_max - in_min + 1)
 		{
 			printf("[IslandMusicCustomiser] Exclusion list contains entire randomisation source!\n");
 
@@ -31,11 +31,11 @@ public:
 		(
 			std::find
 			(
-				Configuration::s_excludedBgm.begin(),
-				Configuration::s_excludedBgm.end(),
+				Configuration::s_ExcludedBgm.begin(),
+				Configuration::s_ExcludedBgm.end(),
 				result
 			)
-			!= Configuration::s_excludedBgm.end()
+			!= Configuration::s_ExcludedBgm.end()
 		);
 
 		return (Configuration::EBgmType)result;
@@ -71,7 +71,7 @@ public:
 				return in_bgmType;
 		}
 
-		if (result == ms_lastBgmType)
+		if (result == ms_LastBgmType)
 		{
 #if _DEBUG
 			printf("[IslandMusicCustomiser] Index %d was played previously - rerolling!\n", result);
@@ -80,7 +80,7 @@ public:
 			return GetBgmType(in_bgmType, in_randomType);
 		}
 
-		ms_lastBgmType = result;
+		ms_LastBgmType = result;
 
 		return result;
 	}

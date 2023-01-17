@@ -1,0 +1,24 @@
+﻿<ui:ContentDialog x:Class="RealTimeAndWeather.UI.LatLongPrompt"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                  xmlns:ui="http://schemas.modernwpf.com/2019"
+                  mc:Ignorable="d" 
+                  d:DesignHeight="450" d:DesignWidth="800"
+                  Title="Provide the latitude and longitude of your location."
+                  PrimaryButtonText="OK"
+                  SecondaryButtonText="Cancel"
+                  DefaultButton="Primary"
+                  PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+                  SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    <Grid>
+        <ui:SimpleStackPanel Spacing="12">
+            <TextBlock Text="This information is used for real-time weather data, as well as providing sunrise and sunset data to the time of day." TextWrapping="Wrap"/>
+            <ui:NumberBox Name="LatitudeField"  Value="0" ui:ControlHelper.Header="Latitude"/>
+            <ui:NumberBox Name="LongitudeField" Value="0" ui:ControlHelper.Header="Longitude"/>
+        </ui:SimpleStackPanel>
+    </Grid>
+    
+</ui:ContentDialog>

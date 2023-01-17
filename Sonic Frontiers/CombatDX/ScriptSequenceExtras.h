@@ -23,32 +23,32 @@ class ScriptSequenceExtras : public app::ScriptSequence
 	}
 
 public:
-	inline static bool s_isPlayerInCombat = false;
+	inline static bool s_IsPlayerInCombat = false;
 	inline static const char* s_pAnimationName;
-	inline static float s_framerate = 0.0f;
+	inline static float s_Framerate = 0.0f;
 
 	struct Timer
 	{
-		float m_time;
+		float m_Time;
 
-		bool m_isRunning;
+		bool m_IsRunning;
 
 		Timer()
 		{
-			m_time      = 0.0f;
-			m_isRunning = true;
+			m_Time      = 0.0f;
+			m_IsRunning = true;
 		}
 
 		Timer(bool in_isRunning)
 		{
-			m_time      = 0.0f;
-			m_isRunning = in_isRunning;
+			m_Time      = 0.0f;
+			m_IsRunning = in_isRunning;
 		}
 
 		Timer(float in_time, bool in_isRunning)
 		{
-			m_time      = in_time;
-			m_isRunning = in_isRunning;
+			m_Time      = in_time;
+			m_IsRunning = in_isRunning;
 		}
 	};
 
@@ -61,7 +61,7 @@ public:
 	*/
 	int IsPlayerInCombat(lua_State* in_pLuaState)
 	{
-		lua_pushboolean(in_pLuaState, s_isPlayerInCombat);
+		lua_pushboolean(in_pLuaState, s_IsPlayerInCombat);
 
 		return 1;
 	}
@@ -133,7 +133,7 @@ public:
 	*/
 	int GetDeltaTime(lua_State* in_pLuaState)
 	{
-		lua_pushnumber(in_pLuaState, 1.0f / s_framerate);
+		lua_pushnumber(in_pLuaState, 1.0f / s_Framerate);
 
 		return 1;
 	}
@@ -164,7 +164,7 @@ public:
 			val = s_timers[key];
 		}
 
-		lua_pushnumber(in_pLuaState, val.m_time);
+		lua_pushnumber(in_pLuaState, val.m_Time);
 
 		return 1;
 	}
@@ -204,7 +204,7 @@ public:
 			return 1;
 		}
 
-		lua_pushnumber(in_pLuaState, s_timers[key].m_time);
+		lua_pushnumber(in_pLuaState, s_timers[key].m_Time);
 
 		return 1;
 	}
@@ -229,11 +229,11 @@ public:
 			{
 				if (lua_isboolean(in_pLuaState, 2))
 				{
-					s_timers[key].m_isRunning = lua_toboolean(in_pLuaState, 2);
+					s_timers[key].m_IsRunning = lua_toboolean(in_pLuaState, 2);
 				}
 				else
 				{
-					s_timers[key].m_time = lua_tonumber(in_pLuaState, 2);
+					s_timers[key].m_Time = lua_tonumber(in_pLuaState, 2);
 				}
 			}
 		}
