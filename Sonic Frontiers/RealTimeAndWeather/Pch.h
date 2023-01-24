@@ -4,7 +4,6 @@
 
 // Detours
 #include <Windows.h>
-#include <winhttp.h>
 #include <detours.h>
 
 // Standard library

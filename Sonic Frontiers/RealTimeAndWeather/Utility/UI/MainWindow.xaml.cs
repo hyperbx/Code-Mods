@@ -104,7 +104,6 @@ namespace RealTimeAndWeather.UI
             if (latitude == 0.0f && longitude == 0.0f)
                 await DialogHelper.ShowEmbedded("Welcome to Null Island.", "0°N, 0°E", "OK");
 
-            // TODO: 3rd arg.
             Finalise(latitude, longitude);
         }
 

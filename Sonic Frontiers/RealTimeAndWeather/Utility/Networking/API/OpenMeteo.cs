@@ -8,7 +8,7 @@ namespace RealTimeAndWeather
 {
     public class OpenMeteo
     {
-        public static List<City> GetCitiesByName(string name, bool removeDuplicates = true)
+        public static List<City> GetCitiesByName(string name)
         {
             if (!Client.IsAvailable())
             {

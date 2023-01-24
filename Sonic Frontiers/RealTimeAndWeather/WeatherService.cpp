@@ -1,5 +1,6 @@
 WeatherService::EWeatherType WeatherService::GetWeather()
 {
+	// TODO: temporary for testing.
 	return Sunny;
 
 	auto* hourly = &WeatherListener::m_CurrentInfo.m_HourlyRecords;
