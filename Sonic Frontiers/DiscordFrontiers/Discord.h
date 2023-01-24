@@ -9,7 +9,7 @@ public:
 	
 	inline static std::string Name = "Sonic Frontiers";
 
-	inline static std::string Details = "Idle";
+	inline static std::string Details = "";
 	inline static std::string State   = "";
 
 	inline static std::string LargeImageKey = "default";

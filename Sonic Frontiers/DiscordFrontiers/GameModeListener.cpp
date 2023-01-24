@@ -14,16 +14,16 @@ HOOK(void*, __fastcall, GameModeTutorialCtor, m_SigGameModeTutorialCtor(), void*
 
 HOOK(void*, __fastcall, GameModeFishingCtor, m_SigGameModeFishingCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	Discord::Update("Fishing", Discord::State, Discord::LargeImageKey, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+	Discord::Update("Fishing", Discord::Details, Discord::LargeImageKey, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
 
 	return originalGameModeFishingCtor(a1, a2, a3);
 }
 
 HOOK(void*, __fastcall, GameModeHackingCtor, m_SigGameModeHackingCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	if (StringHelper::Compare(GameModeListener::Stage, "w5r01"))
+	if (StringHelper::Compare(GameModeListener::Island, "w5r01"))
 	{
-		Discord::Update("vs. The End", "", GameModeListener::Stage, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+		Discord::Update("vs. The End", "", GameModeListener::Island, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
 	}
 	else
 	{
@@ -35,7 +35,7 @@ HOOK(void*, __fastcall, GameModeHackingCtor, m_SigGameModeHackingCtor(), void* a
 
 HOOK(void*, __fastcall, GameModeStageCtor, m_SigGameModeStageCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	GameModeListener::Update(GameModeListener::Stage);
+	GameModeListener::Update(GameModeListener::Island);
 
 	return originalGameModeStageCtor(a1, a2, a3);
 }
@@ -56,9 +56,20 @@ HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), voi
 
 HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t a1, int64_t a2, int* a3)
 {
-	Discord::State = "Exploring";
+	auto worldId = (const char*)(a1 + 0xA0);
 
-	GameModeListener::Stage = (const char*)(a1 + 0xA0);
+	if
+	(
+		worldId && !StringHelper::Compare(worldId, "w1f01") &&
+
+		/* It'd be nice if std::vector just had a .contains() function. */
+		std::find(GameModeListener::Islands.begin(), GameModeListener::Islands.end(), std::string(worldId).substr(0, 2)) != GameModeListener::Islands.end()
+	)
+	{
+		GameModeListener::Island = worldId;
+	}
+
+	Discord::State = "Exploring";
 
 	return originalGameModeStageUpdate(a1, a2, a3);
 }

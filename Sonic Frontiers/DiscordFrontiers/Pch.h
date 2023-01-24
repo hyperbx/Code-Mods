@@ -7,9 +7,11 @@
 #include <detours.h>
 
 // Standard library
+#include <algorithm>
 #include <cstdint>
 #include <cstdio>
 #include <unordered_map>
+#include <vector>
 
 // Dependencies
 #include <Discord/x64/include/discord_register.h>

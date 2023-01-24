@@ -3,7 +3,7 @@
 class GameModeListener
 {
 public:
-	inline static std::unordered_map<std::string, std::string> Stages =
+	inline static std::unordered_map<std::string, std::string> Worlds =
 	{
 		{ "w1r03", "Kronos Island" },
 		{ "w2r01", "Ares Island" },
@@ -11,6 +11,7 @@ public:
 		{ "w1r05", "Rhea Island" },
 		{ "w1r04", "Ouranos Island" },
 		{ "w5r01", "The End" },
+		{ "w1f01", "Fishing Spot" },
 		{ "w6d01", "1-1" },
 		{ "w8d01", "1-2" },
 		{ "w9d04", "1-3" },
@@ -43,6 +44,15 @@ public:
 		{ "w9d07", "4-9" }
 	};
 
+	inline static std::vector<std::string> Islands =
+	{
+		"w1",
+		"w2",
+		"w3",
+		"w5"
+	};
+
+	inline static std::string Island;
 	inline static std::string Stage;
 
 	static void Install();
@@ -51,10 +61,10 @@ public:
 
 	static std::string GetNameFromStageId(std::string in_stageId)
 	{
-		if (Stages.find(in_stageId) == Stages.end())
+		if (Worlds.find(in_stageId) == Worlds.end())
 			return "unknown";
 
-		return Stages[in_stageId];
+		return Worlds[in_stageId];
 	}
 };
 
