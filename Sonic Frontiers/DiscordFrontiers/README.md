@@ -1,4 +1,4 @@
-# [Discord Frontiers]()
+# [Discord Frontiers](https://gamebanana.com/mods/423887)
 A mod for Sonic Frontiers that adds Discord rich presence support.
 
 ## Credits
