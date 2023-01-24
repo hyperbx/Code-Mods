@@ -20,6 +20,6 @@ A repository containing DLL mods for various games.
 
 - Sonic Frontiers
   - [Combat DX](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/CombatDX)
-  - [Discord Frontiers]()
+  - [Discord Frontiers](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DiscordFrontiers)
   - [Island Music Customiser](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/IslandMusicCustomiser)
   - [Real Time and Weather](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/RealTimeAndWeather)
