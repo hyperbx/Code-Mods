@@ -1,0 +1,20 @@
+{
+  "StatusMainMenu": "Главное Меню",
+  "StatusExploring": "Исследование",
+  "StatusFishing": "Рыбалка",
+  "StatusHacking": "Взлом",
+  "StatusCredits": "Титры",
+  "LocationKronos": "Остров Кроноса",
+  "LocationAres": "Остров Ареса",
+  "LocationChaos": "Остров Хаоса",
+  "LocationRhea": "Остров Реи",
+  "LocationOuranos": "Остров Урана",
+  "LocationCyberSpace": "Цифровое Измерение",
+  "LocationTraining": "Симулятор Тренировок",
+  "LocationUnknown": "Неизвестно",
+  "BossGiganto": "Против Гиганта",
+  "BossWyvern": "Против Виверны",
+  "BossKnight": "Против Рыцаря",
+  "BossSupreme": "Против Командора",
+  "BossTheEnd": "Против Погибели"
+}

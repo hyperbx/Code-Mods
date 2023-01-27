@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iterator>
 #include <string>
+#include <sstream>
 #include <algorithm>
 
 class IOHelper
@@ -41,5 +42,20 @@ public:
 		return std::equal(std::istreambuf_iterator<char>(f1.rdbuf()),
 						  std::istreambuf_iterator<char>(),
 						  std::istreambuf_iterator<char>(f2.rdbuf()));
+	}
+
+	/// <summary>
+	/// Reads a plaintext file into a string.
+	/// </summary>
+	static std::string ReadString(const std::string& path)
+	{
+		std::ifstream txt(path);
+
+		std::stringstream buffer;
+		{
+			buffer << txt.rdbuf();
+		}
+
+		return buffer.str();
 	}
 };

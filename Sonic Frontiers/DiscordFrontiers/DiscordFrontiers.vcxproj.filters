@@ -5,6 +5,7 @@
     <ClInclude Include="GameModeListener.h" />
     <ClInclude Include="Discord.h" />
     <ClInclude Include="BossListener.h" />
+    <ClInclude Include="Configuration.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -13,5 +14,6 @@
     <ClCompile Include="GameModeListener.cpp" />
     <ClCompile Include="Discord.cpp" />
     <ClCompile Include="BossListener.cpp" />
+    <ClCompile Include="Configuration.cpp" />
   </ItemGroup>
 </Project>

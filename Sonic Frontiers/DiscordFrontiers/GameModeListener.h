@@ -5,13 +5,11 @@ class GameModeListener
 public:
 	inline static std::unordered_map<std::string, std::string> Worlds =
 	{
-		{ "w1r03", "Kronos Island" },
-		{ "w2r01", "Ares Island" },
-		{ "w3r01", "Chaos Island" },
-		{ "w1r05", "Rhea Island" },
-		{ "w1r04", "Ouranos Island" },
-		{ "w5r01", "The End" },
-		{ "w1f01", "Fishing Spot" },
+		{ "w1r03", "LocationKronos" },
+		{ "w2r01", "LocationAres" },
+		{ "w3r01", "LocationChaos" },
+		{ "w1r05", "LocationRhea" },
+		{ "w1r04", "LocationOuranos" },
 		{ "w6d01", "1-1" },
 		{ "w8d01", "1-2" },
 		{ "w9d04", "1-3" },

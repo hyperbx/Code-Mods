@@ -1,20 +1,20 @@
 HOOK(void*, __fastcall, GameModeTitleCtor, m_SigGameModeTitleCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	Discord::Update("Main Menu", "", "default", "", 0);
+	Discord::Update(LanguageHelper::Localise("StatusMainMenu"), "", "default", "", 0);
 
 	return originalGameModeTitleCtor(a1, a2, a3);
 }
 
 HOOK(void*, __fastcall, GameModeTutorialCtor, m_SigGameModeTutorialCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	Discord::Update("Training Simulator", "", "training", "default", TimeHelper::GetSystemEpoch());
+	Discord::Update(LanguageHelper::Localise("LocationTraining"), "", "training", "default", TimeHelper::GetSystemEpoch());
 
 	return originalGameModeTutorialCtor(a1, a2, a3);
 }
 
 HOOK(void*, __fastcall, GameModeFishingCtor, m_SigGameModeFishingCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	Discord::Update("Fishing", Discord::Details, Discord::LargeImageKey, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+	Discord::Update(LanguageHelper::Localise("StatusFishing"), Discord::Details, Discord::LargeImageKey, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
 
 	return originalGameModeFishingCtor(a1, a2, a3);
 }
@@ -23,11 +23,11 @@ HOOK(void*, __fastcall, GameModeHackingCtor, m_SigGameModeHackingCtor(), void* a
 {
 	if (StringHelper::Compare(GameModeListener::Island, "w5r01"))
 	{
-		Discord::Update("vs. The End", "", GameModeListener::Island, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+		Discord::Update(LanguageHelper::Localise("BossTheEnd"), "", GameModeListener::Island, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
 	}
 	else
 	{
-		Discord::Update("Hacking", "", "hacking", "default", TimeHelper::GetSystemEpoch());
+		Discord::Update(LanguageHelper::Localise("StatusHacking"), "", "hacking", "default", TimeHelper::GetSystemEpoch());
 	}
 
 	return originalGameModeHackingCtor(a1, a2, a3);
@@ -49,7 +49,7 @@ HOOK(void*, __fastcall, GameModeCyberStageCtor, m_SigGameModeCyberStageCtor(), v
 
 HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), void* a1, int64_t a2, int64_t a3)
 {
-	Discord::Update("Credits", "", "default", "", 0);
+	Discord::Update(LanguageHelper::Localise("StatusCredits"), "", "default", "", 0);
 
 	return originalGameModeStaffRollCtor(a1, a2, a3);
 }
@@ -69,7 +69,7 @@ HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64
 		GameModeListener::Island = worldId;
 	}
 
-	Discord::State = "Exploring";
+	Discord::State = LanguageHelper::Localise("StatusExploring");
 
 	return originalGameModeStageUpdate(a1, a2, a3);
 }
@@ -95,14 +95,15 @@ void GameModeListener::Update(std::string in_stageId, bool in_isCyberSpace)
 #endif
 
 	auto name = GetNameFromStageId(in_stageId);
+	auto unknown = LanguageHelper::Localise("LocationUnknown");
 
 	if (in_isCyberSpace)
 	{
 		Discord::Update
 		(
-			name == "unknown" ? "Unknown" : name,
-			"Cyber Space",
-			name == "unknown" ? name : in_stageId,
+			name == "unknown" ? unknown : name,
+			LanguageHelper::Localise("LocationCyberSpace"),
+			name == "unknown" ? unknown : in_stageId,
 			"default",
 			TimeHelper::GetSystemEpoch()
 		);
@@ -112,8 +113,8 @@ void GameModeListener::Update(std::string in_stageId, bool in_isCyberSpace)
 		Discord::Update
 		(
 			Discord::State,
-			name == "unknown" ? "Unknown" : name,
-			name == "unknown" ? name : in_stageId,
+			name == "unknown" ? unknown : LanguageHelper::Localise(name),
+			name == "unknown" ? unknown : in_stageId,
 			"default",
 			TimeHelper::GetSystemEpoch()
 		);

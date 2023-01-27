@@ -1,0 +1,20 @@
+{
+  "StatusMainMenu": "Menu Principal",
+  "StatusExploring": "A Explorar",
+  "StatusFishing": "A Pescar",
+  "StatusHacking": "A Hackear",
+  "StatusCredits": "Créditos",
+  "LocationKronos": "Kronos Island",
+  "LocationAres": "Ares Island",
+  "LocationChaos": "Chaos Island",
+  "LocationRhea": "Rhea Island",
+  "LocationOuranos": "Ouranos Island",
+  "LocationCyberSpace": "Ciberespaço",
+  "LocationTraining": "A Treinar no Simulador",
+  "LocationUnknown": "Desconhecido",
+  "BossGiganto": "vs. Giganto",
+  "BossWyvern": "vs. Wyvern",
+  "BossKnight": "vs. Knight",
+  "BossSupreme": "vs. Supreme",
+  "BossTheEnd": "vs. The End"
+}

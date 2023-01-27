@@ -127,6 +127,9 @@
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.ini"
+copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.json"
+xcopy /Y /E /I "$(MSBuildProjectDirectory)\Resources\Languages" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\Languages"
 copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\discord-rpc.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -179,17 +182,22 @@ copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildP
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.ini"
+copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.json"
+xcopy /Y /E /I "$(MSBuildProjectDirectory)\Resources\Languages" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\Languages"
 copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\discord-rpc.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BossListener.h" />
+    <ClInclude Include="Configuration.h" />
     <ClInclude Include="Discord.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="GameModeListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BossListener.cpp" />
+    <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Discord.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />

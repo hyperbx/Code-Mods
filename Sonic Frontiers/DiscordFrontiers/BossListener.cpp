@@ -2,19 +2,19 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 {
 	if (StringHelper::Compare(GameModeListener::Island, "w1r03"))
 	{
-		BossListener::Update("vs. Giganto");
+		BossListener::Update(LanguageHelper::Localise("BossGiganto"));
 	}
 	else if (StringHelper::Compare(GameModeListener::Island, "w2r01"))
 	{
-		BossListener::Update("vs. Wyvern");
+		BossListener::Update(LanguageHelper::Localise("BossWyvern"));
 	}
 	else if (StringHelper::Compare(GameModeListener::Island, "w3r01"))
 	{
-		BossListener::Update("vs. Knight");
+		BossListener::Update(LanguageHelper::Localise("BossKnight"));
 	}
 	else if (StringHelper::Compare(GameModeListener::Island, "w1r04"))
 	{
-		BossListener::Update("vs. Supreme");
+		BossListener::Update(LanguageHelper::Localise("BossSupreme"));
 	}
 
 	return originalStatePluginBossBattleCtor(a1, a2);

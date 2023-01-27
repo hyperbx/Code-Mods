@@ -1,0 +1,45 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "General",
+			"DisplayName": "General",
+			"Elements":
+			[
+				{
+					"Name": "language",
+					"DisplayName": "Language",
+					"Type": "LanguageType",
+					"DefaultValue": "English"
+				}
+			]
+        }
+    ],
+	"Enums": 
+	{
+		"LanguageType": 
+		[
+			{
+				"DisplayName": "English",
+				"Value": "en-GB"
+			},
+			{
+				"DisplayName": "Italiano (Italy)",
+				"Value": "it-IT"
+			},
+			{
+				"DisplayName": "Português (Portugal)",
+				"Value": "pt-PT"
+			},
+			{
+				"DisplayName": "Português (Brazil)",
+				"Value": "pt-BR"
+			},
+			{
+				"DisplayName": "Русский (Russian)",
+				"Value": "ru-RU"
+			},
+		]
+	},
+    "IniFile": "DiscordFrontiers.ini"
+}

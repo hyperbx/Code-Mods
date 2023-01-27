@@ -200,4 +200,14 @@ public:
 
 		return ss.str();
 	}
+
+	static std::string GetSubstringBeforeLastChar(const std::string str, char c)
+	{
+		const size_t index = str.rfind(c);
+
+		if (std::string::npos != index)
+			return str.substr(0, index);
+
+		return str;
+	}
 };
