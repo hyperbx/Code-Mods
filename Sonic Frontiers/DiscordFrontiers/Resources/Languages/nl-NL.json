@@ -1,0 +1,20 @@
+{
+  "StatusMainMenu": "Hoofdmenu",
+  "StatusExploring": "Aan Het Verkennen",
+  "StatusFishing": "Aan Het Vissen",
+  "StatusHacking": "Aan Het Hacken",
+  "StatusCredits": "Aftiteling",
+  "LocationKronos": "Kronos Island",
+  "LocationAres": "Ares Island",
+  "LocationChaos": "Chaos Island",
+  "LocationRhea": "Rhea Island",
+  "LocationOuranos": "Ouranos Island",
+  "LocationCyberSpace": "Cyberspace",
+  "LocationTraining": "Trainingssimulator",
+  "LocationUnknown": "Onbekend",
+  "BossGiganto": "vs. Giganto",
+  "BossWyvern": "vs. Wyvern",
+  "BossKnight": "vs. Knight",
+  "BossSupreme": "vs. Supreme",
+  "BossTheEnd": "vs. The End"
+}
