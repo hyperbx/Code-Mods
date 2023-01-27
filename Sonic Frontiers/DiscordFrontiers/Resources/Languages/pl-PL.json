@@ -1,0 +1,20 @@
+{
+  "StatusMainMenu": "Menu Główne",
+  "StatusExploring": "Zwiedzanie",
+  "StatusFishing": "Łowienie ryb",
+  "StatusHacking": "Hakowanie",
+  "StatusCredits": "Napisy Końcowe",
+  "LocationKronos": "Kronos Island",
+  "LocationAres": "Ares Island",
+  "LocationChaos": "Chaos Island",
+  "LocationRhea": "Rhea Island",
+  "LocationOuranos": "Ouranos Island",
+  "LocationCyberSpace": "Cyberprzestrzeń",
+  "LocationTraining": "Symulator Treningowy",
+  "LocationUnknown": "Nieznane",
+  "BossGiganto": "Kontra Giganto",
+  "BossWyvern": "Kontra Wyvern",
+  "BossKnight": "Kontra Knight",
+  "BossSupreme": "Kontra Supreme",
+  "BossTheEnd": "Kontra The End"
+}
