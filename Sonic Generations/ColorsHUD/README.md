@@ -6,4 +6,4 @@ Source code for the DLL used in the Sonic Colors HUD and UI mod for Sonic Genera
 - [PTKickass](https://github.com/PTKickass) - reverse-engineering
 - [M&M](https://github.com/ActualMandM) - reverse-engineering
 - [brianuuu](https://github.com/brianuuu) - reverse-engineering
-- [NextinHKRY](https://gamebanana.com/members/2015101) - UI editing
+- [NextinHKRY](https://github.com/NextinMono) - UI editing
