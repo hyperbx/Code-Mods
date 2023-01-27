@@ -28,6 +28,14 @@
 				"Value": "it-IT"
 			},
 			{
+				"DisplayName": "Deutsch (German)",
+				"Value": "de-DE"
+			},
+			{
+				"DisplayName": "Español (Argentina)",
+				"Value": "es-AR"
+			},
+			{
 				"DisplayName": "Português (Portugal)",
 				"Value": "pt-PT"
 			},
