@@ -59,6 +59,14 @@
 				"DisplayName": "Русский (Russian)",
 				"Value": "ru-RU"
 			},
+			{
+				"DisplayName": "中文繁體 (Chinese Traditional)",
+				"Value": "zh-TW"
+			},
+			{
+				"DisplayName": "中文简体 (Chinese Simplified)",
+				"Value": "zh-CN"
+			},
 		]
 	},
     "IniFile": "DiscordFrontiers.ini"
