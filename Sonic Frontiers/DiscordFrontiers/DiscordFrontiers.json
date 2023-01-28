@@ -24,6 +24,10 @@
 				"Value": "en-GB"
 			},
 			{
+				"DisplayName": "Français (France)",
+				"Value": "fr-FR"
+			},
+			{
 				"DisplayName": "Italiano (Italy)",
 				"Value": "it-IT"
 			},
