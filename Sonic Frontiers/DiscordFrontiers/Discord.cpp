@@ -16,7 +16,7 @@ void Discord::Update(std::string in_state, std::string in_details, std::string i
     Client.largeImageText  = in_details.c_str();
 
     Discord::SmallImageKey = Client.smallImageKey = in_smallImageKey.c_str();
-    Client.smallImageText  = Name.c_str();
+    Client.smallImageText  = LanguageHelper::Localise("Game").c_str();
 
     Discord::StartTime = Client.startTimestamp = in_startTime;
 
