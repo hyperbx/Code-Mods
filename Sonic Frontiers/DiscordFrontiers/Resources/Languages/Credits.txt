@@ -1,14 +1,14 @@
-English - Hyper
-Français (France) - LJSTAR
-Italiano (Italy) - NextinHKRY
-Dutch (Netherlands) - Lady Lunanova
-Deutsch (German) - Kitzu
-Español (Argentina) - ChaosX
-Nynorsk (Norwegian) - Đo
-Polski (Polish) - Kwasior
-Português (Portugal) - PTKickass
-Português (Brazil) - Tio Illuminati
-Русский (Russian) - Nonami
-日本語 (Japanese) - JoeyLaw
-中文繁體 (Chinese Traditional) - JoeyLaw
-中文简体 (Chinese Simplified) - JoeyLaw
+Hyper - English
+LJSTAR - Français (France)
+NextinHKRY - Italiano (Italy)
+Lady Lunanova - Dutch (Netherlands)
+Kitzu - Deutsch (German)
+ChaosX - Español (Argentina)
+Đo - Nynorsk (Norwegian)
+Kwasior - Polski (Polish)
+PTKickass - Português (Portugal)
+Tio Illuminati - Português (Brazil)
+Nonami - Русский (Russian)
+JoeyLaw - 日本語 (Japanese)
+JoeyLaw - 中文繁體 (Chinese Traditional)
+JoeyLaw - 中文简体 (Chinese Simplified)
