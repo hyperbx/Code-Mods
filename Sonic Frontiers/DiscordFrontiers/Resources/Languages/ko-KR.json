@@ -1,0 +1,21 @@
+{
+  "Game": "소닉 프론티어",
+  "StatusMainMenu": "메인 메뉴",
+  "StatusExploring": "오픈 존 탐험중",
+  "StatusFishing": "낚시중",
+  "StatusHacking": "해킹중",
+  "StatusCredits": "스탭롤",
+  "LocationKronos": "크로노스섬",
+  "LocationAres": "아레스섬",
+  "LocationChaos": "카오스섬",
+  "LocationRhea": "레이아섬",
+  "LocationOuranos": "우라노스섬",
+  "LocationCyberSpace": "전뇌공간",
+  "LocationTraining": "가상공간",
+  "LocationUnknown": "어딘가",
+  "BossGiganto": "vs. Giganto",
+  "BossWyvern": "vs. Wyvern",
+  "BossKnight": "vs. Knight",
+  "BossSupreme": "vs. Supreme",
+  "BossTheEnd": "vs. The End"
+}
