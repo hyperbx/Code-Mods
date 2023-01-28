@@ -1,0 +1,20 @@
+{
+  "StatusMainMenu": "メインメニュー",
+  "StatusExploring": "探検",
+  "StatusFishing": "釣り",
+  "StatusHacking": "ハッキング",
+  "StatusCredits": "クレジット",
+  "LocationKronos": "クロノス島",
+  "LocationAres": "アレス島",
+  "LocationChaos": "カオス島",
+  "LocationRhea": "レイア島",
+  "LocationOuranos": "ウラノス島",
+  "LocationCyberSpace": "電脳空間",
+  "LocationTraining": "トレーニング",
+  "LocationUnknown": "Unknown",
+  "BossGiganto": "vs. Giganto",
+  "BossWyvern": "vs. Wyvern",
+  "BossKnight": "vs. Knight",
+  "BossSupreme": "vs. Supreme",
+  "BossTheEnd": "vs. The End"
+}

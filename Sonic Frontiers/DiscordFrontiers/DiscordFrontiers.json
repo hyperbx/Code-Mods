@@ -60,6 +60,10 @@
 				"Value": "ru-RU"
 			},
 			{
+				"DisplayName": "日本語 (Japanese)",
+				"Value": "ja-JP"
+			},
+			{
 				"DisplayName": "中文繁體 (Chinese Traditional)",
 				"Value": "zh-TW"
 			},
