@@ -17,4 +17,5 @@
 #include <Signature.h>
 
 // Internal headers
+#include "Time.h"
 #include "ScriptSequenceExtras.h"

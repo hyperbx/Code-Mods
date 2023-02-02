@@ -186,6 +186,7 @@
   <ItemGroup>
     <ClInclude Include="Pch.h" />
     <ClInclude Include="ScriptSequenceExtras.h" />
+    <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />

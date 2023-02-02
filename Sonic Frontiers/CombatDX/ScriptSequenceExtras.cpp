@@ -23,10 +23,11 @@ HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::Scr
 	originalRegisterLuaCallback(in_pThis, in_pScript);
 
 	auto* luaWrapper = in_pScript->GetLuaWrapper();
+	auto* pLuaState = luaWrapper->pLuaState;
 
-	if (luaWrapper->pLuaState != LUA_OK)
+	if (pLuaState != LUA_OK)
 	{
-		auto result = lua_tostring(luaWrapper->pLuaState, -1);
+		auto result = lua_tostring(pLuaState, -1);
 
 		if (result != nullptr)
 		{
@@ -56,18 +57,19 @@ HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::Scr
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::DestroyTimer)>();
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::GetTimer)>();
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::SetTimer)>();
+	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::GetTime)>();
 }
 
 SIGNATURE_SCAN
 (
-	m_sigSetLifeGaugeVisibility,
+	m_SigSetLifeGaugeVisibility,
 
 	0x1404FC490,
 
 	"\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x81\xEC\x80\x00\x00\x00\x0F\xB6", "xxxxxxxxxxxxxxxxxxxxxxxxx"
 );
 
-HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_sigSetLifeGaugeVisibility(), int64_t a1, char in_showHealth)
+HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_SigSetLifeGaugeVisibility(), int64_t a1, char in_showHealth)
 {
 	ScriptSequenceExtras::s_IsPlayerInCombat = in_showHealth == 1;
 
@@ -76,14 +78,14 @@ HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_sigSetLifeGaugeVisibility()
 
 SIGNATURE_SCAN
 (
-	m_sigChangeAnimation,
+	m_SigChangeAnimation,
 
 	0x1407A7710,
 
 	"\x40\x53\x48\x83\xEC\x20\x48\x8B\xDA\x41\x80", "xxxxxxxxxxx"
 );
 
-HOOK(int64_t, __fastcall, ChangeAnimation, m_sigChangeAnimation(), int64_t a1, const char* in_animationName, char a3)
+HOOK(int64_t, __fastcall, ChangeAnimation, m_SigChangeAnimation(), int64_t a1, const char* in_animationName, char a3)
 {
 	ScriptSequenceExtras::s_pAnimationName = in_animationName;
 
@@ -92,14 +94,14 @@ HOOK(int64_t, __fastcall, ChangeAnimation, m_sigChangeAnimation(), int64_t a1, c
 
 SIGNATURE_SCAN
 (
-	m_sigFrameLimiter,
+	m_SigFrameLimiter,
 
 	0x140BB9ED0,
 
 	"\x48\x89\x5C\x24\x10\x48\x89\x74\x24\x20\x57\x48\x83\xEC\x50\xF3", "xxxxxxxxxxxxxxxx"
 );
 
-HOOK(float, __fastcall, FrameLimiter, m_sigFrameLimiter(), int64_t a1, char a2)
+HOOK(float, __fastcall, FrameLimiter, m_SigFrameLimiter(), int64_t a1, char a2)
 {
 	ScriptSequenceExtras::s_Framerate = *(float*)(a1 + 0x14);
 
@@ -117,10 +119,28 @@ HOOK(float, __fastcall, FrameLimiter, m_sigFrameLimiter(), int64_t a1, char a2)
 	return originalFrameLimiter(a1, a2);
 }
 
+SIGNATURE_SCAN
+(
+	m_SigSetTime,
+
+	0x147E22D20,
+
+	"\xF3\x0F\x10\x44\x24\x28\xF3\x0F\x58\x41\x0C", "xxxxxxxxxxx"
+);
+
+HOOK(int64_t, __fastcall, SetTime, m_SigSetTime(), Time* in_time, int in_days, int in_hours, int in_minutes, float in_seconds)
+{
+	if (in_time)
+		ScriptSequenceExtras::s_pTime = in_time;
+
+	return originalSetTime(in_time, in_days, in_hours, in_minutes, in_seconds);
+}
+
 void ScriptSequenceExtras::Install()
 {
 	INSTALL_HOOK(RegisterLuaCallback);
 	INSTALL_HOOK(SetLifeGaugeVisibility);
 	INSTALL_HOOK(ChangeAnimation);
 	INSTALL_HOOK(FrameLimiter);
+	INSTALL_HOOK(SetTime);
 }

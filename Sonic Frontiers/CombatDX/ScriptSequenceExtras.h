@@ -26,6 +26,7 @@ public:
 	inline static bool s_IsPlayerInCombat = false;
 	inline static const char* s_pAnimationName;
 	inline static float s_Framerate = 0.0f;
+	inline static Time* s_pTime;
 
 	struct Timer
 	{
@@ -243,5 +244,27 @@ public:
 		}
 
 		return 0;
+	}
+
+	/*
+		Function signature: GetTime() : table
+	*/
+	int GetTime(lua_State* in_pLuaState)
+	{
+		lua_createtable(in_pLuaState, 0, 4);
+
+		lua_pushnumber(in_pLuaState, s_pTime->Days);
+		lua_setfield(in_pLuaState, -2, "Day");
+
+		lua_pushnumber(in_pLuaState, s_pTime->Hours);
+		lua_setfield(in_pLuaState, -2, "Hour");
+
+		lua_pushnumber(in_pLuaState, s_pTime->Minutes);
+		lua_setfield(in_pLuaState, -2, "Minute");
+
+		lua_pushnumber(in_pLuaState, s_pTime->Seconds);
+		lua_setfield(in_pLuaState, -2, "Second");
+
+		return 1;
 	}
 };
