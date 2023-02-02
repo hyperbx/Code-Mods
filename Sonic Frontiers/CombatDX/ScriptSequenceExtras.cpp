@@ -2,14 +2,23 @@ typedef int (app::ScriptSequence::* SequenceFuncPtr)(lua_State*);
 
 SIGNATURE_SCAN
 (
-	m_sigRegisterLuaCallback,
+	m_SigRegisterLuaCallback,
 
 	0x14087EF20,
 
 	"\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x48\x8B\xF9\x48\x8B\xCA", "xxxxxxxxxxxxxxxxxxxxx"
 );
 
-HOOK(void, __fastcall, RegisterLuaCallback, m_sigRegisterLuaCallback(), app::ScriptSequence* in_pThis, app::game::Script* in_pScript)
+void PushLuaLibrary(lua_State* in_pLuaState, const char* in_pLibName, lua_CFunction in_function)
+{
+	// Load Lua function to require.
+	luaL_requiref(in_pLuaState, in_pLibName, in_function, 1);
+
+	// Pop function from stack.
+	lua_pop(in_pLuaState, 1);
+}
+
+HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::ScriptSequence* in_pThis, app::game::Script* in_pScript)
 {
 	originalRegisterLuaCallback(in_pThis, in_pScript);
 
@@ -26,6 +35,15 @@ HOOK(void, __fastcall, RegisterLuaCallback, m_sigRegisterLuaCallback(), app::Scr
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 		}
 	}
+
+	PushLuaLibrary(pLuaState, "", luaopen_base);
+	PushLuaLibrary(pLuaState, LUA_COLIBNAME, luaopen_coroutine);
+	PushLuaLibrary(pLuaState, LUA_TABLIBNAME, luaopen_table);
+	PushLuaLibrary(pLuaState, LUA_STRLIBNAME, luaopen_string);
+	PushLuaLibrary(pLuaState, LUA_UTF8LIBNAME, luaopen_utf8);
+	PushLuaLibrary(pLuaState, LUA_MATHLIBNAME, luaopen_math);
+	PushLuaLibrary(pLuaState, LUA_DBLIBNAME, luaopen_debug);
+	PushLuaLibrary(pLuaState, LUA_LOADLIBNAME, luaopen_package);
 
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::IsPlayerInCombat)>();
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::GetCurrentAnimationName)>();
