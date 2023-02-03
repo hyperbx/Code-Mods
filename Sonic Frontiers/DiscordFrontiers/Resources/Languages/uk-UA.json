@@ -1,0 +1,21 @@
+{
+  "Game": "Sonic Frontiers",
+  "StatusMainMenu": "Головне Меню",
+  "StatusExploring": "Досліджує",
+  "StatusFishing": "Рибалить",
+  "StatusHacking": "Хакає",
+  "StatusCredits": "Титри",
+  "LocationKronos": "Острів Кроноса",
+  "LocationAres": "Острів Ареса",
+  "LocationChaos": "Острів Хаоса",
+  "LocationRhea": "Острів Реї",
+  "LocationOuranos": "Острів Урана",
+  "LocationCyberSpace": "Кіберпростір",
+  "LocationTraining": "Симулятор тренувань",
+  "LocationUnknown": "Невідомо",
+  "BossGiganto": "Проти Гіганта",
+  "BossWyvern": "Проти Віверни",
+  "BossKnight": "Проти Лицаря",
+  "BossSupreme": "Проти Отамана",
+  "BossTheEnd": "Проти Загибелі"
+}

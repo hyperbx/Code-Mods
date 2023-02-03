@@ -64,6 +64,10 @@
 				"Value": "ru-RU"
 			},
 			{
+				"DisplayName": "Українська (Ukrainian)",
+				"Value": "uk-UA"
+			},
+			{
 				"DisplayName": "日本語 (Japanese)",
 				"Value": "ja-JP"
 			},

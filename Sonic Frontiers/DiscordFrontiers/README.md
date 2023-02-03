@@ -18,6 +18,7 @@ A mod for Sonic Frontiers that adds Discord rich presence support.
 - [Tio Illuminati](https://twitter.com/ImTioIlluminati) - Português (Brazil)
 - [Nonami](https://gamebanana.com/members/1696613) - Русский (Russian)
 - [ik-01](https://github.com/ik-01) - Русский (Russian) reviewing
+- [Dunker961](https://github.com/Dunker961) - Українська (Ukrainian)
 - [JoeyLaw](https://www.youtube.com/@joeylaw123) - 日本語 (Japanese)
 - [JoeyLaw](https://www.youtube.com/@joeylaw123) - 中文繁體 (Chinese Traditional)
 - [JoeyLaw](https://www.youtube.com/@joeylaw123) - 中文简体 (Chinese Simplified)
