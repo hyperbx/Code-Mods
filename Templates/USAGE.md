@@ -1,1 +1,0 @@
-Place these folders in ~/Documents/Visual Studio 2022/ProjectTemplates/ and they should appear when you create a new project in Visual Studio.
