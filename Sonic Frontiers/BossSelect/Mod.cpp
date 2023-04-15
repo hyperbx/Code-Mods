@@ -81,39 +81,38 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
 
 			if (battleRushParameter)
 			{
-				// Set rank times.
-				for (int stage = 0; stage < 4; stage++)
+				for (int stageIdx = 0; stageIdx < 4; stageIdx++)
 				{
-					for (int rank = 0; rank < 4; rank++)
-					{
-						switch (m_Difficulty)
-						{
-							case EDifficulty_Easy:
-								battleRushParameter->stages[stage].phaseRank[0].rankTime[rank]    = m_Easy[stage][rank];
-								battleRushParameter->stages[stage].phaseRank[0].rankTimeAll[rank] = m_EasyAll[stage][rank];
-								break;
+					auto& stage = battleRushParameter->stages[stageIdx];
 
-							case EDifficulty_Medium:
-								battleRushParameter->stages[stage].phaseRank[0].rankTime[rank]    = m_Medium[stage][rank];
-								battleRushParameter->stages[stage].phaseRank[0].rankTimeAll[rank] = m_MediumAll[stage][rank];
-								break;
-
-							case EDifficulty_Hard:
-								battleRushParameter->stages[stage].phaseRank[0].rankTime[rank]    = m_Hard[stage][rank];
-								battleRushParameter->stages[stage].phaseRank[0].rankTimeAll[rank] = m_HardAll[stage][rank];
-								break;
-						}
-					}
-				}
-
-				for (auto& stage : battleRushParameter->stages)
-				{
 					// This probably isn't needed, but why not.
 					stage.numPhases = 1;
 
 					// Remove time limit from phases.
 					for (auto& phaseLimitTime : stage.phaseLimitTime)
 						phaseLimitTime = 0.0f;
+
+					// Set rank times.
+					for (int rankIdx = 0; rankIdx < 4; rankIdx++)
+					{
+						switch (m_Difficulty)
+						{
+							case EDifficulty_Easy:
+								stage.phaseRank[0].rankTime[rankIdx]    = m_Easy[stageIdx][rankIdx];
+								stage.phaseRank[0].rankTimeAll[rankIdx] = m_EasyAll[stageIdx][rankIdx];
+								break;
+
+							case EDifficulty_Medium:
+								stage.phaseRank[0].rankTime[rankIdx]    = m_Medium[stageIdx][rankIdx];
+								stage.phaseRank[0].rankTimeAll[rankIdx] = m_MediumAll[stageIdx][rankIdx];
+								break;
+
+							case EDifficulty_Hard:
+								stage.phaseRank[0].rankTime[rankIdx]    = m_Hard[stageIdx][rankIdx];
+								stage.phaseRank[0].rankTimeAll[rankIdx] = m_HardAll[stageIdx][rankIdx];
+								break;
+						}
+					}
 				}
 			}
 		}
