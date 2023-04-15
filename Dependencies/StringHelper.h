@@ -201,13 +201,30 @@ public:
 		return ss.str();
 	}
 
-	static std::string GetSubstringBeforeLastChar(const std::string str, char c)
+	static std::string GetSubstringBeforeLastChar(const std::string str, char c, int cIndex = 0)
 	{
+		std::string result;
 		const size_t index = str.rfind(c);
 
 		if (std::string::npos != index)
-			return str.substr(0, index);
+			result = str.substr(0, index);
 
-		return str;
+		for (int i = 0; i < cIndex; i++)
+			return GetSubstringBeforeLastChar(result, c, i);
+
+		return result;
+	}
+
+	static std::string WideCharToString(const wchar_t* wCharArray)
+	{
+		int size = WideCharToMultiByte(CP_ACP, 0, wCharArray, -1, NULL, 0, NULL, NULL);
+		char* charArray = new char[size];
+
+		WideCharToMultiByte(CP_ACP, 0, wCharArray, -1, charArray, size, NULL, NULL);
+
+		std::string result(charArray);
+		delete[] charArray;
+
+		return result;
 	}
 };

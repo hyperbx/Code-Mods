@@ -4,6 +4,8 @@
 #define offsetof(s, m) ((size_t)&(((s*)0)->m))
 #endif
 
+#define EXPORT extern "C" __declspec(dllexport)
+
 #define _CONCAT2(x, y) x##y
 #define CONCAT2(x, y) _CONCAT(x, y)
 #define INSERT_PADDING(length) \
@@ -58,17 +60,16 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     returnType callingConvention implOf##className##functionName(className* This, __VA_ARGS__)
 
 #define INSTALL_VTABLE_HOOK(className, object, functionName, functionIndex) \
-{ \
-    void** addr = &(*(void***)object)[functionIndex]; \
-    if (*addr != implOf##className##functionName) \
-    { \
-        original##className##functionName = (className##functionName*)*addr; \
-        DWORD oldProtect; \
-        VirtualProtect(addr, sizeof(void*), PAGE_EXECUTE_READWRITE, &oldProtect); \
-        *addr = implOf##className##functionName; \
-        VirtualProtect(addr, sizeof(void*), oldProtect, &oldProtect); \
-    } \
-}
+    do { \
+        if (original##className##functionName == nullptr) \
+        { \
+            original##className##functionName = (*(className##functionName***)object)[functionIndex]; \
+            DetourTransactionBegin(); \
+            DetourUpdateThread(GetCurrentThread()); \
+            DetourAttach((void**)&original##className##functionName, implOf##className##functionName); \
+            DetourTransactionCommit(); \
+        } \
+    } while(0)
 
 #define WRITE_MEMORY(location, type, ...) \
 { \
@@ -143,4 +144,6 @@ uint32_t name = *(uint32_t*)location; \
     } \
 }
 
-#define LERP(a, b, t) a + (b - a) * t
+#define LERP(a, b, t) (a + (b - a) * t)
+
+#define SIGN(a) (a < 0 ? a * -1 : a)
