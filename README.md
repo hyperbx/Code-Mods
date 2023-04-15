@@ -19,6 +19,7 @@ A repository containing DLL mods for various games.
   - [Tails' Dash Rings in Stages](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Generations/TailsDashRingsInStages)
 
 - Sonic Frontiers
+  - [Boss Select](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/BossSelect)
   - [Combat DX](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/CombatDX)
   - [Discord Frontiers](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DiscordFrontiers)
   - [Island Music Customiser](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/IslandMusicCustomiser)
