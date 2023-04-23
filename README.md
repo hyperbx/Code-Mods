@@ -2,6 +2,9 @@
 A repository containing DLL mods for various games.
 
 ## Index
+- Project '06
+  - [Uncapped Framerate](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Project%20%3906/UncappedFramerate)
+
 - Sonic Colours: Ultimate
   - [Gameplay & UI Fixes](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Colours%20Ultimate/GameplayAndUIFixes)
 
