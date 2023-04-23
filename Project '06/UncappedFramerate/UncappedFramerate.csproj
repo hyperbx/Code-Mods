@@ -330,9 +330,9 @@
     <Compile Include="Helpers\InputHelper.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Patches\JiggleBonesController.cs" />
-    <Compile Include="Patches\Scenes\csc_b_xx.cs" />
+    <Compile Include="Patches\Scenes\csc_b.cs" />
     <Compile Include="Patches\StageManager.cs" />
-    <Compile Include="Patches\Scenes\wvo_a_sn.cs" />
+    <Compile Include="Patches\Scenes\wvo_a.cs" />
     <Compile Include="Transpilers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

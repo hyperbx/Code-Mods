@@ -1,7 +1,6 @@
 ﻿using MelonLoader;
 using UncappedFramerate.Patches.Scenes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UncappedFramerate
 {
@@ -32,12 +31,16 @@ namespace UncappedFramerate
             switch (sceneName)
             {
                 case "wvo_a_sn":
-                    wvo_a_sn.ApplyPatches();
+                    wvo_a.SN_FixWhaleChase();
                     break;
 
                 case "csc_b_sn":
                 case "csc_b_sd":
-                    csc_b_xx.ApplyPatches();
+                    csc_b.SN_SD_FixRooftopRoundabout();
+                    break;
+
+                case "csc_b_sv":
+                    csc_b.SV_FixMisalignedSpring();
                     break;
             }
         }

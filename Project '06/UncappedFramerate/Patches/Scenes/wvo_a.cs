@@ -2,15 +2,12 @@
 
 namespace UncappedFramerate.Patches.Scenes
 {
-    public class wvo_a_sn
+    public class wvo_a
     {
-        static void FixWhaleChase()
+        public static void SN_FixWhaleChase()
         {
-            var dashPanels = Resources.FindObjectsOfTypeAll<DashPanel>();
+            var dashPanels = Resources.FindObjectsOfTypeAll<global::DashPanel>();
 
-            /* Unity is fucking stupid and doesn't return
-               inactive objects through GameObject.Find(),
-               so we have to do this garbage. */
             foreach (var dashPanel in dashPanels)
             {
                 if (dashPanel.name == "dashpanel22")
@@ -19,11 +16,6 @@ namespace UncappedFramerate.Patches.Scenes
                     dashPanel.transform.position = new Vector3(338.0772f, 4.838f, -921.7548f);
                 }
             }
-        }
-
-        public static void ApplyPatches()
-        {
-            FixWhaleChase();
         }
     }
 }
