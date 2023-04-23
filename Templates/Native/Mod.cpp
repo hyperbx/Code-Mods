@@ -1,17 +1,14 @@
-extern "C"
+EXPORT void Init()
 {
-	_declspec(dllexport) void Init()
-	{
 
-	}
+}
 
-	_declspec(dllexport) void PostInit()
-	{
+EXPORT void PostInit()
+{
 
-	}
+}
 
-	_declspec(dllexport) void OnFrame()
-	{
+EXPORT void OnFrame()
+{
 
-	}
 }

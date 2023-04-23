@@ -16,9 +16,9 @@ namespace $safeprojectname$
         /// This function is called when this mod is unregistered by another mod.
         /// Use this function to unload any additional assets and dependencies that are being used.
         /// </summary>
-		public override void OnDeinitializeMelon()
-		{
-			
-		}
+        public override void OnDeinitializeMelon()
+        {
+            
+        }
     }
 }
