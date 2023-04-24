@@ -3,6 +3,7 @@ A repository containing DLL mods for various games.
 
 ## Index
 - Project '06
+  - [E3 Life Icon Redesign](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Project%20'06/E3LifeIconRedesign)
   - [Uncapped Framerate](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Project%20'06/UncappedFramerate)
 
 - Sonic Colours: Ultimate
