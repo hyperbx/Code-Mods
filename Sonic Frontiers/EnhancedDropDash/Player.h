@@ -17,6 +17,7 @@ public:
 		(
 			std::unordered_map<int, int>
 			{
+				FINPUT.GetVirtualKeysFromActionType(FrontiersInput::ActionType_ACT_Jump),
 				FINPUT.GetVirtualKeysFromActionType(FrontiersInput::ActionType_ACT_StompAttack)
 			}
 		);

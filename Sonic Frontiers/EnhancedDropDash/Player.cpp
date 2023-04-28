@@ -1,6 +1,7 @@
 bool m_IsDropDash              = false;
 bool m_IsDropDashFromSlide     = false;
 bool m_IsDropDashFromStomp     = false;
+bool m_IsJumpInputBuffered     = false;
 bool m_IsUncurlInputBuffered   = false;
 bool m_IsUncurlTriggerBuffered = false;
 
@@ -16,6 +17,7 @@ FUNCTION_PTR(bool, __fastcall, fpExitStateWithTricks, m_SigExitStateWithTricks()
 HOOK(int64_t, __fastcall, DropDashStart, m_SigDropDashStart(), int64_t a1, int64_t a2)
 {
 	m_IsDropDash              = true;
+	m_IsJumpInputBuffered     = InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A);
 	m_IsUncurlInputBuffered   = InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B);
 	m_IsUncurlTriggerBuffered = InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD;
 
@@ -40,6 +42,9 @@ HOOK(int64_t, __fastcall, DropDashStart, m_SigDropDashStart(), int64_t a1, int64
 
 HOOK(bool, __fastcall, DropDashUpdate, m_SigDropDashUpdate(), int64_t a1, int64_t a2)
 {
+	if (!InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A))
+		m_IsJumpInputBuffered = false;
+
 	if (!InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B))
 		m_IsUncurlInputBuffered = false;
 
@@ -53,7 +58,8 @@ HOOK(bool, __fastcall, DropDashUpdate, m_SigDropDashUpdate(), int64_t a1, int64_
 		goto Uncurl;
 	}
 
-	if (!m_IsUncurlInputBuffered && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B))
+	if (!m_IsUncurlInputBuffered && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B) ||
+		!m_IsJumpInputBuffered && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A))
 	{
 	Uncurl:
 		bool isGrounded = *(bool*)((*(int64_t*)(a2 + 72) + 400) + 53) & 2;
