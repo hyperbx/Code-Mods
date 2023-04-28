@@ -1,0 +1,159 @@
+{
+    "Groups":
+	[
+		{
+			"Name": "Physics",
+			"DisplayName": "Physics",
+			"Elements":
+			[
+				{
+					"Name": "IsEnhancedIslandPhysics",
+					"DisplayName": "Use Enhanced Physics on Islands",
+					"Description":
+					[
+						"Use physics parameters that allow you to move when drop dashing.\n",
+						"These are identical to the parameters used by \"Tighter Drop Dash Rotation\" and will not conflict with other physics mods or codes.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsEnhancedCyberPhysics",
+					"DisplayName": "Use Enhanced Physics in Cyber Space",
+					"Description":
+					[
+						"Use physics parameters that allow you to move when drop dashing.\n",
+						"These are identical to the parameters used by \"Tighter Drop Dash Rotation\" and will not conflict with other physics mods or codes.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "Controls",
+			"DisplayName": "Controls",
+			"Elements":
+			[
+				{
+					"Name": "IsDropDashOnSlide",
+					"DisplayName": "Enable Drop Dash on Slide",
+					"Description":
+					[
+						"Instantly drop dash on the ground by sliding.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashOnStomp",
+					"DisplayName": "Enable Drop Dash on Stomp",
+					"Description":
+					[
+						"Instantly drop dash in the air by stomping.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "StompVelocityThreshold",
+					"DisplayName": "Drop Dash Stomp Velocity Threshold",
+					"Description":
+					[
+						"The velocity Sonic must be at to allow him to drop dash in the air.\n",
+						"Set this to zero to drop dash regardless of velocity.\n",
+						"Default: 25.0"
+					],
+					"Type": "float",
+					"DefaultValue": 25.0
+				}
+			]
+		},
+	    {
+			"Name": "Behaviour",
+			"DisplayName": "Behaviour",
+			"Elements":
+			[
+				{
+					"Name": "IsUncurlWhenUngrounded",
+					"DisplayName": "Automatically Uncurl when Ungrounded",
+					"Description":
+					[
+						"Automatically uncurl Sonic when he becomes ungrounded, allowing him to perform tricks.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsStompAllowedUngroundedUncurl",
+					"DisplayName": "Allow Automatic Uncurl with Stomp",
+					"Description":
+					[
+						"Allows Sonic to automatically uncurl when becoming ungrounded when initiating a drop dash by stomping.\n",
+						"This will make stomp act as an immediate trick button.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsGrindDoubleJumpFix",
+					"DisplayName": "Fix Grind Drop Dashing",
+					"Description":
+					[
+						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+        },
+		{
+			"Name": "Camera",
+			"DisplayName": "Camera",
+			"Elements":
+			[
+				{
+					"Name": "IsNoCameraDelay",
+					"DisplayName": "Disable Drop Dash Camera Delay",
+					"Description":
+					[
+						"Disables the drop dash camera delay when entering it normally.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoSlideCameraDelay",
+					"DisplayName": "Disable Drop Dash Camera Delay on Slide",
+					"Description":
+					[
+						"Disables the drop dash camera delay when entering it by sliding.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoStompCameraDelay",
+					"DisplayName": "Disable Drop Dash Camera Delay on Stomp",
+					"Description":
+					[
+						"Disables the drop dash camera delay when entering it by stomping.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+			]
+		}
+    ],
+    "IniFile": "EnhancedDropDash.ini"
+}

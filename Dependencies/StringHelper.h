@@ -227,4 +227,14 @@ public:
 
 		return result;
 	}
+
+	static wchar_t* StringToWideChar(const std::string str)
+	{
+		int length = ::MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, NULL, 0);
+		wchar_t* buffer = new wchar_t[length];
+
+		::MultiByteToWideChar(CP_UTF8, 0, str.c_str(), -1, buffer, length);
+
+		return buffer;
+	}
 };

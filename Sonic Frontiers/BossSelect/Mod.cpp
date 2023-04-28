@@ -60,14 +60,7 @@ std::unordered_map<uint8_t, std::vector<uint32_t>> m_HardAll =
 	{ STAGE_SUPREME, { 815, 935, 1055, 1175 } },
 };
 
-SIG_SCAN
-(
-	m_SigLoadAsset,
-
-	0x140D81C50,
-
-	"\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x81\xEC\xD0\x00\x00\x00\x49\x8B\xF8", "xxxxxxxxxxxxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigLoadAsset, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x81\xEC\xD0\x00\x00\x00\x49\x8B\xF8", "xxxxxxxxxxxxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* in_assetName, const char** in_resourceType)
 {
@@ -121,14 +114,7 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
 	return result;
 }
 
-SIG_SCAN
-(
-	m_SigLoadSaveData,
-
-	0x1409A3D90,
-
-	"\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x40\x41\x8B\x00\x48\x8B\xFA\x48\x8B\xD9\x83\xF8\xFC\x0F\x84\x12", "xxxxxxxxxxxxxxxxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigLoadSaveData, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x40\x41\x8B\x00\x48\x8B\xFA\x48\x8B\xD9\x83\xF8\xFC\x0F\x84\x12", "xxxxxxxxxxxxxxxxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, LoadSaveData, m_SigLoadSaveData(), int64_t a1, int64_t a2, int* a3, int64_t a4)
 {

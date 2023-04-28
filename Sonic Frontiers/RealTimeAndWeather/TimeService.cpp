@@ -1,3 +1,5 @@
+// TODO: set addMinuteReturnFromCyber to zero in timeservice.rfl
+
 HOOK(int64_t, __fastcall, SetTime, 0x147E22D20, Time* in_time, int in_days, int in_hours, int in_minutes, float in_seconds)
 {
 	auto clock = TimeHelper::GetSystemTime();
@@ -29,7 +31,7 @@ HOOK(int64_t, __fastcall, SetTime, 0x147E22D20, Time* in_time, int in_days, int 
 						hour += 24;
 					}
 
-					TimeService::m_Hours = in_time->m_Hours = std::lerp(4.0f, 20.0f, (24 - (TimeService::m_GameSunset.tm_hour - ((hour - realSunrise.tm_hour) / (float)realSunrise.tm_hour))) - TimeService::m_GameSunrise.tm_hour);
+					TimeService::m_Hours = in_time->Hours = std::lerp(4.0f, 20.0f, (24 - (TimeService::m_GameSunset.tm_hour - ((hour - realSunrise.tm_hour) / (float)realSunrise.tm_hour))) - TimeService::m_GameSunrise.tm_hour);
 				}
 				else
 				{
@@ -44,10 +46,10 @@ HOOK(int64_t, __fastcall, SetTime, 0x147E22D20, Time* in_time, int in_days, int 
 						hour += 24;
 					}
 
-					TimeService::m_Hours = in_time->m_Hours = ((float)hour - (float)realSunrise.tm_hour) / (float)realSunrise.tm_hour * (realSunset.tm_hour % TimeService::m_GameSunset.tm_hour) + TimeService::m_GameSunrise.tm_hour;
+					TimeService::m_Hours = in_time->Hours = ((float)hour - (float)realSunrise.tm_hour) / (float)realSunrise.tm_hour * (realSunset.tm_hour % TimeService::m_GameSunset.tm_hour) + TimeService::m_GameSunrise.tm_hour;
 				}
 
-				TimeService::m_Minutes = in_time->m_Minutes = clock.tm_min;
+				TimeService::m_Minutes = in_time->Minutes = clock.tm_min;
 			}
 		}
 	}
@@ -55,15 +57,7 @@ HOOK(int64_t, __fastcall, SetTime, 0x147E22D20, Time* in_time, int in_days, int 
 	return originalSetTime(in_time, 0, 0, 0, 0);
 }
 
-SIG_SCAN
-(
-	m_SigSetTimeSpeed,
-
-	0x147EBD7F6,
-
-	/* 0x147EBD7F6 */
-	"\xE8\xCC\xCC\xCC\xCC\x41\xFF\x0E\x4C\x8D\xBB\x00\x01\x00\x00", "x????xxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigSetTimeSpeed, "\xE8\xCC\xCC\xCC\xCC\x41\xFF\x0E\x4C\x8D\xBB\x00\x01\x00\x00", "x????xxxxxxxxxx");
 
 void TimeService::Install()
 {

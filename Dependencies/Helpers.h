@@ -6,6 +6,16 @@
 
 #define EXPORT extern "C" __declspec(dllexport)
 
+#define PRINT_BOOL(a) printf(#a " = %s\n", a ? "TRUE" : "FALSE")
+
+#define INI_READ_STRING(section, var)  var = reader.Get(section, #var, var)
+#define INI_READ_BOOLEAN(section, var) var = reader.GetBoolean(section, #var, var)
+#define INI_READ_FLOAT(section, var)   var = reader.GetFloat(section, #var, var)
+#define INI_READ_INTEGER(section, var) var = reader.GetInteger(section, #var, var)
+#define INI_READ_DOUBLE(section, var)  var = reader.GetReal(section, #var, var)
+
+#define READ_CALL(addr) ((int64_t)addr + *(int32_t*)((int64_t)addr + 1)) + 5
+
 #define _CONCAT2(x, y) x##y
 #define CONCAT2(x, y) _CONCAT(x, y)
 #define INSERT_PADDING(length) \
@@ -45,6 +55,11 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     typedef returnType callingConvention functionName(__VA_ARGS__); \
     functionName* original##functionName = (functionName*)(location); \
     returnType callingConvention implOf##functionName(__VA_ARGS__)
+
+#define INLINE_HOOK(returnType, callingConvention, functionName, location, ...) \
+    typedef returnType callingConvention functionName(__VA_ARGS__); \
+    inline static functionName* original##functionName = (functionName*)(location); \
+    inline static returnType callingConvention implOf##functionName(__VA_ARGS__)
 
 #define INSTALL_HOOK(functionName) \
 { \

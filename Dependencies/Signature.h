@@ -1,135 +1,102 @@
 #pragma once
 
+#include <CommonLoaderAPI.h>
 #include <Psapi.h>
 
-#ifdef SIG_LIB_CONFLICT
-namespace Signature
-{
-#endif
-    FORCEINLINE const MODULEINFO& getModuleInfo()
-    {
-        static MODULEINFO moduleInfo;
+inline bool m_IsSigValid = true;
 
-        if (moduleInfo.SizeOfImage)
-            return moduleInfo;
+#if CL_SCANNER
 
-        ZeroMemory(&moduleInfo, sizeof(MODULEINFO));
-        GetModuleInformation(GetCurrentProcess(), GetModuleHandle(nullptr), &moduleInfo, sizeof(MODULEINFO));
-
-        return moduleInfo;
-    }
-
-    // Signature scan in specified memory region
-    FORCEINLINE void* sigScan(const char* signature, const char* mask, size_t sigSize, void* memory, const size_t memorySize)
-    {
-        if (sigSize == 0)
-            sigSize = strlen(mask);
-
-        for (size_t i = 0; i < memorySize; i++)
-        {
-            char* currMemory = (char*)memory + i;
-
-            size_t j;
-            for (j = 0; j < sigSize; j++)
-            {
-                if (mask[j] != '?' && signature[j] != currMemory[j])
-                    break;
-            }
-
-            if (j == sigSize)
-                return currMemory;
-        }
-
-        return nullptr;
-    }
-
-    // Signature scan in current process
-    FORCEINLINE void* sigScan(const char* signature, const char* mask, void* hint)
-    {
-        const MODULEINFO& info = getModuleInfo();
-        const size_t sigSize = strlen(mask);
-
-        // Ensure hint address is within the process memory region so there are no crashes.
-        if ((hint >= info.lpBaseOfDll) && ((char*)hint + sigSize <= (char*)info.lpBaseOfDll + info.SizeOfImage))
-        {
-            void* result = sigScan(signature, mask, sigSize, hint, sigSize);
-
-            if (result)
-                return result;
-        }
-
-        return sigScan(signature, mask, sigSize, info.lpBaseOfDll, info.SizeOfImage);
-    }
-
-    // Automatically scanned signatures, these are expected to exist in all game versions
-    // sigValid is going to be false if any automatic signature scan fails
-    inline bool sigValid = true;
-
-#ifdef SIG_LIB_CONFLICT
-    // Automatically scanned signature
-    #define SIGNATURE_SCAN(x, y, ...) \
-        FORCEINLINE void* x(); \
-        inline void* x##Addr = x(); \
-        FORCEINLINE void* x() \
-        { \
-            constexpr const char* x##Data[] = { __VA_ARGS__ }; \
-            constexpr size_t x##Size = _countof(x##Data); \
-            if (!x##Addr) \
-            { \
-                if constexpr (x##Size == 2) \
-                { \
-                    x##Addr = Signature::sigScan(x##Data[0], x##Data[1], (void*)(y)); \
-			        printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
-                    if (x##Addr) \
-                        return x##Addr; \
-                } \
-                else \
-                { \
-                    for (int i = 0; i < x##Size; i += 2) \
-                    { \
-                        x##Addr = Signature::sigScan(x##Data[i], x##Data[i + 1], (void*)(y)); \
-			            printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
-                        if (x##Addr) \
-                            return x##Addr; \
-                    } \
-                } \
-                Signature::sigValid = false; \
-            } \
-            return x##Addr; \
-        }
-#else
-    // Automatically scanned signature
-    #define SIG_SCAN(x, y, ...) \
-        FORCEINLINE void* x(); \
-        inline void* x##Addr = x(); \
-        FORCEINLINE void* x() \
-        { \
-            constexpr const char* x##Data[] = { __VA_ARGS__ }; \
-            constexpr size_t x##Size = _countof(x##Data); \
-            if (!x##Addr) \
-            { \
-                if constexpr (x##Size == 2) \
-                { \
-                    x##Addr = sigScan(x##Data[0], x##Data[1], (void*)(y)); \
-			        printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
-                    if (x##Addr) \
-                        return x##Addr; \
-                } \
-                else \
-                { \
-                    for (int i = 0; i < x##Size; i += 2) \
-                    { \
-                        x##Addr = sigScan(x##Data[i], x##Data[i + 1], (void*)(y)); \
-			            printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
-                        if (x##Addr) \
-                            return x##Addr; \
-                    } \
-                } \
-                sigValid = false; \
-            } \
-            return x##Addr; \
-        }
-#endif
-#ifdef SIG_LIB_CONFLICT
+#define CL_SCAN_SIGNATURE(x, ...) \
+FORCEINLINE void* x(); \
+inline void* x##Addr = x(); \
+FORCEINLINE void* x() \
+{ \
+    if (x##Addr) \
+        return x##Addr; \
+    CommonLoader_GetAPI()->SetState(CMN_LOADER_STATE_SKIP_SIG_VALIDATION, 1); \
+    x##Addr = CommonLoader_GetAPI()->ScanSignature(__VA_ARGS__); \
+    printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
+    if (x##Addr == nullptr) \
+        m_IsSigValid = false; \
+    return x##Addr; \
 }
+
+#define CL_SCAN_SIGNATURE_ALLOW_NULL(x, ...) \
+FORCEINLINE void* x(); \
+inline void* x##Addr = x(); \
+FORCEINLINE void* x() \
+{ \
+    if (x##Addr) \
+        return x##Addr; \
+    CommonLoader_GetAPI()->SetState(CMN_LOADER_STATE_SKIP_SIG_VALIDATION, 1); \
+    x##Addr = CommonLoader_GetAPI()->ScanSignature(__VA_ARGS__); \
+    printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
+    return x##Addr; \
+}
+
+#else
+
+inline MODULEINFO moduleInfo;
+
+inline const MODULEINFO& GetModuleInfo()
+{
+    if (moduleInfo.SizeOfImage)
+        return moduleInfo;
+
+    ZeroMemory(&moduleInfo, sizeof(MODULEINFO));
+    GetModuleInformation(GetCurrentProcess(), GetModuleHandle(nullptr), &moduleInfo, sizeof(MODULEINFO));
+
+    return moduleInfo;
+}
+
+inline void* ScanSignature(const char* signature, const char* mask)
+{
+    const MODULEINFO& moduleInfo = GetModuleInfo();
+    const size_t length = strlen(mask);
+
+    for (size_t i = 0; i < moduleInfo.SizeOfImage; i++)
+    {
+        char* memory = (char*)moduleInfo.lpBaseOfDll + i;
+
+        size_t j;
+        for (j = 0; j < length; j++)
+        {
+            if (mask[j] != '?' && signature[j] != memory[j])
+                break;
+        }
+
+        if (j == length)
+            return memory;
+    }
+
+    return nullptr;
+}
+
+#define CL_SCAN_SIGNATURE(x, ...) \
+FORCEINLINE void* x(); \
+inline void* x##Addr = x(); \
+FORCEINLINE void* x() \
+{ \
+    if (x##Addr) \
+        return x##Addr; \
+    x##Addr = ScanSignature(__VA_ARGS__); \
+    printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
+    if (x##Addr == nullptr) \
+        m_IsSigValid = false; \
+    return x##Addr; \
+}
+
+#define CL_SCAN_SIGNATURE_ALLOW_NULL(x, ...) \
+FORCEINLINE void* x(); \
+inline void* x##Addr = x(); \
+FORCEINLINE void* x() \
+{ \
+    if (x##Addr) \
+        return x##Addr; \
+    x##Addr = ScanSignature(__VA_ARGS__); \
+    printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
+    return x##Addr; \
+}
+
 #endif

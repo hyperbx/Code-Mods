@@ -1,13 +1,6 @@
 Configuration::EBgmType BgmService::ms_LastBgmType;
 
-SIG_SCAN
-(
-	m_SigSetIslandBgm,
-
-	/* 0x14C1A3750 */
-	"\x48\x85\xD2\x0F\x84\x46\x01\x00\x00\x48\x89\xE0",
-	"xxxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigSetIslandBgm, "\x48\x85\xD2\x0F\x84\x46\x01\x00\x00\x48\x89\xE0", "xxxxxxxxxxxx");
 
 HOOK(void, __fastcall, SetIslandBgm, m_SigSetIslandBgm(), app::snd::BgmIdExtension* in_pBgmIdExtension, int64_t a2, const char** out_ppMusicId)
 {

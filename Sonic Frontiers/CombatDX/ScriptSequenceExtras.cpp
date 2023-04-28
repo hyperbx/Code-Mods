@@ -1,22 +1,10 @@
 typedef int (app::ScriptSequence::* SequenceFuncPtr)(lua_State*);
 
-SIGNATURE_SCAN
-(
-	m_SigRegisterLuaCallback,
-
-	0x14087EF20,
-
-	"\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x48\x8B\xF9\x48\x8B\xCA", "xxxxxxxxxxxxxxxxxxxxx"
-);
-
-void PushLuaLibrary(lua_State* in_pLuaState, const char* in_pLibName, lua_CFunction in_function)
-{
-	// Load Lua function to require.
-	luaL_requiref(in_pLuaState, in_pLibName, in_function, 1);
-
-	// Pop function from stack.
+#define PUSH_LUA_LIB(in_pLuaState, in_pLibName, in_function) \
+	luaL_requiref(in_pLuaState, in_pLibName, in_function, 1); \
 	lua_pop(in_pLuaState, 1);
-}
+
+CL_SCAN_SIGNATURE(m_SigRegisterLuaCallback, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x83\xEC\x20\x48\x8B\xF9\x48\x8B\xCA", "xxxxxxxxxxxxxxxxxxxxx");
 
 HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::ScriptSequence* in_pThis, app::game::Script* in_pScript)
 {
@@ -37,14 +25,15 @@ HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::Scr
 		}
 	}
 
-	PushLuaLibrary(pLuaState, "", luaopen_base);
-	PushLuaLibrary(pLuaState, LUA_COLIBNAME, luaopen_coroutine);
-	PushLuaLibrary(pLuaState, LUA_TABLIBNAME, luaopen_table);
-	PushLuaLibrary(pLuaState, LUA_STRLIBNAME, luaopen_string);
-	PushLuaLibrary(pLuaState, LUA_UTF8LIBNAME, luaopen_utf8);
-	PushLuaLibrary(pLuaState, LUA_MATHLIBNAME, luaopen_math);
-	PushLuaLibrary(pLuaState, LUA_DBLIBNAME, luaopen_debug);
-	PushLuaLibrary(pLuaState, LUA_LOADLIBNAME, luaopen_package);
+	PUSH_LUA_LIB(pLuaState, "", luaopen_base);
+	PUSH_LUA_LIB(pLuaState, LUA_COLIBNAME, luaopen_coroutine);
+	PUSH_LUA_LIB(pLuaState, LUA_TABLIBNAME, luaopen_table);
+	PUSH_LUA_LIB(pLuaState, LUA_STRLIBNAME, luaopen_string);
+	PUSH_LUA_LIB(pLuaState, LUA_UTF8LIBNAME, luaopen_utf8);
+	PUSH_LUA_LIB(pLuaState, LUA_MATHLIBNAME, luaopen_math);
+	PUSH_LUA_LIB(pLuaState, LUA_DBLIBNAME, luaopen_debug);
+	PUSH_LUA_LIB(pLuaState, LUA_LOADLIBNAME, luaopen_package);
+	PUSH_LUA_LIB(pLuaState, LUA_IOLIBNAME, luaopen_io);
 
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::IsPlayerInCombat)>();
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::GetCurrentAnimationName)>();
@@ -60,14 +49,7 @@ HOOK(void, __fastcall, RegisterLuaCallback, m_SigRegisterLuaCallback(), app::Scr
 	luaWrapper->RegisterLuaCallback<static_cast<SequenceFuncPtr>(&ScriptSequenceExtras::GetTime)>();
 }
 
-SIGNATURE_SCAN
-(
-	m_SigSetLifeGaugeVisibility,
-
-	0x1404FC490,
-
-	"\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x81\xEC\x80\x00\x00\x00\x0F\xB6", "xxxxxxxxxxxxxxxxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigSetLifeGaugeVisibility, "\x48\x89\x5C\x24\x08\x48\x89\x6C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x81\xEC\x80\x00\x00\x00\x0F\xB6", "xxxxxxxxxxxxxxxxxxxxxxxxx");
 
 HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_SigSetLifeGaugeVisibility(), int64_t a1, char in_showHealth)
 {
@@ -76,30 +58,16 @@ HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_SigSetLifeGaugeVisibility()
 	return originalSetLifeGaugeVisibility(a1, in_showHealth);
 }
 
-SIGNATURE_SCAN
-(
-	m_SigChangeAnimation,
+CL_SCAN_SIGNATURE(m_SigChangeAnimation, "\x40\x53\x48\x83\xEC\x20\x48\x8B\xDA\x41\x80", "xxxxxxxxxxx");
 
-	0x1407A7710,
-
-	"\x40\x53\x48\x83\xEC\x20\x48\x8B\xDA\x41\x80", "xxxxxxxxxxx"
-);
-
-HOOK(int64_t, __fastcall, ChangeAnimation, m_SigChangeAnimation(), int64_t a1, const char* in_animationName, char a3)
+HOOK(int64_t, __fastcall, ChangeAnimation, m_SigChangeAnimation(), int64_t a1, const char* in_pAnimationName, char a3)
 {
-	ScriptSequenceExtras::s_pAnimationName = in_animationName;
+	ScriptSequenceExtras::s_pAnimationName = in_pAnimationName;
 
-	return originalChangeAnimation(a1, in_animationName, a3);
+	return originalChangeAnimation(a1, in_pAnimationName, a3);
 }
 
-SIGNATURE_SCAN
-(
-	m_SigFrameLimiter,
-
-	0x140BB9ED0,
-
-	"\x48\x89\x5C\x24\x10\x48\x89\x74\x24\x20\x57\x48\x83\xEC\x50\xF3", "xxxxxxxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigFrameLimiter, "\x48\x89\x5C\x24\x10\x48\x89\x74\x24\x20\x57\x48\x83\xEC\x50\xF3", "xxxxxxxxxxxxxxxx");
 
 HOOK(float, __fastcall, FrameLimiter, m_SigFrameLimiter(), int64_t a1, char a2)
 {
@@ -119,14 +87,7 @@ HOOK(float, __fastcall, FrameLimiter, m_SigFrameLimiter(), int64_t a1, char a2)
 	return originalFrameLimiter(a1, a2);
 }
 
-SIGNATURE_SCAN
-(
-	m_SigSetTime,
-
-	0x147E22D20,
-
-	"\xF3\x0F\x10\x44\x24\x28\xF3\x0F\x58\x41\x0C", "xxxxxxxxxxx"
-);
+CL_SCAN_SIGNATURE(m_SigSetTime, "\xF3\x0F\x10\x44\x24\x28\xF3\x0F\x58\x41\x0C", "xxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, SetTime, m_SigSetTime(), Time* in_time, int in_days, int in_hours, int in_minutes, float in_seconds)
 {

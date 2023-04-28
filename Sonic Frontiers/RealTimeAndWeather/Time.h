@@ -3,11 +3,9 @@
 class Time
 {
 public:
-	int m_Days;
+	int Days;
+	int Hours;
+	int Minutes;
 	
-	int m_Hours;
-
-	int m_Minutes;
-	
-	float m_Seconds;
+	float Seconds;
 };

@@ -5,33 +5,33 @@
 
 class MemoryPreserver
 {
-	static std::unordered_map<int, std::vector<char>> preservedMemory;
+	inline static std::unordered_map<size_t, std::vector<char>> m_PreservedMemory;
 
 public:
-	static const void Add(int location, const size_t length)
+	static const void Add(const size_t location, const size_t length)
 	{
 		char* buffer = new char[length];
-		memcpy(buffer, (void*)(location), length);
+		memcpy(buffer, (void*)location, length);
 
 		// Remove the current key from preserved memory if it already exists.
-		if (preservedMemory.find(location) != preservedMemory.end())
-			preservedMemory.erase(location);
+		if (m_PreservedMemory.find(location) != m_PreservedMemory.end())
+			m_PreservedMemory.erase(location);
 
-		preservedMemory.emplace(location, std::vector<char>(buffer, buffer + sizeof(buffer)));
+		m_PreservedMemory.emplace(location, std::vector<char>(buffer, buffer + length));
 
 		delete buffer;
 	}
 
-	static const void Remove(int location)
+	static const void Remove(const size_t location)
 	{
-		preservedMemory.erase(location);
+		m_PreservedMemory.erase(location);
 	}
 
-	static const void Restore(int location)
+	static const void Restore(const size_t location)
 	{
 		int i = 0;
 
-		for (char c : preservedMemory.at(location))
+		for (char c : m_PreservedMemory.at(location))
 		{
 			WRITE_MEMORY(location + i, const char, c);
 			i++;
@@ -39,7 +39,5 @@ public:
 	}
 };
 
-inline std::unordered_map<int, std::vector<char>> MemoryPreserver::preservedMemory;
-
 #define PRESERVE_MEMORY(location, length) MemoryPreserver::Add(location, length);
-#define RESTORE_MEMORY(location) MemoryPreserver::Restore(location);
+#define RESTORE_MEMORY(location)          MemoryPreserver::Restore(location);
