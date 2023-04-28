@@ -1,4 +1,4 @@
-# Drop Dash 2: Electric Boogaloo
+# Enhanced Drop Dash
 
 ## Credits
 - [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
