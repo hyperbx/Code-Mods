@@ -29,10 +29,11 @@ HOOK(int64_t, __fastcall, DropDashStart, m_SigDropDashStart(), int64_t a1, int64
 			WRITE_MEMORY(m_SigDropDashCameraDelay(), uint8_t, 0xEB);
 	}
 
-	// I love switches
+	// I love switches...
 	if (Configuration::IsUncurlWhenUngrounded && !m_IsDropDashFromStomp ||
 		(Configuration::IsStompDashUncurlImmediate && m_IsDropDashFromStomp &&
-			BlackboardHelper::CheckStatusField30Flags(STATUS_30_ISLANDSTAGE)))
+		BlackboardHelper::CheckStatusField30Flags(STATUS_30_ISLANDSTAGE) &&
+		!BlackboardHelper::CheckStatusField30Flags(STATUS_30_SIDEVIEW)))
 	{
 		if (m_SigDropDashUngroundedExitFunc() != nullptr && m_SigExitStateWithTricks() != nullptr)
 			WRITE_CALL((uint64_t)m_SigDropDashUngroundedExitFunc(), (uint64_t)m_SigExitStateWithTricks());
