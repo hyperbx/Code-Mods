@@ -5,9 +5,9 @@ bool m_IsJumpInputBuffered     = false;
 bool m_IsUncurlInputBuffered   = false;
 bool m_IsUncurlTriggerBuffered = false;
 
-float m_DeltaTime         = 0.0f;
-float m_DropDashDelayTime = 0.0f;
-float m_Velocity		  = 0.0f;
+float m_DeltaTime          = 0.0f;
+float m_DropDashDelayTime  = 0.0f;
+float m_HorizontalVelocity = 0.0f;
 
 uint64_t m_PlayerSpeedUpdateAddr = READ_CALL(m_SigPlayerSpeedUpdateCaller());
 
@@ -31,7 +31,8 @@ HOOK(int64_t, __fastcall, DropDashStart, m_SigDropDashStart(), int64_t a1, int64
 
 	// I love switches
 	if (Configuration::IsUncurlWhenUngrounded && !m_IsDropDashFromStomp ||
-		Configuration::IsStompDashUncurlImmediate && m_IsDropDashFromStomp)
+		(Configuration::IsStompDashUncurlImmediate && m_IsDropDashFromStomp &&
+			BlackboardHelper::CheckStatusField30Flags(STATUS_30_ISLANDSTAGE)))
 	{
 		if (m_SigDropDashUngroundedExitFunc() != nullptr && m_SigExitStateWithTricks() != nullptr)
 			WRITE_CALL((uint64_t)m_SigDropDashUngroundedExitFunc(), (uint64_t)m_SigExitStateWithTricks());
@@ -125,7 +126,7 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 		// StateStomping
 		case 52:
 		{
-			if (Configuration::IsDropDashOnStomp && m_Velocity >= Configuration::StompVelocityThreshold)
+			if (Configuration::IsDropDashOnStomp && m_HorizontalVelocity >= Configuration::StompVelocityThreshold)
 			{
 				m_IsDropDashFromStomp = true;
 
@@ -171,7 +172,11 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 
 HOOK(int64_t, __fastcall, PlayerSpeedUpdate, m_PlayerSpeedUpdateAddr, int64_t a1, int64_t a2)
 {
-	m_Velocity = Vector3::Magnitude(*(Vector3*)(a2 + 208));
+	m_HorizontalVelocity = Vector3::Magnitude(Vector3::ProjectOnPlane(*(Vector3*)(a2 + 0xD0), *(Quaternion*)(a2 + 0x90) * Vector3(0, 1, 0)));
+
+#if _DEBUG
+	printf("[EnhancedDropDash] m_HorizontalVelocity: %f\n", m_HorizontalVelocity);
+#endif
 
 	return originalPlayerSpeedUpdate(a1, a2);
 }

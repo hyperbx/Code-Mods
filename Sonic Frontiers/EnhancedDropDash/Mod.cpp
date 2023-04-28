@@ -5,7 +5,7 @@ EXPORT void Init()
 		MessageBoxA
 		(
 			nullptr,
-			"This mod is incompatible with your current game version.\nThe last known working version is Sonic Frontiers v1.20.",
+			"A signature scan failed validation...\n\nThis mod may be incompatible with your current game version, or is conflicting with another DLL mod.",
 			"Enhanced Drop Dash",
 			MB_ICONERROR
 		);
