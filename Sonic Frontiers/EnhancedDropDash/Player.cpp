@@ -19,24 +19,18 @@ HOOK(int64_t, __fastcall, DropDashStart, m_SigDropDashStart(), int64_t a1, int64
 	m_IsUncurlInputBuffered   = InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B);
 	m_IsUncurlTriggerBuffered = InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD;
 
-	if (Configuration::IsNoCameraDelay      && !m_IsDropDashFromSlide ||
-		Configuration::IsNoSlideCameraDelay && m_IsDropDashFromSlide  ||
+	if (Configuration::IsNoCameraDelay && !m_IsDropDashFromSlide ||
+		Configuration::IsNoSlideCameraDelay && m_IsDropDashFromSlide ||
 		Configuration::IsNoStompCameraDelay && m_IsDropDashFromStomp)
 	{
 		if (m_SigDropDashCameraDelay() != nullptr)
 			WRITE_MEMORY(m_SigDropDashCameraDelay(), uint8_t, 0xEB);
 	}
 
-	if (Configuration::IsUncurlWhenUngrounded)
+	// I love switches
+	if (Configuration::IsUncurlWhenUngrounded && !m_IsDropDashFromStomp ||
+		Configuration::IsStompDashUncurlImmediate && m_IsDropDashFromStomp)
 	{
-		if (!Configuration::IsStompAllowedUngroundedUncurl && m_IsDropDashFromStomp)
-		{
-			if (m_SigDropDashUngroundedExitFunc() != nullptr)
-				RESTORE_MEMORY((uint64_t)m_SigDropDashUngroundedExitFunc());
-
-			return originalDropDashStart(a1, a2);
-		}
-
 		if (m_SigDropDashUngroundedExitFunc() != nullptr && m_SigExitStateWithTricks() != nullptr)
 			WRITE_CALL((uint64_t)m_SigDropDashUngroundedExitFunc(), (uint64_t)m_SigExitStateWithTricks());
 	}
@@ -80,6 +74,9 @@ HOOK(int64_t, __fastcall, DropDashEnd, m_SigDropDashEnd(), int64_t a1, int64_t a
 
 	if (m_SigDropDashCameraDelay() != nullptr)
 		RESTORE_MEMORY((uint64_t)m_SigDropDashCameraDelay());
+
+	if (m_SigDropDashUngroundedExitFunc() != nullptr)
+		RESTORE_MEMORY((uint64_t)m_SigDropDashUngroundedExitFunc());
 
 	return originalDropDashEnd(a1, a2);
 }

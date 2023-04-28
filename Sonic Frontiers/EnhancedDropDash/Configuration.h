@@ -15,9 +15,9 @@ public:
 	inline static float StompVelocityThreshold = 25.0f;
 
 	// Behaviour
-	inline static bool IsUncurlWhenUngrounded         = false;
-	inline static bool IsStompAllowedUngroundedUncurl = false;
-	inline static bool IsGrindDoubleJumpFix           = true;
+	inline static bool IsUncurlWhenUngrounded     = false;
+	inline static bool IsStompDashUncurlImmediate = false;
+	inline static bool IsGrindDoubleJumpFix       = true;
 
 	// Camera
 	inline static bool IsNoCameraDelay      = false;

@@ -61,7 +61,7 @@
 				},
 				{
 					"Name": "StompVelocityThreshold",
-					"DisplayName": "Drop Dash Stomp Velocity Threshold",
+					"DisplayName": "Stomp Dash Velocity Threshold",
 					"Description":
 					[
 						"The velocity Sonic must be at to allow him to drop dash in the air.\n",
@@ -90,11 +90,11 @@
 					"DefaultValue": false
 				},
 				{
-					"Name": "IsStompAllowedUngroundedUncurl",
-					"DisplayName": "Allow Automatic Uncurl with Stomp",
+					"Name": "IsStompDashUncurlImmediate",
+					"DisplayName": "Immediately Uncurl Stomp Dash",
 					"Description":
 					[
-						"Allows Sonic to automatically uncurl when becoming ungrounded when initiating a drop dash by stomping.\n",
+						"Immediately uncurl Sonic when initiating a drop dash by stomping.\n",
 						"This will make stomp act as an immediate trick button.\n",
 						"Default: False"
 					],

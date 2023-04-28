@@ -13,7 +13,7 @@ void Configuration::Read()
 
 	// Behaviour
 	INI_READ_BOOLEAN("Behaviour", IsUncurlWhenUngrounded);
-	INI_READ_BOOLEAN("Behaviour", IsStompAllowedUngroundedUncurl);
+	INI_READ_BOOLEAN("Behaviour", IsStompDashUncurlImmediate);
 	INI_READ_BOOLEAN("Behaviour", IsGrindDoubleJumpFix);
 
 	// Camera
