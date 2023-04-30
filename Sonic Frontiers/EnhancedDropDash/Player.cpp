@@ -165,13 +165,13 @@ HOOK(int64_t, __fastcall, StateDropDashEnd, m_SigStateDropDashEnd(), int64_t a1,
 	return originalStateDropDashEnd(a1, a2);
 }
 
-HOOK(void, __fastcall, PostureDropDashUpdate, m_SigPostureDropDashUpdate(), int64_t a1, float a2)
+HOOK(void, __fastcall, PostureDropDashUpdate, m_SigPostureDropDashUpdate(), int64_t* in_pThis, float in_deltaTime)
 {
 	// Fix for rolling getting stuck in 2D.
 	if (BlackboardHelper::IsSideView())
-		*(bool*)(a1 + 32) = true;
+		*(bool*)(in_pThis + 32) = true;
 
-	originalPostureDropDashUpdate(a1, a2);
+	originalPostureDropDashUpdate(in_pThis, in_deltaTime);
 }
 
 HOOK(bool, __fastcall, StateDoubleJumpUpdate, m_SigStateDoubleJumpUpdate(), int64_t a1, int64_t in_pSonicContext, float in_deltaTime)
@@ -328,6 +328,7 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 	}
 
 	m_IsAirDashJumpOut = false;
+	m_StateFlags.reset(EStateFlags_IsDropDashCharge);
 
 	return originalGOCPlayerHsmGroundStateUpdate(in_pThis, in_stateIndex);
 }

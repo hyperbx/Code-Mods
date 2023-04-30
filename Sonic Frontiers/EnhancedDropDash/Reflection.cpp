@@ -36,9 +36,6 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
             if (m_SigDropDashTurningDelay() != nullptr)
                 WRITE_NOP(m_SigDropDashTurningDelay(), 2);
         }
-
-        // Reflection::PlayerParameters->forwardView.speed.normal2.initial = 15.0f;
-        // Reflection::PlayerParameters->forwardView.speed.normal2.max = 60.0f;
     }
 
     return result;
