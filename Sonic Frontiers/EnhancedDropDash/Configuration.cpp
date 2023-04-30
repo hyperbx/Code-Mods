@@ -6,7 +6,6 @@ void Configuration::Read()
 	INI_READ_BOOLEAN("Behaviour", IsSlideDash);
 	INI_READ_BOOLEAN("Behaviour", IsUncurlWhenUngrounded);
 	INI_READ_BOOLEAN("Behaviour", IsGrindDoubleJumpFix);
-	INI_READ_BOOLEAN("Behaviour", IsRetainAirVelocity);
 
 	// Air Dash
 	INI_READ_BOOLEAN("AirDash", IsAirDash);

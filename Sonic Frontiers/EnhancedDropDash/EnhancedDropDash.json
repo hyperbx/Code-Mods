@@ -38,17 +38,6 @@
 					],
 					"Type": "bool",
 					"DefaultValue": true
-				},
-				{
-					"Name": "IsRetainAirVelocity",
-					"DisplayName": "Retain Drop Dash Velocity in Air",
-					"Description":
-					[
-						"Retains Sonic's last speed when jumping out of a drop dash.\n",
-						"Default: True"
-					],
-					"Type": "bool",
-					"DefaultValue": true
 				}
 			]
         },

@@ -29,7 +29,6 @@ public:
 	inline static bool IsSlideDash = true;
 	inline static bool IsUncurlWhenUngrounded = false;
 	inline static bool IsGrindDoubleJumpFix = true;
-	inline static bool IsRetainAirVelocity = true;
 
 	// Air Dash
 	inline static bool IsAirDash = false;
