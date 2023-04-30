@@ -80,6 +80,11 @@ public:
 		return CheckStatusFieldFlags(status->StateParameter, in_flags);
 	}
 
+	inline static bool IsAirBoosting()
+	{
+		return BlackboardHelper::CheckStateParameterFlags(STATUS_PARAM_AIRBOOST);
+	}
+
 	inline static bool IsRunning()
 	{
 		return GetStatus()->StateParameter == 0;
@@ -93,6 +98,11 @@ public:
 	inline static bool IsBoosting()
 	{
 		return CheckStateParameterFlags(STATUS_PARAM_BOOST);
+	}
+
+	inline static bool IsCyberSpace()
+	{
+		return !CheckStatusField30Flags(STATUS_30_ISLANDSTAGE);
 	}
 
 	inline static bool IsCylooping()

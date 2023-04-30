@@ -8,11 +8,12 @@
 
 #define PRINT_BOOL(a) printf(#a " = %s\n", a ? "TRUE" : "FALSE")
 
-#define INI_READ_STRING(section, var)  var = reader.Get(section, #var, var)
-#define INI_READ_BOOLEAN(section, var) var = reader.GetBoolean(section, #var, var)
-#define INI_READ_FLOAT(section, var)   var = reader.GetFloat(section, #var, var)
-#define INI_READ_INTEGER(section, var) var = reader.GetInteger(section, #var, var)
-#define INI_READ_DOUBLE(section, var)  var = reader.GetReal(section, #var, var)
+#define INI_READ_STRING(section, var)     var = reader.Get(section, #var, var)
+#define INI_READ_BOOLEAN(section, var)    var = reader.GetBoolean(section, #var, var)
+#define INI_READ_FLOAT(section, var)      var = reader.GetFloat(section, #var, var)
+#define INI_READ_INTEGER(section, var)    var = reader.GetInteger(section, #var, var)
+#define INI_READ_DOUBLE(section, var)     var = reader.GetReal(section, #var, var)
+#define INI_READ_ENUM(section, type, var) var = (type)reader.GetInteger(section, #var, var)
 
 #define READ_CALL(addr) ((int64_t)addr + *(int32_t*)((int64_t)addr + 1)) + 5
 

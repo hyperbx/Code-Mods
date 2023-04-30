@@ -5,6 +5,8 @@
 class Reflection
 {
 public:
+	inline static PlayerParameters* PlayerParameters;
+
 	static void Install();
 };
 

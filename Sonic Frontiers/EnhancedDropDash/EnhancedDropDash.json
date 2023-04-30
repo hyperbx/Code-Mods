@@ -1,6 +1,259 @@
 {
     "Groups":
 	[
+	    {
+			"Name": "Behaviour",
+			"DisplayName": "General Behaviour",
+			"Elements":
+			[
+				{
+					"Name": "IsSlideDash",
+					"DisplayName": "Enable Slide Dash",
+					"Description":
+					[
+						"Instantly drop dash on the ground by sliding.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsUncurlWhenUngrounded",
+					"DisplayName": "Automatically Uncurl when Ungrounded",
+					"Description":
+					[
+						"Automatically uncurl Sonic when he becomes ungrounded, allowing him to perform tricks.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsGrindDoubleJumpFix",
+					"DisplayName": "Fix Grind Drop Dashing",
+					"Description":
+					[
+						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsRetainAirVelocity",
+					"DisplayName": "Retain Drop Dash Velocity in Air",
+					"Description":
+					[
+						"Retains Sonic's last speed when jumping out of a drop dash.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+        },
+		{
+			"Name": "AirDash",
+			"DisplayName": "Air Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsAirDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Uses the new Air Dash that lets you drop dash in the air by boosting whilst charging a drop dash.\n",
+						"Input Guide;\n- Default: A + A + A (Hold) + RT\n- Drop Dash on Double Jump: A + A (Hold) + RT\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "AirDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Both"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "AirDashUncurlType",
+					"DisplayName": "Uncurl Type",
+					"Description":
+					[
+						"The behaviour of the drop dash rolling when initiating it from the Air Dash.\n",
+						"Default: None"
+					],
+					"Type": "EUncurlType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "AirDashInitialVelocity",
+					"DisplayName": "Initial Velocity (3D)",
+					"Description":
+					[
+						"The starting velocity of the Air Dash in 3D areas.\n",
+						"Default: 30.0"
+					],
+					"Type": "float",
+					"DefaultValue": 30.0
+				},
+				{
+					"Name": "AirDashInitialVelocitySV",
+					"DisplayName": "Initial Velocity (2D)",
+					"Description":
+					[
+						"The starting velocity of the Air Dash in 2D areas.\n",
+						"Default: 10.0"
+					],
+					"Type": "float",
+					"DefaultValue": 10.0
+				}
+			]
+		},
+		{
+			"Name": "StompDash",
+			"DisplayName": "Stomp Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsStompDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Uses the new Stomp Dash that lets you drop dash immediately when hitting the ground after stomping.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "StompDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Islands Only"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "StompDashInputType",
+					"DisplayName": "Input Type",
+					"Description":
+					[
+						"Choose between Hold or Press to initiate a drop dash when landing from a stomp.\n",
+						"Default: Hold"
+					],
+					"Type": "EStompDashInputType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "StompDashInitialVelocity",
+					"DisplayName": "Initial Velocity (3D)",
+					"Description":
+					[
+						"The starting velocity of the Stomp Dash in 3D areas.\n",
+						"Default: 50.0"
+					],
+					"Type": "float",
+					"DefaultValue": 50.0
+				},
+				{
+					"Name": "StompDashInitialVelocitySV",
+					"DisplayName": "Initial Velocity (2D)",
+					"Description":
+					[
+						"The starting velocity of the Stomp Dash in 2D areas.\n",
+						"Default: 10.0"
+					],
+					"Type": "float",
+					"DefaultValue": 10.0
+				}
+			]
+		},
+		{
+			"Name": "QuickStompDash",
+			"DisplayName": "Quick Stomp Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsQuickStompDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Uses the Quick Stomp Dash that lets you drop dash in the air by initiating a stomp past the specified velocity threshold.\n",
+						"Input Guide;\n- Default: A + B (when moving faster than the specified velocity threshold)\n- Require Air Boost: A + RT + B\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "QuickStompDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Islands Only"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "IsQuickStompDashRequireAirBoost",
+					"DisplayName": "Require Air Boost",
+					"Description":
+					[
+						"Require air boost to perform a Quick Stomp Dash.\n",
+						"This will ignore the velocity threshold.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "QuickStompDashUncurlType",
+					"DisplayName": "Uncurl Type",
+					"Description":
+					[
+						"The behaviour of the drop dash rolling when initiating it from the Quick Stomp Dash.\n",
+						"Default: None"
+					],
+					"Type": "EUncurlType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "QuickStompDashVelocityThreshold",
+					"DisplayName": "Velocity Threshold (3D)",
+					"Description":
+					[
+						"The velocity Sonic must be at to allow him to drop dash in the air in 3D areas.\n",
+						"Set this to zero to drop dash regardless of velocity.\n",
+						"Default: 25.0"
+					],
+					"Type": "float",
+					"DefaultValue": 25.0
+				},
+				{
+					"Name": "QuickStompDashVelocityThresholdSV",
+					"DisplayName": "Velocity Threshold (2D)",
+					"Description":
+					[
+						"The velocity Sonic must be at to allow him to drop dash in the air in 2D areas.\n",
+						"Set this to zero to drop dash regardless of velocity.\n",
+						"Default: 15.0"
+					],
+					"Type": "float",
+					"DefaultValue": 15.0
+				}
+			]
+		},
 		{
 			"Name": "Physics",
 			"DisplayName": "Physics",
@@ -33,88 +286,6 @@
 			]
 		},
 		{
-			"Name": "Controls",
-			"DisplayName": "Controls",
-			"Elements":
-			[
-				{
-					"Name": "IsDropDashOnSlide",
-					"DisplayName": "Enable Drop Dash on Slide",
-					"Description":
-					[
-						"Instantly drop dash on the ground by sliding.\n",
-						"Default: True"
-					],
-					"Type": "bool",
-					"DefaultValue": true
-				},
-				{
-					"Name": "IsDropDashOnStomp",
-					"DisplayName": "Enable Drop Dash on Stomp",
-					"Description":
-					[
-						"Instantly drop dash in the air by stomping.\n",
-						"Default: False"
-					],
-					"Type": "bool",
-					"DefaultValue": false
-				},
-				{
-					"Name": "StompVelocityThreshold",
-					"DisplayName": "Stomp Dash Velocity Threshold",
-					"Description":
-					[
-						"The velocity Sonic must be at to allow him to drop dash in the air.\n",
-						"Set this to zero to drop dash regardless of velocity.\n",
-						"Default: 25.0"
-					],
-					"Type": "float",
-					"DefaultValue": 25.0
-				}
-			]
-		},
-	    {
-			"Name": "Behaviour",
-			"DisplayName": "Behaviour",
-			"Elements":
-			[
-				{
-					"Name": "IsUncurlWhenUngrounded",
-					"DisplayName": "Automatically Uncurl when Ungrounded",
-					"Description":
-					[
-						"Automatically uncurl Sonic when he becomes ungrounded, allowing him to perform tricks.\n",
-						"Default: False"
-					],
-					"Type": "bool",
-					"DefaultValue": false
-				},
-				{
-					"Name": "IsStompDashUncurlImmediate",
-					"DisplayName": "Immediately Uncurl Stomp Dash",
-					"Description":
-					[
-						"Immediately uncurl Sonic when initiating a drop dash by stomping.\n",
-						"This will make stomp act as an immediate trick button.\n",
-						"Default: False"
-					],
-					"Type": "bool",
-					"DefaultValue": false
-				},
-				{
-					"Name": "IsGrindDoubleJumpFix",
-					"DisplayName": "Fix Grind Drop Dashing",
-					"Description":
-					[
-						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
-						"Default: True"
-					],
-					"Type": "bool",
-					"DefaultValue": true
-				}
-			]
-        },
-		{
 			"Name": "Camera",
 			"DisplayName": "Camera",
 			"Elements":
@@ -124,36 +295,135 @@
 					"DisplayName": "Disable Drop Dash Camera Delay",
 					"Description":
 					[
-						"Disables the drop dash camera delay when entering it normally.\n",
+						"Disables the Drop Dash camera delay when performing it normally.\n",
 						"Default: False"
 					],
 					"Type": "bool",
 					"DefaultValue": false
 				},
 				{
-					"Name": "IsNoSlideCameraDelay",
-					"DisplayName": "Disable Drop Dash Camera Delay on Slide",
+					"Name": "IsNoAirDashCameraDelay",
+					"DisplayName": "Disable Air Dash Camera Delay",
 					"Description":
 					[
-						"Disables the drop dash camera delay when entering it by sliding.\n",
+						"Disables the Air Dash camera delay.\n",
 						"Default: False"
 					],
 					"Type": "bool",
 					"DefaultValue": false
 				},
 				{
-					"Name": "IsNoStompCameraDelay",
-					"DisplayName": "Disable Drop Dash Camera Delay on Stomp",
+					"Name": "IsNoSlideDashCameraDelay",
+					"DisplayName": "Disable Slide Dash Camera Delay",
 					"Description":
 					[
-						"Disables the drop dash camera delay when entering it by stomping.\n",
+						"Disables the Slide Dash camera delay.\n",
 						"Default: False"
 					],
 					"Type": "bool",
 					"DefaultValue": false
 				},
+				{
+					"Name": "IsNoStompDashCameraDelay",
+					"DisplayName": "Disable Stomp Dash Camera Delay",
+					"Description":
+					[
+						"Disables the Stomp Dash camera delay.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoQuickStompDashCameraDelay",
+					"DisplayName": "Disable Quick Stomp Dash Camera Delay",
+					"Description":
+					[
+						"Disables the Quick Stomp Dash camera delay.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				}
 			]
 		}
     ],
+	"Enums": 
+	{
+		"EUncurlType": 
+		[
+			{
+				"DisplayName": "None",
+				"Description":
+				[
+					"Allows you to roll until the drop dash runs out."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Immediate",
+				"Description":
+				[
+					"Immediately uncurls when entering the state. This is useful if you have the Air Trick skill unlocked.\n",
+					"This will revert to None in Cyber Space."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Grounded",
+				"Description":
+				[
+					"Uncurls when becoming grounded."
+				],
+				"Value": "2"
+			}
+		],
+		"EStompDashInputType": 
+		[
+			{
+				"DisplayName": "Hold",
+				"Description":
+				[
+					"Initiate a drop dash when landing whilst holding the B button (replacing stomp bounce)."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Press",
+				"Description":
+				[
+					"Initiate a drop dash immediately when landing if the B button is not held."
+				],
+				"Value": "1"
+			}
+		],
+		"EWorldType": 
+		[
+			{
+				"DisplayName": "Both",
+				"Description":
+				[
+					"Allow this move to function both on islands and in Cyber Space."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Cyber Space Only",
+				"Description":
+				[
+					"Allow this move to function only in Cyber Space."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Islands Only",
+				"Description":
+				[
+					"Allow this move to function only on islands."
+				],
+				"Value": "2"
+			}
+		]
+	},
     "IniFile": "EnhancedDropDash.ini"
 }

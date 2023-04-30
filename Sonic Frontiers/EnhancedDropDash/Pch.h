@@ -7,6 +7,7 @@
 #include <detours.h>
 
 // Standard library
+#include <bitset>
 #include <cstdint>
 #include <cstdio>
 #include <memory>
