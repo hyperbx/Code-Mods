@@ -15,20 +15,21 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
 
         if (Configuration::IsEnhancedIslandPhysics)
         {
+            Reflection::PlayerParameters->forwardView.dropDash.brake = CMN_DROPDASH_BRAKE;
             Reflection::PlayerParameters->forwardView.dropDash.steeringSpeed1 = CMN_DROPDASH_STEERINGSPEED1;
             Reflection::PlayerParameters->forwardView.dropDash.steeringSpeed2 = CMN_DROPDASH_STEERINGSPEED2;
-            Reflection::PlayerParameters->forwardView.dropDash.brake          = CMN_DROPDASH_BRAKE;
         }
 
         if (Configuration::IsEnhancedCyberPhysics)
         {
+            Reflection::PlayerParameters->cyberspace.dropDash.brake = CMN_DROPDASH_BRAKE;
+            Reflection::PlayerParameters->cyberspace.dropDash.minDashSpeed = 45.0f;
             Reflection::PlayerParameters->cyberspace.dropDash.steeringSpeed1 = CMN_DROPDASH_STEERINGSPEED1;
             Reflection::PlayerParameters->cyberspace.dropDash.steeringSpeed2 = CMN_DROPDASH_STEERINGSPEED2;
-            Reflection::PlayerParameters->cyberspace.dropDash.brake          = CMN_DROPDASH_BRAKE;
 
+            Reflection::PlayerParameters->cyberspaceSV.dropDash.brake = CMN_DROPDASH_BRAKE;
             Reflection::PlayerParameters->cyberspaceSV.dropDash.steeringSpeed1 = CMN_DROPDASH_STEERINGSPEED1;
             Reflection::PlayerParameters->cyberspaceSV.dropDash.steeringSpeed2 = CMN_DROPDASH_STEERINGSPEED2;
-            Reflection::PlayerParameters->cyberspaceSV.dropDash.brake          = CMN_DROPDASH_BRAKE;
         }
 
         if (Configuration::IsEnhancedIslandPhysics || Configuration::IsEnhancedCyberPhysics)

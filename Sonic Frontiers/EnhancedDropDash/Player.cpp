@@ -165,13 +165,21 @@ HOOK(int64_t, __fastcall, StateDropDashEnd, m_SigStateDropDashEnd(), int64_t a1,
 	return originalStateDropDashEnd(a1, a2);
 }
 
-HOOK(void, __fastcall, PostureDropDashUpdate, m_SigPostureDropDashUpdate(), int64_t* in_pThis, float in_deltaTime)
+HOOK(bool, __fastcall, PostureDropDashUpdate, m_SigPostureDropDashUpdate(), int64_t a1, double a2)
 {
-	// Fix for rolling getting stuck in 2D.
-	if (BlackboardHelper::IsSideView())
-		*(bool*)(in_pThis + 32) = true;
+	if (m_SigFixDropDashSideView() != nullptr)
+	{
+		if (BlackboardHelper::IsSideView())
+		{
+			WRITE_MEMORY(m_SigFixDropDashSideView(), uint8_t, 0xEB);
+		}
+		else
+		{
+			RESTORE_MEMORY((uint64_t)m_SigFixDropDashSideView());
+		}
+	}
 
-	originalPostureDropDashUpdate(in_pThis, in_deltaTime);
+	return originalPostureDropDashUpdate(a1, a2);
 }
 
 HOOK(bool, __fastcall, StateDoubleJumpUpdate, m_SigStateDoubleJumpUpdate(), int64_t a1, int64_t in_pSonicContext, float in_deltaTime)
@@ -179,6 +187,13 @@ HOOK(bool, __fastcall, StateDoubleJumpUpdate, m_SigStateDoubleJumpUpdate(), int6
 	m_StateFlags.set(EStateFlags_IsDropDashCharge, *(float*)(a1 + 180) > 0.0f);
 
 	return originalStateDoubleJumpUpdate(a1, in_pSonicContext, in_deltaTime);
+}
+
+HOOK(bool, __fastcall, StateRecoveryJumpUpdate, m_SigStateRecoveryJumpUpdate(), int64_t a1, int64_t a2, float in_deltaTime)
+{
+	m_StateFlags.set(EStateFlags_IsDropDashCharge, *(bool*)(a1 + 196));
+
+	return originalStateRecoveryJumpUpdate(a1, a2, in_deltaTime);
 }
 
 HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), int64_t in_pThis, int in_updatePhase, float* in_pDeltaTime)
@@ -402,11 +417,15 @@ void Player::Install()
 	if (m_SigForceGrindJumpPosture() != nullptr)
 		PRESERVE_MEMORY((uint64_t)m_SigForceGrindJumpPosture(), 2);
 
+	if (m_SigFixDropDashSideView() != nullptr)
+		PRESERVE_MEMORY((uint64_t)m_SigFixDropDashSideView(), 1);
+
 	INSTALL_HOOK(StateDropDashStart);
 	INSTALL_HOOK(StateDropDashUpdate);
 	INSTALL_HOOK(StateDropDashEnd);
 	INSTALL_HOOK(PostureDropDashUpdate);
 	INSTALL_HOOK(StateDoubleJumpUpdate);
+	INSTALL_HOOK(StateRecoveryJumpUpdate);
 	INSTALL_HOOK(GOCPlayerHsmUpdate);
 	INSTALL_HOOK(GOCPlayerHsmGroundStateUpdate);
 	INSTALL_HOOK(GOCPlayerHsmAirStateUpdate);

@@ -159,10 +159,10 @@
 					"Description":
 					[
 						"The starting velocity of the Stomp Dash in 2D areas.\n",
-						"Default: 10.0"
+						"Default: 25.0"
 					],
 					"Type": "float",
-					"DefaultValue": 10.0
+					"DefaultValue": 25.0
 				}
 			]
 		},
