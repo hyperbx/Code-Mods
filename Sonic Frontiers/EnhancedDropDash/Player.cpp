@@ -208,6 +208,9 @@ HOOK(bool, __fastcall, StateRecoveryJumpUpdate, m_SigStateRecoveryJumpUpdate(), 
 {
 	m_StateFlags.set(EStateFlags_IsDropDashCharge, *(bool*)(a1 + 196));
 
+	if (InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD)
+		fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateAirBoost, 0);
+
 	return originalStateRecoveryJumpUpdate(a1, a2, in_deltaTime);
 }
 
