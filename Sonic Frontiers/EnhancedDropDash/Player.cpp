@@ -13,6 +13,20 @@ enum EStateFlags
 	EStateFlags_IsQuickStompDash
 };
 
+enum EStateID
+{
+	EStateID_StateRun = 4,
+	EStateID_StateDoubleJump = 9,
+	EStateID_StateStompingBounce = 10,
+	EStateID_StateFall = 14,
+	EStateID_StateAirBoost = 22,
+	EStateID_StateGrindDoubleJump = 46,
+	EStateID_StateStomping = 52,
+	EStateID_StateStompingLand = 55,
+	EStateID_StateSliding = 57,
+	EStateID_StateDropDash = 110
+};
+
 enum EInputFlags
 {
 	EInputFlags_IsJumpInputBuffered,
@@ -24,9 +38,10 @@ bool m_IsAirDashJumpOut = false;
 
 float m_DeltaTime = 0.0f;
 float m_DropDashDelayTime = 0.0f;
+float m_StompDashPressDelayTime = 0.0f;
 float m_HorizontalVelocity = 0.0f;
 
-FUNCTION_PTR(bool, __fastcall, fpSetStateFlags, m_SigSetStateFlags(), int64_t a1, int a2, int a3);
+FUNCTION_PTR(bool, __fastcall, fpSetCurrentState, m_SigSetStateFlags(), int64_t a1, int a2, int a3);
 
 bool IsNormalDropDash()
 {
@@ -144,7 +159,7 @@ HOOK(bool, __fastcall, StateDropDashUpdate, m_SigStateDropDashUpdate(), int64_t 
 			m_IsAirDashJumpOut = true;
 
 	Uncurl:
-		fpSetStateFlags(*(int64_t*)(a2 + 56), isGrounded ? 4 : 14, 0);
+		fpSetCurrentState(*(int64_t*)(a2 + 56), isGrounded ? EStateID_StateRun : EStateID_StateFall, 0);
 
 		return true;
 	}
@@ -196,6 +211,51 @@ HOOK(bool, __fastcall, StateRecoveryJumpUpdate, m_SigStateRecoveryJumpUpdate(), 
 	return originalStateRecoveryJumpUpdate(a1, a2, in_deltaTime);
 }
 
+HOOK(bool, __fastcall, StateStompingLandUpdate, m_SigStateStompingLandUpdate(), int64_t a1, int64_t a2, float in_deltaTime)
+{
+	if (!Configuration::IsStompDash || !IsMoveAvailable(Configuration::StompDashWorldType))
+		return originalStateStompingLandUpdate(a1, a2, in_deltaTime);
+
+	switch (BlackboardHelper::IsCyberSpace()
+			? Configuration::StompDashInputTypeCyber
+			: Configuration::StompDashInputType)
+	{
+		case Configuration::EStompDashInputType_Hold:
+		{
+			if (*(float*)(a1 + 180) > 0.0f)
+			{
+				m_StateFlags.set(EStateFlags_IsStompDash);
+
+				fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateDropDash, 0);
+			}
+
+			break;
+		}
+
+		case Configuration::EStompDashInputType_Press:
+		{
+			if (InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B))
+				break;
+
+			// Prevent stomp bounce timer from running so we can do our own timing.
+			*(float*)(a1 + 180) = 1.0f;
+
+			m_StompDashPressDelayTime += in_deltaTime;
+
+			if (m_StompDashPressDelayTime > 0.075f)
+			{
+				m_StateFlags.set(EStateFlags_IsStompDash);
+
+				fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateDropDash, 0);
+			}
+
+			break;
+		}
+	}
+
+	return originalStateStompingLandUpdate(a1, a2, in_deltaTime);
+}
+
 HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), int64_t in_pThis, int in_updatePhase, float* in_pDeltaTime)
 {
 	Player::CreateInput();
@@ -208,22 +268,6 @@ HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), int64_t in
 	originalGOCPlayerHsmUpdate(in_pThis, in_updatePhase, in_pDeltaTime);
 }
 
-bool DoStompDash(Configuration::EStompDashInputType in_inputType)
-{
-	if (!Configuration::IsStompDash)
-		return false;
-
-	if (!IsMoveAvailable(Configuration::StompDashWorldType))
-		return false;
-
-	if (Configuration::StompDashInputType != in_inputType)
-		return false;
-
-	m_StateFlags.set(EStateFlags_IsStompDash);
-
-	return true;
-}
-
 HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundStateUpdate(), int64_t* in_pThis, int in_stateIndex)
 {
 #if _DEBUG
@@ -232,51 +276,43 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 
 	switch (in_stateIndex)
 	{
-		// StateFall (?)
-		case 14:
+		case EStateID_StateFall:
 		{
 			if (m_IsAirDashJumpOut)
 			{
 				m_IsAirDashJumpOut = false;
-
-				// Swap to StateDoubleJump.
-				in_stateIndex = 9;
+				in_stateIndex = EStateID_StateDoubleJump;
 			}
 
 			break;
 		}
 
-		// StateAirBoost
-		case 22:
+		case EStateID_StateAirBoost:
 		{
 			if (Configuration::IsAirDash && IsMoveAvailable(Configuration::AirDashWorldType) && m_StateFlags.test(EStateFlags_IsDropDashCharge))
 			{
 				m_StateFlags.set(EStateFlags_IsAirDash);
 
-				// Swap to StateDropDash.
-				in_stateIndex = 110;
+				in_stateIndex = EStateID_StateDropDash;
 			}
 
 			break;
 		}
 
-		// StateGrindDoubleJump
-		case 46:
+		case EStateID_StateGrindDoubleJump:
 		{
 			if (Configuration::IsGrindDoubleJumpFix)
 			{
 				if (m_SigForceGrindJumpPosture() != nullptr)
 					WRITE_NOP(m_SigForceGrindJumpPosture(), 2);
 
-				// Swap to StateDoubleJump.
-				in_stateIndex = 9;
+				in_stateIndex = EStateID_StateDoubleJump;
 			}
 
 			break;
 		}
 
-		// StateStomping
-		case 52:
+		case EStateID_StateStomping:
 		{
 			if (!Configuration::IsQuickStompDash ||
 				!IsMoveAvailable(Configuration::QuickStompDashWorldType) ||
@@ -292,28 +328,17 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 			if (Configuration::IsQuickStompDashRequireAirBoost || isVelocityAboveThreshold)
 			{
 				m_StateFlags.set(EStateFlags_IsQuickStompDash);
-			
-				// Swap to StateDropDash.
-				in_stateIndex = 110;
+				in_stateIndex = EStateID_StateDropDash;
 			}
 
 			break;
 		}
 
-		// StateStompingLand
-		case 55:
-		{
-			if (DoStompDash(Configuration::EStompDashInputType_Press))
-			{
-				// Swap to StateDropDash.
-				in_stateIndex = 110;
-			}
-
+		case EStateID_StateStompingLand:
+			m_StompDashPressDelayTime = 0.0f;
 			break;
-		}
 
-		// StateSliding
-		case 57:
+		case EStateID_StateSliding:
 		{
 			if (Configuration::IsSlideDash)
 			{
@@ -321,10 +346,10 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 					return 0;
 
 				m_DropDashDelayTime = 0.0f;
+
 				m_StateFlags.set(EStateFlags_IsSlideDash);
 
-				// Swap to StateDropDash.
-				in_stateIndex = 110;
+				in_stateIndex = EStateID_StateDropDash;
 			}
 
 			break;
@@ -348,29 +373,18 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 	return originalGOCPlayerHsmGroundStateUpdate(in_pThis, in_stateIndex);
 }
 
+#if 0
+CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmAirStateUpdate, "\x41\x56\x48\x83\xEC\x30\x0F\xB6\x81\x1C", "xxxxxxxxxx");
+
 HOOK(char, __fastcall, GOCPlayerHsmAirStateUpdate, m_SigGOCPlayerHsmAirStateUpdate(), int64_t* in_pThis, int in_stateIndex)
 {
 #if _DEBUG
 	printf("[EnhancedDropDash::GOCPlayerHsmAirStateUpdate] in_stateIndex: %d\n", in_stateIndex);
 #endif
 
-	switch (in_stateIndex)
-	{
-		// StateStompingBounce
-		case 10:
-		{
-			if (DoStompDash(Configuration::EStompDashInputType_Hold))
-			{
-				// Swap to StateDropDash.
-				in_stateIndex = 110;
-			}
-
-			break;
-		}
-	}
-
 	return originalGOCPlayerHsmAirStateUpdate(in_pThis, in_stateIndex);
 }
+#endif
 
 HOOK(int64_t, __fastcall, PlayerSpeedUpdate, READ_CALL(m_SigPlayerSpeedUpdateCaller()), int64_t a1, int64_t a2)
 {
@@ -426,9 +440,9 @@ void Player::Install()
 	INSTALL_HOOK(PostureDropDashUpdate);
 	INSTALL_HOOK(StateDoubleJumpUpdate);
 	INSTALL_HOOK(StateRecoveryJumpUpdate);
+	INSTALL_HOOK(StateStompingLandUpdate);
 	INSTALL_HOOK(GOCPlayerHsmUpdate);
 	INSTALL_HOOK(GOCPlayerHsmGroundStateUpdate);
-	INSTALL_HOOK(GOCPlayerHsmAirStateUpdate);
 	INSTALL_HOOK(PlayerSpeedUpdate);
 
 	if (Configuration::IsSlideDash)

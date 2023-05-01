@@ -41,6 +41,7 @@ public:
 	inline static bool IsStompDash = false;
 	inline static EWorldType StompDashWorldType = EWorldType_IslandOnly;
 	inline static EStompDashInputType StompDashInputType = EStompDashInputType_Hold;
+	inline static EStompDashInputType StompDashInputTypeCyber = EStompDashInputType_Press;
 	inline static float StompDashInitialVelocity = 50.0f;
 	inline static float StompDashInitialVelocitySV = 25.0f;
 

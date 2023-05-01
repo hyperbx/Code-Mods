@@ -97,10 +97,10 @@
 					"Description":
 					[
 						"The starting velocity of the Air Dash in 2D areas.\n",
-						"Default: 10.0"
+						"Default: 15.0"
 					],
 					"Type": "float",
-					"DefaultValue": 10.0
+					"DefaultValue": 15.0
 				}
 			]
 		},
@@ -133,14 +133,25 @@
 				},
 				{
 					"Name": "StompDashInputType",
-					"DisplayName": "Input Type",
+					"DisplayName": "Input Type (Islands)",
 					"Description":
 					[
-						"Choose between Hold or Press to initiate a drop dash when landing from a stomp.\n",
+						"The method of input used to perform a Stomp Dash on the islands.\n",
 						"Default: Hold"
 					],
 					"Type": "EStompDashInputType",
 					"DefaultValue": 0
+				},
+				{
+					"Name": "StompDashInputTypeCyber",
+					"DisplayName": "Input Type (Cyber Space)",
+					"Description":
+					[
+						"The method of input used to perform a Stomp Dash in Cyber Space.\n",
+						"Default: Press"
+					],
+					"Type": "EStompDashInputType",
+					"DefaultValue": 1
 				},
 				{
 					"Name": "StompDashInitialVelocity",
