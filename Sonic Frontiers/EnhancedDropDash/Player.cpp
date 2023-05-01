@@ -41,7 +41,7 @@ float m_DropDashDelayTime = 0.0f;
 float m_StompDashPressDelayTime = 0.0f;
 float m_HorizontalVelocity = 0.0f;
 
-FUNCTION_PTR(bool, __fastcall, fpSetCurrentState, m_SigSetStateFlags(), int64_t a1, int a2, int a3);
+FUNCTION_PTR(bool, __fastcall, fpSetCurrentState, m_SigSetCurrentState(), int64_t a1, int a2, int a3);
 
 bool IsNormalDropDash()
 {
@@ -204,14 +204,18 @@ HOOK(bool, __fastcall, StateDoubleJumpUpdate, m_SigStateDoubleJumpUpdate(), int6
 	return originalStateDoubleJumpUpdate(a1, in_pSonicContext, in_deltaTime);
 }
 
-HOOK(bool, __fastcall, StateRecoveryJumpUpdate, m_SigStateRecoveryJumpUpdate(), int64_t a1, int64_t a2, float in_deltaTime)
+HOOK(bool, __fastcall, StateRecoveryJumpUpdate, m_SigStateRecoveryJumpUpdate(), int64_t a1, int64_t in_pSonicContext, float in_deltaTime)
 {
 	m_StateFlags.set(EStateFlags_IsDropDashCharge, *(bool*)(a1 + 196));
 
-	if (InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD)
-		fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateAirBoost, 0);
+	// Always allow air boost exit.
+	if (m_StateFlags.test(EStateFlags_IsDropDashCharge) &&
+		InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD)
+	{
+		fpSetCurrentState(*(int64_t*)(in_pSonicContext + 56), EStateID_StateAirBoost, 0);
+	}
 
-	return originalStateRecoveryJumpUpdate(a1, a2, in_deltaTime);
+	return originalStateRecoveryJumpUpdate(a1, in_pSonicContext, in_deltaTime);
 }
 
 HOOK(bool, __fastcall, StateStompingLandUpdate, m_SigStateStompingLandUpdate(), int64_t a1, int64_t a2, float in_deltaTime)
@@ -357,6 +361,11 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 
 			break;
 		}
+
+		/* I have no idea what this state is, but it kept
+		   killing Air Dash when jumping off rails. */
+		case 165:
+			return 0;
 
 		default:
 		{
