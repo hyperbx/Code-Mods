@@ -5,7 +5,9 @@ void Configuration::Read()
 	// Behaviour
 	INI_READ_BOOLEAN("Behaviour", IsSlideDash);
 	INI_READ_BOOLEAN("Behaviour", IsUncurlWhenUngrounded);
+	INI_READ_BOOLEAN("Behaviour", IsNoFansWhenRolling);
 	INI_READ_BOOLEAN("Behaviour", IsGrindDoubleJumpFix);
+	INI_READ_BOOLEAN("Behaviour", IsSideViewRollFix);
 
 	// Air Dash
 	INI_READ_BOOLEAN("AirDash", IsAirDash);
@@ -36,8 +38,8 @@ void Configuration::Read()
 
 	// Camera
 	INI_READ_BOOLEAN("Camera", IsNoCameraDelay);
-	INI_READ_BOOLEAN("Camera", IsNoAirDashCameraDelay);
 	INI_READ_BOOLEAN("Camera", IsNoSlideDashCameraDelay);
+	INI_READ_BOOLEAN("Camera", IsNoAirDashCameraDelay);
 	INI_READ_BOOLEAN("Camera", IsNoStompDashCameraDelay);
 	INI_READ_BOOLEAN("Camera", IsNoQuickStompDashCameraDelay);
 }

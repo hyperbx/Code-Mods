@@ -28,7 +28,9 @@ public:
 	// Behaviour
 	inline static bool IsSlideDash = true;
 	inline static bool IsUncurlWhenUngrounded = false;
+	inline static bool IsNoFansWhenRolling = true;
 	inline static bool IsGrindDoubleJumpFix = true;
+	inline static bool IsSideViewRollFix = true;
 
 	// Air Dash
 	inline static bool IsAirDash = false;
@@ -59,8 +61,8 @@ public:
 
 	// Camera
 	inline static bool IsNoCameraDelay = false;
-	inline static bool IsNoAirDashCameraDelay = false;
 	inline static bool IsNoSlideDashCameraDelay = false;
+	inline static bool IsNoAirDashCameraDelay = false;
 	inline static bool IsNoStompDashCameraDelay = false;
 	inline static bool IsNoQuickStompDashCameraDelay = false;
 

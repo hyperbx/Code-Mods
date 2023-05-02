@@ -29,11 +29,34 @@
 					"DefaultValue": false
 				},
 				{
+					"Name": "IsNoFansWhenRolling",
+					"DisplayName": "Disable Fans when Rolling",
+					"Description":
+					[
+						"Allows you to roll uninterrupted through fans without flying upwards. This is particularly useful for Air Dash.\n",
+						"Fans will be completely operational for all other cases except for rolling.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
 					"Name": "IsGrindDoubleJumpFix",
 					"DisplayName": "Fix Grind Drop Dashing",
 					"Description":
 					[
 						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSideViewRollFix",
+					"DisplayName": "Fix 2D Drop Dash Roll",
+					"Description":
+					[
+						"Fixes the drop dash getting stuck in 2D areas if you move the analog stick towards or away from the camera plane.\n",
 						"Default: True"
 					],
 					"Type": "bool",
@@ -302,22 +325,22 @@
 					"DefaultValue": false
 				},
 				{
-					"Name": "IsNoAirDashCameraDelay",
-					"DisplayName": "Disable Air Dash Camera Delay",
+					"Name": "IsNoSlideDashCameraDelay",
+					"DisplayName": "Disable Slide Dash Camera Delay",
 					"Description":
 					[
-						"Disables the Air Dash camera delay.\n",
+						"Disables the Slide Dash camera delay.\n",
 						"Default: False"
 					],
 					"Type": "bool",
 					"DefaultValue": false
 				},
 				{
-					"Name": "IsNoSlideDashCameraDelay",
-					"DisplayName": "Disable Slide Dash Camera Delay",
+					"Name": "IsNoAirDashCameraDelay",
+					"DisplayName": "Disable Air Dash Camera Delay",
 					"Description":
 					[
-						"Disables the Slide Dash camera delay.\n",
+						"Disables the Air Dash camera delay.\n",
 						"Default: False"
 					],
 					"Type": "bool",

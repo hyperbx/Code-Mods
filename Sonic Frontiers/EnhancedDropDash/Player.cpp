@@ -24,7 +24,8 @@ enum EStateID
 	EStateID_StateStomping = 52,
 	EStateID_StateStompingLand = 55,
 	EStateID_StateSliding = 57,
-	EStateID_StateDropDash = 110
+	EStateID_StateDropDash = 110,
+	EStateID_StateFan = 165
 };
 
 enum EInputFlags
@@ -182,7 +183,7 @@ HOOK(int64_t, __fastcall, StateDropDashEnd, m_SigStateDropDashEnd(), int64_t a1,
 
 HOOK(bool, __fastcall, PostureDropDashUpdate, m_SigPostureDropDashUpdate(), int64_t a1, double a2)
 {
-	if (m_SigFixDropDashSideView() != nullptr)
+	if (Configuration::IsSideViewRollFix && m_SigFixDropDashSideView() != nullptr)
 	{
 		if (BlackboardHelper::IsSideView())
 		{
@@ -261,6 +262,15 @@ HOOK(bool, __fastcall, StateStompingLandUpdate, m_SigStateStompingLandUpdate(), 
 	}
 
 	return originalStateStompingLandUpdate(a1, a2, in_deltaTime);
+}
+
+HOOK(bool, __fastcall, ObjFanProcessMessage, m_SigObjFanProcessMessage(), int64_t a1, int64_t a2)
+{
+	// Disable fans if we're rolling.
+	if (Configuration::IsNoFansWhenRolling && m_StateFlags.test(EStateFlags_IsDropDash))
+		return 1;
+
+	return originalObjFanProcessMessage(a1, a2);
 }
 
 HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), int64_t in_pThis, int in_updatePhase, float* in_pDeltaTime)
@@ -362,11 +372,6 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 			break;
 		}
 
-		/* I have no idea what this state is, but it kept
-		   killing Air Dash when jumping off rails. */
-		case 165:
-			return 0;
-
 		default:
 		{
 			if (Configuration::IsGrindDoubleJumpFix)
@@ -453,6 +458,7 @@ void Player::Install()
 	INSTALL_HOOK(StateDoubleJumpUpdate);
 	INSTALL_HOOK(StateRecoveryJumpUpdate);
 	INSTALL_HOOK(StateStompingLandUpdate);
+	INSTALL_HOOK(ObjFanProcessMessage);
 	INSTALL_HOOK(GOCPlayerHsmUpdate);
 	INSTALL_HOOK(GOCPlayerHsmGroundStateUpdate);
 	INSTALL_HOOK(PlayerSpeedUpdate);
