@@ -42,7 +42,6 @@ float m_DropDashDelayTime = 0.0f;
 float m_StompDashHoldDelayTime = 0.0f;
 float m_StompDashPressDelayTime = 0.0f;
 float m_HorizontalVelocity = 0.0f;
-float m_LastHorizontalVelocityAir = 0.0f;
 
 FUNCTION_PTR(bool, __fastcall, fpSetCurrentState, m_SigSetCurrentState(), int64_t a1, int a2, int a3);
 
