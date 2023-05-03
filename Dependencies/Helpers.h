@@ -17,6 +17,49 @@
 
 #define READ_CALL(addr) ((int64_t)addr + *(int32_t*)((int64_t)addr + 1)) + 5
 
+#define READ_JUMP(name, addr) \
+size_t name = 0; \
+int8_t jmpType##name = 0; \
+uint8_t opcode##name = *(uint8_t*)((size_t)addr); \
+if ((opcode##name & 0xF0) == 0x70) \
+{ \
+    jmpType##name = 0;\
+} \
+else \
+{ \
+    switch (opcode##name) \
+    { \
+        case 0xE3: \
+        case 0xEB: \
+            jmpType##name = 0; \
+            break; \
+        case 0xE9: \
+            jmpType##name = 1; \
+            break; \
+        case 0x0F: \
+            jmpType##name = 2; \
+            break; \
+        case 0xFF: \
+            jmpType##name = 3; \
+            break; \
+    } \
+} \
+switch (jmpType##name) \
+{ \
+    case 0: \
+        name = ((size_t)addr + *(int8_t*)((size_t)addr + 1)) + 2; \
+        break; \
+    case 1: \
+        name = ((size_t)addr + *(int32_t*)((size_t)addr + 1)) + 5; \
+        break; \
+    case 2: \
+        name = ((size_t)addr + *(int32_t*)((size_t)addr + 2)) + 6; \
+        break; \
+    case 3: \
+        name = *(int64_t*)((size_t)addr + 6); \
+        break; \
+} \
+
 #define _CONCAT2(x, y) x##y
 #define CONCAT2(x, y) _CONCAT(x, y)
 #define INSERT_PADDING(length) \
