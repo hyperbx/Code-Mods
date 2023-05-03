@@ -9,6 +9,7 @@ CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisablePhantomRushUI, "\x0F\x84\x98\x00\x00\x0
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableQuickCyloopUI, "\x80\x4F\x38\x01\x48\x8B\xCE", "xxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableRecoverySmash, "\x0F\x84\xD5\x00\x00\x00\x48\x8B\xD7\x49\x8B\xCD", "xxxxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSonicBoom, "\xE8\xCC\xCC\xCC\xCC\xB0\x01\x48\x8B\x5C\x24\x70\x48\x83\xC4\x60\x5F\xC3\x48\x8B\x5C\x24\x70", "x????xxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSpinSlash, "\x74\x79\xBA\x2D\x00\x00\x00", "xxxxxxx");
 
 enum EAttackID : uint8_t
 {
@@ -146,7 +147,13 @@ EXPORT void Init()
 
 	if (Configuration::IsNoSonicBoom)
 	{
-		if (m_SigDisableSonicBoom != nullptr)
+		if (m_SigDisableSonicBoom() != nullptr)
 			WRITE_NOP((int64_t)m_SigDisableSonicBoom(), 5);
+	}
+
+	if (Configuration::IsNoSpinSlash)
+	{
+		if (m_SigDisableSpinSlash() != nullptr)
+			WRITE_MEMORY((int64_t)m_SigDisableSpinSlash(), uint8_t, 0xEB);
 	}
 }
