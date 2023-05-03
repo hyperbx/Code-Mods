@@ -1,4 +1,4 @@
-# Disable Skills
+# [Disable Skills](https://gamebanana.com/mods/441619)
 
 ## Credits
 - [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
