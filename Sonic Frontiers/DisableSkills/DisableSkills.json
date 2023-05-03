@@ -1,0 +1,111 @@
+{
+    "Groups":
+	[
+	    {
+			"Name": "Skills",
+			"DisplayName": "Skills",
+			"Elements":
+			[
+				{
+					"Name": "IsNoAirTrick",
+					"DisplayName": "Disable Air Trick",
+					"Description": [ "Disables Air Trick." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoCrossSlash",
+					"DisplayName": "Disable Cross Slash",
+					"Description": [ "Disables Cross Slash." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoCycloneKick",
+					"DisplayName": "Disable Cyclone Kick",
+					"Description": [ "Disables Cyclone Kick." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoCyloop",
+					"DisplayName": "Disable Cyloop",
+					"Description": [ "Disables Cyloop." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoGrandSlam",
+					"DisplayName": "Disable Grand Slam",
+					"Description": [ "Disables Grand Slam." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoHomingShot",
+					"DisplayName": "Disable Homing Shot",
+					"Description": [ "Disables Homing Shot." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoLoopKick",
+					"DisplayName": "Disable Loop Kick",
+					"Description": [ "Disables Loop Kick." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoPhantomRush",
+					"DisplayName": "Disable Phantom Rush",
+					"Description": [ "Disables Phantom Rush." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoQuickCyloop",
+					"DisplayName": "Disable Quick Cyloop",
+					"Description": [ "Disables Quick Cyloop." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoRecoverySmash",
+					"DisplayName": "Disable Recovery Smash",
+					"Description": [ "Disables Recovery Smash." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoSonicBoom",
+					"DisplayName": "Disable Sonic Boom",
+					"Description": [ "Disables Sonic Boom." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoSpinSlash",
+					"DisplayName": "Disable Spin Slash",
+					"Description": [ "Disables Spin Slash." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoStompAttack",
+					"DisplayName": "Disable Stomp Attack",
+					"Description": [ "Disables Stomp Attack." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoWildRush",
+					"DisplayName": "Disable Wild Rush",
+					"Description": [ "Disables Wild Rush." ],
+					"Type": "bool",
+					"DefaultValue": false
+				}
+			]
+        }
+    ],
+    "IniFile": "DisableSkills.ini"
+}

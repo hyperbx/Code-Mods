@@ -1,4 +1,4 @@
-# Enhanced Drop Dash
+# [Enhanced Drop Dash](https://gamebanana.com/mods/440674)
 
 ## Credits
 - [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering

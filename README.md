@@ -25,6 +25,7 @@ A repository containing DLL mods for various games.
 - Sonic Frontiers
   - [Boss Select](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/BossSelect)
   - [Combat DX](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/CombatDX)
+  - [Disable Skills](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DisableSkills)
   - [Discord Frontiers](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DiscordFrontiers)
   - [Enhanced Drop Dash](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/EnhancedDropDash)
   - [Island Music Customiser](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/IslandMusicCustomiser)
