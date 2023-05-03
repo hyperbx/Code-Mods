@@ -21,6 +21,7 @@ void Configuration::Read()
 	INI_READ_ENUM("StompDash", EWorldType, StompDashWorldType);
 	INI_READ_ENUM("StompDash", EStompDashInputType, StompDashInputType);
 	INI_READ_ENUM("StompDash", EStompDashInputType, StompDashInputTypeCyber);
+	INI_READ_FLOAT("StompDash", StompDashHoldDelay);
 	INI_READ_FLOAT("StompDash", StompDashInitialVelocity);
 	INI_READ_FLOAT("StompDash", StompDashInitialVelocitySV);
 

@@ -39,8 +39,10 @@ bool m_IsAirDashJumpOut = false;
 
 float m_DeltaTime = 0.0f;
 float m_DropDashDelayTime = 0.0f;
+float m_StompDashHoldDelayTime = 0.0f;
 float m_StompDashPressDelayTime = 0.0f;
 float m_HorizontalVelocity = 0.0f;
+float m_LastHorizontalVelocityAir = 0.0f;
 
 FUNCTION_PTR(bool, __fastcall, fpSetCurrentState, m_SigSetCurrentState(), int64_t a1, int a2, int a3);
 
@@ -224,18 +226,23 @@ HOOK(bool, __fastcall, StateStompingLandUpdate, m_SigStateStompingLandUpdate(), 
 	if (!Configuration::IsStompDash || !IsMoveAvailable(Configuration::StompDashWorldType))
 		return originalStateStompingLandUpdate(a1, a2, in_deltaTime);
 
+	bool startDropDash = false;
+
 	switch (BlackboardHelper::IsCyberSpace()
 			? Configuration::StompDashInputTypeCyber
 			: Configuration::StompDashInputType)
 	{
 		case Configuration::EStompDashInputType_Hold:
 		{
-			if (*(float*)(a1 + 180) > 0.0f)
-			{
-				m_StateFlags.set(EStateFlags_IsStompDash);
+			if (!InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B))
+				break;
 
-				fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateDropDash, 0);
-			}
+			// Disable original timing.
+			*(float*)(a1 + 180) = 1.0f;
+
+			m_StompDashHoldDelayTime += in_deltaTime;
+
+			startDropDash = m_StompDashHoldDelayTime > Configuration::StompDashHoldDelay;
 
 			break;
 		}
@@ -245,20 +252,22 @@ HOOK(bool, __fastcall, StateStompingLandUpdate, m_SigStateStompingLandUpdate(), 
 			if (InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B))
 				break;
 
-			// Prevent stomp bounce timer from running so we can do our own timing.
+			// Disable original timing.
 			*(float*)(a1 + 180) = 1.0f;
 
 			m_StompDashPressDelayTime += in_deltaTime;
 
-			if (m_StompDashPressDelayTime > 0.075f)
-			{
-				m_StateFlags.set(EStateFlags_IsStompDash);
-
-				fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateDropDash, 0);
-			}
+			startDropDash = m_StompDashPressDelayTime > 0.075f;
 
 			break;
 		}
+	}
+
+	if (startDropDash)
+	{
+		m_StateFlags.set(EStateFlags_IsStompDash);
+
+		fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateDropDash, 0);
 	}
 
 	return originalStateStompingLandUpdate(a1, a2, in_deltaTime);
@@ -352,6 +361,7 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 		}
 
 		case EStateID_StateStompingLand:
+			m_StompDashHoldDelayTime = 0.0f;
 			m_StompDashPressDelayTime = 0.0f;
 			break;
 

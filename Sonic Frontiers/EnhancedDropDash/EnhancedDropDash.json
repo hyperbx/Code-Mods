@@ -177,6 +177,17 @@
 					"DefaultValue": 1
 				},
 				{
+					"Name": "StompDashHoldDelay",
+					"DisplayName": "Hold Delay",
+					"Description":
+					[
+						"The amount of time that needs to pass when using the \"Hold\" input type before Sonic performs a drop dash when landing from a stomp.\n",
+						"Default: 0.1"
+					],
+					"Type": "float",
+					"DefaultValue": 0.1
+				},
+				{
 					"Name": "StompDashInitialVelocity",
 					"DisplayName": "Initial Velocity (3D)",
 					"Description":
