@@ -19,7 +19,7 @@
 
 #define READ_JUMP(name, addr) \
 size_t name = 0; \
-int8_t jmpType##name = 0; \
+int8_t jmpType##name = -1; \
 uint8_t opcode##name = *(uint8_t*)((size_t)addr); \
 if ((opcode##name & 0xF0) == 0x70) \
 { \
