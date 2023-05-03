@@ -181,7 +181,7 @@
 					"DisplayName": "Hold Delay",
 					"Description":
 					[
-						"The amount of time that needs to pass when using the \"Hold\" input type before Sonic performs a drop dash when landing from a stomp.\n",
+						"The amount of seconds that need to pass when using the \"Hold\" input type before Sonic performs a drop dash when landing from a stomp.\n",
 						"Default: 0.125"
 					],
 					"Type": "float",
