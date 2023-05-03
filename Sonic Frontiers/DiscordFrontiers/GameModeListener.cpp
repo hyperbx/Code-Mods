@@ -19,7 +19,7 @@ HOOK(void*, __fastcall, GameModeFishingCtor, m_SigGameModeFishingCtor(), void* a
 	return originalGameModeFishingCtor(a1, a2, a3);
 }
 
-HOOK(void*, __fastcall, GameModeHackingCtor, m_SigGameModeHackingCtor(), void* a1, int64_t a2, int64_t a3)
+HOOK(void*, __fastcall, GameModeHackingCtor, 0x1401A3D40, void* a1, int64_t a2, int64_t a3) // TODO: replace address.
 {
 	if (StringHelper::Compare(GameModeListener::Island, "w5r01"))
 	{
@@ -40,6 +40,22 @@ HOOK(void*, __fastcall, GameModeStageCtor, m_SigGameModeStageCtor(), void* a1, i
 	return originalGameModeStageCtor(a1, a2, a3);
 }
 
+HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t a1, int64_t a2, int* a3)
+{
+	auto worldId = (const char*)(a1 + 0xA0);
+	auto worldPrefix = std::string(worldId).substr(0, 2);
+
+	if (worldId && !StringHelper::Compare(worldId, "w1f01") &&
+		std::find(GameModeListener::Islands.begin(), GameModeListener::Islands.end(), worldPrefix) != GameModeListener::Islands.end())
+	{
+		GameModeListener::Island = worldId;
+	}
+
+	Discord::State = LanguageHelper::Localise("StatusExploring");
+
+	return originalGameModeStageUpdate(a1, a2, a3);
+}
+
 HOOK(void*, __fastcall, GameModeCyberStageCtor, m_SigGameModeCyberStageCtor(), void* a1, int64_t a2, int64_t a3)
 {
 	GameModeListener::Update(GameModeListener::Stage, true);
@@ -52,26 +68,6 @@ HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), voi
 	Discord::Update(LanguageHelper::Localise("StatusCredits"), "", "default", "", 0);
 
 	return originalGameModeStaffRollCtor(a1, a2, a3);
-}
-
-HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t a1, int64_t a2, int* a3)
-{
-	auto worldId = (const char*)(a1 + 0xA0);
-
-	if
-	(
-		worldId && !StringHelper::Compare(worldId, "w1f01") &&
-
-		/* It'd be nice if std::vector just had a .contains() function. */
-		std::find(GameModeListener::Islands.begin(), GameModeListener::Islands.end(), std::string(worldId).substr(0, 2)) != GameModeListener::Islands.end()
-	)
-	{
-		GameModeListener::Island = worldId;
-	}
-
-	Discord::State = LanguageHelper::Localise("StatusExploring");
-
-	return originalGameModeStageUpdate(a1, a2, a3);
 }
 
 HOOK(int64_t, __fastcall, GameModeCyberStageUpdate, m_SigGameModeCyberStageUpdate(), int64_t a1, int64_t a2, int* a3)
@@ -128,9 +124,9 @@ void GameModeListener::Install()
 	INSTALL_HOOK(GameModeFishingCtor);
 	INSTALL_HOOK(GameModeHackingCtor);
 	INSTALL_HOOK(GameModeStageCtor);
+	INSTALL_HOOK(GameModeStageUpdate);
 	INSTALL_HOOK(GameModeCyberStageCtor);
 	INSTALL_HOOK(GameModeStaffRollCtor);
-	INSTALL_HOOK(GameModeStageUpdate);
 	INSTALL_HOOK(GameModeCyberStageUpdate);
 	INSTALL_HOOK(GameModeCyberStageRetryFromMenuInit);
 }
