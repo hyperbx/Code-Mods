@@ -49,7 +49,6 @@ CL_SCAN_SIGNATURE(m_SigPlayerSpeedUpdateCaller, "\xE8\xCC\xCC\xCC\xCC\x80\xBF\x1
 
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDropDashCameraDelay, "\x73\x2A\xF3\x0F\x10\x05\xCC\xCC\xCC\xCC\x45\x33\xC9", "xxxxxx????xxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigSquatToSlideWorkaround, "\x75\x27\x45\x31\xC0\x48\x89\xF9", "xxxxxxxx");
-CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDropDashUngroundedExitFunc, "\xE8\xCC\xCC\xCC\xCC\x84\xC0\x75\xD8\x48\x8B\xCF", "x????xxxxxxx");
-CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigExitStateWithTricks, "\x48\x89\x5C\x24\x10\x48\x89\x6C\x24\x18\x48\x89\x74\x24\x20\x57\x48\x83\xEC\x40\x48\x8B\x59", "xxxxxxxxxxxxxxxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigForceGrindJumpPosture, "\x73\x09\x0F\x28\x1D\xCC\xCC\xCC\xCC\xEB\x35\x0F\x2F\xDA", "xxxxx????xxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigFixDropDashSideView, "\x74\x10\x0F\x28\xCF", "xxxxx");
+CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigCanRecoveryJump, "\xE8\xCC\xCC\xCC\xCC\x84\xC0\x74\x0F\x45\x31\xC0\x48\x89\xF9", "x????xxxxxxxxxx");

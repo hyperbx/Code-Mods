@@ -1,6 +1,7 @@
 #pragma once
 
 #define STATUS_PARAM_BOOST          0x01
+#define STATUS_PARAM_RECOVERYJUMP   0x02
 #define STATUS_PARAM_AIRBOOST       0x04
 #define STATUS_PARAM_GRINDJUMP      0x06
 #define STATUS_PARAM_GRIND          0x07

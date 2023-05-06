@@ -1,4 +1,5 @@
-std::bitset<8> m_StateFlags;
+std::bitset<9> m_StateFlags;
+std::bitset<2> m_AirDashFlags;
 std::bitset<3> m_InputFlags;
 
 enum EStateFlags
@@ -10,22 +11,14 @@ enum EStateFlags
 	EStateFlags_IsSlideDash,
 	EStateFlags_IsStompDashRelease,
 	EStateFlags_IsStompDash,
-	EStateFlags_IsQuickStompDash
+	EStateFlags_IsQuickStompDash,
+	EStateFlags_IsGroundedOnce
 };
 
-enum EStateID
+enum EAirDashFlags
 {
-	EStateID_StateRun = 4,
-	EStateID_StateDoubleJump = 9,
-	EStateID_StateStompingBounce = 10,
-	EStateID_StateFall = 14,
-	EStateID_StateAirBoost = 22,
-	EStateID_StateGrindDoubleJump = 46,
-	EStateID_StateStomping = 52,
-	EStateID_StateStompingLand = 55,
-	EStateID_StateSliding = 57,
-	EStateID_StateDropDash = 110,
-	EStateID_StateFan = 165
+	EAirDashFlags_AwaitDoubleJump,
+	EAirDashFlags_AwaitRecovery
 };
 
 enum EInputFlags
@@ -35,7 +28,22 @@ enum EInputFlags
 	EInputFlags_IsUncurlTriggerBuffered
 };
 
-bool m_IsAirDashJumpOut = false;
+enum EStateID
+{
+	EStateID_StateRun = 4,
+	EStateID_StateDoubleJump = 9,
+	EStateID_StateStompingBounce = 10,
+	EStateID_StateRecoveryJump = 11,
+	EStateID_StateFall = 14,
+	EStateID_StateRecovery = 15,
+	EStateID_StateAirBoost = 22,
+	EStateID_StateGrindDoubleJump = 46,
+	EStateID_StateStomping = 52,
+	EStateID_StateStompingLand = 55,
+	EStateID_StateSliding = 57,
+	EStateID_StateDropDash = 110,
+	EStateID_StateFan = 165
+};
 
 float m_DeltaTime = 0.0f;
 float m_DropDashDelayTime = 0.0f;
@@ -119,12 +127,6 @@ HOOK(int64_t, __fastcall, StateDropDashStart, m_SigStateDropDashStart(), int64_t
 			WRITE_MEMORY(m_SigDropDashCameraDelay(), uint8_t, 0xEB);
 	}
 
-	if (IsImmediateExit())
-	{
-		if (m_SigDropDashUngroundedExitFunc() != nullptr && m_SigExitStateWithTricks() != nullptr)
-			WRITE_CALL((uint64_t)m_SigDropDashUngroundedExitFunc(), (uint64_t)m_SigExitStateWithTricks());
-	}
-
 	return originalStateDropDashStart(a1, a2);
 }
 
@@ -141,26 +143,55 @@ HOOK(bool, __fastcall, StateDropDashUpdate, m_SigStateDropDashUpdate(), int64_t 
 	if (InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) < TRIGGER_THRESHOLD)
 		m_InputFlags.reset(EInputFlags_IsUncurlTriggerBuffered);
 
-	if (IsUngroundedExit() && isGrounded)
+	m_AirDashFlags.set(EAirDashFlags_AwaitRecovery, m_StateFlags.test(EStateFlags_IsAirDash));
+
+	// Exit StateDropDash into StateRecovery immediately (if enabled).
+	if (IsImmediateExit())
 	{
-		if (m_SigDropDashUngroundedExitFunc() != nullptr && m_SigExitStateWithTricks() != nullptr)
-			WRITE_CALL((uint64_t)m_SigDropDashUngroundedExitFunc(), (uint64_t)m_SigExitStateWithTricks());
+		fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateRecovery, 0);
+		return true;
 	}
 
+	/* Set flag if we've been grounded at least once. This'll be used
+	   for other conditions later that we must check when grounded. */
+	if (!m_StateFlags.test(EStateFlags_IsGroundedOnce))
+		m_StateFlags.set(EStateFlags_IsGroundedOnce, isGrounded);
+
+	if (!isGrounded)
+	{
+		// Exit StateDropDash into StateRecovery when ungrounded (if enabled).
+		if (IsUngroundedExit() && m_StateFlags.test(EStateFlags_IsGroundedOnce))
+		{
+			fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateRecovery, 0);
+			return true;
+		}
+
+		// Exit StateDropDash into StateAirBoost whilst RT is held when airborne.
+		if (!m_InputFlags.test(EInputFlags_IsUncurlTriggerBuffered) && InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD)
+		{
+			fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateAirBoost, 0);
+			return true;
+		}
+
+		// Set double jump flag for when we enter the fall state later after cancelling Air Dash.
+		if (!m_InputFlags.test(EInputFlags_IsJumpInputBuffered) && m_StateFlags.test(EStateFlags_IsAirDash) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A))
+			m_AirDashFlags.set(EAirDashFlags_AwaitDoubleJump, true);
+	}
+
+	// Exit StateDropDash into StateRun when grounded (if enabled) or whilst RT is held.
 	if (IsGroundedExit(isGrounded) || !m_InputFlags.test(EInputFlags_IsUncurlTriggerBuffered) && InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD)
 	{
 		BlackboardHelper::GetStatus()->StateParameter |= STATUS_PARAM_BOOST;
 
-		goto Uncurl;
+		fpSetCurrentState(*(int64_t*)(a2 + 56), EStateID_StateRun, 0);
+
+		return true;
 	}
 
+	// Exit StateDropDash into either StateRun or StateFall whilst B or A are held.
 	if (!m_InputFlags.test(EInputFlags_IsUncurlInputBuffered) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B) ||
 		!m_InputFlags.test(EInputFlags_IsJumpInputBuffered) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A))
 	{
-		if (m_StateFlags.test(EStateFlags_IsAirDash) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_A))
-			m_IsAirDashJumpOut = true;
-
-	Uncurl:
 		fpSetCurrentState(*(int64_t*)(a2 + 56), isGrounded ? EStateID_StateRun : EStateID_StateFall, 0);
 
 		return true;
@@ -175,9 +206,6 @@ HOOK(int64_t, __fastcall, StateDropDashEnd, m_SigStateDropDashEnd(), int64_t a1,
 
 	if (m_SigDropDashCameraDelay() != nullptr)
 		RESTORE_MEMORY((uint64_t)m_SigDropDashCameraDelay());
-
-	if (m_SigDropDashUngroundedExitFunc() != nullptr)
-		RESTORE_MEMORY((uint64_t)m_SigDropDashUngroundedExitFunc());
 
 	return originalStateDropDashEnd(a1, a2);
 }
@@ -303,9 +331,14 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 	{
 		case EStateID_StateFall:
 		{
-			if (m_IsAirDashJumpOut)
+			/* I was debating changing this implementation to just switch
+			   the state from StateDropDash itself, but doing that cancels
+			   all horizontal velocity, so we're gonna keep it the old way. */
+
+			if (m_AirDashFlags.test(EAirDashFlags_AwaitDoubleJump))
 			{
-				m_IsAirDashJumpOut = false;
+				m_AirDashFlags.reset(EAirDashFlags_AwaitDoubleJump);
+
 				in_stateIndex = EStateID_StateDoubleJump;
 			}
 
@@ -314,7 +347,10 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 
 		case EStateID_StateAirBoost:
 		{
-			if (Configuration::IsAirDash && IsMoveAvailable(Configuration::AirDashWorldType) && m_StateFlags.test(EStateFlags_IsDropDashCharge))
+			if (Configuration::IsAirDash &&
+				IsMoveAvailable(Configuration::AirDashWorldType) &&
+				m_StateFlags.test(EStateFlags_IsDropDashCharge) &&
+				!m_AirDashFlags.test(EAirDashFlags_AwaitRecovery))
 			{
 				m_StateFlags.set(EStateFlags_IsAirDash);
 
@@ -353,6 +389,7 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 			if (Configuration::IsQuickStompDashRequireAirBoost || isVelocityAboveThreshold)
 			{
 				m_StateFlags.set(EStateFlags_IsQuickStompDash);
+
 				in_stateIndex = EStateID_StateDropDash;
 			}
 
@@ -389,11 +426,13 @@ HOOK(char, __fastcall, GOCPlayerHsmGroundStateUpdate, m_SigGOCPlayerHsmGroundSta
 					RESTORE_MEMORY((uint64_t)m_SigForceGrindJumpPosture());
 			}
 
+			if (in_stateIndex != EStateID_StateRecovery && in_stateIndex != EStateID_StateRecoveryJump)
+				m_AirDashFlags.reset(EAirDashFlags_AwaitRecovery);
+
 			break;
 		}
 	}
 
-	m_IsAirDashJumpOut = false;
 	m_StateFlags.reset(EStateFlags_IsDropDashCharge);
 
 	return originalGOCPlayerHsmGroundStateUpdate(in_pThis, in_stateIndex);
@@ -451,14 +490,19 @@ void Player::Install()
 	if (m_SigDropDashCameraDelay() != nullptr)
 		PRESERVE_MEMORY((uint64_t)m_SigDropDashCameraDelay(), 1);
 
-	if (m_SigDropDashUngroundedExitFunc() != nullptr)
-		PRESERVE_MEMORY((uint64_t)m_SigDropDashUngroundedExitFunc(), 5);
-
 	if (m_SigForceGrindJumpPosture() != nullptr)
 		PRESERVE_MEMORY((uint64_t)m_SigForceGrindJumpPosture(), 2);
 
 	if (m_SigFixDropDashSideView() != nullptr)
 		PRESERVE_MEMORY((uint64_t)m_SigFixDropDashSideView(), 1);
+
+	if (m_SigCanRecoveryJump() != nullptr)
+	{
+		READ_THUNK(CanRecoveryJump, (uint64_t)m_SigCanRecoveryJump());
+
+		// Force allow recovery jump.
+		WRITE_NOP(CanRecoveryJump + 0xA9, 2);
+	}
 
 	INSTALL_HOOK(StateDropDashStart);
 	INSTALL_HOOK(StateDropDashUpdate);
