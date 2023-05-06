@@ -60,6 +60,9 @@ switch (jmpType##name) \
         break; \
 } \
 
+#define READ_THUNK(name, addr) READ_JUMP(name, (int64_t)READ_CALL(addr))
+#define READ_THUNK_OFFSET(name, addr, offset) READ_JUMP(name, (int64_t)(READ_CALL(addr) + offset))
+
 #define _CONCAT2(x, y) x##y
 #define CONCAT2(x, y) _CONCAT(x, y)
 #define INSERT_PADDING(length) \
