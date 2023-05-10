@@ -1,4 +1,5 @@
 CL_SCAN_SIGNATURE(m_SigAttackProcessor, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x48\x89\x7C\x24\x18\x55\x41\x56\x41\x57\x48\x8B\xEC\x48\x83\xEC\x60\x48", "xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigSetCurrentStateCaller, "\xE8\xCC\xCC\xCC\xCC\x48\x8D\x4D\xC0\xE8\xCC\xCC\xCC\xCC\x48\x8B\x47\x50", "x????xxxxx????xxxx");
 
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableAirTricksFromTerrain, "\x74\x10\x41\xB0\x01\xBA\x28\x00\x00\x00", "xxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableAirTricksFromTraversalObjects, "\xB0\x01\x88\x46\x3E", "xxxxx");
@@ -31,6 +32,8 @@ enum EAttackID : uint8_t
 	EAttackID_GrandSlam = 24
 };
 
+FUNCTION_PTR(char, __fastcall, fpSetCurrentState, READ_CALL((int64_t)m_SigSetCurrentStateCaller()), int64_t in_gocPlayerHsmField56, int in_stateIndex, int a3);
+
 HOOK(int64_t, __fastcall, AttackProcessor, m_SigAttackProcessor(), int64_t a1, EAttackID in_attackId, uint8_t a3, int64_t a4)
 {
 #if _DEBUG
@@ -55,7 +58,15 @@ HOOK(int64_t, __fastcall, AttackProcessor, m_SigAttackProcessor(), int64_t a1, E
 		}
 
 		case EAttackID_HomingShot:
-			return Configuration::IsNoHomingShot ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		{
+			if (!Configuration::IsNoHomingShot)
+				break;
+			
+			// Switch to StateHomingAttack.
+			fpSetCurrentState(a1, 60, 0);
+
+			return 0;
+		}
 
 		case EAttackID_LoopKick:
 			return Configuration::IsNoLoopKick ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
