@@ -3,11 +3,15 @@ void Configuration::Read()
 	INIReader reader(INI_FILE);
 
 	// Behaviour
-	INI_READ_BOOLEAN("Behaviour", IsSlideDash);
+	INI_READ_BOOLEAN("Behaviour", IsAirBoostUngroundedExit);
+	INI_READ_BOOLEAN("Behaviour", IsStompUngroundedExit);
 	INI_READ_BOOLEAN("Behaviour", IsUncurlWhenUngrounded);
 	INI_READ_BOOLEAN("Behaviour", IsNoFansWhenRolling);
-	INI_READ_BOOLEAN("Behaviour", IsGrindDoubleJumpFix);
 	INI_READ_BOOLEAN("Behaviour", IsSideViewRollFix);
+	INI_READ_BOOLEAN("Behaviour", IsGrindDoubleJumpFix);
+
+	// Slide Dash
+	INI_READ_BOOLEAN("SlideDash", IsSlideDash);
 
 	// Air Dash
 	INI_READ_BOOLEAN("AirDash", IsAirDash);

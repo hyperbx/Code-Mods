@@ -26,11 +26,15 @@ public:
 	};
 
 	// Behaviour
-	inline static bool IsSlideDash = true;
+	inline static bool IsAirBoostUngroundedExit = true;
+	inline static bool IsStompUngroundedExit = true;
 	inline static bool IsUncurlWhenUngrounded = false;
 	inline static bool IsNoFansWhenRolling = true;
-	inline static bool IsGrindDoubleJumpFix = true;
 	inline static bool IsSideViewRollFix = true;
+	inline static bool IsGrindDoubleJumpFix = true;
+
+	// Slide Dash
+	inline static bool IsSlideDash = true;
 
 	// Air Dash
 	inline static bool IsAirDash = false;

@@ -3,15 +3,26 @@
 	[
 	    {
 			"Name": "Behaviour",
-			"DisplayName": "General Behaviour",
+			"DisplayName": "Behaviour",
 			"Elements":
 			[
 				{
-					"Name": "IsSlideDash",
-					"DisplayName": "Enable Slide Dash",
+					"Name": "IsAirBoostUngroundedExit",
+					"DisplayName": "Allow Air Boost Roll Cancel",
 					"Description":
 					[
-						"Instantly drop dash on the ground by sliding.\n",
+						"Allows Sonic to perform an air boost whilst drop dashing in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsStompUngroundedExit",
+					"DisplayName": "Allow Stomp Roll Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform a stomp attack whilst drop dashing in the air.\n",
 						"Default: True"
 					],
 					"Type": "bool",
@@ -19,10 +30,10 @@
 				},
 				{
 					"Name": "IsUncurlWhenUngrounded",
-					"DisplayName": "Automatically Uncurl when Ungrounded",
+					"DisplayName": "Automatically Roll Cancel when Ungrounded",
 					"Description":
 					[
-						"Automatically uncurl Sonic when he becomes ungrounded, allowing him to perform tricks.\n",
+						"Automatically cancels rolling when Sonic becomes ungrounded, allowing him to perform tricks.\n",
 						"Default: False"
 					],
 					"Type": "bool",
@@ -41,17 +52,6 @@
 					"DefaultValue": true
 				},
 				{
-					"Name": "IsGrindDoubleJumpFix",
-					"DisplayName": "Fix Grind Drop Dashing",
-					"Description":
-					[
-						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
-						"Default: True"
-					],
-					"Type": "bool",
-					"DefaultValue": true
-				},
-				{
 					"Name": "IsSideViewRollFix",
 					"DisplayName": "Fix 2D Drop Dash Roll",
 					"Description":
@@ -61,9 +61,38 @@
 					],
 					"Type": "bool",
 					"DefaultValue": true
+				},
+				{
+					"Name": "IsGrindDoubleJumpFix",
+					"DisplayName": "Fix Grind Drop Dashing",
+					"Description":
+					[
+						"Allows you to drop dash immediately after jumping off a grind rail, rather than waiting for the separate grind double jump state to exit first.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
 				}
 			]
         },
+		{
+			"Name": "SlideDash",
+			"DisplayName": "Slide Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsSlideDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Instantly drop dash on the ground by sliding.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
 		{
 			"Name": "AirDash",
 			"DisplayName": "Air Dash",
