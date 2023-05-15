@@ -43,6 +43,9 @@ enum EStateID
 	EStateID_StateStomping = 52,
 	EStateID_StateStompingLand = 55,
 	EStateID_StateSliding = 57,
+	EStateID_StateQuickStep = 65,
+	EStateID_StateQuickStepLeft = 66,
+	EStateID_StateQuickStepRight = 67,
 	EStateID_StateDropDash = 110,
 	EStateID_StateFan = 165
 };
@@ -210,18 +213,25 @@ HOOK(bool, __fastcall, StateDropDashUpdate, m_SigStateDropDashUpdate(), int64_t 
 		}
 
 		// Exit StateDropDash into StateAirBoost whilst RT is held when airborne.
-		if (Configuration::IsAirBoostUngroundedExit && (!m_InputFlags.test(EInputFlags_IsUncurlTriggerBuffered) && InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD))
+		if (Configuration::IsAirBoostRollCancel && (!m_InputFlags.test(EInputFlags_IsUncurlTriggerBuffered) && InputHelper::Instance->GetTriggerInput(VK_PAD_RTRIGGER) > TRIGGER_THRESHOLD))
 		{
 			SetCurrentState(in_pSonicContext, EStateID_StateAirBoost);
 			return true;
 		}
 
 		// Exit StateDropDash into StateStomping.
-		if (Configuration::IsStompUngroundedExit && (!m_InputFlags.test(EInputFlags_IsUncurlInputBuffered) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B)))
+		if (Configuration::IsStompRollCancel && (!m_InputFlags.test(EInputFlags_IsUncurlInputBuffered) && InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_B)))
 		{
 			SetCurrentState(in_pSonicContext, EStateID_StateStomping);
 			return true;
 		}
+	}
+
+	// Exit StateDropDash into StateQuickStep.
+	if (Configuration::IsQuickStepRollCancel && (InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_LEFT_SHOULDER) || InputHelper::Instance->GetInputDown(XINPUT_GAMEPAD_RIGHT_SHOULDER)))
+	{
+		SetCurrentState(in_pSonicContext, EStateID_StateQuickStep);
+		return true;
 	}
 
 	// Exit StateDropDash into either StateRun or StateFall whilst B or A are held.

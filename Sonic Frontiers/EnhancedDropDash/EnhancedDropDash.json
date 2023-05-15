@@ -7,22 +7,33 @@
 			"Elements":
 			[
 				{
-					"Name": "IsAirBoostUngroundedExit",
+					"Name": "IsAirBoostRollCancel",
 					"DisplayName": "Allow Air Boost Roll Cancel",
 					"Description":
 					[
-						"Allows Sonic to perform an air boost whilst drop dashing in the air.\n",
+						"Allows Sonic to perform an air boost whilst rolling in the air.\n",
 						"Default: True"
 					],
 					"Type": "bool",
 					"DefaultValue": true
 				},
 				{
-					"Name": "IsStompUngroundedExit",
+					"Name": "IsQuickStepRollCancel",
+					"DisplayName": "Allow Quick Step Roll Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform a quick step whilst rolling.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsStompRollCancel",
 					"DisplayName": "Allow Stomp Roll Cancel",
 					"Description":
 					[
-						"Allows Sonic to perform a stomp attack whilst drop dashing in the air.\n",
+						"Allows Sonic to perform a stomp attack whilst rolling in the air.\n",
 						"Default: True"
 					],
 					"Type": "bool",

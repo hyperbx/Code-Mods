@@ -3,8 +3,9 @@ void Configuration::Read()
 	INIReader reader(INI_FILE);
 
 	// Behaviour
-	INI_READ_BOOLEAN("Behaviour", IsAirBoostUngroundedExit);
-	INI_READ_BOOLEAN("Behaviour", IsStompUngroundedExit);
+	INI_READ_BOOLEAN("Behaviour", IsAirBoostRollCancel);
+	INI_READ_BOOLEAN("Behaviour", IsQuickStepRollCancel);
+	INI_READ_BOOLEAN("Behaviour", IsStompRollCancel);
 	INI_READ_BOOLEAN("Behaviour", IsUncurlWhenUngrounded);
 	INI_READ_BOOLEAN("Behaviour", IsNoFansWhenRolling);
 	INI_READ_BOOLEAN("Behaviour", IsSideViewRollFix);

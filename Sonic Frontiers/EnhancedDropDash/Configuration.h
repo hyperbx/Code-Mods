@@ -26,8 +26,9 @@ public:
 	};
 
 	// Behaviour
-	inline static bool IsAirBoostUngroundedExit = true;
-	inline static bool IsStompUngroundedExit = true;
+	inline static bool IsAirBoostRollCancel = true;
+	inline static bool IsQuickStepRollCancel = true;
+	inline static bool IsStompRollCancel = true;
 	inline static bool IsUncurlWhenUngrounded = false;
 	inline static bool IsNoFansWhenRolling = true;
 	inline static bool IsSideViewRollFix = true;
