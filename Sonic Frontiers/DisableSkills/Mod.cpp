@@ -1,4 +1,4 @@
-CL_SCAN_SIGNATURE(m_SigAttackProcessor, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x48\x89\x7C\x24\x18\x55\x41\x56\x41\x57\x48\x8B\xEC\x48\x83\xEC\x60\x48", "xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigActionProcessor, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x48\x89\x7C\x24\x18\x55\x41\x56\x41\x57\x48\x8B\xEC\x48\x83\xEC\x60\x48", "xxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 CL_SCAN_SIGNATURE(m_SigSetCurrentStateCaller, "\xE8\xCC\xCC\xCC\xCC\x48\x8D\x4D\xC0\xE8\xCC\xCC\xCC\xCC\x48\x8B\x47\x50", "x????xxxxx????xxxx");
 
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableAirTricksFromTerrain, "\x74\x10\x41\xB0\x01\xBA\x28\x00\x00\x00", "xxxxxxxxxx");
@@ -12,52 +12,66 @@ CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableRecoverySmash, "\x0F\x84\xD5\x00\x00\x0
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSonicBoom, "\xE8\xCC\xCC\xCC\xCC\xB0\x01\x48\x8B\x5C\x24\x70\x48\x83\xC4\x60\x5F\xC3\x48\x8B\x5C\x24\x70", "x????xxxxxxxxxxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSpinSlash, "\x74\x79\xBA\x2D\x00\x00\x00", "xxxxxxx");
 
-enum EAttackID : uint8_t
+enum EAction : int8_t
 {
-	EAttackID_Default = 0,
-	EAttackID_HomingAttack = 1,
-	EAttackID_StompAttack = 4,
-	EAttackID_LoopKick = 5,
-	EAttackID_WildRush = 6,
-	EAttackID_SpinSlash = 7,
-	EAttackID_CrossSlash = 9,
-	EAttackID_HomingShot = 10,
-	EAttackID_CycloneKick = 11,
-	EAttackID_QuickCyloop = 12,
-	EAttackID_Attack01 = 14,
-	EAttackID_Attack02 = 15,
-	EAttackID_Attack03 = 16,
-	EAttackID_Attack04 = 17,
-	EAttackID_AttackFinal = 22,
-	EAttackID_GrandSlam = 24
+	EAction_Root,
+	EAction_HomingAttack,
+	EAction_AerialHomingAttack,
+	EAction_Pursuit,             // Pursuit Kick (unused)
+	EAction_Stomping,            // Stomp Attack
+	EAction_LoopKick,
+	EAction_Crasher,             // Wild Rush
+	EAction_SpinSlash,
+	EAction_SonicBoom,
+	EAction_CrossSlash,
+	EAction_HomingShot,
+	EAction_ChargeAttack,       // Cyclone Kick
+	EAction_QuickCyloop,
+	EAction_AerialQuickCyloop,
+	EAction_AcceleCombo1,
+	EAction_AcceleCombo2,
+	EAction_AcceleCombo3,
+	EAction_AcceleCombo4,
+	EAction_AerialAcceleCombo1,
+	EAction_AerialAcceleCombo2,
+	EAction_AerialAcceleCombo3,
+	EAction_AerialAcceleCombo4,
+	EAction_ComboFinish,
+	EAction_SpinJump,
+	EAction_Smash,              // Grand Slam
+	EAction_Behind,
+	EAction_Guarded,
+	EAction_Avoid,
+	EAction_AirBoost,
+	EAction_AfterAirBoost
 };
 
 FUNCTION_PTR(char, __fastcall, fpSetCurrentState, READ_CALL((int64_t)m_SigSetCurrentStateCaller()), int64_t in_gocPlayerHsmField56, int in_stateIndex, int a3);
 
-HOOK(int64_t, __fastcall, AttackProcessor, m_SigAttackProcessor(), int64_t a1, EAttackID in_attackId, uint8_t a3, int64_t a4)
+HOOK(int64_t, __fastcall, ActionProcessor, m_SigActionProcessor(), int64_t a1, EAction in_action, int8_t a3, int64_t a4)
 {
 #if _DEBUG
-	printf("[DisableSkills] in_attackId: %d\n", in_attackId);
+	printf("[DisableSkills] in_attackId: %d\n", in_action);
 #endif
 
-	switch (in_attackId)
+	switch (in_action)
 	{
-		case EAttackID_CrossSlash:
-			return Configuration::IsNoCrossSlash ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_CrossSlash:
+			return Configuration::IsNoCrossSlash ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_CycloneKick:
-			return Configuration::IsNoCycloneKick ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_ChargeAttack:
+			return Configuration::IsNoCycloneKick ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_GrandSlam:
+		case EAction_Smash:
 		{
 			// This ID is shared between Grand Slam and Recovery Smash...
 			if (Configuration::IsNoGrandSlam && !Configuration::IsNoRecoverySmash)
-				return originalAttackProcessor(a1, in_attackId, a3, a4);
+				return originalActionProcessor(a1, in_action, a3, a4);
 
-			return Configuration::IsNoGrandSlam ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+			return Configuration::IsNoGrandSlam ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 		}
 
-		case EAttackID_HomingShot:
+		case EAction_HomingShot:
 		{
 			if (!Configuration::IsNoHomingShot)
 				break;
@@ -68,23 +82,23 @@ HOOK(int64_t, __fastcall, AttackProcessor, m_SigAttackProcessor(), int64_t a1, E
 			return 0;
 		}
 
-		case EAttackID_LoopKick:
-			return Configuration::IsNoLoopKick ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_LoopKick:
+			return Configuration::IsNoLoopKick ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_QuickCyloop:
-			return Configuration::IsNoQuickCyloop ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_QuickCyloop:
+			return Configuration::IsNoQuickCyloop ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_SpinSlash:
-			return Configuration::IsNoSpinSlash ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_SpinSlash:
+			return Configuration::IsNoSpinSlash ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_StompAttack:
-			return Configuration::IsNoStompAttack ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_Stomping:
+			return Configuration::IsNoStompAttack ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 
-		case EAttackID_WildRush:
-			return Configuration::IsNoWildRush ? 0 : originalAttackProcessor(a1, in_attackId, a3, a4);
+		case EAction_Crasher:
+			return Configuration::IsNoWildRush ? 0 : originalActionProcessor(a1, in_action, a3, a4);
 	}
 
-	return originalAttackProcessor(a1, in_attackId, a3, a4);
+	return originalActionProcessor(a1, in_action, a3, a4);
 }
 
 EXPORT void Init()
@@ -104,7 +118,7 @@ EXPORT void Init()
 
 	Configuration::Read();
 
-	INSTALL_HOOK(AttackProcessor);
+	INSTALL_HOOK(ActionProcessor);
 
 	if (Configuration::IsNoAirTrick)
 	{
