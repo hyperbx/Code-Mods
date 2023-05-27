@@ -66,45 +66,42 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
 {
 	auto result = originalLoadAsset(a1, in_assetName, in_resourceType);
 
-	if (StringHelper::Compare(*in_resourceType, "ResReflection"))
+	if (StringHelper::Compare(*in_resourceType, "ResReflection") && StringHelper::Compare(in_assetName, "battlerush"))
 	{
-		if (StringHelper::Compare(in_assetName, "battlerush"))
+		auto battleRushParameter = reinterpret_cast<BattleRushParameter*>(*(int64_t*)(result + 0x60));
+
+		if (battleRushParameter)
 		{
-			auto battleRushParameter = reinterpret_cast<BattleRushParameter*>(*(int64_t*)(result + 0x60));
-
-			if (battleRushParameter)
+			for (int stageIdx = 0; stageIdx < 4; stageIdx++)
 			{
-				for (int stageIdx = 0; stageIdx < 4; stageIdx++)
+				auto& stage = battleRushParameter->stages[stageIdx];
+
+				// This probably isn't needed, but why not.
+				stage.numPhases = 1;
+
+				// Remove time limit from phases.
+				for (auto& phaseLimitTime : stage.phaseLimitTime)
+					phaseLimitTime = 0.0f;
+
+				// Set rank times.
+				for (int rankIdx = 0; rankIdx < 4; rankIdx++)
 				{
-					auto& stage = battleRushParameter->stages[stageIdx];
-
-					// This probably isn't needed, but why not.
-					stage.numPhases = 1;
-
-					// Remove time limit from phases.
-					for (auto& phaseLimitTime : stage.phaseLimitTime)
-						phaseLimitTime = 0.0f;
-
-					// Set rank times.
-					for (int rankIdx = 0; rankIdx < 4; rankIdx++)
+					switch (m_Difficulty)
 					{
-						switch (m_Difficulty)
-						{
-							case EDifficulty_Easy:
-								stage.phaseRank[0].rankTime[rankIdx]    = m_Easy[stageIdx][rankIdx];
-								stage.phaseRank[0].rankTimeAll[rankIdx] = m_EasyAll[stageIdx][rankIdx];
-								break;
+						case EDifficulty_Easy:
+							stage.phaseRank[0].rankTime[rankIdx]    = m_Easy[stageIdx][rankIdx];
+							stage.phaseRank[0].rankTimeAll[rankIdx] = m_EasyAll[stageIdx][rankIdx];
+							break;
 
-							case EDifficulty_Medium:
-								stage.phaseRank[0].rankTime[rankIdx]    = m_Medium[stageIdx][rankIdx];
-								stage.phaseRank[0].rankTimeAll[rankIdx] = m_MediumAll[stageIdx][rankIdx];
-								break;
+						case EDifficulty_Medium:
+							stage.phaseRank[0].rankTime[rankIdx]    = m_Medium[stageIdx][rankIdx];
+							stage.phaseRank[0].rankTimeAll[rankIdx] = m_MediumAll[stageIdx][rankIdx];
+							break;
 
-							case EDifficulty_Hard:
-								stage.phaseRank[0].rankTime[rankIdx]    = m_Hard[stageIdx][rankIdx];
-								stage.phaseRank[0].rankTimeAll[rankIdx] = m_HardAll[stageIdx][rankIdx];
-								break;
-						}
+						case EDifficulty_Hard:
+							stage.phaseRank[0].rankTime[rankIdx]    = m_Hard[stageIdx][rankIdx];
+							stage.phaseRank[0].rankTimeAll[rankIdx] = m_HardAll[stageIdx][rankIdx];
+							break;
 					}
 				}
 			}
@@ -114,26 +111,38 @@ HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* i
 	return result;
 }
 
-CL_SCAN_SIGNATURE(m_SigLoadSaveData, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x40\x41\x8B\x00\x48\x8B\xFA\x48\x8B\xD9\x83\xF8\xFC\x0F\x84\x12", "xxxxxxxxxxxxxxxxxxxxxxxxx");
-
-HOOK(int64_t, __fastcall, LoadSaveData, m_SigLoadSaveData(), int64_t a1, int64_t a2, int* a3, int64_t a4)
+HOOK
+(
+	HANDLE,
+	__fastcall,
+	KernelBaseCreateFileA,
+	PROC_ADDRESS("Kernel32.dll", "CreateFileA"),
+	LPCSTR lpFileName,
+	DWORD dwDesiredAccess,
+	DWORD dwShareMode,
+	LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+	DWORD dwCreationDisposition,
+	DWORD dwFlagsAndAttributes,
+	HANDLE hTemplateFile
+)
 {
-	switch (*(uint8_t*)(a1 + 604))
+	if (dwDesiredAccess & GENERIC_READ)
 	{
-		case 2:
+		if (StringHelper::ContainsSubstring(lpFileName, "auto0"))
+		{
 			m_Difficulty = EDifficulty_Easy;
-			break;
-
-		case 0:
+		}
+		else if (StringHelper::ContainsSubstring(lpFileName, "manual0"))
+		{
 			m_Difficulty = EDifficulty_Medium;
-			break;
-
-		case 1:
+		}
+		else if (StringHelper::ContainsSubstring(lpFileName, "manual1"))
+		{
 			m_Difficulty = EDifficulty_Hard;
-			break;
+		}
 	}
 
-	return originalLoadSaveData(a1, a2, a3, a4);
+	return originalKernelBaseCreateFileA(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
 }
 
 HOOK
@@ -161,6 +170,6 @@ HOOK
 EXPORT void Init()
 {
 	INSTALL_HOOK(LoadAsset);
-	INSTALL_HOOK(LoadSaveData);
+	INSTALL_HOOK(KernelBaseCreateFileA);
 	INSTALL_HOOK(KernelBaseCreateFileW);
 }
