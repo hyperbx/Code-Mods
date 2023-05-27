@@ -22,6 +22,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT2CPP", "Sonic Frontiers\B
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnhancedDropDash", "Sonic Frontiers\EnhancedDropDash\EnhancedDropDash.vcxproj", "{445E3608-3DCF-45A7-AB70-86DA906CE4E5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisableSkills", "Sonic Frontiers\DisableSkills\DisableSkills.vcxproj", "{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,18 @@ Global
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x64.Build.0 = Release|x64
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x86.ActiveCfg = Release|Win32
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x86.Build.0 = Release|Win32
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|Any CPU.Build.0 = Debug|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|x64.ActiveCfg = Debug|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|x64.Build.0 = Debug|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|x86.ActiveCfg = Debug|Win32
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Debug|x86.Build.0 = Debug|Win32
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|Any CPU.ActiveCfg = Release|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|Any CPU.Build.0 = Release|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|x64.ActiveCfg = Release|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|x64.Build.0 = Release|x64
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|x86.ActiveCfg = Release|Win32
+		{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
