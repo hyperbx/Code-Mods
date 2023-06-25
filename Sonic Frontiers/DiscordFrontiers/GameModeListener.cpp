@@ -19,7 +19,7 @@ HOOK(void*, __fastcall, GameModeFishingCtor, m_SigGameModeFishingCtor(), void* a
 	return originalGameModeFishingCtor(a1, a2, a3);
 }
 
-HOOK(void*, __fastcall, GameModeHackingCtor, 0x1401A3D40, void* a1, int64_t a2, int64_t a3) // TODO: replace address.
+HOOK(void*, __fastcall, GameModeHackingCtor, 0x1401B4220, void* a1, int64_t a2, int64_t a3) // TODO: replace address.
 {
 	if (StringHelper::Compare(GameModeListener::Island, "w5r01"))
 	{
