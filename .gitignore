@@ -348,5 +348,6 @@ MigrationBackup/
 .ionide/
 
 # Test projects
+*/.bak
 /Sonic Generations/Test
 /Sonic Colours Ultimate/Test

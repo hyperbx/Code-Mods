@@ -253,16 +253,16 @@ public:
 	{
 		lua_createtable(in_pLuaState, 0, 4);
 
-		lua_pushnumber(in_pLuaState, s_pTime->Days);
+		lua_pushnumber(in_pLuaState, s_pTime ? s_pTime->Days : 0);
 		lua_setfield(in_pLuaState, -2, "Day");
 
-		lua_pushnumber(in_pLuaState, s_pTime->Hours);
+		lua_pushnumber(in_pLuaState, s_pTime ? s_pTime->Hours : 0);
 		lua_setfield(in_pLuaState, -2, "Hour");
 
-		lua_pushnumber(in_pLuaState, s_pTime->Minutes);
+		lua_pushnumber(in_pLuaState, s_pTime ? s_pTime->Minutes : 0);
 		lua_setfield(in_pLuaState, -2, "Minute");
 
-		lua_pushnumber(in_pLuaState, s_pTime->Seconds);
+		lua_pushnumber(in_pLuaState, s_pTime ? s_pTime->Seconds : 0.0f);
 		lua_setfield(in_pLuaState, -2, "Second");
 
 		return 1;

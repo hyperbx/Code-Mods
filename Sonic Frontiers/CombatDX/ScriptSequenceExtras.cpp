@@ -58,7 +58,7 @@ HOOK(uint64_t, __fastcall, SetLifeGaugeVisibility, m_SigSetLifeGaugeVisibility()
 	return originalSetLifeGaugeVisibility(a1, in_showHealth);
 }
 
-CL_SCAN_SIGNATURE(m_SigChangeAnimation, "\x40\x53\x48\x83\xEC\x20\x48\x8B\xDA\x41\x80", "xxxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigChangeAnimation, "\x40\x53\x48\x83\xEC\x20\xF6\x81\x78\x01\x00\x00\x10\x48\x8B\xDA", "xxxxxxxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, ChangeAnimation, m_SigChangeAnimation(), int64_t a1, const char* in_pAnimationName, char a3)
 {
