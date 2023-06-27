@@ -9,7 +9,7 @@ CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisablePhantomRush, "\x72\x09\x66\x83\x89\xF0\
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisablePhantomRushUI, "\x0F\x84\x98\x00\x00\x00\xBA\x4C\x23\x00\x00", "xxxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableQuickCyloopUI, "\x80\x4F\x38\x01\x48\x8B\xCE", "xxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableRecoverySmash, "\x0F\x84\xD5\x00\x00\x00\x48\x8B\xD7\x49\x8B\xCD", "xxxxxxxxxxxx");
-CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSonicBoom, "\xE8\xCC\xCC\xCC\xCC\xB0\x01\x48\x8B\x5C\x24\x70\x48\x83\xC4\x60\x5F\xC3\x48\x8B\x5C\x24\x70", "x????xxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSonicBoomSpinChargeCheck, "\x75\x3F\xBA\x0E\x00\x00\x00\x48\x8B\xCF", "xxxxxxxxxx");
 CL_SCAN_SIGNATURE_ALLOW_NULL(m_SigDisableSpinSlash, "\x74\x79\xBA\x2E\x00\x00\x00", "xxxxxxx");
 
 enum EAction : int8_t
@@ -25,7 +25,7 @@ enum EAction : int8_t
 	EAction_SonicBoom,
 	EAction_CrossSlash,
 	EAction_HomingShot,
-	EAction_ChargeAttack,       // Cyclone Kick
+	EAction_ChargeAttack,        // Cyclone Kick
 	EAction_QuickCyloop,
 	EAction_AerialQuickCyloop,
 	EAction_AcceleCombo1,
@@ -47,6 +47,14 @@ enum EAction : int8_t
 };
 
 FUNCTION_PTR(char, __fastcall, fpSetCurrentState, READ_CALL((int64_t)m_SigSetCurrentStateCaller()), int64_t in_gocPlayerHsmField56, int in_stateIndex, int a3);
+
+HOOK(bool, __fastcall, SetCurrentState, READ_CALL((int64_t)m_SigSetCurrentStateCaller()), int64_t in_gocPlayerHsmField56, int in_stateIndex, int a3)
+{
+	if (Configuration::IsNoSonicBoom && in_stateIndex == 151)
+		return false;
+
+	return originalSetCurrentState(in_gocPlayerHsmField56, in_stateIndex, a3);
+}
 
 HOOK(int64_t, __fastcall, ActionProcessor, m_SigActionProcessor(), int64_t a1, EAction in_action, int8_t a3, int64_t a4, char a5)
 {
@@ -119,6 +127,7 @@ EXPORT void Init()
 	Configuration::Read();
 
 	INSTALL_HOOK(ActionProcessor);
+	INSTALL_HOOK(SetCurrentState);
 
 	if (Configuration::IsNoAirTrick)
 	{
@@ -172,8 +181,8 @@ EXPORT void Init()
 
 	if (Configuration::IsNoSonicBoom)
 	{
-		if (m_SigDisableSonicBoom() != nullptr)
-			WRITE_NOP((int64_t)m_SigDisableSonicBoom(), 5);
+		if (m_SigDisableSonicBoomSpinChargeCheck() != nullptr)
+			WRITE_NOP(m_SigDisableSonicBoomSpinChargeCheck(), 2);
 	}
 
 	if (Configuration::IsNoSpinSlash)
