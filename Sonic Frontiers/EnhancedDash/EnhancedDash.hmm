@@ -1,0 +1,17 @@
+Patch "Enhanced Dash" by "Hyper"
+{
+    // Always Trickable Spin Dash Exit
+    {
+        /* 0x1408A5B97 */
+        var sig = ScanSignature
+        (
+            "\x41\x8D\x50\x04\x48\x8B\xCF\xE8\xCC\xCC\xCC\xCC\xB0\x01",
+            "xxxxxxxx????xx"
+        );
+
+        if (sig == 0)
+            return;
+
+        WriteProtected<byte>(sig, Assemble("lea edx, dword ptr [r8 + 0x10]"));
+    }
+}

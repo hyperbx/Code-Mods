@@ -6,7 +6,7 @@ EXPORT void Init()
 		(
 			nullptr,
 			"A signature scan failed validation...\n\nThis mod may be incompatible with your current game version, or is conflicting with another DLL mod.",
-			"Enhanced Drop Dash",
+			"Enhanced Dash",
 			MB_ICONERROR
 		);
 

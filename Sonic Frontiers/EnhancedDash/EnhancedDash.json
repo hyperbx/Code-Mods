@@ -1,0 +1,1103 @@
+{
+    "Groups":
+	[
+		{
+			"Name": "AirDash",
+			"DisplayName": "Air Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsAirDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Enables the Air Dash that lets you Drop Dash in the air by boosting whilst charging a Drop Dash.\n",
+						"Default Controller Guide (recommended);",
+						"- Default: A + A + A (Hold) + RT\n- Drop Dash on Double Jump: A + A (Hold) + RT\n",
+						"Default Keyboard Guide;",
+						"- Default: Space + Space + Space (Hold) + Shift\n- Drop Dash on Double Jump: Space + Space (Hold) + Shift\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "AirDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Both"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "AirDashUncurlType",
+					"DisplayName": "Uncurl Type",
+					"Description":
+					[
+						"The behaviour of Drop Dash rolling when initiating it from the Air Dash.\n",
+						"Default: None"
+					],
+					"Type": "ECommonUncurlType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "AirDashInitialVelocitySV",
+					"DisplayName": "Initial Velocity (2D)",
+					"Description":
+					[
+						"The starting velocity of the Air Dash in 2D areas.\n",
+						"Default: 15.0"
+					],
+					"Type": "float",
+					"DefaultValue": 15.0
+				},
+				{
+					"Name": "AirDashInitialVelocity",
+					"DisplayName": "Initial Velocity (3D)",
+					"Description":
+					[
+						"The starting velocity of the Air Dash in 3D areas.\n",
+						"Default: 30.0"
+					],
+					"Type": "float",
+					"DefaultValue": 30.0
+				},
+				{
+					"Name": "IsNoAirDashCameraDelay",
+					"DisplayName": "Disable Camera Delay",
+					"Description":
+					[
+						"Disables the camera delay for Drop Dash when performed via Air Dash.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				}
+			]
+		},
+		{
+			"Name": "AirTricks",
+			"DisplayName": "Air Tricks",
+			"Elements":
+			[
+				{
+					"Name": "IsAirTricksEnhanced",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Enables enhancements for Air Tricks.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "AirTrickMinBoostReward",
+					"DisplayName": "Minimum Boost Energy Reward",
+					"Description":
+					[
+						"The minimum amount of boost energy rewarded for performing Air Tricks.\n",
+						"Default: 1.0"
+					],
+					"Type": "float",
+					"DefaultValue": 1.0
+				},
+				{
+					"Name": "AirTrickMaxBoostReward",
+					"DisplayName": "Maximum Boost Energy Reward",
+					"Description":
+					[
+						"The maximum amount of boost energy rewarded for performing Air Tricks.\n",
+						"Default: 5.0"
+					],
+					"Type": "float",
+					"DefaultValue": 5.0
+				},
+				{
+					"Name": "AirTrickSamePenalty",
+					"DisplayName": "Repeat Trick Penalty",
+					"Description":
+					[
+						"The amount of bonus boost energy subtracted by performing the same Air Trick multiple times.\n",
+						"To disable this, set this to 0.\n",
+						"Default: 0.5"
+					],
+					"Type": "float",
+					"DefaultValue": 0.5
+				},
+				{
+					"Name": "AirTrickFatigueTime",
+					"DisplayName": "Fatigue Time",
+					"Description":
+					[
+						"The amount of air time (in seconds) after performing at least one Air Trick before reaching fatigue for boost energy rewards, reducing the maximum boost energy reward down to minimum.\n",
+						"To disable this, set this to 0.\n",
+						"Default: 75.0"
+					],
+					"Type": "float",
+					"DefaultValue": 75.0
+				},
+			]
+		},
+		{
+			"Name": "Drift",
+			"DisplayName": "Drift",
+			"Elements":
+			[
+				{
+					"Name": "IsDriftEnhancedCyberPhysics",
+					"DisplayName": "Use Enhanced Physics in Cyber Space",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Drift in Cyber Space.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDriftEnhancedIslandPhysics",
+					"DisplayName": "Use Enhanced Physics on Islands",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Drift on the islands.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "DropDash",
+			"DisplayName": "Drop Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsDropDashAirBoostCancel",
+					"DisplayName": "Allow Air Boost Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform an Air Boost whilst rolling in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashQuickStepCancel",
+					"DisplayName": "Allow Quick Step Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform a Quick Step whilst rolling.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashStompCancel",
+					"DisplayName": "Allow Stomp Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform a Stomp Attack whilst rolling in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashCancelWhenUngrounded",
+					"DisplayName": "Automatically Cancel when Ungrounded",
+					"Description":
+					[
+						"Automatically cancels rolling when Sonic becomes ungrounded, allowing him to perform tricks.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsNoDropDashCameraDelay",
+					"DisplayName": "Disable Camera Delay",
+					"Description":
+					[
+						"Disables the camera delay for Drop Dash.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsDropDashNoFans",
+					"DisplayName": "Disable Fans when Rolling",
+					"Description":
+					[
+						"Allows you to roll uninterrupted through fans without flying upwards. This is particularly useful for Air Dash.\n",
+						"Fans will be completely operational for all other cases except for rolling.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashSideViewRollFix",
+					"DisplayName": "Fix Rolling in 2D",
+					"Description":
+					[
+						"Fixes Drop Dash getting stuck in 2D areas if you move the analog stick towards or away from the camera plane.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashEnhancedCyberPhysics",
+					"DisplayName": "Use Enhanced Physics in Cyber Space",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Drop Dash in Cyber Space.\n",
+						"These are identical to the parameters used by \"Tighter Drop Dash Rotation\" and will not conflict with other physics mods or codes.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsDropDashEnhancedIslandPhysics",
+					"DisplayName": "Use Enhanced Physics on Islands",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Drop Dash on the islands.\n",
+						"These are identical to the parameters used by \"Tighter Drop Dash Rotation\" and will not conflict with other physics mods or codes.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "FocusDash",
+			"DisplayName": "Focus Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsFocusDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Enables the Focus Dash that lets you charge a Spin Dash in the air and aim in any direction with slow-mo.\n",
+						"Default Controller Guide (recommended);",
+						"- Charge: LT + LS (in the air)\n- Aim: LS\n- Release: RT\n",
+						"Default Keyboard Guide;",
+						"- Charge: F + Z (in the air)\n- Aim: W/A/S/D\n- Release: Shift\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "FocusDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Islands Only"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "FocusDashInitialVelocitySV",
+					"DisplayName": "Initial Velocity (2D)",
+					"Description":
+					[
+						"The starting velocity of the Focus Dash in 2D areas.\n",
+						"Default: 50.0"
+					],
+					"Type": "float",
+					"DefaultValue": 50.0
+				},
+				{
+					"Name": "FocusDashInitialVelocity",
+					"DisplayName": "Initial Velocity (3D)",
+					"Description":
+					[
+						"The starting velocity of the Focus Dash in 3D areas.\n",
+						"Default: 75.0"
+					],
+					"Type": "float",
+					"DefaultValue": 75.0
+				},
+				{
+					"Name": "FocusDashCameraStickType",
+					"DisplayName": "Camera Stick",
+					"Description":
+					[
+						"The analog stick used to aim Focus Dash.\n",
+						"This will always be on W/A/S/D for keyboard users.\n",
+						"Default: Left"
+					],
+					"Type": "EFocusDashCameraStickType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "FocusDashYawSensitivity",
+					"DisplayName": "Camera X Sensitivity",
+					"Description":
+					[
+						"The sensitivity of moving the camera left and right.\n",
+						"To invert this, set this value to a negative number.\n",
+						"Default: 6.5"
+					],
+					"Type": "float",
+					"DefaultValue": 6.5
+				},
+				{
+					"Name": "FocusDashPitchSensitivity",
+					"DisplayName": "Camera Y Sensitivity",
+					"Description":
+					[
+						"The sensitivity of moving the camera up and down.\n",
+						"To invert this, set this value to a negative number.\n",
+						"Default: 3.25"
+					],
+					"Type": "float",
+					"DefaultValue": 3.25
+				},
+				{
+					"Name": "FocusDashActiveBoostConsumption",
+					"DisplayName": "Active Boost Energy Consumption",
+					"Description":
+					[
+						"The amount of boost energy actively subtracted whilst charging Focus Dash.\n",
+						"To disable this, set this to 0.\n",
+						"Default: 2.5"
+					],
+					"Type": "float",
+					"DefaultValue": 2.5
+				},
+				{
+					"Name": "FocusDashMinPitchBoostConsumption",
+					"DisplayName": "Minimum Pitch Boost Energy Consumption",
+					"Description":
+					[
+						"The amount of boost energy subtracted when releasing Focus Dash at a downward angle.\n",
+						"To disable this, set this to 0.\n",
+						"Default: 5.0"
+					],
+					"Type": "float",
+					"DefaultValue": 5.0
+				},
+				{
+					"Name": "FocusDashMaxPitchBoostConsumption",
+					"DisplayName": "Maximum Pitch Boost Energy Consumption",
+					"Description":
+					[
+						"The amount of boost energy subtracted when releasing Focus Dash at an upward angle.\n",
+						"To disable this, set this to 0.\n",
+						"Default: 50.0"
+					],
+					"Type": "float",
+					"DefaultValue": 50.0
+				},
+				{
+					"Name": "IsFocusDashNoBoostReplenishment",
+					"DisplayName": "Disable Boost Replenishment from Timer",
+					"Description":
+					[
+						"Disables the boost gauge automatically replenishing when releasing Focus Dash.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsFocusDashVFX",
+					"DisplayName": "Slow-Mo Filter",
+					"Description":
+					[
+						"Applies a greyscale filter to the screen whilst charging Focus Dash.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsFocusDashSE",
+					"DisplayName": "Slow-Mo Sound",
+					"Description":
+					[
+						"Plays a slow-mo sound on loop whilst charging Focus Dash.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "SlideDash",
+			"DisplayName": "Slide Dash",
+			"Elements":
+			[
+				{
+					"Name": "SlideDashActionTypeSV",
+					"DisplayName": "2D Action",
+					"Description":
+					[
+						"The behaviour for pressing the Slide button in 2D areas.\n",
+						"Default: Spin Move"
+					],
+					"Type": "ESlideDashActionType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "SlideDashActionType",
+					"DisplayName": "3D Action",
+					"Description":
+					[
+						"The behaviour for pressing the Slide button in 3D areas.\n",
+						"Default: Drop Dash"
+					],
+					"Type": "ESlideDashActionType",
+					"DefaultValue": 1
+				},
+				{
+					"Name": "IsSlideDashNoDropDashCameraDelay",
+					"DisplayName": "Disable Drop Dash Camera Delay",
+					"Description":
+					[
+						"Disables the camera delay for Drop Dash when performed via Slide Dash.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				}
+			]
+		},
+		{
+			"Name": "SpinCharge",
+			"DisplayName": "Spin Charge",
+			"Elements":
+			[
+				{
+					"Name": "SpinChargeCameraShakeType",
+					"DisplayName": "Camera Shake",
+					"Description":
+					[
+						"The amount of camera shake when charging a Spin Dash.\n",
+						"The \"Restore Unused Spin Charge Camera Shake\" code must be disabled for this option to apply.\n",
+						"Default: Medium"
+					],
+					"Type": "ECameraShakeType",
+					"DefaultValue": 1
+				},
+				{
+					"Name": "SpinChargeInitialReleaseVelocitySV",
+					"DisplayName": "Initial Release Velocity (2D)",
+					"Description":
+					[
+						"The starting velocity of the Spin Dash when released in 2D areas.\n",
+						"Default: 5.0"
+					],
+					"Type": "float",
+					"DefaultValue": 5.0
+				},
+				{
+					"Name": "SpinChargeInitialReleaseVelocity",
+					"DisplayName": "Initial Release Velocity (3D)",
+					"Description":
+					[
+						"The starting velocity of the Spin Dash when released in 3D areas.\n",
+						"Default: 10.0"
+					],
+					"Type": "float",
+					"DefaultValue": 10.0
+				},
+				{
+					"Name": "SpinChargeMultiplier",
+					"DisplayName": "Charge Multiplier",
+					"Description":
+					[
+						"The multiplier added for every charge of the Spin Dash.\n",
+						"Default: 0.25"
+					],
+					"Type": "float",
+					"DefaultValue": 0.25
+				},
+				{
+					"Name": "SpinChargeTerminalReleaseVelocity",
+					"DisplayName": "Terminal Release Velocity",
+					"Description":
+					[
+						"The velocity bonus limit from charging a Spin Dash.\n",
+						"Default: 100.0"
+					],
+					"Type": "float",
+					"DefaultValue": 100.0
+				},
+				{
+					"Name": "SpinChargeTerminalReleaseVelocity",
+					"DisplayName": "Velocity Decay Rate",
+					"Description":
+					[
+						"The rate at which the bonus velocity decays when the Spin Dash is released.\n",
+						"Default: 10.0"
+					],
+					"Type": "float",
+					"DefaultValue": 10.0
+				},
+				{
+					"Name": "IsSpinChargeNoAirCamera",
+					"DisplayName": "Disable Air Camera",
+					"Description":
+					[
+						"Disables the zoom camera when charging a Spin Dash in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinChargeNoAirDeceleration",
+					"DisplayName": "Disable Air Deceleration",
+					"Description":
+					[
+						"Disables Sonic's velocity decelerating when charging a Spin Dash in the air.\n",
+						"This option is recommended with \"Disable Spin Charge Air Camera\".\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "SpinDash",
+			"DisplayName": "Spin Dash",
+			"Elements":
+			[
+				{
+					"Name": "SpinDashReleaseActionType",
+					"DisplayName": "Release Action",
+					"Description":
+					[
+						"The behaviour for releasing a Spin Dash.\n",
+						"Default: Default"
+					],
+					"Type": "ESpinDashReleaseActionType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "SpinDashSlideActionType",
+					"DisplayName": "Slide Action",
+					"Description":
+					[
+						"The behaviour for pressing the Slide button to exit from a Spin Dash.\n",
+						"Default: Spin Charge"
+					],
+					"Type": "ESpinDashSlideActionType",
+					"DefaultValue": 3
+				},
+				{
+					"Name": "IsSpinDashStompCancel",
+					"DisplayName": "Allow Stomp Cancel",
+					"Description":
+					[
+						"Disregards the \"Slide Action\" setting when in the air and performs a Stomp Attack instead.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsSpinDashNoDropDashCameraDelay",
+					"DisplayName": "Disable Drop Dash Camera Delay",
+					"Description":
+					[
+						"Disables the camera delay for Drop Dash when performed via Spin Dash.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinDashEnhancedCyberPhysics",
+					"DisplayName": "Use Enhanced Physics in Cyber Space",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Spin Dash in Cyber Space.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinDashEnhancedIslandPhysics",
+					"DisplayName": "Use Enhanced Physics on Islands",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Spin Dash on the islands.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "SpinMove",
+			"DisplayName": "Spin Move",
+			"Elements":
+			[
+				{
+					"Name": "SpinMoveEffectsType",
+					"DisplayName": "Effect Type",
+					"Description":
+					[
+						"The behaviour of the particle effect for Spin Move.\n",
+						"Default: Velocity-based"
+					],
+					"Type": "ESpinMoveEffectsType",
+					"DefaultValue": 1
+				},
+				{
+					"Name": "SpinMoveTerminalVelocityType",
+					"DisplayName": "Spin Dash at Terminal Velocity",
+					"Description":
+					[
+						"The behaviour for reaching terminal velocity for Spin Move.\n",
+						"Default: 2D only"
+					],
+					"Type": "ESpinMoveTerminalVelocityType",
+					"DefaultValue": 1
+				},
+				{
+					"Name": "IsSpinMoveAirBoostCancel",
+					"DisplayName": "Allow Air Boost Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform an Air Boost whilst rolling in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinMoveStompCancel",
+					"DisplayName": "Allow Stomp Cancel",
+					"Description":
+					[
+						"Allows Sonic to perform a Stomp Attack whilst rolling in the air.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinMoveCancelWhenUngrounded",
+					"DisplayName": "Automatically Cancel when Ungrounded",
+					"Description":
+					[
+						"Automatically cancels rolling when Sonic becomes ungrounded, allowing him to perform tricks.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsSpinMoveEnhancedCyberPhysics",
+					"DisplayName": "Use Enhanced Physics in Cyber Space",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Spin Move in Cyber Space.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "IsSpinMoveEnhancedIslandPhysics",
+					"DisplayName": "Use Enhanced Physics on Islands",
+					"Description":
+					[
+						"Use physics parameters that enhance movement with Spin Move on the islands.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		},
+		{
+			"Name": "QuickStompDash",
+			"DisplayName": "Quick Stomp Dash",
+			"Elements":
+			[
+				{
+					"Name": "IsQuickStompDash",
+					"DisplayName": "Enabled",
+					"Description":
+					[
+						"Enables the Quick Stomp Dash that lets you Drop Dash in the air by initiating a Stomp Attack past the specified velocity threshold.\n",
+						"Default Controller Guide (recommended);",
+						"- Default: A + B (when moving faster than the specified velocity threshold)\n- Require Air Boost: A + RT + B\n",
+						"Default Keyboard Guide;",
+						"- Default: Space + Ctrl (when moving faster than the specified velocity threshold)\n- Require Air Boost: Space + Shift + Ctrl\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "QuickStompDashWorldType",
+					"DisplayName": "World Type",
+					"Description":
+					[
+						"The areas of the game this move is allowed to be used in.\n",
+						"Default: Islands Only"
+					],
+					"Type": "EWorldType",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "QuickStompDashUncurlType",
+					"DisplayName": "Uncurl Type",
+					"Description":
+					[
+						"The behaviour of Drop Dash rolling when initiating it from the Quick Stomp Dash.\n",
+						"Default: None"
+					],
+					"Type": "ECommonUncurlType",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "QuickStompDashVelocityThresholdSV",
+					"DisplayName": "Velocity Threshold (2D)",
+					"Description":
+					[
+						"The velocity Sonic must be at to allow him to Drop Dash in the air in 2D areas.\n",
+						"Set this to zero to Drop Dash regardless of velocity.\n",
+						"Default: 15.0"
+					],
+					"Type": "float",
+					"DefaultValue": 15.0
+				},
+				{
+					"Name": "QuickStompDashVelocityThreshold",
+					"DisplayName": "Velocity Threshold (3D)",
+					"Description":
+					[
+						"The velocity Sonic must be at to allow him to Drop Dash in the air in 3D areas.\n",
+						"Set this to zero to Drop Dash regardless of velocity.\n",
+						"Default: 25.0"
+					],
+					"Type": "float",
+					"DefaultValue": 25.0
+				},
+				{
+					"Name": "IsNoQuickStompDashCameraDelay",
+					"DisplayName": "Disable Camera Delay",
+					"Description":
+					[
+						"Disables the camera delay for Drop Dash when performed via Quick Stomp Dash.\n",
+						"Default: False"
+					],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "IsQuickStompDashRequireAirBoost",
+					"DisplayName": "Require Air Boost",
+					"Description":
+					[
+						"Require Air Boost to perform a Quick Stomp Dash.\n",
+						"This will ignore the velocity threshold.\n",
+						"Default: True"
+					],
+					"Type": "bool",
+					"DefaultValue": true
+				}
+			]
+		}
+    ],
+	"Enums": 
+	{
+		"ECameraShakeType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Description":
+				[
+					"Disables camera shake."
+				],
+				"Value": "-1"
+			},
+			{
+				"DisplayName": "Low",
+				"Description":
+				[
+					"A subtle amount of camera shake."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Medium",
+				"Description":
+				[
+					"A moderate amount of camera shake.\n",
+					"This restores the unused camera."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "High",
+				"Description":
+				[
+					"A high amount of camera shake."
+				],
+				"Value": "2"
+			},
+			{
+				"DisplayName": "Extreme",
+				"Description":
+				[
+					"An absurd amount of camera shake."
+				],
+				"Value": "3"
+			}
+		],
+		"ECommonUncurlType": 
+		[
+			{
+				"DisplayName": "None",
+				"Description":
+				[
+					"Allows you to roll until Drop Dash runs out."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Immediate",
+				"Description":
+				[
+					"Immediately uncurls when entering the state. This is useful if you have the Air Trick skill unlocked.\n",
+					"This will revert to None in Cyber Space."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Grounded",
+				"Description":
+				[
+					"Uncurls when becoming grounded."
+				],
+				"Value": "2"
+			}
+		],
+		"EFocusDashCameraStickType":
+		[
+			{
+				"DisplayName": "Left",
+				"Description":
+				[
+					"Use the left stick to aim Focus Dash."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Right",
+				"Description":
+				[
+					"Use the right stick to aim Focus Dash."
+				],
+				"Value": "1"
+			}
+		],
+		"ESlideDashActionType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Description":
+				[
+					"Disables Slide Dash."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Drop Dash",
+				"Description":
+				[
+					"Instantly Drop Dash by pressing the Slide button."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Spin Move",
+				"Description":
+				[
+					"Begin rolling by pressing the Slide button."
+				],
+				"Value": "2"
+			}
+		],
+		"ESpinDashReleaseActionType": 
+		[
+			{
+				"DisplayName": "Spin Boost",
+				"Description":
+				[
+					"Release Spin Boost for Spin Dash."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Drop Dash",
+				"Description":
+				[
+					"Release Drop Dash for Spin Dash."
+				],
+				"Value": "1"
+			}
+		],
+		"ESpinDashSlideActionType": 
+		[
+			{
+				"DisplayName": "None",
+				"Description":
+				[
+					"Default."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Exit",
+				"Description":
+				[
+					"Exits Spin Dash into running or falling."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Slide",
+				"Description":
+				[
+					"Exits Spin Dash into sliding or falling.\n",
+					"This will initiate a Drop Dash when grounded if Slide Dash is enabled."
+				],
+				"Value": "2"
+			},
+			{
+				"DisplayName": "Spin Charge",
+				"Description":
+				[
+					"Exits Spin Dash into charging another."
+				],
+				"Value": "3"
+			},
+			{
+				"DisplayName": "Drop Dash",
+				"Description":
+				[
+					"Exits Spin Dash into Drop Dash."
+				],
+				"Value": "4"
+			}
+		],
+		"ESpinMoveEffectsType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Description":
+				[
+					"Don't use any effects."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Velocity-based",
+				"Description":
+				[
+					"Toggles the Drop Dash particle when exceeding the initial velocity threshold."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Always",
+				"Description":
+				[
+					"Always use the Drop Dash particle."
+				],
+				"Value": "2"
+			}
+		],
+		"ESpinMoveTerminalVelocityType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Description":
+				[
+					"Continue rolling when reaching terminal velocity."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "2D only",
+				"Description":
+				[
+					"Releases a Spin Dash when reaching terminal velocity in 2D areas."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "3D only",
+				"Description":
+				[
+					"Releases a Spin Dash when reaching terminal velocity in 3D areas."
+				],
+				"Value": "2"
+			},
+			{
+				"DisplayName": "Always",
+				"Description":
+				[
+					"Releases a Spin Dash when reaching terminal velocity."
+				],
+				"Value": "3"
+			}
+		],
+		"EWorldType":
+		[
+			{
+				"DisplayName": "Both",
+				"Description":
+				[
+					"Allow this move to function both on the islands and in Cyber Space."
+				],
+				"Value": "0"
+			},
+			{
+				"DisplayName": "Cyber Space Only",
+				"Description":
+				[
+					"Allow this move to function only in Cyber Space."
+				],
+				"Value": "1"
+			},
+			{
+				"DisplayName": "Islands Only",
+				"Description":
+				[
+					"Allow this move to function only on the islands."
+				],
+				"Value": "2"
+			}
+		]
+	},
+    "IniFile": "EnhancedDash.ini"
+}

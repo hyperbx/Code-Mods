@@ -18,6 +18,7 @@
 #include "../Common/FrontiersInput.h"
 #include <gmath/Vector3.hpp>
 #include <INIReader.h>
+#include <IOHelper.h>
 #include <MemoryPreserver.h>
 #include <rangers-api/rangers-api/rangers-api.h>
 #include <Signature.h>
@@ -25,7 +26,8 @@
 
 // Internal headers
 #include "Configuration.h"
+#include "Reflection.h"
 #include "BlackboardStatus.h"
 #include "BlackboardHelper.h"
+#include "MsgChangeLayerTimeScale.h"
 #include "Player.h"
-#include "Reflection.h"

@@ -104,6 +104,9 @@ HOOK(int64_t, __fastcall, ActionProcessor, m_SigActionProcessor(), int64_t a1, E
 
 		case EAction_Crasher:
 			return Configuration::IsNoWildRush ? 0 : originalActionProcessor(a1, in_action, a3, a4, a5);
+
+		case EAction_SonicBoom:
+			return Configuration::IsNoSonicBoom ? 0 : originalActionProcessor(a1, in_action, a3, a4, a5);
 	}
 
 	return originalActionProcessor(a1, in_action, a3, a4, a5);

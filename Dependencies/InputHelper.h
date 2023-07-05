@@ -96,7 +96,7 @@ public:
 		m_TriggerMap = in_triggerMap;
 	}
 
-	int16_t GetAnalogInput(int in_analog, int in_playerIndex = 0)
+	int16_t GetAnalogInput(int in_analog, bool in_testDeadzone = true, int in_playerIndex = 0)
 	{
 		DWORD result = XInputGetState(in_playerIndex, &m_PadState);
 		AnalogKey key = m_AnalogMap[in_analog];
@@ -112,39 +112,74 @@ public:
 
 		if (result == ERROR_SUCCESS)
 		{
+			short analog = 0;
+
 			switch (in_analog)
 			{
 				case VK_PAD_LTHUMB_LEFT:
 				case VK_PAD_LTHUMB_RIGHT:
-					return m_PadState.Gamepad.sThumbLX;
+					analog = m_PadState.Gamepad.sThumbLX;
+					break;
 
 				case VK_PAD_LTHUMB_UP:
 				case VK_PAD_LTHUMB_DOWN:
-					return m_PadState.Gamepad.sThumbLY;
+					analog = m_PadState.Gamepad.sThumbLY;
+					break;
 
 				case VK_PAD_RTHUMB_LEFT:
 				case VK_PAD_RTHUMB_RIGHT:
-					return m_PadState.Gamepad.sThumbRX;
+					analog = m_PadState.Gamepad.sThumbRX;
+					break;
 
 				case VK_PAD_RTHUMB_UP:
 				case VK_PAD_RTHUMB_DOWN:
-					return m_PadState.Gamepad.sThumbRY;
+					analog = m_PadState.Gamepad.sThumbRY;
+					break;
 
 				default:
-					return 0;
+					analog = 0;
+					break;
 			}
+
+			if (in_testDeadzone)
+				analog = IsAnalogNeutral(in_analog, in_playerIndex) ? 0 : analog;
+
+			return analog;
 		}
 	}
 
-	bool IsLeftAnalogNeutral(int in_playerIndex = 0)
+	bool IsAnalogNeutral(int in_analog, int in_playerIndex = 0)
 	{
-		auto x = GetAnalogInput(VK_PAD_LTHUMB_LEFT, in_playerIndex);
-		auto y = GetAnalogInput(VK_PAD_LTHUMB_UP, in_playerIndex);
+		switch (in_analog)
+		{
+			case VK_PAD_LTHUMB_UP:
+			case VK_PAD_LTHUMB_DOWN:
+			case VK_PAD_LTHUMB_LEFT:
+			case VK_PAD_LTHUMB_RIGHT:
+			{
+				auto x = GetAnalogInput(VK_PAD_LTHUMB_LEFT, in_playerIndex);
+				auto y = GetAnalogInput(VK_PAD_LTHUMB_UP, in_playerIndex);
 
-		return x < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-			   x > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
-			   y < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  &&
-			   y > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+				return x < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
+					x > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
+					y < XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE &&
+					y > -XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE;
+			}
+
+			case VK_PAD_RTHUMB_UP:
+			case VK_PAD_RTHUMB_DOWN:
+			case VK_PAD_RTHUMB_LEFT:
+			case VK_PAD_RTHUMB_RIGHT:
+			{
+				auto x = GetAnalogInput(VK_PAD_RTHUMB_LEFT, in_playerIndex);
+				auto y = GetAnalogInput(VK_PAD_RTHUMB_UP, in_playerIndex);
+
+				return x < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE &&
+					x > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE &&
+					y < XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE &&
+					y > -XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
+			}
+		}
 	}
 
 	uint8_t GetTriggerInput(int in_trigger, int in_playerIndex = 0)

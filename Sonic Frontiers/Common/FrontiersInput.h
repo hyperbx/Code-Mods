@@ -9,7 +9,7 @@
 
 inline static int64_t m_OptionDataSingleton;
 
-CL_SCAN_SIGNATURE(m_SigOptionDataReader, "\x48\x89\x5C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x83\xEC\x60\x48\x89\xD7\x48\x89\xCB\x48\x8D\x15\xCC\xCC\xCC\xCC\x45\x31\xC0\x48\x8D\x0D\xCC\xCC\xCC\xCC\xE8\xCC\xCC\xCC\xCC\x84\xC0\xC7\x44\x24\x24\x03\x00\x00\x00\x48\x8D\x0D\xCC\xCC\xCC\xCC\xBE\x01\x00\x00\x00\x4C\x8D\x05\xCC\xCC\xCC\xCC\x48\x89\x74\x24\x40\x4C\x0F\x44\xC1\x66", "xxxxxxxxxxxxxxxxxxxxxxxx????xxxxxx????x????xxxxxxxxxxxxx????xxxxxxxx????xxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigOptionDataReader, "\x48\x89\x5C\x24\x10\x48\x89\x74\x24\x18\x57\x48\x83\xEC\x60\x48\x89\xD7\x48\x89\xCB\x48\x8D\x15\xCC\xCC\xCC\xCC\x45\x31\xC0\x48\x8D\x0D\xCC\xCC\xCC\xCC\xE8\xCC\xCC\xCC\xCC\x84\xC0\xC7\x44\x24\x24\x03\x00\x00\x00\x48\x8D\x0D\xCC\xCC\xCC\xCC\xBE\x01\x00\x00\x00\x4C\x8D\x05\xCC\xCC\xCC\xCC\x48\x89\x74\x24\x40\x4C\x0F\x44\xC1\x89", "xxxxxxxxxxxxxxxxxxxxxxxx????xxxxxx????x????xxxxxxxxxxxxx????xxxxxxxx????xxxxxxxxxx");
 CL_SCAN_SIGNATURE(m_SigOptionDataWriter, "\x48\x89\x5C\x24\x10\x56\x48\x81\xEC\xA0\x00\x00\x00\x4C\x8B\x81\x98\x00\x00\x00\x48\x89", "xxxxxxxxxxxxxxxxxxxxxx");
 
 INLINE_HOOK(int64_t, __fastcall, OptionDataReader, m_SigOptionDataReader(), int64_t* a1, int64_t* a2)
@@ -108,9 +108,14 @@ public:
 		AppVersion appVersion;
 
 		/// <summary>
+		/// コンフィグ2
+		/// </summary>
+		uint8_t config2;
+
+		/// <summary>
 		/// reserved1
 		/// </summary>
-		uint16_t reserved1;
+		uint8_t reserved1;
 
 		/// <summary>
 		/// 保存日時
@@ -253,9 +258,9 @@ public:
 		uint8_t mouseSensibilityRate;
 
 		/// <summary>
-		/// padding0
+		/// ニュートラル停止減衰率
 		/// </summary>
-		uint8_t padding0;
+		uint8_t neutralDecelerationRate;
 
 		/// <summary>
 		/// [DLC]ソニック衣装
@@ -283,14 +288,29 @@ public:
 		uint8_t config2;
 
 		/// <summary>
-		/// reserved1
+		/// 島の見た目
 		/// </summary>
-		uint8_t reserved1[3];
+		uint8_t islandVisual;
+
+		/// <summary>
+		/// NPCの見た目
+		/// </summary>
+		uint8_t npcVisual;
+
+		/// <summary>
+		/// 基本空気抵抗スケールレート
+		/// </summary>
+		uint8_t baseAirDragScaleRate;
+
+		/// <summary>
+		/// ステータス
+		/// </summary>
+		uint32_t status;
 
 		/// <summary>
 		/// reserved2
 		/// </summary>
-		uint32_t reserved2[2];
+		uint32_t reserved2;
 
 	} OptionGamePlayData;
 
@@ -808,9 +828,14 @@ public:
 		MusicSelectType musicSelectType;
 
 		/// <summary>
+		/// フラグ
+		/// </summary>
+		uint8_t flags;
+
+		/// <summary>
 		/// padding
 		/// </summary>
-		uint8_t padding[2];
+		uint8_t padding;
 
 		/// <summary>
 		/// reserved

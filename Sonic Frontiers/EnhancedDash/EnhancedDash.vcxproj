@@ -23,6 +23,7 @@
     <ProjectGuid>{445E3608-3DCF-45A7-AB70-86DA906CE4E5}</ProjectGuid>
     <RootNamespace>DropDashUncurl</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>EnhancedDash</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -68,8 +69,7 @@
     <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -125,10 +125,15 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
-copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDropDash.ini"
-copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDropDash.json"</Command>
+      <Command>copy /Y "$(MSBuildProjectDirectory)\Info.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\info.ini"
+copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.hmm" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.hmm"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.ini"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.json"</Command>
     </PostBuildEvent>
+    <MASM>
+      <IncludePaths>$(SolutionDir)Dependencies</IncludePaths>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -177,10 +182,15 @@ copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.json" "$(MSBuildProjectDire
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
-copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDropDash.ini"
-copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDropDash.json"</Command>
+      <Command>copy /Y "$(MSBuildProjectDirectory)\Info.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\info.ini"
+copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.hmm" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.hmm"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.ini"
+copy /Y "$(MSBuildProjectDirectory)\EnhancedDash.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\EnhancedDash.json"</Command>
     </PostBuildEvent>
+    <MASM>
+      <IncludePaths>$(SolutionDir)Dependencies</IncludePaths>
+    </MASM>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BlackboardHelper.h" />
@@ -188,13 +198,16 @@ copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.json" "$(MSBuildProjectDire
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerParameters.h" />
+    <ClInclude Include="SonicParameters.h" />
     <ClInclude Include="Reflection.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="Mod.cpp" />
+    <ClInclude Include="MsgChangeLayerTimeScale.h">
+      <FileType>CppHeader</FileType>
+    </ClInclude>
     <ClCompile Include="Pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -205,6 +218,5 @@ copy /Y "$(MSBuildProjectDirectory)\EnhancedDropDash.json" "$(MSBuildProjectDire
     <ClCompile Include="Reflection.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets">
-  </ImportGroup>
+  <ImportGroup Label="ExtensionTargets" />
 </Project>

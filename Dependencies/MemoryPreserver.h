@@ -10,6 +10,9 @@ class MemoryPreserver
 public:
 	static const void Add(const size_t location, const size_t length)
 	{
+		if (location == 0)
+			return;
+
 		char* buffer = new char[length];
 		memcpy(buffer, (void*)location, length);
 
@@ -30,6 +33,9 @@ public:
 	static const void Restore(const size_t location)
 	{
 		int i = 0;
+
+		if (location == 0)
+			return;
 
 		for (char c : m_PreservedMemory.at(location))
 		{

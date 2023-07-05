@@ -498,35 +498,286 @@ typedef struct
 	/// </summary>
 	PlayerParamAttackData slingShot;
 
+	/// <summary>
+	/// Knuckles Punch1
+	/// </summary>
+	PlayerParamAttackData knucklesPunch1;
+
+	/// <summary>
+	/// Knuckles Punch2
+	/// </summary>
+	PlayerParamAttackData knucklesPunch2;
+
+	/// <summary>
+	/// Knuckles Uppercut
+	/// </summary>
+	PlayerParamAttackData knucklesUppercut;
+
+	/// <summary>
+	/// Amy Tarot Attack
+	/// </summary>
+	PlayerParamAttackData amyTarotAttack;
+
+	/// <summary>
+	/// Amy Tarot Rolling
+	/// </summary>
+	PlayerParamAttackData amyTarotRolling;
+
 } PlayerParamAttack;
 
 typedef struct
 {
 	/// <summary>
-	/// 水平拡散角度
+	/// 水中時の水抵抗係数
 	/// </summary>
-	float horzAngle;
+	float resistRate;
 
 	/// <summary>
-	/// 垂直拡散角度
+	/// 息継ぎ時の減速
 	/// </summary>
-	float vertAngle;
+	float breatheBrake;
 
 	/// <summary>
-	/// 距離比率
+	/// 息継ぎの拘束時間
 	/// </summary>
-	float distanceRatio;
+	float breatheTime;
 
-} PlayerParamAcceleHitEffect;
+	/// <summary>
+	/// 重力方向にかかる加速度
+	/// </summary>
+	float breatheGravity;
+
+} PlayerParamWaterAct;
 
 typedef struct
 {
 	/// <summary>
-	/// ヒットエフェクト
+	/// 法線方向の初速基本値
 	/// </summary>
-	PlayerParamAcceleHitEffect hitEffect[5];
+	float baseSpeed;
 
-} PlayerParamAcceleLevel;
+	/// <summary>
+	/// 上方向の初速
+	/// </summary>
+	float upSpeed;
+
+	/// <summary>
+	/// 上方向の初速　空中
+	/// </summary>
+	float upSpeedAir;
+
+	/// <summary>
+	/// エッジからの飛び出しの場合の最低速度
+	/// </summary>
+	float edgeSpeed;
+
+	/// <summary>
+	/// 他の空中アクションへ移行できる時間
+	/// </summary>
+	float airActionTime;
+
+	/// <summary>
+	/// 壁移動へ移行できる時間
+	/// </summary>
+	float wallMoveTime;
+
+} PlayerParamBaseJump;
+
+typedef struct
+{
+	/// <summary>
+	/// 最高速度
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// [通常]斜面滑り力
+	/// </summary>
+	float slidePower;
+
+	/// <summary>
+	/// [通常]ブレーキ力
+	/// </summary>
+	float brakeForce;
+
+	/// <summary>
+	/// [S字内]斜面滑り力
+	/// </summary>
+	float slidePowerSlalom;
+
+	/// <summary>
+	/// [S字内]ブレーキ力
+	/// </summary>
+	float brakeForceSlalom;
+
+	/// <summary>
+	/// 終了速度
+	/// </summary>
+	float releaseSpeed;
+
+	/// <summary>
+	/// 入力方向に対する重力加速度を使用するか
+	/// </summary>
+	bool useInput;
+
+} PlayerParamBallMove;
+
+typedef struct
+{
+	/// <summary>
+	/// 幅
+	/// </summary>
+	float width;
+
+	/// <summary>
+	/// 距離
+	/// </summary>
+	float distance;
+
+	/// <summary>
+	/// UV:U開始
+	/// </summary>
+	float u0;
+
+	/// <summary>
+	/// UV:U終了
+	/// </summary>
+	float u1;
+
+} PlayerParamLocusData;
+
+typedef struct
+{
+	/// <summary>
+	/// data
+	/// </summary>
+	PlayerParamLocusData data[4];
+
+} PlayerParamLocus;
+
+typedef struct
+{
+	/// <summary>
+	/// エフェクトの再生間隔
+	/// </summary>
+	float effectSpanTime;
+
+	/// <summary>
+	/// エフェクトの再生時間
+	/// </summary>
+	float effectLifeTime;
+
+	/// <summary>
+	/// エフェクト発生位置オフセット
+	/// </summary>
+	float effectOffsetDistance;
+
+	/// <summary>
+	/// エフェクトオーバーラップオフセット
+	/// </summary>
+	float effectOverlapDistance;
+
+} PlayerParamAuraTrain;
+
+typedef struct
+{
+	/// <summary>
+	/// リングレベル段数
+	/// </summary>
+	uint8_t ringsLevel;
+
+	/// <summary>
+	/// スピードレベル段数
+	/// </summary>
+	uint8_t speedLevel;
+
+	/// <summary>
+	/// 攻撃レベル段数
+	/// </summary>
+	uint8_t offensiveLevel;
+
+	/// <summary>
+	/// 防御レベル段数
+	/// </summary>
+	uint8_t defensiveLevel;
+
+} PlayerParamLevel;
+
+typedef struct
+{
+	/// <summary>
+	/// クールタイム
+	/// </summary>
+	float coolTime;
+
+} PlayerParamBarrierWall;
+
+typedef struct
+{
+	/// <summary>
+	/// 島別レート
+	/// </summary>
+	float rates[5];
+
+} PlayerParamDamageRateLevel;
+
+typedef struct
+{
+	/// <summary>
+	/// 難易度
+	/// </summary>
+	PlayerParamDamageRateLevel diffculties[4];
+
+} PlayerParamDamageRate;
+
+typedef struct
+{
+	/// <summary>
+	/// ダメージ設定
+	/// </summary>
+	PlayerParamAttack attack;
+
+	/// <summary>
+	/// 水中専用挙動
+	/// </summary>
+	PlayerParamWaterAct wateract;
+
+	/// <summary>
+	/// BASEジャンプ
+	/// </summary>
+	PlayerParamBaseJump basejump;
+
+	/// <summary>
+	/// ボール移動
+	/// </summary>
+	PlayerParamBallMove ballmove;
+
+	/// <summary>
+	/// 移動軌跡
+	/// </summary>
+	PlayerParamLocus locus;
+
+	/// <summary>
+	/// オーラトレイン
+	/// </summary>
+	PlayerParamAuraTrain auratrain;
+
+	/// <summary>
+	/// レベル段階数
+	/// </summary>
+	PlayerParamLevel level;
+
+	/// <summary>
+	/// 結界壁
+	/// </summary>
+	PlayerParamBarrierWall barrierWall;
+
+	/// <summary>
+	/// ダメージ倍率
+	/// </summary>
+	PlayerParamDamageRate damageRate;
+
+} CommonPackage;
 
 typedef struct
 {
@@ -1642,7 +1893,15 @@ enum Action : int8_t
 	Avoid = 27,
 	AirBoost = 28,
 	AfterAirBoost = 29,
-	ActionNum = 30,
+	KnucklesPunch1 = 30,
+	KnucklesPunch2 = 31,
+	KnucklesUppercut = 32,
+	KnucklesCyKnuckle = 33,
+	KnucklesHeatKnuckle = 34,
+	AmyTarotAttack = 35,
+	AmyTarotRolling = 36,
+	AmyCyHammer = 37,
+	ActionNum = 38,
 };
 
 typedef struct
@@ -1800,6 +2059,46 @@ typedef struct
 	/// AfterAirBoost
 	/// </summary>
 	PlayerParamComboTransit afterAirBoost;
+
+	/// <summary>
+	/// Knuckles Punch1
+	/// </summary>
+	PlayerParamComboTransit knucklesPunch1;
+
+	/// <summary>
+	/// Knuckles Punch2
+	/// </summary>
+	PlayerParamComboTransit knucklesPunch2;
+
+	/// <summary>
+	/// Knuckles Uppercut
+	/// </summary>
+	PlayerParamComboTransit knucklesUppercut;
+
+	/// <summary>
+	/// Knuckles CyKnuckle
+	/// </summary>
+	PlayerParamComboTransit knucklesCyKnuckle;
+
+	/// <summary>
+	/// Knuckles MaximumHeatKnuckle
+	/// </summary>
+	PlayerParamComboTransit knucklesHeatKnuckle;
+
+	/// <summary>
+	/// Amy TarotAttack
+	/// </summary>
+	PlayerParamComboTransit amyTarotAttack;
+
+	/// <summary>
+	/// Amy TarotRolling
+	/// </summary>
+	PlayerParamComboTransit amyTarotRolling;
+
+	/// <summary>
+	/// Amy CyHammer
+	/// </summary>
+	PlayerParamComboTransit amyCyHammer;
 
 } PlayerParamComboTransitTable;
 
@@ -2539,103 +2838,6 @@ typedef struct
 typedef struct
 {
 	/// <summary>
-	/// 水中時の水抵抗係数
-	/// </summary>
-	float resistRate;
-
-	/// <summary>
-	/// 息継ぎ時の減速
-	/// </summary>
-	float breatheBrake;
-
-	/// <summary>
-	/// 息継ぎの拘束時間
-	/// </summary>
-	float breatheTime;
-
-	/// <summary>
-	/// 重力方向にかかる加速度
-	/// </summary>
-	float breatheGravity;
-
-} PlayerParamWaterAct;
-
-typedef struct
-{
-	/// <summary>
-	/// 法線方向の初速基本値
-	/// </summary>
-	float baseSpeed;
-
-	/// <summary>
-	/// 上方向の初速
-	/// </summary>
-	float upSpeed;
-
-	/// <summary>
-	/// 上方向の初速　空中
-	/// </summary>
-	float upSpeedAir;
-
-	/// <summary>
-	/// エッジからの飛び出しの場合の最低速度
-	/// </summary>
-	float edgeSpeed;
-
-	/// <summary>
-	/// 他の空中アクションへ移行できる時間
-	/// </summary>
-	float airActionTime;
-
-	/// <summary>
-	/// 壁移動へ移行できる時間
-	/// </summary>
-	float wallMoveTime;
-
-} PlayerParamBaseJump;
-
-typedef struct
-{
-	/// <summary>
-	/// 最高速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// [通常]斜面滑り力
-	/// </summary>
-	float slidePower;
-
-	/// <summary>
-	/// [通常]ブレーキ力
-	/// </summary>
-	float brakeForce;
-
-	/// <summary>
-	/// [S字内]斜面滑り力
-	/// </summary>
-	float slidePowerSlalom;
-
-	/// <summary>
-	/// [S字内]ブレーキ力
-	/// </summary>
-	float brakeForceSlalom;
-
-	/// <summary>
-	/// 終了速度
-	/// </summary>
-	float releaseSpeed;
-
-	/// <summary>
-	/// 入力方向に対する重力加速度を使用するか
-	/// </summary>
-	bool useInput;
-
-} PlayerParamBallMove;
-
-typedef struct
-{
-	/// <summary>
 	/// 吹き飛ばされ時の減速度
 	/// </summary>
 	float blowDeceleForce;
@@ -2676,116 +2878,6 @@ typedef struct
 	cstring pylonHitStop;
 
 } PlayerParamSandSki;
-
-typedef struct
-{
-	/// <summary>
-	/// 蛇行周期
-	/// </summary>
-	float meanderCycle;
-
-	/// <summary>
-	/// 蛇行角度
-	/// </summary>
-	float meanderAngle;
-
-	/// <summary>
-	/// 最大速度
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// 最小速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 逃げ回る時間
-	/// </summary>
-	float time;
-
-} PlayerParamRunawayBee;
-
-typedef struct
-{
-	/// <summary>
-	/// コダマ数
-	/// </summary>
-	int32_t numKodamas;
-
-	/// <summary>
-	/// 移動初速
-	/// </summary>
-	float initialSpeed;
-
-	/// <summary>
-	/// 移動最小速度
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// 移動最大速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// ジャンプ力
-	/// </summary>
-	float jumpForce;
-
-} PlayerParamRunWithKodamaParam;
-
-typedef struct
-{
-	/// <summary>
-	/// コダマ最大数
-	/// </summary>
-	int32_t maxKodamas;
-
-	/// <summary>
-	/// 重力サイズ
-	/// </summary>
-	float gravitySize;
-
-	/// <summary>
-	/// コダマ数ごとのパラメータ
-	/// </summary>
-	PlayerParamRunWithKodamaParam params[8];
-
-} PlayerParamRunWithKodama;
-
-typedef struct
-{
-	/// <summary>
-	/// 幅
-	/// </summary>
-	float width;
-
-	/// <summary>
-	/// 距離
-	/// </summary>
-	float distance;
-
-	/// <summary>
-	/// UV:U開始
-	/// </summary>
-	float u0;
-
-	/// <summary>
-	/// UV:U終了
-	/// </summary>
-	float u1;
-
-} PlayerParamLocusData;
-
-typedef struct
-{
-	/// <summary>
-	/// data
-	/// </summary>
-	PlayerParamLocusData data[4];
-
-} PlayerParamLocus;
 
 enum CameraShakeTiming : int8_t
 {
@@ -2870,89 +2962,83 @@ typedef struct
 typedef struct
 {
 	/// <summary>
-	/// エフェクトの再生間隔
+	/// 蛇行周期
 	/// </summary>
-	float effectSpanTime;
+	float meanderCycle;
 
 	/// <summary>
-	/// エフェクトの再生時間
+	/// 蛇行角度
 	/// </summary>
-	float effectLifeTime;
+	float meanderAngle;
 
 	/// <summary>
-	/// エフェクト発生位置オフセット
+	/// 最大速度
 	/// </summary>
-	float effectOffsetDistance;
+	float minSpeed;
 
 	/// <summary>
-	/// エフェクトオーバーラップオフセット
+	/// 最小速度
 	/// </summary>
-	float effectOverlapDistance;
+	float maxSpeed;
 
-} PlayerParamAuraTrain;
+	/// <summary>
+	/// 逃げ回る時間
+	/// </summary>
+	float time;
+
+} PlayerParamRunawayBee;
 
 typedef struct
 {
 	/// <summary>
-	/// リングレベル段数
+	/// コダマ数
 	/// </summary>
-	uint8_t ringsLevel;
+	int32_t numKodamas;
 
 	/// <summary>
-	/// スピードレベル段数
+	/// 移動初速
 	/// </summary>
-	uint8_t speedLevel;
+	float initialSpeed;
 
 	/// <summary>
-	/// 攻撃レベル段数
+	/// 移動最小速度
 	/// </summary>
-	uint8_t offensiveLevel;
+	float minSpeed;
 
 	/// <summary>
-	/// 防御レベル段数
+	/// 移動最大速度
 	/// </summary>
-	uint8_t defensiveLevel;
+	float maxSpeed;
 
-} PlayerParamLevel;
+	/// <summary>
+	/// ジャンプ力
+	/// </summary>
+	float jumpForce;
+
+} PlayerParamRunWithKodamaParam;
 
 typedef struct
 {
 	/// <summary>
-	/// クールタイム
+	/// コダマ最大数
 	/// </summary>
-	float coolTime;
+	int32_t maxKodamas;
 
-} PlayerParamBarrierWall;
+	/// <summary>
+	/// 重力サイズ
+	/// </summary>
+	float gravitySize;
+
+	/// <summary>
+	/// コダマ数ごとのパラメータ
+	/// </summary>
+	PlayerParamRunWithKodamaParam params[8];
+
+} PlayerParamRunWithKodama;
 
 typedef struct
 {
-	/// <summary>
-	/// 島別レート
-	/// </summary>
-	float rates[5];
-
-} PlayerParamDamageRateLevel;
-
-typedef struct
-{
-	/// <summary>
-	/// 難易度
-	/// </summary>
-	PlayerParamDamageRateLevel diffculties[4];
-
-} PlayerParamDamageRate;
-
-typedef struct
-{
-	/// <summary>
-	/// ダメージ設定
-	/// </summary>
-	PlayerParamAttack attack;
-
-	/// <summary>
-	/// アクセルレベル
-	/// </summary>
-	PlayerParamAcceleLevel acceleLevel;
+	CommonPackage commonPackage;
 
 	/// <summary>
 	/// アクセルモード
@@ -2962,17 +3048,7 @@ typedef struct
 	/// <summary>
 	/// 攻撃Act / Accele Combo
 	/// </summary>
-	PlayerParamAcceleCombo acceleCombo;
-
-	/// <summary>
-	/// 攻撃Act / Accele Combo
-	/// </summary>
 	PlayerParamAcceleComboSet acceleComboSet;
-
-	/// <summary>
-	/// 攻撃Act / Loop Kick
-	/// </summary>
-	PlayerParamLoopKick loopKick;
 
 	/// <summary>
 	/// 攻撃Act / Loop Kick
@@ -2982,17 +3058,7 @@ typedef struct
 	/// <summary>
 	/// 攻撃Act / Crasher
 	/// </summary>
-	PlayerParamCrasher crasher;
-
-	/// <summary>
-	/// 攻撃Act / Crasher
-	/// </summary>
 	PlayerParamCrasherSet crasherSet;
-
-	/// <summary>
-	/// 攻撃Act / Spin Slash
-	/// </summary>
-	PlayerParamSpinSlash spinSlash;
 
 	/// <summary>
 	/// 攻撃Act / Spin Slash
@@ -3002,17 +3068,7 @@ typedef struct
 	/// <summary>
 	/// 攻撃Act / Charge Attack
 	/// </summary>
-	PlayerParamChargeAttack chargeAtack;
-
-	/// <summary>
-	/// 攻撃Act / Charge Attack
-	/// </summary>
 	PlayerParamChargeAttackSet chargeAtackSet;
-
-	/// <summary>
-	/// 攻撃Act / Stomping
-	/// </summary>
-	PlayerParamStompingAttack stompingAttack;
 
 	/// <summary>
 	/// 攻撃Act / Stomping
@@ -3022,17 +3078,7 @@ typedef struct
 	/// <summary>
 	/// 攻撃Act / Combo Finish
 	/// </summary>
-	PlayerParamComboFinish comboFinish;
-
-	/// <summary>
-	/// 攻撃Act / Combo Finish
-	/// </summary>
 	PlayerParamComboFinishSet comboFinishSet;
-
-	/// <summary>
-	/// 攻撃Act / Sonic Boom
-	/// </summary>
-	PlayerParamSonicBoom sonicboom;
 
 	/// <summary>
 	/// 攻撃Act / Sonic Boom
@@ -3042,27 +3088,12 @@ typedef struct
 	/// <summary>
 	/// 攻撃Act / Cross Slash
 	/// </summary>
-	PlayerParamCrossSlash crossSlash;
-
-	/// <summary>
-	/// 攻撃Act / Cross Slash
-	/// </summary>
 	PlayerParamCrossSlashSet crossSlashSet;
 
 	/// <summary>
 	/// 攻撃Act / Homing Shot
 	/// </summary>
-	PlayerParamHomingShot homingShot;
-
-	/// <summary>
-	/// 攻撃Act / Homing Shot
-	/// </summary>
 	PlayerParamHomingShotSet homingShotSet;
-
-	/// <summary>
-	/// 攻撃Act / Smash
-	/// </summary>
-	PlayerParamSmash smash;
 
 	/// <summary>
 	/// 攻撃Act / Smash
@@ -3090,24 +3121,14 @@ typedef struct
 	PlayerParamSuperSonic supersonic;
 
 	/// <summary>
-	/// 水中専用挙動
-	/// </summary>
-	PlayerParamWaterAct wateract;
-
-	/// <summary>
-	/// BASEジャンプ
-	/// </summary>
-	PlayerParamBaseJump basejump;
-
-	/// <summary>
-	/// ボール移動
-	/// </summary>
-	PlayerParamBallMove ballmove;
-
-	/// <summary>
 	/// サンドスキー
 	/// </summary>
 	PlayerParamSandSki sandski;
+
+	/// <summary>
+	/// スリングショット
+	/// </summary>
+	PlayerParamSlingshot slingshot;
 
 	/// <summary>
 	/// 蜂逃げ回り
@@ -3119,37 +3140,7 @@ typedef struct
 	/// </summary>
 	PlayerParamRunWithKodama runWithKodama;
 
-	/// <summary>
-	/// 移動軌跡
-	/// </summary>
-	PlayerParamLocus locus;
-
-	/// <summary>
-	/// スリングショット
-	/// </summary>
-	PlayerParamSlingshot slingshot;
-
-	/// <summary>
-	/// オーラトレイン
-	/// </summary>
-	PlayerParamAuraTrain auratrain;
-
-	/// <summary>
-	/// レベル段階数
-	/// </summary>
-	PlayerParamLevel level;
-
-	/// <summary>
-	/// 結界壁
-	/// </summary>
-	PlayerParamBarrierWall barrierWall;
-
-	/// <summary>
-	/// ダメージ倍率
-	/// </summary>
-	PlayerParamDamageRate damageRate;
-
-} CommonPackage;
+} CommonPackageSonic;
 
 enum SupportedPlane : int8_t
 {
@@ -3298,6 +3289,30 @@ typedef struct
 typedef struct
 {
 	/// <summary>
+	/// 最大力
+	/// </summary>
+	float force;
+
+	/// <summary>
+	/// 速度ダンパー範囲
+	/// </summary>
+	float damperRange;
+
+	/// <summary>
+	/// 最低躍度
+	/// </summary>
+	float jerkMin;
+
+	/// <summary>
+	/// 最高躍度
+	/// </summary>
+	float jerkMax;
+
+} PlayerParamSpeedAcceleData2;
+
+typedef struct
+{
+	/// <summary>
 	/// 通常
 	/// </summary>
 	PlayerParamSpeedData normal;
@@ -3361,6 +3376,16 @@ typedef struct
 	/// 減速度
 	/// </summary>
 	PlayerParamSpeedAcceleData decele;
+
+	/// <summary>
+	/// ニュートラル時最小減速度
+	/// </summary>
+	PlayerParamSpeedAcceleData2 deceleNeutralMin;
+
+	/// <summary>
+	/// ニュートラル時最大減速度
+	/// </summary>
+	PlayerParamSpeedAcceleData2 deceleNeutralMax;
 
 	/// <summary>
 	/// 加速度/オートラン
@@ -3723,6 +3748,16 @@ typedef struct
 	/// 速度比旋回力減衰の最大減衰力
 	/// </summary>
 	float rotationForceDecayMax;
+
+	/// <summary>
+	/// 空気抵抗スケール[最小]
+	/// </summary>
+	float baseAirDragScaleMin;
+
+	/// <summary>
+	/// 空気抵抗スケール[最大]
+	/// </summary>
+	float baseAirDragScaleMax;
 
 } PlayerParamJumpSpeed;
 
@@ -4688,30 +4723,6 @@ typedef struct
 typedef struct
 {
 	/// <summary>
-	/// 加速力
-	/// </summary>
-	float acceleForce;
-
-	/// <summary>
-	/// 減速力
-	/// </summary>
-	float deceleForce;
-
-	/// <summary>
-	/// 重力係数
-	/// </summary>
-	float gravityRate;
-
-	/// <summary>
-	/// 終了速度
-	/// </summary>
-	float releaseSpeed;
-
-} PlayerParamPinBall;
-
-typedef struct
-{
-	/// <summary>
 	/// 垂直方向の速度減衰率
 	/// </summary>
 	float damperV;
@@ -4742,566 +4753,6 @@ typedef struct
 	float jumpCheckSpeed;
 
 } PlayerParamFan;
-
-typedef struct
-{
-	/// <summary>
-	/// 垂直方向の速度減衰率
-	/// </summary>
-	float damperV;
-
-	/// <summary>
-	/// 水平方向の速度減衰率
-	/// </summary>
-	float damperH;
-
-	/// <summary>
-	/// 水平方向の減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
-	/// 指定高度からの距離に応じた加速率
-	/// </summary>
-	float accelRate;
-
-	/// <summary>
-	/// スティックによる移動加速度
-	/// </summary>
-	float moveForce;
-
-	/// <summary>
-	/// 水平方向の最高速度
-	/// </summary>
-	float maxSpeedH;
-
-	/// <summary>
-	/// 垂直方向の最高速度
-	/// </summary>
-	float maxSpeedV;
-
-	/// <summary>
-	/// 渦の回転速度
-	/// </summary>
-	float rotateSpeed;
-
-	/// <summary>
-	/// 渦の回転角速度
-	/// </summary>
-	float rotateAngularSpeed;
-
-	/// <summary>
-	/// 渦の吸い込み速度最小値
-	/// </summary>
-	float minDrawSpeed;
-
-	/// <summary>
-	/// 渦の吸い込み速度最大値
-	/// </summary>
-	float maxDrawSpeed;
-
-	/// <summary>
-	/// 渦の吸い込み速度最小値になる距離
-	/// </summary>
-	float minDrawSpeedDistance;
-
-	/// <summary>
-	/// 渦の吸い込み速度最大値になる距離
-	/// </summary>
-	float maxDrawSpeedDistance;
-
-	/// <summary>
-	/// ダメージ時間
-	/// </summary>
-	float damageTime;
-
-	/// <summary>
-	/// ダメージ時ブレーキをかけない時間
-	/// </summary>
-	float damageNoBrakeTime;
-
-	/// <summary>
-	/// ホーミングアタックリアクション時の向き変更する力
-	/// </summary>
-	float forceHomingReaction;
-
-	/// <summary>
-	/// ホーミングアタックリアクション時の向き変更する力(巻き込まれ中)
-	/// </summary>
-	float forceHomingReaction2;
-
-} PlayerParamStorm;
-
-typedef struct
-{
-	/// <summary>
-	/// 加速度[m/sec]
-	/// </summary>
-	float acceleForce;
-
-	/// <summary>
-	/// 減速度[m/sec]
-	/// </summary>
-	float deceleForce;
-
-	/// <summary>
-	/// オーバースピード減速度[m/sec]
-	/// </summary>
-	float overSpeedDeceleForce;
-
-	/// <summary>
-	/// 旋回力[deg/sec]
-	/// </summary>
-	float rotationForce;
-
-	/// <summary>
-	/// 速度比旋回力減衰の減衰開始速度
-	/// </summary>
-	float rotationForceDecaySpeed;
-
-	/// <summary>
-	/// 速度比旋回力減衰の減衰レート
-	/// </summary>
-	float rotationForceDecayRate;
-
-	/// <summary>
-	/// 速度比旋回力減衰の最大減衰力
-	/// </summary>
-	float rotationForceDecayMax;
-
-} PlayerParamCloudJump;
-
-typedef struct
-{
-	/// <summary>
-	/// 落下加速度
-	/// </summary>
-	float fallAccel;
-
-	/// <summary>
-	/// 水の抵抗係数
-	/// </summary>
-	float damper;
-
-	/// <summary>
-	/// ジャンプ速度
-	/// </summary>
-	float jumpSpeed;
-
-	/// <summary>
-	/// ストンピング速度
-	/// </summary>
-	float stompingSpeed;
-
-	/// <summary>
-	/// バウンド速度
-	/// </summary>
-	float boundSpeed;
-
-} PlayerParamAquaBall;
-
-typedef struct
-{
-	/// <summary>
-	/// スキルピース取得時の値
-	/// </summary>
-	uint32_t amount;
-
-} PlayerParamAirTrick;
-
-typedef struct
-{
-	/// <summary>
-	/// 旋回判定入力角度
-	/// </summary>
-	float startAngle;
-
-	/// <summary>
-	/// 終了速度
-	/// </summary>
-	float endSpeed;
-
-	/// <summary>
-	/// 最低速度 基本値
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// 最低速度 最大値
-	/// </summary>
-	float minSpeedMax;
-
-	/// <summary>
-	/// 最高速度 基本値
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 最高速度 最大値
-	/// </summary>
-	float maxSpeedMax;
-
-	/// <summary>
-	/// ブースト時　最低速度 基本値
-	/// </summary>
-	float minBoostSpeed;
-
-	/// <summary>
-	/// ブースト時　最低速度 最大値
-	/// </summary>
-	float minBoostSpeedMax;
-
-	/// <summary>
-	/// ブースト時　最高速度 基本値
-	/// </summary>
-	float maxBoostSpeed;
-
-	/// <summary>
-	/// ブースト時　最高速度 最大値
-	/// </summary>
-	float maxBoostSpeedMax;
-
-	/// <summary>
-	/// 加速度
-	/// </summary>
-	float accel;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
-	/// 最大ドリフト角
-	/// </summary>
-	float maxSteerAngle;
-
-	/// <summary>
-	/// 舵加速度
-	/// </summary>
-	float steerAccel;
-
-	/// <summary>
-	/// 最大舵速度
-	/// </summary>
-	float maxSteerSpeed;
-
-	/// <summary>
-	/// 無入力時舵加速度
-	/// </summary>
-	float neutralSteerAccel;
-
-	/// <summary>
-	/// 無入力時最大舵速度
-	/// </summary>
-	float maxNeutralSteerSpeed;
-
-	/// <summary>
-	/// 最大回転速度
-	/// </summary>
-	float maxRotateSpeed;
-
-	/// <summary>
-	/// 走行復帰時間
-	/// </summary>
-	float recoverTime;
-
-	/// <summary>
-	/// 最大チャージ時間
-	/// </summary>
-	float maxChargeTime;
-
-	/// <summary>
-	/// 最低ダッシュ速度
-	/// </summary>
-	float minDashSpeed;
-
-	/// <summary>
-	/// 最大ダッシュ速度
-	/// </summary>
-	float maxDashSpeed;
-
-	/// <summary>
-	/// 最低ダッシュジャンプ速度
-	/// </summary>
-	float minDashJumpSpeed;
-
-	/// <summary>
-	/// 最大ダッシュジャンプ速度
-	/// </summary>
-	float maxDashJumpSpeed;
-
-	/// <summary>
-	/// ジャンプ速度
-	/// </summary>
-	float jumpSpeed;
-
-	/// <summary>
-	/// 落下判定時間
-	/// </summary>
-	float checkFallTime;
-
-} PlayerParamDrift;
-
-typedef struct
-{
-	/// <summary>
-	/// 旋回判定入力角度
-	/// </summary>
-	float startAngle;
-
-	/// <summary>
-	/// 終了速度
-	/// </summary>
-	float endSpeed;
-
-	/// <summary>
-	/// 最低速度 基本値
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// 最高速度 基本値
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 加速度
-	/// </summary>
-	float accel;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
-	/// 最大ドリフト角
-	/// </summary>
-	float maxSteerAngle;
-
-	/// <summary>
-	/// 舵加速度
-	/// </summary>
-	float steerAccel;
-
-	/// <summary>
-	/// 最大舵速度
-	/// </summary>
-	float maxSteerSpeed;
-
-	/// <summary>
-	/// 無入力時舵加速度
-	/// </summary>
-	float neutralSteerAccel;
-
-	/// <summary>
-	/// 無入力時最大舵速度
-	/// </summary>
-	float maxNeutralSteerSpeed;
-
-	/// <summary>
-	/// 最大回転速度
-	/// </summary>
-	float maxRotateSpeed;
-
-	/// <summary>
-	/// 走行復帰時間
-	/// </summary>
-	float recoverTime;
-
-} PlayerParamDriftAir;
-
-typedef struct
-{
-	/// <summary>
-	/// 最高速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
-	/// 回転速度1
-	/// </summary>
-	float steeringSpeed1;
-
-	/// <summary>
-	/// 回転速度2
-	/// </summary>
-	float steeringSpeed2;
-
-	/// <summary>
-	/// 回転速度1になる速度
-	/// </summary>
-	float startSteeringSpeed;
-
-	/// <summary>
-	/// 回転速度2になる速度
-	/// </summary>
-	float endSteeringSpeed;
-
-	/// <summary>
-	/// 制御不能速度
-	/// </summary>
-	float outOfControlSpeed;
-
-	/// <summary>
-	/// 走行復帰速度
-	/// </summary>
-	float checkDashSpeed;
-
-	/// <summary>
-	/// 走行復帰時間
-	/// </summary>
-	float checkDashTime;
-
-} PlayerParamDriftDash;
-
-typedef struct
-{
-	/// <summary>
-	/// 最大チャージ時間
-	/// </summary>
-	float maxChargeTime;
-
-	/// <summary>
-	/// 最低ダッシュ速度 基本値
-	/// </summary>
-	float minDashSpeed;
-
-	/// <summary>
-	/// 最低ダッシュ速度 最大値
-	/// </summary>
-	float minDashSpeedMax;
-
-	/// <summary>
-	/// 最大ダッシュ速度 基本値
-	/// </summary>
-	float maxDashSpeed;
-
-	/// <summary>
-	/// 最大ダッシュ速度 最大値
-	/// </summary>
-	float maxDashSpeedMax;
-
-	/// <summary>
-	/// バンプジャンプからのダッシュ速度
-	/// </summary>
-	float tumbleDashSpeed;
-
-	/// <summary>
-	/// 最高速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
-	/// 回転速度1
-	/// </summary>
-	float steeringSpeed1;
-
-	/// <summary>
-	/// 回転速度2
-	/// </summary>
-	float steeringSpeed2;
-
-	/// <summary>
-	/// 回転速度1になる速度
-	/// </summary>
-	float startSteeringSpeed;
-
-	/// <summary>
-	/// 回転速度2になる速度
-	/// </summary>
-	float endSteeringSpeed;
-
-	/// <summary>
-	/// 制御不能速度
-	/// </summary>
-	float outOfControlSpeed;
-
-	/// <summary>
-	/// 走行復帰速度
-	/// </summary>
-	float checkDashSpeed;
-
-	/// <summary>
-	/// 走行復帰時間
-	/// </summary>
-	float checkDashTime;
-
-} PlayerParamDropDash;
-
-typedef struct
-{
-	/// <summary>
-	/// 開始落下速度
-	/// </summary>
-	float startSpeed;
-
-	/// <summary>
-	/// ジャンプ倍率　１段目
-	/// </summary>
-	float jumpRate1;
-
-	/// <summary>
-	/// ジャンプ倍率　2段目
-	/// </summary>
-	float jumpRate2;
-
-	/// <summary>
-	/// ジャンプ倍率　3段目
-	/// </summary>
-	float jumpRate3;
-
-	/// <summary>
-	/// ジャンプ不能時間
-	/// </summary>
-	float inoperableTime;
-
-} PlayerParamBounceJump;
-
-typedef struct
-{
-	/// <summary>
-	/// ダッシュ速度　基本値
-	/// </summary>
-	float dashSpeed;
-
-	/// <summary>
-	/// ダッシュ速度　最大値
-	/// </summary>
-	float dashSpeedMax;
-
-	/// <summary>
-	/// 移動速度　基本値
-	/// </summary>
-	float speed;
-
-	/// <summary>
-	/// 移動速度　最大値
-	/// </summary>
-	float speedMax;
-
-	/// <summary>
-	/// 加速度
-	/// </summary>
-	float accel;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-} PlayerParamLightDash;
 
 typedef struct
 {
@@ -5360,50 +4811,6 @@ typedef struct
 	float brake;
 
 	/// <summary>
-	/// 回転速度1
-	/// </summary>
-	float steeringSpeed1;
-
-	/// <summary>
-	/// 回転速度2
-	/// </summary>
-	float steeringSpeed2;
-
-	/// <summary>
-	/// 回転速度1になる速度
-	/// </summary>
-	float startSteeringSpeed;
-
-	/// <summary>
-	/// 回転速度2になる速度
-	/// </summary>
-	float endSteeringSpeed;
-
-} PlayerParamSquatMove;
-
-typedef struct
-{
-	/// <summary>
-	/// 初速
-	/// </summary>
-	float startSpeed;
-
-	/// <summary>
-	/// 最高速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 加速度
-	/// </summary>
-	float accel;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float brake;
-
-	/// <summary>
 	/// ダメージ時初速
 	/// </summary>
 	float damageSpeed;
@@ -5424,25 +4831,6 @@ typedef struct
 	float endSteeringSpeed;
 
 } PlayerParamSlowMove;
-
-typedef struct
-{
-	/// <summary>
-	/// 時間
-	/// </summary>
-	float time;
-
-	/// <summary>
-	/// 最低速度
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// 減速度
-	/// </summary>
-	float deceleForce;
-
-} PlayerParamSpinDash;
 
 typedef struct
 {
@@ -5857,150 +5245,6 @@ typedef struct
 typedef struct
 {
 	/// <summary>
-	/// 最高速度
-	/// </summary>
-	float maxSpeed;
-
-	/// <summary>
-	/// 最低速度
-	/// </summary>
-	float minSpeed;
-
-	/// <summary>
-	/// ダメージ速度
-	/// </summary>
-	float damageSpeed;
-
-	/// <summary>
-	/// 最低速度への加速度
-	/// </summary>
-	float accel;
-
-	/// <summary>
-	/// ダメージ時減速度
-	/// </summary>
-	float damageBrake;
-
-	/// <summary>
-	/// ダメージ減速時間
-	/// </summary>
-	float damageBrakeTime;
-
-	/// <summary>
-	/// ダメージモーション時間
-	/// </summary>
-	float damageMotionTime;
-
-	/// <summary>
-	/// ダメージ後無敵時間
-	/// </summary>
-	float damageInvicibleTime;
-
-	/// <summary>
-	/// 最高速ダンパー係数
-	/// </summary>
-	float damper;
-
-	/// <summary>
-	/// 空中ダンパー垂直方向
-	/// </summary>
-	float airDamperV;
-
-	/// <summary>
-	/// 空中ダンパー水平方向
-	/// </summary>
-	float airDamperH;
-
-	/// <summary>
-	/// 専用重力加速度
-	/// </summary>
-	float gravity;
-
-	/// <summary>
-	/// 空中ジャンプ速度
-	/// </summary>
-	float airJumpSpeed;
-
-	/// <summary>
-	/// 地上ジャンプ速度
-	/// </summary>
-	float groundJumpSpeed;
-
-	/// <summary>
-	/// 空中加速度
-	/// </summary>
-	float airAccel;
-
-	/// <summary>
-	/// 最高空中加速度
-	/// </summary>
-	float maxAirAddSpeed;
-
-	/// <summary>
-	/// ダウンフォース係数
-	/// </summary>
-	float downForceRate;
-
-	/// <summary>
-	/// 回転速度1
-	/// </summary>
-	float steeringSpeed1;
-
-	/// <summary>
-	/// 回転速度2
-	/// </summary>
-	float steeringSpeed2;
-
-	/// <summary>
-	/// 回転速度3
-	/// </summary>
-	float steeringSpeed3;
-
-	/// <summary>
-	/// 回転速度1になる速度
-	/// </summary>
-	float startSteeringSpeed;
-
-	/// <summary>
-	/// 回転速度2になる速度
-	/// </summary>
-	float endSteeringSpeed;
-
-	/// <summary>
-	/// 開始速度
-	/// </summary>
-	float startSpeed;
-
-	/// <summary>
-	/// 開始斜度
-	/// </summary>
-	float startSlope;
-
-	/// <summary>
-	/// 静止時開始斜度
-	/// </summary>
-	float staticStartSlope;
-
-	/// <summary>
-	/// 終了斜度
-	/// </summary>
-	float finishSlope;
-
-	/// <summary>
-	/// 終了時間
-	/// </summary>
-	float finishTime;
-
-	/// <summary>
-	/// 大着地判定時間
-	/// </summary>
-	float bigLandTime;
-
-} PlayerParamBoarding;
-
-typedef struct
-{
-	/// <summary>
 	/// 消費速度/ソニック
 	/// </summary>
 	float consumptionRate;
@@ -6159,50 +5403,6 @@ typedef struct
 	float maxSideSpeed;
 
 } PlayerParamAutorun;
-
-typedef struct
-{
-	/// <summary>
-	/// 前方加速力
-	/// </summary>
-	float frontAccel;
-
-	/// <summary>
-	/// 前方減速力
-	/// </summary>
-	float frontBrake;
-
-	/// <summary>
-	/// 横方減速力
-	/// </summary>
-	float sideBrake;
-
-	/// <summary>
-	/// ダメージ時減速力
-	/// </summary>
-	float damageBrake;
-
-	/// <summary>
-	/// 自動進行方向修正速度
-	/// </summary>
-	float defaultRotateSpeed;
-
-	/// <summary>
-	/// 進行方向修正速度
-	/// </summary>
-	float rotateSpeed;
-
-	/// <summary>
-	/// 空中進行方向修正速度
-	/// </summary>
-	float rotateSpeedAir;
-
-	/// <summary>
-	/// 重力加速度
-	/// </summary>
-	float gravity;
-
-} PlayerParamSlider;
 
 typedef struct
 {
@@ -6471,6 +5671,1147 @@ typedef struct
 typedef struct
 {
 	/// <summary>
+	/// 汎用
+	/// </summary>
+	PlayerParamCommon common;
+
+	/// <summary>
+	/// 速度
+	/// </summary>
+	PlayerParamSpeed speed;
+
+	/// <summary>
+	/// 角速度
+	/// </summary>
+	PlayerParamRotation rotation;
+
+	/// <summary>
+	/// 走りモーション
+	/// </summary>
+	PlayerParamRunning running;
+
+	/// <summary>
+	/// 姿勢回転
+	/// </summary>
+	PlayerParamBalance balance;
+
+	/// <summary>
+	/// ブレーキ
+	/// </summary>
+	PlayerParamBrake brake;
+
+	/// <summary>
+	/// ターン
+	/// </summary>
+	PlayerParamTurn turn;
+
+	/// <summary>
+	/// ジャンプ
+	/// </summary>
+	PlayerParamJump jump;
+
+	/// <summary>
+	/// ジャンプ中速度
+	/// </summary>
+	PlayerParamJumpSpeed jumpSpeed;
+
+	/// <summary>
+	/// 2段ジャンプ
+	/// </summary>
+	PlayerParamDoubleJump doubleJump;
+
+	/// <summary>
+	/// 落下
+	/// </summary>
+	PlayerParamFall fall;
+
+	/// <summary>
+	/// ダメージ
+	/// </summary>
+	PlayerParamDamage damage;
+
+	/// <summary>
+	/// 死亡
+	/// </summary>
+	PlayerParamDead dead;
+
+	/// <summary>
+	/// スライディング
+	/// </summary>
+	PlayerParamSliding sliding;
+
+	/// <summary>
+	/// ストンピング
+	/// </summary>
+	PlayerParamStomping stomping;
+
+	/// <summary>
+	/// グラインド
+	/// </summary>
+	PlayerParamGrind grind;
+
+	/// <summary>
+	/// 坂滑り
+	/// </summary>
+	PlayerParamFallSlope fallSlope;
+
+	/// <summary>
+	/// 坂バックフリップ
+	/// </summary>
+	PlayerParamFallFlip fallFlip;
+
+	/// <summary>
+	/// バンプジャンプ
+	/// </summary>
+	PlayerParamTumble tumble;
+
+	/// <summary>
+	/// スピンアタック
+	/// </summary>
+	PlayerParamSpinAttack spinAttack;
+
+	/// <summary>
+	/// ホーミングアタック
+	/// </summary>
+	PlayerParamHomingAttack homingAttack;
+
+	/// <summary>
+	/// 敵接触
+	/// </summary>
+	PlayerParamHitEnemy hitEnemy;
+
+	/// <summary>
+	/// ダイビング
+	/// </summary>
+	PlayerParamDiving diving;
+
+	/// <summary>
+	/// ファン
+	/// </summary>
+	PlayerParamFan fan;
+
+	/// <summary>
+	/// 後方宙返り
+	/// </summary>
+	PlayerParamBackflip backflip;
+
+	/// <summary>
+	/// 低速移動
+	/// </summary>
+	PlayerParamSlowMove slowmove;
+
+	/// <summary>
+	/// スピン
+	/// </summary>
+	PlayerParamSpin spin;
+
+	/// <summary>
+	/// 壁移動
+	/// </summary>
+	PlayerParamWallMove wallmove;
+
+	/// <summary>
+	/// 壁ジャンプ
+	/// </summary>
+	PlayerParamWallJump walljump;
+
+	/// <summary>
+	/// クライミング
+	/// </summary>
+	PlayerParamClimbing climbing;
+
+	/// <summary>
+	/// 滑落
+	/// </summary>
+	PlayerParamSlideDown slidedown;
+
+	/// <summary>
+	/// ブースト
+	/// </summary>
+	PlayerParamBoost boost;
+
+	/// <summary>
+	/// エアブースト
+	/// </summary>
+	PlayerParamAirBoost airboost;
+
+	/// <summary>
+	/// オートラン
+	/// </summary>
+	PlayerParamAutorun autorun;
+
+	/// <summary>
+	/// サイドステップ
+	/// </summary>
+	PlayerParamSideStep sidestep;
+
+	/// <summary>
+	/// サイドステップ(特殊状況)
+	/// </summary>
+	PlayerParamSideStep2 sidestep2;
+
+	/// <summary>
+	/// クイックステップ
+	/// </summary>
+	PlayerParamQuickStep quickstep;
+
+	/// <summary>
+	/// パリー
+	/// </summary>
+	PlayerParamParry parry;
+
+	/// <summary>
+	/// 回避
+	/// </summary>
+	PlayerParamAvoid avoid;
+
+} ModePackage;
+
+typedef struct
+{
+	/// <summary>
+	/// 垂直方向の速度減衰率
+	/// </summary>
+	float damperV;
+
+	/// <summary>
+	/// 水平方向の速度減衰率
+	/// </summary>
+	float damperH;
+
+	/// <summary>
+	/// 水平方向の減速度
+	/// </summary>
+	float brake;
+
+	/// <summary>
+	/// 指定高度からの距離に応じた加速率
+	/// </summary>
+	float accelRate;
+
+	/// <summary>
+	/// スティックによる移動加速度
+	/// </summary>
+	float moveForce;
+
+	/// <summary>
+	/// 水平方向の最高速度
+	/// </summary>
+	float maxSpeedH;
+
+	/// <summary>
+	/// 垂直方向の最高速度
+	/// </summary>
+	float maxSpeedV;
+
+	/// <summary>
+	/// 渦の回転速度
+	/// </summary>
+	float rotateSpeed;
+
+	/// <summary>
+	/// 渦の回転角速度
+	/// </summary>
+	float rotateAngularSpeed;
+
+	/// <summary>
+	/// 渦の吸い込み速度最小値
+	/// </summary>
+	float minDrawSpeed;
+
+	/// <summary>
+	/// 渦の吸い込み速度最大値
+	/// </summary>
+	float maxDrawSpeed;
+
+	/// <summary>
+	/// 渦の吸い込み速度最小値になる距離
+	/// </summary>
+	float minDrawSpeedDistance;
+
+	/// <summary>
+	/// 渦の吸い込み速度最大値になる距離
+	/// </summary>
+	float maxDrawSpeedDistance;
+
+	/// <summary>
+	/// ダメージ時間
+	/// </summary>
+	float damageTime;
+
+	/// <summary>
+	/// ダメージ時ブレーキをかけない時間
+	/// </summary>
+	float damageNoBrakeTime;
+
+	/// <summary>
+	/// ホーミングアタックリアクション時の向き変更する力
+	/// </summary>
+	float forceHomingReaction;
+
+	/// <summary>
+	/// ホーミングアタックリアクション時の向き変更する力(巻き込まれ中)
+	/// </summary>
+	float forceHomingReaction2;
+
+} PlayerParamStorm;
+
+typedef struct
+{
+	/// <summary>
+	/// 加速度[m/sec]
+	/// </summary>
+	float acceleForce;
+
+	/// <summary>
+	/// 減速度[m/sec]
+	/// </summary>
+	float deceleForce;
+
+	/// <summary>
+	/// オーバースピード減速度[m/sec]
+	/// </summary>
+	float overSpeedDeceleForce;
+
+	/// <summary>
+	/// 旋回力[deg/sec]
+	/// </summary>
+	float rotationForce;
+
+	/// <summary>
+	/// 速度比旋回力減衰の減衰開始速度
+	/// </summary>
+	float rotationForceDecaySpeed;
+
+	/// <summary>
+	/// 速度比旋回力減衰の減衰レート
+	/// </summary>
+	float rotationForceDecayRate;
+
+	/// <summary>
+	/// 速度比旋回力減衰の最大減衰力
+	/// </summary>
+	float rotationForceDecayMax;
+
+} PlayerParamCloudJump;
+
+typedef struct
+{
+	/// <summary>
+	/// 落下加速度
+	/// </summary>
+	float fallAccel;
+
+	/// <summary>
+	/// 水の抵抗係数
+	/// </summary>
+	float damper;
+
+	/// <summary>
+	/// ジャンプ速度
+	/// </summary>
+	float jumpSpeed;
+
+	/// <summary>
+	/// ストンピング速度
+	/// </summary>
+	float stompingSpeed;
+
+	/// <summary>
+	/// バウンド速度
+	/// </summary>
+	float boundSpeed;
+
+} PlayerParamAquaBall;
+
+typedef struct
+{
+	/// <summary>
+	/// 前方加速力
+	/// </summary>
+	float frontAccel;
+
+	/// <summary>
+	/// 前方減速力
+	/// </summary>
+	float frontBrake;
+
+	/// <summary>
+	/// 横方減速力
+	/// </summary>
+	float sideBrake;
+
+	/// <summary>
+	/// ダメージ時減速力
+	/// </summary>
+	float damageBrake;
+
+	/// <summary>
+	/// 自動進行方向修正速度
+	/// </summary>
+	float defaultRotateSpeed;
+
+	/// <summary>
+	/// 進行方向修正速度
+	/// </summary>
+	float rotateSpeed;
+
+	/// <summary>
+	/// 空中進行方向修正速度
+	/// </summary>
+	float rotateSpeedAir;
+
+	/// <summary>
+	/// 重力加速度
+	/// </summary>
+	float gravity;
+
+} PlayerParamSlider;
+
+typedef struct
+{
+	/// <summary>
+	/// スキルピース取得時の値
+	/// </summary>
+	uint32_t amount;
+
+} PlayerParamAirTrick;
+
+typedef struct
+{
+	/// <summary>
+	/// 旋回判定入力角度
+	/// </summary>
+	float startAngle;
+
+	/// <summary>
+	/// 終了速度
+	/// </summary>
+	float endSpeed;
+
+	/// <summary>
+	/// 最低速度 基本値
+	/// </summary>
+	float minSpeed;
+
+	/// <summary>
+	/// 最低速度 最大値
+	/// </summary>
+	float minSpeedMax;
+
+	/// <summary>
+	/// 最高速度 基本値
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 最高速度 最大値
+	/// </summary>
+	float maxSpeedMax;
+
+	/// <summary>
+	/// ブースト時　最低速度 基本値
+	/// </summary>
+	float minBoostSpeed;
+
+	/// <summary>
+	/// ブースト時　最低速度 最大値
+	/// </summary>
+	float minBoostSpeedMax;
+
+	/// <summary>
+	/// ブースト時　最高速度 基本値
+	/// </summary>
+	float maxBoostSpeed;
+
+	/// <summary>
+	/// ブースト時　最高速度 最大値
+	/// </summary>
+	float maxBoostSpeedMax;
+
+	/// <summary>
+	/// 加速度
+	/// </summary>
+	float accel;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float brake;
+
+	/// <summary>
+	/// 最大ドリフト角
+	/// </summary>
+	float maxSteerAngle;
+
+	/// <summary>
+	/// 舵加速度
+	/// </summary>
+	float steerAccel;
+
+	/// <summary>
+	/// 最大舵速度
+	/// </summary>
+	float maxSteerSpeed;
+
+	/// <summary>
+	/// 無入力時舵加速度
+	/// </summary>
+	float neutralSteerAccel;
+
+	/// <summary>
+	/// 無入力時最大舵速度
+	/// </summary>
+	float maxNeutralSteerSpeed;
+
+	/// <summary>
+	/// 最大回転速度
+	/// </summary>
+	float maxRotateSpeed;
+
+	/// <summary>
+	/// 走行復帰時間
+	/// </summary>
+	float recoverTime;
+
+	/// <summary>
+	/// 最大チャージ時間
+	/// </summary>
+	float maxChargeTime;
+
+	/// <summary>
+	/// 最低ダッシュ速度
+	/// </summary>
+	float minDashSpeed;
+
+	/// <summary>
+	/// 最大ダッシュ速度
+	/// </summary>
+	float maxDashSpeed;
+
+	/// <summary>
+	/// 最低ダッシュジャンプ速度
+	/// </summary>
+	float minDashJumpSpeed;
+
+	/// <summary>
+	/// 最大ダッシュジャンプ速度
+	/// </summary>
+	float maxDashJumpSpeed;
+
+	/// <summary>
+	/// ジャンプ速度
+	/// </summary>
+	float jumpSpeed;
+
+	/// <summary>
+	/// 落下判定時間
+	/// </summary>
+	float checkFallTime;
+
+} PlayerParamDrift;
+
+typedef struct
+{
+	/// <summary>
+	/// 旋回判定入力角度
+	/// </summary>
+	float startAngle;
+
+	/// <summary>
+	/// 終了速度
+	/// </summary>
+	float endSpeed;
+
+	/// <summary>
+	/// 最低速度 基本値
+	/// </summary>
+	float minSpeed;
+
+	/// <summary>
+	/// 最高速度 基本値
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 加速度
+	/// </summary>
+	float accel;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float brake;
+
+	/// <summary>
+	/// 最大ドリフト角
+	/// </summary>
+	float maxSteerAngle;
+
+	/// <summary>
+	/// 舵加速度
+	/// </summary>
+	float steerAccel;
+
+	/// <summary>
+	/// 最大舵速度
+	/// </summary>
+	float maxSteerSpeed;
+
+	/// <summary>
+	/// 無入力時舵加速度
+	/// </summary>
+	float neutralSteerAccel;
+
+	/// <summary>
+	/// 無入力時最大舵速度
+	/// </summary>
+	float maxNeutralSteerSpeed;
+
+	/// <summary>
+	/// 最大回転速度
+	/// </summary>
+	float maxRotateSpeed;
+
+	/// <summary>
+	/// 走行復帰時間
+	/// </summary>
+	float recoverTime;
+
+} PlayerParamDriftAir;
+
+typedef struct
+{
+	/// <summary>
+	/// 最高速度
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float brake;
+
+	/// <summary>
+	/// 回転速度1
+	/// </summary>
+	float steeringSpeed1;
+
+	/// <summary>
+	/// 回転速度2
+	/// </summary>
+	float steeringSpeed2;
+
+	/// <summary>
+	/// 回転速度1になる速度
+	/// </summary>
+	float startSteeringSpeed;
+
+	/// <summary>
+	/// 回転速度2になる速度
+	/// </summary>
+	float endSteeringSpeed;
+
+	/// <summary>
+	/// 制御不能速度
+	/// </summary>
+	float outOfControlSpeed;
+
+	/// <summary>
+	/// 走行復帰速度
+	/// </summary>
+	float checkDashSpeed;
+
+	/// <summary>
+	/// 走行復帰時間
+	/// </summary>
+	float checkDashTime;
+
+} PlayerParamDriftDash;
+
+typedef struct
+{
+	/// <summary>
+	/// 最高速度
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 最低速度
+	/// </summary>
+	float minSpeed;
+
+	/// <summary>
+	/// ダメージ速度
+	/// </summary>
+	float damageSpeed;
+
+	/// <summary>
+	/// 最低速度への加速度
+	/// </summary>
+	float accel;
+
+	/// <summary>
+	/// ダメージ時減速度
+	/// </summary>
+	float damageBrake;
+
+	/// <summary>
+	/// ダメージ減速時間
+	/// </summary>
+	float damageBrakeTime;
+
+	/// <summary>
+	/// ダメージモーション時間
+	/// </summary>
+	float damageMotionTime;
+
+	/// <summary>
+	/// ダメージ後無敵時間
+	/// </summary>
+	float damageInvicibleTime;
+
+	/// <summary>
+	/// 最高速ダンパー係数
+	/// </summary>
+	float damper;
+
+	/// <summary>
+	/// 空中ダンパー垂直方向
+	/// </summary>
+	float airDamperV;
+
+	/// <summary>
+	/// 空中ダンパー水平方向
+	/// </summary>
+	float airDamperH;
+
+	/// <summary>
+	/// 専用重力加速度
+	/// </summary>
+	float gravity;
+
+	/// <summary>
+	/// 空中ジャンプ速度
+	/// </summary>
+	float airJumpSpeed;
+
+	/// <summary>
+	/// 地上ジャンプ速度
+	/// </summary>
+	float groundJumpSpeed;
+
+	/// <summary>
+	/// 空中加速度
+	/// </summary>
+	float airAccel;
+
+	/// <summary>
+	/// 最高空中加速度
+	/// </summary>
+	float maxAirAddSpeed;
+
+	/// <summary>
+	/// ダウンフォース係数
+	/// </summary>
+	float downForceRate;
+
+	/// <summary>
+	/// 回転速度1
+	/// </summary>
+	float steeringSpeed1;
+
+	/// <summary>
+	/// 回転速度2
+	/// </summary>
+	float steeringSpeed2;
+
+	/// <summary>
+	/// 回転速度3
+	/// </summary>
+	float steeringSpeed3;
+
+	/// <summary>
+	/// 回転速度1になる速度
+	/// </summary>
+	float startSteeringSpeed;
+
+	/// <summary>
+	/// 回転速度2になる速度
+	/// </summary>
+	float endSteeringSpeed;
+
+	/// <summary>
+	/// 開始速度
+	/// </summary>
+	float startSpeed;
+
+	/// <summary>
+	/// 開始斜度
+	/// </summary>
+	float startSlope;
+
+	/// <summary>
+	/// 静止時開始斜度
+	/// </summary>
+	float staticStartSlope;
+
+	/// <summary>
+	/// 終了斜度
+	/// </summary>
+	float finishSlope;
+
+	/// <summary>
+	/// 終了時間
+	/// </summary>
+	float finishTime;
+
+	/// <summary>
+	/// 大着地判定時間
+	/// </summary>
+	float bigLandTime;
+
+} PlayerParamBoarding;
+
+typedef struct
+{
+	/// <summary>
+	/// 最大チャージ時間
+	/// </summary>
+	float maxChargeTime;
+
+	/// <summary>
+	/// 最低ダッシュ速度 基本値
+	/// </summary>
+	float minDashSpeed;
+
+	/// <summary>
+	/// 最低ダッシュ速度 最大値
+	/// </summary>
+	float minDashSpeedMax;
+
+	/// <summary>
+	/// 最大ダッシュ速度 基本値
+	/// </summary>
+	float maxDashSpeed;
+
+	/// <summary>
+	/// 最大ダッシュ速度 最大値
+	/// </summary>
+	float maxDashSpeedMax;
+
+	/// <summary>
+	/// バンプジャンプからのダッシュ速度
+	/// </summary>
+	float tumbleDashSpeed;
+
+	/// <summary>
+	/// 最高速度
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float brake;
+
+	/// <summary>
+	/// 回転速度1
+	/// </summary>
+	float steeringSpeed1;
+
+	/// <summary>
+	/// 回転速度2
+	/// </summary>
+	float steeringSpeed2;
+
+	/// <summary>
+	/// 回転速度1になる速度
+	/// </summary>
+	float startSteeringSpeed;
+
+	/// <summary>
+	/// 回転速度2になる速度
+	/// </summary>
+	float endSteeringSpeed;
+
+	/// <summary>
+	/// 制御不能速度
+	/// </summary>
+	float outOfControlSpeed;
+
+	/// <summary>
+	/// 走行復帰速度
+	/// </summary>
+	float checkDashSpeed;
+
+	/// <summary>
+	/// 走行復帰時間
+	/// </summary>
+	float checkDashTime;
+
+} PlayerParamDropDash;
+
+typedef struct
+{
+	/// <summary>
+	/// 開始落下速度
+	/// </summary>
+	float startSpeed;
+
+	/// <summary>
+	/// ジャンプ倍率　１段目
+	/// </summary>
+	float jumpRate1;
+
+	/// <summary>
+	/// ジャンプ倍率　2段目
+	/// </summary>
+	float jumpRate2;
+
+	/// <summary>
+	/// ジャンプ倍率　3段目
+	/// </summary>
+	float jumpRate3;
+
+	/// <summary>
+	/// ジャンプ不能時間
+	/// </summary>
+	float inoperableTime;
+
+} PlayerParamBounceJump;
+
+typedef struct
+{
+	/// <summary>
+	/// ダッシュ速度　基本値
+	/// </summary>
+	float dashSpeed;
+
+	/// <summary>
+	/// ダッシュ速度　最大値
+	/// </summary>
+	float dashSpeedMax;
+
+	/// <summary>
+	/// 移動速度　基本値
+	/// </summary>
+	float speed;
+
+	/// <summary>
+	/// 移動速度　最大値
+	/// </summary>
+	float speedMax;
+
+	/// <summary>
+	/// 加速度
+	/// </summary>
+	float accel;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float brake;
+
+} PlayerParamLightDash;
+
+typedef struct
+{
+	/// <summary>
+	/// 時間
+	/// </summary>
+	float time;
+
+	/// <summary>
+	/// 最低速度
+	/// </summary>
+	float minSpeed;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	float deceleForce;
+
+} PlayerParamSpinDash;
+
+typedef struct
+{
+	/// <summary>
+	/// 初速
+	/// </summary>
+	float initialSpeed;
+
+	/// <summary>
+	/// 最高速度
+	/// </summary>
+	float maxSpeed;
+
+	/// <summary>
+	/// 加速度
+	/// </summary>
+	PlayerParamSpeedAcceleData accele;
+
+	/// <summary>
+	/// 減速度
+	/// </summary>
+	PlayerParamSpeedAcceleData decele;
+
+	/// <summary>
+	/// 基本旋回力
+	/// </summary>
+	float baseRotateForce;
+
+	/// <summary>
+	/// 旋回中速度
+	/// </summary>
+	float minTurnSpeed;
+
+	/// <summary>
+	/// 旋回減速/開始角度
+	/// </summary>
+	float turnDeceleAngleMin;
+
+	/// <summary>
+	/// 旋回減速/最大角度
+	/// </summary>
+	float turnDeceleAngleMax;
+
+} PlayerParamSpinBoostSpeed;
+
+enum AirAccelMode : int8_t
+{
+	Alawys = 0,
+	AirAccelMode_None = 1,
+	Speed = 2,
+};
+
+typedef struct
+{
+	/// <summary>
+	/// 強制走り時間
+	/// </summary>
+	float forceRunTime;
+
+	/// <summary>
+	/// 初速を維持する時間
+	/// </summary>
+	float initialRunTime;
+
+	/// <summary>
+	/// 通常速度
+	/// </summary>
+	PlayerParamSpinBoostSpeed speedBall;
+
+	/// <summary>
+	/// ブースト速度
+	/// </summary>
+	PlayerParamSpinBoostSpeed speedBoost;
+
+	/// <summary>
+	/// ニュートラル時最小減速度
+	/// </summary>
+	PlayerParamSpeedAcceleData2 deceleNeutralMin;
+
+	/// <summary>
+	/// ニュートラル時最大減速度
+	/// </summary>
+	PlayerParamSpeedAcceleData2 deceleNeutralMax;
+
+	/// <summary>
+	/// 重力サイズ
+	/// </summary>
+	float gravitySize;
+
+	/// <summary>
+	/// 空中/重力開始時間
+	/// </summary>
+	float gravityBeginTime;
+
+	/// <summary>
+	/// 空中/重力最大化時間
+	/// </summary>
+	float gravityMaxTime;
+
+	/// <summary>
+	/// 空中/最小重力サイズ
+	/// </summary>
+	float gravitySizeMinInAir;
+
+	/// <summary>
+	/// 空中/最大重力サイズ
+	/// </summary>
+	float gravitySizeMaxInAir;
+
+	/// <summary>
+	/// 斜面加速度
+	/// </summary>
+	float maxGravityAccele;
+
+	/// <summary>
+	/// 斜面減速度
+	/// </summary>
+	float maxGravityDecele;
+
+	/// <summary>
+	/// スピン状態のまま空中を移動できる時間
+	/// </summary>
+	float inAirTime;
+
+	/// <summary>
+	/// スピンブーストが終了してころころ移動になる速度
+	/// </summary>
+	float spinBoostEndSpeed;
+
+	/// <summary>
+	/// 飛び出し挙動になる角度
+	/// </summary>
+	float jumpOutAngle;
+
+	/// <summary>
+	/// 飛び出し挙動になる速度
+	/// </summary>
+	float jumpOutSpeed;
+
+	/// <summary>
+	/// 丘で飛び出すか
+	/// </summary>
+	bool humpJumpOut;
+
+	/// <summary>
+	/// 空中加速動作
+	/// </summary>
+	AirAccelMode airAccelMode;
+
+	/// <summary>
+	/// 空中加速が可能になる速度の閾値
+	/// </summary>
+	float airAccelVertSpeedThreshold;
+
+	/// <summary>
+	/// チャージ中回頭速度
+	/// </summary>
+	float chargeRotateForce;
+
+	/// <summary>
+	/// チャージ中回頭速度が0になる角度
+	/// </summary>
+	float chargeRotateForceMinAngle;
+
+	/// <summary>
+	/// チャージ中回頭速度が最大になる角度
+	/// </summary>
+	float chargeRotateForceMaxAngle;
+
+	/// <summary>
+	/// チャージ時のカメラシェイク名
+	/// </summary>
+	cstring cameraShakeName;
+
+} PlayerParamSpinBoost;
+
+typedef struct
+{
+	/// <summary>
 	/// 通常最高速度
 	/// </summary>
 	float maxSpeed;
@@ -6624,129 +6965,70 @@ typedef struct
 typedef struct
 {
 	/// <summary>
-	/// 汎用
+	/// 低重力モード/重力スケール
 	/// </summary>
-	PlayerParamCommon common;
+	float lowGravityScale;
 
 	/// <summary>
-	/// 速度
+	/// タイムスケールモード/タイムスケール
 	/// </summary>
-	PlayerParamSpeed speed;
+	float timeScale;
 
 	/// <summary>
-	/// 角速度
+	/// 最高速チャレンジモード/最大加速力
 	/// </summary>
-	PlayerParamRotation rotation;
+	float accelForce;
 
 	/// <summary>
-	/// 走りモーション
+	/// 最高速チャレンジモード/躍度
 	/// </summary>
-	PlayerParamRunning running;
+	float jerk;
 
 	/// <summary>
-	/// 姿勢回転
+	/// 最高速チャレンジモード/最高速扱いとする速度
 	/// </summary>
-	PlayerParamBalance balance;
+	float maxSpeedThreshold;
 
 	/// <summary>
-	/// ブレーキ
+	/// 最高速チャレンジモード/ゲージ回復速度
 	/// </summary>
-	PlayerParamBrake brake;
+	float recoveryRate;
 
 	/// <summary>
-	/// ターン
+	/// アニマル運搬モード/最低移動速度
 	/// </summary>
-	PlayerParamTurn turn;
+	float animalMinSpeed;
 
 	/// <summary>
-	/// ジャンプ
+	/// アニマル運搬モード/最高移動速度
 	/// </summary>
-	PlayerParamJump jump;
+	float animalMaxSpeed;
 
 	/// <summary>
-	/// ジャンプ中速度
+	/// アニマル運搬モード/初速度
 	/// </summary>
-	PlayerParamJumpSpeed jumpSpeed;
+	float animalInitialSpeed;
 
 	/// <summary>
-	/// 2段ジャンプ
+	/// アニマル運搬モード/旋回時最低移動速度
 	/// </summary>
-	PlayerParamDoubleJump doubleJump;
+	float animalMinTurnSpeed;
 
 	/// <summary>
-	/// 落下
+	/// アニマル運搬モード/ジャンプ力
 	/// </summary>
-	PlayerParamFall fall;
+	float animalJumpForce;
 
 	/// <summary>
-	/// ダメージ
+	/// アニマル運搬モード/重力サイズ
 	/// </summary>
-	PlayerParamDamage damage;
+	float animalGravitySize;
 
-	/// <summary>
-	/// 死亡
-	/// </summary>
-	PlayerParamDead dead;
+} PlayerParamCyberMode;
 
-	/// <summary>
-	/// スライディング
-	/// </summary>
-	PlayerParamSliding sliding;
-
-	/// <summary>
-	/// ストンピング
-	/// </summary>
-	PlayerParamStomping stomping;
-
-	/// <summary>
-	/// グラインド
-	/// </summary>
-	PlayerParamGrind grind;
-
-	/// <summary>
-	/// 坂滑り
-	/// </summary>
-	PlayerParamFallSlope fallSlope;
-
-	/// <summary>
-	/// 坂バックフリップ
-	/// </summary>
-	PlayerParamFallFlip fallFlip;
-
-	/// <summary>
-	/// バンプジャンプ
-	/// </summary>
-	PlayerParamTumble tumble;
-
-	/// <summary>
-	/// スピンアタック
-	/// </summary>
-	PlayerParamSpinAttack spinAttack;
-
-	/// <summary>
-	/// ホーミングアタック
-	/// </summary>
-	PlayerParamHomingAttack homingAttack;
-
-	/// <summary>
-	/// 敵接触
-	/// </summary>
-	PlayerParamHitEnemy hitEnemy;
-
-	/// <summary>
-	/// ダイビング
-	/// </summary>
-	PlayerParamDiving diving;
-
-	/// <summary>
-	/// ピンボール
-	/// </summary>
-	PlayerParamPinBall pinball;
-
-	/// <summary>
-	/// ファン
-	/// </summary>
-	PlayerParamFan fan;
+typedef struct
+{
+	ModePackage modePackage;
 
 	/// <summary>
 	/// 嵐浮遊挙動
@@ -6762,6 +7044,11 @@ typedef struct
 	/// アクアボール内挙動
 	/// </summary>
 	PlayerParamAquaBall aquaball;
+
+	/// <summary>
+	/// スライダー
+	/// </summary>
+	PlayerParamSlider slider;
 
 	/// <summary>
 	/// エアトリック
@@ -6784,6 +7071,11 @@ typedef struct
 	PlayerParamDriftDash driftDash;
 
 	/// <summary>
+	/// 板乗り
+	/// </summary>
+	PlayerParamBoarding boarding;
+
+	/// <summary>
 	/// ドロップダッシュ
 	/// </summary>
 	PlayerParamDropDash dropDash;
@@ -6799,99 +7091,14 @@ typedef struct
 	PlayerParamLightDash lightDash;
 
 	/// <summary>
-	/// 後方宙返り
-	/// </summary>
-	PlayerParamBackflip backflip;
-
-	/// <summary>
-	/// しゃがみ移動
-	/// </summary>
-	PlayerParamSquatMove squatmove;
-
-	/// <summary>
-	/// 低速移動
-	/// </summary>
-	PlayerParamSlowMove slowmove;
-
-	/// <summary>
 	/// スピンダッシュ
 	/// </summary>
 	PlayerParamSpinDash spindash;
 
 	/// <summary>
-	/// スピン
+	/// スピンブースト
 	/// </summary>
-	PlayerParamSpin spin;
-
-	/// <summary>
-	/// 壁移動
-	/// </summary>
-	PlayerParamWallMove wallmove;
-
-	/// <summary>
-	/// 壁ジャンプ
-	/// </summary>
-	PlayerParamWallJump walljump;
-
-	/// <summary>
-	/// クライミング
-	/// </summary>
-	PlayerParamClimbing climbing;
-
-	/// <summary>
-	/// 滑落
-	/// </summary>
-	PlayerParamSlideDown slidedown;
-
-	/// <summary>
-	/// 板乗り
-	/// </summary>
-	PlayerParamBoarding boarding;
-
-	/// <summary>
-	/// ブースト
-	/// </summary>
-	PlayerParamBoost boost;
-
-	/// <summary>
-	/// エアブースト
-	/// </summary>
-	PlayerParamAirBoost airboost;
-
-	/// <summary>
-	/// オートラン
-	/// </summary>
-	PlayerParamAutorun autorun;
-
-	/// <summary>
-	/// スライダー
-	/// </summary>
-	PlayerParamSlider slider;
-
-	/// <summary>
-	/// サイドステップ
-	/// </summary>
-	PlayerParamSideStep sidestep;
-
-	/// <summary>
-	/// サイドステップ(特殊状況)
-	/// </summary>
-	PlayerParamSideStep2 sidestep2;
-
-	/// <summary>
-	/// クイックステップ
-	/// </summary>
-	PlayerParamQuickStep quickstep;
-
-	/// <summary>
-	/// パリー
-	/// </summary>
-	PlayerParamParry parry;
-
-	/// <summary>
-	/// 回避
-	/// </summary>
-	PlayerParamAvoid avoid;
+	PlayerParamSpinBoost spinBoost;
 
 	/// <summary>
 	/// スパソニ飛行
@@ -6903,9 +7110,12 @@ typedef struct
 	/// </summary>
 	PlayerParamLimitedFly limitedfly;
 
-	INSERT_PADDING(88U);
+	/// <summary>
+	/// 電脳固有モード
+	/// </summary>
+	PlayerParamCyberMode cyberMode;
 
-} ModePackage;
+} ModePackageSonic;
 
 typedef struct
 {
@@ -6946,12 +7156,12 @@ typedef struct
 	/// <summary>
 	/// 共通
 	/// </summary>
-	CommonPackage common;
+	CommonPackageSonic common;
 
 	/// <summary>
 	/// 通常
 	/// </summary>
-	ModePackage forwardView;
+	ModePackageSonic forwardView;
 
 	/// <summary>
 	/// 水中
@@ -6961,11 +7171,11 @@ typedef struct
 	/// <summary>
 	/// 電脳空間/FV
 	/// </summary>
-	ModePackage cyberspace;
+	ModePackageSonic cyberspace;
 
 	/// <summary>
 	/// 電脳空間/SV
 	/// </summary>
-	ModePackage cyberspaceSV;
+	ModePackageSonic cyberspaceSV;
 
-} PlayerParameters;
+} SonicParameters;

@@ -27,6 +27,6 @@ A repository containing DLL mods for various games.
   - [Combat DX](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/CombatDX)
   - [Disable Skills](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DisableSkills)
   - [Discord Frontiers](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/DiscordFrontiers)
-  - [Enhanced Drop Dash](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/EnhancedDropDash)
+  - [Enhanced Dash](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/EnhancedDash)
   - [Island Music Customiser](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/IslandMusicCustomiser)
   - [Real Time and Weather](https://github.com/HyperBE32/App-Extension-Mods/tree/main/Sonic%20Frontiers/RealTimeAndWeather)

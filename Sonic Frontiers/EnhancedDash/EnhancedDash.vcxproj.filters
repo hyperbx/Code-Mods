@@ -5,9 +5,10 @@
     <ClInclude Include="BlackboardHelper.h" />
     <ClInclude Include="BlackboardStatus.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerParameters.h" />
+    <ClInclude Include="SonicParameters.h" />
     <ClInclude Include="Reflection.h" />
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="MsgChangeLayerTimeScale.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
