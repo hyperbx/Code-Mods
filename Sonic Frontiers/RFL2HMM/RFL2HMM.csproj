@@ -178,6 +178,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Templates\ActionChainParameter.cs" />
     <None Include="Templates\ActionChainStageParameter.cs" />
     <None Include="Templates\AmbSoundParameter.cs" />

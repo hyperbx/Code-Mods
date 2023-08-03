@@ -4,15 +4,16 @@ namespace RFL2HMM
 {
     class Program
     {
-        private static StringBuilder _output = new();
-
+        private const string _version = "1.0.0";
         private const string _arrayDelimiter = "__arr";
+
+        private static StringBuilder _output = new();
 
         static void Main(string[] args)
         {
             Console.WriteLine
             (
-                "RFL2HMM - RFL to HMM Code Converter\n" +
+                $"RFL2HMM v{_version} - RFL to HMM Code Converter\n" +
                 "Written by Hyper\n"
             );
 
