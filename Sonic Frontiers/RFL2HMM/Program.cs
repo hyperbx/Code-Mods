@@ -22,11 +22,12 @@ namespace RFL2HMM
                 Console.Write
                 (
                     "Usage;\n" +
-                    "RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\"\n" +
-                    "RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\" \"output.hmm\"\n\n" +
+                    "- RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\"\n" +
+                    "- RFL2HMM.exe templateName \"original.rfl\" \"modified.rfl\" \"output.hmm\"\n\n" +
                     "" +
                     "Information;\n" +
-                    "For the template name, browse the \"Templates\" folder provided and use the file name.\n\n" +
+                    "- For the template name, browse the \"Templates\" folder provided and use the file name.\n" +
+                    "- The original RFL file must use the original file name from the game data, this is used to load it from the HMM code.\n\n" +
                     "" +
                     "Press any key to exit..."
                 );
