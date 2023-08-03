@@ -40,7 +40,7 @@ namespace RFL2HMM
             string originalFilePath = args[1];
             string modifiedFilePath = args[2];
 
-            if (!Directory.Exists("Templates") || !File.Exists(Path.Combine("Templates", $"{templateName}.cs")))
+            if (!File.Exists(Path.Combine("Templates", $"{templateName}.cs")))
             {
                 Console.WriteLine($"Failed to load template: \"{templateName}.cs\"");
                 return;
@@ -190,7 +190,7 @@ namespace RFL2HMM
 
         static List<int> GetSubstringIndices(string str, string substr)
         {
-            List<int> indices = new List<int>();
+            var indices = new List<int>();
 
             int i = 0;
             while ((i = str.IndexOf(substr, i)) != -1)

@@ -89,37 +89,31 @@ namespace RFL2HMM
         {
             var options = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true);
             var syntaxTree = CSharpSyntaxTree.ParseText(_scriptTemplate(originalFilePath, modifiedFilePath, templateName));
-
-            var references = new MetadataReference[]
-            {
-                MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
-            };
-
+            var references = new MetadataReference[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) };
             var compilation = CSharpCompilation.Create("DynamicScript", new[] { syntaxTree }, references, options);
 
             using (var ms = new MemoryStream())
             {
                 var result = compilation.Emit(ms);
 
-                if (!result.Success)
+                if (result.Success)
                 {
-                    foreach (var diagnostic in result.Diagnostics)
-                        Console.WriteLine(diagnostic.ToString());
-                }
-                else
-                {
-                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    ms.Seek(0, SeekOrigin.Begin);
+
                     var assembly = Assembly.Load(ms.ToArray());
-
-                    Type scriptType = assembly.GetType("RFL2HMM.DiffVm");
-                    MethodInfo method = scriptType.GetMethod("Main");
-
+                    var scriptType = assembly.GetType("RFL2HMM.DiffVm");
+                    var method = scriptType.GetMethod("Main");
                     object instance = null;
 
                     if (!method.IsStatic)
                         instance = Activator.CreateInstance(scriptType);
 
                     return (Dictionary<string, object>)method.Invoke(instance, null);
+                }
+                else
+                {
+                    foreach (var diagnostic in result.Diagnostics)
+                        Console.WriteLine(diagnostic.ToString());
                 }
             }
 
