@@ -84,16 +84,15 @@ namespace RFL2HMM
 
             _output.AppendLine
             (
-                $"Code \"RFL\" by \"{Environment.UserName}\"\n" +
+                $"Code \"{templateName}\" by \"{Environment.UserName}\"\n" +
                 "//\n" +
-                "\t#include \"ReflectionHelpers\"\n" +
-                "\t#lib \"Reflection\"\n" +
+                "\t#include \"ReflectionHelpers\" noemit\n\n" +
                 $"\t#lib \"{templateName}\"\n" +
                 "//\n" +
                 "{\n" +
                 $"\tvar {templateName}Info = Reflection.GetDataInfo<{templateName}.Root>(\"{Path.GetFileNameWithoutExtension(originalFilePath)}\");\n\n" +
                 "" +
-                $"\tif (!IS_RFL_INFO_SAFE({templateName}Info))\n" +
+                $"\tif ({templateName}Info.pData == null)\n" +
                 "\t\treturn;\n" +
                 ""
             );
