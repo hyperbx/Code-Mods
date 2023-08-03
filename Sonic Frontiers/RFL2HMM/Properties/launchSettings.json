@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RFL2HMM": {
+      "commandName": "Project",
+      "commandLineArgs": "MiniBossBladeConfig \"miniboss_blade01.rfl\" \"modified_miniboss_blade01.rfl\""
+    }
+  }
+}

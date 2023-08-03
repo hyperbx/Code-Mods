@@ -18,12 +18,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DiscordFrontiers", "Sonic F
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BossSelect", "Sonic Frontiers\BossSelect\BossSelect.vcxproj", "{F061BACB-76B8-4D8C-B3FB-6929F6F4105F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BT2CPP", "Sonic Frontiers\BT2CPP\BT2CPP.csproj", "{C650FDA7-8AB5-4C12-A1FD-18D2BFFEE36C}"
 EndProject
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisableSkills", "Sonic Frontiers\DisableSkills\DisableSkills.vcxproj", "{6DEA2DF8-31B3-4EF0-A198-742DCBA8CC66}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnhancedDash", "Sonic Frontiers\EnhancedDash\EnhancedDash.vcxproj", "{445E3608-3DCF-45A7-AB70-86DA906CE4E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFL2HMM", "Sonic Frontiers\RFL2HMM\RFL2HMM.csproj", "{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +119,18 @@ Global
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x64.Build.0 = Release|x64
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x86.ActiveCfg = Release|Win32
 		{445E3608-3DCF-45A7-AB70-86DA906CE4E5}.Release|x86.Build.0 = Release|Win32
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|x64.Build.0 = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|x64.ActiveCfg = Release|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|x64.Build.0 = Release|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE415BF9-581F-45B4-9F20-8CB9EE5CB90C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
