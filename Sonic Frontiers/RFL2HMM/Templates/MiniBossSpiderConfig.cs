@@ -71,7 +71,7 @@ public class MiniBossSpiderConfigClass
     }
 
     public enum MiniBossSpiderBreakType : sbyte
-{
+    {
         BREAK_NONE = 0,
         BREAK_LEG = 1,
         BREAK_AIR_LEG = 2,
@@ -227,7 +227,7 @@ public class MiniBossSpiderConfigClass
     }
 
     public enum MiniBossSpiderLevelBand_MiniBossSpiderBreakType : sbyte
-{
+    {
         MiniBossSpiderLevelBand_MiniBossSpiderBreakType_BREAK_NONE = 0,
         MiniBossSpiderLevelBand_MiniBossSpiderBreakType_BREAK_LEG = 1,
         MiniBossSpiderLevelBand_MiniBossSpiderBreakType_BREAK_AIR_LEG = 2,

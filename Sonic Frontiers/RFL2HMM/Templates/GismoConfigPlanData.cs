@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class GismoConfigPlanDataClass
 {
     public enum ContactDamageType : sbyte
-{
+    {
         CONTACT_DAMAGE_NONE = 0,
         CONTACT_DAMAGE_LOW_SPEED = 1,
         CONTACT_DAMAGE_MIDDLE_SPEED = 2,

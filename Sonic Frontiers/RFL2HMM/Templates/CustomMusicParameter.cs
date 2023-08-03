@@ -23,7 +23,7 @@ public class CustomMusicParameterClass
     }
 
     public enum MusicType : sbyte
-{
+    {
         THEME_SONG = 0,
         OTHER = 1
     }

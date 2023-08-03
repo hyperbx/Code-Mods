@@ -17,7 +17,7 @@ public class BattleRushParameterClass
     }
 
     public enum BgmType : sbyte
-{
+    {
         INVALID = -1,
         ENEMY_BATTLE = 0,
         FORCE_BATTLE_FIELD = 1,

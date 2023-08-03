@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class UIWireframeParameterClass
 {
     public enum RenderTargetSize : int
-{
+    {
         RTSIZE_FULL_SCALE = 0,
         RTSIZE_HALF_SCALE = 1,
         RTSIZE_QUARTER_SCALE = 2,

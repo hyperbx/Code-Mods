@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class PracticeParametersClass
 {
     public enum Checker : sbyte
-{
+    {
         InvalidChecker = -1,
         CountActions = 0,
         CountAirTrick = 1,
@@ -15,7 +15,7 @@ public class PracticeParametersClass
     }
 
     public enum Type : byte
-{
+    {
         None = 0,
         ControlCamera = 1,
         Cyloop = 2,
@@ -59,7 +59,7 @@ public class PracticeParametersClass
     }
 
     public enum Judge : sbyte
-{
+    {
         Succeed = 0,
         Failed = 1,
         Skiped = 2,

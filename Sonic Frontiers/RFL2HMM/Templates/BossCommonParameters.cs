@@ -169,7 +169,7 @@ public class BossCommonParametersClass
     }
 
     public enum Shape : sbyte
-{
+    {
         SHAPE_SPHERER = 0,
         SHAPE_BOX = 1,
         SHAPE_CYLINDER = 2,

@@ -22,7 +22,7 @@ public class EnemyAttackRecordBaseTableClass
     }
 
     public enum Kind : sbyte
-{
+    {
         InvalidKind = -1,
         Dead_BattleJellymanLv1 = 0,
         Dead_BattleJellymanLv2 = 1,

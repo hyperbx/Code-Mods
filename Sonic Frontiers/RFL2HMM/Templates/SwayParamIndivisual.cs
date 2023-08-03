@@ -33,7 +33,7 @@ public class SwayParamIndivisualClass
     }
 
     public enum CollisionType : sbyte
-{
+    {
         SWAY_COLLISTION_TYPE_NONE = 0,
         SWAY_COLLISTION_TYPE_SPHERE = 1
     }

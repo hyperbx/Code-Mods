@@ -31,7 +31,7 @@ public class EnemyUmbrellaConfigClass
     }
 
     public enum BarrageType : byte
-{
+    {
         BOX = 0,
         CONE = 1,
         FAN = 2

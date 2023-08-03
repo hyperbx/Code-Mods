@@ -44,7 +44,7 @@ public class EnemyWolfConfigClass
     }
 
     public enum WolfVolumeShape : sbyte
-{
+    {
         SPHERE = 0,
         BOX = 1,
         CYLINDER = 2,

@@ -72,7 +72,7 @@ public class EnemyJellymanConfigClass
     }
 
     public enum VolumeShape : sbyte
-{
+    {
         SPHERE = 0,
         BOX = 1,
         CYLINDER = 2,
@@ -187,7 +187,7 @@ public class EnemyJellymanConfigClass
     }
 
     public enum SuperArmorType : sbyte
-{
+    {
         None = 0,
         Attack = 1,
         Always = 2

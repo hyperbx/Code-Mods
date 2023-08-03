@@ -12,7 +12,7 @@ public class GameSkillParameterClass
     }
 
     public enum Value : sbyte
-{
+    {
         Cyloop = 0,
         Smash = 1,
         QuickCyloop = 2,

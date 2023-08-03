@@ -53,7 +53,7 @@ public class SoundCommonParameterClass
     }
 
     public enum Priority : sbyte
-{
+    {
         PRIORITY_LOW = 0,
         PRIORITY_DEFAULT = 1,
         PRIORITY_HIGH = 2,
@@ -63,7 +63,7 @@ public class SoundCommonParameterClass
     }
 
     public enum InterruptType : sbyte
-{
+    {
         INTERRUPT_TYPE_STOP = 0,
         INTERRUPT_TYPE_PAUSE = 1,
         INTERRUPT_TYPE_OVERLAP = 2,
@@ -88,7 +88,7 @@ public class SoundCommonParameterClass
     }
 
     public enum BGMTransitInfo_InterruptType : sbyte
-{
+    {
         BGMTransitInfo_InterruptType_INTERRUPT_TYPE_STOP = 0,
         BGMTransitInfo_InterruptType_INTERRUPT_TYPE_PAUSE = 1,
         BGMTransitInfo_InterruptType_INTERRUPT_TYPE_OVERLAP = 2,

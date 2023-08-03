@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class SequenceParameterClass
 {
     public enum SequenceType : byte
-{
+    {
         SequenceSensor = 0,
         ObjItem = 1
     }

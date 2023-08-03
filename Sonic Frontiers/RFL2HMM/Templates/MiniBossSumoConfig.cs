@@ -40,7 +40,7 @@ public class MiniBossSumoConfigClass
     }
 
     public enum ColliderProperty : uint
-{
+    {
         None = 0,
         Damaged = 1,
         DamageToPlayer = 2,

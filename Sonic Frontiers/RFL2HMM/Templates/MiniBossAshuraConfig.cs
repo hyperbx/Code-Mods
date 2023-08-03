@@ -117,7 +117,7 @@ public class MiniBossAshuraConfigClass
     }
 
     public enum OnArmCircleBulletType : sbyte
-{
+    {
         CBT_NONE = 0,
         CBT_FRONT = 1,
         CBT_BACK = 2,

@@ -53,7 +53,7 @@ public class MiniBossStriderConfigClass
     }
 
     public enum MeansOfAttack : byte
-{
+    {
         Bullet = 0,
         Laser = 1,
         NumAttackTypes = 2

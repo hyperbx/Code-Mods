@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 public class ChallengeDataClass
 {
     public enum Status : sbyte
-{
+    {
         STATUS_ZERO_FILL = 0,
         STATUS_INITIALIZED = 1
     }
 
     public enum Sequence : sbyte
-{
+    {
         Island1 = 0,
         Island2 = 1,
         Island3 = 2,
@@ -21,7 +21,7 @@ public class ChallengeDataClass
     }
 
     public enum SaveDataIcon : sbyte
-{
+    {
         IconNoData = 0,
         IconIsland1 = 1,
         IconIsland2 = 2,
@@ -32,7 +32,7 @@ public class ChallengeDataClass
     }
 
     public enum AppVersion : byte
-{
+    {
         AppVersion_1_10 = 0,
         AppVersion_1_20 = 1,
         AppVersion_1_30 = 2,
@@ -61,7 +61,7 @@ public class ChallengeDataClass
     }
 
     public enum Value : sbyte
-{
+    {
         S = 0,
         A = 1,
         B = 2,

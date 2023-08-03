@@ -91,7 +91,7 @@ public class MiniBossTyrantConfigClass
     }
 
     public enum BarrageType : sbyte
-{
+    {
         TYPE_AIM_PLAYER = 0,
         TYPE_NO_AIM = 1
     }
@@ -224,7 +224,7 @@ public class MiniBossTyrantConfigClass
     }
 
     public enum ActionType : sbyte
-{
+    {
         ACTION_TYPE_NONE = 0,
         ACTION_TYPE_SPIN = 1,
         ACTION_TYPE_ROULETTE = 2,

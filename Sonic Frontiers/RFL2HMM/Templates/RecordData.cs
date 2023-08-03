@@ -16,7 +16,7 @@ public class RecordDataClass
     }
 
     public enum EventType : sbyte
-{
+    {
         KEY = 0,
         INTERVAL = 1
     }

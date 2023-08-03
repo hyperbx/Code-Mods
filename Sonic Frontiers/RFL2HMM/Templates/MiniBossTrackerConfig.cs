@@ -146,7 +146,7 @@ public class MiniBossTrackerConfigClass
     }
 
     public enum ActionType : sbyte
-{
+    {
         BULLET = 0,
         MINE = 1,
         BASEMINE = 2,

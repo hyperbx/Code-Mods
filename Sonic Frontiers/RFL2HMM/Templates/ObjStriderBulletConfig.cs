@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class ObjStriderBulletConfigClass
 {
     public enum ShootingDirection : byte
-{
+    {
         Sonic = 0,
         Random = 1,
         NumShootingDirections = 2

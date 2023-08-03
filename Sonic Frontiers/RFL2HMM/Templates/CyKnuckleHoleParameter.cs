@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class CyKnuckleHoleParameterClass
 {
     public enum EasingType : byte
-{
+    {
         LINEAR_EASEIN = 0,
         LINEAR_EASEOUT = 1,
         LINEAR_EASEINOUT = 2,

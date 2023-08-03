@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 public class PlayerParamBehindFinishClass
 {
     public enum Condition : sbyte
-{
+    {
         Time = 0,
         Animation = 1
     }
 
     public enum Shape : sbyte
-{
+    {
         Sphere = 0,
         Cylinder = 1,
         Box = 2

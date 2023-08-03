@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class BossRifleThresholdRingSupplyParamClass
 {
     public enum LaserType : sbyte
-{
+    {
         LT_NONE = 0,
         LT_STRAIGHT = 1,
         LT_HOMING = 2

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class HeightFieldConfigClass
 {
     public enum LayerType : sbyte
-{
+    {
         LAYER_NONE = 0,
         LAYER_SOLID = 1,
         LAYER_LIQUID = 2,
@@ -40,7 +40,7 @@ public class HeightFieldConfigClass
     }
 
     public enum MaterialType : sbyte
-{
+    {
         MAT_NONE = 0,
         MAT_STONE = 1,
         MAT_EARTH = 2,

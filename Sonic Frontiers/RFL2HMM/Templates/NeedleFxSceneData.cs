@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class NeedleFxSceneDataClass
 {
     public enum DOFRenderTargetSize : int
-{
+    {
         DOF_RTSIZE_FULL_SCALE = 0,
         DOF_RTSIZE_HALF_SCALE = 1,
         DOF_RTSIZE_QUARTER_SCALE = 2,
@@ -21,7 +21,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum AntiAliasingType : sbyte
-{
+    {
         AATYPE_NONE = 0,
         AATYPE_TAA = 1,
         AATYPE_FXAA = 2,
@@ -30,7 +30,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum UpscaleType : sbyte
-{
+    {
         USTYPE_LINEAR = 0,
         USTYPE_FSR_FAST = 1,
         USTYPE_FSR_EASU = 2,
@@ -97,7 +97,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum Mode : sbyte
-{
+    {
         DISABLE = 0,
         ENABLE = 1,
         FIXED_RESOLUTION = 2
@@ -211,7 +211,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum DebugViewType : sbyte
-{
+    {
         DEBUG_VIEW_DEFAULT = 0,
         DEBUG_VIEW_DIR_DIFFUSE = 1,
         DEBUG_VIEW_DIR_SPECULAR = 2,
@@ -256,7 +256,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum Type : sbyte
-{
+    {
         NONE = 0,
         SHADOW_LIGHT = 1,
         SHADOW_AND_DISTANT_LIGHT = 2
@@ -277,7 +277,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum LocalLightCullingType : sbyte
-{
+    {
         LOCAL_LIGHT_CULLING_TYPE_NONE = 0,
         LOCAL_LIGHT_CULLING_TYPE_CPU_TILE = 1,
         LOCAL_LIGHT_CULLING_TYPE_GPU_TILE = 2,
@@ -287,7 +287,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum TextureViewType : sbyte
-{
+    {
         TEXTURE_VIEW_NONE = 0,
         TEXTURE_VIEW_DEPTH = 1,
         TEXTURE_VIEW_LUMINANCE = 2,
@@ -299,7 +299,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum AmbientSpecularType : sbyte
-{
+    {
         AMBIENT_SPECULAR_NONE = 0,
         AMBIENT_SPECULAR_SG = 1,
         AMBIENT_SPECULAR_IBL = 2,
@@ -307,7 +307,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ChannelMode : sbyte
-{
+    {
         CHANNELMODE_RGB = 0,
         CHANNELMODE_RRR = 1,
         CHANNELMODE_GGG = 2,
@@ -318,7 +318,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum DebugScreenType : sbyte
-{
+    {
         DEBUG_SCREEN_GBUFFER0 = 0,
         DEBUG_SCREEN_GBUFFER1 = 1,
         DEBUG_SCREEN_GBUFFER2 = 2,
@@ -346,7 +346,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ErrorCheckType : sbyte
-{
+    {
         ERROR_CHECK_NONE = 0,
         ERROR_CHECK_NAN = 1,
         ERROR_CHECK_ALBEDO = 2,
@@ -354,7 +354,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum VisualizeMode : sbyte
-{
+    {
         DEFAULT = 0,
         HEATMAP_TYPE0 = 1,
         HEATMAP_TYPE1 = 2,
@@ -380,7 +380,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum DebugScreenView : sbyte
-{
+    {
         DEBUG_SCREEN_VIEW_DEFAULT = 0,
         DEBUG_SCREEN_VIEW_ALL_ENABLE = 1,
         DEBUG_SCREEN_VIEW_ALL_DISABLE = 2
@@ -513,7 +513,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum Exposure : sbyte
-{
+    {
         EXPOSURE_MANUAL = 0,
         EXPOSURE_AUTO = 1
     }
@@ -525,7 +525,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum LUMINANCE_RANGE : sbyte
-{
+    {
         LUMINANCE_RANGE_CLAMP = 0,
         LUMINANCE_RANGE_CUTOFF = 1,
         LUMINANCE_RANGE_CUTOFF_PCT_RATE = 2,
@@ -555,7 +555,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum Tonemap : sbyte
-{
+    {
         TONEMAP_DISNEY = 0,
         TONEMAP_FILMIC = 1,
         TONEMAP_ACES = 2,
@@ -592,7 +592,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum LutIndex : int
-{
+    {
         LUT_INDEX_DEFAULT = 0,
         LUT_INDEX_WB = 1,
         LUT_INDEX_USER_0 = 2,
@@ -643,7 +643,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum RenderTargetSize : int
-{
+    {
         RTSIZE_FULL_SCALE = 0,
         RTSIZE_HALF_SCALE = 1,
         RTSIZE_QUARTER_SCALE = 2,
@@ -679,7 +679,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ShadowRenderingType : sbyte
-{
+    {
         SHADOW_RENDERING_TYPE_SHADOW_MAP = 0,
         SHADOW_RENDERING_TYPE_PLANAR_PROJECTION = 1,
         SHADOW_RENDERING_TYPE_PLANAR_PROJECTION_SHADOW_MAP = 2,
@@ -688,7 +688,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ShadowFilter : sbyte
-{
+    {
         SHADOW_FILTER_POINT = 0,
         SHADOW_FILTER_PCF = 1,
         SHADOW_FILTER_PCSS = 2,
@@ -706,7 +706,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ShadowRangeType : sbyte
-{
+    {
         SHADOW_RANGE_TYPE_CAMERA_LOOKAT = 0,
         SHADOW_RANGE_TYPE_POSITION_MANUAL = 1,
         SHADOW_RANGE_TYPE_FULL_MANUAL = 2,
@@ -715,21 +715,21 @@ public class NeedleFxSceneDataClass
     }
 
     public enum FitProjection : sbyte
-{
+    {
         FIT_PROJECTION_TO_CASCADES = 0,
         FIT_PROJECTION_TO_SCENE = 1,
         FIT_PROJECTION_TO_ROTATE_CASCADES = 2
     }
 
     public enum FitNearFar : sbyte
-{
+    {
         FIT_NEARFAR_ZERO_ONE = 0,
         FIT_NEARFAR_AABB = 1,
         FIT_NEARFAR_SCENE_AABB = 2
     }
 
     public enum PartitionType : sbyte
-{
+    {
         PARTITION_PSSM = 0,
         PARTITION_MANUAL = 1
     }
@@ -821,7 +821,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum SSAOType : sbyte
-{
+    {
         SSAO = 0,
         HBAO = 1,
         HBAO_SSS = 2,
@@ -830,7 +830,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum FxSSAOParameter_RenderTargetSize : sbyte
-{
+    {
         RTSIZE_SAME_AS_FRAMEBUFFER = 0,
         RTSIZE_ONE_SECOND = 1,
         RTSIZE_ONE_FORTH = 2,
@@ -838,7 +838,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum BLURType : sbyte
-{
+    {
         None = 1,
         Gauss2x2 = 2,
         Gauss3x3 = 3,
@@ -908,7 +908,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum DebugDrawType : sbyte
-{
+    {
         DEBUG_DRAW_NONE = 0,
         DEBUG_DRAW_ONLY_ENABLED = 1,
         DEBUG_DRAW_ALL = 2
@@ -935,7 +935,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum BlurType : sbyte
-{
+    {
         BLURTYPE_PREV_SURFACE = 0,
         BLURTYPE_RADIAL = 1,
         BLURTYPE_CAMERA = 2,
@@ -943,7 +943,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum FocusType : sbyte
-{
+    {
         FOCUSTYPE_CENTER = 0,
         FOCUSTYPE_LOOKAT = 1,
         FOCUSTYPE_USER_SETTING = 2,
@@ -1083,7 +1083,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum SunPosType : sbyte
-{
+    {
         SUN_POS_TYPE_NONE = 0,
         SUN_POS_TYPE_ANGLE = 1,
         SUN_POS_TYPE_EARTH = 2
@@ -1119,7 +1119,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum MoonPosType : sbyte
-{
+    {
         MOON_POS_TYPE_NONE = 0,
         MOON_POS_TYPE_INV_SUN = 1,
         MOON_POS_TYPE_EARTH = 2
@@ -1132,7 +1132,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum SkyModel : sbyte
-{
+    {
         BRUNETON = 0,
         SEBASTIEN = 1
     }
@@ -1409,14 +1409,14 @@ public class NeedleFxSceneDataClass
     }
 
     public enum PlacementType : sbyte
-{
+    {
         CirclePacking = 0,
         RandomPos = 1,
         PT_COUNT = 2
     }
 
     public enum ShadowCullingType : sbyte
-{
+    {
         Normal = 0,
         AabbUpScale2 = 1,
         ShadowFrustum = 2
@@ -1552,13 +1552,13 @@ public class NeedleFxSceneDataClass
     }
 
     public enum GradationMode : sbyte
-{
+    {
         GRADATION_MODE_CIRCLE = 0,
         GRADATION_MODE_LINE = 1
     }
 
     public enum BlendMode : sbyte
-{
+    {
         BLEND_MODE_ALPHA_BLEND = 0,
         BLEND_MODE_ADD = 1,
         BLEND_MODE_MUL = 2,
@@ -1836,7 +1836,7 @@ public class NeedleFxSceneDataClass
     }
 
     public enum ColorblinidSimulationType : sbyte
-{
+    {
         COLORBLIND_SIM_NONE = 0,
         COLORBLIND_SIM_PROTANOPIA = 1,
         COLORBLIND_SIM_DEUTERANOPIA = 2,

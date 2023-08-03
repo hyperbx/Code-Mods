@@ -16,13 +16,13 @@ public class PlayerCameraSetParametersClass
     }
 
     public enum Priority : byte
-{
+    {
         Default = 0,
         High = 1
     }
 
     public enum CameraType : byte
-{
+    {
         None = 0,
         Fixed = 1,
         Offset = 2,
@@ -33,7 +33,7 @@ public class PlayerCameraSetParametersClass
     }
 
     public enum CameraCoordType : byte
-{
+    {
         Orthgonal = 0,
         Spherical = 1
     }

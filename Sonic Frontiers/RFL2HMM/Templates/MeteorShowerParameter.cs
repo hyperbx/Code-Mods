@@ -28,7 +28,7 @@ public class MeteorShowerParameterClass
     }
 
     public enum Symbol : sbyte
-{
+    {
         Invalid = -1,
         Seven = 0,
         Bar = 1,
@@ -63,7 +63,7 @@ public class MeteorShowerParameterClass
     }
 
     public enum RateInfo_Symbol : sbyte
-{
+    {
         RateInfo_Symbol_Invalid = -1,
         RateInfo_Symbol_Seven = 0,
         RateInfo_Symbol_Bar = 1,
@@ -82,7 +82,7 @@ public class MeteorShowerParameterClass
     }
 
     public enum CeilingInfo_Symbol : sbyte
-{
+    {
         CeilingInfo_Symbol_Invalid = -1,
         CeilingInfo_Symbol_Seven = 0,
         CeilingInfo_Symbol_Bar = 1,
@@ -101,7 +101,7 @@ public class MeteorShowerParameterClass
     }
 
     public enum PayoutInfo_Symbol : sbyte
-{
+    {
         PayoutInfo_Symbol_Invalid = -1,
         PayoutInfo_Symbol_Seven = 0,
         PayoutInfo_Symbol_Bar = 1,

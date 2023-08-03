@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class StatsDataContainerClass
 {
     public enum StatsType : int
-{
+    {
         TYPE_INVALID = 0,
         TYPE_UINT64 = 1,
         TYPE_UINT32 = 2,

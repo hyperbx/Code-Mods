@@ -55,7 +55,7 @@ public class MonologueParametersClass
     }
 
     public enum Value : sbyte
-{
+    {
         SteppeIsland1 = 0,
         DesertIsland = 1,
         VolcanicIsland = 2,

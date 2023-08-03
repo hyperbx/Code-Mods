@@ -28,7 +28,7 @@ public class BulletPatternSetParametersClass
     }
 
     public enum Type : byte
-{
+    {
         BulletFixed = 0,
         BulletAimPlayer = 1,
         LaserNormal = 2,
@@ -37,7 +37,7 @@ public class BulletPatternSetParametersClass
     }
 
     public enum ElementType : byte
-{
+    {
         Hacking1 = 0,
         Hacking2 = 1
     }

@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class ExtremeConfigClass
 {
     public enum LineType : sbyte
-{
+    {
         LINE3 = 0,
         LINE5 = 1,
         LINE_INF = 2

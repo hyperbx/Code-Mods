@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class CaptionParameterClass
 {
     public enum DisplayType : sbyte
-{
+    {
         Caption = 0,
         Tutorial = 1
     }

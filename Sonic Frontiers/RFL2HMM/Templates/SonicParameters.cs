@@ -35,7 +35,7 @@ public class SonicParametersClass
     }
 
     public enum HitSE : sbyte
-{
+    {
         SE_None = -1,
         Weak = 0,
         Strong = 1,
@@ -263,13 +263,13 @@ public class SonicParametersClass
     }
 
     public enum Condition : sbyte
-{
+    {
         Time = 0,
         Animation = 1
     }
 
     public enum Shape : sbyte
-{
+    {
         Sphere = 0,
         Cylinder = 1,
         Box = 2
@@ -609,7 +609,7 @@ public class SonicParametersClass
     }
 
     public enum ComboMoveType : byte
-{
+    {
         Homing = 0,
         Step = 1,
         None = 2
@@ -633,7 +633,7 @@ public class SonicParametersClass
     }
 
     public enum Action : sbyte
-{
+    {
         Root = 0,
         HomingAttack = 1,
         AerialHomingAttack = 2,
@@ -940,7 +940,7 @@ public class SonicParametersClass
     }
 
     public enum Part : sbyte
-{
+    {
         PunchR = 0,
         PunchL = 1,
         KickR = 2,
@@ -1015,7 +1015,7 @@ public class SonicParametersClass
     }
 
     public enum CameraShakeTiming : sbyte
-{
+    {
         StartCameraInterpolation = 0,
         EndCameraInterpolation = 1
     }
@@ -1101,7 +1101,7 @@ public class SonicParametersClass
     }
 
     public enum SupportedPlane : sbyte
-{
+    {
         Flat = 0,
         Slope = 1,
         Wall = 2
@@ -2120,7 +2120,7 @@ public class SonicParametersClass
     }
 
     public enum AirAccelMode : sbyte
-{
+    {
         Alawys = 0,
         AirAccelMode_None = 1,
         Speed = 2

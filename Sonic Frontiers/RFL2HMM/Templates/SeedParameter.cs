@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class SeedParameterClass
 {
     public enum SeedType : byte
-{
+    {
         SeedSensor = 0,
         ObjItem = 1
     }

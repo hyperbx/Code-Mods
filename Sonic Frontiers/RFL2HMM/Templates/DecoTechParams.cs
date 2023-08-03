@@ -24,7 +24,7 @@ public class DecoTechParamsClass
     }
 
     public enum Orientation : sbyte
-{
+    {
         ORIENTATION_NONE = 0,
         ORIENTATION_HORIZONTAL = 1,
         ORIENTATION_VERTICAL = 2,
@@ -44,7 +44,7 @@ public class DecoTechParamsClass
     }
 
     public enum DecoLayerBlendOp : sbyte
-{
+    {
         DECO_LAYER_BLEND_OP_BLEND = 0,
         DECO_LAYER_BLEND_OP_SUBTRACT_ALPHA = 1
     }

@@ -16,13 +16,13 @@ public class OcclusionCapsuleListClass
     }
 
     public enum VolumeType : sbyte
-{
+    {
         VOLUME_SPHERE = 0,
         VOLUME_CAPSULE = 1
     }
 
     public enum LODLevel : sbyte
-{
+    {
         LOD_HIGH = 0,
         LOD_MIDDLE = 1,
         LOD_LOW = 2

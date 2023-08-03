@@ -39,7 +39,7 @@ public class BossBitConfigClass
     }
 
     public enum BulletType : byte
-{
+    {
         Normal = 0,
         Normal2 = 1,
         Laser = 2,
@@ -47,7 +47,7 @@ public class BossBitConfigClass
     }
 
     public enum RotType : byte
-{
+    {
         Rotation = 0,
         RoundTrip = 1,
         Aim = 2,
@@ -55,7 +55,7 @@ public class BossBitConfigClass
     }
 
     public enum CameraId : byte
-{
+    {
         Invalid = 0,
         Rotate = 1,
         Trace = 2,
@@ -64,7 +64,7 @@ public class BossBitConfigClass
     }
 
     public enum FormationId : byte
-{
+    {
         Default = 0,
         FanShaped = 1
     }

@@ -15,7 +15,7 @@ public class MiniBossChargerConfigClass
     }
 
     public enum BarrageType : sbyte
-{
+    {
         TYPE_LASER = 0,
         TYPE_BALL = 1,
         TYPE_BALL_L = 2,
@@ -531,7 +531,7 @@ public class MiniBossChargerConfigClass
     }
 
     public enum AttackType : int
-{
+    {
         AttackTypeInvalid = 0,
         AttackSimpleRotateBullet = 1,
         AttackFollowLaser = 2,
@@ -598,7 +598,7 @@ public class MiniBossChargerConfigClass
     }
 
     public enum MiniBossChargerLevel1_AttackType : int
-{
+    {
         MiniBossChargerLevel1_AttackType_AttackTypeInvalid = 0,
         MiniBossChargerLevel1_AttackType_AttackSimpleRotateBullet = 1,
         MiniBossChargerLevel1_AttackType_AttackFollowLaser = 2,

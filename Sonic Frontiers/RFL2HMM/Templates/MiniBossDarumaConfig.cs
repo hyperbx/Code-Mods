@@ -33,7 +33,7 @@ public class MiniBossDarumaConfigClass
     }
 
     public enum ScatterType : sbyte
-{
+    {
         RANDOM = 0,
         HOMING = 1,
         SPIRAL = 2
@@ -257,20 +257,20 @@ public class MiniBossDarumaConfigClass
     }
 
     public enum StompingType : sbyte
-{
+    {
         WEEK = 0,
         WAVE = 1
     }
 
     public enum BulletType : sbyte
-{
+    {
         NORMAL = 0,
         THREE_WAY = 1,
         FIVE_WAY = 2
     }
 
     public enum SpecialBulletType : sbyte
-{
+    {
         BOMB = 0,
         PILLAR = 1,
         WAVE_BOMB = 2

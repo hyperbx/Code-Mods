@@ -24,7 +24,7 @@ public class GismoConfigDesignDataClass
     }
 
     public enum ShapeType : sbyte
-{
+    {
         SHAPE_BOX = 0,
         SHAPE_SPHERE = 1,
         SHAPE_CAPSULE = 2,
@@ -34,7 +34,7 @@ public class GismoConfigDesignDataClass
     }
 
     public enum BasePoint : sbyte
-{
+    {
         BASE_CENTER = 0,
         BASE_Z_PLANE = 1,
         BASE_X_PLANE = 2,
@@ -55,14 +55,14 @@ public class GismoConfigDesignDataClass
     }
 
     public enum RigidBodyType : sbyte
-{
+    {
         RIGID_BODY_NONE = 0,
         RIGID_BODY_STATIC = 1,
         RIGID_BODY_DYNAMIC = 2
     }
 
     public enum RigidBodyMaterial : sbyte
-{
+    {
         RIGID_BODY_MAT_NONE = 0,
         RIGID_BODY_MAT_WOOD = 1,
         RIGID_BODY_MAT_IRON = 2,
@@ -112,7 +112,7 @@ public class GismoConfigDesignDataClass
     }
 
     public enum MotionType : byte
-{
+    {
         MOTION_SWING = 0,
         MOTION_ROTATE = 1,
         MOTION_LINEAR_SWING = 2
@@ -142,7 +142,7 @@ public class GismoConfigDesignDataClass
     }
 
     public enum KillType : sbyte
-{
+    {
         KILL_TYPE_NOT_KILL = 0,
         KILL_TYPE_KILL = 1,
         KILL_TYPE_BREAK = 2,

@@ -51,7 +51,7 @@ public class MiniBossFlyerConfigClass
     }
 
     public enum HorizontalType : sbyte
-{
+    {
         HorzCenter = 0,
         HorzLeft = 1,
         HorzRight = 2
@@ -100,7 +100,7 @@ public class MiniBossFlyerConfigClass
     }
 
     public enum PlayerOffsetType : sbyte
-{
+    {
         PLAYER_OFFSET_NORMAL = 0,
         PLAYER_OFFSET_ABSOLUTE = 1
     }

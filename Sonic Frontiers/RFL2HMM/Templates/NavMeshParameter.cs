@@ -34,7 +34,7 @@ public class NavMeshParameterClass
     }
 
     public enum Partition : byte
-{
+    {
         Watershed = 0,
         Monotone = 1,
         Layers = 2

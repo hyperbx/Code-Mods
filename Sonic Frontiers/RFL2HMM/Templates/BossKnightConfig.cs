@@ -53,7 +53,7 @@ public class BossKnightConfigClass
     }
 
     public enum EaseType : sbyte
-{
+    {
         ET_Sin = 0,
         ET_Cubic = 1,
         ET_Quadratic = 2
@@ -102,7 +102,7 @@ public class BossKnightConfigClass
     }
 
     public enum GimmickType : sbyte
-{
+    {
         GT_A = 0,
         GT_B = 1,
         GT_C = 2,
@@ -112,7 +112,7 @@ public class BossKnightConfigClass
     }
 
     public enum AttackType : sbyte
-{
+    {
         AT_A = 0,
         AT_B = 1,
         AT_C = 2,
@@ -122,7 +122,7 @@ public class BossKnightConfigClass
     }
 
     public enum BossPillarParam_GimmickType : sbyte
-{
+    {
         BossPillarParam_GimmickType_GT_A = 0,
         BossPillarParam_GimmickType_GT_B = 1,
         BossPillarParam_GimmickType_GT_C = 2,
@@ -132,7 +132,7 @@ public class BossKnightConfigClass
     }
 
     public enum BossPillarParam_AttackType : sbyte
-{
+    {
         BossPillarParam_AttackType_AT_A = 0,
         BossPillarParam_AttackType_AT_B = 1,
         BossPillarParam_AttackType_AT_C = 2,
@@ -202,7 +202,7 @@ public class BossKnightConfigClass
     }
 
     public enum CollisionType : sbyte
-{
+    {
         CT_SPHERE = 0,
         CT_CAPSULE = 1,
         CT_CYLINDER = 2,
@@ -211,7 +211,7 @@ public class BossKnightConfigClass
     }
 
     public enum ColliderActiveType : sbyte
-{
+    {
         Always = 0,
         OnContactActive = 1,
         OnContactInactive = 2,
@@ -222,7 +222,7 @@ public class BossKnightConfigClass
     }
 
     public enum ColliderProperty : short
-{
+    {
         CpNone = 0,
         CpBattleUse = 1,
         CpBattleUnuse = 2,
@@ -347,7 +347,7 @@ public class BossKnightConfigClass
     }
 
     public enum PointType : sbyte
-{
+    {
         PT_HOMINGPOINT = 0,
         PT_HEROSAGE = 1,
         PT_MINIONGENERATOR = 2,
@@ -378,7 +378,7 @@ public class BossKnightConfigClass
     }
 
     public enum Shape : sbyte
-{
+    {
         SHAPE_BOX = 0,
         SHAPE_SPHERE = 1,
         SHAPE_CYLINDER = 2,
@@ -712,7 +712,7 @@ public class BossKnightConfigClass
     }
 
     public enum BossAttackCollisionParam_AttackType : sbyte
-{
+    {
         AT_NONE = 0,
         AT_BLOWOFF = 1,
         AT_SLAMDOWNWARD = 2,
@@ -937,7 +937,7 @@ public class BossKnightConfigClass
     }
 
     public enum PlayerOffsetType : sbyte
-{
+    {
         PLAYER_OFFSET_NORMAL = 0,
         PLAYER_OFFSET_ABSOLUTE = 1
     }
@@ -1289,7 +1289,7 @@ public class BossKnightConfigClass
     }
 
     public enum XType : byte
-{
+    {
         Zero = 0,
         HitPosX = 1,
         Indivisual = 2

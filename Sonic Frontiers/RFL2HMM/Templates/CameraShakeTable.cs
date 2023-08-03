@@ -16,7 +16,7 @@ public class CameraShakeTableClass
     }
 
     public enum ShakeType : byte
-{
+    {
         Directional = 0,
         WorldY = 1,
         Random = 2

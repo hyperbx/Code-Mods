@@ -4,13 +4,13 @@ using System.Runtime.InteropServices;
 public class OptionDataClass
 {
     public enum Status : sbyte
-{
+    {
         STATUS_ZERO_FILL = 0,
         STATUS_INITIALIZED = 1
     }
 
     public enum Sequence : sbyte
-{
+    {
         Island1 = 0,
         Island2 = 1,
         Island3 = 2,
@@ -21,7 +21,7 @@ public class OptionDataClass
     }
 
     public enum SaveDataIcon : sbyte
-{
+    {
         IconNoData = 0,
         IconIsland1 = 1,
         IconIsland2 = 2,
@@ -32,7 +32,7 @@ public class OptionDataClass
     }
 
     public enum AppVersion : byte
-{
+    {
         AppVersion_1_10 = 0,
         AppVersion_1_20 = 1,
         AppVersion_1_30 = 2,
@@ -61,7 +61,7 @@ public class OptionDataClass
     }
 
     public enum VoiceLanguageType : sbyte
-{
+    {
         VOICE_LANGUAGE_ENGLISH = 0,
         VOICE_LANGUAGE_FRENCH = 1,
         VOICE_LANGUAGE_ITALIAN = 2,
@@ -72,7 +72,7 @@ public class OptionDataClass
     }
 
     public enum LanguageType : sbyte
-{
+    {
         LANGUAGE_ENGLISH = 0,
         LANGUAGE_FRENCH = 1,
         LANGUAGE_ITALIAN = 2,
@@ -89,7 +89,7 @@ public class OptionDataClass
     }
 
     public enum VibrationLevel : sbyte
-{
+    {
         None = 0,
         Low = 1,
         Medium = 2,
@@ -97,7 +97,7 @@ public class OptionDataClass
     }
 
     public enum Value : sbyte
-{
+    {
         Easy = 0,
         Normal = 1,
         Hard = 2,
@@ -138,7 +138,7 @@ public class OptionDataClass
     }
 
     public enum InputKey : int
-{
+    {
         Invalid = -1,
         GamePad_DPadLeft = 0,
         GamePad_DPadRight = 1,
@@ -485,7 +485,7 @@ public class OptionDataClass
     }
 
     public enum MovementStyle : sbyte
-{
+    {
         PadSimulate = 0,
         Aiming = 1
     }
@@ -511,13 +511,13 @@ public class OptionDataClass
     }
 
     public enum MusicSelect : sbyte
-{
+    {
         MUSIC_SELECT_ON = 0,
         MUSIC_SELECT_OFF = 1
     }
 
     public enum MusicSelectType : sbyte
-{
+    {
         MUSIC_SELECT_NORMAL = 0,
         MUSIC_SELECT_SHUFFLE = 1,
         MUSIC_SELECT_LOOP = 2
@@ -540,7 +540,7 @@ public class OptionDataClass
     }
 
     public enum Resolution : sbyte
-{
+    {
         Reso3840x2160 = 0,
         Reso2560x1440 = 1,
         Reso1920x1080 = 2,
@@ -548,28 +548,28 @@ public class OptionDataClass
     }
 
     public enum GraphicQuality : sbyte
-{
+    {
         GraphicQuality_High = 0,
         GraphicQuality_Low = 1,
         Custom = 2
     }
 
     public enum FrameRate : sbyte
-{
+    {
         FPS60 = 0,
         FPS30 = 1,
         FPSNoLimit = 2
     }
 
     public enum AntiAliasing : sbyte
-{
+    {
         TAA = 0,
         FXAA = 1,
         AntiAliasing_None = 2
     }
 
     public enum AnisotropicFiltering : sbyte
-{
+    {
         AnisotropicFiltering_None = 0,
         AnisotropicFiltering_Low = 1,
         AnisotropicFiltering_Medium = 2,
@@ -577,7 +577,7 @@ public class OptionDataClass
     }
 
     public enum DOF : sbyte
-{
+    {
         Disabled = 0,
         DOF_Low = 1,
         DOF_Medium = 2,
@@ -585,25 +585,25 @@ public class OptionDataClass
     }
 
     public enum Bloom : sbyte
-{
+    {
         Bloom_High = 0,
         Bloom_Low = 1
     }
 
     public enum Shadow : sbyte
-{
+    {
         Shadow_High = 0,
         Shadow_Low = 1
     }
 
     public enum VolumetricLight : sbyte
-{
+    {
         VolumetricLight_High = 0,
         VolumetricLight_Low = 1
     }
 
     public enum RederingScale : sbyte
-{
+    {
         RederingScale_High = 0,
         RederingScale_Medium = 1,
         RederingScale_Low = 2

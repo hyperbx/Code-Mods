@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 public class TalkEventCameraPresetParametersClass
 {
     public enum GazePositionType : sbyte
-{
+    {
         Base = 0,
         Head = 1,
         Eye = 2,

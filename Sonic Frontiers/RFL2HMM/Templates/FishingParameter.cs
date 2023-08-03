@@ -36,7 +36,7 @@ public class FishingParameterClass
     }
 
     public enum Type : sbyte
-{
+    {
         TYPE_INVALID = 0,
         TYPE_NORMAL = 1,
         TYPE_HOLD = 2
@@ -90,14 +90,14 @@ public class FishingParameterClass
     }
 
     public enum FishShadowType : sbyte
-{
+    {
         SMALL = 0,
         MEDIUM = 1,
         LARGE = 2
     }
 
     public enum CatchUpMotionType : sbyte
-{
+    {
         SHADOW_SIZE = 0,
         LARGE_GOOD_FISH = 1,
         LARGE_GOOD_ITEM = 2,
@@ -111,7 +111,7 @@ public class FishingParameterClass
     }
 
     public enum ToastType : sbyte
-{
+    {
         MOTION = 0,
         PATTERN_1 = 1,
         PATTERN_2 = 2,
