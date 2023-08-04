@@ -84,7 +84,7 @@ namespace RFL2HMM
 
             _output.AppendLine
             (
-                $"Code \"{templateName}\" by \"{Environment.UserName}\"\n" +
+                $"Code \"{templateName}-{DateTime.Now:hhmmssddMMyyyy}\" by \"{Environment.UserName}\"\n" +
                 "//\n" +
                 "\t#include \"ReflectionHelpers\" noemit\n\n" +
                 $"\t#lib \"{templateName}\"\n" +
