@@ -28,7 +28,7 @@ bool HudSonicStage::IsCasino()
 	if (Configuration::overrideForbiddenCasino)
 		return false;
 
-	if (StringHelper::Compare(BlueBlurCommon::GetStageID(), "cnz100"))
+	if (StringHelper::Compare(BlueBlurCommon::GetStageCharID(), "cnz100"))
 		return true;
 
 	return false;
@@ -41,7 +41,7 @@ bool HudSonicStage::IsStageForbidden()
 	(
 		isMission  ||
 		IsCasino() ||
-		TableListener::rankTables.find(std::string(BlueBlurCommon::GetStageID())) == TableListener::rankTables.end()
+		TableListener::rankTables.find(std::string(BlueBlurCommon::GetStageCharID())) == TableListener::rankTables.end()
 	)
 	{
 		return true;
@@ -51,7 +51,7 @@ bool HudSonicStage::IsStageForbidden()
 	for (std::vector<std::string>::const_iterator i = Configuration::forbiddenStages.begin(); i != Configuration::forbiddenStages.end(); ++i)
 	{
 		// Stage ID matches - HUD must be special.
-		if (StringHelper::Compare(BlueBlurCommon::GetStageID(), i->c_str()))
+		if (StringHelper::Compare(BlueBlurCommon::GetStageCharID(), i->c_str()))
 			return true;
 	}
 

@@ -18,7 +18,7 @@ void ScoreListener::AddClamp(int& score, int scoreToReward, bool timeout)
 	if (timeout)
 	{
 		// Stop rewarding score if the player is over the maximum time.
-		if (Configuration::scoreTimeout && StatisticsListener::totals.elapsedTime > TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds)
+		if (Configuration::scoreTimeout && StatisticsListener::totals.elapsedTime > TableListener::rankTables[BlueBlurCommon::GetStageCharID()].maxSeconds)
 		{
 #if _DEBUG
 			printf("[Score Generations] Time bonus expired! No longer rewarding score...\n");

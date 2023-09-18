@@ -13,11 +13,11 @@ ResultListener::RankType ResultListener::Rank(bool perfect)
 {
 	RankType rank;
 	int total = ScoreListener::totalScore;
-	int S = TableListener::rankTables[BlueBlurCommon::GetStageID()].S;
-	int A = TableListener::rankTables[BlueBlurCommon::GetStageID()].A;
-	int B = TableListener::rankTables[BlueBlurCommon::GetStageID()].B;
-	int C = TableListener::rankTables[BlueBlurCommon::GetStageID()].C;
-	int D = TableListener::rankTables[BlueBlurCommon::GetStageID()].D;
+	int S = TableListener::rankTables[BlueBlurCommon::GetStageCharID()].S;
+	int A = TableListener::rankTables[BlueBlurCommon::GetStageCharID()].A;
+	int B = TableListener::rankTables[BlueBlurCommon::GetStageCharID()].B;
+	int C = TableListener::rankTables[BlueBlurCommon::GetStageCharID()].C;
+	int D = TableListener::rankTables[BlueBlurCommon::GetStageCharID()].D;
 
 	if (Configuration::perfectBonus == Configuration::PerfectBonusType::Disabled && S != -1 && total > S)
 	{
@@ -70,18 +70,18 @@ float ComputeProgressBar(ResultListener::RankType rank, int divider)
 			return 0.0f;
 
 		case ResultListener::RankType::D:
-			return ((float)divider / (float)TableListener::rankTables[BlueBlurCommon::GetStageID()].C) / 3.0f;
+			return ((float)divider / (float)TableListener::rankTables[BlueBlurCommon::GetStageCharID()].C) / 3.0f;
 
 		case ResultListener::RankType::C:
 		{
-			const float baseScore = (float)TableListener::rankTables[BlueBlurCommon::GetStageID()].C;
-			return (1.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[BlueBlurCommon::GetStageID()].B - baseScore)) / 3.0f;
+			const float baseScore = (float)TableListener::rankTables[BlueBlurCommon::GetStageCharID()].C;
+			return (1.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[BlueBlurCommon::GetStageCharID()].B - baseScore)) / 3.0f;
 		}
 
 		case ResultListener::RankType::B:
 		{
-			const float baseScore = (float)TableListener::rankTables[BlueBlurCommon::GetStageID()].B;
-			return (2.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[BlueBlurCommon::GetStageID()].A - baseScore)) / 3.0f;
+			const float baseScore = (float)TableListener::rankTables[BlueBlurCommon::GetStageCharID()].B;
+			return (2.0f / 3.0f) + (((float)divider - baseScore) / ((float)TableListener::rankTables[BlueBlurCommon::GetStageCharID()].A - baseScore)) / 3.0f;
 		}
 
 		default:

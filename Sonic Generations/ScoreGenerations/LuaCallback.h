@@ -1,10 +1,12 @@
 #pragma once
 
 #define LUA_FILE "ScoreGenerations.lua"
+#define MATH_LUA_FILE "Math.lua"
 
 class LuaCallback
 {
 	static std::string LuaPath;
+	static std::string MathLuaPath;
 
 public:
 	static bool SetLuaPath(std::string path);

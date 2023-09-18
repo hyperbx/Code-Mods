@@ -1,6 +1,8 @@
 #pragma once
 
 #include <fstream>
+#include <filesystem>
+#include <iostream>
 #include <iterator>
 #include <string>
 #include <sstream>
@@ -22,7 +24,7 @@ public:
 	/// <summary>
 	/// Compares two files and returns whether or not they're identical.
 	/// </summary>
-	static bool Compare(const std::string& file1, const std::string& file2)
+	static bool Compare(const std::filesystem::path& file1, const std::filesystem::path& file2)
 	{
 		std::ifstream f1(file1, std::ifstream::binary | std::ifstream::ate);
 		std::ifstream f2(file2, std::ifstream::binary | std::ifstream::ate);
@@ -47,7 +49,7 @@ public:
 	/// <summary>
 	/// Reads a plaintext file into a string.
 	/// </summary>
-	static std::string ReadString(const std::string& path)
+	static std::string ReadString(const std::filesystem::path& path)
 	{
 		std::ifstream txt(path);
 
@@ -57,5 +59,21 @@ public:
 		}
 
 		return buffer.str();
+	}
+
+	/// <summary>
+	/// Writes a string to a file.
+	/// </summary>
+	static bool WriteString(const std::filesystem::path& path, const std::string& data)
+	{
+		std::ofstream file(path);
+
+		if (!file)
+			return false;
+
+		file << data;
+		file.close();
+
+		return true;
 	}
 };

@@ -1,4 +1,5 @@
 std::string LuaCallback::LuaPath = LUA_FILE;
+std::string LuaCallback::MathLuaPath = MATH_LUA_FILE;
 
 const struct luaL_Reg LuaCallback::Functions[] =
 {
@@ -26,8 +27,12 @@ bool LuaCallback::SetLuaPath(std::string path)
 	if (!IOHelper::FileExists(path))
 		return false;
 
-	// Set new active Lua path.
 	LuaPath = path;
+
+	std::string mathLuaPath = LuaPath.substr(0, LuaPath.find_last_of("\\")) + "\\Math.lua";
+
+	if (IOHelper::FileExists(mathLuaPath))
+		MathLuaPath = mathLuaPath;
 
 	return true;
 }
@@ -57,12 +62,13 @@ void LuaCallback::PushExposedData(lua_State* L)
 	PushExposedNumber<int>(L, "milliseconds", StatisticsListener::totals.milliseconds);
 	PushExposedNumber<int>(L, "score", ScoreListener::score);
 	PushExposedNumber<int>(L, "scoreLimit", Configuration::scoreLimit);
-	PushExposedNumber<int>(L, "minSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
-	PushExposedNumber<int>(L, "maxSeconds", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
+	PushExposedNumber<int>(L, "minSeconds", TableListener::rankTables[BlueBlurCommon::GetStageCharID()].minSeconds);
+	PushExposedNumber<int>(L, "maxSeconds", TableListener::rankTables[BlueBlurCommon::GetStageCharID()].maxSeconds);
 
 	// Push needed exposed strings to the stack.
-	PushExposedString(L, "stageID", BlueBlurCommon::GetStageID());
+	PushExposedString(L, "stageID", BlueBlurCommon::GetStageCharID());
 }
+
 template <typename T, typename std::enable_if<std::is_arithmetic<T>::value>::type*>
 void LuaCallback::PushExposedNumber(lua_State* L, std::string name, T pushToStack)
 {
@@ -101,7 +107,7 @@ bool LuaCallback::LoadInternalLibrary(lua_State* L)
 	PushLuaLibrary(L, LUA_MATHLIBNAME, luaopen_math);
 
 	// Try loading the internal math library.
-	if (IsLuaSafe(L, luaL_dofile(L, "Math.lua")))
+	if (IsLuaSafe(L, luaL_dofile(L, MathLuaPath.c_str())))
 		return true;
 
 	if (Configuration::debugLua)
@@ -132,6 +138,8 @@ void LuaCallback::PrintExposedData()
 {
 	if (Configuration::debugLua)
 	{
+		printf("[Score Generations] [Lua Debug] LuaPath = %s\n", LuaPath.c_str());
+		printf("[Score Generations] [Lua Debug] MathLuaPath = %s\n", MathLuaPath.c_str());
 		printf("[Score Generations] [Lua Debug] totalRingCount = %d\n", StatisticsListener::totals.totalRingCount);
 		printf("[Score Generations] [Lua Debug] totalEnemies = %d\n", StatisticsListener::totals.totalEnemies);
 		printf("[Score Generations] [Lua Debug] totalPhysics = %d\n", StatisticsListener::totals.totalPhysics);
@@ -154,9 +162,9 @@ void LuaCallback::PrintExposedData()
 		printf("[Score Generations] [Lua Debug] milliseconds = %d\n", StatisticsListener::totals.milliseconds);
 		printf("[Score Generations] [Lua Debug] score = %d\n", ScoreListener::score);
 		printf("[Score Generations] [Lua Debug] scoreLimit = %d\n", Configuration::scoreLimit);
-		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageID()].minSeconds);
-		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageID()].maxSeconds);
-		printf("[Score Generations] [Lua Debug] stageID = %s\n", BlueBlurCommon::GetStageID());
+		printf("[Score Generations] [Lua Debug] minSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageCharID()].minSeconds);
+		printf("[Score Generations] [Lua Debug] maxSeconds = %d\n", TableListener::rankTables[BlueBlurCommon::GetStageCharID()].maxSeconds);
+		printf("[Score Generations] [Lua Debug] stageID = %s\n", BlueBlurCommon::GetStageCharID());
 	}
 }
 
@@ -170,7 +178,8 @@ int LuaCallback::RunAlgorithm(std::string algorithm)
 		return 0;
 
 	// Try loading the external library.
-	LoadExternalLibrary(L);
+	if (!LoadExternalLibrary(L))
+		return 0;
 
 	// Get needed exposed variables.
 	PushExposedData(L);
