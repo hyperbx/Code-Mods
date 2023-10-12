@@ -4,10 +4,15 @@ bool isBoostToFall        = false;
 bool isJumpShort          = false;
 bool isRolling            = false;
 bool updateDropDash       = false;
+bool updateHomingAfter    = false;
 bool updateSpinAttackRoll = false;
 
-float bounceDeltaTime         = 0.0f;
-float spinAttackRollDeltaTime = 0.0f;
+float bounceDeltaTime                 = 0.0f;
+float Player::DeltaTime               = 0.0f;
+float dropDashDeltaTime               = 0.0f;
+float homingAfterDeltaTime            = 0.0f;
+float originalCameraPositionSensitive = 100.0f;
+float spinAttackRollDeltaTime         = 0.0f;
 
 int bounceCount = 0;
 
@@ -29,7 +34,7 @@ void CreateSpinJumpParticle(Sonic::Player::CPlayer* player)
                 ? "ef_ch_sps_yh1_spinattack"
                 : "ef_ch_sng_yh1_spinattack",
 
-            4
+            1
         );
     }
 }
@@ -71,6 +76,18 @@ bool IsGrinding(const char* animName)
     return IsBlacklistedAnimation(animations, animName);
 }
 
+bool IsDeathBySpinAttack(const char* animName)
+{
+    std::vector<const char*> animations =
+    {
+        "Homing",
+        "JumpBall",
+        "SpinAttack"
+    };
+
+    return IsBlacklistedAnimation(animations, animName);
+}
+
 bool IsSpinJump(const char* animName)
 {
     std::vector<const char*> animations =
@@ -95,7 +112,8 @@ bool CanDropDash()
            !CONTEXT->StateFlag(eStateFlag_OnWater) &&
            !(Configuration::dropDashType == Configuration::DropDashType::SideView && !CONTEXT->m_Is2DMode) &&
            !(Configuration::dropDashType == Configuration::DropDashType::ForwardView && CONTEXT->m_Is2DMode) &&
-           !IsGrinding(CONTEXT->GetCurrentAnimationName().c_str());
+           !IsGrinding(CONTEXT->GetCurrentAnimationName().c_str()) &&
+           !BlueBlurCommon::IsCurrentStageBoss();
 }
 
 bool CanSpinAttackRoll()
@@ -124,8 +142,7 @@ void DriftUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUp
     )
     {
         // TODO: fix this for board.
-        // TODO: fix deadzone.
-        if (input.IsDown(Sonic::eKeyState_LeftTrigger))
+        if (input.IsDown(Sonic::eKeyState_LeftTrigger) && input.LeftStickVertical > -0.65f)
         {
             if (!context->StateFlag(eStateFlag_Drifting))
                 context->ChangeState("Drift");
@@ -138,11 +155,11 @@ void DriftUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUp
     }
 }
 
-void DropDashStart()
+void DropDashStart(Sonic::Player::CPlayerSpeedContext* context)
 {
     if (!updateDropDash && CanDropDash())
     {
-        CONTEXT->PlaySound(2002055, 1);
+        context->PlaySound(2002055, 1);
 
         updateDropDash = true;
     }
@@ -151,11 +168,28 @@ void DropDashStart()
 void DropDashEnd()
 {
     updateDropDash = false;
+    dropDashDeltaTime = 0.0f;
 }
 
 void DropDashUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
 {
     auto input = Sonic::CInputState::GetInstance()->GetPadState();
+
+    // Restore camera gradually.
+    // TODO: apply to 2D.
+    BlueBlurCommon::SetCameraParam
+    (
+        BlueBlurCommon::POSITION_SENSITIVE,
+
+        LERP
+        (
+            BlueBlurCommon::GetCameraParam(BlueBlurCommon::POSITION_SENSITIVE),
+            originalCameraPositionSensitive,
+            dropDashDeltaTime / 8
+        )
+    );
+
+    dropDashDeltaTime += updateInfo.DeltaTime;
 
     if (context->m_Grounded)
     {
@@ -163,6 +197,9 @@ void DropDashUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::
         {
             if (updateDropDash && CanDropDash())
             {
+                // Delay camera.
+                BlueBlurCommon::SetCameraParam(BlueBlurCommon::POSITION_SENSITIVE, 25.0f);
+
                 Impulse::VelocityZ
                 (
                     context->GetVelocity().norm() + (context->m_Is2DMode
@@ -182,7 +219,7 @@ void DropDashUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::
     }
 }
 
-void DoubleJumpUpdate()
+void DoubleJumpUpdate(Sonic::Player::CPlayerSpeedContext* context)
 {
     auto input = Sonic::CInputState::GetInstance()->GetPadState();
 
@@ -196,7 +233,7 @@ void DoubleJumpUpdate()
         {
             if (GetDoubleJumpFlag())
             {
-                DropDashStart();
+                DropDashStart(context);
             }
             else
             {
@@ -220,7 +257,31 @@ void DoubleJumpUpdate()
     else
     {
         if (input.IsTapped(Sonic::eKeyState_A))
-            DropDashStart();
+            DropDashStart(context);
+    }
+}
+
+void HomingAfterEnd()
+{
+    updateHomingAfter = false;
+
+    homingAfterDeltaTime = 0.0f;
+}
+
+void HomingAfterUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
+{
+    if (updateHomingAfter)
+    {
+        BlueBlurCommon::SetGameSpeed(LERP(BlueBlurCommon::GetGameSpeed(), 1.0f, homingAfterDeltaTime / 0.5f));
+
+        homingAfterDeltaTime += updateInfo.DeltaTime;
+
+        if (BlueBlurCommon::GetGameSpeed() >= 0.999999f)
+        {
+            BlueBlurCommon::SetGameSpeed(1.0f);
+
+            HomingAfterEnd();
+        }
     }
 }
 
@@ -230,6 +291,9 @@ void SpinAttackRollEnd(Sonic::Player::CPlayerSpeedContext* context, const hh::fn
     updateSpinAttackRoll = false;
 
     spinAttackRollDeltaTime = 0.0f;
+
+    // Reset camera.
+    BlueBlurCommon::SetCameraParam(BlueBlurCommon::POSITION_SENSITIVE, originalCameraPositionSensitive);
 }
 
 void SpinAttackRollUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh::fnd::SUpdateInfo& updateInfo)
@@ -260,25 +324,33 @@ void SpinAttackRollUpdate(Sonic::Player::CPlayerSpeedContext* context, const hh:
             if (!StringHelper::Compare(context->GetCurrentAnimationName().c_str(), "SpinAttack"))
                 context->ChangeAnimation("SpinAttack");
 
-            #pragma region WIP Physics
-            // auto front = context->GetFrontDirection().dot(Hedgehog::Math::CVector(0, 1, 0));
-            // auto vel = (velocityMag * cos(front));
-               
-            // float slopeFactor = 0.125f;
-            // float slopeFactorUp = 0.25;
-            // float slopeFactorDown = 0.75;
-               
-            // vel -= vel * (front * (vel > 0.0f && sin(front) > 0.0f ? slopeFactorUp : slopeFactorDown)) / 2;
-               
-            // printf("Front:       %f\n", front);
-            // printf("Front (sin): %f\n", sin(front));
-            // printf("Front (cos): %f\n", cos(front));
-            // printf("Velocity:    %f\n", vel);
-            #pragma endregion
+            auto front = context->GetFrontDirection().dot(Hedgehog::Math::CVector(0, 1, 0));
+            {
+                // NOTE: I have no idea what I'm doing, but it seems to work.
 
-            Impulse::VelocityZ(velocityMag);
+                float toAngle = sin(front) * 90;
 
-            BlueBlurCommon::SetCollision(context, BlueBlurCommon::TypeSonicSliding, true);
+                float slopeFactor     = 0.045;
+                float slopeFactorUp   = 0.03;
+                float slopeFactorDown = -0.06;
+
+#if _DEBUG
+                printf("front:       %f\n", front);
+                printf("sin(Front):  %f\n", sin(front));
+                printf("velocity:    %f\n", velocityMag);
+#endif
+
+                Impulse::VelocityZ
+                (
+                    velocityMag + ((sin(front) < 0.1f && sin(front) > -0.1f)
+                        ? toAngle * slopeFactor
+                        : (sin(front) > 0.0f
+                            ? toAngle * slopeFactorUp
+                            : toAngle * slopeFactorDown))
+                );
+            }
+
+            BlueBlurCommon::SetCollision(context, BlueBlurCommon::TypeSonicBoost, true);
         }
         else
         {
@@ -360,7 +432,28 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
     auto currentAnim = context->GetCurrentAnimationName().c_str();
     auto input       = Sonic::CInputState::GetInstance()->GetPadState();
 
-    if (CONTEXT->StateFlag(eStateFlag_Dead))
+    // printf("%s\n", currentAnim);
+
+    Player::DeltaTime = updateInfo.DeltaTime;
+
+    if (Configuration::disableBoostCollision)
+    {
+        if (BlueBlurCommon::IsCurrentStageBoss())
+        {
+            // Restore boost hit collision.
+            WRITE_MEMORY(0x1117A6A, uint8_t, 0x8B, 0x0D, 0x84, 0x1B, 0xE6, 0x01);
+        }
+        else
+        {
+            // Disable boost hit collision.
+            WRITE_JUMP(0x1117A6A, 0x1117A78);
+        }
+    }
+
+    if (Configuration::homingSlowMotion)
+        HomingAfterUpdate(context, updateInfo);
+
+    if (context->StateFlag(eStateFlag_Dead))
         goto Return;
 
     if (context->m_Grounded)
@@ -463,9 +556,9 @@ HOOK(char, __fastcall, CSonicContextHomingUpdate, 0xDFFE30, int* _this, void* _,
     return originalCSonicContextHomingUpdate(_this, _, a2);
 }
 
-HOOK(int, __fastcall, CSonicStateJumpBallUpdate, 0x11BCB00, float* _this)
+HOOK(int, __fastcall, CSonicStateJumpBallUpdate, 0x11BCB00, hh::fnd::CStateMachineBase::CStateBase* _this)
 {
-    DoubleJumpUpdate();
+    DoubleJumpUpdate((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase());
 
     return originalCSonicStateJumpBallUpdate(_this);
 }
@@ -486,12 +579,15 @@ HOOK(int, __fastcall, CSonicStateHomingAttackEnd, 0x1231F80, hh::fnd::CStateMach
 
 HOOK(void, __fastcall, CStateJumpShortStart, 0x1255820, hh::fnd::CStateMachineBase::CStateBase* _this)
 {
+    auto context = (Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase();
+    {
+        DoubleJumpUpdate(context);
+
+        if (!BlueBlurCommon::IsSuper())
+            CreateSpinJumpParticle(context->m_pPlayer);
+    }
+
     isJumpShort = true;
-
-    DoubleJumpUpdate();
-
-     if (!BlueBlurCommon::IsSuper())
-         CreateSpinJumpParticle(((Sonic::Player::CPlayerSpeedContext*)_this->GetContextBase())->m_pPlayer);
 
     originalCStateJumpShortStart(_this);
 }
@@ -551,7 +647,7 @@ HOOK(void, __fastcall, CSonicStateFallUpdate, 0x1118C50, hh::fnd::CStateMachineB
         WRITE_MEMORY(0x1118E94, uint8_t, 0x76);
     }
 
-    DoubleJumpUpdate();
+    DoubleJumpUpdate(context);
 
     if (updateDropDash)
     {
@@ -624,6 +720,43 @@ ASM_HOOK(0x123332B, AirBoostToFallFlag)
     }
 }
 
+void __fastcall OnDestroyEnemy()
+{
+    if
+    (
+        BlueBlurCommon::IsClassic() ||
+        !IsDeathBySpinAttack(CONTEXT->GetCurrentAnimationName().c_str())
+    )
+    {
+        return;
+    }
+
+    if (Configuration::cameraShake)
+        Camera::Shake(0.125f, 0.025f, 0.5f);
+
+    if (Configuration::homingSlowMotion)
+    {
+        BlueBlurCommon::SetGameSpeed(0.125f);
+
+        updateHomingAfter = true;
+    }
+}
+
+ASM_HOOK(0xBDDD9A, DestroyEnemy)
+{
+    static void* returnAddress = (void*)0xBDDDA1;
+
+    __asm
+    {
+        inc word ptr [esi + 0E0h]
+
+        call OnDestroyEnemy
+        mov  edx, eax
+
+        jmp [returnAddress]
+    }
+}
+
 ASM_HOOK(0x1119125, WalkFallFlag)
 {
     static void* returnAddress    = (void*)0x111912A;
@@ -660,58 +793,8 @@ void Player::Install()
     INSTALL_HOOK(MsgRestartStage);
 
     INSTALL_ASM_HOOK(AirBoostToFallFlag);
+    INSTALL_ASM_HOOK(DestroyEnemy);
     INSTALL_ASM_HOOK(WalkFallFlag);
-
-    // Restore XButtonHoming string to disable the HMM code.
-    WRITE_STRING(0x15FA418, "XButtonHoming");
-
-    // Loop dash ring animations.
-    WRITE_MEMORY(0x1276D20, uint8_t, 0x1D);
-    WRITE_MEMORY(0x1276D87, uint8_t, 0x1D);
-
-    // Replace animations with the jump ball.
-    WRITE_MEMORY(0x12733A2, const char*, "sn_ball_loop"); // JumpShortBegin
-    WRITE_MEMORY(0x1273409, const char*, "sn_ball_loop"); // JumpShort
-    WRITE_MEMORY(0x1273470, const char*, "sn_ball_loop"); // JumpShortTop
-    WRITE_MEMORY(0x127380A, const char*, "sn_ball_loop"); // JumpHurdleL
-    WRITE_MEMORY(0x1273876, const char*, "sn_ball_loop"); // JumpHurdleR
-    WRITE_MEMORY(0x1273A12, const char*, "sn_ball_loop"); // SquatToJump
-
-    // Disable boost particles.
-    WRITE_MEMORY(0x15A3568, uint8_t, 0x00); // ef_bo_sha_yh1_boost1
-    WRITE_MEMORY(0x15E9048, uint8_t, 0x00); // ef_ch_sng_yh1_boost1
-    WRITE_MEMORY(0x15E9060, uint8_t, 0x00); // ef_ch_sng_yh1_boost2
-    WRITE_MEMORY(0x15EE774, uint8_t, 0x00); // ef_bo_sha_yh1_hyper_sn
-    WRITE_MEMORY(0x15EE78C, uint8_t, 0x00); // ef_bo_sha_yh1_hyper_sn
-    WRITE_MEMORY(0x15F99F8, uint8_t, 0x00); // ef_ch_sps_yh1_boost1
-    WRITE_MEMORY(0x15F9A10, uint8_t, 0x00); // ef_ch_sps_yh1_boost2
-    WRITE_MEMORY(0x164330C, uint8_t, 0x00); // ef_st_ssh_yh1_bobsled_boost
-
-    // Disable spin dash on dash panels.
-    WRITE_MEMORY(0xE0AC1C, uint8_t, 0xE9, 0x27, 0x01, 0x00, 0x00);
-    WRITE_MEMORY(0xE0C734, uint8_t, 0xE9, 0x27, 0x01, 0x00, 0x00);
-
-    // Right mouth bones.
-    WRITE_MEMORY(0x015E8F9C, const char*, "MouthR_Reference");
-    WRITE_MEMORY(0x015E8FA4, const char*, "MouthR_Position");
-    WRITE_MEMORY(0x015E8FAC, const char*, "MouthR_Jaw");
-    WRITE_MEMORY(0x015E8FB4, const char*, "MouthR_Teeth_Low");
-    WRITE_MEMORY(0x015E8FBC, const char*, "MouthR_Lip_C");
-    WRITE_MEMORY(0x015E8FC4, const char*, "MouthR_Teeth_Up");
-    WRITE_MEMORY(0x015E8FCC, const char*, "MouthR_Lip_L");
-    WRITE_MEMORY(0x015E8FD4, const char*, "MouthR_Lip_R");
-    WRITE_MEMORY(0x015E8FDC, const char*, "MouthR_Nose");
-
-    // Left mouth bones.
-    WRITE_MEMORY(0x015E8FE4, const char*, "MouthL_Reference");
-    WRITE_MEMORY(0x015E8FEC, const char*, "MouthL_Position");
-    WRITE_MEMORY(0x015E8FF4, const char*, "MouthL_Jaw");
-    WRITE_MEMORY(0x015E8FFC, const char*, "MouthL_Teeth_Low");
-    WRITE_MEMORY(0x015E9004, const char*, "MouthL_Lip_C");
-    WRITE_MEMORY(0x015E900C, const char*, "MouthL_Teeth_Up");
-    WRITE_MEMORY(0x015E9014, const char*, "MouthL_Lip_L");
-    WRITE_MEMORY(0x015E901C, const char*, "MouthL_Lip_R");
-    WRITE_MEMORY(0x015E9024, const char*, "MouthL_Nose");
 
     if (Configuration::boostOnRT)
     {

@@ -12,15 +12,29 @@ constexpr double DEG2RAD = 0.01745329238474369;
 
 #define EXPORT extern "C" __declspec(dllexport)
 
-#define PRINT_BOOL(a) printf(#a " = %s\n", a ? "TRUE" : "FALSE")
-#define PRINT_VECTOR_3(a) printf(#a " = %f,%f,%f\n", (a).X, (a).Y, (a).Z);
-#define PRINT_VECTOR_4(a) printf(#a " = %f,%f,%f,%f\n", (a).X, (a).Y, (a).Z, (a).W);
+#define PRINT_BOOLEAN(a) printf(#a " = %s\n", a ? "TRUE" : "FALSE")
+#define PRINT_VECTOR_3(a) printf(#a " = %f,%f,%f\n", (a).x(), (a).y(), (a).z());
+#define PRINT_VECTOR_4(a) printf(#a " = %f,%f,%f,%f\n", (a).x(), (a).y(), (a).z(), (a).w());
 #define PRINT_FLOAT(a) printf(#a " = %f\n", a);
 #define PRINT_INTEGER(a) printf(#a " = %d\n", a);
 #define PRINT_POINTER(a) printf(#a " = %llx\n", a);
 #define PRINT_BYTE(a) printf(#a " = %x\n", a);
 
 #define IS_NOP(addr) (addr != nullptr && *(uint8_t*)(addr) == 0x90)
+
+#define INI_BEGIN_SECTION(section) \
+{ \
+    std::string CurrentSection = section;
+
+#define INI_READ_STRING_B(var)     var = reader.Get(CurrentSection, #var, var)
+#define INI_READ_BOOLEAN_B(var)    var = reader.GetBoolean(CurrentSection, #var, var)
+#define INI_READ_FLOAT_B(var)      var = reader.GetFloat(CurrentSection, #var, var)
+#define INI_READ_INTEGER_B(var)    var = reader.GetInteger(CurrentSection, #var, var)
+#define INI_READ_DOUBLE_B(var)     var = reader.GetReal(CurrentSection, #var, var)
+#define INI_READ_ENUM_B(type, var) var = (type)reader.GetInteger(CurrentSection, #var, var)
+
+#define INI_END_SECTION() \
+}
 
 #define INI_READ_STRING(section, var)     var = reader.Get(section, #var, var)
 #define INI_READ_BOOLEAN(section, var)    var = reader.GetBoolean(section, #var, var)
@@ -77,6 +91,12 @@ if (addr != 0) \
     } \
 }
 
+inline static size_t ReadJump(size_t addr)
+{
+    READ_JUMP(anon, addr);
+    return anon;
+}
+
 #define READ_THUNK(name, addr) READ_JUMP(name, (int64_t)READ_CALL(addr))
 #define READ_THUNK_OFFSET(name, addr, offset) READ_JUMP(name, (int64_t)(READ_CALL(addr) + offset))
 
@@ -102,8 +122,8 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
 #define FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
     returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
 
-#define INLINE_FUNCTION_PTR(functionPtr, function, ...) \
-    functionPtr; function(__VA_ARGS__)
+#define INLINE_FUNCTION_PTR(returnType, callingConvention, function, location, ...) \
+    inline static returnType (callingConvention *function)(__VA_ARGS__) = (returnType(callingConvention*)(__VA_ARGS__))(location)
     
 #define PROC_ADDRESS(libraryName, procName) \
     GetProcAddress(LoadLibrary(TEXT(libraryName)), procName)
@@ -264,3 +284,6 @@ if (std::abs(name - b) < r) \
 #define SIGN(a) (a < 0 ? a * -1 : a)
 
 #define RANGE(value, start1, end1, start2, end2) start2 + (end2 - start2) * ((value - start1) / (end1 - start1))
+
+#define FLOAT_PERCENT_TO_UINT8(value) ((value) < 0.0f ? 0 : (value) > 100.0f ? 255 : (uint8_t)((value) / 100.0f * 255.0f))
+#define FLOAT_PERCENT_TO_UINT16(value) ((value) < 0.0f ? 0 : (value) > 100.0f ? 65535 : (uint16_t)((value) / 100.0f * 65535.0f))

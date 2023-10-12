@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Pch.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="StateAirDash.h" />
+    <ClInclude Include="StateDropDash.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="BlackboardHelper.h" />
+    <ClInclude Include="BlackboardStatus.h" />
+    <ClInclude Include="ESonicState.h" />
+    <ClInclude Include="StateQuickStompDash.h" />
+    <ClInclude Include="StatePluginAirTrick.h" />
+    <ClInclude Include="StatePluginBoost.h" />
+    <ClInclude Include="StateSlideDash.h" />
+    <ClInclude Include="StateSpinBoost.h" />
+    <ClInclude Include="Reflection.h" />
+    <ClInclude Include="SonicParameters.h" />
+    <ClInclude Include="StateSpinBoostCharge.h" />
+    <ClInclude Include="StateGrindDoubleJump.h" />
+    <ClInclude Include="StateFallSlope.h" />
+    <ClInclude Include="MsgChangeLayerTimeScale.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="MsgSetAbilityEnabled.h" />
+    <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="StatePluginCyloop.h" />
+    <ClInclude Include="StateSpinMove.h" />
+    <ClInclude Include="StateSpringJumpHeadLand.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Mod.cpp" />
+    <ClCompile Include="Pch.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="StateAirDash.cpp" />
+    <ClCompile Include="StateDropDash.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="StateQuickStompDash.cpp" />
+    <ClCompile Include="StatePluginAirTrick.cpp" />
+    <ClCompile Include="StatePluginBoost.cpp" />
+    <ClCompile Include="StateSlideDash.cpp" />
+    <ClCompile Include="StateSpinBoost.cpp" />
+    <ClCompile Include="Reflection.cpp" />
+    <ClCompile Include="StateSpinBoostCharge.cpp" />
+    <ClCompile Include="StateGrindDoubleJump.cpp" />
+    <ClCompile Include="StateFallSlope.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="StatePluginCyloop.cpp" />
+    <ClCompile Include="StateSpinMove.cpp" />
+    <ClCompile Include="StateSpringJumpHeadLand.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="StateSpinBoostChargeAsm.asm" />
+    <MASM Include="PlayerAsm.asm" />
+  </ItemGroup>
+</Project>

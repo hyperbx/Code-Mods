@@ -102,13 +102,16 @@ copy /Y "$(MSBuildProjectDirectory)\FrontiersSonic.json" "$(MSBuildProjectDirect
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="HudSonicStage.h" />
     <ClInclude Include="Impulse.h" />
+    <ClInclude Include="Patches.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="HudSonicStage.cpp" />

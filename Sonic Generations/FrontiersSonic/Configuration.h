@@ -24,6 +24,16 @@ public:
 	static bool alwaysActiveReticle;
 
 	/// <summary>
+	/// Determines whether the camera will shake when destroying an enemy.
+	/// </summary>
+	static bool cameraShake;
+
+	/// <summary>
+	/// Determines whether Sonic can damage enemies when boosting.
+	/// </summary>
+	static bool disableBoostCollision;
+
+	/// <summary>
 	/// Determines whether Sonic can perform a second jump after the first.
 	/// </summary>
 	static bool doubleJump;
@@ -32,6 +42,11 @@ public:
 	/// Determines whether Sonic can homing attack whilst grounded.
 	/// </summary>
 	static bool groundHoming;
+
+	/// <summary>
+	/// Determines whether time will slow down when performing a homing attack.
+	/// </summary>
+	static bool homingSlowMotion;
 
 	/// <summary>
 	/// Determines whether Sonic will bounce after performing a stomp.

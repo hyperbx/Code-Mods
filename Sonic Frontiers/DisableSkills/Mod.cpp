@@ -59,7 +59,7 @@ HOOK(bool, __fastcall, SetCurrentState, READ_CALL((int64_t)m_SigSetCurrentStateC
 HOOK(int64_t, __fastcall, ActionProcessor, m_SigActionProcessor(), int64_t a1, EAction in_action, int8_t a3, int64_t a4, char a5)
 {
 #if _DEBUG
-	printf("[DisableSkills] in_attackId: %d\n", in_action);
+	printf("[Disable Skills] in_attackId: %d\n", in_action);
 #endif
 
 	switch (in_action)

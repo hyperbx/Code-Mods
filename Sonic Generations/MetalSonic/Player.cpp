@@ -84,6 +84,14 @@ HOOK(void, __fastcall, CPlayerSpeedUpdateParallel, 0xE6BF20, Sonic::Player::CPla
 {
 	auto context = _this->GetContext();
 
+	// TODO: this is only for Broken Metal.
+	if (BlueBlurCommon::IsClassic())
+	{
+		originalCPlayerSpeedUpdateParallel(_this, _, updateInfo);
+
+		return;
+	}
+
 	if
 	(
 		context->m_HorizontalVelocity.norm() >= (BlueBlurCommon::IsModern() ? 8.0f : 17.0f) &&

@@ -28,32 +28,32 @@ public:
 	inline static float s_Framerate = 0.0f;
 	inline static Time* s_pTime;
 
-	struct Timer
+	struct ChainTime
 	{
 		float m_Time;
 
 		bool m_IsRunning;
 
-		Timer()
+		ChainTime()
 		{
 			m_Time      = 0.0f;
 			m_IsRunning = true;
 		}
 
-		Timer(bool in_isRunning)
+		ChainTime(bool in_isRunning)
 		{
 			m_Time      = 0.0f;
 			m_IsRunning = in_isRunning;
 		}
 
-		Timer(float in_time, bool in_isRunning)
+		ChainTime(float in_time, bool in_isRunning)
 		{
 			m_Time      = in_time;
 			m_IsRunning = in_isRunning;
 		}
 	};
 
-	inline static std::unordered_map<const char*, Timer> s_timers;
+	inline static std::unordered_map<const char*, ChainTime> s_timers;
 
 	static void Install();
 
@@ -148,7 +148,7 @@ public:
 	{
 		auto key = lua_tostring(in_pLuaState, 1);
 
-		auto val = Timer
+		auto val = ChainTime
 		(
 			// Always return true if no enabled state was specified.
 			lua_gettop(in_pLuaState) > 1
@@ -224,7 +224,7 @@ public:
 		{
 			if (lua_gettop(in_pLuaState) > 2)
 			{
-				s_timers[key] = Timer(lua_tonumber(in_pLuaState, 2), lua_toboolean(in_pLuaState, 3));
+				s_timers[key] = ChainTime(lua_tonumber(in_pLuaState, 2), lua_toboolean(in_pLuaState, 3));
 			}
 			else
 			{
