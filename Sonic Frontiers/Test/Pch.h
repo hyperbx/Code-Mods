@@ -12,4 +12,4 @@
 
 // Dependencies
 #include <Helpers.h>
-#include "..\Dependencies\BlueBlurCommon.h"
+#include <rangers-api/rangers-api/rangers-api.h>

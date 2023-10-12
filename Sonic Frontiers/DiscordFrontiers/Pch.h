@@ -19,7 +19,7 @@
 #include <Helpers.h>
 #include <INIReader.h>
 #include <LanguageHelper.h>
-#include <LostCodeLoader.h>
+#include <ModInfo.h>
 #include <Signature.h>
 #include <StringHelper.h>
 #include <TimeHelper.h>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <BlueBlur.h>
+#include "..\Dependencies\BlueBlur\BlueBlur.h"
 #include <Helpers.h>
 
 #define CONTEXT BlueBlurCommon::GetContext()

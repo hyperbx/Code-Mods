@@ -58,7 +58,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\BlueBlur;$(SolutionDir)Dependencies\Lua542\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\Detours\include;$(SolutionDir)Dependencies\gmath</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\Dependencies\BlueBlur;$(SolutionDir)Dependencies\Lua542\include;$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\Detours\include;$(SolutionDir)Dependencies\gmath</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Pch.h</ForcedIncludeFiles>
@@ -70,7 +70,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalDependencies>detours.lib;syelog.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\BlueBlur;$(SolutionDir)Dependencies\Lua542;$(SolutionDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\Dependencies\BlueBlur;$(SolutionDir)Dependencies\Lua542;$(SolutionDir)Dependencies\Detours\lib\x86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\ScoreGenerations.ini" "$(MSBuildProjectDirectory)\bin\Win32\$(Configuration)\ScoreGenerations.ini"

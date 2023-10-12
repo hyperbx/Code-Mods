@@ -57,7 +57,7 @@ HOOK(int64_t, __fastcall, SetTime, 0x147E22D20, Time* in_time, int in_days, int 
 	return originalSetTime(in_time, 0, 0, 0, 0);
 }
 
-CL_SCAN_SIGNATURE(m_SigSetTimeSpeed, "\xE8\xCC\xCC\xCC\xCC\x41\xFF\x0E\x4C\x8D\xBB\x00\x01\x00\x00", "x????xxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigSetTimeSpeed, 0x1482923F6, "\xE8\xCC\xCC\xCC\xCC\x41\xFF\x0E\x4C\x8D\xBB\x00\x01\x00\x00", "x????xxxxxxxxxx");
 
 void TimeService::Install()
 {

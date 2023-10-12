@@ -1,7 +1,5 @@
 #pragma once
 
-#include "BlackboardStatus.h"
-
 class BlackboardHelper
 {
 public:
@@ -45,7 +43,7 @@ public:
 
 	inline static app::player::BlackboardBattle* GetBlackboardBattle()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return nullptr;
@@ -55,7 +53,7 @@ public:
 		if (!pSonic)
 			return nullptr;
 
-		auto* pPlayerBlackboard = pSonic->GetComponent<app::player::GOCPlayerBlackboard>();
+		auto* pPlayerBlackboard = pSonic->GetGOC<app::player::GOCPlayerBlackboard>();
 
 		if (!pPlayerBlackboard)
 			return nullptr;
@@ -80,7 +78,7 @@ public:
 
 	inline static app::player::BlackboardStatus* GetBlackboardStatus()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return nullptr;
@@ -90,7 +88,7 @@ public:
 		if (!pSonic)
 			return nullptr;
 
-		auto* pPlayerBlackboard = pSonic->GetComponent<app::player::GOCPlayerBlackboard>();
+		auto* pPlayerBlackboard = pSonic->GetGOC<app::player::GOCPlayerBlackboard>();
 
 		if (!pPlayerBlackboard)
 			return nullptr;
@@ -190,7 +188,7 @@ public:
 
 	inline static bool IsSideView()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return false;
@@ -200,7 +198,7 @@ public:
 		if (!pSonic)
 			return false;
 
-		auto* pPlayerParameter = pSonic->GetComponent("GOCPlayerParameter");
+		auto* pPlayerParameter = pSonic->GetGOC("GOCPlayerParameter");
 
 		if (!pPlayerParameter)
 			return false;
@@ -210,7 +208,7 @@ public:
 
 	inline static bool IsUnderwater()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return false;
@@ -220,7 +218,7 @@ public:
 		if (!pSonic)
 			return false;
 
-		auto* pPlayerParameter = pSonic->GetComponent("GOCPlayerParameter");
+		auto* pPlayerParameter = pSonic->GetGOC("GOCPlayerParameter");
 
 		if (!pPlayerParameter)
 			return false;

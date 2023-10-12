@@ -1,4 +1,4 @@
-CL_SCAN_SIGNATURE(m_SigGameModeStageUpdate, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x48\x89\x7C\x24\x18\x4C\x89\x74\x24\x20\x55\x48\x8D\xAC\x24\x20\xFE", "xxxxxxxxxxxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigGameModeStageUpdate, 0x1401703F0, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x55\x57\x41\x56\x48\x8D\xAC\x24\x60", "xxxxxxxxxxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t a1, int64_t a2, int* a3)
 {

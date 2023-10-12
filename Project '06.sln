@@ -5,15 +5,6 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UncappedFramerate", "Project '06\UncappedFramerate\UncappedFramerate.csproj", "{B39B0EDB-A8CB-4892-BD8A-F77172AA3AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickBoot", "Project '06\QuickBoot\QuickBoot.csproj", "{C049C95E-E88D-439B-B946-2FB33C5B5FA0}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5D2AD615-FE02-4241-A20F-BD672001435C} = {5D2AD615-FE02-4241-A20F-BD672001435C}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickBoot.Utility", "Project '06\QuickBoot.Utility\QuickBoot.Utility.csproj", "{5D2AD615-FE02-4241-A20F-BD672001435C}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "QuickBoot.Shared", "Project '06\QuickBoot.Shared\QuickBoot.Shared.shproj", "{25DC51D9-12CC-42AF-A7CA-0F3641D14019}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E3LifeIconRedesign", "Project '06\E3LifeIconRedesign\E3LifeIconRedesign.csproj", "{557B4AAE-2A5B-4C66-AD26-FFC9BDE3CFC2}"
 EndProject
 Global
@@ -26,14 +17,6 @@ Global
 		{B39B0EDB-A8CB-4892-BD8A-F77172AA3AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B39B0EDB-A8CB-4892-BD8A-F77172AA3AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B39B0EDB-A8CB-4892-BD8A-F77172AA3AFF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C049C95E-E88D-439B-B946-2FB33C5B5FA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C049C95E-E88D-439B-B946-2FB33C5B5FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C049C95E-E88D-439B-B946-2FB33C5B5FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C049C95E-E88D-439B-B946-2FB33C5B5FA0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D2AD615-FE02-4241-A20F-BD672001435C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D2AD615-FE02-4241-A20F-BD672001435C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D2AD615-FE02-4241-A20F-BD672001435C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D2AD615-FE02-4241-A20F-BD672001435C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{557B4AAE-2A5B-4C66-AD26-FFC9BDE3CFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{557B4AAE-2A5B-4C66-AD26-FFC9BDE3CFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{557B4AAE-2A5B-4C66-AD26-FFC9BDE3CFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -44,10 +27,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {58A3D613-40A6-46D8-95CD-81BD8EF68106}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Project '06\QuickBoot.Shared\QuickBoot.Shared.projitems*{25dc51d9-12cc-42af-a7ca-0f3641d14019}*SharedItemsImports = 13
-		Project '06\QuickBoot.Shared\QuickBoot.Shared.projitems*{5d2ad615-fe02-4241-a20f-bd672001435c}*SharedItemsImports = 4
-		Project '06\QuickBoot.Shared\QuickBoot.Shared.projitems*{c049c95e-e88d-439b-b946-2fb33c5b5fa0}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

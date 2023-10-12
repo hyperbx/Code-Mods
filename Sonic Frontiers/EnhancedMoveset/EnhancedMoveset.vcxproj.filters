@@ -7,7 +7,6 @@
     <ClInclude Include="StateDropDash.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="BlackboardHelper.h" />
-    <ClInclude Include="BlackboardStatus.h" />
     <ClInclude Include="ESonicState.h" />
     <ClInclude Include="StateQuickStompDash.h" />
     <ClInclude Include="StatePluginAirTrick.h" />
@@ -30,7 +29,6 @@
     <ClInclude Include="StatePluginCyloop.h" />
     <ClInclude Include="StateSpringJumpHeadLand.h" />
     <ClInclude Include="MsgShakeCameraName.h" />
-    <ClInclude Include="BlackboardItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />

@@ -60,7 +60,7 @@ std::unordered_map<uint8_t, std::vector<uint32_t>> m_HardAll =
 	{ STAGE_SUPREME, { 815, 935, 1055, 1175 } },
 };
 
-CL_SCAN_SIGNATURE(m_SigLoadAsset, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x81\xEC\xD0\x00\x00\x00\x49\x8B\xF8", "xxxxxxxxxxxxxxxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigLoadAsset, 0x140EE8970, "\x48\x89\x5C\x24\x08\x48\x89\x74\x24\x10\x57\x48\x81\xEC\xD0\x00\x00\x00\x49\x8B\xF8", "xxxxxxxxxxxxxxxxxxxxx");
 
 HOOK(int64_t, __fastcall, LoadAsset, m_SigLoadAsset(), int64_t a1, const char* in_assetName, const char** in_resourceType)
 {

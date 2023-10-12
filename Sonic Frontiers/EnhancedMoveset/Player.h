@@ -71,7 +71,7 @@ public:
 
 	static app::player::Sonic* GetSonic()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return nullptr;
@@ -86,12 +86,12 @@ public:
 		if (!pSonic)
 			return nullptr;
 
-		return pSonic->GetComponent<app::player::GOCPlayerKinematicParams>();
+		return pSonic->GetGOC<app::player::GOCPlayerKinematicParams>();
 	}
 
 	static bool IsGrounded()
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return false;
@@ -101,7 +101,7 @@ public:
 		if (!pLevelInfo)
 			return false;
 
-		return pLevelInfo->playerInfos[0]->IsGrounded;
+		return pLevelInfo->pPlayerInfos[0]->IsGrounded;
 	}
 
 	static bool IsGroundedSpecial()
@@ -162,7 +162,7 @@ public:
 
 		FUNCTION_PTR(void, __fastcall, fpSetAnimation, m_SigSetAnimation(), int64_t in_pGOCPlayerVisual, const char* in_pAnimationName, uint8_t a3);
 
-		return fpSetAnimation((int64_t)(pSonic->GetComponent("GOCPlayerVisual")), in_pAnimationName, 0xFE);
+		return fpSetAnimation((int64_t)(pSonic->GetGOC("GOCPlayerVisual")), in_pAnimationName, 0xFE);
 	}
 
 	static void SetAnimationEffect(int64_t in_pSonicContext, bool in_enabled, const char* in_pEffectName = "")
@@ -190,7 +190,7 @@ public:
 
 		FUNCTION_PTR(double, __fastcall, fpSetAnimationParameter, m_SigSetAnimationParameter(), int64_t in_pGOCPlayerVisual, const char* in_pAnimationParameterName, float in_value);
 
-		return fpSetAnimationParameter((int64_t)(pSonic->GetComponent("GOCPlayerVisual")), in_pAnimationParameterName, in_value);
+		return fpSetAnimationParameter((int64_t)(pSonic->GetGOC("GOCPlayerVisual")), in_pAnimationParameterName, in_value);
 	}
 
 	static void SetDamageSphere(int64_t in_pSonicContext, bool in_enabled, float in_radius = 1.0f)
@@ -272,7 +272,7 @@ public:
 
 	static void SetBulletTime(bool in_isEnabled, float in_timeScale = 0.125f, float in_fadeTime = 0.25f, const char* in_pLayerName = "ninja", int in_flags = 0x30002F0)
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return;
@@ -306,7 +306,7 @@ public:
 
 	static int PlaySound(const char* in_pSoundName)
 	{
-		auto* pGameDocument = app::GameDocument::GetSingleton();
+		auto* pGameDocument = hh::game::GameManager::GetSingleton();
 
 		if (!pGameDocument)
 			return 0;
@@ -320,7 +320,7 @@ public:
 
 		FUNCTION_PTR(int*, __fastcall, fpPlaySound, m_SigPlaySound(), int64_t in_pGOCSound, int* a2, const char* in_soundName, float a4);
 
-		return *fpPlaySound((int64_t)(pSonic->GetComponent("GOCSound")), &zero, in_pSoundName, 0.0f);
+		return *fpPlaySound((int64_t)(pSonic->GetGOC("GOCSound")), &zero, in_pSoundName, 0.0f);
 	}
 
 	static void StopSound(int* in_pSoundHandle)

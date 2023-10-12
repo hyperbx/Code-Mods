@@ -7,7 +7,7 @@
 #include <detours.h>
 
 // BlueBlur must be included before STL
-#include "..\BlueBlurCommon.h"
+#include "..\Dependencies\BlueBlurCommon.h"
 
 // Standard library
 #include <algorithm>

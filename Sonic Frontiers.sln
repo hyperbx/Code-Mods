@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IslandMusicCustomiser", "Sonic Frontiers\IslandMusicCustomiser\IslandMusicCustomiser.vcxproj", "{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RealTimeAndWeather", "Sonic Frontiers\RealTimeAndWeather\RealTimeAndWeather.vcxproj", "{3B1FACDC-2FB9-4CE7-ABF7-9F88E9F9501E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{62E332FF-297D-4307-B488-878B5C146BD7} = {62E332FF-297D-4307-B488-878B5C146BD7}
@@ -20,6 +18,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisableSkills", "Sonic Fron
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EnhancedMoveset", "Sonic Frontiers\EnhancedMoveset\EnhancedMoveset.vcxproj", "{19CDFC2A-2452-4528-9A9D-E69A99249E9D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test", "Sonic Frontiers\Test\Test.vcxproj", "{61763B92-4050-4D9A-AEB0-454CC08E8995}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,18 +30,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|Any CPU.Build.0 = Debug|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x64.ActiveCfg = Debug|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x64.Build.0 = Debug|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x86.ActiveCfg = Debug|Win32
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Debug|x86.Build.0 = Debug|Win32
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|Any CPU.ActiveCfg = Release|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|Any CPU.Build.0 = Release|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x64.ActiveCfg = Release|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x64.Build.0 = Release|x64
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x86.ActiveCfg = Release|Win32
-		{F83DD0D0-323D-4BD9-ABC1-FD412CA8ED85}.Release|x86.Build.0 = Release|Win32
 		{3B1FACDC-2FB9-4CE7-ABF7-9F88E9F9501E}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{3B1FACDC-2FB9-4CE7-ABF7-9F88E9F9501E}.Debug|Any CPU.Build.0 = Debug|x64
 		{3B1FACDC-2FB9-4CE7-ABF7-9F88E9F9501E}.Debug|x64.ActiveCfg = Debug|x64
@@ -114,6 +102,18 @@ Global
 		{19CDFC2A-2452-4528-9A9D-E69A99249E9D}.Release|x64.Build.0 = Release|x64
 		{19CDFC2A-2452-4528-9A9D-E69A99249E9D}.Release|x86.ActiveCfg = Release|Win32
 		{19CDFC2A-2452-4528-9A9D-E69A99249E9D}.Release|x86.Build.0 = Release|Win32
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|Any CPU.Build.0 = Debug|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|x64.ActiveCfg = Debug|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|x64.Build.0 = Debug|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|x86.ActiveCfg = Debug|Win32
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Debug|x86.Build.0 = Debug|Win32
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|Any CPU.ActiveCfg = Release|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|Any CPU.Build.0 = Release|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|x64.ActiveCfg = Release|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|x64.Build.0 = Release|x64
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|x86.ActiveCfg = Release|Win32
+		{61763B92-4050-4D9A-AEB0-454CC08E8995}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
