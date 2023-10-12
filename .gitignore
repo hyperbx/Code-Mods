@@ -350,5 +350,6 @@ MigrationBackup/
 
 # Test projects
 */.bak
-/Sonic Generations/Test
 /Sonic Colours Ultimate/Test
+/Sonic Frontiers/Test
+/Sonic Generations/Test
