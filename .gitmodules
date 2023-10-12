@@ -1,9 +1,9 @@
-[submodule "Dependencies/BlueBlur"]
-	path = Dependencies/BlueBlur
-	url = https://github.com/blueskythlikesclouds/BlueBlur.git
-[submodule "Dependencies/rangers-api"]
-	path = Dependencies/rangers-api
-	url = https://github.com/DeaTh-G/rangers-api.git
 [submodule "Dependencies/imgui/imgui"]
 	path = Dependencies/imgui/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "Sonic Generations/Dependencies/BlueBlur"]
+	path = Sonic Generations/Dependencies/BlueBlur
+	url = https://github.com/blueskythlikesclouds/BlueBlur.git
+[submodule "Sonic Frontiers/Dependencies/rangers-api"]
+	path = Sonic Frontiers/Dependencies/rangers-api
+	url = https://github.com/DeaTh-G/rangers-api.git
