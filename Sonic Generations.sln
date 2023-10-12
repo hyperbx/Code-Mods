@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FixWindowTitle", "Sonic Generations\FixWindowTitle\FixWindowTitle.vcxproj", "{0B047D67-6A8E-4DDF-A898-175651364E3C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ForcesHUD", "Sonic Generations\ForcesHUD\ForcesHUD.vcxproj", "{593DB095-44A2-4CE1-B2E1-0F952D8DD7D7}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScoreGenerations", "Sonic Generations\ScoreGenerations\ScoreGenerations.vcxproj", "{CF11FC10-0829-4D91-BCBE-A1D3BCC5A5AC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TailsDashRingsInStages", "Sonic Generations\TailsDashRingsInStages\TailsDashRingsInStages.vcxproj", "{DE8FE174-3508-4A39-9EEF-A4A04078B329}"
@@ -14,21 +12,6 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RestoreTimeBreakMusic", "Sonic Generations\RestoreTimeBreakMusic\RestoreTimeBreakMusic.vcxproj", "{020654BF-9913-47E2-9573-055EC4ADCA95}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RestoreSilverPinchMusic", "Sonic Generations\RestoreSilverPinchMusic\RestoreSilverPinchMusic.vcxproj", "{E566C733-73F5-425C-9BFF-DC30CA49E92C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{0D6EA313-F767-4163-BDC2-73B07305F10B}"
-	ProjectSection(SolutionItems) = preProject
-		Sonic Generations\BlueBlurCommon.h = Sonic Generations\BlueBlurCommon.h
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AdventureHUD", "Sonic Generations\AdventureHUD\AdventureHUD.vcxproj", "{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "P5HUD", "Sonic Generations\P5HUD\P5HUD.vcxproj", "{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ColorsHUD", "Sonic Generations\ColorsHUD\ColorsHUD.vcxproj", "{5BD6599F-193F-4019-9940-60CD2F88B924}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MetalSonic", "Sonic Generations\MetalSonic\MetalSonic.vcxproj", "{DE7715DF-0242-4E19-8F10-A277F46C30DA}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FrontiersSonic", "Sonic Generations\FrontiersSonic\FrontiersSonic.vcxproj", "{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,10 +23,6 @@ Global
 		{0B047D67-6A8E-4DDF-A898-175651364E3C}.Debug|x86.Build.0 = Debug|Win32
 		{0B047D67-6A8E-4DDF-A898-175651364E3C}.Release|x86.ActiveCfg = Release|Win32
 		{0B047D67-6A8E-4DDF-A898-175651364E3C}.Release|x86.Build.0 = Release|Win32
-		{593DB095-44A2-4CE1-B2E1-0F952D8DD7D7}.Debug|x86.ActiveCfg = Debug|Win32
-		{593DB095-44A2-4CE1-B2E1-0F952D8DD7D7}.Debug|x86.Build.0 = Debug|Win32
-		{593DB095-44A2-4CE1-B2E1-0F952D8DD7D7}.Release|x86.ActiveCfg = Release|Win32
-		{593DB095-44A2-4CE1-B2E1-0F952D8DD7D7}.Release|x86.Build.0 = Release|Win32
 		{CF11FC10-0829-4D91-BCBE-A1D3BCC5A5AC}.Debug|x86.ActiveCfg = Debug|Win32
 		{CF11FC10-0829-4D91-BCBE-A1D3BCC5A5AC}.Debug|x86.Build.0 = Debug|Win32
 		{CF11FC10-0829-4D91-BCBE-A1D3BCC5A5AC}.Release|x86.ActiveCfg = Release|Win32
@@ -60,26 +39,6 @@ Global
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Debug|x86.Build.0 = Debug|Win32
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Release|x86.ActiveCfg = Release|Win32
 		{E566C733-73F5-425C-9BFF-DC30CA49E92C}.Release|x86.Build.0 = Release|Win32
-		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Debug|x86.ActiveCfg = Debug|Win32
-		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Debug|x86.Build.0 = Debug|Win32
-		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Release|x86.ActiveCfg = Release|Win32
-		{B83B6266-3EFF-4B7A-B094-85FF07C8DE4F}.Release|x86.Build.0 = Release|Win32
-		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Debug|x86.ActiveCfg = Debug|Win32
-		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Debug|x86.Build.0 = Debug|Win32
-		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Release|x86.ActiveCfg = Release|Win32
-		{A50B35F0-3CD8-4393-850F-C6C1D7E30D2E}.Release|x86.Build.0 = Release|Win32
-		{5BD6599F-193F-4019-9940-60CD2F88B924}.Debug|x86.ActiveCfg = Debug|Win32
-		{5BD6599F-193F-4019-9940-60CD2F88B924}.Debug|x86.Build.0 = Debug|Win32
-		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.ActiveCfg = Release|Win32
-		{5BD6599F-193F-4019-9940-60CD2F88B924}.Release|x86.Build.0 = Release|Win32
-		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Debug|x86.ActiveCfg = Debug|Win32
-		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Debug|x86.Build.0 = Debug|Win32
-		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.ActiveCfg = Release|Win32
-		{DE7715DF-0242-4E19-8F10-A277F46C30DA}.Release|x86.Build.0 = Release|Win32
-		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Debug|x86.ActiveCfg = Debug|Win32
-		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Debug|x86.Build.0 = Debug|Win32
-		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Release|x86.ActiveCfg = Release|Win32
-		{8F842FAA-8DB7-4AAA-97DD-B69DDFB4A012}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
