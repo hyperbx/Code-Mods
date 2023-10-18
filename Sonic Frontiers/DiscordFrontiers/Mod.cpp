@@ -1,4 +1,4 @@
-extern "C" _declspec(dllexport) void Init(ModInfo* in_modInfo)
+EXPORT void Init(ModInfo* in_modInfo)
 {
 	Configuration::Read();
 
@@ -9,10 +9,16 @@ extern "C" _declspec(dllexport) void Init(ModInfo* in_modInfo)
 	LanguageHelper::Read(StringHelper::GetSubstringBeforeLastChar(in_modInfo->CurrentMod->Path, '\\').append(std::format("\\Languages\\{}.json", Configuration::Language)));
 }
 
-extern "C" _declspec(dllexport) void PostInit()
+EXPORT void PostInit()
 {
-	Discord::Initialise();
+	Discord::Init();
+	BattleRushListener::Init();
+	BossListener::Init();
+	GameModeListener::Init();
+	PlayerListener::Init();
+}
 
-	BossListener::Install();
-	GameModeListener::Install();
+EXPORT void OnFrame()
+{
+	StageListener::Update();
 }

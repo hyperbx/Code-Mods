@@ -26,7 +26,7 @@ CL_SCAN_SIGNATURE(m_SigStopEffect, 0x14B912E80, "\x48\x89\x5C\x24\x08\x57\x48\x8
 CL_SCAN_SIGNATURE(m_SigCheckBlackboardFlags, 0x1407DE270, "\x8B\xC2\x83\xE0\x3F\x44\x0F\xB6\xC0\x8B\xC2\x48\xC1\xE8\x06\x48\x8B\x44\xC1\x28", "xxxxxxxxxxxxxxxxxxxx");
 
 // Hooks
-CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmUpdate, 0x140802DF0, "\x40\x53\x55\x48\x83\xEC\x28\x49", "xxxxxxxx");
+CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmUpdate, 0x1408AA540, "\x40\x53\x55\x48\x83\xEC\x28\x49", "xxxxxxxx");
 CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmAirStateUpdate, 0x1408024E0, "\x41\x56\x48\x83\xEC\x30\x0F\xB6\x81\x1C", "xxxxxxxxxx");
 CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmGroundStateUpdate, 0x1408025D0, "\x40\x53\x41\x56\x41\x57\x48\x83\xEC\x20\xF6\x81\x1C", "xxxxxxxxxxxxx");
 CL_SCAN_SIGNATURE(m_SigPlayerKinematicsAirUpdateCaller, 0x14082C1C6, "\xE8\xCC\xCC\xCC\xCC\x80\xBF\x10\x01\x00\x00\x00", "x????xxxxxxx");

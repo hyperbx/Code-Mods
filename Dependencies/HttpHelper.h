@@ -8,18 +8,18 @@ using json = nlohmann::json;
 
 class HttpHelper
 {
-	static inline size_t WriteCallback(char* ptr, size_t size, size_t nmemb, void* userdata)
+	static inline size_t WriteCallback(char* in_ptr, size_t in_size, size_t in_nmemb, void* in_userdata)
 	{
-		std::string* response = static_cast<std::string*>(userdata);
+		std::string* response = static_cast<std::string*>(in_userdata);
 		{
-			response->append(ptr, size * nmemb);
+			response->append(in_ptr, in_size * in_nmemb);
 		}
 
-		return size * nmemb;
+		return in_size * in_nmemb;
 	}
 
 public:
-	static std::string ReadStringFromUrl(const std::string& url)
+	static std::string ReadStringFromUrl(const std::string& in_url)
 	{
 		std::string result;
 
@@ -27,7 +27,7 @@ public:
 
 		if (curl)
 		{
-			curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+			curl_easy_setopt(curl, CURLOPT_URL, in_url.c_str());
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &result);
 
@@ -39,6 +39,37 @@ public:
 
 			curl_easy_cleanup(curl);
 		}
+
+		return result;
+	}
+
+	static long GetResponse(const std::string& in_url)
+	{
+		long result = -1L;
+		CURL* curl = curl_easy_init();
+
+		if (!curl)
+			return result;
+
+		curl_easy_setopt(curl, CURLOPT_URL, in_url.c_str());
+		curl_easy_setopt(curl, CURLOPT_NOBODY, 1L);
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+
+		CURLcode res = curl_easy_perform(curl);
+
+		if (res != CURLE_OK)
+		{
+			std::cerr << "[HttpHelper] curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+		}
+		else
+		{
+			long response;
+			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response);
+
+			result = response;
+		}
+
+		curl_easy_cleanup(curl);
 
 		return result;
 	}
@@ -173,9 +204,9 @@ public:
 		}
 	};
 
-	static IpInfo GetIpInfo(std::string ip)
+	static IpInfo GetIpInfo(std::string in_ip)
 	{
-		std::string response = ReadStringFromUrl("http://ip-api.com/json/" + ip + "?fields=66846719");
+		std::string response = ReadStringFromUrl("http://ip-api.com/json/" + in_ip + "?fields=66846719");
 
 		if (response.empty())
 			return IpInfo();

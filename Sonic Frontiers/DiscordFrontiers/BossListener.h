@@ -3,9 +3,8 @@
 class BossListener
 {
 public:
-	static void Install();
-
-	static void Update(std::string in_state);
+	static void Init();
+	static void Glitch(float in_deltaTime);
 };
 
 CL_SCAN_SIGNATURE(m_SigStatePluginBossBattleCtor, 0x14099A160, "\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x20\x33\xFF\x48\x89\x51\x08\x89\x79\x14\x48\x8D\x05\xCC\xCC\xCC\xCC\xC6\x41\x10\x01\x48\x8B\xD9\x66\x89\x79\x18\x48\x89\x79\x20\x48\x89\x01\x89", "xxxxxxxxxxxxxxxxxxxxxx????xxxxxxxxxxxxxxxxxxx");

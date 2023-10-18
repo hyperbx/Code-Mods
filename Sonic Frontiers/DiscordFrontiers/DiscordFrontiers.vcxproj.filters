@@ -6,6 +6,11 @@
     <ClInclude Include="Discord.h" />
     <ClInclude Include="BossListener.h" />
     <ClInclude Include="Configuration.h" />
+    <ClInclude Include="StageHelper.h" />
+    <ClInclude Include="StageListener.h" />
+    <ClInclude Include="BattleRushListener.h" />
+    <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="MasterTrialListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -15,5 +20,9 @@
     <ClCompile Include="Discord.cpp" />
     <ClCompile Include="BossListener.cpp" />
     <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="StageHelper.cpp" />
+    <ClCompile Include="StageListener.cpp" />
+    <ClCompile Include="BattleRushListener.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
   </ItemGroup>
 </Project>

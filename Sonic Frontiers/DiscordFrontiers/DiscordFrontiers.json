@@ -7,7 +7,7 @@
 			"Elements":
 			[
 				{
-					"Name": "language",
+					"Name": "Language",
 					"DisplayName": "Language",
 					"Type": "LanguageType",
 					"DefaultValue": "English"

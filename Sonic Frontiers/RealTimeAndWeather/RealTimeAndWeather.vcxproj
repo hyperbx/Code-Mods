@@ -120,7 +120,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>detours.lib;syelog.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib\libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>detours.lib;syelog.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -175,7 +175,7 @@ copy /Y "$(MSBuildProjectDirectory)\Utility\bin\$(Configuration)\RealTimeAndWeat
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>detours.lib;syelog.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib\libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>detours.lib;syelog.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>

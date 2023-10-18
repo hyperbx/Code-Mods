@@ -113,17 +113,17 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(ProjectDir)\..\Dependencies;$(SolutionDir)Dependencies\Detours\include;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Pch.h</ForcedIncludeFiles>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PreprocessorDefinitions>_WINDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>detours.lib;syelog.lib;discord-rpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\Discord\x64\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>detours.lib;syelog.lib;discord-rpc.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib;$(SolutionDir)Dependencies\Discord\x64\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
@@ -166,19 +166,19 @@ copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildP
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(SolutionDir)Dependencies\Detours\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies;$(ProjectDir)\..\Dependencies;$(SolutionDir)Dependencies\Detours\include;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>Pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>Pch.h</ForcedIncludeFiles>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <PreprocessorDefinitions>_WINDLL;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_WINDLL;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>detours.lib;syelog.lib;discord-rpc.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\Discord\x64\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>detours.lib;syelog.lib;discord-rpc.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;libcurl_a.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\Detours\lib\x64;$(SolutionDir)Dependencies\curl\builds\libcurl-vc-x64-release-static-ipv6-sspi-schannel\lib;$(SolutionDir)Dependencies\Discord\x64\lib</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(MSBuildProjectDirectory)\Mod.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\mod.ini"
@@ -189,13 +189,19 @@ copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildP
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BattleRushListener.h" />
     <ClInclude Include="BossListener.h" />
+    <ClInclude Include="MasterTrialListener.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="Discord.h" />
     <ClInclude Include="Pch.h" />
     <ClInclude Include="GameModeListener.h" />
+    <ClInclude Include="PlayerListener.h" />
+    <ClInclude Include="StageHelper.h" />
+    <ClInclude Include="StageListener.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BattleRushListener.cpp" />
     <ClCompile Include="BossListener.cpp" />
     <ClCompile Include="Configuration.cpp" />
     <ClCompile Include="Discord.cpp" />
@@ -208,6 +214,9 @@ copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildP
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="GameModeListener.cpp" />
+    <ClCompile Include="PlayerListener.cpp" />
+    <ClCompile Include="StageHelper.cpp" />
+    <ClCompile Include="StageListener.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,132 +1,67 @@
-HOOK(void*, __fastcall, GameModeTitleCtor, m_SigGameModeTitleCtor(), void* a1, int64_t a2, int64_t a3)
-{
-	Discord::Update(LanguageHelper::Localise("StatusMainMenu"), "", "default", "", 0);
+bool m_isCyberSpaceChallengeTimeStarted = false;
 
-	return originalGameModeTitleCtor(a1, a2, a3);
+HOOK(void*, __fastcall, GameModeTitleCtor, m_SigGameModeTitleCtor(), int64_t in_pThis, int64_t a2, int64_t a3)
+{
+	Discord::Commit(LanguageHelper::Localise("DetailsGameModeTitle"), "", "default", "", 0);
+
+	BattleRushListener::IsBattleRush = false;
+	GameModeListener::IsCyberSpaceChallenge = false;
+	m_isCyberSpaceChallengeTimeStarted = false;
+
+	return originalGameModeTitleCtor(in_pThis, a2, a3);
 }
 
-HOOK(void*, __fastcall, GameModeTutorialCtor, m_SigGameModeTutorialCtor(), void* a1, int64_t a2, int64_t a3)
+HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t in_pThis, int64_t a2, int* a3)
 {
-	Discord::Update(LanguageHelper::Localise("LocationTraining"), "", "training", "default", TimeHelper::GetSystemEpoch());
+	// The game mode updates when switching to Super Sonic 2, for some reason.
+	if (Discord::LargeImageKey == "supreme2")
+		return originalGameModeStageUpdate(in_pThis, a2, a3);
 
-	return originalGameModeTutorialCtor(a1, a2, a3);
+	Discord::State = LanguageHelper::Localise("StateExploring");
+
+	return originalGameModeStageUpdate(in_pThis, a2, a3);
 }
 
-HOOK(void*, __fastcall, GameModeFishingCtor, m_SigGameModeFishingCtor(), void* a1, int64_t a2, int64_t a3)
+HOOK(int64_t, __fastcall, GameModeCyberStageChallengeCtor, m_SigGameModeCyberStageChallengeCtor(), int64_t in_pThis, int64_t a2, int64_t a3)
 {
-	Discord::Update(LanguageHelper::Localise("StatusFishing"), Discord::Details, Discord::LargeImageKey, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+	GameModeListener::IsCyberSpaceChallenge = true;
 
-	return originalGameModeFishingCtor(a1, a2, a3);
-}
-
-HOOK(void*, __fastcall, GameModeHackingCtor, 0x1401B4220, void* a1, int64_t a2, int64_t a3) // TODO: replace address.
-{
-	if (StringHelper::Compare(GameModeListener::Island, "w5r01"))
+	if (!m_isCyberSpaceChallengeTimeStarted)
 	{
-		Discord::Update(LanguageHelper::Localise("BossTheEnd"), "", GameModeListener::Island, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
-	}
-	else
-	{
-		Discord::Update(LanguageHelper::Localise("StatusHacking"), "", "hacking", "default", TimeHelper::GetSystemEpoch());
-	}
-
-	return originalGameModeHackingCtor(a1, a2, a3);
-}
-
-HOOK(void*, __fastcall, GameModeStageCtor, m_SigGameModeStageCtor(), void* a1, int64_t a2, int64_t a3)
-{
-	GameModeListener::Update(GameModeListener::Island);
-
-	return originalGameModeStageCtor(a1, a2, a3);
-}
-
-HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t a1, int64_t a2, int* a3)
-{
-	auto worldId = (const char*)(a1 + 0xA0);
-	auto worldPrefix = std::string(worldId).substr(0, 2);
-
-	if (worldId && !StringHelper::Compare(worldId, "w1f01") &&
-		std::find(GameModeListener::Islands.begin(), GameModeListener::Islands.end(), worldPrefix) != GameModeListener::Islands.end())
-	{
-		GameModeListener::Island = worldId;
+		Discord::StartTime = TimeHelper::GetSystemEpoch();
+		m_isCyberSpaceChallengeTimeStarted = true;
 	}
 
-	Discord::State = LanguageHelper::Localise("StatusExploring");
-
-	return originalGameModeStageUpdate(a1, a2, a3);
+	return originalGameModeCyberStageChallengeCtor(in_pThis, a2, a3);
 }
 
-HOOK(void*, __fastcall, GameModeCyberStageCtor, m_SigGameModeCyberStageCtor(), void* a1, int64_t a2, int64_t a3)
-{
-	GameModeListener::Update(GameModeListener::Stage, true);
-
-	return originalGameModeCyberStageCtor(a1, a2, a3);
-}
-
-HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), void* a1, int64_t a2, int64_t a3)
-{
-	Discord::Update(LanguageHelper::Localise("StatusCredits"), "", "default", "", 0);
-
-	return originalGameModeStaffRollCtor(a1, a2, a3);
-}
-
-HOOK(int64_t, __fastcall, GameModeCyberStageUpdate, m_SigGameModeCyberStageUpdate(), int64_t a1, int64_t a2, int* a3)
-{
-	GameModeListener::Stage = (const char*)(a1 + 0xA0);
-
-	return originalGameModeCyberStageUpdate(a1, a2, a3);
-}
-
-HOOK(char, __fastcall, GameModeCyberStageRetryFromMenuInit, m_SigGameModeCyberStageRetryFromMenuInit(), int64_t a1, int64_t a2)
+HOOK(char, __fastcall, GameModeRetryFromMenuInit, m_SigGameModeRetryFromMenuInit(), int64_t in_pThis, int64_t a2)
 {
 	Discord::ResetTime();
 
-	return originalGameModeCyberStageRetryFromMenuInit(a1, a2);
+	return originalGameModeRetryFromMenuInit(in_pThis, a2);
 }
 
-void GameModeListener::Update(std::string in_stageId, bool in_isCyberSpace)
+HOOK(int64_t, __fastcall, GameModeCyberStageChallengeRetryFromMenuInit, m_SigGameModeCyberStageChallengeRetryFromMenuInit(), int64_t in_pThis, int64_t a2)
 {
-#if _DEBUG
-	printf("[Discord Frontiers] World: %s\n", in_stageId.c_str());
-#endif
+	Discord::ResetTime();
 
-	auto name = GetNameFromStageId(in_stageId);
-	auto unknown = LanguageHelper::Localise("LocationUnknown");
-
-	if (in_isCyberSpace)
-	{
-		Discord::Update
-		(
-			name == "unknown" ? unknown : name,
-			LanguageHelper::Localise("LocationCyberSpace"),
-			name == "unknown" ? unknown : in_stageId,
-			"default",
-			TimeHelper::GetSystemEpoch()
-		);
-	}
-	else
-	{
-		Discord::Update
-		(
-			Discord::State,
-			name == "unknown" ? unknown : LanguageHelper::Localise(name),
-			name == "unknown" ? unknown : in_stageId,
-			"default",
-			TimeHelper::GetSystemEpoch()
-		);
-	}
+	return originalGameModeCyberStageChallengeRetryFromMenuInit(in_pThis, a2);
 }
 
-void GameModeListener::Install()
+HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), int64_t in_pThis, int64_t a2, int64_t a3)
+{
+	Discord::Commit(LanguageHelper::Localise("DetailsGameModeCredits"), "", "default", "", 0);
+
+	return originalGameModeStaffRollCtor(in_pThis, a2, a3);
+}
+
+void GameModeListener::Init()
 {
 	INSTALL_HOOK(GameModeTitleCtor);
-	INSTALL_HOOK(GameModeTutorialCtor);
-	INSTALL_HOOK(GameModeFishingCtor);
-	INSTALL_HOOK(GameModeHackingCtor);
-	INSTALL_HOOK(GameModeStageCtor);
 	INSTALL_HOOK(GameModeStageUpdate);
-	INSTALL_HOOK(GameModeCyberStageCtor);
+	INSTALL_HOOK(GameModeCyberStageChallengeCtor);
+	INSTALL_HOOK(GameModeRetryFromMenuInit);
+	INSTALL_HOOK(GameModeCyberStageChallengeRetryFromMenuInit);
 	INSTALL_HOOK(GameModeStaffRollCtor);
-	INSTALL_HOOK(GameModeCyberStageUpdate);
-	INSTALL_HOOK(GameModeCyberStageRetryFromMenuInit);
 }

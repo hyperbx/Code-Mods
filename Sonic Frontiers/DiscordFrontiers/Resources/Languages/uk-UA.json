@@ -1,21 +1,67 @@
 {
-  "Game": "Sonic Frontiers",
-  "StatusMainMenu": "Головне Меню",
-  "StatusExploring": "Досліджує",
-  "StatusFishing": "Рибалить",
-  "StatusHacking": "Хакає",
-  "StatusCredits": "Титри",
-  "LocationKronos": "Острів Кроноса",
-  "LocationAres": "Острів Ареса",
-  "LocationChaos": "Острів Хаоса",
-  "LocationRhea": "Острів Реї",
-  "LocationOuranos": "Острів Урана",
-  "LocationCyberSpace": "Кіберпростір",
-  "LocationTraining": "Симулятор тренувань",
-  "LocationUnknown": "Невідомо",
-  "BossGiganto": "Проти Гіганта",
-  "BossWyvern": "Проти Віверни",
-  "BossKnight": "Проти Лицаря",
-  "BossSupreme": "Проти Отамана",
-  "BossTheEnd": "Проти Загибелі"
+  "Game":                                  "Sonic Frontiers",
+
+  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeCredits":                "Титри",
+  "DetailsGameModeCyberStage":             "Кіберпростір",
+  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeTitle":                  "Головне Меню",
+										  
+  "DetailsLocationKronos":                 "Острів Кроноса",
+  "DetailsLocationAres":                   "Острів Ареса",
+  "DetailsLocationChaos":                  "Острів Хаоса",
+  "DetailsLocationRhea":                   "Острів Реї",
+  "DetailsLocationOuranos":                "Острів Урана",
+  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationUnknown":                "Невідомо",
+
+  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
+  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
+  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
+  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
+  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
+  
+  "StateExploring":                        "Досліджує",
+  "StateGameModeFishing":                  "Рибалить",
+  "StateGameModeHacking":                  "Хакає",
+  "StateGameModeTutorial":                 "Симулятор тренувань",
+
+  "StateBossGiganto":                      "Проти Гіганта",
+  "StateBossWyvern":                       "Проти Віверни",
+  "StateBossKnight":                       "Проти Лицаря",
+  "StateBossSupreme":                      "Проти Отамана",
+  "StateBossSupremeBeast":                 "Проти Отамана?",           // VERIFY: is this question mark placement correct?
+  "StateBossTheEnd":                       "Проти Загибелі",
+										  
+  "StateEnemySoldier":                     "vs. Soldier",              // TODO
+  "StateEnemyBubble":                      "vs. Bubble",               // TODO
+  "StateEnemyShell":                       "vs. Shell",                // TODO
+  "StateEnemyBanger":                      "vs. Banger",               // TODO
+  "StateEnemyCyclone":                     "vs. Cyclone",              // TODO
+  "StateEnemyHopper":                      "vs. Hopper",               // TODO
+  "StateEnemySniper":                      "vs. Sniper",               // TODO
+  "StateEnemyJellyfish":                   "vs. Jellyfish",            // TODO
+  "StateEnemyCapture":                     "vs. Capture",              // TODO
+  "StateEnemyEagle":                       "vs. Eagle",                // TODO
+  "StateEnemyWolf":                        "vs. Wolf",                 // TODO
+  "StateEnemyBalloon":                     "vs. Balloon",              // TODO
+										        
+  "StateGuardianNinja":                    "vs. Ninja",                // TODO
+  "StateGuardianSquid":                    "vs. Squid",                // TODO
+  "StateGuardianTower":                    "vs. Tower",                // TODO
+  "StateGuardianAsura":                    "vs. Asura",                // TODO
+  "StateGuardianShark":                    "vs. Shark",                // TODO
+  "StateGuardianSumo":                     "vs. Sumo",                 // TODO
+  "StateGuardianTank":                     "vs. Tank",                 // TODO
+  "StateGuardianStrider":                  "vs. Strider",              // TODO
+  "StateGuardianShinobi":                  "vs. Shinobi",              // TODO
+  "StateGuardianExcavator":                "vs. Excavator",            // TODO
+  "StateGuardianSpider":                   "vs. Spider",               // TODO
+  "StateGuardianFortress":                 "vs. Fortress",             // TODO
+  "StateGuardianRedPillar":                "vs. Red Pillar",           // TODO
+  "StateGuardianCaterpillar":              "vs. Caterpillar",          // TODO
+  "StateGuardianKunoichi":                 "vs. Kunoichi",             // TODO
+  "StateGuardianSilverHammer":             "vs. Silver Hammer",        // TODO
+  "StateGuardianMasterNinja":              "vs. Master Ninja",         // TODO
+  "StateGuardianGhost":                    "vs. Ghost"                 // TODO
 }

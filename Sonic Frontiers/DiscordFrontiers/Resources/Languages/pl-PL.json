@@ -1,21 +1,67 @@
 {
-  "Game": "Sonic Frontiers",
-  "StatusMainMenu": "Menu Główne",
-  "StatusExploring": "Zwiedzanie",
-  "StatusFishing": "Łowienie ryb",
-  "StatusHacking": "Hakowanie",
-  "StatusCredits": "Napisy Końcowe",
-  "LocationKronos": "Kronos Island",
-  "LocationAres": "Ares Island",
-  "LocationChaos": "Chaos Island",
-  "LocationRhea": "Rhea Island",
-  "LocationOuranos": "Ouranos Island",
-  "LocationCyberSpace": "Cyberprzestrzeń",
-  "LocationTraining": "Symulator Treningowy",
-  "LocationUnknown": "Nieznane",
-  "BossGiganto": "Kontra Giganto",
-  "BossWyvern": "Kontra Wyvern",
-  "BossKnight": "Kontra Knight",
-  "BossSupreme": "Kontra Supreme",
-  "BossTheEnd": "Kontra The End"
+  "Game":                                  "Sonic Frontiers",
+
+  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeCredits":                "Napisy Końcowe",
+  "DetailsGameModeCyberStage":             "Cyberprzestrzeń",
+  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeTitle":                  "Menu Główne",
+										  
+  "DetailsLocationKronos":                 "Kronos Island",
+  "DetailsLocationAres":                   "Ares Island",
+  "DetailsLocationChaos":                  "Chaos Island",
+  "DetailsLocationRhea":                   "Rhea Island",
+  "DetailsLocationOuranos":                "Ouranos Island",
+  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationUnknown":                "Nieznane",
+
+  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
+  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
+  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
+  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
+  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
+  
+  "StateExploring":                        "Zwiedzanie",
+  "StateGameModeFishing":                  "Łowienie ryb",
+  "StateGameModeHacking":                  "Hakowanie",
+  "StateGameModeTutorial":                 "Symulator Treningowy",
+
+  "StateBossGiganto":                      "Kontra Giganto",
+  "StateBossWyvern":                       "Kontra Wyvern",
+  "StateBossKnight":                       "Kontra Knight",
+  "StateBossSupreme":                      "Kontra Supreme",
+  "StateBossSupremeBeast":                 "Kontra Supreme?",             // VERIFY: is this question mark placement correct?
+  "StateBossTheEnd":                       "Kontra The End",
+										  
+  "StateEnemySoldier":                     "Kontra Soldier",              // VERIFY
+  "StateEnemyBubble":                      "Kontra Bubble",               // VERIFY
+  "StateEnemyShell":                       "Kontra Shell",                // VERIFY
+  "StateEnemyBanger":                      "Kontra Banger",               // VERIFY
+  "StateEnemyCyclone":                     "Kontra Cyclone",              // VERIFY
+  "StateEnemyHopper":                      "Kontra Hopper",               // VERIFY
+  "StateEnemySniper":                      "Kontra Sniper",               // VERIFY
+  "StateEnemyJellyfish":                   "Kontra Jellyfish",            // VERIFY
+  "StateEnemyCapture":                     "Kontra Capture",              // VERIFY
+  "StateEnemyEagle":                       "Kontra Eagle",                // VERIFY
+  "StateEnemyWolf":                        "Kontra Wolf",                 // VERIFY
+  "StateEnemyBalloon":                     "Kontra Balloon",              // VERIFY
+										        
+  "StateGuardianNinja":                    "Kontra Ninja",                // VERIFY
+  "StateGuardianSquid":                    "Kontra Squid",                // VERIFY
+  "StateGuardianTower":                    "Kontra Tower",                // VERIFY
+  "StateGuardianAsura":                    "Kontra Asura",                // VERIFY
+  "StateGuardianShark":                    "Kontra Shark",                // VERIFY
+  "StateGuardianSumo":                     "Kontra Sumo",                 // VERIFY
+  "StateGuardianTank":                     "Kontra Tank",                 // VERIFY
+  "StateGuardianStrider":                  "Kontra Strider",              // VERIFY
+  "StateGuardianShinobi":                  "Kontra Shinobi",              // VERIFY
+  "StateGuardianExcavator":                "Kontra Excavator",            // VERIFY
+  "StateGuardianSpider":                   "Kontra Spider",               // VERIFY
+  "StateGuardianFortress":                 "Kontra Fortress",             // VERIFY
+  "StateGuardianRedPillar":                "Kontra Red Pillar",           // VERIFY
+  "StateGuardianCaterpillar":              "Kontra Caterpillar",          // VERIFY
+  "StateGuardianKunoichi":                 "Kontra Kunoichi",             // VERIFY
+  "StateGuardianSilverHammer":             "Kontra Silver Hammer",        // VERIFY
+  "StateGuardianMasterNinja":              "Kontra Master Ninja",         // VERIFY
+  "StateGuardianGhost":                    "Kontra Ghost"                 // VERIFY
 }
