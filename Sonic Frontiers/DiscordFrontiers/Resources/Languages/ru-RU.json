@@ -1,26 +1,26 @@
 {
   "Game":                                  "Sonic Frontiers",
 
-  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeBattleRush":             "Быстрая битва",
   "DetailsGameModeCredits":                "Титры",
   "DetailsGameModeCyberStage":             "Киберпространство",
-  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeCyberStageChallenge":    "Кибериспытание",
   "DetailsGameModeTitle":                  "Главное Меню",
-										  
+
   "DetailsLocationKronos":                 "Остров Кроноса",
   "DetailsLocationAres":                   "Остров Ареса",
   "DetailsLocationChaos":                  "Остров Хаоса",
   "DetailsLocationRhea":                   "Остров Реи",
   "DetailsLocationOuranos":                "Остров Урана",
-  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationCustomStage":            "Пользовательский этап",
   "DetailsLocationUnknown":                "Неизвестно",
 
-  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
-  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
-  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
-  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
-  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
-  
+  "DetailsLocationMasterTrialDragon":      "Испытание дракона",
+  "DetailsLocationMasterTrialSnake":       "Испытание змея",
+  "DetailsLocationMasterTrialTiger":       "Испытание тигра",
+  "DetailsLocationMasterTrialCrane":       "Испытание журавля",
+  "DetailsLocationMasterTrialKing":        "Испытание коко-куратора",
+
   "StateExploring":                        "Исследование",
   "StateGameModeFishing":                  "Рыбалка",
   "StateGameModeHacking":                  "Взлом",
@@ -30,38 +30,38 @@
   "StateBossWyvern":                       "Против Виверны",
   "StateBossKnight":                       "Против Рыцаря",
   "StateBossSupreme":                      "Против Командора",
-  "StateBossSupremeBeast":                 "Против Командора?",        // VERIFY: is this question mark placement correct?
+  "StateBossSupremeBeast":                 "Против Командора?",
   "StateBossTheEnd":                       "Против Погибели",
-										  
-  "StateEnemySoldier":                     "vs. Soldier",              // TODO
-  "StateEnemyBubble":                      "vs. Bubble",               // TODO
-  "StateEnemyShell":                       "vs. Shell",                // TODO
-  "StateEnemyBanger":                      "vs. Banger",               // TODO
-  "StateEnemyCyclone":                     "vs. Cyclone",              // TODO
-  "StateEnemyHopper":                      "vs. Hopper",               // TODO
-  "StateEnemySniper":                      "vs. Sniper",               // TODO
-  "StateEnemyJellyfish":                   "vs. Jellyfish",            // TODO
-  "StateEnemyCapture":                     "vs. Capture",              // TODO
-  "StateEnemyEagle":                       "vs. Eagle",                // TODO
-  "StateEnemyWolf":                        "vs. Wolf",                 // TODO
-  "StateEnemyBalloon":                     "vs. Balloon",              // TODO
-										        
-  "StateGuardianNinja":                    "vs. Ninja",                // TODO
-  "StateGuardianSquid":                    "vs. Squid",                // TODO
-  "StateGuardianTower":                    "vs. Tower",                // TODO
-  "StateGuardianAsura":                    "vs. Asura",                // TODO
-  "StateGuardianShark":                    "vs. Shark",                // TODO
-  "StateGuardianSumo":                     "vs. Sumo",                 // TODO
-  "StateGuardianTank":                     "vs. Tank",                 // TODO
-  "StateGuardianStrider":                  "vs. Strider",              // TODO
-  "StateGuardianShinobi":                  "vs. Shinobi",              // TODO
-  "StateGuardianExcavator":                "vs. Excavator",            // TODO
-  "StateGuardianSpider":                   "vs. Spider",               // TODO
-  "StateGuardianFortress":                 "vs. Fortress",             // TODO
-  "StateGuardianRedPillar":                "vs. Red Pillar",           // TODO
-  "StateGuardianCaterpillar":              "vs. Caterpillar",          // TODO
-  "StateGuardianKunoichi":                 "vs. Kunoichi",             // TODO
-  "StateGuardianSilverHammer":             "vs. Silver Hammer",        // TODO
-  "StateGuardianMasterNinja":              "vs. Master Ninja",         // TODO
-  "StateGuardianGhost":                    "vs. Ghost"                 // TODO
+
+  "StateEnemySoldier":                     "Против Солдата",
+  "StateEnemyBubble":                      "Против Пузыря",
+  "StateEnemyShell":                       "Против Панциря",
+  "StateEnemyBanger":                      "Против Волчка",
+  "StateEnemyCyclone":                     "Против Циклона",
+  "StateEnemyHopper":                      "Против Попрыгуна",
+  "StateEnemySniper":                      "Против Снайпера",
+  "StateEnemyJellyfish":                   "Против Медузы",
+  "StateEnemyCapture":                     "Против Захвата",
+  "StateEnemyEagle":                       "Против Орла",
+  "StateEnemyWolf":                        "Против Волка",
+  "StateEnemyBalloon":                     "Против Шара",
+
+  "StateGuardianNinja":                    "Против Ниндзя",
+  "StateGuardianSquid":                    "Против Кальмара",
+  "StateGuardianTower":                    "Против Башни",
+  "StateGuardianAsura":                    "Против Асуры",
+  "StateGuardianShark":                    "Против Акулы",
+  "StateGuardianSumo":                     "Против Сумо",
+  "StateGuardianTank":                     "Против Танка",
+  "StateGuardianStrider":                  "Против Скитальца",
+  "StateGuardianShinobi":                  "Против Синоби",
+  "StateGuardianExcavator":                "Против Землекопа",
+  "StateGuardianSpider":                   "Против Паука",
+  "StateGuardianFortress":                 "Против Крепости",
+  "StateGuardianRedPillar":                "Против Красной Колонны",
+  "StateGuardianCaterpillar":              "Против Гусеницы",
+  "StateGuardianKunoichi":                 "Против Куноити",
+  "StateGuardianSilverHammer":             "Против Серебряного Молота",
+  "StateGuardianMasterNinja":              "Против Мастера-Ниндзя",
+  "StateGuardianGhost":                    "Против Призрака"
 }
