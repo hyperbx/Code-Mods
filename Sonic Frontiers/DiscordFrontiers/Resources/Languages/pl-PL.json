@@ -1,10 +1,10 @@
 {
   "Game":                                  "Sonic Frontiers",
 
-  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeBattleRush":             "Szaleńcze starcie",
   "DetailsGameModeCredits":                "Napisy Końcowe",
   "DetailsGameModeCyberStage":             "Cyberprzestrzeń",
-  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeCyberStageChallenge":    "Wyzwanie cyberprzestrzeni",
   "DetailsGameModeTitle":                  "Menu Główne",
 										  
   "DetailsLocationKronos":                 "Kronos Island",
@@ -12,14 +12,14 @@
   "DetailsLocationChaos":                  "Chaos Island",
   "DetailsLocationRhea":                   "Rhea Island",
   "DetailsLocationOuranos":                "Ouranos Island",
-  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationCustomStage":            "Poziom Niestandardowy",
   "DetailsLocationUnknown":                "Nieznane",
 
-  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
-  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
-  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
-  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
-  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
+  "DetailsLocationMasterTrialDragon":      "Wyzwanie smoka",
+  "DetailsLocationMasterTrialSnake":       "Wyzwanie węża",
+  "DetailsLocationMasterTrialTiger":       "Wyzwanie tygrysa",
+  "DetailsLocationMasterTrialCrane":       "Wyzwanie żurawia",
+  "DetailsLocationMasterTrialKing":        "Wyzwanie Najwyższego Króla Koko",
   
   "StateExploring":                        "Zwiedzanie",
   "StateGameModeFishing":                  "Łowienie ryb",
@@ -30,38 +30,38 @@
   "StateBossWyvern":                       "Kontra Wyvern",
   "StateBossKnight":                       "Kontra Knight",
   "StateBossSupreme":                      "Kontra Supreme",
-  "StateBossSupremeBeast":                 "Kontra Supreme?",             // VERIFY: is this question mark placement correct?
+  "StateBossSupremeBeast":                 "Kontra Supreme?",
   "StateBossTheEnd":                       "Kontra The End",
 										  
-  "StateEnemySoldier":                     "Kontra Soldier",              // VERIFY
-  "StateEnemyBubble":                      "Kontra Bubble",               // VERIFY
-  "StateEnemyShell":                       "Kontra Shell",                // VERIFY
-  "StateEnemyBanger":                      "Kontra Banger",               // VERIFY
-  "StateEnemyCyclone":                     "Kontra Cyclone",              // VERIFY
-  "StateEnemyHopper":                      "Kontra Hopper",               // VERIFY
-  "StateEnemySniper":                      "Kontra Sniper",               // VERIFY
-  "StateEnemyJellyfish":                   "Kontra Jellyfish",            // VERIFY
-  "StateEnemyCapture":                     "Kontra Capture",              // VERIFY
-  "StateEnemyEagle":                       "Kontra Eagle",                // VERIFY
-  "StateEnemyWolf":                        "Kontra Wolf",                 // VERIFY
-  "StateEnemyBalloon":                     "Kontra Balloon",              // VERIFY
+  "StateEnemySoldier":                     "Kontra Soldier",
+  "StateEnemyBubble":                      "Kontra Bubble",
+  "StateEnemyShell":                       "Kontra Shell",
+  "StateEnemyBanger":                      "Kontra Banger",
+  "StateEnemyCyclone":                     "Kontra Cyclone",
+  "StateEnemyHopper":                      "Kontra Hopper",
+  "StateEnemySniper":                      "Kontra Sniper",
+  "StateEnemyJellyfish":                   "Kontra Jellyfish",
+  "StateEnemyCapture":                     "Kontra Capture",
+  "StateEnemyEagle":                       "Kontra Eagle",
+  "StateEnemyWolf":                        "Kontra Wolf",
+  "StateEnemyBalloon":                     "Kontra Balloon",
 										        
-  "StateGuardianNinja":                    "Kontra Ninja",                // VERIFY
-  "StateGuardianSquid":                    "Kontra Squid",                // VERIFY
-  "StateGuardianTower":                    "Kontra Tower",                // VERIFY
-  "StateGuardianAsura":                    "Kontra Asura",                // VERIFY
-  "StateGuardianShark":                    "Kontra Shark",                // VERIFY
-  "StateGuardianSumo":                     "Kontra Sumo",                 // VERIFY
-  "StateGuardianTank":                     "Kontra Tank",                 // VERIFY
-  "StateGuardianStrider":                  "Kontra Strider",              // VERIFY
-  "StateGuardianShinobi":                  "Kontra Shinobi",              // VERIFY
-  "StateGuardianExcavator":                "Kontra Excavator",            // VERIFY
-  "StateGuardianSpider":                   "Kontra Spider",               // VERIFY
-  "StateGuardianFortress":                 "Kontra Fortress",             // VERIFY
-  "StateGuardianRedPillar":                "Kontra Red Pillar",           // VERIFY
-  "StateGuardianCaterpillar":              "Kontra Caterpillar",          // VERIFY
-  "StateGuardianKunoichi":                 "Kontra Kunoichi",             // VERIFY
-  "StateGuardianSilverHammer":             "Kontra Silver Hammer",        // VERIFY
-  "StateGuardianMasterNinja":              "Kontra Master Ninja",         // VERIFY
-  "StateGuardianGhost":                    "Kontra Ghost"                 // VERIFY
+  "StateGuardianNinja":                    "Kontra Ninja",
+  "StateGuardianSquid":                    "Kontra Squid",
+  "StateGuardianTower":                    "Kontra Tower",
+  "StateGuardianAsura":                    "Kontra Asura",
+  "StateGuardianShark":                    "Kontra Shark",
+  "StateGuardianSumo":                     "Kontra Sumo",
+  "StateGuardianTank":                     "Kontra Tank",
+  "StateGuardianStrider":                  "Kontra Strider",
+  "StateGuardianShinobi":                  "Kontra Shinobi",
+  "StateGuardianExcavator":                "Kontra Excavator",
+  "StateGuardianSpider":                   "Kontra Spider",
+  "StateGuardianFortress":                 "Kontra Fortress",
+  "StateGuardianRedPillar":                "Kontra Red Pillar",
+  "StateGuardianCaterpillar":              "Kontra Caterpillar",
+  "StateGuardianKunoichi":                 "Kontra Kunoichi",
+  "StateGuardianSilverHammer":             "Kontra Silver Hammer",
+  "StateGuardianMasterNinja":              "Kontra Master Ninja",
+  "StateGuardianGhost":                    "Kontra Ghost"
 }
