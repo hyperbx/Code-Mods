@@ -1,26 +1,26 @@
 {
   "Game":                                  "ソニックフロンティア",
 
-  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeBattleRush":             "バトルラッシュ",
   "DetailsGameModeCredits":                "クレジット",
   "DetailsGameModeCyberStage":             "電脳空間",
-  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeCyberStageChallenge":    "電脳空間チャレンジ",
   "DetailsGameModeTitle":                  "メインメニュー",
-										  
+
   "DetailsLocationKronos":                 "クロノス島",
   "DetailsLocationAres":                   "アレス島",
   "DetailsLocationChaos":                  "カオス島",
   "DetailsLocationRhea":                   "レイア島",
   "DetailsLocationOuranos":                "ウラノス島",
-  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationCustomStage":            "カスタムステージ",
   "DetailsLocationUnknown":                "Unknown",
 
-  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
-  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
-  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
-  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
-  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
-  
+  "DetailsLocationMasterTrialDragon":      "龍の試練",
+  "DetailsLocationMasterTrialSnake":       "蛇の試練",
+  "DetailsLocationMasterTrialTiger":       "虎の試練",
+  "DetailsLocationMasterTrialCrane":       "鶴の試練",
+  "DetailsLocationMasterTrialKing":        "教官王ココの試練",
+
   "StateExploring":                        "探検",
   "StateGameModeFishing":                  "釣り",
   "StateGameModeHacking":                  "ハッキング",
@@ -30,38 +30,38 @@
   "StateBossWyvern":                       "vs. Wyvern",
   "StateBossKnight":                       "vs. Knight",
   "StateBossSupreme":                      "vs. Supreme",
-  "StateBossSupremeBeast":                 "vs. Supreme？",             // VERIFY: is this question mark placement correct?
+  "StateBossSupremeBeast":                 "vs. Supreme?",
   "StateBossTheEnd":                       "vs. The End",
-										  
-  "StateEnemySoldier":                     "vs. Soldier",              // TODO
-  "StateEnemyBubble":                      "vs. Bubble",               // TODO
-  "StateEnemyShell":                       "vs. Shell",                // TODO
-  "StateEnemyBanger":                      "vs. Banger",               // TODO
-  "StateEnemyCyclone":                     "vs. Cyclone",              // TODO
-  "StateEnemyHopper":                      "vs. Hopper",               // TODO
-  "StateEnemySniper":                      "vs. Sniper",               // TODO
-  "StateEnemyJellyfish":                   "vs. Jellyfish",            // TODO
-  "StateEnemyCapture":                     "vs. Capture",              // TODO
-  "StateEnemyEagle":                       "vs. Eagle",                // TODO
-  "StateEnemyWolf":                        "vs. Wolf",                 // TODO
-  "StateEnemyBalloon":                     "vs. Balloon",              // TODO
-										        
-  "StateGuardianNinja":                    "vs. Ninja",                // TODO
-  "StateGuardianSquid":                    "vs. Squid",                // TODO
-  "StateGuardianTower":                    "vs. Tower",                // TODO
-  "StateGuardianAsura":                    "vs. Asura",                // TODO
-  "StateGuardianShark":                    "vs. Shark",                // TODO
-  "StateGuardianSumo":                     "vs. Sumo",                 // TODO
-  "StateGuardianTank":                     "vs. Tank",                 // TODO
-  "StateGuardianStrider":                  "vs. Strider",              // TODO
-  "StateGuardianShinobi":                  "vs. Shinobi",              // TODO
-  "StateGuardianExcavator":                "vs. Excavator",            // TODO
-  "StateGuardianSpider":                   "vs. Spider",               // TODO
-  "StateGuardianFortress":                 "vs. Fortress",             // TODO
-  "StateGuardianRedPillar":                "vs. Red Pillar",           // TODO
-  "StateGuardianCaterpillar":              "vs. Caterpillar",          // TODO
-  "StateGuardianKunoichi":                 "vs. Kunoichi",             // TODO
-  "StateGuardianSilverHammer":             "vs. Silver Hammer",        // TODO
-  "StateGuardianMasterNinja":              "vs. Master Ninja",         // TODO
-  "StateGuardianGhost":                    "vs. Ghost"                 // TODO
+
+  "StateEnemySoldier":                     "vs. Soldier",
+  "StateEnemyBubble":                      "vs. Bubble",
+  "StateEnemyShell":                       "vs. Shell",
+  "StateEnemyBanger":                      "vs. Banger",
+  "StateEnemyCyclone":                     "vs. Cyclone",
+  "StateEnemyHopper":                      "vs. Hopper",
+  "StateEnemySniper":                      "vs. Sniper",
+  "StateEnemyJellyfish":                   "vs. Jellyfish",
+  "StateEnemyCapture":                     "vs. Capture",
+  "StateEnemyEagle":                       "vs. Eagle",
+  "StateEnemyWolf":                        "vs. Wolf",
+  "StateEnemyBalloon":                     "vs. Balloon",
+
+  "StateGuardianNinja":                    "vs. Ninja",
+  "StateGuardianSquid":                    "vs. Squid",
+  "StateGuardianTower":                    "vs. Tower",
+  "StateGuardianAsura":                    "vs. Asura",
+  "StateGuardianShark":                    "vs. Shark",
+  "StateGuardianSumo":                     "vs. Sumo",
+  "StateGuardianTank":                     "vs. Tank",
+  "StateGuardianStrider":                  "vs. Strider",
+  "StateGuardianShinobi":                  "vs. Shinobi",
+  "StateGuardianExcavator":                "vs. Excavator",
+  "StateGuardianSpider":                   "vs. Spider",
+  "StateGuardianFortress":                 "vs. Fortress",
+  "StateGuardianRedPillar":                "vs. Red Pillar",
+  "StateGuardianCaterpillar":              "vs. Caterpillar",
+  "StateGuardianKunoichi":                 "vs. Kunoichi",
+  "StateGuardianSilverHammer":             "vs. Silver Hammer",
+  "StateGuardianMasterNinja":              "vs. Master Ninja",
+  "StateGuardianGhost":                    "vs. Ghost"
 }
