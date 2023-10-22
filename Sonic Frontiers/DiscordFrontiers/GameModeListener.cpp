@@ -13,8 +13,7 @@ HOOK(void*, __fastcall, GameModeTitleCtor, m_SigGameModeTitleCtor(), int64_t in_
 
 HOOK(int64_t, __fastcall, GameModeStageUpdate, m_SigGameModeStageUpdate(), int64_t in_pThis, int64_t a2, int* a3)
 {
-	// The game mode updates when switching to Super Sonic 2, for some reason.
-	if (Discord::LargeImageKey == "supreme2")
+	if (BossListener::IsBoss)
 		return originalGameModeStageUpdate(in_pThis, a2, a3);
 
 	Discord::State = LanguageHelper::Localise("StateExploring");

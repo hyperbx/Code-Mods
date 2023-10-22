@@ -3,6 +3,8 @@
 class BossListener
 {
 public:
+	static inline bool IsBoss = false;
+
 	static void Init();
 	static void Glitch(float in_deltaTime);
 };

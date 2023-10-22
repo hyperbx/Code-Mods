@@ -1,5 +1,3 @@
-bool m_isStageUpdate = false;
-
 std::string m_lastStageID = "";
 
 HOOK(bool, __fastcall, UIMainMenuStateLoadListUpdate, m_SigUIMainMenuStateLoadListUpdate(), int64_t in_pThis, int* a2)
@@ -28,10 +26,10 @@ void StageListener::Update()
 		if (m_lastStageID.empty())
 			return;
 
-		m_isStageUpdate = true;
+		IsLazyUpdate = true;
 	}
 
-	if (!m_isStageUpdate)
+	if (!IsLazyUpdate)
 		return;
 
 	// The stage has changed during Battle Rush, assume playing all islands.
@@ -46,7 +44,7 @@ void StageListener::Update()
 
 	Commit(currentStageID);
 
-	m_isStageUpdate = false;
+	IsLazyUpdate = false;
 }
 
 void StageListener::Commit(std::string in_stageId)
@@ -55,6 +53,7 @@ void StageListener::Commit(std::string in_stageId)
 	printf("[Discord Frontiers] World: %s\n", in_stageId.c_str());
 #endif
 
+	BossListener::IsBoss = false;
 	MasterTrialListener::IsBossRush = false;
 
 	auto pStageData = StageHelper::GetCurrentStageData();

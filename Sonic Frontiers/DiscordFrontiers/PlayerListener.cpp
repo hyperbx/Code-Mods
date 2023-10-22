@@ -26,7 +26,7 @@ HOOK(int64_t, __fastcall, ChangePlayerVisualToSuperSonic2, m_SigChangePlayerVisu
 	return originalChangePlayerVisualToSuperSonic2(in_pThis);
 }
 
-HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), hh::game::GOComponent* in_pThis, int in_updatePhase, float* in_pDeltaTime)
+HOOK(void, __fastcall, PlayerListener_GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), hh::game::GOComponent* in_pThis, int in_updatePhase, float* in_pDeltaTime)
 {
 	bool isSuper = PlayerListener::IsSuper((app::player::Player*)in_pThis->pOwner);
 
@@ -43,7 +43,7 @@ HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), hh::game::
 		}
 	}
 
-	return originalGOCPlayerHsmUpdate(in_pThis, in_updatePhase, in_pDeltaTime);
+	return originalPlayerListener_GOCPlayerHsmUpdate(in_pThis, in_updatePhase, in_pDeltaTime);
 }
 
 void PlayerListener::Init()
@@ -51,7 +51,7 @@ void PlayerListener::Init()
 	INSTALL_HOOK(PlayerCtor);
 	INSTALL_HOOK(ChangePlayerVisualToSuperSonic);
 	INSTALL_HOOK(ChangePlayerVisualToSuperSonic2);
-	INSTALL_HOOK(GOCPlayerHsmUpdate);
+	INSTALL_HOOK(PlayerListener_GOCPlayerHsmUpdate);
 }
 
 void PlayerListener::Commit()

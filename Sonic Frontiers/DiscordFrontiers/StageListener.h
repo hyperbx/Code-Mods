@@ -16,6 +16,8 @@ private:
 	};
 
 public:
+	static inline bool IsLazyUpdate = false;
+
 	static void Init();
 	static void Update();
 	static void Commit(std::string in_stageId);

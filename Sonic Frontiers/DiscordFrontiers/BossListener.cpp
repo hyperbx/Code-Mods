@@ -1,4 +1,5 @@
 bool m_isSupremeBeast = false;
+bool m_isCommittedLazyUpdate = false;
 
 float m_glitchTimer = 0.0f;
 float m_glitchTimerThreshold = 10.0f;
@@ -7,6 +8,8 @@ int m_glitchPhase = 0;
 
 HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCtor(), void* a1, int64_t a2)
 {
+	BossListener::IsBoss = true;
+
 	if (BattleRushListener::IsBattleRush || MasterTrialListener::IsBossRush)
 		return originalStatePluginBossBattleCtor(a1, a2);
 
@@ -71,15 +74,54 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 	return originalStatePluginBossBattleCtor(a1, a2);
 }
 
-HOOK(void, __fastcall, GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), int64_t in_pThis, int in_updatePhase, float* in_pDeltaTime)
+HOOK(void, __fastcall, BossListener_GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(), hh::game::GOComponent* in_pThis, int in_updatePhase, float* in_pDeltaTime)
 {
+	originalBossListener_GOCPlayerHsmUpdate(in_pThis, in_updatePhase, in_pDeltaTime);
+
 	BossListener::Glitch(*in_pDeltaTime);
 
-	originalGOCPlayerHsmUpdate(in_pThis, in_updatePhase, in_pDeltaTime);
+	auto pGOCPlayerBlackboard = in_pThis->pOwner->GetGOC<app::player::GOCPlayerBlackboard>();
+
+	if (!pGOCPlayerBlackboard)
+		return;
+
+	auto pBlackboard = pGOCPlayerBlackboard->pBlackboard;
+
+	if (!pBlackboard)
+		return;
+
+	auto pBlackboardItem = pBlackboard->GetBlackboardContent<app::player::BlackboardItem>();
+
+	if (!pBlackboardItem)
+		return;
+
+	if (pBlackboardItem->RingCount <= 0)
+	{
+		if (m_isCommittedLazyUpdate)
+			return;
+
+		if (BattleRushListener::IsBattleRush)
+			return;
+
+		Discord::CommitState(LanguageHelper::Localise("StateExploring"));
+
+		BossListener::IsBoss = false;
+		StageListener::IsLazyUpdate = true;
+
+		m_isSupremeBeast = false;
+		m_isCommittedLazyUpdate = true;
+	}
+	else
+	{
+		m_isCommittedLazyUpdate = false;
+	}
 }
 
 void BossListener::Glitch(float in_deltaTime)
 {
+	if (!BossListener::IsBoss)
+		return;
+
 	if (!m_isSupremeBeast)
 		return;
 
@@ -107,5 +149,5 @@ void BossListener::Glitch(float in_deltaTime)
 void BossListener::Init()
 {
 	INSTALL_HOOK(StatePluginBossBattleCtor);
-	INSTALL_HOOK(GOCPlayerHsmUpdate);
+	INSTALL_HOOK(BossListener_GOCPlayerHsmUpdate);
 }
