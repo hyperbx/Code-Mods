@@ -6,7 +6,7 @@
   "DetailsGameModeCyberStage":             "Cyberspace",
   "DetailsGameModeCyberStageChallenge":    "Cyberspace Utfordring",
   "DetailsGameModeTitle":                  "Start Meny",
-										  
+
   "DetailsLocationKronos":                 "Kronos Island",
   "DetailsLocationAres":                   "Ares Island",
   "DetailsLocationChaos":                  "Chaos Island",
@@ -20,7 +20,7 @@
   "DetailsLocationMasterTrialTiger":       "Tigerens Prøve",
   "DetailsLocationMasterTrialCrane":       "Tranens Prøve",
   "DetailsLocationMasterTrialKing":        "Mester Kongens Prøve",
-  
+
   "StateExploring":                        "Oppdagelse",
   "StateGameModeFishing":                  "Ut å Fiske",
   "StateGameModeHacking":                  "Hacking",

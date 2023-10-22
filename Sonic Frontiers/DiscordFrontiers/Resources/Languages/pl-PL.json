@@ -6,7 +6,7 @@
   "DetailsGameModeCyberStage":             "Cyberprzestrzeń",
   "DetailsGameModeCyberStageChallenge":    "Wyzwanie cyberprzestrzeni",
   "DetailsGameModeTitle":                  "Menu Główne",
-										  
+
   "DetailsLocationKronos":                 "Kronos Island",
   "DetailsLocationAres":                   "Ares Island",
   "DetailsLocationChaos":                  "Chaos Island",
@@ -20,7 +20,7 @@
   "DetailsLocationMasterTrialTiger":       "Wyzwanie tygrysa",
   "DetailsLocationMasterTrialCrane":       "Wyzwanie żurawia",
   "DetailsLocationMasterTrialKing":        "Wyzwanie Najwyższego Króla Koko",
-  
+
   "StateExploring":                        "Zwiedzanie",
   "StateGameModeFishing":                  "Łowienie ryb",
   "StateGameModeHacking":                  "Hakowanie",
@@ -32,7 +32,7 @@
   "StateBossSupreme":                      "Kontra Supreme",
   "StateBossSupremeBeast":                 "Kontra Supreme?",
   "StateBossTheEnd":                       "Kontra The End",
-										  
+
   "StateEnemySoldier":                     "Kontra Soldier",
   "StateEnemyBubble":                      "Kontra Bubble",
   "StateEnemyShell":                       "Kontra Shell",
@@ -45,7 +45,7 @@
   "StateEnemyEagle":                       "Kontra Eagle",
   "StateEnemyWolf":                        "Kontra Wolf",
   "StateEnemyBalloon":                     "Kontra Balloon",
-										        
+
   "StateGuardianNinja":                    "Kontra Ninja",
   "StateGuardianSquid":                    "Kontra Squid",
   "StateGuardianTower":                    "Kontra Tower",

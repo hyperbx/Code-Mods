@@ -6,7 +6,7 @@
   "DetailsGameModeCyberStage":             "Ciberespaço",
   "DetailsGameModeCyberStageChallenge":    "Desafio do Ciberespaço",
   "DetailsGameModeTitle":                  "Menu Principal",
-										  
+
   "DetailsLocationKronos":                 "Kronos Island",
   "DetailsLocationAres":                   "Ares Island",
   "DetailsLocationChaos":                  "Chaos Island",
@@ -20,7 +20,7 @@
   "DetailsLocationMasterTrialTiger":       "Desafio do Tigre",
   "DetailsLocationMasterTrialCrane":       "Desafio da Garça",
   "DetailsLocationMasterTrialKing":        "Desafio do Rei-mestre Koco",
-  
+
   "StateExploring":                        "A Explorar",
   "StateGameModeFishing":                  "A Pescar",
   "StateGameModeHacking":                  "A Hackear",
@@ -32,7 +32,7 @@
   "StateBossSupreme":                      "vs. Supreme",
   "StateBossSupremeBeast":                 "vs. Supreme?",
   "StateBossTheEnd":                       "vs. The End",
-										  
+
   "StateEnemySoldier":                     "vs. Soldier",
   "StateEnemyBubble":                      "vs. Bubble",
   "StateEnemyShell":                       "vs. Shell",
@@ -45,7 +45,7 @@
   "StateEnemyEagle":                       "vs. Eagle",
   "StateEnemyWolf":                        "vs. Wolf",
   "StateEnemyBalloon":                     "vs. Balloon",
-										        
+
   "StateGuardianNinja":                    "vs. Ninja",
   "StateGuardianSquid":                    "vs. Squid",
   "StateGuardianTower":                    "vs. Tower",

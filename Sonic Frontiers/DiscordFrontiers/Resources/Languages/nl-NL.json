@@ -1,26 +1,26 @@
 {
   "Game":                                  "Sonic Frontiers",
 
-  "DetailsGameModeBattleRush":             "Battle Rush",              // TODO
+  "DetailsGameModeBattleRush":             "Battle Rush",
   "DetailsGameModeCredits":                "Aftiteling",
   "DetailsGameModeCyberStage":             "Cyberspace",
-  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",    // TODO
+  "DetailsGameModeCyberStageChallenge":    "Cyber Space Challenge",
   "DetailsGameModeTitle":                  "Hoofdmenu",
-										  
+
   "DetailsLocationKronos":                 "Kronos Island",
   "DetailsLocationAres":                   "Ares Island",
   "DetailsLocationChaos":                  "Chaos Island",
   "DetailsLocationRhea":                   "Rhea Island",
   "DetailsLocationOuranos":                "Ouranos Island",
-  "DetailsLocationCustomStage":            "Custom Stage",             // TODO
+  "DetailsLocationCustomStage":            "Custom Stage",
   "DetailsLocationUnknown":                "Onbekend",
 
-  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",           // TODO
-  "DetailsLocationMasterTrialSnake":       "Snake's Trial",            // TODO
-  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",            // TODO
-  "DetailsLocationMasterTrialCrane":       "Crane's Trial",            // TODO
-  "DetailsLocationMasterTrialKing":        "Master King's Trial",      // TODO
-  
+  "DetailsLocationMasterTrialDragon":      "Dragon's Trial",
+  "DetailsLocationMasterTrialSnake":       "Snake's Trial",
+  "DetailsLocationMasterTrialTiger":       "Tiger's Trial",
+  "DetailsLocationMasterTrialCrane":       "Crane's Trial",
+  "DetailsLocationMasterTrialKing":        "Master King's Trial",
+
   "StateExploring":                        "Aan Het Verkennen",
   "StateGameModeFishing":                  "Aan Het Vissen",
   "StateGameModeHacking":                  "Aan Het Hacken",
@@ -30,9 +30,9 @@
   "StateBossWyvern":                       "vs. Wyvern",
   "StateBossKnight":                       "vs. Knight",
   "StateBossSupreme":                      "vs. Supreme",
-  "StateBossSupremeBeast":                 "vs. Supreme?",             // VERIFY: is this question mark placement correct?
+  "StateBossSupremeBeast":                 "vs. Supreme?",
   "StateBossTheEnd":                       "vs. The End",
-										  
+
   "StateEnemySoldier":                     "vs. Soldier",
   "StateEnemyBubble":                      "vs. Bubble",
   "StateEnemyShell":                       "vs. Shell",

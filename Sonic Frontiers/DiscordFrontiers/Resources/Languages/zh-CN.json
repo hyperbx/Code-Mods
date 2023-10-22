@@ -6,7 +6,7 @@
   "DetailsGameModeCyberStage":             "电脑空间",
   "DetailsGameModeCyberStageChallenge":    "电脑空间挑战",
   "DetailsGameModeTitle":                  "主菜单",
-										  
+
   "DetailsLocationKronos":                 "克洛诺斯岛",
   "DetailsLocationAres":                   "阿瑞斯島",
   "DetailsLocationChaos":                  "卡奥斯岛",
@@ -20,7 +20,7 @@
   "DetailsLocationMasterTrialTiger":       "虎之试炼",
   "DetailsLocationMasterTrialCrane":       "鹤之试炼",
   "DetailsLocationMasterTrialKing":        "教官王柯柯的试炼",
-  
+
   "StateExploring":                        "探索",
   "StateGameModeFishing":                  "钓鱼",
   "StateGameModeHacking":                  "骇客",
@@ -32,7 +32,7 @@
   "StateBossSupreme":                      "vs. Supreme",
   "StateBossSupremeBeast":                 "vs. Supreme?",
   "StateBossTheEnd":                       "vs. The End",
-										  
+
   "StateEnemySoldier":                     "vs. Soldier",
   "StateEnemyBubble":                      "vs. Bubble",
   "StateEnemyShell":                       "vs. Shell",
@@ -45,7 +45,7 @@
   "StateEnemyEagle":                       "vs. Eagle",
   "StateEnemyWolf":                        "vs. Wolf",
   "StateEnemyBalloon":                     "vs. Balloon",
-										        
+
   "StateGuardianNinja":                    "vs. Ninja",
   "StateGuardianSquid":                    "vs. Squid",
   "StateGuardianTower":                    "vs. Tower",

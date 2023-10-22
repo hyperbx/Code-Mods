@@ -6,7 +6,7 @@
   "DetailsGameModeCyberStage":             "Cyberespace",
   "DetailsGameModeCyberStageChallenge":    "Défi du cyberespace",
   "DetailsGameModeTitle":                  "Menu Principal",
-										  
+
   "DetailsLocationKronos":                 "Kronos Island",
   "DetailsLocationAres":                   "Ares Island",
   "DetailsLocationChaos":                  "Chaos Island",
@@ -14,13 +14,13 @@
   "DetailsLocationOuranos":                "Ouranos Island",
   "DetailsLocationCustomStage":            "Stage Personnalisé",
   "DetailsLocationUnknown":                "Inconnu",
-  
+
   "DetailsLocationMasterTrialDragon":      "Épreuve du Dragon",
   "DetailsLocationMasterTrialSnake":       "Épreuve du Serpent",
   "DetailsLocationMasterTrialTiger":       "Épreuve du Tigre",
   "DetailsLocationMasterTrialCrane":       "Épreuve du Crane",
   "DetailsLocationMasterTrialKing":        "Épreuve du Koco Maître Roi",
-										  
+
   "StateExploring":                        "Exploration",
   "StateGameModeFishing":                  "Pêche",
   "StateGameModeHacking":                  "Piratage",
