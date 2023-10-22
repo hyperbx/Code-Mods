@@ -2,6 +2,21 @@ bool m_isStageUpdate = false;
 
 std::string m_lastStageID = "";
 
+HOOK(bool, __fastcall, UIMainMenuStateLoadListUpdate, m_SigUIMainMenuStateLoadListUpdate(), int64_t in_pThis, int* a2)
+{
+	bool result = originalUIMainMenuStateLoadListUpdate(in_pThis, a2);
+
+	if (result)
+		StageListener::IsLazyUpdate = true;
+
+	return result;
+}
+
+void StageListener::Init()
+{
+	INSTALL_HOOK(UIMainMenuStateLoadListUpdate);
+}
+
 void StageListener::Update()
 {
 	auto currentStageID = StageHelper::GetCurrentStageID();

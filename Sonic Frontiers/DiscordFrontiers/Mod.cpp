@@ -16,6 +16,7 @@ EXPORT void PostInit()
 	BossListener::Init();
 	GameModeListener::Init();
 	PlayerListener::Init();
+	StageListener::Init();
 }
 
 EXPORT void OnFrame()

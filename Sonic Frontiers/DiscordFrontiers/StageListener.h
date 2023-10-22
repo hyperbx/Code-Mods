@@ -16,6 +16,7 @@ private:
 	};
 
 public:
+	static void Init();
 	static void Update();
 	static void Commit(std::string in_stageId);
 
@@ -27,3 +28,5 @@ public:
 		return m_stageMap[in_stageId];
 	}
 };
+
+CL_SCAN_SIGNATURE(m_SigUIMainMenuStateLoadListUpdate, 0x140AA0C20, "\x40\x55\x53\x56\x48\x8D\x6C\x24\xB9\x48\x81\xEC\x90\x00\x00\x00\x80\x79", "xxxxxxxxxxxxxxxxxx");
