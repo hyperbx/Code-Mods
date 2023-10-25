@@ -117,15 +117,26 @@ void StageListener::Commit(std::string in_stageId)
 
 			customStageImageUrl = Configuration::URL;
 
-			if (HttpHelper::GetResponse(customStageImageUrl) != 200)
+			long response = HttpHelper::GetResponse(customStageImageUrl);
+
+			if (response != 200)
+			{
 				customStageImageUrl = "missing";
+
+				Discord::CommitLargeImageText(std::format("Error: failed to load image (response {})", response));
+			}
 		}
 
 		Discord::Commit
 		(
 			name,
-			LanguageHelper::Localise(location),
+
+			location,
+
 			isCustomStage ? customStageImageUrl : StringHelper::ToLower(name),
+			name,
+
+			PlayerListener::GetCharacterImageKey(),
 			PlayerListener::GetCharacterName(),
 			
 			GameModeListener::IsCyberSpaceChallenge
@@ -135,18 +146,18 @@ void StageListener::Commit(std::string in_stageId)
 	}
 	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Minigame))
 	{
-		Discord::CommitState(LanguageHelper::Localise("StateGameModeFishing"));
+		Discord::CommitState("StateGameModeFishing");
 		Discord::ResetTime();
 	}
 	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Hacking))
 	{
 		if (IS_ATTRIBUTE_FLAG(EAttributeFlags_LastBoss))
 		{
-			Discord::Commit(LanguageHelper::Localise("StateBossTheEnd"), "", "w5r01", "supersonic", TimeHelper::GetSystemEpoch());
+			Discord::Commit("StateBossTheEnd", "", "w5r01", "StateBossTheEnd", "supersonic", "PlayerSuperSonic", TimeHelper::GetSystemEpoch());
 		}
 		else
 		{
-			Discord::Commit(LanguageHelper::Localise("StateGameModeHacking"), "", "hacking", "sonic", TimeHelper::GetSystemEpoch());
+			Discord::Commit("StateGameModeHacking", "", "hacking", "StateGameModeHacking", "sonic", "PlayerSonic", TimeHelper::GetSystemEpoch());
 		}
 	}
 	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_MasterTrial))
@@ -155,7 +166,7 @@ void StageListener::Commit(std::string in_stageId)
 	}
 	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Tutorial))
 	{
-		Discord::Commit(LanguageHelper::Localise("StateGameModeTutorial"), "", "training", "sonic", TimeHelper::GetSystemEpoch());
+		Discord::Commit("StateGameModeTutorial", "", "training", "StateGameModeTutorial", "sonic", "PlayerSonic", TimeHelper::GetSystemEpoch());
 	}
 	else
 	{
@@ -166,9 +177,15 @@ void StageListener::Commit(std::string in_stageId)
 			Discord::Commit
 			(
 				"",
-				LanguageHelper::Localise("DetailsLocationUnknown"),
+
+				"DetailsLocationUnknown",
+
 				"unknown",
+				"DetailsLocationUnknown",
+
+				PlayerListener::GetCharacterImageKey(),
 				PlayerListener::GetCharacterName(),
+
 				TimeHelper::GetSystemEpoch()
 			);
 		}
@@ -177,9 +194,15 @@ void StageListener::Commit(std::string in_stageId)
 			Discord::Commit
 			(
 				Discord::State,
-				LanguageHelper::Localise(name),
+
+				name,
+
 				StringHelper::ToLower(in_stageId),
+				name,
+
+				PlayerListener::GetCharacterImageKey(),
 				PlayerListener::GetCharacterName(),
+
 				TimeHelper::GetSystemEpoch()
 			);
 		}

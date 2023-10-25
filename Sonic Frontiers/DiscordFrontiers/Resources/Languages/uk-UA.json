@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Виклик Тигра",
   "DetailsLocationMasterTrialCrane":       "Виклик Журавля",
   "DetailsLocationMasterTrialKing":        "Виклик Вождя",
+  
+  "PlayerSonic":                           "Сонік",
+  "PlayerSuperSonic":                      "Супер Сонік",
+  "PlayerAmy":                             "Емі",
+  "PlayerKnuckles":                        "Наклз",
+  "PlayerTails":                           "Тейлз",
 
   "StateExploring":                        "Досліджує",
   "StateGameModeFishing":                  "Рибалить",

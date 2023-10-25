@@ -2,7 +2,7 @@ bool m_isCyberSpaceChallengeTimeStarted = false;
 
 HOOK(void*, __fastcall, GameModeTitleCtor, m_SigGameModeTitleCtor(), int64_t in_pThis, int64_t a2, int64_t a3)
 {
-	Discord::Commit(LanguageHelper::Localise("DetailsGameModeTitle"), "", "default", "", 0);
+	Discord::Commit("DetailsGameModeTitle", "", "default", "Game", "", "", 0);
 
 	BattleRushListener::IsBattleRush = false;
 	GameModeListener::IsCyberSpaceChallenge = false;
@@ -27,7 +27,7 @@ HOOK(int64_t, __fastcall, GameModeCyberStageChallengeCtor, m_SigGameModeCyberSta
 
 	if (!m_isCyberSpaceChallengeTimeStarted)
 	{
-		Discord::StartTime = TimeHelper::GetSystemEpoch();
+		Discord::ResetTime();
 		m_isCyberSpaceChallengeTimeStarted = true;
 	}
 
@@ -50,7 +50,7 @@ HOOK(int64_t, __fastcall, GameModeCyberStageChallengeRetryFromMenuInit, m_SigGam
 
 HOOK(void*, __fastcall, GameModeStaffRollCtor, m_SigGameModeStaffRollCtor(), int64_t in_pThis, int64_t a2, int64_t a3)
 {
-	Discord::Commit(LanguageHelper::Localise("DetailsGameModeCredits"), "", "default", "", 0);
+	Discord::Commit("DetailsGameModeCredits", "", "default", "Game", "", "", 0);
 
 	return originalGameModeStaffRollCtor(in_pThis, a2, a3);
 }

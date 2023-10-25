@@ -18,9 +18,14 @@ HOOK(void, __fastcall, GameModeBattleRushExtensionProcessMessage, m_SigGameModeB
 
 	Discord::Commit
 	(
-		BattleRushListener::GetStatus(),
-		LanguageHelper::Localise("DetailsGameModeBattleRush"),
+		BattleRushListener::GetState(),
+
+		"DetailsGameModeBattleRush",
+
 		BattleRushListener::GetLargeImageKey(),
+		BattleRushListener::GetState(),
+
+		PlayerListener::GetCharacterImageKey(),
 		PlayerListener::GetCharacterName(),
 
 		(BattleRushListener::IsBattleRushAll || BattleRushListener::Phase > 0)

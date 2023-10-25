@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Tigerens Prøve",
   "DetailsLocationMasterTrialCrane":       "Tranens Prøve",
   "DetailsLocationMasterTrialKing":        "Mester Kongens Prøve",
+  
+  "PlayerSonic":                           "Sonic",
+  "PlayerSuperSonic":                      "Super Sonic",
+  "PlayerAmy":                             "Amy",
+  "PlayerKnuckles":                        "Knuckles",
+  "PlayerTails":                           "Tails",
 
   "StateExploring":                        "Oppdagelse",
   "StateGameModeFishing":                  "Ut å Fiske",

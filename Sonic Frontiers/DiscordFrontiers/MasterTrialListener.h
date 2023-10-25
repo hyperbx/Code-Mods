@@ -16,29 +16,33 @@ public:
 
 	static void CommitBossRush(std::string in_stageId)
 	{
-		Discord::CommitDetails(LanguageHelper::Localise("DetailsLocationMasterTrialKing"));
+		Discord::CommitDetails("DetailsLocationMasterTrialKing");
 		Discord::CommitSmallImage("sonic");
 
 		if (in_stageId == "w1t01")
 		{
-			Discord::CommitState(LanguageHelper::Localise("StateBossGiganto"));
+			Discord::CommitState("StateBossGiganto");
 			Discord::CommitLargeImage("giganto");
+			Discord::CommitLargeImageText("StateBossGiganto");
 		}
 		else if (in_stageId == "w2t01")
 		{
-			Discord::CommitState(LanguageHelper::Localise("StateBossWyvern"));
+			Discord::CommitState("StateBossWyvern");
 			Discord::CommitLargeImage("wyvern");
+			Discord::CommitLargeImageText("StateBossWyvern");
 		}
 		else if (in_stageId == "w3t01")
 		{
-			Discord::CommitState(LanguageHelper::Localise("StateBossKnight"));
+			Discord::CommitState("StateBossKnight");
 			Discord::CommitLargeImage("knight");
+			Discord::CommitLargeImageText("StateBossKnight");
 		}
 	}
 
 	static void CommitMasterTrial(std::string in_stageId)
 	{
 		std::string state = "DetailsLocationUnknown";
+		std::string details = m_trialMap[in_stageId];
 
 		if (in_stageId == "w5t02")
 		{
@@ -57,13 +61,6 @@ public:
 			state = "StateGuardianNinja";
 		}
 
-		Discord::Commit
-		(
-			LanguageHelper::Localise(state),
-			LanguageHelper::Localise(m_trialMap[in_stageId]),
-			in_stageId,
-			"sonic",
-			TimeHelper::GetSystemEpoch()
-		);
+		Discord::Commit(state, details, in_stageId, details, "sonic", "PlayerSonic", TimeHelper::GetSystemEpoch());
 	}
 };

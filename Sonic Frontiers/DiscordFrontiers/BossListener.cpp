@@ -22,22 +22,22 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 
 	if (stage == "w1r03")
 	{
-		name = LanguageHelper::Localise("StateBossGiganto");
+		name = "StateBossGiganto";
 		key  = "giganto";
 	}
 	else if (stage == "w2r01")
 	{
-		name = LanguageHelper::Localise("StateBossWyvern");
+		name = "StateBossWyvern";
 		key  = "wyvern";
 	}
 	else if (stage == "w3r01")
 	{
-		name = LanguageHelper::Localise("StateBossKnight");
+		name = "StateBossKnight";
 		key  = "knight";
 	}
 	else if (stage == "w1r04")
 	{
-		name = LanguageHelper::Localise("StateBossSupreme");
+		name = "StateBossSupreme";
 		key  = "supreme";
 	}
 	else if (stage == "w1r06")
@@ -50,8 +50,9 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 
 			if (pBossRifleBeast)
 			{
-				Discord::CommitState(LanguageHelper::Localise("StateBossSupremeBeast"));
+				Discord::CommitState("StateBossSupremeBeast");
 				Discord::CommitLargeImage("supreme2");
+				Discord::CommitLargeImageText("???", false);
 
 				m_isSupremeBeast = true;
 
@@ -59,7 +60,7 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 			}
 			else
 			{
-				name = LanguageHelper::Localise("StateBossSupreme");
+				name = "StateBossSupreme";
 				key  = "supreme";
 			}
 		}
@@ -69,7 +70,10 @@ HOOK(void*, __fastcall, StatePluginBossBattleCtor, m_SigStatePluginBossBattleCto
 	printf("[Discord Frontiers] Boss: %s\n", name.c_str());
 #endif
 
-	Discord::Commit(name, Discord::Details, key, Discord::SmallImageKey, TimeHelper::GetSystemEpoch());
+	Discord::CommitState(name);
+	Discord::CommitLargeImage(key);
+	Discord::CommitLargeImageText(name);
+	Discord::ResetTime();
 
 	return originalStatePluginBossBattleCtor(a1, a2);
 }
@@ -103,7 +107,7 @@ HOOK(void, __fastcall, BossListener_GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdate(
 		if (BattleRushListener::IsBattleRush)
 			return;
 
-		Discord::CommitState(LanguageHelper::Localise("StateExploring"));
+		Discord::CommitState("StateExploring");
 
 		BossListener::IsBoss = false;
 		StageListener::IsLazyUpdate = true;
@@ -130,12 +134,12 @@ void BossListener::Glitch(float in_deltaTime)
 		switch (m_glitchPhase)
 		{
 			case 0:
-				Discord::CommitState(LanguageHelper::Localise("StateBossSupremeBeast"));
+				Discord::CommitState("StateBossSupremeBeast");
 				m_glitchPhase = 1;
 				break;
 
 			case 1:
-				Discord::CommitState(LanguageHelper::Localise("StateBossTheEnd"));
+				Discord::CommitState("StateBossTheEnd");
 				m_glitchPhase = 0;
 				break;
 		}

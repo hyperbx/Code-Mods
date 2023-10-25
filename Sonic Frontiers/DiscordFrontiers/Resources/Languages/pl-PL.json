@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Wyzwanie tygrysa",
   "DetailsLocationMasterTrialCrane":       "Wyzwanie żurawia",
   "DetailsLocationMasterTrialKing":        "Wyzwanie Najwyższego Króla Koko",
+  
+  "PlayerSonic":                           "Sonic",
+  "PlayerSuperSonic":                      "Super Sonic",
+  "PlayerAmy":                             "Amy",
+  "PlayerKnuckles":                        "Knuckles",
+  "PlayerTails":                           "Tails",
 
   "StateExploring":                        "Zwiedzanie",
   "StateGameModeFishing":                  "Łowienie ryb",

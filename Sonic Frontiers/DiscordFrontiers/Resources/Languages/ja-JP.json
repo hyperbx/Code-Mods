@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "虎の試練",
   "DetailsLocationMasterTrialCrane":       "鶴の試練",
   "DetailsLocationMasterTrialKing":        "教官王ココの試練",
+  
+  "PlayerSonic":                           "ソニック",
+  "PlayerSuperSonic":                      "スーパーソニック",
+  "PlayerAmy":                             "エミー",
+  "PlayerKnuckles":                        "ナックルズ",
+  "PlayerTails":                           "テイルス",
 
   "StateExploring":                        "探検",
   "StateGameModeFishing":                  "釣り",

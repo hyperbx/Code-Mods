@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Épreuve du Tigre",
   "DetailsLocationMasterTrialCrane":       "Épreuve du Crane",
   "DetailsLocationMasterTrialKing":        "Épreuve du Koco Maître Roi",
+  
+  "PlayerSonic":                           "Sonic",
+  "PlayerSuperSonic":                      "Super Sonic",
+  "PlayerAmy":                             "Amy",
+  "PlayerKnuckles":                        "Knuckles",
+  "PlayerTails":                           "Tails",
 
   "StateExploring":                        "Exploration",
   "StateGameModeFishing":                  "Pêche",

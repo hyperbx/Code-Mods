@@ -117,7 +117,7 @@ public:
 		return Phase;
 	}
 
-	static std::string GetStatus()
+	static std::string GetState()
 	{
 		auto island = StageHelper::GetCurrentIsland();
 
@@ -128,7 +128,7 @@ public:
 		if (island == StageHelper::EIsland_Unknown)
 			return "";
 
-		return LanguageHelper::Localise(std::get<0>(m_phaseMaps[island][GetPhase()]));
+		return std::get<0>(m_phaseMaps[island][GetPhase()]);
 	}
 
 	static std::string GetLargeImageKey()

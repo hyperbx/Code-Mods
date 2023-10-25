@@ -20,6 +20,9 @@ public:
 
 	static std::string Localise(std::string in_key)
 	{
+		if (in_key.empty())
+			return in_key;
+
 		if (m_Resource.empty())
 			return in_key;
 

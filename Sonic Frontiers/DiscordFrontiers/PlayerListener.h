@@ -3,12 +3,20 @@
 class PlayerListener
 {
 private:
-	static inline std::unordered_map<uint8_t, std::string> m_playerMap =
+	static inline std::unordered_map<uint8_t, std::string> m_playerImageKeyMap =
 	{
 		{ 0, "sonic"    },
 		{ 1, "amy"      },
 		{ 2, "knuckles" },
 		{ 3, "tails"    }
+	};
+
+	static inline std::unordered_map<uint8_t, std::string> m_playerNameMap =
+	{
+		{ 0, "PlayerSonic"    },
+		{ 1, "PlayerAmy"      },
+		{ 2, "PlayerKnuckles" },
+		{ 3, "PlayerTails"    }
 	};
 
 public:
@@ -17,7 +25,7 @@ public:
 	static void Init();
 	static void Commit();
 
-	static bool IsSuper(app::player::Player* in_pPlayer = nullptr)
+	static bool IsSuper(hh::game::GameObject* in_pPlayer = nullptr)
 	{
 		if (!in_pPlayer)
 		{
@@ -65,12 +73,24 @@ public:
 		return pLevelInfo->pPlayerInfos[0]->CharacterIndex;
 	}
 
-	static std::string GetCharacterName()
+	static std::string GetCharacterImageKey()
 	{
-		if (GetCharacterIndex() == 0 && IsSuper())
+		int idx = GetCharacterIndex();
+
+		if (idx == 0 && IsSuper())
 			return IsSuperSonic2 ? "supersonic2" : "supersonic";
 
-		return m_playerMap[GetCharacterIndex()];
+		return m_playerImageKeyMap[idx];
+	}
+
+	static std::string GetCharacterName()
+	{
+		int idx = GetCharacterIndex();
+
+		if (idx == 0 && IsSuper())
+			return "PlayerSuperSonic";
+
+		return m_playerNameMap[GetCharacterIndex()];
 	}
 };
 

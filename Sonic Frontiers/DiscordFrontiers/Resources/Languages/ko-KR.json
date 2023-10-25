@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "범의 시련",
   "DetailsLocationMasterTrialCrane":       "학의 시련",
   "DetailsLocationMasterTrialKing":        "교관왕 코코의 시련",
+  
+  "PlayerSonic":                           "소닉",
+  "PlayerSuperSonic":                      "슈퍼 소닉",
+  "PlayerAmy":                             "에이미",
+  "PlayerKnuckles":                        "너클즈",
+  "PlayerTails":                           "테일즈",
 
   "StateExploring":                        "오픈 존 탐험중",
   "StateGameModeFishing":                  "낚시중",

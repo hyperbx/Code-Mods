@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Tiger's Trial",
   "DetailsLocationMasterTrialCrane":       "Crane's Trial",
   "DetailsLocationMasterTrialKing":        "Master King's Trial",
+  
+  "PlayerSonic":                           "Sonic",
+  "PlayerSuperSonic":                      "Super Sonic",
+  "PlayerAmy":                             "Amy",
+  "PlayerKnuckles":                        "Knuckles",
+  "PlayerTails":                           "Tails",
 
   "StateExploring":                        "Exploring",
   "StateGameModeFishing":                  "Fishing",

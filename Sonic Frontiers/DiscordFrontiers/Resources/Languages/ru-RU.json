@@ -20,6 +20,12 @@
   "DetailsLocationMasterTrialTiger":       "Испытание тигра",
   "DetailsLocationMasterTrialCrane":       "Испытание журавля",
   "DetailsLocationMasterTrialKing":        "Испытание коко-куратора",
+  
+  "PlayerSonic":                           "Соник",
+  "PlayerSuperSonic":                      "Супер Соник",
+  "PlayerAmy":                             "Эми",
+  "PlayerKnuckles":                        "Наклз",
+  "PlayerTails":                           "Тейлз",
 
   "StateExploring":                        "Исследование",
   "StateGameModeFishing":                  "Рыбалка",
