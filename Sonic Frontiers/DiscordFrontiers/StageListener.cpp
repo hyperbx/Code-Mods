@@ -65,7 +65,7 @@ void StageListener::Commit(std::string in_stageId)
 		return;
 	}
 
-	if (IS_ATTRIBUTE_FLAG(EAttributeFlags_BattleRush))
+	if (IS_ATTRIBUTE_FLAG(eAttributeFlags_BattleRush))
 	{
 		BattleRushListener::IsBattleRush = true;
 		BattleRushListener::Phase = 0;
@@ -73,14 +73,14 @@ void StageListener::Commit(std::string in_stageId)
 		return;
 	}
 
-	if (IS_ATTRIBUTE_FLAG(EAttributeFlags_BossRush))
+	if (IS_ATTRIBUTE_FLAG(eAttributeFlags_BossRush))
 	{
 		MasterTrialListener::IsBossRush = true;
 		MasterTrialListener::CommitBossRush(in_stageId);
 		return;
 	}
 	
-	if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Cyber))
+	if (IS_ATTRIBUTE_FLAG(eAttributeFlags_Cyber))
 	{
 		auto name = std::string(pStageData->CyberName.begin(), pStageData->CyberName.end());
 
@@ -144,14 +144,14 @@ void StageListener::Commit(std::string in_stageId)
 				: TimeHelper::GetSystemEpoch()
 		);
 	}
-	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Minigame))
+	else if (IS_ATTRIBUTE_FLAG(eAttributeFlags_Minigame))
 	{
 		Discord::CommitState("StateGameModeFishing");
 		Discord::ResetTime();
 	}
-	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Hacking))
+	else if (IS_ATTRIBUTE_FLAG(eAttributeFlags_Hacking))
 	{
-		if (IS_ATTRIBUTE_FLAG(EAttributeFlags_LastBoss))
+		if (IS_ATTRIBUTE_FLAG(eAttributeFlags_LastBoss))
 		{
 			Discord::Commit("StateBossTheEnd", "", "w5r01", "StateBossTheEnd", "supersonic", "PlayerSuperSonic", TimeHelper::GetSystemEpoch());
 		}
@@ -160,11 +160,11 @@ void StageListener::Commit(std::string in_stageId)
 			Discord::Commit("StateGameModeHacking", "", "hacking", "StateGameModeHacking", "sonic", "PlayerSonic", TimeHelper::GetSystemEpoch());
 		}
 	}
-	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_MasterTrial))
+	else if (IS_ATTRIBUTE_FLAG(eAttributeFlags_MasterTrial))
 	{
 		MasterTrialListener::CommitMasterTrial(in_stageId);
 	}
-	else if (IS_ATTRIBUTE_FLAG(EAttributeFlags_Tutorial))
+	else if (IS_ATTRIBUTE_FLAG(eAttributeFlags_Tutorial))
 	{
 		Discord::Commit("StateGameModeTutorial", "", "training", "StateGameModeTutorial", "sonic", "PlayerSonic", TimeHelper::GetSystemEpoch());
 	}

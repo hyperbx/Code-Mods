@@ -67,10 +67,10 @@ public:
 
 		auto pLevelInfo = pGameManager->GetService<app::level::LevelInfo>();
 
-		if (!pLevelInfo || pLevelInfo->pPlayerInfos.size() <= 0)
+		if (!pLevelInfo)
 			return 0;
 
-		return pLevelInfo->pPlayerInfos[0]->CharacterIndex;
+		return pLevelInfo->GetPlayerInformation()->CharacterIndex;
 	}
 
 	static std::string GetCharacterImageKey()
