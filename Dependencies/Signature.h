@@ -60,6 +60,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             if (x##Addr == nullptr) \
@@ -83,6 +84,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
@@ -106,6 +108,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             if (x##Addr == nullptr) \
@@ -129,6 +132,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
@@ -156,6 +160,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             if (x##Addr == nullptr) \
@@ -179,6 +184,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             printf("[Signature] %s received: 0x%llx (expected: 0x%llx)\n", #x, x##Addr, y); \
@@ -202,6 +208,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             if (x##Addr == nullptr) \
@@ -225,6 +232,7 @@ inline void* ScanSignature(const char* signature, const char* mask)
             } \
             else \
             { \
+                printf("[Signature] CommonLoader not found, using independent signature scanner!\n"); \
                 x##Addr = ScanSignature(__VA_ARGS__); \
             } \
             printf("[Signature] %s received: 0x%llx\n", #x, x##Addr); \
