@@ -7,7 +7,7 @@
 #define CMN_LOADER_XSTRINGIFY(X) CMN_LOADER_STRINGIFY(X)
 
 #ifndef CMN_LOADER_HOST_MODULES
-#define CMN_LOADER_HOST_MODULES "d3d9.dll", "d3d11.dll"
+#define CMN_LOADER_HOST_MODULES "d3d9.dll", "d3d11.dll", "dinput8.dll"
 #endif
 
 #define CMN_LOADER_STATE_SKIP_SIG_VALIDATION 0
