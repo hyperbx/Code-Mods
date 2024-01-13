@@ -1,0 +1,259 @@
+Code "First Person Camera" in "Camera" by "Hyper"
+//
+    #include "Helpers" noemit
+
+    #lib "GameObject"
+    #lib "Memory"
+    #lib "Player"
+    #lib "Resources"
+
+    #import "Cameras"
+    #import "GOComponents"
+    #import "Messages"
+
+    static bool _isInitialised = false;
+    static bool _isCrosshair = false;
+
+    static float _boostGaugeX = _boostGaugeDefaultX;
+    static float _boostGaugeY = _boostGaugeDefaultY;
+    static float _boostGaugeZ = _boostGaugeDefaultZ;
+
+    static float _minElevation = -85.0f;
+    static float _maxElevation = 85.0f;
+
+    static readonly float _boostGaugeDefaultX = 660.0f;
+    static readonly float _boostGaugeDefaultY = -375.0f;
+    static readonly float _boostGaugeDefaultZ = 0.0f;
+    static readonly float _boostGaugeCrosshairX = 0.0f;
+    static readonly float _boostGaugeCrosshairY = 0.0f;
+    static readonly float _boostGaugeCrosshairZ = -300.0f;
+//
+{
+    if (!_isInitialised)
+    {
+        // Disable Cyloop aura.
+        Memory.WriteForceJump
+        (
+            /* 0x14080F16D */
+            ScanSignature
+            (
+                "\x74\x16\x3C\x08\x74\x12",
+                "xxxxxx"
+            )
+        );
+
+        // Disable Cyloop camera.
+        WriteNop
+        (
+            /* 0x1408577FE */
+            ScanSignature
+            (
+                "\xE8\xCC\xCC\xCC\xCC\x4C\x8D\x05\xCC\xCC\xCC\xCC\x48\x8B\xD3\x48\x8D\x4D\x40",
+                "x????xxx????xxxxxxx"
+            ),
+
+            5
+        );
+
+        // Disable Drop Dash camera delay.
+        Memory.WriteForceJump
+        (
+            /* 0x140843092 */
+            ScanSignature
+            (
+                "\x73\x2A\xF3\x0F\x10\x05\xCC\xCC\xCC\xCC\x45\x33\xC9",
+                "xxxxxx????xxx"
+            )
+        );
+
+        // Hide sixth sense effects.
+        Memory.WriteForceJump
+        (
+            /* 0x1407E98CC */
+            ScanSignature
+            (
+                "\x74\x79\xE8\xCC\xCC\xCC\xCC\x48\x8D\x4B\x6C",
+                "xxx????xxxx"
+            )
+        );
+    
+        // Disable skill camera events.
+        {
+            WriteProtected<byte>
+            (
+                /* 0x1408D5986 */
+                ScanSignature
+                (
+                    "\x0F\x84\x83\x00\x00\x00\x44\x38\x36",
+                    "xxxxxxxxx"
+                ),
+
+                0xE9, 0x84, 0x00, 0x00, 0x00
+            );
+
+            WriteNop
+            (
+                /* 0x14087F9E9 */
+                ScanSignature
+                (
+                    "\xE8\xCC\xCC\xCC\xCC\x41\xC7\x86\xAC\x00\x00\x00\x03\x00\x00\x00",
+                    "x????xxxxxxxxxxx"
+                ),
+
+                5
+            );
+        }
+    
+        fixed (bool* p_isCrosshair = &_isCrosshair)
+        {
+            WriteAsmHook
+            (
+                $@"
+                    push rbx
+                    sub  rsp, 0x20
+                    mov  eax, dword ptr [r8]
+                    cmp  eax, -4
+                    je   isNoCrosshair
+                    cmp  eax, -3
+                    jne  isCrosshair
+                    jmp  isNoCrosshair
+                isCrosshair:
+                    mov  rbx, {(long)p_isCrosshair}
+                    mov  byte ptr [rbx], 1
+                    jmp  exit
+                isNoCrosshair:
+                    mov  rbx, {(long)p_isCrosshair}
+                    mov  byte ptr [rbx], 0
+                exit:
+                    mov  rbx, rdx
+                    cmp  eax, -4
+                ",
+
+                /* 0x140A58D00 */
+                ScanSignature
+                (
+                    "\x40\x53\x48\x83\xEC\x20\x41\x8B\x00\x48\x8B\xDA\x83\xF8\xFC\x74\x3B",
+                    "xxxxxxxxxxxxxxxxx"
+                ),
+
+                HookBehavior.Replace
+            );
+        }
+
+        // TODO: fix gauge flickering when the player is off screen.
+        fixed (float* p_boostGaugeX = &_boostGaugeX)
+        fixed (float* p_boostGaugeY = &_boostGaugeY)
+        fixed (float* p_boostGaugeZ = &_boostGaugeZ)
+        {
+            WriteAsmHook
+            (
+                $@"
+                    lea    r8, qword ptr [rsp + 0x50]
+                    mov    rcx, {(long)p_boostGaugeX}
+                    mov    ecx, dword ptr [rcx]
+                    mov    dword ptr [r8], ecx
+                    mov    rcx, {(long)p_boostGaugeY}
+                    mov    ecx, dword ptr [rcx]
+                    mov    dword ptr [r8 + 0x04], ecx
+                    mov    rcx, {(long)p_boostGaugeZ}
+                    mov    ecx, dword ptr [rcx]
+                    mov    dword ptr [r8 + 0x08], ecx
+                    movaps xmm0, xmmword ptr [r8]
+                    movaps xmmword ptr [rsp + 0x40], xmm0
+                ",
+
+                /* 0x140A6D475 */
+                ScanSignature
+                (
+                    "\x0F\x28\x44\x24\x50\x0F\x58\x05",
+                    "xxxxxxxx"
+                ),
+
+                HookBehavior.Replace
+            );
+        }
+
+        /* Allows the camera to look directly downwards and upwards.
+
+           Setting this via the Reflection library would work, but
+           it's too late to set the value. */
+        fixed (float* p_minElevation = &_minElevation)
+        fixed (float* p_maxElevation = &_maxElevation)
+        {
+            WriteAsmHook
+            (
+                $@"
+                    mov   rax, {(long)p_minElevation}
+                    movss xmm0, dword ptr [rax]
+                    mulss xmm0, xmm2
+                    movss dword ptr [rdx + 0xE0], xmm0
+                    mov   rax, {(long)p_maxElevation}
+                    movss xmm0, dword ptr [rax]
+                    mulss xmm0, xmm2
+                    movss dword ptr [rdx + 0xE4], xmm0
+                ",
+
+                /* 0x1466BEF69 */
+                ScanSignature
+                (
+                    "\xF3\x0F\x10\x49\x0C\xF3\x0F\x59\xCA\xF3\x0F\x11\x8A\xE4\x00\x00\x00\x8B\x41\x10\x89\x82\xE8\x00\x00\x00\x8B\x41\x14\x89\x82\xEC\x00\x00\x00\x8B\x41\x18\x89\x82\xF0\x00\x00\x00\x8B\x41\x20",
+                    "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                ),
+
+                HookBehavior.Replace
+            );
+        }
+
+        string NotifySonicResources(string in_resourceName, string in_resourceType)
+        {
+            if (in_resourceType != "ResModel")
+                return in_resourceName;
+            
+            // Hide Sonic model.
+            if (in_resourceName == "chr_sonic")
+                return "chr_sonic_aura";
+            
+            return in_resourceName;
+        }
+
+        Resources.AddResourceNotifyAction(NotifySonicResources);
+
+        _isInitialised = true;
+    }
+
+    // Kill all intrusive effects.
+    Player.Effect.StopAnimationEffects();
+
+    // Update boost gauge position.
+    _boostGaugeX = _isCrosshair ? _boostGaugeCrosshairX : _boostGaugeDefaultX;
+    _boostGaugeY = _isCrosshair ? _boostGaugeCrosshairY : _boostGaugeDefaultY;
+    _boostGaugeZ = _isCrosshair ? _boostGaugeCrosshairZ : _boostGaugeDefaultZ;
+
+    var pPlayer = Player.GetPlayerData();
+
+    if (pPlayer == null)
+        return;
+
+    var pGOCCamera = GameObject.GetGOC<GOCCamera>(&pPlayer->GameObject);
+
+    if (pGOCCamera == null)
+        return;
+
+    var pStandardCamera = pGOCCamera->GetCameraController<StandardCamera>();
+
+    if (pStandardCamera == null)
+        return;
+    
+    var pStandardCameraContext = pStandardCamera->pContext;
+
+    if (pStandardCameraContext == null)
+        return;
+    
+    pStandardCameraContext->Distance = 0.0f;
+    pStandardCameraContext->DistanceSuspension = pStandardCameraContext->Distance;
+    pStandardCameraContext->Elevation = 0.0f;
+    pStandardCameraContext->SetFieldOfView(90.0f);
+
+    // Kill camera volumes.
+    Messages.SendMessageToLayer(16, new MsgStartFreeCamera());
+}
