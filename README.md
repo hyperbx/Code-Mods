@@ -1,5 +1,5 @@
-# Application Extension Mods
-A repository containing DLL mods for various games.
+# Code Mods
+A repository containing code mods for various games.
 
 ## Index
 - Project '06
