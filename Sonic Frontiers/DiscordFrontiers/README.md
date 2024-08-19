@@ -1,6 +1,29 @@
 # [Discord Frontiers](https://gamebanana.com/mods/423887)
 A mod for Sonic Frontiers that adds Discord rich presence support.
 
+# Mod Integration
+If you have a custom stage mod, Discord Frontiers will automatically detect it if the `cyber_name` field in `stagedata.lua` does not follow the `#-#` naming convention of other existing Cyber Space stages.
+
+To provide a custom thumbnail for your stage, create a `DiscordFrontiers.ini` file in your mod's directory and enter the following;
+```ini
+[Images]
+wxdxx=""
+```
+
+Replace `wxdxx` with the value of the `name` field in `stagedata.lua` for your custom stage. The value of this field must be a valid URL to an image hosted publicly. You can host your thumbnail on GitHub and copy the raw image link to it into here.
+
+The `Images` section in `DiscordFrontiers.ini` allows you to redirect any Discord image asset. You can find a list of keys [here](https://github.com/hyperbx/Code-Mods/tree/main/Sonic%20Frontiers/DiscordFrontiers/Resources/Images) (minus the `*.png` extension), these can be redirected to a valid URL.
+
+If you need to replace any strings, say if you have a custom character, you can copy `en-GB.json` (for English) from `./Discord Frontiers/Languages/` into your mod's directory and rename it to `DiscordFrontiers.json` (or `DiscordFrontiers.en-GB.json`, if you plan to localise these strings).
+
+You can then remove all strings that you don't intend to modify from the JSON and modify only the strings you need, for example;
+```json
+{
+  "PlayerSonic":       "Shadow",
+  "PlayerSuperSonic":  "Super Shadow"
+}
+```
+
 ## Credits
 - [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
 - [acro](https://github.com/acrolo) - testing and Training Simulator image
