@@ -11,6 +11,7 @@
     <ClInclude Include="BattleRushListener.h" />
     <ClInclude Include="PlayerListener.h" />
     <ClInclude Include="MasterTrialListener.h" />
+    <ClInclude Include="BasicIniReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />

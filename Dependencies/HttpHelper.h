@@ -64,6 +64,7 @@ public:
 		else
 		{
 			long response;
+
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response);
 
 			result = response;

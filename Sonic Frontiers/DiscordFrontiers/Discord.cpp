@@ -7,7 +7,17 @@ void Discord::Init()
     Discord::Commit(State, Details, LargeImageKey, LargeImageText, SmallImageKey, SmallImageText, 0, true);
 }
 
-void Discord::Commit(std::string in_state, std::string in_details, std::string in_largeImageKey, std::string in_largeImageText, std::string in_smallImageKey, std::string in_smallImageText, time_t in_startTime, bool in_isLocalised)
+void Discord::Commit
+(
+    std::string in_state,
+    std::string in_details,
+    std::string in_largeImageKey,
+    std::string in_largeImageText,
+    std::string in_smallImageKey,
+    std::string in_smallImageText,
+    time_t in_startTime,
+    bool in_isLocalised
+)
 {
     if (in_isLocalised)
     {

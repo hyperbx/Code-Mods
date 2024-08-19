@@ -16,7 +16,9 @@ private:
 	};
 
 public:
-	static inline bool IsLazyUpdate = false;
+	inline static std::unordered_map<std::string, std::string> CustomStageMap;
+
+	inline static bool IsLazyUpdate = false;
 
 	static void Init();
 	static void Update();

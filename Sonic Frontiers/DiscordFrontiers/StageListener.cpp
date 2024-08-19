@@ -92,40 +92,10 @@ void StageListener::Commit(std::string in_stageId)
 			? "DetailsLocationCustomStage"
 			: "DetailsGameModeCyberStage";
 
-		std::string customStageImageUrl = "unknown";
-
 		if (GameModeListener::IsCyberSpaceChallenge)
 			location = "DetailsGameModeCyberStageChallenge";
 
-		if (Configuration::URL.empty())
-		{
-			auto customStageHash = std::to_string(csl::ut::StringMapOperation::hash(name.c_str()));
-
-			customStageImageUrl = std::format(CACHE_URL, customStageHash);
-
-#if _DEBUG
-			printf("[Discord Frontiers] Hash: %s\n", customStageHash.c_str());
-			printf("[Discord Frontiers] URL:  %s\n", customStageImageUrl.c_str());
-#endif
-
-			if (HttpHelper::GetResponse(customStageImageUrl) != 200)
-				customStageImageUrl = "unknown";
-		}
-		else
-		{
-			printf("[Discord Frontiers] Visualiser URL: %s\n", Configuration::URL.c_str());
-
-			customStageImageUrl = Configuration::URL;
-
-			long response = HttpHelper::GetResponse(customStageImageUrl);
-
-			if (response != 200)
-			{
-				customStageImageUrl = "missing";
-
-				Discord::CommitLargeImageText(std::format("Error: failed to load image (response {})", response));
-			}
-		}
+		auto imgSrc = Discord::GetCustomImageSource(CustomStageMap, in_stageId, name);
 
 		Discord::Commit
 		(
@@ -133,8 +103,8 @@ void StageListener::Commit(std::string in_stageId)
 
 			location,
 
-			isCustomStage ? customStageImageUrl : StringHelper::ToLower(name),
-			name,
+			isCustomStage ? std::get<0>(imgSrc) : StringHelper::ToLower(name),
+			isCustomStage ? std::get<1>(imgSrc) : name,
 
 			PlayerListener::GetCharacterImageKey(),
 			PlayerListener::GetCharacterName(),

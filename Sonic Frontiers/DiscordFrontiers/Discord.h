@@ -4,6 +4,9 @@
 
 class Discord
 {
+private:
+	inline static std::unordered_map<std::string, long> m_responses;
+
 public:
 	inline static DiscordRichPresence Client;
 
@@ -89,5 +92,58 @@ public:
 #endif
 
 		Commit(State, Details, LargeImageKey, LargeImageText, SmallImageKey, SmallImageText, TimeHelper::GetSystemEpoch(), false);
+	}
+
+	static std::tuple<std::string, std::string> GetCustomImageSource
+	(
+		std::unordered_map<std::string, std::string> in_sources,
+		std::string in_imageKey,
+		std::string in_imageText,
+		bool in_isSmallImage = false
+	)
+	{
+		std::string imageKey = in_isSmallImage
+			? "unknown_small"
+			: "unknown";
+
+		bool isReportMissingImage = false;
+
+		if (in_sources.count(in_imageKey))
+		{
+			isReportMissingImage = true;
+			imageKey = in_sources[in_imageKey];
+
+			printf("[Discord Frontiers] %s: %s\n", in_imageKey.c_str(), imageKey.c_str());
+		}
+		else
+		{
+			return std::make_tuple(imageKey, in_imageText);
+		}
+
+		auto response = -1;
+
+		if (m_responses.count(imageKey))
+		{
+			// Get last response to reduce connections.
+			response = m_responses[imageKey];
+		}
+		else
+		{
+			// Get new response if we haven't tried already.
+			response = HttpHelper::GetResponse(imageKey);
+
+			m_responses.insert({ imageKey, response });
+		}
+
+		if (response != 200)
+		{
+			imageKey = in_isSmallImage
+				? "missing_small"
+				: "missing";
+
+			in_imageText = std::format("Error: failed to load image (response {})", response);
+		}
+
+		return std::make_tuple(imageKey, in_imageText);
 	}
 };

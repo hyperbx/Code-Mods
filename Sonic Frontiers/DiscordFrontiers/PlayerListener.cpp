@@ -11,9 +11,7 @@ HOOK(int64_t, __fastcall, PlayerCtor, m_SigPlayerCtor(), int64_t in_pThis, int64
 HOOK(int64_t, __fastcall, ChangePlayerVisualToSuperSonic, m_SigChangePlayerVisualToSuperSonic(), int64_t in_pThis)
 {
 	PlayerListener::IsSuperSonic2 = false;
-
-	Discord::CommitSmallImage("supersonic");
-	Discord::CommitSmallImageText("PlayerSuperSonic");
+	PlayerListener::Commit();
 
 	return originalChangePlayerVisualToSuperSonic(in_pThis);
 }
@@ -21,9 +19,7 @@ HOOK(int64_t, __fastcall, ChangePlayerVisualToSuperSonic, m_SigChangePlayerVisua
 HOOK(int64_t, __fastcall, ChangePlayerVisualToSuperSonic2, m_SigChangePlayerVisualToSuperSonic2(), int64_t in_pThis)
 {
 	PlayerListener::IsSuperSonic2 = true;
-
-	Discord::CommitSmallImage("supersonic2");
-	Discord::CommitSmallImageText("PlayerSuperSonic");
+	PlayerListener::Commit();
 
 	return originalChangePlayerVisualToSuperSonic2(in_pThis);
 }
@@ -39,8 +35,7 @@ HOOK(void, __fastcall, PlayerListener_GOCPlayerHsmUpdate, m_SigGOCPlayerHsmUpdat
 		
 		if (!m_isCommittedStatusUpdate)
 		{
-			Discord::CommitSmallImage(isSuper ? "supersonic" : "sonic");
-			Discord::CommitSmallImageText(isSuper ? "PlayerSuperSonic" : "PlayerSonic");
+			PlayerListener::Commit();
 
 			m_lastUpdateStatus = isSuper;
 			m_isCommittedStatusUpdate = true;
@@ -60,6 +55,8 @@ void PlayerListener::Init()
 
 void PlayerListener::Commit()
 {
-	Discord::CommitSmallImage(PlayerListener::GetCharacterImageKey());
-	Discord::CommitSmallImageText(PlayerListener::GetCharacterName());
+	auto imgSrc = GetCharacterImageSource();
+
+	Discord::CommitSmallImage(std::get<0>(imgSrc));
+	Discord::CommitSmallImageText(std::get<1>(imgSrc));
 }

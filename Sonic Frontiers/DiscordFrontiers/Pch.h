@@ -14,8 +14,8 @@
 #include <vector>
 
 // Dependencies
-#include <Discord/x64/include/discord_register.h>
-#include <Discord/x64/include/discord_rpc.h>
+#include <Discord/discord-rpc/x64/include/discord_register.h>
+#include <Discord/discord-rpc/x64/include/discord_rpc.h>
 #include <Helpers.h>
 #include <HttpHelper.h>
 #include <INIReader.h>
@@ -29,6 +29,7 @@
 CL_SCAN_SIGNATURE(m_SigGOCPlayerHsmUpdate, 0x1408AA540, "\x40\x53\x55\x48\x83\xEC\x28\x49", "xxxxxxxx");
 
 // Internal headers
+#include "BasicIniReader.h"
 #include "Configuration.h"
 #include "Discord.h"
 #include "StageHelper.h"
