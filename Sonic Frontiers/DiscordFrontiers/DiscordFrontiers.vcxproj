@@ -185,7 +185,7 @@ copy /Y "$(SolutionDir)Dependencies\Discord\discord-rpc\x64\bin\discord-rpc.dll"
 copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.ini" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.ini"
 copy /Y "$(MSBuildProjectDirectory)\DiscordFrontiers.json" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\DiscordFrontiers.json"
 xcopy /Y /E /I "$(MSBuildProjectDirectory)\Resources\Languages" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\Languages"
-copy /Y "$(SolutionDir)Dependencies\Discord\x64\bin\discord-rpc.dll" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\discord-rpc.dll"</Command>
+copy /Y "$(SolutionDir)Dependencies\Discord\discord-rpc\x64\bin\discord-rpc.dll" "$(MSBuildProjectDirectory)\bin\$(Platform)\$(Configuration)\discord-rpc.dll"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
