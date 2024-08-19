@@ -60,8 +60,8 @@ void StageListener::Commit(std::string in_stageId)
 
 	if (!pStageData)
 	{
-		printf("[Discord Frontiers] Cannot retrieve info about current stage.\n");
-		printf("[Discord Frontiers] Error: app::level::StageData returned nullptr...\n");
+		PRINT_ERROR("[Discord Frontiers] Cannot retrieve info about current stage.\n");
+		PRINT_ERROR("[Discord Frontiers] Error: app::level::StageData returned nullptr...\n");
 		return;
 	}
 
@@ -95,19 +95,17 @@ void StageListener::Commit(std::string in_stageId)
 		if (GameModeListener::IsCyberSpaceChallenge)
 			location = "DetailsGameModeCyberStageChallenge";
 
-		auto imgSrc = Discord::GetCustomImageSource(CustomStageMap, in_stageId, name);
-
 		Discord::Commit
 		(
 			name,
 
 			location,
 
-			isCustomStage ? std::get<0>(imgSrc) : StringHelper::ToLower(name),
-			isCustomStage ? std::get<1>(imgSrc) : name,
+			isCustomStage ? in_stageId : StringHelper::ToLower(name),
+			name,
 
 			PlayerListener::GetCharacterImageKey(),
-			PlayerListener::GetCharacterName(),
+			PlayerListener::GetCharacterNameKey(),
 			
 			GameModeListener::IsCyberSpaceChallenge
 				? Discord::StartTime
@@ -154,7 +152,7 @@ void StageListener::Commit(std::string in_stageId)
 				"DetailsLocationUnknown",
 
 				PlayerListener::GetCharacterImageKey(),
-				PlayerListener::GetCharacterName(),
+				PlayerListener::GetCharacterNameKey(),
 
 				TimeHelper::GetSystemEpoch()
 			);
@@ -171,7 +169,7 @@ void StageListener::Commit(std::string in_stageId)
 				name,
 
 				PlayerListener::GetCharacterImageKey(),
-				PlayerListener::GetCharacterName(),
+				PlayerListener::GetCharacterNameKey(),
 
 				TimeHelper::GetSystemEpoch()
 			);

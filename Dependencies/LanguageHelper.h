@@ -7,7 +7,7 @@ using json = nlohmann::json;
 
 class LanguageHelper
 {
-	static inline json m_Resource;
+	static inline json m_resource;
 
 public:
 	static void Read(std::string in_resourcePath)
@@ -15,7 +15,17 @@ public:
 		if (!IOHelper::FileExists(in_resourcePath))
 			return;
 
-		m_Resource = json::parse(IOHelper::ReadString(in_resourcePath));
+		m_resource = json::parse(IOHelper::ReadString(in_resourcePath));
+	}
+
+	static void Merge(std::string in_resourcePath)
+	{
+		if (!IOHelper::FileExists(in_resourcePath))
+			return;
+
+		auto source = json::parse(IOHelper::ReadString(in_resourcePath));
+
+		m_resource.merge_patch(source);
 	}
 
 	static std::string Localise(std::string in_key)
@@ -23,12 +33,12 @@ public:
 		if (in_key.empty())
 			return in_key;
 
-		if (m_Resource.empty())
+		if (m_resource.empty())
 			return in_key;
 
-		if (!m_Resource.contains(in_key))
+		if (!m_resource.contains(in_key))
 			return in_key;
 
-		return m_Resource[in_key];
+		return m_resource[in_key];
 	}
 };

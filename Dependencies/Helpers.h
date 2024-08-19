@@ -12,6 +12,11 @@ constexpr double DEG2RAD = 0.01745329238474369;
 
 #define EXPORT extern "C" __declspec(dllexport)
 
+#define PRINT_ERROR(str, ...) \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY); \
+    printf(str, __VA_ARGS__); \
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 #define PRINT_BOOLEAN(a) printf(#a " = %s\n", a ? "TRUE" : "FALSE")
 #define PRINT_VECTOR_3(a) printf(#a " = %f,%f,%f\n", (a).x(), (a).y(), (a).z());
 #define PRINT_VECTOR_4(a) printf(#a " = %f,%f,%f,%f\n", (a).x(), (a).y(), (a).z(), (a).w());
@@ -287,3 +292,7 @@ if (std::abs(name - b) < r) \
 
 #define FLOAT_PERCENT_TO_UINT8(value) ((value) < 0.0f ? 0 : (value) > 100.0f ? 255 : (uint8_t)((value) / 100.0f * 255.0f))
 #define FLOAT_PERCENT_TO_UINT16(value) ((value) < 0.0f ? 0 : (value) > 100.0f ? 65535 : (uint16_t)((value) / 100.0f * 65535.0f))
+
+#define INIT_CONSOLE() \
+    AllocConsole(); \
+    freopen("CONOUT$", "w", stdout);

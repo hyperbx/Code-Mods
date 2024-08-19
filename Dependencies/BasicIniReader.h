@@ -2,6 +2,10 @@
 
 #define INI std::map<std::string, std::map<std::string, std::string>>
 
+#include <fstream>
+#include <map>
+#include <string>
+
 class BasicIniReader
 {
 public:

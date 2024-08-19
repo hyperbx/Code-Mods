@@ -1,7 +1,5 @@
 #pragma once
 
-#define CACHE_URL "https://raw.githubusercontent.com/Big-Endian-32/Networking/main/Sonic%20Frontiers/Discord%20Frontiers/.cache/{}.png"
-
 class StageListener
 {
 private:
@@ -16,8 +14,6 @@ private:
 	};
 
 public:
-	inline static std::unordered_map<std::string, std::string> CustomStageMap;
-
 	inline static bool IsLazyUpdate = false;
 
 	static void Init();

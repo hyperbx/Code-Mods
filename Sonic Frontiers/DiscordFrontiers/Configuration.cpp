@@ -10,45 +10,49 @@ void Configuration::ReadMods(ModInfo* in_pModInfo)
 {
 	for (auto pMod : *in_pModInfo->ModList)
 	{
-		auto path = StringHelper::GetSubstringBeforeLastChar(pMod->Path, '\\').append("\\DiscordFrontiers.ini");
-
-		printf("%s\n", path.c_str());
-
-		if (!IOHelper::FileExists(path))
+		if (!strcmp(pMod->Name, "Discord Frontiers"))
 			continue;
 
-		printf("[Discord Frontiers] Loading configuration from \"%s\"\n", path.c_str());
+		auto path = StringHelper::GetSubstringBeforeLastChar(pMod->Path, '\\');
 
-		auto ini = BasicIniReader::Read(path);
+		auto iniPath = path + "\\DiscordFrontiers.ini";
+		auto jsonPath = path + "\\DiscordFrontiers.json";
+		auto jsonPathLocalised = path + std::format("\\DiscordFrontiers.{}.json", Configuration::Language);
 
-		if (ini.count("Stages"))
+		if (IOHelper::FileExists(iniPath))
 		{
-			// Load custom stage image URLs.
-			for (auto key : ini["Stages"])
-			{
-				if (StageListener::CustomStageMap.count(key.first))
-				{
-					StageListener::CustomStageMap[key.first] = key.second;
-					continue;
-				}
+			printf("[Discord Frontiers] Loading configuration from \"%s\"\n", iniPath.c_str());
 
-				StageListener::CustomStageMap.insert({ key.first, key.second });
+			auto ini = BasicIniReader::Read(iniPath);
+
+			if (ini.count("Images"))
+			{
+				// Load custom image URLs.
+				for (auto key : ini["Images"])
+				{
+					if (Discord::ImageURLs.count(key.first))
+					{
+						Discord::ImageURLs[key.first] = key.second;
+						continue;
+					}
+
+					Discord::ImageURLs.insert({ key.first, key.second });
+				}
 			}
 		}
 
-		if (ini.count("Characters"))
+		if (IOHelper::FileExists(jsonPath))
 		{
-			// Load custom character image URLs.
-			for (auto key : ini["Characters"])
-			{
-				if (PlayerListener::CharacterInfoMap.count(key.first))
-				{
-					PlayerListener::CharacterInfoMap[key.first] = key.second;
-					continue;
-				}
+			printf("[Discord Frontiers] Loading localisation from \"%s\"\n", jsonPath.c_str());
 
-				PlayerListener::CharacterInfoMap.insert({ key.first, key.second });
-			}
+			LanguageHelper::Merge(jsonPath);
+		}
+
+		if (IOHelper::FileExists(jsonPathLocalised))
+		{
+			printf("[Discord Frontiers] Loading localisation from \"%s\"\n", jsonPathLocalised.c_str());
+
+			LanguageHelper::Merge(jsonPathLocalised);
 		}
 	}
 }

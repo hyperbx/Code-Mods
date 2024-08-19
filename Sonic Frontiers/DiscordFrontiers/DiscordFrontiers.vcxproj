@@ -191,7 +191,6 @@ copy /Y "$(SolutionDir)Dependencies\Discord\discord-rpc\x64\bin\discord-rpc.dll"
   <ItemGroup>
     <ClInclude Include="BattleRushListener.h" />
     <ClInclude Include="BossListener.h" />
-    <ClInclude Include="BasicIniReader.h" />
     <ClInclude Include="MasterTrialListener.h" />
     <ClInclude Include="Configuration.h" />
     <ClInclude Include="Discord.h" />

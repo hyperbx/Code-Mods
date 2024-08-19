@@ -55,8 +55,6 @@ void PlayerListener::Init()
 
 void PlayerListener::Commit()
 {
-	auto imgSrc = GetCharacterImageSource();
-
-	Discord::CommitSmallImage(std::get<0>(imgSrc));
-	Discord::CommitSmallImageText(std::get<1>(imgSrc));
+	Discord::CommitSmallImage(GetCharacterImageKey());
+	Discord::CommitSmallImageText(GetCharacterNameKey());
 }

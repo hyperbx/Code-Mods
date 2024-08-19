@@ -3,9 +3,7 @@
 class PlayerListener
 {
 private:
-	inline static std::tuple<std::string, std::string> m_currentSource = { "unknown_small", "DetailsLocationUnknown" };
-
-	inline static std::string m_defaultImageKeys[6] =
+	inline static std::string m_imageKeys[6] =
 	{
 		"sonic",
 		"amy",
@@ -15,39 +13,17 @@ private:
 		"supersonic2"
 	};
 
-	inline static std::string m_characterImageSourceKeys[4] =
+	inline static std::string m_nameKeys[6] =
 	{
-		"SonicURL",
-		"AmyURL",
-		"KnucklesURL",
-		"TailsURL"
-	};
-
-	inline static std::string m_characterNameSourceKeys[4] =
-	{
-		"SonicName",
-		"AmyName",
-		"KnucklesName",
-		"TailsName"
+		"PlayerSonic",
+		"PlayerAmy",
+		"PlayerKnuckles",
+		"PlayerTails",
+		"PlayerSuperSonic",
+		"PlayerSuperSonic2"
 	};
 
 public:
-	inline static std::unordered_map<std::string, std::string> CharacterInfoMap =
-	{				      
-		{ "SonicURL",        "sonic"             },
-		{ "SonicName",       "PlayerSonic"       },
-		{ "AmyURL",          "amy"               },
-		{ "AmyName",         "PlayerAmy"         },
-		{ "KnucklesURL",     "knuckles"          },
-		{ "KnucklesName",    "PlayerKnuckles"    },
-		{ "TailsURL",        "tails"             },
-		{ "TailsName",       "PlayerTails"       },
-		{ "SuperSonicURL",   "supersonic"        },
-		{ "SuperSonicName",  "PlayerSuperSonic"  },
-		{ "SuperSonic2URL",  "supersonic2"       },
-		{ "SuperSonic2Name", "PlayerSuperSonic2" }
-	};
-
 	inline static bool IsSuperSonic2 = false;
 
 	static void Init();
@@ -101,48 +77,32 @@ public:
 		return pLevelInfo->GetPlayerInformation()->CharacterIndex;
 	}
 
-	static std::tuple<std::string, std::string> GetCharacterImageSource()
+	static std::string GetCharacterImageKey()
 	{
 		auto idx = GetCharacterIndex();
 
-		auto imageSourceKey = m_characterImageSourceKeys[idx];
-		auto nameSourceKey = m_characterNameSourceKeys[idx];
+		if (idx == 0 && IsSuper())
+		{
+			return IsSuperSonic2
+				? "supersonic2"
+				: "supersonic";
+		}
+
+		return m_imageKeys[idx];
+	}
+
+	static std::string GetCharacterNameKey()
+	{
+		auto idx = GetCharacterIndex();
 
 		if (idx == 0 && IsSuper())
 		{
-			imageSourceKey = IsSuperSonic2
-				? "SuperSonic2URL"
-				: "SuperSonicURL";
-
-			nameSourceKey = IsSuperSonic2
-				? "SuperSonic2Name"
-				: "SuperSonicName";
+			return IsSuperSonic2
+				? "PlayerSuperSonic2"
+				: "PlayerSuperSonic";
 		}
 
-		auto name = CharacterInfoMap[nameSourceKey];
-
-		// Don't reload resources from the internet if the current source is identical.
-		if (std::get<0>(m_currentSource) == imageSourceKey && std::get<1>(m_currentSource) == name)
-			return m_currentSource;
-
-		for (int i = 0; i < 6; i++)
-		{
-			// Check if image key is default and return it if so.
-			if (m_defaultImageKeys[i] == CharacterInfoMap[imageSourceKey])
-				return std::make_tuple(m_defaultImageKeys[i], name);
-		}
-
-		return m_currentSource = Discord::GetCustomImageSource(CharacterInfoMap, imageSourceKey, name, true);
-	}
-
-	static std::string GetCharacterImageKey()
-	{
-		return std::get<0>(GetCharacterImageSource());
-	}
-
-	static std::string GetCharacterName()
-	{
-		return std::get<1>(GetCharacterImageSource());
+		return m_nameKeys[idx];
 	}
 };
 

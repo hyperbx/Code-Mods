@@ -26,7 +26,7 @@ HOOK(void, __fastcall, GameModeBattleRushExtensionProcessMessage, m_SigGameModeB
 		BattleRushListener::GetState(),
 
 		PlayerListener::GetCharacterImageKey(),
-		PlayerListener::GetCharacterName(),
+		PlayerListener::GetCharacterNameKey(),
 
 		(BattleRushListener::IsBattleRushAll || BattleRushListener::Phase > 0)
 			? Discord::StartTime

@@ -5,10 +5,13 @@
 class Discord
 {
 private:
+	inline static std::vector<std::string> m_hostedAssets;
 	inline static std::unordered_map<std::string, long> m_responses;
 
 public:
 	inline static DiscordRichPresence Client;
+
+	inline static std::unordered_map<std::string, std::string> ImageURLs;
 
 	inline static std::string State          = "";
 	inline static std::string Details        = "";
@@ -94,30 +97,53 @@ public:
 		Commit(State, Details, LargeImageKey, LargeImageText, SmallImageKey, SmallImageText, TimeHelper::GetSystemEpoch(), false);
 	}
 
-	static std::tuple<std::string, std::string> GetCustomImageSource
-	(
-		std::unordered_map<std::string, std::string> in_sources,
-		std::string in_imageKey,
-		std::string in_imageText,
-		bool in_isSmallImage = false
-	)
+	static std::vector<std::string> GetHostedAssets()
 	{
+		std::vector<std::string> result{};
+
+		auto url = std::format("https://discordapp.com/api/v6/oauth2/applications/{}/assets", APPLICATION_ID);
+		auto response = HttpHelper::GetResponse(url);
+
+		if (response != 200)
+		{
+			PRINT_ERROR("[Discord Frontiers] Failed to get Discord assets.");
+			return result;
+		}
+
+		auto resource = json::parse(HttpHelper::ReadStringFromUrl(url));
+
+		for (const auto& item : resource)
+			result.push_back(item.at("name"));
+
+		return result;
+	}
+
+	static bool IsDiscordAsset(std::string in_key)
+	{
+		if (std::find(m_hostedAssets.begin(), m_hostedAssets.end(), in_key) != m_hostedAssets.end())
+			return true;
+
+		return false;
+	}
+
+	static std::string GetImageFromSource(std::string in_imageKey, bool in_isSmallImage)
+	{
+		if (in_imageKey.empty())
+			return in_imageKey;
+
 		std::string imageKey = in_isSmallImage
 			? "unknown_small"
 			: "unknown";
 
-		bool isReportMissingImage = false;
-
-		if (in_sources.count(in_imageKey))
+		if (ImageURLs.count(in_imageKey))
 		{
-			isReportMissingImage = true;
-			imageKey = in_sources[in_imageKey];
+			imageKey = ImageURLs[in_imageKey];
 
 			printf("[Discord Frontiers] %s: %s\n", in_imageKey.c_str(), imageKey.c_str());
 		}
 		else
 		{
-			return std::make_tuple(imageKey, in_imageText);
+			return IsDiscordAsset(in_imageKey) ? in_imageKey : imageKey;
 		}
 
 		auto response = -1;
@@ -141,9 +167,18 @@ public:
 				? "missing_small"
 				: "missing";
 
-			in_imageText = std::format("Error: failed to load image (response {})", response);
+			constexpr std::string_view err = "Error: failed to load image \"{}\" ({})";
+
+			if (response == -1)
+			{
+				PRINT_ERROR("[Discord Frontiers] %s\n", std::format(err, in_imageKey, "curl error").c_str());
+			}
+			else
+			{
+				PRINT_ERROR("[Discord Frontiers] %s\n", std::format(err, in_imageKey, std::format("response {}", response)).c_str());
+			}
 		}
 
-		return std::make_tuple(imageKey, in_imageText);
+		return imageKey;
 	}
 };
