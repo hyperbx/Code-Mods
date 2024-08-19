@@ -45,14 +45,28 @@ void Configuration::ReadMods(ModInfo* in_pModInfo)
 		{
 			printf("[Discord Frontiers] Loading localisation from \"%s\"\n", jsonPath.c_str());
 
-			LanguageHelper::Merge(jsonPath);
+			try
+			{
+				LanguageHelper::Merge(jsonPath);
+			}
+			catch (nlohmann::json::parse_error& out_ex)
+			{
+				PRINT_ERROR("[Discord Frontiers] Failed to parse JSON: %s\n%s\n", jsonPath.c_str(), out_ex.what());
+			}
 		}
 
 		if (IOHelper::FileExists(jsonPathLocalised))
 		{
 			printf("[Discord Frontiers] Loading localisation from \"%s\"\n", jsonPathLocalised.c_str());
 
-			LanguageHelper::Merge(jsonPathLocalised);
+			try
+			{
+				LanguageHelper::Merge(jsonPathLocalised);
+			}
+			catch (nlohmann::json::parse_error& out_ex)
+			{
+				PRINT_ERROR("[Discord Frontiers] Failed to parse JSON: %s\n%s\n", jsonPathLocalised.c_str(), out_ex.what());
+			}
 		}
 	}
 }
