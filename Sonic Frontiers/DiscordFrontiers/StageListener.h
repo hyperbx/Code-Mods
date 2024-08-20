@@ -14,6 +14,8 @@ private:
 	};
 
 public:
+	inline static std::vector<std::string> CustomStages;
+
 	inline static bool IsLazyUpdate = false;
 
 	static void Init();

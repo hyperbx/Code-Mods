@@ -25,6 +25,16 @@ void Configuration::ReadMods(ModInfo* in_pModInfo)
 
 			auto ini = BasicIniReader::Read(iniPath);
 
+			if (ini.count("General"))
+			{
+				auto custom = BasicIniReader::Get(ini, "General", "Custom");
+				auto stages = StringHelper::Split(custom, ',');
+
+				// Load custom stages.
+				for (auto stage : stages)
+					StageListener::CustomStages.push_back(stage);
+			}
+
 			if (ini.count("Images"))
 			{
 				// Load custom image URLs.

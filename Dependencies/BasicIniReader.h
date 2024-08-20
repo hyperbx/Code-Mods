@@ -55,5 +55,16 @@ public:
 
         return result;
     }
+
+    inline static std::string Get(INI in_ini, std::string in_section, std::string in_key, std::string in_defaultValue = "")
+    {
+        if (!in_ini.count(in_section))
+            return in_defaultValue;
+
+        if (!in_ini[in_section].count(in_key))
+            return in_defaultValue;
+
+        return in_ini[in_section][in_key];
+    }
 };
 

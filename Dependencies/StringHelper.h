@@ -118,20 +118,38 @@ public:
 	}
 
 	/// <summary>
-	/// Extracts comma separated strings.
+	/// Splits a string by a delimiter.
 	/// </summary>
-	/// <param name="str">String to extract from.</param>
-	/// <returns>Vector of the strings.</returns>
-	static std::vector<std::string> GetCommaSeparatedStrings(std::string str)
+	/// <param name="str">The string to split.</param>
+	/// <returns>A vector of the strings.</returns>
+	static std::vector<std::string> Split(std::string str, char delimiter, char trim = ' ')
 	{
-		std::vector<std::string> strings;
+		std::vector<std::string> result;
 		std::istringstream stream(str);
 		std::string token;
 
-		while (std::getline(stream, token, ','))
-			strings.push_back(token);
+		while (std::getline(stream, token, delimiter))
+			result.push_back(Trim(token, trim));
 
-		return strings;
+		return result;
+	}
+
+	/// <summary>
+	/// Omits a character from the start and end of a string.
+	/// </summary>
+	/// <param name="str">The string to trim.</param>
+	/// <param name="c">The character to omit.</param>
+	/// <returns>The original string without the specified character leading or trailing it.</returns>
+	static std::string Trim(std::string str, char c = ' ')
+	{
+		auto start = str.find_first_not_of(c);
+
+		if (start == std::string::npos)
+			return "";
+
+		auto end = str.find_last_not_of(c);
+
+		return str.substr(start, end - start + 1);
 	}
 	
 	/// <summary>

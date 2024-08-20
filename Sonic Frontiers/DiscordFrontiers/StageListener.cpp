@@ -88,6 +88,10 @@ void StageListener::Commit(std::string in_stageId)
 		   Otherwise, this will default to regular Cyber Space. */
 		bool isCustomStage = name[1] != '-';
 
+		// Override previous check if this stage ID is marked as custom in DiscordFrontiers.ini.
+		if (std::find(CustomStages.begin(), CustomStages.end(), in_stageId) != CustomStages.end())
+			isCustomStage = true;
+
 		std::string location = isCustomStage
 			? "DetailsLocationCustomStage"
 			: "DetailsGameModeCyberStage";
@@ -98,10 +102,8 @@ void StageListener::Commit(std::string in_stageId)
 		Discord::Commit
 		(
 			name,
-
 			location,
-
-			isCustomStage ? in_stageId : StringHelper::ToLower(name),
+			in_stageId,
 			name,
 
 			PlayerListener::GetCharacterImageKey(),
