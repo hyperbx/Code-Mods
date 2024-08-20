@@ -1,7 +1,7 @@
 # [Discord Frontiers](https://gamebanana.com/mods/423887)
 A mod for Sonic Frontiers that adds Discord rich presence support.
 
-# Mod Integration
+## Mod Integration
 If you have a custom stage mod, Discord Frontiers will automatically detect it if the `cyber_name` field in `stagedata.lua` does not follow the `#-#` naming convention of other existing Cyber Space stages.
 
 To provide a custom thumbnail for your stage, create a `DiscordFrontiers.ini` file in your mod's directory and enter the following;
@@ -25,7 +25,7 @@ You can then remove all strings that you don't intend to modify from the JSON an
 ```
 
 ## Credits
-- [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
+- [Hyper](https://github.com/hyperbx) - programming and reverse-engineering
 - [acro](https://github.com/acrolo) - testing and Training Simulator image
 - [benhoyt](https://github.com/benhoyt) - [inih](https://github.com/benhoyt/inih)
 
