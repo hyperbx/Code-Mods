@@ -3,7 +3,7 @@ A repository containing code mods for various games.
 
 ## Index
 - Fallout 4
-  - [Camera Near Clip Fix](https://github.com/hyperbx/Code-Mods/tree/main/Fallout%204/CameraNearClipFix)
+  - [Fix Camera Clipping](https://github.com/hyperbx/Code-Mods/tree/main/Fallout%204/FixCameraClipping)
 
 - Project '06
   - [E3 Life Icon Redesign](https://github.com/hyperbx/Code-Mods/tree/main/Project%20'06/E3LifeIconRedesign)

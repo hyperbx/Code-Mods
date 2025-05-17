@@ -2,7 +2,7 @@ EXPORT F4SEPluginVersionData F4SEPlugin_Version =
 {
     F4SEPluginVersionData::kVersion,
     1,
-    "Camera Near Clip Fix",
+    "Fix Camera Clipping",
     "Hyper",
 
     F4SEPluginVersionData::kAddressIndependence_Signatures,

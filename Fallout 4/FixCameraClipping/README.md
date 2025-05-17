@@ -1,4 +1,4 @@
-# Camera Near Clip Fix
+# Fix Camera Clipping
 Fixes the camera clipping through geometry in first-person by adjusting its near distance to account for the field of view.
 
 >[!WARNING]
@@ -7,12 +7,13 @@ Fixes the camera clipping through geometry in first-person by adjusting its near
 # Pre-requisites
 ### Building
 - Visual Studio 2022
+
 ### Running
 - Fallout 4 (v1.10.984)
 - [Fallout 4 Script Extender](https://f4se.silverlock.org/) (v0.7.2)
 
 # Usage
-Install Fallout 4 Script Extender and place `CameraNearClipFix.dll` in `.\Data\F4SE\Plugins\`.
+Install Fallout 4 Script Extender and place `FixCameraClipping.dll` in `.\Data\F4SE\Plugins\`.
 
 # Screenshots
 ## Default FOV @ 3440x1440
