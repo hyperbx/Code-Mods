@@ -137,8 +137,9 @@ const HMODULE MODULE_HANDLE = GetModuleHandle(nullptr);
     typedef returnType _##procName(__VA_ARGS__); \
     _##procName* procName = (_##procName*)GetProcAddress(GetModuleHandle(TEXT(libraryName)), #procName);
 
-#define DECLARE_ASM_HOOK(NAME) extern "C" void* original##NAME; \
-	extern "C" void* implOf##NAME;
+#define DECLARE_ASM_HOOK(NAME) \
+    extern "C" void* original##NAME; \
+    extern "C" void* implOf##NAME;
 
 #define ASM_HOOK(startAddress, functionName) \
 	static uint32_t functionName##StartAddress = startAddress; \

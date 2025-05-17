@@ -7,3 +7,6 @@
 [submodule "Sonic Frontiers/Dependencies/rangers-api"]
 	path = Sonic Frontiers/Dependencies/rangers-api
 	url = https://github.com/DeaTh-G/rangers-api.git
+[submodule "Dependencies/f4se"]
+	path = Dependencies/f4se
+	url = https://github.com/ianpatt/f4se.git
