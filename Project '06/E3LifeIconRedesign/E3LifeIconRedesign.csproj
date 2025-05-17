@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>D:\Source\Loose\CSharp\HyperBE32\MelonLoaderTemplate\MelonLoaderTemplate\Dependencies\MelonLoader\0Harmony.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Dependencies\Project '06\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>

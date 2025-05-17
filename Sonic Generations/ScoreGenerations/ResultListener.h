@@ -37,7 +37,7 @@ public:
     static void Result();
 
     /// <summary>
-    /// Reverse-engineered struct for the result description - by Sajid and HyperBE32.
+    /// Reverse-engineered struct for the result description - by Sajid and hyperbx.
     /// </summary>
     struct ResultDescription
     {

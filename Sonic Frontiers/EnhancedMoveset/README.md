@@ -1,7 +1,7 @@
 # [Enhanced Moveset](https://gamebanana.com/mods/440674)
 
 ## Credits
-- [Hyper](https://github.com/HyperBE32) - programming and reverse-engineering
+- [Hyper](https://github.com/hyperbx) - programming and reverse-engineering
 - [Ahremic](https://github.com/Ahremic) - vector math support, Air Dash idea, state ID reverse-engineering
 - [NM](https://github.com/NM-20) - state ID reverse-engineering
 - [Sajid](https://github.com/Sajidur78) - vector math support
