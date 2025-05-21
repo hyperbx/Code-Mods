@@ -6,8 +6,8 @@ Fixes the camera clipping through geometry in first-person by adjusting its near
 - Visual Studio 2022
 
 ### Running
-- Fallout 4 (1.10.984)
-- [Fallout 4 Script Extender](https://f4se.silverlock.org/) (0.7.2)
+- Fallout 4 (1.10.163 or 1.10.984)
+- [Fallout 4 Script Extender](https://f4se.silverlock.org/)
 
 # Usage
 Install Fallout 4 Script Extender and place `FixCameraClipping.dll` in `.\Data\F4SE\Plugins\`.

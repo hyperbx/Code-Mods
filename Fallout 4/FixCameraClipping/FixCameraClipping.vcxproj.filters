@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="Resources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -10,5 +11,8 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ModAsm.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FixCameraClipping.rc" />
   </ItemGroup>
 </Project>

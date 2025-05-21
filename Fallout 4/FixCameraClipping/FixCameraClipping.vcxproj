@@ -191,6 +191,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Pch.h" />
+    <ClInclude Include="Resources.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />
@@ -204,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <MASM Include="ModAsm.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FixCameraClipping.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
