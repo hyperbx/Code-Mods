@@ -25,7 +25,7 @@ extern "C"
     }
 }
 
-EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_f4se)
+EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_pInfo)
 {
     // v1.10.984: 0x142095BF4
     g_pSigSetNearDistance = (uint64_t)ScanSignature
