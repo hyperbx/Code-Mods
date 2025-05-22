@@ -10,9 +10,6 @@
     <ClCompile Include="Pch.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="ModAsm.asm" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="FixCameraClipping.rc" />
   </ItemGroup>
 </Project>

@@ -204,9 +204,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <MASM Include="ModAsm.asm" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="FixCameraClipping.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

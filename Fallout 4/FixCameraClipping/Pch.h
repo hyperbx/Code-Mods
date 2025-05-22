@@ -22,4 +22,3 @@ typedef uint32_t UInt32;
 typedef uint64_t UInt64;
 
 #include <f4se\f4se\PluginAPI.h>
-#include <f4se\f4se_common\f4se_version.h>

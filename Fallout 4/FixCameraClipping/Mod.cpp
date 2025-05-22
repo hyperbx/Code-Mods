@@ -1,12 +1,5 @@
 #define MOD_NAME    "Fix Camera Clipping"
-#define MOD_VERSION 2
-
-bool g_isNextGen = true;
-
-void ShowUnsupportedMessage()
-{
-    MessageBoxA(nullptr, "Fallout 4 version 1.10.163 or 1.10.984 is required.", MOD_NAME, MB_ICONERROR);
-}
+#define MOD_VERSION 3
 
 // Pre-next-gen metadata
 EXPORT bool F4SEPlugin_Query(const F4SEInterface* in_pF4SE, PluginInfo* in_pInfo)
@@ -14,14 +7,6 @@ EXPORT bool F4SEPlugin_Query(const F4SEInterface* in_pF4SE, PluginInfo* in_pInfo
     in_pInfo->infoVersion = PluginInfo::kInfoVersion;
     in_pInfo->name = MOD_NAME;
     in_pInfo->version = MOD_VERSION;
-
-    g_isNextGen = false;
-
-    if (in_pF4SE->runtimeVersion != RUNTIME_VERSION_1_10_163)
-    {
-        ShowUnsupportedMessage();
-        return false;
-    }
 
     return true;
 }
@@ -38,77 +23,56 @@ EXPORT F4SEPluginVersionData F4SEPlugin_Version =
     F4SEPluginVersionData::kAddressIndependence_Signatures,
     F4SEPluginVersionData::kStructureIndependence_NoStructs,
 
-    { RUNTIME_VERSION_1_10_163, RUNTIME_VERSION_1_10_984, 0 },
+    // No version requirements.
+    // Tested versions: 1.10.163, 1.10.984
+    // Researched versions (untested, should work): 1.1.29, 1.3.47, 1.10.130, 1.10.138, 1.10.155, 1.10.162, 1.10.980
+    { 0 },
 
     0
 };
 
-extern "C"
+HOOK(void, __fastcall, BSShaderUtilSetCameraFOV, 0, uint64_t apCamera, float afFOV, float afFar, float afNear)
 {
-    DECLARE_ASM_HOOK(SetNearDistance_1_10_163);
-    DECLARE_ASM_HOOK(SetNearDistance_1_10_984);
+    afNear = max(5.0f / tan((std::clamp(afFOV, 1.0f, 179.0f) * DEG2RADf) * 0.5f), 0.01f);
 
-    uint64_t g_pSigSetNearDistance = 0;
-    uint64_t g_pNiCameraSingleton = 0;
-
-    float GetNearDistance(float in_fov)
-    {
-        return max(5.0f / tan((std::clamp(in_fov, 1.0f, 179.0f) * DEG2RADf) * 0.5f), 0.01f);
-    }
+    originalBSShaderUtilSetCameraFOV(apCamera, afFOV, afFar, afNear);
 }
 
 EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_pF4SE)
 {
-    if (g_isNextGen)
+    // Scan for latest function first.
+    // 1.10.980: 0x14206B620
+    // 1.10.984: 0x14206BD40
+    auto pBSShaderUtilSetCameraFOV = (uint64_t)ScanSignature
+    (
+        "\x48\x8B\xC4\x53\x48\x81\xEC\x90\x00\x00\x00\x0F\x29\x70\xE8\x0F\x28",
+        "xxxxxxxxxxxxxxxxx"
+    );
+
+    if (!pBSShaderUtilSetCameraFOV)
     {
-        // 1.10.984: 0x142095BF4
-        g_pSigSetNearDistance = (uint64_t)ScanSignature
+        // Scan for earlier function revision.
+        // 1.1.29:   0x142CD2AE0
+        // 1.3.47:   0x14283DBE0
+        // 1.10.130: 0x142820310
+        // 1.10.138: 0x142820310
+        // 1.10.155: 0x142820420
+        // 1.10.162: 0x142820430
+        // 1.10.163: 0x142820430
+        pBSShaderUtilSetCameraFOV = (uint64_t)ScanSignature
         (
-            "\xF3\x0F\x10\x1D\xCC\xCC\xCC\xCC\x0F\x28\xCE\xF3\x0F\x10\x15\xCC\xCC\xCC\xCC\x48\x8B\x0D\xCC\xCC\xCC\xCC\xE8\xCC\xCC\xCC\xCC\x0F\x28\xC6\xE8\xCC\xCC\xCC\xCC\x48\x8B\x15",
-            "xxxx????xxxxxxx????xxx????x????xxxx????xxx"
+            "\x48\x8B\xC4\x53\x48\x81\xEC\x90\x00\x00\x00\x0F\x29\x70\xE8\x0F\x29\x78\xD8\x44\x0F\x29\x40\xC8\xF3",
+            "xxxxxxxxxxxxxxxxxxxxxxxxx"
         );
     }
-    else
+    
+    if (!pBSShaderUtilSetCameraFOV)
     {
-        // 1.10.163: 0x14284FEDF
-        auto pNiCameraSingletonLdr = (uint64_t)ScanSignature
-        (
-            "\x48\x8B\x0D\xCC\xCC\xCC\xCC\xF3\x0F\x10\x1D\xCC\xCC\xCC\xCC\xF3\x0F\x10\x15\xCC\xCC\xCC\xCC\x0F\x28\xCE\xE8\xCC\xCC\xCC\xCC\x0F\x28\xC6\xE8\xCC\xCC\xCC\xCC\x48\x8B\x15",
-            "xxx????xxxx????xxxx????xxxx????xxxx????xxx"
-        );
-
-        if (!pNiCameraSingletonLdr)
-        {
-            ShowUnsupportedMessage();
-            return false;
-        }
-
-        // Gets the effective address from the instruction
-        // mov rcx, qword ptr cs:[0x146723238] at 0x14284FEDF.
-        g_pNiCameraSingleton = pNiCameraSingletonLdr + (*(uint32_t*)(pNiCameraSingletonLdr + 3)) + 7;
-
-        // 1.10.163: 0x14284FEE6
-        g_pSigSetNearDistance = (uint64_t)ScanSignature
-        (
-            "\xF3\x0F\x10\x1D\xCC\xCC\xCC\xCC\xF3\x0F\x10\x15\xCC\xCC\xCC\xCC\x0F\x28\xCE\xE8\xCC\xCC\xCC\xCC\x0F\x28\xC6\xE8\xCC\xCC\xCC\xCC\x48\x8B\x15",
-            "xxxx????xxxx????xxxx????xxxx????xxx"
-        );
-    }
-
-    if (!g_pSigSetNearDistance)
-    {
-        ShowUnsupportedMessage();
+        MessageBoxA(nullptr, "Unsupported game version.", MOD_NAME, MB_ICONERROR);
         return false;
     }
 
-    if (g_isNextGen)
-    {
-        INSTALL_HOOK_ADDRESSED(SetNearDistance_1_10_984, g_pSigSetNearDistance);
-    }
-    else
-    {
-        INSTALL_HOOK_ADDRESSED(SetNearDistance_1_10_163, g_pSigSetNearDistance);
-    }
+    INSTALL_HOOK_ADDRESSED(BSShaderUtilSetCameraFOV, pBSShaderUtilSetCameraFOV);
 
     return true;
 }
