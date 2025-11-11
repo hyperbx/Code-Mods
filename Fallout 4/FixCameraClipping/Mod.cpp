@@ -31,7 +31,7 @@ EXPORT F4SEPluginVersionData F4SEPlugin_Version =
     0
 };
 
-HOOK(void, __fastcall, BSShaderUtilSetCameraFOV, 0, uint64_t apCamera, float afFOV, float afFar, float afNear)
+HOOK(void, __fastcall, BSShaderUtilSetCameraFOV, 0, void* apCamera, float afFOV, float afFar, float afNear)
 {
     afNear = max(5.0f / tan((std::clamp(afFOV, 1.0f, 179.0f) * DEG2RADf) * 0.5f), 0.01f);
 
@@ -43,6 +43,7 @@ EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_pF4SE)
     // Scan for latest function first.
     // 1.10.980: 0x14206B620
     // 1.10.984: 0x14206BD40
+    // 1.11.137: 0x1421BB580
     auto pBSShaderUtilSetCameraFOV = (uint64_t)ScanSignature
     (
         "\x48\x8B\xC4\x53\x48\x81\xEC\x90\x00\x00\x00\x0F\x29\x70\xE8\x0F\x28",
