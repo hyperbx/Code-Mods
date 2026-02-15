@@ -1,0 +1,4 @@
+Name: Fix Analog Deadzone
+Author: Hyper
+Version: 1.0.0
+Description: "Fixes the analog sticks being too sensitive by using the original console deadzones."
