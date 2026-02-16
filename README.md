@@ -20,3 +20,12 @@ A repository containing code mods for various games.
   - [Restore Silver Pinch Music](https://github.com/hyperbx/Code-Mods/tree/main/Sonic%20Generations/RestoreSilverPinchMusic)
   - [Score Generations](https://github.com/hyperbx/Code-Mods/tree/main/Sonic%20Generations/ScoreGenerations)
   - [Tails' Dash Rings in Stages](https://github.com/hyperbx/Code-Mods/tree/main/Sonic%20Generations/TailsDashRingsInStages)
+ 
+- Yakuza 3 Remastered
+  - [Fix Analog Deadzone](https://github.com/hyperbx/Code-Mods/tree/main/Yakuza/FixAnalogDeadzone)
+ 
+- Yakuza 4 Remastered
+  - [Fix Analog Deadzone](https://github.com/hyperbx/Code-Mods/tree/main/Yakuza/FixAnalogDeadzone)
+ 
+- Yakuza 5 Remastered
+  - [Fix Analog Deadzone](https://github.com/hyperbx/Code-Mods/tree/main/Yakuza/FixAnalogDeadzone)
