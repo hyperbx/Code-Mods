@@ -1,0 +1,23 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Dynamic-Link Library with code injection (DLL)</Name>
+    <Description>Build a .dll that can be loaded into a Unity app at runtime and hook functions using MelonLoader.</Description>
+    <Icon>TemplateIcon.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Dll</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <LocationField>Enabled</LocationField>
+    <SupportsLanguageDropDown>Enabled</SupportsLanguageDropDown>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="DllWithCodeInjectionMelonLoader.csproj" File="DllWithCodeInjectionMelonLoader.csproj" ReplaceParameters="true">
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Mod.cs">Mod.cs</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

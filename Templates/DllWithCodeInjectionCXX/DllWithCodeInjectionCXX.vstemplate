@@ -1,0 +1,24 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Dynamic-Link Library with code injection (DLL)</Name>
+    <Description>Build a .dll that can be loaded into a Windows app at runtime and hook functions using the Code Mods Framework.</Description>
+    <Icon>TemplateIcon.ico</Icon>
+    <ProjectType>VC</ProjectType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Dll</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <LocationField>Enabled</LocationField>
+    <SupportsLanguageDropDown>Enabled</SupportsLanguageDropDown>
+    <TargetPlatformName>Windows</TargetPlatformName>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="DllWithCodeInjectionCXX.vcxproj" File="DllWithCodeInjectionCXX.vcxproj" ReplaceParameters="true">
+      <ProjectItem TargetFileName="DllMain.cpp">DllMain.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.vcxproj.filters">DllWithCodeInjectionCXX.vcxproj.filters</ProjectItem>
+      <ProjectItem TargetFileName="Pch.cpp">Pch.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Pch.h">Pch.h</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

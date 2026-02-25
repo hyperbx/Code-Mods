@@ -1,0 +1,497 @@
+{
+    "Groups":
+	[
+	    {
+            "Name": "Score",
+            "DisplayName": "Score",
+            "Elements":
+			[
+				{
+					"Name": "Ring",
+					"DisplayName": "Rings",
+					"Description": [ "The amount of score rewarded for collecting rings." ],
+					"Type": "int",
+					"DefaultValue": 10
+				},
+				{
+					"Name": "Enemy",
+					"DisplayName": "Enemies",
+					"Description": [ "The amount of score rewarded for defeating enemies." ],
+					"Type": "int",
+					"DefaultValue": 300
+				},
+				{
+					"Name": "Physics",
+					"DisplayName": "Objects",
+					"Description": [ "The amount of score rewarded for breaking physics objects." ],
+					"Type": "int",
+					"DefaultValue": 150
+				},
+				{
+					"Name": "PointMarker",
+					"DisplayName": "Checkpoints",
+					"Description": [ "The amount of score rewarded for passing through checkpoints." ],
+					"Type": "int",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "RedRing",
+					"DisplayName": "Red Rings",
+					"Description": [ "The amount of score rewarded for collecting red rings." ],
+					"Type": "int",
+					"DefaultValue": 2000
+				},
+				{
+					"Name": "RainbowRing",
+					"DisplayName": "Rainbow Rings",
+					"Description": [ "The amount of score rewarded for passing through rainbow rings." ],
+					"Type": "int",
+					"DefaultValue": 1000
+				},
+				{
+					"Name": "ItemBox",
+					"DisplayName": "Item Boxes",
+					"Description": [ "The amount of score rewarded for breaking item boxes." ],
+					"Type": "int",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "SuperRing",
+					"DisplayName": "Super Rings",
+					"Description": [ "The amount of score rewarded for collecting super rings." ],
+					"Type": "int",
+					"DefaultValue": 100
+				},
+				{
+					"Name": "TrickFinish",
+					"DisplayName": "Trick Finish",
+					"Description": [ "The amount of score rewarded for finishing trick combos." ],
+					"Type": "int",
+					"DefaultValue": 5000
+				},
+				{
+					"Name": "Trick",
+					"DisplayName": "Trick Combos",
+					"Description": [ "The amount of score rewarded for performing trick combos." ],
+					"Type": "int",
+					"DefaultValue": 25
+				},
+				{
+					"Name": "Life",
+					"DisplayName": "Lives",
+					"Description": [ "The amount of score rewarded for collecting lives." ],
+					"Type": "int",
+					"DefaultValue": 1000
+				},
+				{
+					"Name": "DashRing",
+					"DisplayName": "Dash Rings",
+					"Description": [ "The amount of score rewarded for passing through dash rings." ],
+					"Type": "int",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "QuickStep",
+					"DisplayName": "Quick Stepping",
+					"Description": [ "The amount of score rewarded for quick stepping whilst running." ],
+					"Type": "int",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "Drift",
+					"DisplayName": "Drifting",
+					"Description": [ "The amount of score rewarded for drifting." ],
+					"Type": "int",
+					"DefaultValue": 0
+				},
+				{
+					"Name": "Balloon",
+					"DisplayName": "Balloons",
+					"Description": [ "The amount of score rewarded for popping balloons." ],
+					"Type": "int",
+					"DefaultValue": 75
+				},
+				{
+					"Name": "BoardTrick",
+					"DisplayName": "Board Tricks",
+					"Description": [ "The amount of score rewarded for jumping off trick ramps using the board." ],
+					"Type": "int",
+					"DefaultValue": 2500
+				},
+				{
+					"Name": "Super",
+					"DisplayName": "Super Sonic",
+					"Description": [ "The amount of score rewarded for being Super Sonic at the frequency specified in the behaviour section." ],
+					"Type": "int",
+					"DefaultValue": 2000
+				}
+            ]
+        },
+	    {
+			"Name": "GameplayBonus",
+			"DisplayName": "Gameplay Bonuses",
+			"Elements":
+			[
+				{
+					"Name": "IsRewardSpeedBonus",
+					"DisplayName": "Reward Speed Bonus",
+					"Description": [ "Determines if you should be rewarded with a bonus for your current speed passing through a checkpoint." ],
+					"Type": "bool",
+					"DefaultValue": true
+				},
+				{
+					"Name": "HomingChainBonus",
+					"DisplayName": "Homing Chain Bonus",
+					"Description": [ "The bonus rewarded for perfoming a homing chain." ],
+					"Type": "int",
+					"DefaultValue": 100
+				},
+				{
+					"Name": "HomingChainBonusLimit",
+					"Description":
+					[
+						"The limit the homing chain bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"DisplayName": "Homing Chain Bonus Limit",
+					"Type": "int",
+					"DefaultValue": 5000
+				},
+				{
+					"Name": "SlamBonus",
+					"DisplayName": "Slam Bonus",
+					"Description": [ "The bonus rewarded for crashing through enemies rapidly." ],
+					"Type": "int",
+					"DefaultValue": 100
+				},
+				{
+					"Name": "SlamBonusLimit",
+					"DisplayName": "Slam Bonus Limit",
+					"Description":
+					[
+						"The limit the slam bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"Type": "int",
+					"DefaultValue": 5000
+				},
+				{
+					"Name": "TrickBonusLimit",
+					"DisplayName": "Trick Bonus Limit",
+					"Description":
+					[
+						"The limit the trick bonus should be clamped to after being multiplied.\n",
+						"Set this to 0 to disable it."
+					],
+					"Type": "int",
+					"DefaultValue": 12800
+				}
+			]
+        },
+	    {
+			"Name": "ResultBonus",
+			"DisplayName": "Results Bonuses",
+			"Elements":
+			[
+				{
+					"Name": "TimeBonusExpression",
+					"DisplayName": "Time Bonus Expression",
+					"Description":
+					[
+						"The Lua expression that calculates the time bonus.\n",
+						"Exposed variables:",
+						"• TotalRingCount - total number of rings obtained by the player.",
+						"• TotalEnemies - total number of enemies destroyed by the player.",
+						"• TotalPhysics - total number of physics objects destroyed by the player.",
+						"• TotalPointMarkers - total number of checkpoints passed by the player.",
+						"• TotalRedRings - total number of red rings obtained by the player.",
+						"• TotalRainbowRings - total number of rainbow rings passed by the player.",
+						"• TotalItemBoxes - total number of item boxes obtained by the player.",
+						"• TotalSuperRings - total number of super rings obtained by the player.",
+						"• TotalTricks - total number of tricks performed by the player.",
+						"• TotalDashRings - total number of dash rings passed by the player.",
+						"• TotalQuickSteps - total number of quick steps performed by the player.",
+						"• TotalDrifts - total number of drifts performed by the player.",
+						"• TotalBalloons - total number of balloons destroyed by the player.",
+						"• TotalSpeed - total speed built up throughout the stage when passing checkpoints.",
+						"• HighestSpeed - the highest speed recorded when passing through a checkpoint.",
+						"• RingCount - number of rings the player finished with.",
+						"• Minutes - minutes on the timer.",
+						"• Seconds - seconds on the timer.",
+						"• ElapsedTime - total amount of time passed in seconds.",
+						"• Score - total score the player finished with.",
+						"• MaxScore - the maximum amount of score the player can obtain.",
+						"• MinSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+						"• MaxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+						"• StageID - the current stage ID.\n",
+						"Set this to '0' to disable it."
+					],
+					"Type": "string",
+					"DefaultValue": "calculateTimeBonus()"
+				},
+				{
+					"Name": "RingBonusExpression",
+					"DisplayName": "Ring Bonus Expression",
+					"Description":
+					[
+						"The Lua expression that calculates the ring bonus.\n",
+						"Exposed variables:",
+						"• TotalRingCount - total number of rings obtained by the player.",
+						"• TotalEnemies - total number of enemies destroyed by the player.",
+						"• TotalPhysics - total number of physics objects destroyed by the player.",
+						"• TotalPointMarkers - total number of checkpoints passed by the player.",
+						"• TotalRedRings - total number of red rings obtained by the player.",
+						"• TotalRainbowRings - total number of rainbow rings passed by the player.",
+						"• TotalItemBoxes - total number of item boxes obtained by the player.",
+						"• TotalSuperRings - total number of super rings obtained by the player.",
+						"• TotalTricks - total number of tricks performed by the player.",
+						"• TotalDashRings - total number of dash rings passed by the player.",
+						"• TotalQuickSteps - total number of quick steps performed by the player.",
+						"• TotalDrifts - total number of drifts performed by the player.",
+						"• TotalBalloons - total number of balloons destroyed by the player.",
+						"• TotalSpeed - total speed built up throughout the stage when passing checkpoints.",
+						"• HighestSpeed - the highest speed recorded when passing through a checkpoint.",
+						"• RingCount - number of rings the player finished with.",
+						"• Minutes - minutes on the timer.",
+						"• Seconds - seconds on the timer.",
+						"• ElapsedTime - total amount of time passed in seconds.",
+						"• Score - total score the player finished with.",
+						"• MaxScore - the maximum amount of score the player can obtain.",
+						"• MinSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+						"• MaxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+						"• StageID - the current stage ID.\n",
+						"Set this to '0' to disable it."
+					],
+					"Type": "string",
+					"DefaultValue": "math.clamp(ringCount * 50, 0, 5000)"
+				},
+				{
+					"Name": "SpeedBonusExpression",
+					"DisplayName": "Speed Bonus Expression",
+					"Description":
+					[
+						"The Lua expression that calculates the speed bonus.\n",
+						"Exposed variables:",
+						"• TotalRingCount - total number of rings obtained by the player.",
+						"• TotalEnemies - total number of enemies destroyed by the player.",
+						"• TotalPhysics - total number of physics objects destroyed by the player.",
+						"• TotalPointMarkers - total number of checkpoints passed by the player.",
+						"• TotalRedRings - total number of red rings obtained by the player.",
+						"• TotalRainbowRings - total number of rainbow rings passed by the player.",
+						"• TotalItemBoxes - total number of item boxes obtained by the player.",
+						"• TotalSuperRings - total number of super rings obtained by the player.",
+						"• TotalTricks - total number of tricks performed by the player.",
+						"• TotalDashRings - total number of dash rings passed by the player.",
+						"• TotalQuickSteps - total number of quick steps performed by the player.",
+						"• TotalDrifts - total number of drifts performed by the player.",
+						"• TotalBalloons - total number of balloons destroyed by the player.",
+						"• TotalSpeed - total speed built up throughout the stage when passing checkpoints.",
+						"• HighestSpeed - the highest speed recorded when passing through a checkpoint.",
+						"• RingCount - number of rings the player finished with.",
+						"• Minutes - minutes on the timer.",
+						"• Seconds - seconds on the timer.",
+						"• ElapsedTime - total amount of time passed in seconds.",
+						"• Score - total score the player finished with.",
+						"• MaxScore - the maximum amount of score the player can obtain.",
+						"• MinSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+						"• MaxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+						"• StageID - the current stage ID.\n",
+						"Set this to '0' to disable it."
+					],
+					"Type": "string",
+					"DefaultValue": "totalVelocity * 3"
+				},
+				{
+					"Name": "UserExpression",
+					"DisplayName": "User Expression",
+					"Description":
+					[
+						"A custom Lua expression for mod developers to use.\n",
+						"Exposed variables:",
+						"• TotalRingCount - total number of rings obtained by the player.",
+						"• TotalEnemies - total number of enemies destroyed by the player.",
+						"• TotalPhysics - total number of physics objects destroyed by the player.",
+						"• TotalPointMarkers - total number of checkpoints passed by the player.",
+						"• TotalRedRings - total number of red rings obtained by the player.",
+						"• TotalRainbowRings - total number of rainbow rings passed by the player.",
+						"• TotalItemBoxes - total number of item boxes obtained by the player.",
+						"• TotalSuperRings - total number of super rings obtained by the player.",
+						"• TotalTricks - total number of tricks performed by the player.",
+						"• TotalDashRings - total number of dash rings passed by the player.",
+						"• TotalQuickSteps - total number of quick steps performed by the player.",
+						"• TotalDrifts - total number of drifts performed by the player.",
+						"• TotalBalloons - total number of balloons destroyed by the player.",
+						"• TotalSpeed - total speed built up throughout the stage when passing checkpoints.",
+						"• HighestSpeed - the highest speed recorded when passing through a checkpoint.",
+						"• RingCount - number of rings the player finished with.",
+						"• Minutes - minutes on the timer.",
+						"• Seconds - seconds on the timer.",
+						"• ElapsedTime - total amount of time passed in seconds.",
+						"• Score - total score the player finished with.",
+						"• MaxScore - the maximum amount of score the player can obtain.",
+						"• MinSeconds - elapsed time in seconds the player must finish below for a higher time bonus.",
+						"• MaxSeconds - elapsed time in seconds the player must finish below for a time bonus.",
+						"• StageID - the current stage ID.\n",
+						"Set this to '0' to disable it."
+					],
+					"Type": "string",
+					"DefaultValue": "0"
+				}
+			]
+        },
+	    {
+			"Name": "Multiplier",
+			"DisplayName": "Multipliers",
+			"Elements":
+			[
+				{
+					"Name": "HomingChainMultiplier",
+					"DisplayName": "Homing Chain Multiplier",
+					"Description": [ "The multiplier used to increase the homing chain bonus." ],
+					"Type": "float",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "SpeedBonusMultiplier",
+					"DisplayName": "Speed Bonus Multiplier",
+					"Description": [ "The multiplier used to increase the speed bonus." ],
+					"Type": "float",
+					"DefaultValue": 10
+				},
+				{
+					"Name": "SlamMultiplier",
+					"DisplayName": "Slam Multiplier",
+					"Description": [ "The multiplier used to increase the slam bonus." ],
+					"Type": "float",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "TrickMultiplier",
+					"DisplayName": "Trick Multiplier",
+					"Description": [ "The multiplier used to increase the trick bonus." ],
+					"Type": "float",
+					"DefaultValue": 2
+				}
+			]
+        },
+	    {
+			"Name": "Timer",
+			"DisplayName": "Timers",
+			"Elements":
+			[
+				{
+					"Name": "IsScoreTimeout",
+					"DisplayName": "Score Time Over",
+					"Description": [ "Determines if the score should stop counting up after you surpass the maximum amount of time for a time bonus." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "SuperSonicTimer",
+					"DisplayName": "Super Sonic Timer",
+					"Description": [ "The amount of time in seconds the player is rewarded for being Super Sonic." ],
+					"Type": "float",
+					"DefaultValue": 2
+				},
+				{
+					"Name": "SlamTimer",
+					"DisplayName": "Slam Timer",
+					"Description": [ "The amount of time in seconds the slam bonus times out after when the player is grounded." ],
+					"Type": "float",
+					"DefaultValue": 2
+				}
+			]
+        },
+	    {
+			"Name": "Behaviour",
+			"DisplayName": "Behaviour",
+			"Elements":
+			[
+				{
+					"Name": "IsRestoreLastCheckpointScore",
+					"DisplayName": "Restore Last Checkpoint Score",
+					"Description": [ "Determines if the score should reset back to what you had at your last checkpoint upon dying." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "MaxScore",
+					"Description": [ "The maximum amount of score the player can obtain." ],
+					"DisplayName": "Max Score",
+					"Type": "int",
+					"DefaultValue": 999999
+				},
+				{
+					"Name": "PerfectBonusType",
+					"DisplayName": "Perfect Bonus",
+					"Description": [ "The behaviour of the perfect bonus for calculating your final rank." ],
+					"Type": "PerfectBonusType",
+					"DefaultValue": 1
+				}
+			]
+        },
+	    {
+			"Name": "Appearance",
+			"DisplayName": "Appearance",
+			"Elements":
+			[
+				{
+					"Name": "ScoreFormat",
+					"DisplayName": "Score Format",
+					"Description":
+					[
+						"The string format used to display the score on the HUD.\n",
+						"Examples:",
+						"%d - write the raw value.",
+						"%06d - write the value with six digit padding."
+					],
+					"Type": "string",
+					"DefaultValue": "%06d"
+				}
+			]
+        },
+	    {
+			"Name": "Developer",
+			"DisplayName": "Developer",
+			"Elements":
+			[
+				{
+					"Name": "IsCustomUI",
+					"DisplayName": "Custom HUD Layout",
+					"Description": [ "Disables Score Generations' HUD in favour of using a custom layout from another mod." ],
+					"Type": "bool",
+					"DefaultValue": false
+				},
+				{
+					"Name": "ProhibitedStages",
+					"Description": [ "The list of stages that don't display or count your score." ],
+					"DisplayName": "Prohibited Stages",
+					"Type": "string",
+					"DefaultValue": "bms, bms001, bde, bde001, bsd, bsd001, bpc, bpc001, bsl, bsl001, bne, bne001, blb, blb001"
+				}
+			]
+        }
+    ],
+	"Enums": 
+	{
+		"PerfectBonusType": 
+		[
+			{
+				"DisplayName": "Disabled",
+				"Description": [ "Disable perfect bonus." ],
+				"Value": 0
+			},
+			{
+				"DisplayName": "Only for A Rank",
+				"Description": [ "Enable perfect bonus, but only when you get an A rank." ],
+				"Value": 1
+			},
+			{
+				"DisplayName": "Enabled",
+				"Description": [ "Enable perfect bonus with default behaviour." ],
+				"Value": 2
+			}
+		]
+	},
+    "IniFile": "ScoreGenerations.ini"
+  }

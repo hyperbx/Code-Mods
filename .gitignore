@@ -347,9 +347,3 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-
-# Test projects
-*/.bak
-/Sonic Colours Ultimate/Test
-/Sonic Frontiers/Test
-/Sonic Generations/Test

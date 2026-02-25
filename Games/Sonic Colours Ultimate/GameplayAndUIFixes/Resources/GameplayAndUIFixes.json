@@ -1,0 +1,81 @@
+{
+  "Groups":
+  [
+    {
+      "Name": "Main",
+      "DisplayName": "Behaviour",
+      "Elements":
+      [
+        {
+          "Name": "IncludeDir1",
+          "DisplayName": "Gauge Type",
+          "Description": [ "The design used for the boost gauge." ],
+          "Type": "GaugeType",
+          "DefaultValue": "Ultimate"
+        },
+        {
+          "Name": "IncludeDir2",
+          "DisplayName": "Tails Save",
+          "Description": [ "Determines if Tails Save should be used in place of lives." ],
+          "Type": "TailsSaveType",
+          "DefaultValue": "Enabled"
+        },
+        {
+          "Name": "RingLifeType",
+          "DisplayName": "Ring Life Bonus",
+          "Description": [ "Determines how collecting 100 rings should give you an extra life." ],
+          "Type": "RingLifeType",
+          "DefaultValue": "Disabled"
+        }
+      ]
+    }
+  ],
+  "Enums":
+  {
+    "GaugeType":
+    [
+      {
+        "DisplayName": "Original",
+        "Description": [ "Uses the boost gauge design from Sonic Colours." ],
+        "Value": ".\\ui\\gauge\\"
+      },
+      {
+        "DisplayName": "Ultimate",
+        "Description": [ "Uses the boost gauge design from Sonic Colours: Ultimate." ],
+        "Value": "."
+      }
+    ],
+    "TailsSaveType":
+    [
+      {
+        "DisplayName": "Disabled",
+        "Description": [ "Disables Tails Save and restores the life counter." ],
+        "Value": ".\\ui\\lives\\"
+      },
+      {
+        "DisplayName": "Enabled",
+        "Description": [ "Enables Tails Save." ],
+        "Value": "."
+      }
+    ],
+    "RingLifeType":
+    [
+      {
+        "DisplayName": "Disabled",
+        "Description": [ "Don't reward an extra life for collecting 100 rings." ],
+        "Value": 0
+      },
+      {
+        "DisplayName": "Once",
+        "Description": [ "Only reward an extra life once when collecting exactly 100 rings." ],
+        "Value": 1
+      },
+      {
+        "DisplayName": "Enabled",
+        "Description": [ "Always reward extra lives when collecting 100 rings." ],
+        "Value": 2
+      }
+    ]
+  },
+  "IniFile": "mod.ini"
+}

@@ -4,9 +4,15 @@
 [submodule "Dependencies/CommonLoader"]
 	path = Dependencies/CommonLoader
 	url = https://github.com/hedge-dev/CommonLoader.git
+[submodule "Dependencies/eigen"]
+	path = Dependencies/eigen
+	url = https://github.com/PX4/eigen.git
 [submodule "Dependencies/f4se"]
 	path = Dependencies/f4se
 	url = https://github.com/ianpatt/f4se.git
+[submodule "Dependencies/HE1ML"]
+	path = Dependencies/HE1ML
+	url = https://github.com/hedge-dev/HE1ML.git
 [submodule "Framework/Dependencies/curl"]
 	path = Framework/Dependencies/curl
 	url = https://github.com/curl/curl.git

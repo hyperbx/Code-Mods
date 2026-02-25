@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Pch.h" />
+    <ClInclude Include="Configuration.h" />
+    <ClInclude Include="API\ScoreGenerationsAPI.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="API\ScoreGenerationsTypes.h">
+      <Filter>API</Filter>
+    </ClInclude>
+    <ClInclude Include="StatisticsProvider.h" />
+    <ClInclude Include="API\ScoreGenerationsAPIv1.h" />
+    <ClInclude Include="API\ScoreGenerationsAPIv2.h" />
+    <ClInclude Include="TableProvider.h" />
+    <ClInclude Include="BonusProvider.h" />
+    <ClInclude Include="ScoreHooks.h" />
+    <ClInclude Include="ScoreProvider.h" />
+    <ClInclude Include="LuaSystem.h" />
+    <ClInclude Include="ScoreHud.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="Pch.cpp" />
+    <ClCompile Include="Configuration.cpp" />
+    <ClCompile Include="StatisticsProvider.cpp" />
+    <ClCompile Include="API\ScoreGenerationsAPIv2.cpp" />
+    <ClCompile Include="API\ScoreGenerationsAPIv1.cpp" />
+    <ClCompile Include="TableProvider.cpp" />
+    <ClCompile Include="BonusProvider.cpp" />
+    <ClCompile Include="ScoreHooks.cpp" />
+    <ClCompile Include="ScoreProvider.cpp" />
+    <ClCompile Include="LuaSystem.cpp" />
+    <ClCompile Include="ScoreHud.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="API">
+      <UniqueIdentifier>{07842645-e56c-4a33-a46c-770ba09821a9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LuaSystem.inl" />
+  </ItemGroup>
+</Project>
