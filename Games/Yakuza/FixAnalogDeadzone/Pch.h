@@ -16,5 +16,6 @@
 
 #define MOD_NAME   "Fix Analog Deadzone"
 #define MOD_AUTHOR "Hyper"
+#define LOG_SOURCE MOD_NAME
 
 inline ModInfo g_ModInfo = { MOD_NAME, MOD_AUTHOR, { 1, 0, 0 } };

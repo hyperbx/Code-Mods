@@ -105,6 +105,7 @@ copy /Y "$(ProjectDir)Resources\mod-meta.yaml" "$(TargetDir)mod-meta.yaml"
   <ItemGroup>
     <ClInclude Include="Pch.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="Signatures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DllMain.cpp" />

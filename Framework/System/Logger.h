@@ -63,7 +63,7 @@ namespace CMF::System::Logger
         Error
     };
 
-    static void Init();
+    static void Init(bool in_openConsole = false);
     static void Log(const std::string_view in_str, LogType in_logType, const char* in_callerName = nullptr);
 }
 

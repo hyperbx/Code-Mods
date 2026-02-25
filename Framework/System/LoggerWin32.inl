@@ -8,10 +8,13 @@ namespace CMF::System::Logger
 {
     inline static HANDLE g_hStdOut{};
 
-    inline void Init()
+    inline void Init(bool in_openConsole)
     {
         g_hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
         
+        if (!in_openConsole)
+            return;
+
         AllocConsole();
         freopen("CONOUT$", "w", stdout);
     }
