@@ -20,6 +20,7 @@
 
 #define MOD_NAME   "Tails' Dash Rings in Stages"
 #define MOD_AUTHOR "Hyper"
+#define LOG_SOURCE MOD_NAME
 
 inline ModInfo g_ModInfo = { MOD_NAME, MOD_AUTHOR, { 1, 1, 0 } };
 

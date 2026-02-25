@@ -10,9 +10,7 @@ static void UpdateModels(const char* in_pModelName = nullptr)
 			: "cmn_obj_TailsDashring_HD";
 	}
 
-#if _DEBUG
-	printf("[Tails' Dash Rings in Stages] Loading model: %s\n", in_pModelName);
-#endif
+	LOGFN_UTILITY("Loading model: {}", in_pModelName);
 
 	// Replace rainbow ring model.
 	if (Configuration::UseCustomRainbowRings)
@@ -28,9 +26,7 @@ static void UpdateModels(const char* in_pModelName = nullptr)
 
 static void __fastcall UpdateAnimations(const int in_type)
 {
-#if _DEBUG
-	printf("[Tails' Dash Rings in Stages] Type: %d\n", in_type);
-#endif
+	LOGFN_UTILITY("Type: {}", in_type);
 
 	switch (in_type)
 	{
