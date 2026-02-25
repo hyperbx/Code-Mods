@@ -8,14 +8,14 @@ public:
 	int m_RingCount{};
 };
 
-static CLevelInfo* g_pCLevelInfo{};
+static CLevelInfo* g_pLevelInfo{};
 static bool g_isRingLifeReceived{};
 
 DECLARE_FUNCTION_PTR(void, __cdecl, fpReturnToTitle, Sig_ReturnToTitle());
 
 DECLARE_HOOK(CLevelInfo*, __fastcall, CLevelInfo_Ctor, Sig_CLevelInfo_Ctor(), CLevelInfo* in_pThis)
 {
-	g_pCLevelInfo = in_pThis;
+	g_pLevelInfo = in_pThis;
 	g_isRingLifeReceived = false;
 
 	return original_CLevelInfo_Ctor(in_pThis);
@@ -23,18 +23,18 @@ DECLARE_HOOK(CLevelInfo*, __fastcall, CLevelInfo_Ctor, Sig_CLevelInfo_Ctor(), CL
 
 DECLARE_HOOK(CLevelInfo*, __fastcall, CLevelInfo_Dtor, Sig_CLevelInfo_Dtor(), CLevelInfo* in_pThis, uint8_t in_flags)
 {
-	g_pCLevelInfo = nullptr;
+	g_pLevelInfo = nullptr;
 
 	return original_CLevelInfo_Dtor(in_pThis, in_flags);
 }
 
 DECLARE_HOOK(void*, __fastcall, MsgPLNotifyDead_Ctor, Sig_MsgPLNotifyDead_Ctor(), void* in_pThis)
 {
-	if (!Configuration::IsTailsSave && g_pCLevelInfo)
+	if (!Configuration::IsTailsSave && g_pLevelInfo)
 	{
-		if (g_pCLevelInfo->m_LifeCount - 1 != 0)
+		if (g_pLevelInfo->m_LifeCount - 1 != 0)
 		{
-			--g_pCLevelInfo->m_LifeCount;
+			--g_pLevelInfo->m_LifeCount;
 		}
 		else
 		{
@@ -77,7 +77,7 @@ EXPORT void Init()
 
 EXPORT void OnFrame()
 {
-	if (!g_pCLevelInfo)
+	if (!g_pLevelInfo)
 		return;
 
 	switch (Configuration::RingLifeType)
@@ -105,13 +105,13 @@ EXPORT void OnFrame()
 	static int s_ringLifeBonusCapacity = 100;
 
 	// Reset bonus cap if the player loses their rings.
-	if (g_pCLevelInfo->m_RingCount == 0)
+	if (g_pLevelInfo->m_RingCount == 0)
 		s_ringLifeBonusCapacity = 100;
 
-	while (g_pCLevelInfo->m_RingCount >= s_ringLifeBonusCapacity && !g_isRingLifeReceived)
+	while (g_pLevelInfo->m_RingCount >= s_ringLifeBonusCapacity && !g_isRingLifeReceived)
 	{
 		// Increment life counter.
-		g_pCLevelInfo->m_LifeCount += 1;
+		g_pLevelInfo->m_LifeCount += 1;
 
 		// Increase bonus cap for the next 100 rings.
 		s_ringLifeBonusCapacity += 100;
