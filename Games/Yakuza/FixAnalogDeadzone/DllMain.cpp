@@ -13,9 +13,9 @@ DECLARE_HOOK(void, __fastcall, ProcessInputs, Sig_ProcessInputs(), void* a1, voi
     original_ProcessInputs(a1, a2, a3);
 }
 
-DECLARE_HOOK(bool, __fastcall, IsKeyDown, Sig_IsKeyDown(), uint32_t keyCode)
+DECLARE_HOOK(bool, __fastcall, IsKeyDown, Sig_IsKeyDown(), uint32_t in_keyCode)
 {
-    auto result = original_IsKeyDown(keyCode);
+    auto result = original_IsKeyDown(in_keyCode);
 
     // Use keyboard deadzone.
     if (result && g_pAnalogDeadzone)

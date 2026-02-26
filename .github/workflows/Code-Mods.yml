@@ -1,0 +1,41 @@
+name: Code Mods
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    name: ${{matrix.configuration}}
+    runs-on: windows-2025-vs2026
+    strategy:
+      matrix:
+        configuration: [ Debug, Release ]
+    steps:
+    - name: Clone
+      uses: actions/checkout@v6
+      with:
+        submodules: true
+    - name: Install .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: 10.0.x
+    - name: Install Node
+      uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - name: Install artifact client
+      uses: lhotari/gh-actions-artifact-client@v2
+    - name: Build solutions
+      working-directory: ${{github.workspace}}
+      run: ./Build.ps1 -Archive -BlockedSolutions "Project '06" -Configuration "${{matrix.configuration}}" -Clean
+    - name: Upload artifacts
+      run: |
+        foreach ($filePath in [System.IO.Directory]::EnumerateFiles("${{github.workspace}}/Artifacts/", "*.zip", [System.IO.SearchOption]::AllDirectories))
+        {
+            $gameName = [System.IO.Path]::GetFileName([System.IO.Path]::GetDirectoryName($filePath))
+            $fileName = [System.IO.Path]::GetFileName($filePath)
+            $artifactName = "[${gameName}] ${fileName}"
+            
+            Write-Host "Uploading `"${artifactName}`"..."
+            
+            Get-Content -AsByteStream "${filePath}" | node "${{runner.temp}}/_github_home/.local/bin/gh-actions-artifact-client.js" upload "${artifactName}"
+        }
