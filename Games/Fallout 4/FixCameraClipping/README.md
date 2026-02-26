@@ -1,4 +1,4 @@
-# [Fix Camera Clipping](https://www.nexusmods.com/fallout4/mods/93910)
+# Fix Camera Clipping
 Fixes the camera clipping through geometry in first-person by adjusting its near distance to account for the field of view.
 
 ## Pre-requisites
@@ -9,8 +9,8 @@ Fixes the camera clipping through geometry in first-person by adjusting its near
 - Fallout 4
 - [Fallout 4 Script Extender](https://f4se.silverlock.org/)
 
-## Usage
-Install Fallout 4 Script Extender and place `FixCameraClipping.dll` in `.\Data\F4SE\Plugins\`.
+## Downloads
+- [Nexus Mods](https://www.nexusmods.com/fallout4/mods/93910)
 
 ## Screenshots
 ### Default FOV @ 3440x1440

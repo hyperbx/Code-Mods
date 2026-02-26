@@ -1,5 +1,5 @@
-# [Gameplay & UI Fixes](https://gamebanana.com/mods/322057)
-Various gameplay and UI fixes for Sonic Colours: Ultimate.
+# Gameplay & UI Fixes
+A collection of various gameplay and UI fixes for Sonic Colours: Ultimate.
 
 ## Pre-requisites
 ### Building
@@ -8,6 +8,9 @@ Various gameplay and UI fixes for Sonic Colours: Ultimate.
 ### Running
 - Sonic Colours: Ultimate ([Steam](https://store.steampowered.com/app/2055290/Sonic_Colors_Ultimate/), [Epic](https://store.epicgames.com/p/sonic-colors-ultimate))
 - [Hedge Mod Manager](https://github.com/thesupersonic16/HedgeModManager/releases)
+
+## Downloads
+- [GameBanana](https://gamebanana.com/mods/322057)
 
 ## Credits
 - [Hyper](https://github.com/hyperbx): programming, reverse-engineering and texturing

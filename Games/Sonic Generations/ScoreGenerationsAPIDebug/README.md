@@ -1,5 +1,5 @@
-# Tails' Dash Rings in Stages
-Replaces normal dash rings with Tails' ones with extra customisation options similar to Sonic Colours: Ultimate.
+# Score Generations API Debug
+Quick and dirty debugging hotkeys for the Score Generations API.
 
 ## Pre-requisites
 ### Building
@@ -8,6 +8,3 @@ Replaces normal dash rings with Tails' ones with extra customisation options sim
 ### Running
 - [Sonic Generations](https://store.steampowered.com/app/71340/Sonic_Generations_Collection/) (2011)
 - [Hedge Mod Manager](https://github.com/thesupersonic16/HedgeModManager/releases)
-
-## Downloads
-- [GameBanana](https://gamebanana.com/mods/294538)

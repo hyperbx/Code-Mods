@@ -1,4 +1,5 @@
-# [Uncapped Framerate](https://gamebanana.com/mods/439858)
+# Uncapped Framerate
+Disables the frame rate cap with additional fixes for automation that fails under higher framerates.
 
 ## Pre-requisites
 ### Building
@@ -8,3 +9,6 @@
 ### Running
 - [Project '06](https://www.youtube.com/@ChaosX) (Silver Release)
 - [MelonLoader](https://github.com/LavaGang/MelonLoader/releases)
+
+## Downloads
+- [GameBanana](https://gamebanana.com/mods/439858)
