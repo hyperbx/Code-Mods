@@ -24,9 +24,9 @@ namespace ScoreGenerations
 		DECLARE_API_FUNC(int, ComputeUserBonus);
 		DECLARE_API_FUNC(Statistics&, GetStatistics);
 		DECLARE_API_FUNC(ScoreTable&, GetScoreTable);
-		DECLARE_API_FUNC(RankTable&, GetCurrentRankTable);
-		DECLARE_API_FUNC(RankTable&, GetRankTable, const char* in_pStageID);
+		DECLARE_API_FUNC(RankTable&, GetRankTable);
 		DECLARE_API_FUNC(void, GetRankTables, RankTableNode** out_ppBuffer, int* out_pLength);
+		DECLARE_API_FUNC(RankTable&, FindRankTable, const char* in_pStageID);
 		DECLARE_API_FUNC(BonusTable&, GetBonusTable);
 		DECLARE_API_FUNC(MultiplierTable&, GetMultiplierTable);
 		DECLARE_API_FUNC(TimerTable&, GetTimerTable);

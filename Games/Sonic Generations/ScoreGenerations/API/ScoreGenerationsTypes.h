@@ -168,6 +168,8 @@ namespace ScoreGenerations
             : pStageID(in_pStageID), pRankTable(in_pRankTable) {}
     };
 
+    typedef std::unordered_map<std::string, RankTable> RankTableMap_t;
+
     struct BonusTable
     {
         int HomingChainBonus{};
@@ -194,6 +196,4 @@ namespace ScoreGenerations
         float SuperSonicTimer{};
         float SlamTimer{};
     };
-
-    typedef std::unordered_map<std::string, RankTable> RankTableMap_t;
 };

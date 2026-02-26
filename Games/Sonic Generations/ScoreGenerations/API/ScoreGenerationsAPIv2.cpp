@@ -77,14 +77,9 @@ static ScoreTable& SCORE_GENS_API GetScoreTable()
     return TableProvider::GetScoreTable();
 }
 
-static RankTable& SCORE_GENS_API GetCurrentRankTable()
+static RankTable& SCORE_GENS_API GetRankTable()
 {
     return TableProvider::GetRankTables()[g_pStageID];
-}
-
-static RankTable& SCORE_GENS_API GetRankTable(const char* in_pStageID)
-{
-    return TableProvider::GetRankTables()[in_pStageID];
 }
 
 static void SCORE_GENS_API GetRankTables(RankTableNode** out_ppBuffer, int* out_pLength)
@@ -103,6 +98,11 @@ static void SCORE_GENS_API GetRankTables(RankTableNode** out_ppBuffer, int* out_
 
     *out_ppBuffer = pBuffer;
     *out_pLength = length;
+}
+
+static RankTable& SCORE_GENS_API FindRankTable(const char* in_pStageID)
+{
+    return TableProvider::GetRankTables()[in_pStageID];
 }
 
 static BonusTable& SCORE_GENS_API GetBonusTable()
@@ -160,9 +160,9 @@ API g_ScoreGenerationsAPI
     ComputeUserBonus,
     GetStatistics,
     GetScoreTable,
-    GetCurrentRankTable,
     GetRankTable,
     GetRankTables,
+    FindRankTable,
     GetBonusTable,
     GetMultiplierTable,
     GetTimerTable,

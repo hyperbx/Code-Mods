@@ -161,8 +161,7 @@ EXPORT void OnFrame()
 #if SCORE_GENS_API_VERSION == 1
 			ScoreGenerationsAPI::GetRankTables();
 #elif SCORE_GENS_API_VERSION == 2
-			LOGFN_WARNING("GetCurrentRankTable() = 0x{:X}", (size_t)&pApi->GetCurrentRankTable());
-			LOGFN_WARNING("GetRankTable(\"{}\") = 0x{:X}", pApi->GetStageID(), (size_t)&pApi->GetRankTable(pApi->GetStageID()));
+			LOGFN_WARNING("GetRankTable() = 0x{:X}", (size_t)&pApi->GetRankTable());
 
 			ScoreGenerations::RankTableNode* pRankTables{};
 			int rankTablesLength{};
@@ -190,6 +189,8 @@ EXPORT void OnFrame()
 			}
 
 			delete[] pRankTables;
+
+			LOGFN_WARNING("FindRankTable(\"{}\") = 0x{:X}", pApi->GetStageID(), (size_t)&pApi->FindRankTable(pApi->GetStageID()));
 #endif
 		}
 
