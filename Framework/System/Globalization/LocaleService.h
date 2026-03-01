@@ -1,7 +1,7 @@
 #pragma once
 
 #include <filesystem>
-#include <json.h>
+#include "..\..\Dependencies\json\single_include\nlohmann\json.hpp"
 
 namespace CMF::System::Globalization
 {
