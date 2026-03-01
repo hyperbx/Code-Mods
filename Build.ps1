@@ -2,8 +2,8 @@ param
 (
     [Switch]$Archive,
     [String]$BlockedSolutions,
-    [String]$Configuration = "Release",
     [Switch]$Clean,
+    [String]$Configuration = "Release",
     [Switch]$Help
 )
 
@@ -18,8 +18,8 @@ if ($Help)
     Write-Host "Parameters:"
     Write-Host "-Archive - archives the build artifacts."
     Write-Host "-BlockedSolutions - semi-colon separated list of solutions not to build."
-    Write-Host "-Configuration [name] - build with a specific configuration."
     Write-Host "-Clean - clean the solutions before building."
+    Write-Host "-Configuration [name] - build with a specific configuration."
     Write-Host "-Help - display help."
     exit
 }

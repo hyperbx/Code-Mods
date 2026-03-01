@@ -10,6 +10,7 @@ A collection of various gameplay and UI fixes for Sonic Colours: Ultimate.
 - [Hedge Mod Manager](https://github.com/thesupersonic16/HedgeModManager/releases)
 
 ## Downloads
+- GitHub ([Debug](https://nightly.link/hyperbx/Code-Mods/workflows/Code-Mods/main/%5BSonic%20Colours%20Ultimate%5D%20GameplayAndUIFixes-x64-Debug.zip), [Release](https://nightly.link/hyperbx/Code-Mods/workflows/Code-Mods/main/%5BSonic%20Colours%20Ultimate%5D%20GameplayAndUIFixes-x64-Release.zip)) [<sup>⚠️</sup>](## "Builds may be unavailable if this repository hasn't had a commit in the last 90 days.")
 - [GameBanana](https://gamebanana.com/mods/322057)
 
 ## Credits

@@ -10,6 +10,7 @@ Fixes the camera clipping through geometry in first-person by adjusting its near
 - [Fallout 4 Script Extender](https://f4se.silverlock.org/)
 
 ## Downloads
+- GitHub ([Debug](https://nightly.link/hyperbx/Code-Mods/workflows/Code-Mods/main/%5BFallout%204%5D%20FixCameraClipping-x64-Debug.zip), [Release](https://nightly.link/hyperbx/Code-Mods/workflows/Code-Mods/main/%5BFallout%204%5D%20FixCameraClipping-x64-Release.zip)) [<sup>⚠️</sup>](## "Builds may be unavailable if this repository hasn't had a commit in the last 90 days.")
 - [Nexus Mods](https://www.nexusmods.com/fallout4/mods/93910)
 
 ## Screenshots
