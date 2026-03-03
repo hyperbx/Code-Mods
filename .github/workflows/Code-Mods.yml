@@ -37,5 +37,5 @@ jobs:
             
             Write-Host "Uploading `"${artifactName}`"..."
             
-            Get-Content -AsByteStream "${filePath}" | node "${{runner.temp}}/_github_home/.local/bin/gh-actions-artifact-client.js" upload "${artifactName}"
+            Get-Content -AsByteStream "${filePath}" | node "${{runner.temp}}/_github_home/.local/bin/gh-actions-artifact-client.js" upload "${artifactName}" --retentionDays=90
         }
