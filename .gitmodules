@@ -25,3 +25,12 @@
 [submodule "Framework/Dependencies/xxHash"]
 	path = Framework/Dependencies/xxHash
 	url = https://github.com/Cyan4973/xxHash.git
+[submodule "Games/Zelda 64 Recompiled/Dependencies/Zelda64RecompSyms"]
+	path = Games/Zelda 64 Recompiled/Dependencies/Zelda64RecompSyms
+	url = https://github.com/Zelda64Recomp/Zelda64RecompSyms.git
+[submodule "Games/Zelda 64 Recompiled/Dependencies/mm"]
+	path = Games/Zelda 64 Recompiled/Dependencies/mm
+	url = https://github.com/zeldaret/mm.git
+[submodule "Games/Zelda 64 Recompiled/Dependencies/MMRecompModTemplate"]
+	path = Games/Zelda 64 Recompiled/Dependencies/MMRecompModTemplate
+	url = https://github.com/Zelda64Recomp/MMRecompModTemplate.git

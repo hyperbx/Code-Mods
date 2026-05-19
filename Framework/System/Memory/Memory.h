@@ -53,5 +53,5 @@ namespace CMF::System::Memory
 #include "SignatureScanner.h"
 
 #ifdef WIN32
-#include "MemoryWin32.h"
+#include "MemoryWin32.inl"
 #endif
