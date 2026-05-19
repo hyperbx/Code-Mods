@@ -7,7 +7,7 @@ Allows the player to unsheathe their sword without slashing first.
 - Python (see `Requirements.txt`)
 
 ### Running
-- [Zelda 64 Recompiled](https://github.com/Zelda64Recomp/Zelda64Recomp)
+- [Zelda 64: Recompiled](https://github.com/Zelda64Recomp/Zelda64Recomp)
 
 ## Downloads
 - [GitHub](https://nightly.link/hyperbx/Code-Mods/workflows/Code-Mods/main/%5BMajora%27s%20Mask%5D%20UnsheatheSwordWithoutSlashing-Release.zip) [<sup>⚠️</sup>](## "Builds may be unavailable if this repository hasn't had a commit in the last 90 days.")

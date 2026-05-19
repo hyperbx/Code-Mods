@@ -24,3 +24,7 @@
  
 - Yakuza 5 Remastered
   - [Fix Analog Deadzone](https://github.com/hyperbx/Code-Mods/tree/main/Games/Yakuza/FixAnalogDeadzone)
+
+- Zelda 64: Recompiled
+  - Majora's Mask
+    - [Unsheathe Sword Without Slashing](https://github.com/hyperbx/Code-Mods/tree/main/Games/Zelda%2064%20Recompiled/Majora's%20Mask/Unsheathe%20Sword%20Without%20Slashing)
