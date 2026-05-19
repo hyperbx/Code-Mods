@@ -1,0 +1,15 @@
+*.d
+*.o
+*.elf
+*.bin
+*.exe
+*.dll
+*.lib
+*.pdb
+*.exp
+*.nrm
+*.zip
+./funcs.h
+patches.map
+bin/
+.vscode/settings.json

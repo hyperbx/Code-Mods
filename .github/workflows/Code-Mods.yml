@@ -18,15 +18,21 @@ jobs:
       uses: actions/setup-dotnet@v5
       with:
         dotnet-version: 10.0.x
+    - name: Install Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.13'
+    - name: Install Python dependencies
+      run: pip install -r "${{github.workspace}}/Requirements.txt"
     - name: Install Node
       uses: actions/setup-node@v6
       with:
         node-version: 24
     - name: Install artifact client
       uses: lhotari/gh-actions-artifact-client@v2
-    - name: Build solutions
+    - name: Build
       working-directory: ${{github.workspace}}
-      run: ./Build.ps1 -Archive -BlockedSolutions "Project '06" -Configuration "${{matrix.configuration}}" -Clean
+      run: ./Build.ps1 -Archive -BlockList "Project '06" -Configuration "${{matrix.configuration}}" -Clean
     - name: Upload artifacts
       run: |
         foreach ($filePath in [System.IO.Directory]::EnumerateFiles("${{github.workspace}}/Artifacts/", "*.zip", [System.IO.SearchOption]::AllDirectories))

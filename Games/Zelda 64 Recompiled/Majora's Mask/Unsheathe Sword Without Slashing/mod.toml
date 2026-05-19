@@ -1,0 +1,16 @@
+[manifest]
+id = "mm_unsheathe_sword_without_slashing"
+version = "1.0.0"
+display_name = "Unsheathe Sword Without Slashing"
+description = "Allows the player to unsheathe their sword without slashing first."
+short_description = "Ready up for a fight."
+authors = [ "Hyper" ]
+game_id = "mm"
+minimum_recomp_version = "1.2.2"
+
+[inputs]
+elf_path = "bin/mod.elf"
+mod_filename = "mm_unsheathe_sword_without_slashing"
+func_reference_syms_file = "../../Dependencies/Zelda64RecompSyms/mm.us.rev1.syms.toml"
+data_reference_syms_files = [ "../../Dependencies/Zelda64RecompSyms/mm.us.rev1.datasyms.toml", "../../Dependencies/Zelda64RecompSyms/mm.us.rev1.datasyms_static.toml" ]
+additional_files = [ "thumb.dds" ]

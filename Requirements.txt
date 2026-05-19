@@ -1,0 +1,5 @@
+# Required packages for Python scripts in this repository.
+# pip install -r Requirements.txt
+
+requests >= 2.34.2
+tqdm >= 4.67.3

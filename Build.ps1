@@ -1,14 +1,14 @@
 param
 (
     [Switch]$Archive,
-    [String]$BlockedSolutions,
+    [String]$BlockList,
     [Switch]$Clean,
     [String]$Configuration = "Release",
     [Switch]$Help
 )
 
 $work = $pwd
-$blockedSolutionsList = $BlockedSolutions.Split(";");
+$blockList = $BlockList.Split(";");
 $artifactsDir = [System.IO.Directory]::CreateDirectory([System.IO.Path]::Combine($work, "Artifacts"))
 
 if ($Help)
@@ -17,8 +17,8 @@ if ($Help)
     Write-Host
     Write-Host "Parameters:"
     Write-Host "-Archive - archives the build artifacts."
-    Write-Host "-BlockedSolutions - semi-colon separated list of solutions not to build."
-    Write-Host "-Clean - clean the solutions before building."
+    Write-Host "-BlockList - semi-colon separated list of projects not to build."
+    Write-Host "-Clean - clean the projects before building."
     Write-Host "-Configuration [name] - build with a specific configuration."
     Write-Host "-Help - display help."
     exit
@@ -42,16 +42,26 @@ function GetProjectProperty([String]$in_projectPath, [String]$in_propertyName)
     return & msbuild /NoLogo /p:Configuration="${Configuration}" -getProperty:"${in_propertyName}" "${in_projectPath}"
 }
 
+function IsDependency([String]$in_path)
+{
+    return $in_path.Contains("Dependencies")
+}
+
 function BuildSolutions([String]$in_root)
 {
     $root = [System.IO.Path]::Combine($work, $in_root)
 
     foreach ($solutionPath in [System.IO.Directory]::EnumerateFiles($root, "*.sln", [System.IO.SearchOption]::AllDirectories))
     {
+        if (IsDependency($solutionPath))
+        {
+            continue
+        }
+        
         $solutionDir  = Split-Path $solutionPath
         $solutionName = [System.IO.Path]::GetFileNameWithoutExtension($solutionPath)
         
-        if ($blockedSolutionsList.Contains($solutionName))
+        if ($blockList.Contains($solutionName))
         {
             continue
         }
@@ -81,7 +91,7 @@ function BuildSolutions([String]$in_root)
             foreach ($projectPath in $projects)
             {
                 $projectDir  = GetProjectProperty $projectPath "ProjectDir"
-                $projectName = GetProjectProperty $projectPath "ProjectName"
+                $projectName = (GetProjectProperty $projectPath "ProjectName").Replace(" ", "")
                 $binDir      = [System.IO.Path]::Combine($projectDir, "bin")
 
                 foreach ($platformDir in [System.IO.Directory]::EnumerateDirectories($binDir))
@@ -107,7 +117,6 @@ function BuildSolutions([String]$in_root)
                         Write-Host "* Cannot archive project binaries."                  -ForegroundColor DarkRed
                         Write-Host "* Directory not found: ${targetDir}"                 -ForegroundColor DarkRed
                         Write-Host ("***********************" + '*' * $targetDir.Length) -ForegroundColor DarkRed
-
                         exit -1
                     }
 
@@ -123,4 +132,66 @@ function BuildSolutions([String]$in_root)
     }
 }
 
+function BuildMakefiles([String]$in_root)
+{
+    $root = [System.IO.Path]::Combine($work, $in_root)
+
+    foreach ($makefilePath in [System.IO.Directory]::EnumerateFiles($root, "Makefile", [System.IO.SearchOption]::AllDirectories))
+    {
+        if (IsDependency($makefilePath))
+        {
+            continue
+        }
+
+        $makefileDir = Split-Path $makefilePath
+        $projectName = [System.IO.Path]::GetFileName($makefileDir)
+        
+        if ($blockList.Contains($projectName))
+        {
+            continue
+        }
+
+        $args = @()
+
+        if ($Clean)
+        {
+            $args += "clean"
+        }
+
+        $args += "all"
+
+        Write-Host
+        Write-Host ("**************" + '*' * $makefilePath.Length) -ForegroundColor DarkGreen
+        Write-Host "* Makefile: ${makefilePath} *"                 -ForegroundColor DarkGreen
+        Write-Host ("**************" + '*' * $makefilePath.Length) -ForegroundColor DarkGreen
+
+        & make -C "${makefileDir}" @args
+
+        if ($Archive)
+        {
+            $projectNameSafe = $projectName.Replace(" ", "")
+            $binDir = [System.IO.Path]::Combine($makefileDir, "bin")
+            $targetName = "${projectNameSafe}-${Configuration}.zip"
+            
+            if (![System.IO.Directory]::Exists($binDir))
+            {
+                Write-Host
+                Write-Host ("***********************" + '*' * $binDir.Length) -ForegroundColor DarkRed
+                Write-Host "* Cannot archive project binaries."               -ForegroundColor DarkRed
+                Write-Host "* Directory not found: ${binDir}"                 -ForegroundColor DarkRed
+                Write-Host ("***********************" + '*' * $binDir.Length) -ForegroundColor DarkRed
+                exit -1
+            }
+            
+            $artifactRootDir    = [System.IO.Directory]::CreateDirectory([System.IO.Path]::Combine($artifactsDir.FullName, $in_root))
+            $artifactTargetPath = [System.IO.Path]::Combine($artifactRootDir.FullName, $targetName)
+
+            cd $binDir
+            Compress-Archive -Force * $artifactTargetPath
+            cd $work
+        }
+    }
+}
+
 BuildSolutions("Games")
+BuildMakefiles("Games/Zelda 64 Recompiled/Majora's Mask")
