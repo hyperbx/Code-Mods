@@ -7,7 +7,6 @@ INT_DIR        := obj
 
 DECOMP_DIR     := ../../Dependencies/mm
 TEMPLATE_DIR   := ../../Dependencies/MMRecompModTemplate
-RECOMP_DIR     := ../../Dependencies/N64Recomp
 TOOLS_ROOT_DIR := ../../Tools
 
 ENV_SETUP_PATH := $(TOOLS_ROOT_DIR)/Setup.py
@@ -26,6 +25,7 @@ INCLUDES_AFTER := include/libc $(DECOMP_DIR)/include/libc
 
 ifeq ($(OS), Windows_NT)
 	ENV_PLATFORM := Windows
+	SHELL = cmd
 else ifeq ($(shell uname), Darwin)
 	ENV_PLATFORM := macOS
 else

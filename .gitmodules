@@ -1,15 +1,9 @@
-[submodule "Dependencies/BlueBlur"]
-	path = Dependencies/BlueBlur
-	url = https://github.com/blueskythlikesclouds/BlueBlur.git
 [submodule "Dependencies/CommonLoader"]
 	path = Dependencies/CommonLoader
 	url = https://github.com/hedge-dev/CommonLoader.git
 [submodule "Dependencies/eigen"]
 	path = Dependencies/eigen
 	url = https://github.com/PX4/eigen.git
-[submodule "Dependencies/f4se"]
-	path = Dependencies/f4se
-	url = https://github.com/ianpatt/f4se.git
 [submodule "Dependencies/HE1ML"]
 	path = Dependencies/HE1ML
 	url = https://github.com/hedge-dev/HE1ML.git
@@ -25,6 +19,12 @@
 [submodule "Framework/Dependencies/xxHash"]
 	path = Framework/Dependencies/xxHash
 	url = https://github.com/Cyan4973/xxHash.git
+[submodule "Games/Fallout 4/Dependencies/f4se"]
+	path = Games/Fallout 4/Dependencies/f4se
+	url = https://github.com/ianpatt/f4se
+[submodule "Games/Sonic Generations/Dependencies/BlueBlur"]
+	path = Games/Sonic Generations/Dependencies/BlueBlur
+	url = https://github.com/blueskythlikesclouds/BlueBlur.git
 [submodule "Games/Zelda 64 Recompiled/Dependencies/Zelda64RecompSyms"]
 	path = Games/Zelda 64 Recompiled/Dependencies/Zelda64RecompSyms
 	url = https://github.com/Zelda64Recomp/Zelda64RecompSyms.git

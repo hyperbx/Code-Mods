@@ -7,7 +7,6 @@ INT_DIR        := obj
 
 DECOMP_DIR     := ../../Dependencies/mm
 TEMPLATE_DIR   := ../../Dependencies/MMRecompModTemplate
-RECOMP_DIR     := ../../Dependencies/N64Recomp
 TOOLS_ROOT_DIR := ../../Tools
 
 ENV_SETUP_PATH := $(TOOLS_ROOT_DIR)/Setup.py
