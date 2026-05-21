@@ -1,3 +1,4 @@
+#include "config.h"
 #include "global.h"
 #include "modding.h"
 #include "recomputils.h"
@@ -9,7 +10,14 @@ RECOMP_HOOK_RETURN("Player_UpperAction_ChangeHeldItem") s32 UnsheatheSwordWithou
 {
     if (this->heldItemId >= ITEM_SWORD_KOKIRI && this->heldItemId <= ITEM_SWORD_GILDED)
     {
+        if ((this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) == 0 &&
+            CONFIG_FALLING_ATTACK_BEHAVIOUR == ATTACK_BEHAVIOUR_SLASH)
+        {
+            return recomphook_get_return_s32();
+        }
+        
         sPlayerUseHeldItem = sPlayerHeldItemButtonIsHeldDown = false;
+
         return true;
     }
 

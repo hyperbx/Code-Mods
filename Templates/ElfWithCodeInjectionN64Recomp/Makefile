@@ -71,7 +71,7 @@ INT_DIRS := $(sort $(dir $(ALL_OBJS)))
 all: setup $(TARGET_PATH) package
 
 setup:
-	python $(TOOLS_ROOT_DIR)/Setup.py $(ENV_PLATFORM) $(ENV_ARCH)
+	python $(ENV_SETUP_PATH) $(ENV_PLATFORM) $(ENV_ARCH)
 
 $(TARGET_PATH): $(ALL_OBJS) $(LD_SCRIPT) | $(INT_DIR)
 	$(LD) $(ALL_OBJS) $(LD_FLAGS) -o $@
