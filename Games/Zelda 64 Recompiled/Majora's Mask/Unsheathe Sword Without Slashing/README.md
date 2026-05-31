@@ -4,7 +4,7 @@ Allows the player to unsheathe their sword without slashing first.
 ## Pre-requisites
 ### Building
 - Make
-- Python (see `Requirements.txt`)
+- Python (see [`Requirements.txt`](https://github.com/hyperbx/Code-Mods/blob/main/Requirements.txt))
 
 ### Running
 - [Zelda 64: Recompiled](https://github.com/Zelda64Recomp/Zelda64Recomp)

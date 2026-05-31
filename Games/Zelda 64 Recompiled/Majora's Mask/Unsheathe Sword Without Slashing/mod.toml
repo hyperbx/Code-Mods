@@ -1,6 +1,6 @@
 [manifest]
 id = "mm_unsheathe_sword_without_slashing"
-version = "1.1.1"
+version = "1.1.2"
 display_name = "Unsheathe Sword Without Slashing"
 description = "Allows the player to unsheathe their sword without slashing first."
 short_description = "Ready up for a fight."
