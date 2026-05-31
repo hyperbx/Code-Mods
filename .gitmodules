@@ -1,3 +1,6 @@
+[submodule "Dependencies/Boost/preprocessor"]
+	path = Dependencies/Boost/preprocessor
+	url = https://github.com/boostorg/preprocessor.git
 [submodule "Dependencies/CommonLoader"]
 	path = Dependencies/CommonLoader
 	url = https://github.com/hedge-dev/CommonLoader.git

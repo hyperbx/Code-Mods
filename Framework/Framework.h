@@ -2,11 +2,13 @@
 
 // Code Mods Framework
 
+#ifdef __cplusplus
 #include <cstdint>
+#endif
 
 #include "System/System.h"
 
-#ifndef CMF_EXCLUDE_NAMESPACE_ALIASES
+#if defined(__cplusplus) && !defined(CMF_EXCLUDE_NAMESPACE_ALIASES)
 namespace cmf = CMF;
 
 namespace CMF

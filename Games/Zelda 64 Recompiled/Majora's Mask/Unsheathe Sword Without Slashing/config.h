@@ -1,6 +1,6 @@
 #pragma once
 
-#include "recompconfig.h"
+#include <recompconfig.h>
 
 #define CONFIG_FALLING_ATTACK_BEHAVIOUR recomp_get_config_u32("falling_attack_behaviour")
 

@@ -1,21 +1,42 @@
-TARGET_NAME    := mod
-TARGET_DIR     := bin
-TARGET_PATH    := $(TARGET_DIR)/$(TARGET_NAME).elf
-TARGET_INFO    := $(TARGET_NAME).toml
+ENV_PLATFORM := Windows
+ENV_ARCH     := x64
 
-INT_DIR        := obj
+ifeq ($(OS), Windows_NT)
+	SHELL = cmd
+    ifeq ($(PROCESSOR_ARCHITECTURE), ARM64)
+        ENV_ARCH := arm64
+    endif
+else ifeq ($(shell uname), Darwin)
+	ENV_PLATFORM := macOS
+else
+	ENV_PLATFORM := Linux
+endif
 
-DECOMP_DIR     := ../../Dependencies/mm
-TEMPLATE_DIR   := ../../Dependencies/MMRecompModTemplate
-TOOLS_ROOT_DIR := ../../Tools
+ifneq ($(OS), Windows_NT)
+    UNAME_P := $(shell uname -p)
+	ifeq ($(filter arm%,$(UNAME_P)),)
+        ENV_ARCH := arm64
+    endif
+endif
 
-ENV_SETUP_PATH := $(TOOLS_ROOT_DIR)/Setup.py
-ENV_PLATFORM   := Windows
-ENV_ARCH       := x64
+REPO_ROOT_DIR := ../../../..
+GAME_ROOT_DIR := ../..
 
-SOURCES  := *.c
+DECOMP_DIR   := $(GAME_ROOT_DIR)/Dependencies/mm
+TEMPLATE_DIR := $(GAME_ROOT_DIR)/Dependencies/MMRecompModTemplate
 
-INCLUDES := $(TEMPLATE_DIR)/include \
+TARGET_NAME := mod
+TARGET_DIR  := bin
+TARGET_PATH := $(TARGET_DIR)/$(TARGET_NAME).elf
+TARGET_INFO := $(TARGET_NAME).toml
+
+INT_DIR := obj
+
+SOURCES := *.c
+
+INCLUDES := $(REPO_ROOT_DIR)/Dependencies/Boost/preprocessor/include \
+			$(REPO_ROOT_DIR)/Framework \
+			$(TEMPLATE_DIR)/include \
 			$(TEMPLATE_DIR)/include/dummy_headers \
 			$(DECOMP_DIR)/include \
 			$(DECOMP_DIR)/src \
@@ -23,31 +44,9 @@ INCLUDES := $(TEMPLATE_DIR)/include \
 
 INCLUDES_AFTER := include/libc $(DECOMP_DIR)/include/libc
 
-ifeq ($(OS), Windows_NT)
-	ENV_PLATFORM := Windows
-	SHELL = cmd
-else ifeq ($(shell uname), Darwin)
-	ENV_PLATFORM := macOS
-else
-	ENV_PLATFORM := Linux
-endif
+TOOLS_SETUP_SCRIPT := $(REPO_ROOT_DIR)/Tools/N64Recomp/Setup.py
+TOOLS_DIR          := $(REPO_ROOT_DIR)/Tools/N64Recomp/$(ENV_PLATFORM)/$(ENV_ARCH)
 
-ifeq ($(OS), Windows_NT)
-    ifeq ($(PROCESSOR_ARCHITECTURE), ARM64)
-        ENV_ARCH := arm64
-	else
-        ENV_ARCH := x64
-    endif
-else
-    UNAME_P := $(shell uname -p)
-    ifeq ($(UNAME_P), x86_64)
-        ENV_ARCH := x64
-    else ifneq ($(filter arm%,$(UNAME_P)),)
-        ENV_ARCH := arm64
-    endif
-endif
-
-TOOLS_DIR := $(TOOLS_ROOT_DIR)/$(ENV_PLATFORM)/$(ENV_ARCH)
 CC := $(TOOLS_DIR)/nrs_bin/clang
 LD := $(TOOLS_DIR)/nrs_bin/ld.lld
 
@@ -56,7 +55,8 @@ ARCH_FLAGS := -target mips -mips2 -mabi=32 -O2 -G0 -mno-abicalls -mno-odd-spreg 
               -fomit-frame-pointer -ffast-math -fno-unsafe-math-optimizations -fno-builtin-memset
 WARN_FLAGS := -Wall -Wextra -Wno-incompatible-library-redeclaration -Wno-unused-parameter -Wno-unknown-pragmas -Wno-unused-variable \
               -Wno-missing-braces -Wno-unsupported-floating-point-opt -Werror=section
-C_FLAGS    := $(ARCH_FLAGS) $(WARN_FLAGS) -D_LANGUAGE_C -nostdinc -ffunction-sections
+ETC_FLAGS  := -DN64RECOMP
+C_FLAGS    := $(ARCH_FLAGS) $(WARN_FLAGS) $(ETC_FLAGS) -D_LANGUAGE_C -nostdinc -ffunction-sections
 CPP_FLAGS  := -DMIPS -DF3DEX_GBI_2 -DF3DEX_GBI_PL -DGBI_DOWHILE $(foreach dir,$(INCLUDES),-I $(dir)) $(foreach dir,$(INCLUDES_AFTER),-idirafter $(dir))
 LD_FLAGS   := -nostdlib -T $(LD_SCRIPT) -Map $(TARGET_DIR)/$(TARGET_NAME).map --unresolved-symbols=ignore-all --emit-relocs -e 0 --no-nmagic -gc-sections
 
@@ -71,7 +71,7 @@ INT_DIRS := $(sort $(dir $(ALL_OBJS)))
 all: setup $(TARGET_PATH) package
 
 setup:
-	python $(ENV_SETUP_PATH) $(ENV_PLATFORM) $(ENV_ARCH)
+	python $(TOOLS_SETUP_SCRIPT) $(ENV_PLATFORM) $(ENV_ARCH)
 
 $(TARGET_PATH): $(ALL_OBJS) $(LD_SCRIPT) | $(INT_DIR)
 	$(LD) $(ALL_OBJS) $(LD_FLAGS) -o $@
