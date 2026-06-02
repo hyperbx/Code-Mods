@@ -14,6 +14,10 @@
 #include "Memory/Memory.h"
 #include "Net/Net.h"
 #include "Numerics/Numerics.h"
+#endif
+
 #include "Utilities/Utilities.h"
+
+#ifdef __cplusplus
 #include "Logger.h"
 #endif
