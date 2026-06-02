@@ -1,5 +1,7 @@
 #include "Signatures.h"
 
+using namespace CMF::System::Memory;
+
 static float* g_pAnalogDeadzone{};
 static constexpr float g_kGamepadDeadzone{ 1.0f };
 static constexpr float g_kKeyboardDeadzone{ 1.3157895f };
@@ -32,9 +34,9 @@ static void Init()
     cmf::sys::Logger::Init();
 #endif
 
-    if (!cmf::sys::mem::SignatureScanner::Status.Success)
+    if (!SignatureScanner::Status.Success)
     {
-        LOGFN_ERROR("Error: {}\n{}", cmf::sys::mem::SignatureScanner::Status.pMessage, cmf::sys::mem::SignatureScanner::Status.GetPatternString());
+        LOGFN_ERROR("Error: {}\n{}", SignatureScanner::Status.pMessage, SignatureScanner::Status.GetPatternString());
         MessageBoxA(nullptr, "Failed to install patches.", MOD_NAME, MB_ICONERROR);
         return;
     }

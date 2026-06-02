@@ -1,5 +1,7 @@
 #include "Signatures.h"
 
+using namespace CMF::System::Memory;
+
 // Pre-next-gen metadata
 EXPORT bool F4SEPlugin_Query(const F4SEInterface* in_pF4SE, PluginInfo* in_pInfo)
 {
@@ -41,9 +43,9 @@ EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_pF4SE)
 {
     cmf::sys::Logger::Init();
 
-    if (!cmf::sys::mem::SignatureScanner::Status.Success)
+    if (!SignatureScanner::Status.Success)
     {
-        LOGFN_ERROR("Error: {}\n{}", cmf::sys::mem::SignatureScanner::Status.pMessage, cmf::sys::mem::SignatureScanner::Status.GetPatternString());
+        LOGFN_ERROR("Error: {}\n{}", SignatureScanner::Status.pMessage, SignatureScanner::Status.GetPatternString());
         MessageBoxA(nullptr, "Failed to install patches.", MOD_NAME, MB_ICONERROR);
         return false;
     }

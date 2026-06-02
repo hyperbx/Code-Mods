@@ -1,5 +1,7 @@
 #include "Signatures.h"
 
+using namespace CMF::System::Memory;
+
 class CLevelInfo
 {
 public:
@@ -57,9 +59,9 @@ EXPORT void Init()
 {
 	cmf::sys::Logger::Init();
 
-	if (!cmf::sys::mem::SignatureScanner::Status.Success)
+	if (!SignatureScanner::Status.Success)
 	{
-		LOGFN_ERROR("Error: {}\n{}", cmf::sys::mem::SignatureScanner::Status.pMessage, cmf::sys::mem::SignatureScanner::Status.GetPatternString());
+		LOGFN_ERROR("Error: {}\n{}", SignatureScanner::Status.pMessage, SignatureScanner::Status.GetPatternString());
 		return;
 	}
 

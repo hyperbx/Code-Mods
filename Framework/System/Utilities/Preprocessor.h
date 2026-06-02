@@ -17,11 +17,11 @@
 
 #define IS_TYPE_void
 
-#define IS_TYPE(TYPE) \
+#define IS_VOID(TYPE) \
     BOOST_PP_IS_EMPTY(BOOST_PP_CAT(IS_TYPE_, TYPE))
 
 #define GET_RETURN(RETURN_TYPE) \
-    BOOST_PP_IF(IS_TYPE(RETURN_TYPE), BOOST_PP_EMPTY(), return)
+    BOOST_PP_IF(IS_VOID(RETURN_TYPE), BOOST_PP_EMPTY(), return)
 
 #ifdef WIN32
 #include "PreprocessorWin32.h"
