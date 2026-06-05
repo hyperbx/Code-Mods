@@ -1,11 +1,7 @@
 #pragma once
 
-#ifdef WIN32
-#   include "HookingWin32.h"
-#else
-#   ifdef N64RECOMP
-#       include "HookingN64Recomp.h"
-#   else
-#       include "HookingNop.h"
-#   endif
+#if defined(WIN32)
+#include "HookingWin32.h"
+#elif defined(N64RECOMP)
+#include "HookingN64Recomp.h"
 #endif

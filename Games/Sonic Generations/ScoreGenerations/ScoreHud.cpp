@@ -8,7 +8,7 @@ using namespace ScoreGenerations;
 
 static bool g_isResultsHooked = false;
 
-DECLARE_HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
+DECLARE_STATIC_HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 {
 	if (g_isResultsHooked)
 	{
@@ -25,7 +25,7 @@ DECLARE_HOOK(bool, __cdecl, IsPerfectBonus, 0x10B8A90)
 	return original_IsPerfectBonus();
 }
 
-DECLARE_HOOK(int*, __cdecl, MsgChangeResultState_Ctor, 0x587C40, void* a1, int* a2, int* in_pRank, int* a4)
+DECLARE_STATIC_HOOK(int*, __cdecl, MsgChangeResultState_Ctor, 0x587C40, void* a1, int* a2, int* in_pRank, int* a4)
 {
 	DECLARE_FUNCTION_PTR(bool, __cdecl, fpIsPerfectBonus, 0x10B8A90);
 
@@ -36,7 +36,7 @@ DECLARE_HOOK(int*, __cdecl, MsgChangeResultState_Ctor, 0x587C40, void* a1, int* 
 	return original_MsgChangeResultState_Ctor(a1, a2, in_pRank, a4);
 }
 
-DECLARE_HOOK(int, __fastcall, CPlayer_ProcessMessage_MsgRestartStage, 0xE76810, int* in_pThis, void* EDX, int* in_pMessage)
+DECLARE_STATIC_HOOK(int, __fastcall, CPlayer_ProcessMessage_MsgRestartStage, 0xE76810, int* in_pThis, void* EDX, int* in_pMessage)
 {
 	auto pPlayerSpeedContext = Sonic::Player::CPlayerSpeedContext::GetInstance();
 
@@ -74,7 +74,7 @@ DECLARE_HOOK(int, __fastcall, CPlayer_ProcessMessage_MsgRestartStage, 0xE76810, 
 	return original_CPlayer_ProcessMessage_MsgRestartStage(in_pThis, EDX, in_pMessage);
 }
 
-DECLARE_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_ScoreHud, 0x1098A50, void* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
+DECLARE_STATIC_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_ScoreHud, 0x1098A50, void* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
 {
 	struct CHudSonicStage
 	{
@@ -111,7 +111,7 @@ DECLARE_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_ScoreHud, 0x1098A50, 
 	original_CHudSonicStage_UpdateSerial_ScoreHud(in_pThis, EDX, in_rUpdateInfo);
 }
 
-DECLARE_HOOK(bool, __fastcall, CScriptImpl_Init, 0x1105120, void* in_pThis)
+DECLARE_STATIC_HOOK(bool, __fastcall, CScriptImpl_Init, 0x1105120, void* in_pThis)
 {
 	return ScoreHud::IsMission = original_CScriptImpl_Init(in_pThis);
 }
@@ -192,12 +192,6 @@ bool ScoreHud::IsProhibitedStage()
 
 void ScoreHud::Install()
 {
-	INSTALL_HOOK(CHudSonicStage_UpdateSerial_ScoreHud);
-	INSTALL_HOOK(CScriptImpl_Init);
-	INSTALL_HOOK(IsPerfectBonus);
-	INSTALL_HOOK(MsgChangeResultState_Ctor);
-	INSTALL_HOOK(CPlayer_ProcessMessage_MsgRestartStage);
-
 	INSTALL_ASM_HOOK_32(CStateDisplayGameOver_Ctor);
 	INSTALL_ASM_HOOK_32(Hud_CPause_CStateWindow_Exit);
 	INSTALL_ASM_HOOK_32(CGameplayFlowStage_CStateGoalFadeBefore_CalculateResults);

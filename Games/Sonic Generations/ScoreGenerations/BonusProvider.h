@@ -12,7 +12,5 @@ namespace ScoreGenerations
 		static void ResetHomingChainBonus();
 		static void ResetSlamBonus();
 		static void ResetTrickBonus();
-
-		static void Install();
 	};
 }

@@ -54,8 +54,3 @@ EXPORT bool F4SEPlugin_Load(const F4SEInterface* in_pF4SE)
 
     return true;
 }
-
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
-{
-    return TRUE;
-}

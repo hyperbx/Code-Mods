@@ -17,7 +17,7 @@ static std::string g_trickAnim{};
 static float g_superSonicDeltaTimer{};
 static float g_slamBonusDeltaTimer{};
 
-DECLARE_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_BonusProvider, 0x1098A50, Sonic::CGameObject* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
+DECLARE_STATIC_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_BonusProvider, 0x1098A50, Sonic::CGameObject* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
 {
 	auto pPlayerSpeedContext = Sonic::Player::CPlayerSpeedContext::GetInstance();
 
@@ -184,9 +184,4 @@ void BonusProvider::ResetTrickBonus()
 {
 	g_trickCount = 0;
 	g_trickAnim = "";
-}
-
-void BonusProvider::Install()
-{
-	INSTALL_HOOK(CHudSonicStage_UpdateSerial_BonusProvider);
 }

@@ -1,5 +1,4 @@
 #include "../Dependencies/ArchiveTree.h"
-#include "BonusProvider.h"
 #include "ScoreHooks.h"
 #include "ScoreHud.h"
 #include "StatisticsProvider.h"
@@ -33,13 +32,7 @@ EXPORT void Init(ModInfo_t* in_pModInfo)
 		ArchiveTree::Install();
 	}
 
-	BonusProvider::Install();
 	ScoreHooks::Install();
 	ScoreHud::Install();
 	StatisticsProvider::Install();
-}
-
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
-{
-	return TRUE;
 }

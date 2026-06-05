@@ -23,7 +23,7 @@ static float GetElapsedTime(Sonic::CGameDocument* in_pGameDocument)
 	return std::max(0.0f, std::max(0.0f, *(float*)(pMember + 0x184)) + *(float*)(pMember + 0x18C));
 }
 
-DECLARE_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_StatisticsProvider, 0x1098A50, Sonic::CGameObject* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
+DECLARE_STATIC_HOOK(void, __fastcall, CHudSonicStage_UpdateSerial_StatisticsProvider, 0x1098A50, Sonic::CGameObject* in_pThis, void* EDX, const Hedgehog::Universe::SUpdateInfo& in_rUpdateInfo)
 {
 	auto& rStatistics = StatisticsProvider::GetStatistics();
 	auto* pPlayerSpeedContext = Sonic::Player::CPlayerSpeedContext::GetInstance();
@@ -61,8 +61,6 @@ Statistics& StatisticsProvider::GetStatistics()
 
 void StatisticsProvider::Install()
 {
-	INSTALL_HOOK(CHudSonicStage_UpdateSerial_StatisticsProvider);
-
 	// Set score format.
 	WRITE(0x1095D7D, const char*, Configuration::ScoreFormat.c_str());
 }

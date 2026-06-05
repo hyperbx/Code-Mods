@@ -138,7 +138,7 @@ DECLARE_ASM_HOOK_32(CObjRainbowRing_AddCallback_UpdateAnimations, 0x115AC63)
 	}
 }
 
-DECLARE_HOOK(int, __cdecl, CObjMsnNumberDashRing_Ctor, 0xEDBD40, int a1)
+DECLARE_STATIC_HOOK(int, __cdecl, CObjMsnNumberDashRing_Ctor, 0xEDBD40, int a1)
 {
 	// Restore original dash ring model.
 	UpdateModels("cmn_obj_dashring_HD");
@@ -191,5 +191,4 @@ void ResourcePatches::Install()
 
 	INSTALL_ASM_HOOK_32(CObjRainbowRing_AddCallback_UpdateModels);
 	INSTALL_ASM_HOOK_32(CObjRainbowRing_AddCallback_UpdateAnimations);
-	INSTALL_HOOK(CObjMsnNumberDashRing_Ctor);
 }
